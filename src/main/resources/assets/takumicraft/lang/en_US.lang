@@ -1,0 +1,40 @@
+#TakumiCraft English Langage File
+#general
+takumicraft.info.name=Takumi Craft
+takumicraft.description.name=Woo! Takumi has come!!!
+takumicraft.credits.name=The texture of "Yukari Creeper" is made by Noraushi/Bahamut.
+
+#tile
+tile.creeperbomb.name=Creeper Bomb
+tile.gunore.name=Gunpowder Ore
+
+#item
+takumicraft.item.shield.name=Creeper Shield
+
+#entity
+entity.silentcreeper.name=Silent Creeper
+entity.lavacreeper.name=Lava Creeper
+entity.firecreeper.name=Fire Creeper
+entity.icecreeper.name=Ice Creeper
+entity.watercreeper.name=Water Creeper
+
+#Vanilla item & tile
+item.skull.creeper.name=Creeper Head
+item.fireworksCharge.type.3=Creeper-shaped
+entity.Creeper.name=Creeper
+item.banner.creeper.black=Black Creeper Charge
+item.banner.creeper.red=Red Creeper Charge
+item.banner.creeper.green=Green Creeper Charge
+item.banner.creeper.brown=Brown Creeper Charge
+item.banner.creeper.blue=Blue Creeper Charge
+item.banner.creeper.purple=Purple Creeper Charge
+item.banner.creeper.cyan=Cyan Creeper Charge
+item.banner.creeper.silver=Light Gray Creeper Charge
+item.banner.creeper.gray=Gray Creeper Charge
+item.banner.creeper.pink=Pink Creeper Charge
+item.banner.creeper.lime=Lime Creeper Charge
+item.banner.creeper.yellow=Yellow Creeper Charge
+item.banner.creeper.lightBlue=Light Blue Creeper Charge
+item.banner.creeper.magenta=Magenta Creeper Charge
+item.banner.creeper.orange=Orange Creeper Charge
+item.banner.creeper.white=White Creeper Charge

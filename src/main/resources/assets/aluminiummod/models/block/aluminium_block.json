@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "aluminiummod:blocks/aluminium_block"
+  }
+}

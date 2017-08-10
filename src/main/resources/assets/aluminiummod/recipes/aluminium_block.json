@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aluminiummod:aluminium"
+    }
+  },
+  "result": {
+    "item": "aluminiummod:aluminium_block"
+  }
+}

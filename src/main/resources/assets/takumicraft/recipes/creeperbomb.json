@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Q ",
+    "QQQ",
+    " Q "
+  ],
+  "key": {
+    "Q": {
+      "item": "minecraft:skull",
+      "data":4
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperbomb"
+  }
+}
