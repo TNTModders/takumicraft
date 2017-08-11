@@ -7,6 +7,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -24,6 +25,11 @@ public abstract class EntityTakumiAbstranctCreeper extends EntityCreeper impleme
             return;
         }
         super.damageEntity(damageSrc, damageAmount);
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        return true;
     }
 
     @Override

@@ -3,11 +3,14 @@ package com.tntmodders.takumi.entity;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ITakumiEntity {
     void takumiExplode();
+
+    boolean takumiExplodeEvent(ExplosionEvent.Detonate event);
 
     EnumTakumiRank takumiRank();
 
@@ -87,16 +90,18 @@ public interface ITakumiEntity {
             return isMagic;
         }
 
-        public void setMagic(boolean magic) {
+        public EnumTakumiType setMagic(boolean magic) {
             isMagic = magic;
+            return this;
         }
 
         public boolean isDest() {
             return isDest;
         }
 
-        public void setDest(boolean dest) {
+        public EnumTakumiType setDest(boolean dest) {
             isDest = dest;
+            return this;
         }
 
         public boolean getStrong(EnumTakumiType enemyType) {

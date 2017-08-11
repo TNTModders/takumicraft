@@ -53,7 +53,7 @@ public class TakumiEntityCore {
                 }
                 TakumiCraftCore.LOGGER.info("Registered entity : " + location.getResourcePath());
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 

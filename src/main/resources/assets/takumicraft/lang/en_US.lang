@@ -17,6 +17,8 @@ entity.lavacreeper.name=Lava Creeper
 entity.firecreeper.name=Fire Creeper
 entity.icecreeper.name=Ice Creeper
 entity.watercreeper.name=Water Creeper
+entity.zombiecreeper.name=Zombie Creeper
+entity.zombievillagercreeper.name=Zombie Villager Creeper
 
 #Vanilla item & tile
 item.skull.creeper.name=Creeper Head

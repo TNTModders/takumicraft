@@ -1,24 +1,35 @@
 package com.tntmodders.takumi.client.render.layer;
 
-import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
+import com.tntmodders.takumi.client.render.ITakumiRender;
 import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerTakumiCreeperCharge<T extends EntityTakumiAbstranctCreeper> implements LayerRenderer<T> {
-    private final RenderTakumiCreeper creeperRenderer;
-    private final ModelCreeper creeperModel = new ModelCreeper(2.0F);
+public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstranctCreeper> {
+    private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    private final RenderLiving creeperRenderer;
+    private final ModelBase creeperModel;
 
-    public LayerTakumiCreeperCharge(RenderTakumiCreeper creeperRendererIn) {
+    public LayerTakumiCharge(RenderLiving creeperRendererIn) {
         this.creeperRenderer = creeperRendererIn;
+        if (creeperRenderer.getMainModel() instanceof ModelCreeper) {
+            this.creeperModel = new ModelCreeper(2.0f);
+        } else if (creeperRenderer instanceof ITakumiRender) {
+            this.creeperModel = ((ITakumiRender) creeperRenderer).getPoweredModel();
+        } else {
+            this.creeperModel = creeperRenderer.getMainModel();
+        }
     }
 
-    public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(EntityTakumiAbstranctCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn.getPowered()) {
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);
