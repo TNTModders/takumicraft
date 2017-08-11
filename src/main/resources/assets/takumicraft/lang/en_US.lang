@@ -22,6 +22,7 @@ entity.firecreeper.name=Fire Creeper
 entity.icecreeper.name=Ice Creeper
 entity.endercreeper.name=Ender Creeper
 entity.lightcreeper.name=Light Creeper
+entity.slimecreeper.name=Slime Creeper
 
 #Vanilla item & tile
 item.skull.creeper.name=Creeper Head

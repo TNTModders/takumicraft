@@ -2,9 +2,12 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -40,5 +43,16 @@ public class TakumiUtils {
             e.printStackTrace();
         }
         return 0f;
+    }
+
+    public static void takumiSetPowered(Entity entity) {
+        try {
+            Field field = EntityCreeper.class.getDeclaredField("POWERED");
+            field.setAccessible(true);
+            DataParameter<Boolean> parameter = ((DataParameter<Boolean>) field.get(entity));
+            entity.getDataManager().set(parameter, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

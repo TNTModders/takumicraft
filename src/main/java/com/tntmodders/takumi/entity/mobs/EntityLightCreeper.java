@@ -74,7 +74,7 @@ public class EntityLightCreeper extends EntityTakumiAbstranctCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.WIND;
+        return EnumTakumiType.NORMAL;
     }
 
     @Override
@@ -99,6 +99,6 @@ public class EntityLightCreeper extends EntityTakumiAbstranctCreeper {
 
     @Override
     public int getRegisterID() {
-        return 3;
+        return 10;
     }
 }
