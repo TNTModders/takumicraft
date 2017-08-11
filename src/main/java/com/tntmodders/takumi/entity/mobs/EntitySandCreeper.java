@@ -43,7 +43,7 @@ public class EntitySandCreeper extends EntityTakumiAbstranctCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 16776960;
+        return 12303206;
     }
 
     @Override

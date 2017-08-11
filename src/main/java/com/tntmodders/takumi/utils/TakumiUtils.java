@@ -34,7 +34,8 @@ public class TakumiUtils {
         try {
             Field field = Block.class.getDeclaredField("blockHardness");
             field.setAccessible(true);
-            return ((float) field.get(block));
+            float f = ((float) field.get(block));
+            return f > -1 ? f : -1;
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }

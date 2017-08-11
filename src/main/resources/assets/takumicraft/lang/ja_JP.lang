@@ -21,6 +21,7 @@ entity.lavacreeper.name=熔岩匠
 entity.firecreeper.name=発火匠
 entity.icecreeper.name=氷匠
 entity.endercreeper.name=エンダー匠
+entity.lightcreeper.name=光匠
 
 #Vanilla item & tile
 item.skull.creeper.name=匠の頭

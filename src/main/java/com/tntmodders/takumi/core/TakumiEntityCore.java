@@ -62,7 +62,7 @@ public class TakumiEntityCore {
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiModelCore.registerEntityRender(clazz, entity);
             }
-            TakumiCraftCore.LOGGER.info("Registered entity : " + location.getResourcePath());
+            TakumiCraftCore.LOGGER.info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " + entity.takumiRank().name() + " and " + entity.takumiType().name());
         }
     }
 

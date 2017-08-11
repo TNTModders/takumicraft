@@ -18,6 +18,7 @@ public class BlockTakumiCreeperBomb extends Block {
         this.setUnlocalizedName("creeperbomb");
         this.setResistance(0f);
         this.setHardness(2f);
+        this.setLightLevel(1f);
     }
 
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
