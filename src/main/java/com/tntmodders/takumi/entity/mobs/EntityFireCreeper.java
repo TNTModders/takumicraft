@@ -17,7 +17,7 @@ public class EntityFireCreeper extends EntityTakumiAbstranctCreeper {
             for (int y = ((int) this.posY) - range; y < ((int) this.posY) + range; y++) {
                 for (int z = ((int) this.posZ) - range; z < ((int) this.posZ) + range; z++) {
                     BlockPos pos = new BlockPos(x, y, z);
-                    if (this.world.isAirBlock(pos) &&  Blocks.FIRE.canPlaceBlockAt(this.world,pos)) {
+                    if (this.world.isAirBlock(pos) && Blocks.FIRE.canPlaceBlockAt(this.world, pos)) {
                         this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
                     }
                 }
@@ -53,5 +53,10 @@ public class EntityFireCreeper extends EntityTakumiAbstranctCreeper {
     @Override
     public String getRegisterName() {
         return "firecreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 7;
     }
 }

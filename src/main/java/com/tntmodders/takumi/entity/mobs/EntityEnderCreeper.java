@@ -132,4 +132,9 @@ public class EntityEnderCreeper extends EntityTakumiAbstranctCreeper {
     public String getRegisterName() {
         return "endercreeper";
     }
+
+    @Override
+    public int getRegisterID() {
+        return 9;
+    }
 }

@@ -55,4 +55,9 @@ public class EntityLavaCreeper extends EntityTakumiAbstranctCreeper {
     public String getRegisterName() {
         return "lavacreeper";
     }
+
+    @Override
+    public int getRegisterID() {
+        return 6;
+    }
 }

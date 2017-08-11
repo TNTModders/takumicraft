@@ -32,6 +32,15 @@ public interface ITakumiEntity {
 
     String getRegisterName();
 
+    /**
+     * @return LOW     : 1 ~ 200
+     * MID      : 201 ~ 400
+     * HIGH    : 401 ~ 500
+     * BOSS    :501 ~ 600
+     * TAK       :900 ~
+     */
+    int getRegisterID();
+
     enum EnumTakumiRank {
         LOW(1, 5, 10, 40),
         MID(2, 10, 50, 4),

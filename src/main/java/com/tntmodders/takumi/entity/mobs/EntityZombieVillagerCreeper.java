@@ -310,4 +310,9 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     public String getRegisterName() {
         return "zombievillagercreeper";
     }
+
+    @Override
+    public int getRegisterID() {
+        return 2;
+    }
 }

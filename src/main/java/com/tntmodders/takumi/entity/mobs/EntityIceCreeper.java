@@ -55,4 +55,9 @@ public class EntityIceCreeper extends EntityTakumiAbstranctCreeper {
     public String getRegisterName() {
         return "icecreeper";
     }
+
+    @Override
+    public int getRegisterID() {
+        return 8;
+    }
 }

@@ -602,6 +602,11 @@ public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
         return false;
     }
 
+    @Override
+    public int getRegisterID() {
+        return 1;
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public RenderLiving getRender(RenderManager manager) {

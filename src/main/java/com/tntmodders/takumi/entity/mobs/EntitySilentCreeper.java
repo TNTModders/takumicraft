@@ -70,4 +70,9 @@ public class EntitySilentCreeper extends EntityTakumiAbstranctCreeper {
     public String getRegisterName() {
         return "silentcreeper";
     }
+
+    @Override
+    public int getRegisterID() {
+        return 3;
+    }
 }
