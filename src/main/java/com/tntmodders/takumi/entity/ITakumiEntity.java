@@ -75,7 +75,8 @@ public interface ITakumiEntity {
         GROUND(3),
         WIND(4),
         WATER(5),
-        DRAGON(6);
+        DRAGON(6),
+        NORMAL(7);
 
         private final int id;
 
@@ -112,6 +113,8 @@ public interface ITakumiEntity {
             } else if (this.id == 6 && enemyType.id != 0) {
                 return true;
             } else if (this.id == 0 && enemyType.id == 6) {
+                return true;
+            } else if (this.id == 7 && enemyType.id == 7) {
                 return true;
             }
             return false;

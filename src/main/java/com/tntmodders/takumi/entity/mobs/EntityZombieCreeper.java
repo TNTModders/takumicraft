@@ -579,7 +579,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.GROUND;
+        return EnumTakumiType.NORMAL;
     }
 
     @Override
