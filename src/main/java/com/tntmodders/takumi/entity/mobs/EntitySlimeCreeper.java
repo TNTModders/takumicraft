@@ -71,7 +71,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstranctCreeper {
         this.dataManager.register(SLIME_SIZE, 1);
     }
 
-    protected void setSlimeSize(int size, boolean resetHealth) {
+    public void setSlimeSize(int size, boolean resetHealth) {
         this.dataManager.set(SLIME_SIZE, Integer.valueOf(size));
         this.setSize(0.51000005F * (float) size, 0.51000005F * (float) size);
         this.setPosition(this.posX, this.posY, this.posZ);

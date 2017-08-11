@@ -1,5 +1,6 @@
 package com.tntmodders.takumi;
 
+import com.tntmodders.takumi.client.gui.TakumiGuiHandler;
 import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.event.TakumiEvents;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -69,6 +71,7 @@ public class TakumiCraftCore {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 5);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
     }
 
     @EventHandler

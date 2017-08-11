@@ -21,6 +21,7 @@ import java.util.List;
 
 public class TakumiEntityCore {
     private static List<Biome> biomes = new ArrayList<>();
+    public static List<ITakumiEntity> entityList = new ArrayList<>();
 
     public static void register() {
         for (Field fileld : Biomes.class.getDeclaredFields()) {
@@ -62,6 +63,7 @@ public class TakumiEntityCore {
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiModelCore.registerEntityRender(clazz, entity);
             }
+            TakumiEntityCore.entityList.add(entity);
             TakumiCraftCore.LOGGER.info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " + entity.takumiRank().name() + " and " + entity.takumiType().name());
         }
     }
