@@ -12,13 +12,14 @@ tile.gunore.name=火薬岩
 takumicraft.item.shield.name=匠式硬質盾
 
 #entity
+entity.zombiecreeper.name=ゾンビ匠
+entity.zombievillagercreeper.name=村人ゾンビ匠
 entity.silentcreeper.name=サイレント匠
+entity.sandcreeper.name=砂匠
+entity.watercreeper.name=水匠
 entity.lavacreeper.name=熔岩匠
 entity.firecreeper.name=発火匠
 entity.icecreeper.name=氷匠
-entity.watercreeper.name=水匠
-entity.zombiecreeper.name=ゾンビ匠
-entity.zombievillagercreeper.name=村人ゾンビ匠
 entity.endercreeper.name=エンダー匠
 
 #Vanilla item & tile

@@ -12,13 +12,14 @@ tile.gunore.name=Gunpowder Ore
 takumicraft.item.shield.name=Creeper Shield
 
 #entity
+entity.zombiecreeper.name=Zombie Creeper
+entity.zombievillagercreeper.name=Zombie Villager Creeper
 entity.silentcreeper.name=Silent Creeper
+entity.sandcreeper.name=Sand Creeper
+entity.watercreeper.name=Water Creeper
 entity.lavacreeper.name=Lava Creeper
 entity.firecreeper.name=Fire Creeper
 entity.icecreeper.name=Ice Creeper
-entity.watercreeper.name=Water Creeper
-entity.zombiecreeper.name=Zombie Creeper
-entity.zombievillagercreeper.name=Zombie Villager Creeper
 entity.endercreeper.name=Ender Creeper
 
 #Vanilla item & tile
