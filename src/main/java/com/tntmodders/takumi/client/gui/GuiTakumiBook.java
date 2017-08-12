@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.client.gui;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.EntitySlimeCreeper;
@@ -8,8 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
@@ -23,7 +22,6 @@ import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.io.IOException;
 
@@ -44,14 +42,12 @@ public class GuiTakumiBook extends GuiScreen {
     public GuiTakumiBook(EntityPlayer player) {
         this.player = player;
         this.bookTotalPages = TakumiEntityCore.entityList.size();
-
     }
 
 
     public void initGui() {
         this.buttonList.clear();
         this.buttonDone = this.addButton(new GuiButton(0, this.width / 2 - 100, 196, 200, 20, I18n.format("gui.done")));
-
         int i = (this.width - 192) / 2;
         int j = 2;
         this.buttonNextPage = this.addButton(new NextPageButton(1, i + 120, 156, true));
@@ -88,45 +84,68 @@ public class GuiTakumiBook extends GuiScreen {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        ITakumiEntity takumiEntity = TakumiEntityCore.entityList.get(this.currPage);
+        boolean flg = false;
+        if (TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "slay_" + takumiEntity.getRegisterName()))) {
+            flg = true;
+        }
+        EntityLivingBase base = this.getEntity(takumiEntity, flg);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
         int i = (this.width - 192) / 2;
         int j = 2;
+        this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
         this.drawTexturedModalRect(i, 2, 0, 0, 192, 192);
 
-        String s4 = I18n.format("book.pageIndicator", this.currPage + 1, this.bookTotalPages);
-        String s5 = "";
+        ResourceLocation location = flg ? new ResourceLocation(TakumiCraftCore.MODID, "textures/book/" + takumiEntity.takumiType().getName() + ".png")
+                : new ResourceLocation(TakumiCraftCore.MODID, "textures/book/underfound.png");
+        this.mc.getTextureManager().bindTexture(location);
+        this.drawTexturedModalRect(i, 2, 0, 0, 192, 192);
 
-        if (this.currPage >= 0 && this.currPage < TakumiEntityCore.entityList.size()) {
+        if (flg) {
+            if (takumiEntity.takumiType().isMagic()) {
+                ResourceLocation location2 = new ResourceLocation(TakumiCraftCore.MODID, "textures/book/magic.png");
+                this.mc.getTextureManager().bindTexture(location2);
+                this.drawTexturedModalRect(i, 2, 0, 0, 192, 192);
+            }
+            if (takumiEntity.takumiType().isDest()) {
+                ResourceLocation location2 = new ResourceLocation(TakumiCraftCore.MODID, "textures/book/dest.png");
+                this.mc.getTextureManager().bindTexture(location2);
+                this.drawTexturedModalRect(i, 2, 0, 0, 192, 192);
+            }
+        }
+
+        String s4 = I18n.format("book.pageIndicator", this.currPage + 1, this.bookTotalPages);
+        String s5 = "???";
+        String s6 = "???";
+
+        if (flg && this.currPage >= 0 && this.currPage < TakumiEntityCore.entityList.size()) {
             s5 = TakumiUtils.takumiTranslate("entity." + TakumiEntityCore.entityList.get(this.currPage).getRegisterName() + ".name");
+            s6 = TakumiUtils.takumiTranslate("entity." + TakumiEntityCore.entityList.get(this.currPage).getRegisterName() + ".desc");
         }
 
         int j1 = this.fontRenderer.getStringWidth(s4);
         this.fontRenderer.drawString(s4, i - j1 + 192 - 44, 18, 0);
-
-        {
-            this.fontRenderer.drawSplitString(s5, i + 80, 34, 116, 0);
-        }
+        this.fontRenderer.drawSplitString(s5, i + 80, 34, 70, 0);
+        this.fontRenderer.drawSplitString(s6, i + 40, 100, 116, 0);
         super.drawScreen(mouseX, mouseY, partialTicks);
         int k = (this.width - this.bookImageWidth) / 2;
         byte b0 = 2;
-        EntityLivingBase base = this.getEntity(TakumiEntityCore.entityList.get(this.currPage));
         if (base != null) {
-            this.renderEntity(k + 51, b0 + 75, 30, (float) (k + 51) - this.bookImageWidth, (float) (b0 + 75 - 50) - this.bookImageHeight, base);
+            this.renderEntity(k + 51, b0 + 75, 30, (float) (k + 51) - this.bookImageWidth, (float) (b0 + 75 - 50) - this.bookImageHeight, base, flg);
 
         }
     }
 
-    protected EntityLivingBase getEntity(ITakumiEntity entity) {
+    protected EntityLivingBase getEntity(ITakumiEntity entity, boolean flg) {
         if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);
         }
         return ((EntityLivingBase) entity);
     }
 
-    public void renderEntity(int p_147046_0_, int p_147046_1_, int p_147046_2_, float p_147046_3_, float p_147046_4_, EntityLivingBase p_147046_5_) {
-        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+    public void renderEntity(int p_147046_0_, int p_147046_1_, int p_147046_2_, float p_147046_3_, float p_147046_4_, EntityLivingBase p_147046_5_, boolean flg) {
         GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glTranslatef((float) p_147046_0_, (float) p_147046_1_, 50.0F);
         GL11.glScalef((float) (-p_147046_2_), (float) p_147046_2_, (float) p_147046_2_);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
@@ -136,7 +155,7 @@ public class GuiTakumiBook extends GuiScreen {
         float f5 = p_147046_5_.prevRotationYawHead;
         float f6 = p_147046_5_.rotationYawHead;
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
-        RenderHelper.enableStandardItemLighting();
+        //RenderHelper.enableStandardItemLighting();
         GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-((float) Math.atan((double) (p_147046_4_ / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
         p_147046_5_.renderYawOffset = /*(float) Math.atan((double) (p_147046_3_ / 40.0F)) * 20.0F*/-10 + (time * 0.5f);
@@ -146,7 +165,10 @@ public class GuiTakumiBook extends GuiScreen {
         p_147046_5_.prevRotationYawHead = -10f + (time * 0.5f);
         GL11.glTranslatef(0.0F, ((float) p_147046_5_.getYOffset()), 0.0F);
         Minecraft.getMinecraft().getRenderManager().playerViewY = 180.0F;
-
+        if (!flg) {
+            GL11.glBlendFunc(0, 0);
+            GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
+        }
         this.renderEntityWithPosYaw(p_147046_5_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f, false);
         p_147046_5_.renderYawOffset = f2;
         p_147046_5_.rotationYaw = f3;
@@ -154,11 +176,11 @@ public class GuiTakumiBook extends GuiScreen {
         p_147046_5_.prevRotationYawHead = f5;
         p_147046_5_.rotationYawHead = f6;
         GL11.glPopMatrix();
-        RenderHelper.disableStandardItemLighting();
+/*        RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);*/
     }
 
     void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {

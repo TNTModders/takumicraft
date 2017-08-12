@@ -85,12 +85,42 @@ public interface ITakumiEntity {
         WIND(4),
         WATER(5),
         DRAGON(6),
-        NORMAL(7);
+        NORMAL(7),
+        TAKUMI_D(0, true, false),
+        FIRE_D(1, true, false),
+        GRASS_D(2, true, false),
+        GROUND_D(3, true, false),
+        WIND_D(4, true, false),
+        WATER_D(5, true, false),
+        DRAGON_D(6, true, false),
+        NORMAL_D(7, true, false),
+        TAKUMI_M(0, false, true),
+        FIRE_M(1, false, true),
+        GRASS_M(2, false, true),
+        GROUND_M(3, false, true),
+        WIND_M(4, false, true),
+        WATER_M(5, false, true),
+        DRAGON_M(6, false, true),
+        NORMAL_M(7, false, true),
+        TAKUMI_MD(0, true, true),
+        FIRE_MD(1, true, true),
+        GRASS_MD(2, true, true),
+        GROUND_MD(3, true, true),
+        WIND_MD(4, true, true),
+        WATER_MD(5, true, true),
+        DRAGON_MD(6, true, true),
+        NORMAL_MD(7, true, true);
 
         private final int id;
 
         EnumTakumiType(int i) {
             this.id = i;
+        }
+
+        EnumTakumiType(int i, boolean dest, boolean magic) {
+            this(i);
+            this.isDest = dest;
+            this.isMagic = magic;
         }
 
         private boolean isMagic = false;
@@ -100,30 +130,37 @@ public interface ITakumiEntity {
             return isMagic;
         }
 
-        public EnumTakumiType setMagic(boolean magic) {
-            isMagic = magic;
-            return this;
-        }
-
         public boolean isDest() {
             return isDest;
         }
 
-        public EnumTakumiType setDest(boolean dest) {
-            isDest = dest;
-            return this;
+        public String getName() {
+            String s = this.name().toLowerCase();
+            if (s.contains("_")) {
+                s = s.split("_")[0];
+            }
+            return s;
         }
 
         public boolean getStrong(EnumTakumiType enemyType) {
-            if (this.id != 0 && this.id != 6 && enemyType.id != 0 && enemyType.id != 6) {
+            if (this.id == 7 && enemyType.id == 7) {
+                return this.getStrongMD(enemyType);
+            } else if (this.id != 0 && this.id != 6 && enemyType.id != 0 && enemyType.id != 6) {
                 if (enemyType.id - this.id == 1 || enemyType.id - this.id == -4) {
-                    return true;
+                    return this.getStrongMD(enemyType);
                 }
             } else if (this.id == 6 && enemyType.id != 0) {
-                return true;
+                return this.getStrongMD(enemyType);
             } else if (this.id == 0 && enemyType.id == 6) {
+                return this.getStrongMD(enemyType);
+            }
+            return false;
+        }
+
+        private boolean getStrongMD(EnumTakumiType enemyType) {
+            if (!this.isDest && !this.isMagic && !enemyType.isDest && !enemyType.isMagic) {
                 return true;
-            } else if (this.id == 7 && enemyType.id == 7) {
+            } else if ((this.isDest && enemyType.isMagic) || (this.isMagic && enemyType.isMagic)) {
                 return true;
             }
             return false;

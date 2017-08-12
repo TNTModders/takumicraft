@@ -9,22 +9,41 @@ tile.creeperbomb.name=匠式高性能爆弾
 tile.gunore.name=火薬岩
 
 #item
-takumicraft.item.shield.name=匠式硬質盾
+item.takumibook.name=匠の書
 
 #entity
+＃descは36文字まで。
 entity.zombiecreeper.name=ゾンビ匠
+entity.zombiecreeper.desc=村人を眷属に変えるこの匠の襲った村は、全て廃墟と化すだろう。
 entity.zombievillagercreeper.name=村人ゾンビ匠
+entity.zombievillagercreeper.desc=匠化してしまった村人。治癒の魔法もたちまち爆風に飲み込まれる。
 entity.silentcreeper.name=サイレント匠
+entity.silentcreeper.desc=物音を立てず、暗闇に潜み、後から急襲する。気づいたときには、すでに爆音。
 entity.sandcreeper.name=砂匠
+entity.sandcreeper.desc=砂で埋め立てれば、もう逃げるすべは無い。松明を持っていこう。
 entity.watercreeper.name=水匠
+entity.watercreeper.desc=水で閉じ込めれば、もう溺れる他無い。バケツを持っていこう。
 entity.lavacreeper.name=熔岩匠
+entity.lavacreeper.desc=熔岩で閉じ込めれば、もう帰ることは無い。水を持っていこう。
 entity.firecreeper.name=発火匠
+entity.firecreeper.desc=火がついてしまってはもう遅い。突然現れては森を焦土に変える。
 entity.icecreeper.name=氷匠
+entity.icecreeper.desc=氷漬けにする涼しげな匠。因みに火よりも風に弱い。
 entity.endercreeper.name=エンダー匠
+entity.endercreeper.desc=闇より襲われればもう、気がつけば見知らぬ土地に飛んでいるだろう。
 entity.lightcreeper.name=光匠
+entity.lightcreeper.desc=光から襲われればもう、気がつけば明かりは仄暗く消えてしまうだろう。
 entity.slimecreeper.name=スライム匠
+entity.slimecreeper.desc=爆発性スライム。死ぬと爆発、膨らみ爆発、人呼んで「匠式クラスター爆弾」。
 
-#Vanilla item & tile
+#advancements
+advancements.takumicraft.root.title=匠Craft
+advancements.takumicraft.root.desc=この匠だらけの世界へ!
+advancements.takumicraft.creeperbomb.title=爆発物注意
+advancements.takumicraft.creeperbomb.desc=匠式高性能爆弾の入手
+advancements.takumicraft.slay.desc=が匠の書に追加された
+
+#Vanilla
 item.skull.creeper.name=匠の頭
 item.fireworksCharge.type.3=匠形
 entity.Creeper.name=匠

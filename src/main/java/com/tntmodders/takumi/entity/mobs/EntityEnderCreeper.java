@@ -110,7 +110,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstranctCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL;
+        return EnumTakumiType.GROUND_M;
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import java.io.File;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,12 +31,15 @@ public class TakumiEntityCore {
                 e.printStackTrace();
             }
         }
+        TakumiEntityCore.biomes.remove(Biomes.HELL);
+        TakumiEntityCore.biomes.remove(Biomes.VOID);
         File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
         String s = packFile.toURI().getPath();
         if (s.endsWith("jar")) {
             s = s + "/";
         }
         String spack = s + ("com.tntmodders.takumi.entity.mobs".replace(".", "/"));
+        TakumiCraftCore.LOGGER.info("takumicraft" + spack);
         List<File> files = Arrays.asList(new File(spack).listFiles());
         ArrayList<EntityHolder> entityHolders = new ArrayList<>();
         for (int i = 0; i < files.size(); i++) {
@@ -65,8 +68,45 @@ public class TakumiEntityCore {
             }
             TakumiEntityCore.entityList.add(entity);
             TakumiCraftCore.LOGGER.info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " + entity.takumiRank().name() + " and " + entity.takumiType().name());
+
+            String sResource = s + ("assets.takumicraft.advancements.".replace(".", "/"));
+            File file = new File(sResource + "slay_" + entity.getRegisterName() + ".json");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            File oldFile = new File(s + "assets/takumicraft/temp_adv/slay.json");
+            FileReader h_fr = null;
+            String buf = "";
+            try {
+                String h_s;
+                h_fr = new FileReader(oldFile);
+                BufferedReader h_br = new BufferedReader(h_fr);
+                while (true) {
+                    h_s = h_br.readLine();
+                    if (h_s == null) {
+                        break;
+                    }
+
+                    h_s = h_s.replaceAll("creeper_hoge", entity.getRegisterName());
+
+                    buf = buf + h_s;
+                }
+                h_fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                FileWriter writer = new FileWriter(file);
+                writer.write(buf);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
     static class EntityComparator implements Comparator<EntityHolder> {
         @Override

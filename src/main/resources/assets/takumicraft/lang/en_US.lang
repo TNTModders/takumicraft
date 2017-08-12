@@ -9,22 +9,42 @@ tile.creeperbomb.name=Creeper Bomb
 tile.gunore.name=Gunpowder Ore
 
 #item
-takumicraft.item.shield.name=Creeper Shield
+item.takumibook.name=Creeper Book
+
 
 #entity
+#desc max: 72 chars
 entity.zombiecreeper.name=Zombie Creeper
+entity.zombiecreeper.desc=They attack villager, with the explosion changes them to zombie creeper.
 entity.zombievillagercreeper.name=Zombie Villager Creeper
+entity.zombievillagercreeper.desc=Villager changed zombie, attacks friends, not knowing who they are...
 entity.silentcreeper.name=Silent Creeper
+entity.silentcreeper.desc=It came nearby you, without sound. It is too late if you notice.
 entity.sandcreeper.name=Sand Creeper
+entity.sandcreeper.desc=Explosion sandwich you in sand, soon only your items rise up.
 entity.watercreeper.name=Water Creeper
+entity.watercreeper.desc=Water flood, don't stay in water! To breathe, you have to swim up.
 entity.lavacreeper.name=Lava Creeper
+entity.lavacreeper.desc=Lava press you like Tsunami, not to be burnt, you must cold with water.
 entity.firecreeper.name=Fire Creeper
+entity.firecreeper.desc=As soon as it explode, the forest is going to be burnt. Stop it!
 entity.icecreeper.name=Ice Creeper
+entity.icecreeper.desc=Pack you into ice. Burn it by fire? No,frozen ice can freeze even fire.
 entity.endercreeper.name=Ender Creeper
+entity.endercreeper.desc=Warp you to somewhere, no one knows where. you might enjoy the trip :)
 entity.lightcreeper.name=Light Creeper
+entity.lightcreeper.desc=Destroy light, it is enough that the light is only one, this creeper.
 entity.slimecreeper.name=Slime Creeper
+entity.slimecreeper.desc=It is called "CreeperClusterBomb", consecutive, large slimy explosion.
 
-#Vanilla item & tile
+#advancements
+advancements.takumicraft.root.title=Takumi Craft
+advancements.takumicraft.root.desc=Going into creeper chaotic world!
+advancements.takumicraft.creeperbomb.title=Creeper Bomb
+advancements.takumicraft.creeperbomb.desc=Got a creeper bomb.
+advancements.takumicraft.slay.desc=is registerd to Creeper Book.
+
+#Vanilla
 item.skull.creeper.name=Creeper Head
 item.fireworksCharge.type.3=Creeper-shaped
 entity.Creeper.name=Creeper

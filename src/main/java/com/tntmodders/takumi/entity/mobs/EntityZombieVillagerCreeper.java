@@ -315,4 +315,9 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     public int getRegisterID() {
         return 2;
     }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.NORMAL_M;
+    }
 }

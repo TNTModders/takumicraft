@@ -1,7 +1,11 @@
 package com.tntmodders.takumi.utils;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,9 +15,12 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 public class TakumiUtils {
     public static String takumiTranslate(String s) {
@@ -54,5 +61,21 @@ public class TakumiUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static boolean getAdvancementUnlocked(ResourceLocation location) {
+        ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
+        try {
+            Field field = manager.getClass().getDeclaredField("advancementToProgress");
+            field.setAccessible(true);
+            Map<Advancement, AdvancementProgress> advancementToProgress = ((Map) field.get(manager));
+            if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
+                return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
