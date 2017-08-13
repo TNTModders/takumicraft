@@ -37,8 +37,8 @@ public class TakumiUtils {
             Item item = stack.getItem();
             int meta = stack.getMetadata();
             ItemStack itemStack = new ItemStack(item, 1, meta);
-            if (!TakumiRecipeHolder.MAP.isEmpty() && TakumiRecipeHolder.MAP.containsKey(itemStack)) {
-                List<ResourceLocation> list = TakumiRecipeHolder.MAP.get(itemStack);
+            if (!TakumiRecipeHolder.map.isEmpty() && TakumiRecipeHolder.map.containsKey(itemStack)) {
+                List<ResourceLocation> list = TakumiRecipeHolder.map.get(itemStack);
                 player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
             }
         }

@@ -16,7 +16,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TakumiRecipeHolder {
-    public static final Map<ItemStack, List<ResourceLocation>> MAP = new ItemStackHashMap();
+    public static final Map<ItemStack, List<ResourceLocation>> map = new ItemStackHashMap();
 
     public void register() {
         if (FMLCommonHandler.instance().getSide().isClient()) {
@@ -53,7 +53,7 @@ public class TakumiRecipeHolder {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            TakumiCraftCore.LOGGER.info("takumicraft : recipe registered on jar " + MAP.toString());
+            TakumiCraftCore.LOGGER.info("takumicraft : recipe registered on jar " + map.toString());
         } else {
             List<File> list = TakumiUtils.getListFile(path);
             if (list.size() > 0) {
@@ -69,7 +69,7 @@ public class TakumiRecipeHolder {
                     }
                 }
             }
-            TakumiCraftCore.LOGGER.info("takumicraft : recipe registered on source " + MAP.toString());
+            TakumiCraftCore.LOGGER.info("takumicraft : recipe registered on source " + map.toString());
         }
     }
 
@@ -85,9 +85,20 @@ public class TakumiRecipeHolder {
                 i = jsonObject.getAsJsonObject("key").getAsJsonObject("Q").get("data").getAsInt();
             }
             ItemStack stack = new ItemStack(item, 1, i);
-            List<ResourceLocation> locations = MAP.containsKey(stack) ? MAP.get(stack) : new ArrayList<ResourceLocation>();
+            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<ResourceLocation>();
             locations.add(location);
-            MAP.put(stack, locations);
+            map.put(stack, locations);
+        } else if (jsonObject.has("ingredients") && jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().has("item")) {
+            String s = jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().get("item").getAsString();
+            Item item = Item.getByNameOrId(s);
+            int i = 0;
+            if (jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().has("data")) {
+                i = jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().get("data").getAsInt();
+            }
+            ItemStack stack = new ItemStack(item, 1, i);
+            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<ResourceLocation>();
+            locations.add(location);
+            map.put(stack, locations);
         }
     }
 
