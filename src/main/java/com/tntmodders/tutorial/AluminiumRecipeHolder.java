@@ -1,17 +1,8 @@
 package com.tntmodders.tutorial;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,11 +11,11 @@ public class AluminiumRecipeHolder {
     public final Map<ItemStack, List<ResourceLocation>> map = new ItemStackHashMap();
 
     public void register() {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
+       /* if (FMLCommonHandler.instance().getSide().isClient()) {
             File file = FMLCommonHandler.instance().findContainerFor(AluminiumMod.aluminiumInstance).getSource();
             String s = file.toURI().getPath();
             if (s.endsWith("jar")) {
-                s = s + "/";
+                s = "jar:file:/" + s + "!";
             }
             s = s + "assets/aluminiummod/recipes/";
             File list = new File(s);
@@ -46,9 +37,9 @@ public class AluminiumRecipeHolder {
                                 i = jsonObject.getAsJsonObject("key").getAsJsonObject("#").get("data").getAsInt();
                             }
                             ItemStack stack = new ItemStack(item, 1, i);
-                            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<ResourceLocation>();
+                            List<ResourceLocation> locations = MAP.containsKey(stack) ? MAP.get(stack) : new ArrayList<ResourceLocation>();
                             locations.add(location);
-                            map.put(stack, locations);
+                            MAP.put(stack, locations);
                         } else if (jsonObject.has("ingredients") && jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().has("item")) {
                             String name = jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().get("item").getAsString();
                             Item item = Item.getByNameOrId(name);
@@ -57,9 +48,9 @@ public class AluminiumRecipeHolder {
                                 i = jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().get("data").getAsInt();
                             }
                             ItemStack stack = new ItemStack(item, 1, i);
-                            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<ResourceLocation>();
+                            List<ResourceLocation> locations = MAP.containsKey(stack) ? MAP.get(stack) : new ArrayList<ResourceLocation>();
                             locations.add(location);
-                            map.put(stack, locations);
+                            MAP.put(stack, locations);
                         }
                         stream.close();
                     } catch (Exception e) {
@@ -67,7 +58,7 @@ public class AluminiumRecipeHolder {
                     }
                 }
             }
-        }
+        }*/
     }
 
     public class ItemStackHashMap<K extends ItemStack, V extends List<ResourceLocation>> extends HashMap<K, V> {

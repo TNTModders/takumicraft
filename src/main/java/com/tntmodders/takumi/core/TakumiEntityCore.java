@@ -3,6 +3,7 @@ package com.tntmodders.takumi.core;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -14,8 +15,8 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -33,27 +34,26 @@ public class TakumiEntityCore {
         }
         TakumiEntityCore.biomes.remove(Biomes.HELL);
         TakumiEntityCore.biomes.remove(Biomes.VOID);
-        File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
-        String s = packFile.toURI().getPath();
-        if (s.endsWith("jar")) {
-            s = s + "/";
-        }
-        String spack = s + ("com.tntmodders.takumi.entity.mobs".replace(".", "/"));
-        TakumiCraftCore.LOGGER.info("takumicraft" + spack);
-        List<File> files = Arrays.asList(new File(spack).listFiles());
+
+        List<File> files = TakumiUtils.getListFile("com/tntmodders/takumi/entity/mobs/");
+        TakumiCraftCore.LOGGER.info(files);
         ArrayList<EntityHolder> entityHolders = new ArrayList<>();
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
-            String className = "com.tntmodders.takumi.entity.mobs." + file.getName().substring(0, file.getName().indexOf(".class"));
             try {
-                Class clazz = Class.forName(className);
+                ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+                //TakumiCraftCore.LOGGER.info(TakumiEntityCore.class.getName() + " : " + "com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
+                Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
+                //TakumiCraftCore.LOGGER.info(TakumiEntityCore.class.getName() + " : " + clazz);
                 ITakumiEntity entity = ((ITakumiEntity) clazz.getConstructor(World.class).newInstance(Minecraft.getMinecraft().world));
+                //TakumiCraftCore.LOGGER.info(entity);
                 entityHolders.add(new EntityHolder(clazz, entity));
             } catch (Exception e) {
                 //e.printStackTrace();
             }
         }
         entityHolders.sort(new EntityComparator());
+        TakumiCraftCore.LOGGER.info(entityHolders);
         for (EntityHolder holder : entityHolders) {
             Class clazz = holder.clazz;
             ITakumiEntity entity = holder.entity;
@@ -69,40 +69,60 @@ public class TakumiEntityCore {
             TakumiEntityCore.entityList.add(entity);
             TakumiCraftCore.LOGGER.info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " + entity.takumiRank().name() + " and " + entity.takumiType().name());
 
-            String sResource = s + ("assets.takumicraft.advancements.".replace(".", "/"));
-            File file = new File(sResource + "slay_" + entity.getRegisterName() + ".json");
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            File oldFile = new File(s + "assets/takumicraft/temp_adv/slay.json");
-            FileReader h_fr = null;
-            String buf = "";
-            try {
-                String h_s;
-                h_fr = new FileReader(oldFile);
-                BufferedReader h_br = new BufferedReader(h_fr);
-                while (true) {
-                    h_s = h_br.readLine();
-                    if (h_s == null) {
-                        break;
-                    }
-
-                    h_s = h_s.replaceAll("creeper_hoge", entity.getRegisterName());
-
-                    buf = buf + h_s;
+            File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
+            File oldFile = null;
+            for (File f : TakumiUtils.getListFile("assets/takumicraft/advancements/")) {
+                if (f.getName().contains("slay_.json")) {
+                    oldFile = f;
+                    break;
                 }
-                h_fr.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            try {
-                FileWriter writer = new FileWriter(file);
-                writer.write(buf);
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (oldFile != null) {
+                ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+                URL url = loader.getResource("assets/takumicraft/advancements/");
+                if (!url.getProtocol().equals("jar")) {
+                    String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
+                            oldFile.getAbsolutePath().split("out")[0] + "src" + oldFile.getAbsolutePath().split("out")[1].replaceAll("production", "main")
+                                    .replaceAll("forge1.12", "resources").replaceAll(".json", "")};
+                    for (String sPath : strings) {
+                        String sResource = sPath + entity.getRegisterName() + ".json";
+                        File file = new File(sResource);
+                        //TakumiCraftCore.LOGGER.info(TakumiEntityCore.class.getName() + " : " + sResource + " : " + file.toString());
+                        try {
+                            file.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        FileReader h_fr = null;
+                        String buf = "";
+
+                        String h_s;
+                        try {
+                            h_fr = new FileReader(oldFile);
+                            BufferedReader h_br = new BufferedReader(h_fr);
+                            while (true) {
+                                h_s = h_br.readLine();
+                                if (h_s == null) {
+                                    break;
+                                }
+
+                                h_s = h_s.replaceAll("minecraft:creeper", "takumicraft:" + entity.getRegisterName());
+                                h_s = h_s.replaceAll("creeper_hoge", entity.getRegisterName());
+                                buf = buf + h_s;
+                            }
+                            h_fr.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            FileWriter writer = new FileWriter(file);
+                            writer.write(buf);
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
         }
     }

@@ -18,9 +18,13 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
+import java.net.URL;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class TakumiUtils {
     public static String takumiTranslate(String s) {
@@ -33,8 +37,8 @@ public class TakumiUtils {
             Item item = stack.getItem();
             int meta = stack.getMetadata();
             ItemStack itemStack = new ItemStack(item, 1, meta);
-            if (TakumiCraftCore.HOLDER.map.containsKey(itemStack)) {
-                List<ResourceLocation> list = TakumiCraftCore.HOLDER.map.get(itemStack);
+            if (!TakumiRecipeHolder.MAP.isEmpty() && TakumiRecipeHolder.MAP.containsKey(itemStack)) {
+                List<ResourceLocation> list = TakumiRecipeHolder.MAP.get(itemStack);
                 player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
             }
         }
@@ -77,5 +81,37 @@ public class TakumiUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static List<File> getListFile(String path) {
+        List<File> files = new ArrayList<>();
+        ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+        URL url = loader.getResource(path);
+        //TakumiCraftCore.LOGGER.info(url);
+        if (url.getProtocol().equals("jar")) {
+            String[] strings = url.getPath().split(":");
+            String leadPath = strings[strings.length - 1].split("!")[0];
+            File f = new File(leadPath);
+            JarFile jarFile;
+            try {
+                jarFile = new JarFile(f);
+                Enumeration<JarEntry> enumeration = jarFile.entries();
+                while (enumeration.hasMoreElements()) {
+                    JarEntry entry = enumeration.nextElement();
+                    String s = entry.getName();
+                    if (s != null && s.startsWith(path) && (s.endsWith(".class") || s.endsWith(".json"))) {
+                        TakumiCraftCore.LOGGER.info("takumiUtils : " + s);
+                        files.add(new File(loader.getResource(s).getPath()));
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
+            File newFile = new File(packFile.toURI().getPath() + path);
+            files = Arrays.asList(newFile.listFiles());
+        }
+        return files;
     }
 }
