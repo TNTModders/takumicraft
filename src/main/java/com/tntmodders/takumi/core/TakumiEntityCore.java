@@ -65,7 +65,8 @@ public class TakumiEntityCore {
 
             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
             File oldFile = null;
-            for (File f : TakumiUtils.getListFile("assets/takumicraft/advancements/")) {
+            String assetS = "assets/takumicraft/advancements/";
+            for (File f : TakumiUtils.getListFile(assetS)) {
                 if (f.getName().contains("slay_.json")) {
                     oldFile = f;
                     break;
@@ -73,7 +74,7 @@ public class TakumiEntityCore {
             }
             if (oldFile != null) {
                 ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-                URL url = loader.getResource("assets/takumicraft/advancements/");
+                URL url = loader.getResource(assetS);
                 if (!url.getProtocol().equals("jar")) {
                     String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
                             oldFile.getAbsolutePath().split("out")[0] + "src" + oldFile.getAbsolutePath().split("out")[1].replaceAll("production", "main")

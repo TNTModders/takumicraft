@@ -158,6 +158,13 @@ public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
         super.notifyDataManagerChange(key);
     }
 
+    public void onUpdate() {
+        if (this.getAttackTarget() instanceof EntityVillager && this.getDistanceSqToEntity(this.getAttackTarget()) < 4.0f) {
+            this.setCreeperState(1);
+        }
+        super.onUpdate();
+    }
+
     public void onLivingUpdate() {
         if (this.world.isDaytime() && !this.world.isRemote && !this.isChild() && this.shouldBurnInDay()) {
             float f = this.getBrightness();
@@ -460,7 +467,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
             }
         }
 
-        this.setBreakDoorsAItask(this.rand.nextFloat() < f * 0.1F);
+        this.setBreakDoorsAItask(this.rand.nextBoolean());
         this.setEquipmentBasedOnDifficulty(difficulty);
         this.setEnchantmentBasedOnDifficulty(difficulty);
 

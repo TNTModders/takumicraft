@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.item.ItemTakumiBook;
 import com.tntmodders.takumi.item.ItemTakumiShield;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -47,5 +48,6 @@ public class TakumiItemCore {
                 e.printStackTrace();
             }
         }
+        Items.SPAWN_EGG.setCreativeTab(TakumiCraftCore.TAB_EGGS);
     }
 }

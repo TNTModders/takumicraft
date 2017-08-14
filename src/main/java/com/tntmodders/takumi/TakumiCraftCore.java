@@ -38,6 +38,7 @@ public class TakumiCraftCore {
     public static ModMetadata metadata;
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
+    public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
     public static final TakumiRecipeHolder HOLDER = new TakumiRecipeHolder();
 
     @EventHandler

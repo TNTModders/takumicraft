@@ -42,6 +42,7 @@ advancements.takumicraft.root.title=Takumi Craft
 advancements.takumicraft.root.desc=Going into creeper chaotic world!
 advancements.takumicraft.creeperbomb.title=Creeper Bomb
 advancements.takumicraft.creeperbomb.desc=Got a creeper bomb.
+entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 
 #Vanilla
@@ -64,3 +65,6 @@ item.banner.creeper.lightBlue=Light Blue Creeper Charge
 item.banner.creeper.magenta=Magenta Creeper Charge
 item.banner.creeper.orange=Orange Creeper Charge
 item.banner.creeper.white=White Creeper Charge
+
+#other
+takumicraft.egg.name=Spawn Eggs

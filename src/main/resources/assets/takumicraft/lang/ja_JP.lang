@@ -41,6 +41,7 @@ advancements.takumicraft.root.title=匠Craft
 advancements.takumicraft.root.desc=この匠だらけの世界へ!
 advancements.takumicraft.creeperbomb.title=爆発物注意
 advancements.takumicraft.creeperbomb.desc=匠式高性能爆弾の入手
+entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 
 #Vanilla
@@ -63,3 +64,6 @@ item.banner.creeper.lightBlue=空色の匠模様
 item.banner.creeper.magenta=赤紫色の匠模様
 item.banner.creeper.orange=橙色の匠模様
 item.banner.creeper.white=白色の匠模様
+
+#other
+takumicraft.egg.name=スポーンエッグ
