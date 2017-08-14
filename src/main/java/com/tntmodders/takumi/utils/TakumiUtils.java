@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.utils;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -46,7 +47,7 @@ public class TakumiUtils {
 
     public static float takumiGetHardness(Block block) {
         try {
-            Field field = Block.class.getDeclaredField("blockHardness");
+            Field field = TakumiASMNameMap.getField(Block.class, "blockHardness");
             field.setAccessible(true);
             float f = ((float) field.get(block));
             return f > -1 ? f : -1;
@@ -58,7 +59,7 @@ public class TakumiUtils {
 
     public static void takumiSetPowered(Entity entity) {
         try {
-            Field field = EntityCreeper.class.getDeclaredField("POWERED");
+            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
             field.setAccessible(true);
             DataParameter<Boolean> parameter = ((DataParameter<Boolean>) field.get(entity));
             entity.getDataManager().set(parameter, true);
@@ -71,14 +72,15 @@ public class TakumiUtils {
     public static boolean getAdvancementUnlocked(ResourceLocation location) {
         ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
         try {
-            Field field = manager.getClass().getDeclaredField("advancementToProgress");
+            Field field = TakumiASMNameMap.getField(ClientAdvancementManager.class, "advancementToProgress");
             field.setAccessible(true);
             Map<Advancement, AdvancementProgress> advancementToProgress = ((Map) field.get(manager));
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            TakumiCraftCore.LOGGER.info("failed on " + e.toString());
         }
         return false;
     }
@@ -87,7 +89,6 @@ public class TakumiUtils {
         List<File> files = new ArrayList<>();
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
         URL url = loader.getResource(path);
-        //TakumiCraftCore.LOGGER.info(url);
         if (url.getProtocol().equals("jar")) {
             String[] strings = url.getPath().split(":");
             String leadPath = strings[strings.length - 1].split("!")[0];
@@ -100,7 +101,6 @@ public class TakumiUtils {
                     JarEntry entry = enumeration.nextElement();
                     String s = entry.getName();
                     if (s != null && s.startsWith(path) && (s.endsWith(".class") || s.endsWith(".json"))) {
-                        TakumiCraftCore.LOGGER.info("takumiUtils : " + s);
                         files.add(new File(loader.getResource(s).getPath()));
                     }
                 }

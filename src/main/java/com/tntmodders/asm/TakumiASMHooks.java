@@ -10,7 +10,7 @@ public class TakumiASMHooks {
         try {
             if (creeper instanceof EntityTakumiAbstranctCreeper) {
                 int i = ((EntityTakumiAbstranctCreeper) creeper).getExplosionPower();
-                Field field = EntityCreeper.class.getDeclaredField("explosionRadius");
+                Field field = TakumiASMNameMap.getField(EntityCreeper.class, "explosionRadius");
                 field.setAccessible(true);
                 field.set(creeper, i);
                 ((EntityTakumiAbstranctCreeper) creeper).takumiExplode();

@@ -36,24 +36,18 @@ public class TakumiEntityCore {
         TakumiEntityCore.biomes.remove(Biomes.VOID);
 
         List<File> files = TakumiUtils.getListFile("com/tntmodders/takumi/entity/mobs/");
-        TakumiCraftCore.LOGGER.info(files);
         ArrayList<EntityHolder> entityHolders = new ArrayList<>();
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             try {
                 ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-                //TakumiCraftCore.LOGGER.info(TakumiEntityCore.class.getName() + " : " + "com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
                 Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
-                //TakumiCraftCore.LOGGER.info(TakumiEntityCore.class.getName() + " : " + clazz);
                 ITakumiEntity entity = ((ITakumiEntity) clazz.getConstructor(World.class).newInstance(Minecraft.getMinecraft().world));
-                //TakumiCraftCore.LOGGER.info(entity);
                 entityHolders.add(new EntityHolder(clazz, entity));
             } catch (Exception e) {
-                //e.printStackTrace();
             }
         }
         entityHolders.sort(new EntityComparator());
-        TakumiCraftCore.LOGGER.info(entityHolders);
         for (EntityHolder holder : entityHolders) {
             Class clazz = holder.clazz;
             ITakumiEntity entity = holder.entity;
@@ -87,7 +81,6 @@ public class TakumiEntityCore {
                     for (String sPath : strings) {
                         String sResource = sPath + entity.getRegisterName() + ".json";
                         File file = new File(sResource);
-                        //TakumiCraftCore.LOGGER.info(TakumiEntityCore.class.getName() + " : " + sResource + " : " + file.toString());
                         try {
                             file.createNewFile();
                         } catch (IOException e) {

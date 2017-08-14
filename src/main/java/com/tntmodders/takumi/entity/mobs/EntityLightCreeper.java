@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
@@ -48,7 +49,7 @@ public class EntityLightCreeper extends EntityTakumiAbstranctCreeper {
         }
         float power = this.getPowered() ? 6f : 3f;
         try {
-            Field field = Explosion.class.getDeclaredField("size");
+            Field field = TakumiASMNameMap.getField(Explosion.class, "size");
             field.setAccessible(true);
             power = field.getFloat(event.getExplosion());
         } catch (NoSuchFieldException | IllegalAccessException e) {
