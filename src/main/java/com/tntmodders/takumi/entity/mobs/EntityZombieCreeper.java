@@ -4,6 +4,7 @@ import com.tntmodders.takumi.client.render.RenderZombieCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperAttack;
+import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperSwell;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -80,7 +81,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
 
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAICreeperSwell(this));
+        this.tasks.addTask(2, new EntityAIZombieCreeperSwell(this));
         this.tasks.addTask(2, new EntityAIZombieCreeperAttack(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
@@ -156,13 +157,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
         }
 
         super.notifyDataManagerChange(key);
-    }
-
-    public void onUpdate() {
-        if (this.getAttackTarget() instanceof EntityVillager && this.getDistanceSqToEntity(this.getAttackTarget()) < 4.0f) {
-            this.setCreeperState(1);
-        }
-        super.onUpdate();
     }
 
     public void onLivingUpdate() {
