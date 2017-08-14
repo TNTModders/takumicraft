@@ -36,6 +36,8 @@ entity.lightcreeper.name=Light Creeper
 entity.lightcreeper.desc=Destroy light, it is enough that the light is only one, this creeper.
 entity.slimecreeper.name=Slime Creeper
 entity.slimecreeper.desc=It is called "CreeperClusterBomb", consecutive, large slimy explosion.
+entity.naturalcreeper.name=Natural Creeper
+entity.naturalcreeper.desc=Good for nature... no, no, the good look tree contains explosive!
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

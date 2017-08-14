@@ -35,6 +35,8 @@ entity.lightcreeper.name=光匠
 entity.lightcreeper.desc=光から襲われればもう、気がつけば明かりは仄暗く消えてしまうだろう。
 entity.slimecreeper.name=スライム匠
 entity.slimecreeper.desc=爆発性スライム。死ぬと爆発、膨らみ爆発、人呼んで「匠式クラスター爆弾」。
+entity.naturalcreeper.name=自然匠
+entity.naturalcreeper.desc=その木何の木? 爆弾の木!! 資源にもなるが誘爆注意。
 
 #advancements
 advancements.takumicraft.root.title=匠Craft
