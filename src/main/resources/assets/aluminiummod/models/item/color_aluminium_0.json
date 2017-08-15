@@ -1,5 +1,5 @@
 {
-  "parent": "builtin/generated",
+  "parent": "item/generated",
   "textures": {
     "layer0": "aluminiummod:items/color_aluminium_0"
   }

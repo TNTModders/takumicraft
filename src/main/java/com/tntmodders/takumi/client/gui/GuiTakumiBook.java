@@ -9,6 +9,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
@@ -166,7 +168,7 @@ public class GuiTakumiBook extends GuiScreen {
         GL11.glTranslatef(0.0F, ((float) p_147046_5_.getYOffset()), 0.0F);
         Minecraft.getMinecraft().getRenderManager().playerViewY = 180.0F;
         if (!flg) {
-            GL11.glBlendFunc(0, 0);
+            //GL11.glBlendFunc(0, 0);
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
         }
         this.renderEntityWithPosYaw(p_147046_5_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f, false);
@@ -176,11 +178,10 @@ public class GuiTakumiBook extends GuiScreen {
         p_147046_5_.prevRotationYawHead = f5;
         p_147046_5_.rotationYawHead = f6;
         GL11.glPopMatrix();
-/*        RenderHelper.disableStandardItemLighting();
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        RenderHelper.disableStandardItemLighting();
         OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);*/
+        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
 
     void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {

@@ -2,7 +2,7 @@ package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderTakumiCreeper<T extends EntityTakumiAbstranctCreeper> extends RenderLiving<T> {
+public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends RenderLiving<T> {
 
     public RenderTakumiCreeper(RenderManager renderManagerIn) {
         this(renderManagerIn, new ModelCreeper());

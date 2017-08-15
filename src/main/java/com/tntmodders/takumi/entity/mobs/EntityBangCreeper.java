@@ -3,50 +3,37 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.Field;
 
-public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
-    public EntityLightCreeper(World worldIn) {
+public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
+    public EntityBangCreeper(World worldIn) {
         super(worldIn);
     }
 
-    public float getBrightness() {
-        return 100000f;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender() {
-        return ((int) this.getBrightness());
-    }
-
-    @Override
-    public void onUpdate() {
-        this.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0));
-        super.onUpdate();
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        return TakumiUtils.takumiGetHardness(worldIn.getBlockState(pos).getBlock()) <= -1 ? 10000000f : 5f;
     }
 
     @Override
     public void takumiExplode() {
+        if (!this.world.isRemote) {
+            for (double dx = posX - 0.5; dx < posX + 0.5; dx += 0.25) {
+                for (double dz = posZ - 0.5; dz < posZ + 0.5; dz += 0.25) {
+                    this.world.createExplosion(this, dx, posY, dz, 3f * (this.getPowered() ? 2.0f : 1.0f), true);
+                }
+            }
+        }
     }
 
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, 400, 0));
-            }
-        }
         float power = this.getPowered() ? 6f : 3f;
         try {
             Field field = TakumiASMNameMap.getField(Explosion.class, "size");
@@ -58,7 +45,8 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
 
-                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(this.world.getBlockState(pos)) > 0.5f &&
+                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, event.getExplosion()) >=
+                        Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, event.getExplosion()) &&
                         TakumiUtils.takumiGetHardness(this.world.getBlockState(pos).getBlock()) != -1) {
                     this.world.setBlockToAir(pos);
                     this.world.createExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, true);
@@ -70,7 +58,7 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.LOW;
+        return EnumTakumiRank.MID;
     }
 
     @Override
@@ -85,7 +73,7 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 16776960;
+        return 4682022;
     }
 
     @Override
@@ -95,11 +83,11 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public String getRegisterName() {
-        return "lightcreeper";
+        return "bangcreeper";
     }
 
     @Override
     public int getRegisterID() {
-        return 10;
+        return 202;
     }
 }

@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderSlimeCreeper;
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -40,7 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class EntitySlimeCreeper extends EntityTakumiAbstranctCreeper {
+public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     private static final DataParameter<Integer> SLIME_SIZE = EntityDataManager.createKey(EntitySlimeCreeper.class, DataSerializers.VARINT);
     public float squishAmount;
     public float squishFactor;

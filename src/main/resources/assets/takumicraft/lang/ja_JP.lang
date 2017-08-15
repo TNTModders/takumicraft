@@ -37,6 +37,8 @@ entity.slimecreeper.name=スライム匠
 entity.slimecreeper.desc=爆発性スライム。死ぬと爆発、膨らみ爆発、人呼んで「匠式クラスター爆弾」。
 entity.naturalcreeper.name=自然匠
 entity.naturalcreeper.desc=その木何の木? 爆弾の木!! 資源にもなるが誘爆注意。
+entity.bangcreeper.name=爆匠
+entity.bangcreeper.desc=強力な爆発は黒曜石をも破壊する。身を守る術なく、高密度破壊をもたらす。
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

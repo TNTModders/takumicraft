@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.client.render.layer;
 
 import com.tntmodders.takumi.client.render.ITakumiRender;
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelCreeper;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstranctCreeper> {
+public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCreeper> {
     private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     private final RenderLiving creeperRenderer;
     private final ModelBase creeperModel;
@@ -29,7 +29,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstranctCre
         }
     }
 
-    public void doRenderLayer(EntityTakumiAbstranctCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn.getPowered()) {
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);

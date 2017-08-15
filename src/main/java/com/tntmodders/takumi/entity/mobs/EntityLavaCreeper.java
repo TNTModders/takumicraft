@@ -1,12 +1,12 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityLavaCreeper extends EntityTakumiAbstranctCreeper {
+public class EntityLavaCreeper extends EntityTakumiAbstractCreeper {
     public EntityLavaCreeper(World worldIn) {
         super(worldIn);
     }

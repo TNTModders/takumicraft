@@ -1,6 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,7 +14,7 @@ import net.minecraftforge.event.world.ExplosionEvent;
 
 import java.util.Random;
 
-public class EntityEnderCreeper extends EntityTakumiAbstranctCreeper {
+public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
     public EntityEnderCreeper(World worldIn) {
         super(worldIn);
     }

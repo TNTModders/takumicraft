@@ -38,6 +38,8 @@ entity.slimecreeper.name=Slime Creeper
 entity.slimecreeper.desc=It is called "CreeperClusterBomb", consecutive, large slimy explosion.
 entity.naturalcreeper.name=Natural Creeper
 entity.naturalcreeper.desc=Good for nature... no, no, the good look tree contains explosive!
+entity.bangcreeper.name=Bang Creeper
+entity.bangcreeper.desc=This explosion can even destroy obsidian. There's no way to protect you.
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

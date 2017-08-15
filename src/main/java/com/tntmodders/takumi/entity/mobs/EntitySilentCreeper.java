@@ -1,6 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
@@ -8,7 +8,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntitySilentCreeper extends EntityTakumiAbstranctCreeper {
+public class EntitySilentCreeper extends EntityTakumiAbstractCreeper {
     public EntitySilentCreeper(World worldIn) {
         super(worldIn);
     }

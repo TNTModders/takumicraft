@@ -2,7 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderZombieCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.entity.EntityTakumiAbstranctCreeper;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperAttack;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperSwell;
 import net.minecraft.block.Block;
@@ -52,7 +52,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-public class EntityZombieCreeper extends EntityTakumiAbstranctCreeper {
+public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     protected static final IAttribute SPAWN_REINFORCEMENTS_CHANCE = (new RangedAttribute(null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)).setDescription("Spawn Reinforcements Chance");
     private static final UUID BABY_SPEED_BOOST_ID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
     private static final AttributeModifier BABY_SPEED_BOOST = new AttributeModifier(BABY_SPEED_BOOST_ID, "Baby speed boost", 0.5D, 1);
