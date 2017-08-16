@@ -47,4 +47,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
+
+    @Override
+    public void customSpawn() {
+    }
 }

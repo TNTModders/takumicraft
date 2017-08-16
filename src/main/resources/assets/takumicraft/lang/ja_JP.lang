@@ -39,6 +39,10 @@ entity.naturalcreeper.name=自然匠
 entity.naturalcreeper.desc=その木何の木? 爆弾の木!! 資源にもなるが誘爆注意。
 entity.bangcreeper.name=爆匠
 entity.bangcreeper.desc=強力な爆発は黒曜石をも破壊する。身を守る術なく、高密度破壊をもたらす。
+entity.huskcreeper.name=ハスク匠
+entity.huskcreeper.desc=砂漠のゾンビ匠。爆発を喰らえば、空腹に苦しむこと必至。
+entity.blazecreeper.name=ブレイズ匠
+entity.blazecreeper.desc=近づけば爆発、遠ざかれば火球。地獄を漂う匠は、スティーブを地獄へ誘う。
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

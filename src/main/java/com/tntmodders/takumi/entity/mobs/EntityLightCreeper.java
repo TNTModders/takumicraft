@@ -21,13 +21,13 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
-    public float getBrightness() {
-        return 100000f;
-    }
-
     @SideOnly(Side.CLIENT)
     public int getBrightnessForRender() {
-        return ((int) this.getBrightness());
+        return 15728880;
+    }
+
+    public float getBrightness() {
+        return 1.0F;
     }
 
     @Override

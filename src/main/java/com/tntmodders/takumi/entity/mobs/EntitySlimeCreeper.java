@@ -72,7 +72,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     public void setSlimeSize(int size, boolean resetHealth) {
-        this.dataManager.set(SLIME_SIZE, Integer.valueOf(size));
+        this.dataManager.set(SLIME_SIZE, size);
         this.setSize(0.51000005F * (float) size, 0.51000005F * (float) size);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double) (size * size));
@@ -89,7 +89,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
      * Returns the size of the slime.
      */
     public int getSlimeSize() {
-        return this.dataManager.get(SLIME_SIZE).intValue();
+        return this.dataManager.get(SLIME_SIZE);
     }
 
     /**

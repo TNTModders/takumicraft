@@ -314,7 +314,11 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
 
     private ItemStack getArmorItem(Item item) {
         ItemStack itemStack = new ItemStack(item);
-        itemStack.setItemDamage(this.rand.nextInt(item.getMaxDamage(itemStack) - 1) + 1);
+        int i = item.getMaxDamage(itemStack) - 1;
+        if (i <= 0) {
+            i = 0;
+        }
+        itemStack.setItemDamage(this.rand.nextInt(i) + 1);
         return itemStack;
     }
 

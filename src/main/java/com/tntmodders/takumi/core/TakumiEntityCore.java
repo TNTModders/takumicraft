@@ -54,8 +54,10 @@ public class TakumiEntityCore {
             ResourceLocation location = new ResourceLocation(TakumiCraftCore.MODID, entity.getRegisterName());
             EntityRegistry.registerModEntity(location, clazz, location.getResourcePath(), entity.getRegisterID(), TakumiCraftCore.TakumiInstance, 64, 2, true,
                     entity.getPrimaryColor(), entity.getSecondaryColor());
-            if (!entity.isCustomSpawn() && entity.takumiRank().getSpawnWeight() != 0) {
-                EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, biomes.toArray(new Biome[0]));
+            if (entity.isCustomSpawn()) {
+                entity.customSpawn();
+            } else if (entity.takumiRank().getSpawnWeight() != 0) {
+                EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, biomes.toArray(new Biome[biomes.size()]));
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiModelCore.registerEntityRender(clazz, entity);

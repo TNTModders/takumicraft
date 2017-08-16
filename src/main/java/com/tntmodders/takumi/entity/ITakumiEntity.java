@@ -16,6 +16,8 @@ public interface ITakumiEntity {
 
     EnumTakumiType takumiType();
 
+    void customSpawn();
+
     int getExplosionPower();
 
     int getPrimaryColor();
