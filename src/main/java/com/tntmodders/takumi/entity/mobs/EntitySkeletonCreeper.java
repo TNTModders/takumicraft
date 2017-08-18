@@ -202,7 +202,9 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
             if (this.rand.nextInt(5) == 0) {
                 this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
             }
-            this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
+            if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
+                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
+            }
         }
     }
 

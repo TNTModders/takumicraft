@@ -52,6 +52,8 @@ entity.hotspringcreeper.name=湯匠
 entity.hotspringcreeper.desc=温泉を湧かせる匠。傷も癒え、空腹も消え行く。ありがたや。
 entity.skeletoncreeper.name=スケルトン匠
 entity.skeletoncreeper.desc=爆発性の矢を放つ。ワールドは爆風巻き起こる戦場と化す。
+entity.witherskeletoncreeper.name=ウィザースケルトン匠
+entity.witherskeletoncreeper.desc=ウィザー状態の爆発を起こす。ネザーは阿鼻驚嘆の悪夢に陥る。
 
 entity.takumiarrow.name=匠式弾
 

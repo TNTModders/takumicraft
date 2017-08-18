@@ -53,6 +53,8 @@ entity.hotspringcreeper.name=Hot Spring Creeper
 entity.hotspringcreeper.desc=Thanks for hot spring, this creeper make you relax.
 entity.skeletoncreeper.name=Skeleton Creeper
 entity.skeletoncreeper.desc=Skeleton shooting explosive arrow. The world is going to be war.
+entity.witherskeletoncreeper.name=Wither Skeleton Creeper
+entity.witherskeletoncreeper.desc=Wither damaging explosion, this is a nightmare of nether.
 
 entity.takumiarrow.name=Creeper Arrow
 

@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.model.ModelSkeletonCreeper;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
 import com.tntmodders.takumi.entity.mobs.EntitySkeletonCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityWitherSkeletonCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -36,6 +37,9 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
     }
 
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        if (entitylivingbaseIn instanceof EntityWitherSkeletonCreeper) {
+            GlStateManager.scale(1.2F, 1.2F, 1.2F);
+        }
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
