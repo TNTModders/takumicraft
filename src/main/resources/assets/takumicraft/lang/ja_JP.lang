@@ -7,9 +7,14 @@ takumicraft.credits.name=「ゆかり匠」のテクスチャは野良牛/バフ
 #tile
 tile.creeperbomb.name=匠式高性能爆弾
 tile.gunore.name=火薬岩
+tile.takumihotspring.name=匠温泉
 
 #item
 item.takumibook.name=匠の書
+item.takumibucket_air.name=エメラルドバケツ
+item.takumibucket_takumihotspring.name=匠温泉入り エメラルドバケツ
+item.takumibow.name=匠式強弓
+item.takumiarrow_ha.name=匠式弾[破]
 
 #entity
 ＃descは36文字まで。
@@ -43,6 +48,12 @@ entity.huskcreeper.name=ハスク匠
 entity.huskcreeper.desc=砂漠のゾンビ匠。爆発を喰らえば、空腹に苦しむこと必至。
 entity.blazecreeper.name=ブレイズ匠
 entity.blazecreeper.desc=近づけば爆発、遠ざかれば火球。地獄を漂う匠は、スティーブを地獄へ誘う。
+entity.hotspringcreeper.name=湯匠
+entity.hotspringcreeper.desc=温泉を湧かせる匠。傷も癒え、空腹も消え行く。ありがたや。
+entity.skeletoncreeper.name=スケルトン匠
+entity.skeletoncreeper.desc=爆発性の矢を放つ。ワールドは爆風巻き起こる戦場と化す。
+
+entity.takumiarrow.name=匠式弾
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

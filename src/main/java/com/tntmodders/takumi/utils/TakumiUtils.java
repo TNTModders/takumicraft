@@ -2,6 +2,7 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.Block;
@@ -10,11 +11,15 @@ import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.play.server.SPacketExplosion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -79,8 +84,7 @@ public class TakumiUtils {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            //e.printStackTrace();
-            TakumiCraftCore.LOGGER.info("failed on " + e.toString());
+            e.printStackTrace();
         }
         return false;
     }
@@ -113,5 +117,26 @@ public class TakumiUtils {
             files = Arrays.asList(newFile.listFiles());
         }
         return files;
+    }
+
+    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy) {
+        boolean flg = world instanceof WorldServer;
+        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy);
+        if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(world, explosion)) {
+            return;
+        }
+        explosion.doExplosionA();
+        explosion.doExplosionB(!flg);
+        if (flg) {
+            if (!fire) {
+                explosion.clearAffectedBlockPositions();
+            }
+
+            for (EntityPlayer entityplayer : world.playerEntities) {
+                if (entityplayer.getDistanceSq(x, y, z) < 4096.0D) {
+                    ((EntityPlayerMP) entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z, power, explosion.getAffectedBlockPositions(), explosion.getPlayerKnockbackMap().get(entityplayer)));
+                }
+            }
+        }
     }
 }

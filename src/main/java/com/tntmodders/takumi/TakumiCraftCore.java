@@ -46,6 +46,7 @@ public class TakumiCraftCore {
         TakumiModInfoCore.load(metadata);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new TakumiEvents());
+        TakumiFluidCore.register();
     }
 
     @SubscribeEvent

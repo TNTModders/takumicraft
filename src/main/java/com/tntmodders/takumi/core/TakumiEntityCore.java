@@ -3,16 +3,21 @@ package com.tntmodders.takumi.core;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import javax.annotation.Nullable;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -121,6 +126,24 @@ public class TakumiEntityCore {
                 }
             }
         }
+        itemRegister();
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            renderRegister();
+        }
+    }
+
+    private static void itemRegister() {
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"), EntityTakumiArrow.class, "takumiarrow", 900, TakumiCraftCore.TakumiInstance, 64, 2, true);
+    }
+
+    private static void renderRegister() {
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiArrow.class, manager -> new RenderArrow<EntityArrow>(manager) {
+            @Nullable
+            @Override
+            protected ResourceLocation getEntityTexture(EntityArrow entity) {
+                return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/item/carrow.png");
+            }
+        });
     }
 
 

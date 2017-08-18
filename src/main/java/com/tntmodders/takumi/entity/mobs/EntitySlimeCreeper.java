@@ -305,7 +305,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc.isExplosion() && damageSrc.getTrueSource().getClass() == EntitySlimeCreeper.class) {
+        if (damageSrc.isExplosion() && damageSrc.getTrueSource() != null && damageSrc.getTrueSource().getClass() == EntitySlimeCreeper.class) {
             damageAmount = 0;
         }
         super.damageEntity(damageSrc, damageAmount);

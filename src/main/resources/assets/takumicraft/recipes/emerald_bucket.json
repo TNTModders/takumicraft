@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q Q",
+    " Q "
+  ],
+  "key": {
+    "Q": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumibucket_air"
+  }
+}

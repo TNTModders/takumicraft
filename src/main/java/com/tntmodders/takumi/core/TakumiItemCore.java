@@ -1,9 +1,9 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.item.ItemTakumiBook;
-import com.tntmodders.takumi.item.ItemTakumiShield;
+import com.tntmodders.takumi.item.*;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -18,6 +18,10 @@ public class TakumiItemCore {
     public static List<Item> itemBlocks = new ArrayList<Item>();
     public static final Item TAKUMI_SHIELD = new ItemTakumiShield();
     public static final Item TAKUMI_BOOK = new ItemTakumiBook();
+    public static final Item TAKUMI_BUCKET = new ItemTakumiBucket(Blocks.AIR);
+    public static final Item TAKUMI_SPRING_BUCKET = new ItemTakumiBucket(TakumiBlockCore.HOT_SPRING);
+    public static final Item TAKUMI_BOW = new ItemTakumiBow();
+    public static final ItemTakumiArrow TAKUMI_ARROW_HA = new ItemTakumiArrow("ha", 2, 1, false);
 
     public static void register(IForgeRegistry<Item> registry) {
         Class clazz = TakumiItemCore.class;

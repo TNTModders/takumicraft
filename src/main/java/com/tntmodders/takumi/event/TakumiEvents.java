@@ -1,6 +1,8 @@
 package com.tntmodders.takumi.event;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.entity.mobs.EntityHuskCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySlimeCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
@@ -10,6 +12,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -65,6 +68,13 @@ public class TakumiEvents {
                 e.getWorld().spawnEntity(huskCreeper);
                 e.setResult(Event.Result.DENY);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void damage(LivingAttackEvent event) {
+        if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow) {
+            TakumiCraftCore.LOGGER.info("info");
         }
     }
 }

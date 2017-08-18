@@ -58,7 +58,7 @@ public class TakumiRecipeHolder {
             List<File> list = TakumiUtils.getListFile(path);
             if (list.size() > 0) {
                 for (File recipe : list) {
-                    TakumiCraftCore.LOGGER.info(recipe);
+                    //TakumiCraftCore.LOGGER.info(recipe);
                     InputStream stream = null;
                     try {
                         stream = new FileInputStream(recipe);

@@ -39,7 +39,8 @@ public interface ITakumiEntity {
      * MID      : 201 ~ 400
      * HIGH    : 401 ~ 500
      * BOSS    :501 ~ 600
-     * TAK       :900 ~
+     * TAK       :777
+     * ITEM     :900~
      */
     int getRegisterID();
 

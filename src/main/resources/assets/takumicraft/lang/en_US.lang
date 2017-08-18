@@ -7,9 +7,14 @@ takumicraft.credits.name=The texture of "Yukari Creeper" is made by Noraushi/Bah
 #tile
 tile.creeperbomb.name=Creeper Bomb
 tile.gunore.name=Gunpowder Ore
+tile.takumihotspring.name=Creeper Hot Spring
 
 #item
 item.takumibook.name=Creeper Book
+item.takumibucket_air.name=Emerald Bucket
+item.takumibucket_takumihotspring.name=Emerald Hot Spring Bucket
+item.takumibow.name=Creeper Bow
+item.takumiarrow_ha.name=Creeper Blast Arrow
 
 
 #entity
@@ -44,6 +49,12 @@ entity.huskcreeper.name=Husk Creeper
 entity.huskcreeper.desc=Desert zombie creeper. You will suffer of  hunger.
 entity.blazecreeper.name=Blaze Creeper
 entity.blazecreeper.desc=The farther, the more fireball. The nearer, the more explosion.
+entity.hotspringcreeper.name=Hot Spring Creeper
+entity.hotspringcreeper.desc=Thanks for hot spring, this creeper make you relax.
+entity.skeletoncreeper.name=Skeleton Creeper
+entity.skeletoncreeper.desc=Skeleton shooting explosive arrow. The world is going to be war.
+
+entity.takumiarrow.name=Creeper Arrow
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
