@@ -1,0 +1,42 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:creeperiron"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.antiexplosion.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.antiexplosion.desc"
+    }
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "creeperiron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperiron"
+          }
+        ]
+      }
+    },
+    "creeperbrick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperbrick"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "creeperiron",
+      "creeperbrick"
+    ]
+  ]
+}

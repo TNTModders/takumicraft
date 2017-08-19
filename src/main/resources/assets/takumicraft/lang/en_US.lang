@@ -8,6 +8,8 @@ takumicraft.credits.name=The texture of "Yukari Creeper" is made by Noraushi/Bah
 tile.creeperbomb.name=Creeper Bomb
 tile.gunore.name=Gunpowder Ore
 tile.takumihotspring.name=Creeper Hot Spring
+tile.creeperiron.name=Creeper Iron
+tile.creeperbrick.name=Creeper Brick
 
 #item
 item.takumibook.name=Creeper Book
@@ -55,6 +57,8 @@ entity.skeletoncreeper.name=Skeleton Creeper
 entity.skeletoncreeper.desc=Skeleton shooting explosive arrow. The world is going to be war.
 entity.witherskeletoncreeper.name=Wither Skeleton Creeper
 entity.witherskeletoncreeper.desc=Wither damaging explosion, this is a nightmare of nether.
+entity.objetcreeper.name=Objet Creeper
+entity.objetcreepr.desc=Create an objet to you, explosively anti-explosion art.
 
 entity.takumiarrow.name=Creeper Arrow
 
@@ -63,6 +67,8 @@ advancements.takumicraft.root.title=Takumi Craft
 advancements.takumicraft.root.desc=Going into creeper chaotic world!
 advancements.takumicraft.creeperbomb.title=Creeper Bomb
 advancements.takumicraft.creeperbomb.desc=Got a creeper bomb.
+advancements.takumicraft.antiexplosion.title=Anti Explosion
+advancements.takumicraft.antiexplosion.desc=Got an anti-explosion block.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 
