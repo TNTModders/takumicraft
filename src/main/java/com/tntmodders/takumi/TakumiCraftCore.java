@@ -8,6 +8,7 @@ import com.tntmodders.takumi.utils.TakumiRecipeHolder;
 import com.tntmodders.takumi.world.TakumiGunOreGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,6 +69,11 @@ public class TakumiCraftCore {
     @SubscribeEvent
     public void registerEntities(RegistryEvent.Register<EntityEntry> event) {
         TakumiEntityCore.register();
+    }
+
+    @SubscribeEvent
+    public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
+        TakumiEnchantmentCore.register(event.getRegistry());
     }
 
     @EventHandler

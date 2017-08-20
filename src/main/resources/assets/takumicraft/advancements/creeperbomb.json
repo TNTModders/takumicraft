@@ -12,7 +12,7 @@
   },
   "parent": "takumicraft:root",
   "criteria": {
-    "gunore": {
+    "creeperbomb": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [

@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -99,7 +100,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
      * Gives armor or weapon for entity based on given DifficultyInstance
      */
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_SWORD));
     }
 
     /**

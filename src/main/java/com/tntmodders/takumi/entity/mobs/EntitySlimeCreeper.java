@@ -177,7 +177,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     protected EntitySlimeCreeper createInstance() {
         EntitySlimeCreeper slime = new EntitySlimeCreeper(this.world);
         if (this.getPowered()) {
-            TakumiUtils.takumiSetPowered(slime);
+            TakumiUtils.takumiSetPowered(slime, true);
         }
         return slime;
     }

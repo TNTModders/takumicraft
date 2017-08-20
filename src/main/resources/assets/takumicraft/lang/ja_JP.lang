@@ -17,6 +17,7 @@ item.takumibucket_air.name=エメラルドバケツ
 item.takumibucket_takumihotspring.name=匠温泉入り エメラルドバケツ
 item.takumibow.name=匠式強弓
 item.takumiarrow_ha.name=匠式弾[破]
+item.takumisword.name=匠式宝剣
 
 #entity
 ＃descは36文字まで。
@@ -68,8 +69,13 @@ advancements.takumicraft.creeperbomb.title=爆発物注意
 advancements.takumicraft.creeperbomb.desc=匠式高性能爆弾の入手  全ては爆弾から。
 advancements.takumicraft.antiexplosion.title=対爆仕様
 advancements.takumicraft.antiexplosion.desc=匠式硬質ブロック系統の入手  慢心はダメ、ゼッタイ。
+advancements.takumicraft.disarmament.title=武装解除
+advancements.takumicraft.disarmament.desc=巨匠化状態解除 怖いものなし、匠の狩人。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
+
+#enchantment
+enchantment.takumi_anti_powered=巨匠特攻
 
 #Vanilla
 item.skull.creeper.name=匠の頭

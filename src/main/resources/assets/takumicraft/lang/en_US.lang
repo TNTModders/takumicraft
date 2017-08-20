@@ -17,7 +17,7 @@ item.takumibucket_air.name=Emerald Bucket
 item.takumibucket_takumihotspring.name=Emerald Hot Spring Bucket
 item.takumibow.name=Creeper Bow
 item.takumiarrow_ha.name=Creeper Blast Arrow
-
+item.takumisword.name=Creeper Sword
 
 #entity
 #desc max: 72 chars
@@ -69,8 +69,13 @@ advancements.takumicraft.creeperbomb.title=Creeper Bomb
 advancements.takumicraft.creeperbomb.desc=Got a creeper bomb.
 advancements.takumicraft.antiexplosion.title=Anti Explosion
 advancements.takumicraft.antiexplosion.desc=Got an anti-explosion block.
+advancements.takumicraft.disarmament.title=Disarmament
+advancements.takumicraft.disarmament.desc=Disarmament creeper's lighting armor.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
+
+#enchantment
+enchantment.takumi_anti_powered=Anti-powered
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

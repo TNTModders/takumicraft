@@ -22,6 +22,7 @@ public class TakumiItemCore {
     public static final Item TAKUMI_SPRING_BUCKET = new ItemTakumiBucket(TakumiBlockCore.HOT_SPRING);
     public static final Item TAKUMI_BOW = new ItemTakumiBow();
     public static final ItemTakumiArrow TAKUMI_ARROW_HA = new ItemTakumiArrow("ha", 2, 1, false);
+    public static final Item TAKUMI_SWORD = new ItemTakumiSword();
 
     public static void register(IForgeRegistry<Item> registry) {
         Class clazz = TakumiItemCore.class;

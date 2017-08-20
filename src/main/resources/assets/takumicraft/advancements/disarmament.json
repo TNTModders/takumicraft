@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumisword"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.disarmament.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.disarmament.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

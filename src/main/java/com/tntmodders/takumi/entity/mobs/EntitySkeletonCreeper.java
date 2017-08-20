@@ -230,12 +230,15 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         this.setCombatTask();
     }
 
-    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
+    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack, boolean flg) {
         super.setItemStackToSlot(slotIn, stack);
-
-        if (!this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
+        if (flg && !this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
             this.setCombatTask();
         }
+    }
+
+    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
+        this.setItemStackToSlot(slotIn, stack, true);
     }
 
     public float getEyeHeight() {

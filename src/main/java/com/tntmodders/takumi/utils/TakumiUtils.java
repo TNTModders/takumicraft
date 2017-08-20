@@ -62,12 +62,12 @@ public class TakumiUtils {
         return 0f;
     }
 
-    public static void takumiSetPowered(Entity entity) {
+    public static void takumiSetPowered(Entity entity, boolean flg) {
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
             field.setAccessible(true);
             DataParameter<Boolean> parameter = ((DataParameter<Boolean>) field.get(entity));
-            entity.getDataManager().set(parameter, true);
+            entity.getDataManager().set(parameter, flg);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -2,9 +2,12 @@ package com.tntmodders.takumi.client.gui;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.EntitySilentCreeper;
+import com.tntmodders.takumi.entity.mobs.EntitySkeletonCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySlimeCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityWitherSkeletonCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -19,6 +22,8 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -145,6 +150,10 @@ public class GuiTakumiBook extends GuiScreen {
             return new EntityCreeper(((EntitySilentCreeper) entity).world);
         } else if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);
+        }
+        if (entity instanceof EntitySkeletonCreeper) {
+            ((EntitySkeletonCreeper) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND, entity instanceof EntityWitherSkeletonCreeper ?
+                    new ItemStack(TakumiItemCore.TAKUMI_SWORD) : new ItemStack(TakumiItemCore.TAKUMI_BOW), false);
         }
         return ((EntityLivingBase) entity);
     }
