@@ -1,20 +1,17 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.lang.reflect.Field;
 
 public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
     public EntityLightCreeper(World worldIn) {
@@ -48,20 +45,16 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         float power = this.getPowered() ? 6f : 3f;
-        try {
-            Field field = TakumiASMNameMap.getField(Explosion.class, "size");
-            field.setAccessible(true);
-            power = field.getFloat(event.getExplosion());
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+        if (event.getExplosion() instanceof TakumiExplosion) {
+            power = ((TakumiExplosion) event.getExplosion()).getSize();
         }
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
 
                 if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(this.world.getBlockState(pos)) > 0.5f &&
-                        TakumiUtils.takumiGetHardness(this.world.getBlockState(pos).getBlock()) != -1) {
+                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    this.world.createExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
                 }
             }
         }

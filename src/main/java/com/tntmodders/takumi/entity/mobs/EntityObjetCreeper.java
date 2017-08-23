@@ -21,7 +21,7 @@ public class EntityObjetCreeper extends EntityTakumiAbstractCreeper {
                 for (int y = ((int) this.posY); y < ((int) this.posY) + (range * 1.5) + 3; y++) {
                     for (int z = ((int) this.posZ) - range; z < ((int) this.posZ) + range; z++) {
                         BlockPos pos = new BlockPos(x, y, z);
-                        if (TakumiUtils.takumiGetHardness(this.world.getBlockState(pos).getBlock()) != -1) {
+                        if (TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                             if (y > this.posY + (range * 1.5)) {
                                 if (this.rand.nextInt(8) == 0) {
                                     this.world.setBlockState(pos, TakumiBlockCore.CREEPER_BOMB.getDefaultState());

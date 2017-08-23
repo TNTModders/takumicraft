@@ -10,6 +10,7 @@ tile.gunore.name=Gunpowder Ore
 tile.takumihotspring.name=Creeper Hot Spring
 tile.creeperiron.name=Creeper Iron
 tile.creeperbrick.name=Creeper Brick
+tile.dummy_gunore.name=Gunpowder Ore Creeper
 
 #item
 item.takumibook.name=Creeper Book
@@ -52,13 +53,15 @@ entity.huskcreeper.desc=Desert zombie creeper. You will suffer of  hunger.
 entity.blazecreeper.name=Blaze Creeper
 entity.blazecreeper.desc=The farther, the more fireball. The nearer, the more explosion.
 entity.hotspringcreeper.name=Hot Spring Creeper
-entity.hotspringcreeper.desc=Thanks for hot spring, this creeper make you relax.
+entity.hotspringcreeper.desc=Thanks for hot spring, this creeper makes you relax.
 entity.skeletoncreeper.name=Skeleton Creeper
 entity.skeletoncreeper.desc=Skeleton shooting explosive arrow. The world is going to be war.
 entity.witherskeletoncreeper.name=Wither Skeleton Creeper
 entity.witherskeletoncreeper.desc=Wither damaging explosion, this is a nightmare of nether.
 entity.objetcreeper.name=Objet Creeper
 entity.objetcreepr.desc=Create an objet to you, explosively anti-explosion art.
+entity.gunorecreeper.name=Gunpowder Ore Creeper
+entity.gunorecreeper.desc=This is not a block, but a creeper. You pick this, soon this explodes.
 
 entity.takumiarrow.name=Creeper Arrow
 

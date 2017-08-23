@@ -1,8 +1,8 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -10,15 +10,13 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
 
-import java.lang.reflect.Field;
-
 public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
     public EntityBangCreeper(World worldIn) {
         super(worldIn);
     }
 
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return TakumiUtils.takumiGetHardness(worldIn.getBlockState(pos).getBlock()) <= -1 ? 10000000f : 5f;
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 2.5f;
     }
 
     @Override
@@ -35,21 +33,17 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         float power = this.getPowered() ? 6f : 3f;
-        try {
-            Field field = TakumiASMNameMap.getField(Explosion.class, "size");
-            field.setAccessible(true);
-            power = field.getFloat(event.getExplosion());
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+        if (event.getExplosion() instanceof TakumiExplosion) {
+            power = ((TakumiExplosion) event.getExplosion()).getSize();
         }
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
 
                 if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, event.getExplosion()) >=
                         Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, event.getExplosion()) &&
-                        TakumiUtils.takumiGetHardness(this.world.getBlockState(pos).getBlock()) != -1) {
+                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    this.world.createExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
                 }
             }
         }

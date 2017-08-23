@@ -39,6 +39,7 @@ public class TakumiExplosion extends Explosion {
     private final double y;
     private final double z;
     private final Entity exploder;
+
     private final float size;
     private final List<BlockPos> affectedBlockPositions;
     private final Map<EntityPlayer, Vec3d> playerKnockbackMap;
@@ -58,6 +59,10 @@ public class TakumiExplosion extends Explosion {
         this.causesFire = flaming;
         this.damagesTerrain = damagesTerrain;
         this.position = new Vec3d(this.x, this.y, this.z);
+    }
+
+    public float getSize() {
+        return size;
     }
 
     public Entity getExploder() {

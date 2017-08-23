@@ -1,10 +1,7 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.BlockTakumiAntiExplosion;
-import com.tntmodders.takumi.block.BlockTakumiCreeperBomb;
-import com.tntmodders.takumi.block.BlockTakumiGunOre;
-import com.tntmodders.takumi.block.BlockTakumiHotSpring;
+import com.tntmodders.takumi.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -19,6 +16,7 @@ public class TakumiBlockCore {
     public static final Block HOT_SPRING = new BlockTakumiHotSpring();
     public static final Block CREEPER_BRICK = new BlockTakumiAntiExplosion(Material.SAND, "creeperbrick", 2.5f, "pickaxe");
     public static final Block CREEPER_IRON = new BlockTakumiAntiExplosion(Material.IRON, "creeperiron", 5f, "pickaxe");
+    public static final Block DUMMY_GUNORE = new BlockTakumiDummyGunOre();
 
     public static void register(IForgeRegistry<Block> registry) {
         Class clazz = TakumiBlockCore.class;

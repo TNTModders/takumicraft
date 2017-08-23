@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "takumicraft:blocks/dummy_gunore"
+    },
+    "model": "takumicraft:dummy_gunore",
+    "uvlock": false
+  },
+  "variants": {
+    "normal": [
+      {
+      }
+    ],
+    "inventory": [
+      {
+      }
+    ]
+  }
+}

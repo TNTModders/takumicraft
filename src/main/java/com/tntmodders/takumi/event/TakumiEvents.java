@@ -43,7 +43,7 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered() && ((EntityCreeper) event.getEntityLiving()).world.isThundering()) {
-            TakumiUtils.takumiSetPowered(event.getEntityLiving(), true);
+            TakumiUtils.takumiSetPowered(((EntityCreeper) event.getEntityLiving()), true);
         }
     }
 
@@ -87,18 +87,11 @@ public class TakumiEvents {
             if (!EnchantmentHelper.getEnchantments(stack).isEmpty() && EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED) &&
                     event.getEntityLiving() instanceof EntityCreeper && ((EntityCreeper) event.getEntityLiving()).getPowered()) {
                 event.getEntityLiving().attackEntityFrom(DamageSource.causeMobDamage(((EntityLivingBase) event.getSource().getTrueSource())).setMagicDamage(), 20f);
-                TakumiUtils.takumiSetPowered(event.getEntityLiving(), false);
+                TakumiUtils.takumiSetPowered(((EntityCreeper) event.getEntityLiving()), false);
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-                    EntityPlayerMP playerMP = ((EntityPlayerMP) event.getSource().getTrueSource());
-                    try {
-                        if (playerMP.getAdvancements().getProgress(playerMP.getServer().getAdvancementManager().getAdvancement(
-                                new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"))).hasProgress()) {
-                            playerMP.getAdvancements().grantCriterion(playerMP.getServer().getAdvancementManager().getAdvancement(
-                                    new ResourceLocation(TakumiCraftCore.MODID, "disarmament")), "impossible");
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    TakumiUtils.giveAdvancementImpossible(((EntityPlayerMP) event.getSource().getTrueSource()),
+                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                            new ResourceLocation(TakumiCraftCore.MODID, "disarmament"));
                 }
             }
         }

@@ -5,7 +5,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.entity.Entity;
@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -37,37 +38,11 @@ public class TakumiUtils {
         return I18n.translateToLocal(s);
     }
 
-    public static void takumiUnlockRecipes(ItemStack stack, EntityPlayer player) {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            //レシピはjsonをスキャンして結果からリストでif判定できるように!
-            Item item = stack.getItem();
-            int meta = stack.getMetadata();
-            ItemStack itemStack = new ItemStack(item, 1, meta);
-            if (!TakumiRecipeHolder.map.isEmpty() && TakumiRecipeHolder.map.containsKey(itemStack)) {
-                List<ResourceLocation> list = TakumiRecipeHolder.map.get(itemStack);
-                player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
+    public static void giveAdvancementImpossible(EntityPlayerMP playerMP, ResourceLocation parent, ResourceLocation child) {
+        try {
+            if (playerMP.getAdvancements().getProgress(playerMP.getServer().getAdvancementManager().getAdvancement(parent)).hasProgress()) {
+                playerMP.getAdvancements().grantCriterion(playerMP.getServer().getAdvancementManager().getAdvancement(child), "impossible");
             }
-        }
-    }
-
-    public static float takumiGetHardness(Block block) {
-        try {
-            Field field = TakumiASMNameMap.getField(Block.class, "blockHardness");
-            field.setAccessible(true);
-            float f = ((float) field.get(block));
-            return f > -1 ? f : -1;
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return 0f;
-    }
-
-    public static void takumiSetPowered(Entity entity, boolean flg) {
-        try {
-            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
-            field.setAccessible(true);
-            DataParameter<Boolean> parameter = ((DataParameter<Boolean>) field.get(entity));
-            entity.getDataManager().set(parameter, flg);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,6 +62,42 @@ public class TakumiUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void takumiUnlockRecipes(ItemStack stack, EntityPlayer player) {
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            //レシピはjsonをスキャンして結果からリストでif判定できるように!
+            Item item = stack.getItem();
+            int meta = stack.getMetadata();
+            ItemStack itemStack = new ItemStack(item, 1, meta);
+            if (!TakumiRecipeHolder.map.isEmpty() && TakumiRecipeHolder.map.containsKey(itemStack)) {
+                List<ResourceLocation> list = TakumiRecipeHolder.map.get(itemStack);
+                player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
+            }
+        }
+    }
+
+    public static float takumiGetBlockResistance(Entity entity, IBlockState state, BlockPos pos) {
+        float f = entity.getExplosionResistance(null, entity.world, pos, state);
+        if (f >= 1200) {
+            f = -1;
+        } else if (f < 0) {
+            f = 0;
+        }
+        return f;
+    }
+
+    public static void takumiSetPowered(EntityCreeper entity, boolean flg) {
+        if (!entity.getPowered()) {
+            try {
+                Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
+                field.setAccessible(true);
+                DataParameter<Boolean> parameter = ((DataParameter<Boolean>) field.get(entity));
+                entity.getDataManager().set(parameter, flg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static List<File> getListFile(String path) {
