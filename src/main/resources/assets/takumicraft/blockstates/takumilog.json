@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "takumicraft:takumilog"
+    },
+    "axis=z": {
+      "model": "takumicraft:takumilog",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "takumicraft:takumilog",
+      "x": 90,
+      "y": 90
+    },
+    "axis=none": {
+      "model": "takumicraft:takumilog_bark"
+    }
+  }
+}

@@ -11,6 +11,8 @@ tile.takumihotspring.name=Creeper Hot Spring
 tile.creeperiron.name=Creeper Iron
 tile.creeperbrick.name=Creeper Brick
 tile.dummy_gunore.name=Gunpowder Ore Creeper
+tile.takumilog.name=Creeper Wood Log
+tile.takumileaf.name=Creeper Wood Leaves
 
 #item
 item.takumibook.name=Creeper Book
@@ -62,6 +64,8 @@ entity.objetcreeper.name=Objet Creeper
 entity.objetcreepr.desc=Create an objet to you, explosively anti-explosion art.
 entity.gunorecreeper.name=Gunpowder Ore Creeper
 entity.gunorecreeper.desc=This is not a block, but a creeper. You pick this, soon this explodes.
+entity.treecreeper.name=Tree Creeper
+entity.treecreeper.desc=A creature of creeper tree. Of course, it plants a creeper tree.
 
 entity.takumiarrow.name=Creeper Arrow
 

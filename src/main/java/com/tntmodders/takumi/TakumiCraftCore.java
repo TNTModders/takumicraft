@@ -5,7 +5,7 @@ import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.event.TakumiEvents;
 import com.tntmodders.takumi.utils.TakumiRecipeHolder;
-import com.tntmodders.takumi.world.TakumiGunOreGenerator;
+import com.tntmodders.takumi.world.gen.TakumiGunOreGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;

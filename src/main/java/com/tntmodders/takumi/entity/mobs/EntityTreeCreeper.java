@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class EntityNaturalCreeper extends EntityTakumiAbstractCreeper {
-    public EntityNaturalCreeper(World worldIn) {
+public class EntityTreeCreeper extends EntityTakumiAbstractCreeper {
+    public EntityTreeCreeper(World worldIn) {
         super(worldIn);
     }
 
@@ -17,8 +17,8 @@ public class EntityNaturalCreeper extends EntityTakumiAbstractCreeper {
     public void takumiExplode() {
         if (!this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 6 : 3, false);
-            WorldGenAbstractTree tree = this.getPowered() ? new TakumiWorldGenBigTree(true, TakumiBlockCore.GUNORE.getDefaultState(), TakumiBlockCore.CREEPER_BOMB.getDefaultState())
-                    : new TakumiWorldGenTrees(true, false, TakumiBlockCore.GUNORE.getDefaultState(), TakumiBlockCore.CREEPER_BOMB.getDefaultState());
+            WorldGenAbstractTree tree = this.getPowered() ? new TakumiWorldGenBigTree(true, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore.CREEPER_LEAVES.getDefaultState())
+                    : new TakumiWorldGenTrees(true, false, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore.CREEPER_LEAVES.getDefaultState());
             tree.generate(this.world, this.rand, new BlockPos(this));
         }
     }
@@ -30,7 +30,7 @@ public class EntityNaturalCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.GRASS_D;
+        return EnumTakumiType.GRASS;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class EntityNaturalCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 122752;
+        return 142857;
     }
 
     @Override
@@ -50,11 +50,11 @@ public class EntityNaturalCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public String getRegisterName() {
-        return "naturalcreeper";
+        return "treecreeper";
     }
 
     @Override
     public int getRegisterID() {
-        return 201;
+        return 18;
     }
 }

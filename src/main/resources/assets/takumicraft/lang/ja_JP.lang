@@ -11,6 +11,8 @@ tile.takumihotspring.name=匠温泉
 tile.creeperiron.name=匠式硬質鋼
 tile.creeperbrick.name=匠式硬質煉瓦
 tile.dummy_gunore.name=火薬岩匠
+tile.takumilog.name=匠の木
+tile.takumileaf.name=匠の木の葉
 
 #item
 item.takumibook.name=匠の書
@@ -62,6 +64,8 @@ entity.objetcreeper.name=オブジェ匠
 entity.objetcreepr.desc=爆発的な芸術を、硬質ブロックの対爆オブジェを作り出す匠。
 entity.gunorecreeper.name=火薬岩匠
 entity.gunorecreeper.desc=火薬岩に化けた匠。掘ればその途端、正体をあらわす。
+entity.treecreeper.name=森守匠
+entity.treecreeper.desc=匠の木の精霊。森を守り、木を植える匠。もちろんだが、匠の木である。
 
 entity.takumiarrow.name=匠式弾
 

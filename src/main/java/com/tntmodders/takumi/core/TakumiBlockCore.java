@@ -17,6 +17,8 @@ public class TakumiBlockCore {
     public static final Block CREEPER_BRICK = new BlockTakumiAntiExplosion(Material.SAND, "creeperbrick", 2.5f, "pickaxe");
     public static final Block CREEPER_IRON = new BlockTakumiAntiExplosion(Material.IRON, "creeperiron", 5f, "pickaxe");
     public static final Block DUMMY_GUNORE = new BlockTakumiDummyGunOre();
+    public static final Block CREEPER_LOG = new BlockTakumiLog();
+    public static final Block CREEPER_LEAVES = new BlockTakumiLeaf();
 
     public static void register(IForgeRegistry<Block> registry) {
         Class clazz = TakumiBlockCore.class;
