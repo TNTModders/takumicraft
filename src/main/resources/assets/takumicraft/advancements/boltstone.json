@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:boltstone"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.boltstone.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.boltstone.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "boltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:boltstone"
+          }
+        ]
+      }
+    }
+  }
+}

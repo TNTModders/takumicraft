@@ -18,6 +18,9 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     }
 
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc == DamageSource.LIGHTNING_BOLT) {
+            return;
+        }
         if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
                 (damageSrc.isFireDamage() && this.takumiType() == EnumTakumiType.FIRE) ||
                 (damageSrc == DamageSource.DROWN && this.takumiType() == EnumTakumiType.WATER) ||
