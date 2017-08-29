@@ -67,6 +67,8 @@ entity.gunorecreeper.name=火薬岩匠
 entity.gunorecreeper.desc=火薬岩に化けた匠。掘ればその途端、正体をあらわす。
 entity.treecreeper.name=森守匠
 entity.treecreeper.desc=匠の木の精霊。森を守り、木を植える匠。もちろんだが、匠の木である。
+entity.fishcreeper.name=匠魚
+entity.fishcreeper.desc=銀ではなく緑のシルバーフィッシュ。匠の力を得、岩をも穿つ。
 
 entity.takumiarrow.name=匠式弾
 

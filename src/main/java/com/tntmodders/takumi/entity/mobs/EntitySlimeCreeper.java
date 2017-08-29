@@ -421,7 +421,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean isCustomSpawn() {
-        return false;
+        return true;
     }
 
     @Override

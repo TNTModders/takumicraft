@@ -24,6 +24,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
         this.setRegistryName(TakumiCraftCore.MODID, "takumihotspring");
         this.setUnlocalizedName("takumihotspring");
         this.setLightLevel(1f);
+        this.setResistance(10000000f);
     }
 
     @SideOnly(Side.CLIENT)

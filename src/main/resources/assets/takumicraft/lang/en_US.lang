@@ -67,6 +67,8 @@ entity.gunorecreeper.name=Gunpowder Ore Creeper
 entity.gunorecreeper.desc=This is not a block, but a creeper. You pick this, soon this explodes.
 entity.treecreeper.name=Tree Creeper
 entity.treecreeper.desc=A creature of creeper tree. Of course, it plants a creeper tree.
+entity.fishcreeper.name=Fish Creeper
+entity.fishcreeper.desc=Not silver, but green. Creeper-powered fish explode the rocks.
 
 entity.takumiarrow.name=Creeper Arrow
 
