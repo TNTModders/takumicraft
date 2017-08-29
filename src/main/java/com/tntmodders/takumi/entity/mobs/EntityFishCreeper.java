@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
     public EntityFishCreeper(World worldIn) {
-        dot
         super(worldIn);
         this.setSize(0.4F, 0.3F);
     }
