@@ -69,6 +69,8 @@ entity.treecreeper.name=森守匠
 entity.treecreeper.desc=匠の木の精霊。森を守り、木を植える匠。もちろんだが、匠の木である。
 entity.fishcreeper.name=匠魚
 entity.fishcreeper.desc=銀ではなく緑のシルバーフィッシュ。匠の力を得、岩をも穿つ。
+entity.subsidencecreeper.name=潜匠
+entity.subsidencecreeper.desc=新感覚、いざ地中へ深く。
 
 entity.takumiarrow.name=匠式弾
 
@@ -89,6 +91,8 @@ advancements.takumicraft.slay.desc=が匠の書に追加された
 #enchantment
 enchantment.takumi_anti_powered=巨匠特攻
 
+#potion
+potion.takumisubsidence.name=潜行
 #Vanilla
 item.skull.creeper.name=匠の頭
 item.fireworksCharge.type.3=匠形

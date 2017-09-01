@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Field;
@@ -32,6 +33,7 @@ public class TakumiItemCore {
                 if (field.get(TakumiItemCore.INSTANCE) instanceof Item) {
                     Item item = ((Item) field.get(TakumiItemCore.INSTANCE));
                     registry.register(item);
+                    OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
                     TakumiCraftCore.LOGGER.info("Registered Item : " + item.getUnlocalizedName());
                 }
             } catch (IllegalAccessException e) {

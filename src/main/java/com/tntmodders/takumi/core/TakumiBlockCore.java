@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Field;
@@ -27,6 +28,7 @@ public class TakumiBlockCore {
                 if (field.get(TakumiBlockCore.INSTANCE) instanceof Block) {
                     Block block = ((Block) field.get(TakumiBlockCore.INSTANCE));
                     registry.register(block);
+                    OreDictionary.registerOre(block.getRegistryName().getResourcePath(), block);
                     TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName());
                 }
             } catch (IllegalAccessException e) {
