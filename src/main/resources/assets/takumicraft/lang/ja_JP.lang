@@ -85,6 +85,8 @@ advancements.takumicraft.disarmament.title=武装解除
 advancements.takumicraft.disarmament.desc=巨匠化状態解除 怖いものなし、匠の狩人。
 advancements.takumicraft.boltstone.title=進化せよ!
 advancements.takumicraft.boltstone.desc=かみなりのいしの入手 進化せよ、巨匠の道へ。
+advancements.takumicraft.allcomplete.title=完全覇者
+advancements.takumicraft.allcomplete.desc=匠の書の制覇 次なる匠を待たれよ。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 
@@ -92,7 +94,10 @@ advancements.takumicraft.slay.desc=が匠の書に追加された
 enchantment.takumi_anti_powered=巨匠特攻
 
 #potion
-potion.takumisubsidence.name=潜行
+takumisubsidence=潜行
+potion.effect.takumisubsidence=潜行のポーション
+splash_potion.effect.takumisubsidence=潜行のスプラッシュポーション
+lingering_potion.effect.takumisubsidence=潜行の残留ポーション
 #Vanilla
 item.skull.creeper.name=匠の頭
 item.fireworksCharge.type.3=匠形

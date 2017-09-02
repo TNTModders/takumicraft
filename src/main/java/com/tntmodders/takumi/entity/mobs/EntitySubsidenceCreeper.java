@@ -61,7 +61,7 @@ public class EntitySubsidenceCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.SUBSIDENCE, 200, 0));
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.SUBSIDENCE, 400, 0));
             }
         }
         return true;

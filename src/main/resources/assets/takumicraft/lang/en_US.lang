@@ -85,6 +85,8 @@ advancements.takumicraft.disarmament.title=Disarmament
 advancements.takumicraft.disarmament.desc=Disarmament creeper's lighting armor.
 advancements.takumicraft.boltstone.title=Getting powered!
 advancements.takumicraft.boltstone.desc=Got a boltstone.
+advancements.takumicraft.allcomplete.title=All Complete
+advancements.takumicraft.allcomplete.desc=Complete the Creeper Book.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 
@@ -92,7 +94,10 @@ advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 enchantment.takumi_anti_powered=Anti-powered
 
 #potion
-potion.takumisubsidence.name=Subsidence
+takumisubsidence=Subsidence
+potion.effect.takumisubsidence=Potion of Subsidence
+splash_potion.effect.takumisubsidence=Splash Potion of Subsidence
+lingering_potion.effect.takumisubsidence=Lingering Potion of Subsidence
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

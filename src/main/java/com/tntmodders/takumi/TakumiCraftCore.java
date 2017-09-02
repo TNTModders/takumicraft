@@ -11,6 +11,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -80,6 +81,11 @@ public class TakumiCraftCore {
     @SubscribeEvent
     public void registerPotions(RegistryEvent.Register<Potion> event) {
         TakumiPotionCore.register(event.getRegistry());
+    }
+
+    @SubscribeEvent
+    public void registerPotionType(RegistryEvent.Register<PotionType> event) {
+        TakumiPotionCore.registerPotionType(event.getRegistry());
     }
 
     @EventHandler
