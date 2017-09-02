@@ -2,6 +2,7 @@ package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.entity.mobs.EntityHuskCreeper;
@@ -19,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -42,7 +44,8 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered() && ((EntityCreeper) event.getEntityLiving()).world.isThundering()) {
+        if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered()
+                && ((EntityCreeper) event.getEntityLiving()).world.isThundering()) {
             TakumiUtils.takumiSetPowered(((EntityCreeper) event.getEntityLiving()), true);
         }
     }
@@ -93,6 +96,25 @@ public class TakumiEvents {
                             new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                             new ResourceLocation(TakumiCraftCore.MODID, "disarmament"));
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onKillEntity(LivingDeathEvent event) {
+        if ((event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving() instanceof EntityCreeper) &&
+                event.getSource().getTrueSource() instanceof EntityPlayerMP) {
+            boolean isOK = true;
+            for (ITakumiEntity takumiEntity : TakumiEntityCore.entityList) {
+                if (!TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "slay_" + takumiEntity.getRegisterName()))
+                        && takumiEntity.getClass() != event.getEntityLiving().getClass()) {
+                    isOK = false;
+                    break;
+                }
+            }
+            if (isOK && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
+                TakumiUtils.giveAdvancementImpossible(((EntityPlayerMP) event.getSource().getTrueSource()), new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                        new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
             }
         }
     }

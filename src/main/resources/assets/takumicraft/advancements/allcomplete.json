@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumibook"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.allcomplete.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.allcomplete.desc"
+    },
+    "frame": "goal"
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
