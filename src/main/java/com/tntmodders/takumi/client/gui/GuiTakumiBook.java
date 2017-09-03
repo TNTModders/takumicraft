@@ -4,10 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.entity.mobs.EntitySilentCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySkeletonCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySlimeCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityWitherSkeletonCreeper;
+import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -22,8 +19,11 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -150,8 +150,15 @@ public class GuiTakumiBook extends GuiScreen {
             return new EntityCreeper(((EntitySilentCreeper) entity).world);
         } else if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);
-        }
-        if (entity instanceof EntitySkeletonCreeper) {
+        } else if (entity instanceof EntitySkeletonCreeper) {
+            if (entity instanceof EntityStrayCreeper) {
+                if (!flg) {
+                    entity = new EntitySkeletonCreeper(((EntityStrayCreeper) entity).world);
+                }
+                ItemStack stack = new ItemStack(Items.POTIONITEM);
+                PotionUtils.addPotionToItemStack(stack, PotionType.getPotionTypeForName("water"));
+                ((EntitySkeletonCreeper) entity).setItemStackToSlot(EntityEquipmentSlot.OFFHAND, stack, false);
+            }
             ((EntitySkeletonCreeper) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND, entity instanceof EntityWitherSkeletonCreeper ?
                     new ItemStack(TakumiItemCore.TAKUMI_SWORD) : new ItemStack(TakumiItemCore.TAKUMI_BOW), false);
         }

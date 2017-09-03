@@ -72,7 +72,7 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
 
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-        if (this.rand.nextInt(5) == 0) {
+        if (this.rand.nextInt(5) == 0 && !this.world.isRemote) {
             this.entityDropItem(this.getHeldItem(EnumHand.OFF_HAND), 0);
         }
     }
@@ -84,7 +84,7 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
-            PotionEffect effect = PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0);
+            PotionEffect effect = new PotionEffect(PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion(), 400);
             for (Entity entity : event.getAffectedEntities()) {
                 if (entity instanceof EntityLivingBase) {
                     ((EntityLivingBase) entity).addPotionEffect(effect);

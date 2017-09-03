@@ -16,6 +16,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.DamageSource;
@@ -56,8 +57,9 @@ public class TakumiEvents {
             if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
                 PotionType type = PotionUtils.getPotionFromItem(((EntityStrayCreeper) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
                 for (Entity entity : event.getAffectedEntities()) {
-                    if (entity instanceof EntityLivingBase) {
-                        ((EntityLivingBase) entity).addPotionEffect(type.getEffects().get(0));
+                    if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
+                        PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
+                        ((EntityLivingBase) entity).addPotionEffect(effect);
                     }
                 }
             }
