@@ -5,24 +5,23 @@ import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
-import com.tntmodders.takumi.entity.mobs.EntityHuskCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySlimeCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityZombieVillagerCreeper;
+import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -52,6 +51,17 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(ExplosionEvent.Detonate event) {
+        if (event.getExplosion() instanceof TakumiExplosion && ((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
+            EntityTakumiArrow takumiArrow = ((EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder());
+            if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
+                PotionType type = PotionUtils.getPotionFromItem(((EntityStrayCreeper) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
+                for (Entity entity : event.getAffectedEntities()) {
+                    if (entity instanceof EntityLivingBase) {
+                        ((EntityLivingBase) entity).addPotionEffect(type.getEffects().get(0));
+                    }
+                }
+            }
+        }
         if (event.getExplosion().getExplosivePlacedBy() instanceof ITakumiEntity) {
             boolean flg = ((ITakumiEntity) event.getExplosion().getExplosivePlacedBy()).takumiExplodeEvent(event);
             if (!flg) {
@@ -67,25 +77,49 @@ public class TakumiEvents {
                 EntitySlimeCreeper slimeCreeper = new EntitySlimeCreeper(e.getWorld());
                 slimeCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 slimeCreeper.setSlimeSize(e.getEntityLiving().getRNG().nextBoolean() ? 1 : e.getEntityLiving().getRNG().nextBoolean() ? 2 : 4, false);
-                e.getWorld().spawnEntity(slimeCreeper);
+                if (slimeCreeper.getCanSpawnHere()) {
+                    e.getWorld().spawnEntity(slimeCreeper);
+                }
                 e.setResult(Event.Result.DENY);
             } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class || e.getEntityLiving().getClass() == EntityZombieVillagerCreeper.class) &&
                     (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT_HILLS ||
                             e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.MUTATED_DESERT)) {
                 EntityHuskCreeper huskCreeper = new EntityHuskCreeper(e.getWorld());
                 huskCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
-                e.getWorld().spawnEntity(huskCreeper);
+                if (huskCreeper.getCanSpawnHere()) {
+                    e.getWorld().spawnEntity(huskCreeper);
+                }
+                e.setResult(Event.Result.DENY);
+            } else if (e.getEntityLiving().getClass() == EntitySkeletonCreeper.class &&
+                    (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_MOUNTAINS || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_PLAINS ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_BEACH || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_TAIGA ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_TAIGA_HILLS || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.FROZEN_OCEAN ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.FROZEN_RIVER)) {
+                EntityStrayCreeper strayCreeper = new EntityStrayCreeper(e.getWorld());
+                strayCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                if (strayCreeper.getCanSpawnHere()) {
+                    e.getWorld().spawnEntity(strayCreeper);
+                }
                 e.setResult(Event.Result.DENY);
             }
         }
     }
 
     @SubscribeEvent
+    public void hurt(LivingHurtEvent event) {
+        if (event.getSource().getTrueSource() instanceof EntityTakumiArrow && event.getSource().isExplosion()
+                && event.getSource().getImmediateSource() == event.getEntity()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
     public void damage(LivingAttackEvent event) {
-        if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow &&
-                ((EntityTakumiArrow) event.getSource().getTrueSource()).shootingEntity == event.getEntity()) {
-            TakumiCraftCore.LOGGER.info("info");
-        } else if (!event.getSource().isMagicDamage() && event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityLivingBase) {
+/*        if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow &&
+                event.getSource().getImmediateSource() == event.getEntity()) {
+            event.setCanceled(true);
+        } else*/
+        if (!event.getSource().isMagicDamage() && event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityLivingBase) {
             ItemStack stack = ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand();
             if (!EnchantmentHelper.getEnchantments(stack).isEmpty() && EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED) &&
                     event.getEntityLiving() instanceof EntityCreeper && ((EntityCreeper) event.getEntityLiving()).getPowered()) {

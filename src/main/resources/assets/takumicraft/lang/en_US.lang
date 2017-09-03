@@ -71,6 +71,8 @@ entity.fishcreeper.name=Fish Creeper
 entity.fishcreeper.desc=Not silver, but green. Creeper-powered fish explode the rocks.
 entity.subsidencecreeper.name=Subsidence Creeper
 entity.subsidencecreeper.desc=Deep into the ground, you can feel new feeling.
+entity.straycreeper.name=Stray Creeper
+entity.straycreeper.desc=With the potion, the player will be a portion.
 
 entity.takumiarrow.name=Creeper Arrow
 

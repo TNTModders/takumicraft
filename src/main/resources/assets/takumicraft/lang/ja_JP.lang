@@ -71,6 +71,8 @@ entity.fishcreeper.name=匠魚
 entity.fishcreeper.desc=銀ではなく緑のシルバーフィッシュ。匠の力を得、岩をも穿つ。
 entity.subsidencecreeper.name=潜匠
 entity.subsidencecreeper.desc=新感覚、いざ地中へ深く。
+entity.straycreeper.name=ストレイ匠
+entity.straycreeper.desc=ポーションとその弓矢で、プレイヤーは粉々に。
 
 entity.takumiarrow.name=匠式弾
 

@@ -11,9 +11,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -142,7 +144,15 @@ public class TakumiExplosion extends Explosion {
                         d9 = d9 / d13;
                         double d14 = (double) this.world.getBlockDensity(vec3d, entity.getEntityBoundingBox());
                         double d10 = (1.0D - d12) * d14;
-                        entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder), (float) ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D)));
+                        if (exploder instanceof EntityArrow) {
+                            entity.attackEntityFrom(new EntityDamageSourceIndirect("explosion", ((EntityArrow) this.exploder).shootingEntity, this.exploder).setExplosion(),
+                                    (float) ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D)));
+
+                        } else {
+                            entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder).setExplosion(),
+                                    (float) ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D)));
+
+                        }
                         double d11 = d10;
 
                         if (entity instanceof EntityLivingBase) {

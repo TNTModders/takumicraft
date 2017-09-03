@@ -44,6 +44,11 @@ public class EntityTreeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 56593;
+    }
+
+    @Override
     public boolean isCustomSpawn() {
         return false;
     }

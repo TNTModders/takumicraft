@@ -41,7 +41,17 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
 
     @Override
     public boolean isCustomSpawn() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 26112;
+    }
+
+    @Override
+    public int getSecondaryColor() {
+        return 7846775;
     }
 
     @Override

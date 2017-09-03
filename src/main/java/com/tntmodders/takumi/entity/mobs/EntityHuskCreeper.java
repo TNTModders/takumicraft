@@ -56,8 +56,13 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
     }
 
     @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.MID;
+    }
+
+    @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL;
+        return EnumTakumiType.NORMAL_D;
     }
 
     @Override

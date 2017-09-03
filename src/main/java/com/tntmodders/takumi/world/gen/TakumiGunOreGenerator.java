@@ -19,7 +19,9 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
                 int genX = x + random.nextInt(16);
                 int genY = 1 + random.nextInt(64);
                 int genZ = z + random.nextInt(16);
-                new WorldGenMinable(TakumiBlockCore.GUNORE.getDefaultState(), 25).generate(world, random, new BlockPos(genX, genY, genZ));
+                new WorldGenMinable(random.nextInt(50) == 0 ?
+                        TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
+                        TakumiBlockCore.GUNORE.getDefaultState(), 25).generate(world, random, new BlockPos(genX, genY, genZ));
             }
         }
     }

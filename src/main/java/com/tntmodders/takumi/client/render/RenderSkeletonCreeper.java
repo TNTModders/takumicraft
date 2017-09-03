@@ -2,6 +2,7 @@ package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.model.ModelSkeletonCreeper;
+import com.tntmodders.takumi.client.render.layer.LayerStrayCreeperClothing;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
 import com.tntmodders.takumi.entity.mobs.EntitySkeletonCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityWitherSkeletonCreeper;
@@ -30,6 +31,7 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
             }
         });
         this.addLayer(new LayerTakumiCharge(this));
+        this.addLayer(new LayerStrayCreeperClothing(this));
     }
 
     public void transformHeldFull3DItemLayer() {

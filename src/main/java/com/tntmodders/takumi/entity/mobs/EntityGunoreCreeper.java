@@ -105,6 +105,11 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 7829367;
+    }
+
+    @Override
     public boolean isCustomSpawn() {
         return true;
     }
