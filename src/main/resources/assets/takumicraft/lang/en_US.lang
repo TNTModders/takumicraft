@@ -75,6 +75,8 @@ entity.straycreeper.name=Stray Creeper
 entity.straycreeper.desc=With the potion, the player will be a portion.
 entity.parrotcreeper.name=Parrot Creeper
 entity.parrotcreeper.desc=A creeper looks like parrot. Do you have bombs on your shoulder?
+entity.squidcreeper.name=Squid Creeper
+entity.squidcreeper.desc=Torpedo? No, this is the era of explosive squid!
 
 entity.takumiarrow.name=Creeper Arrow
 

@@ -2,9 +2,11 @@ package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.entity.EnumCreatureType;
@@ -13,6 +15,7 @@ import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -163,4 +166,9 @@ public class TakumiEntityCore {
             this.entity = ent;
         }
     }
+
+    public static final EnumCreatureType CREATURE_TAKUMI =
+            EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 50, Material.AIR, false, true);
+    public static final EnumCreatureType WATER_TAKUMI =
+            EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material.WATER, false, false);
 }

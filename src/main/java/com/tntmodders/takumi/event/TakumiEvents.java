@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityParrot;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
@@ -89,6 +90,13 @@ public class TakumiEvents {
                 slimeCreeper.setSlimeSize(e.getEntityLiving().getRNG().nextBoolean() ? 1 : e.getEntityLiving().getRNG().nextBoolean() ? 2 : 4, false);
                 if (slimeCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(slimeCreeper);
+                }
+                e.setResult(Event.Result.DENY);
+            } else if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntitySquid) {
+                EntitySquidCreeper squidCreeper = new EntitySquidCreeper(e.getWorld());
+                squidCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                if (squidCreeper.getCanSpawnHere()) {
+                    e.getWorld().spawnEntity(squidCreeper);
                 }
                 e.setResult(Event.Result.DENY);
             } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class || e.getEntityLiving().getClass() == EntityZombieVillagerCreeper.class) &&

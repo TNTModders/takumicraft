@@ -161,6 +161,9 @@ public class GuiTakumiBook extends GuiScreen {
             }
             ((EntitySkeletonCreeper) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND, entity instanceof EntityWitherSkeletonCreeper ?
                     new ItemStack(TakumiItemCore.TAKUMI_SWORD) : new ItemStack(TakumiItemCore.TAKUMI_BOW), false);
+        } else if (entity instanceof EntitySquidCreeper) {
+            ((EntitySquidCreeper) entity).tentacleAngle = 45;
+            ((EntitySquidCreeper) entity).squidPitch = 60;
         }
         return ((EntityLivingBase) entity);
     }
@@ -170,6 +173,10 @@ public class GuiTakumiBook extends GuiScreen {
         //GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glTranslatef((float) p_147046_0_, (float) p_147046_1_, 50.0F);
         GL11.glScalef((float) (-p_147046_2_), (float) p_147046_2_, (float) p_147046_2_);
+        if (p_147046_5_ instanceof EntitySquidCreeper) {
+            GL11.glScaled(0.65, 0.65, 0.65);
+            GL11.glTranslated(-1, -1, 0);
+        }
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         float f2 = p_147046_5_.renderYawOffset;
         float f3 = p_147046_5_.rotationYaw;
