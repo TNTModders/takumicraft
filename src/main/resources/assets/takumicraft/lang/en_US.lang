@@ -73,6 +73,8 @@ entity.subsidencecreeper.name=Subsidence Creeper
 entity.subsidencecreeper.desc=Deep into the ground, you can feel new feeling.
 entity.straycreeper.name=Stray Creeper
 entity.straycreeper.desc=With the potion, the player will be a portion.
+entity.parrotcreeper.name=Parrot Creeper
+entity.parrotcreeper.desc=A creeper looks like parrot. Do you have bombs on your shoulder?
 
 entity.takumiarrow.name=Creeper Arrow
 

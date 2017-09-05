@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
@@ -47,6 +48,13 @@ public class TakumiEvents {
         if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered()
                 && ((EntityCreeper) event.getEntityLiving()).world.isThundering()) {
             TakumiUtils.takumiSetPowered(((EntityCreeper) event.getEntityLiving()), true);
+        }
+        if (event.getEntityLiving() instanceof EntityParrot) {
+            if (event.getEntityLiving().getEntityData().hasKey("creeper") && event.getEntityLiving().getEntityData().getBoolean("creeper")) {
+                ((EntityParrot) event.getEntityLiving()).world.createExplosion(event.getEntityLiving(), ((EntityParrot) event.getEntityLiving()).posX, ((EntityParrot) event.getEntityLiving()).posY, ((EntityParrot) event.getEntityLiving()).posZ,
+                        4f, true);
+                event.getEntityLiving().setDead();
+            }
         }
     }
 

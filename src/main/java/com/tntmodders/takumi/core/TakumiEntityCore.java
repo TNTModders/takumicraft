@@ -26,7 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TakumiEntityCore {
-    private static List<Biome> biomes = new ArrayList<>();
+    public static List<Biome> biomes = new ArrayList<>();
     public static List<ITakumiEntity> entityList = new ArrayList<>();
 
     public static void register() {

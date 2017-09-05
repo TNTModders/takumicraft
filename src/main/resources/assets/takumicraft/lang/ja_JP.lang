@@ -73,6 +73,8 @@ entity.subsidencecreeper.name=潜匠
 entity.subsidencecreeper.desc=新感覚、いざ地中へ深く。
 entity.straycreeper.name=ストレイ匠
 entity.straycreeper.desc=ポーションとその弓矢で、プレイヤーは粉々に。
+entity.parrotcreeper.name=鸚鵡匠
+entity.parrotcreeper.desc=緑オウムによく似ている。飛ぶスティーブを落とす、肩上の爆弾。
 
 entity.takumiarrow.name=匠式弾
 
