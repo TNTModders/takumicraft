@@ -81,6 +81,8 @@ entity.frostcreeper.name=流氷匠
 entity.frostcreeper.desc=そこのあなたは氷漬け、閉じ込められたらもう大変。
 entity.magmacreeper.name=業火匠
 entity.magmacreeper.desc=ここのあなたは熔岩漬け、焼け尽くされるまでマグマの中に。
+entity.sandstormcreeper.name=砂爆匠
+entity.sandstormcreeper.desc=そこのあなたはお砂漬け、外の殻から爆風の嵐。
 
 entity.takumiarrow.name=匠式弾
 

@@ -81,6 +81,8 @@ entity.frostcreeper.name=Frost Creeper
 entity.frostcreeper.desc=You will be in the packed ice room, filled with water.
 entity.magmacreeper.name=Magma Creeper
 entity.magmacreeper.desc=You will be in the magma, burning with lava.
+entity.sandstormcreeper.name=Sandstorm Creeper
+entity.sandstormcreeper.desc=You will be in the storm, into storm of exposion.
 
 entity.takumiarrow.name=Creeper Arrow
 
