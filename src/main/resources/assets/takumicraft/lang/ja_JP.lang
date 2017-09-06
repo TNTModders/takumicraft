@@ -77,6 +77,10 @@ entity.parrotcreeper.name=鸚鵡匠
 entity.parrotcreeper.desc=緑オウムによく似ている。飛ぶスティーブを落とす、肩上の爆弾。
 entity.squidcreeper.name=烏賊匠
 entity.squidcreeper.desc=緑の烏賊は、もちろん爆発性。烏賊の群れの厄介者。
+entity.frostcreeper.name=流氷匠
+entity.frostcreeper.desc=そこのあなたは氷漬け、閉じ込められたらもう大変。
+entity.magmacreeper.name=業火匠
+entity.magmacreeper.desc=ここのあなたは熔岩漬け、焼け尽くされるまでマグマの中に。
 
 entity.takumiarrow.name=匠式弾
 

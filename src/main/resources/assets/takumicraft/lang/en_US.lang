@@ -77,6 +77,10 @@ entity.parrotcreeper.name=Parrot Creeper
 entity.parrotcreeper.desc=A creeper looks like parrot. Do you have bombs on your shoulder?
 entity.squidcreeper.name=Squid Creeper
 entity.squidcreeper.desc=Torpedo? No, this is the era of explosive squid!
+entity.frostcreeper.name=Frost Creeper
+entity.frostcreeper.desc=You will be in the packed ice room, filled with water.
+entity.magmacreeper.name=Magma Creeper
+entity.magmacreeper.desc=You will be in the magma, burning with lava.
 
 entity.takumiarrow.name=Creeper Arrow
 

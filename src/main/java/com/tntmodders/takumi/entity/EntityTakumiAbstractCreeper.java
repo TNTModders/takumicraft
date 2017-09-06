@@ -21,12 +21,12 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
             return;
         }
-        if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
+       /* if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
                 (damageSrc.isFireDamage() && this.takumiType() == EnumTakumiType.FIRE) ||
                 (damageSrc == DamageSource.DROWN && this.takumiType() == EnumTakumiType.WATER) ||
                 (damageSrc == DamageSource.FALL && this.takumiType() == EnumTakumiType.WIND)) {
             return;
-        }
+        }*/
         super.damageEntity(damageSrc, damageAmount);
     }
 
