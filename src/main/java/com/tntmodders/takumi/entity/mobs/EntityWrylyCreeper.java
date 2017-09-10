@@ -52,7 +52,7 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 8978176;
+        return 8913151;
     }
 
     @Override
