@@ -83,6 +83,8 @@ entity.magmacreeper.name=業火匠
 entity.magmacreeper.desc=ここのあなたは熔岩漬け、焼け尽くされるまでマグマの中に。
 entity.sandstormcreeper.name=砂爆匠
 entity.sandstormcreeper.desc=そこのあなたはお砂漬け、外の殻から爆風の嵐。
+entity.wrylycreeper.name=苦匠
+entity.wrylycreeper.desc=自爆攻撃?否、この匠、爆発で滅びず、永久に攻撃を浴びせ続ける。
 
 entity.takumiarrow.name=匠式弾
 
