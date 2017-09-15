@@ -85,6 +85,8 @@ entity.sandstormcreeper.name=Sandstorm Creeper
 entity.sandstormcreeper.desc=You will be in the storm, into storm of exposion.
 entity.wrylycreeper.name=Wryly Creeper
 entity.wrylycreeper.desc=Endless explosion, there is no way to escape.
+entity.fireworkscreeper.name=Fireworks Creeper
+entity.fireworkscreeper.desc=Fireworks! Give you a happiness, for this terrible world.
 
 entity.takumiarrow.name=Creeper Arrow
 
