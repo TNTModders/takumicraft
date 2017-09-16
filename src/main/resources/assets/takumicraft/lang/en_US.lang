@@ -89,6 +89,8 @@ entity.fireworkscreeper.name=Fireworks Creeper
 entity.fireworkscreeper.desc=Fireworks! Give you a happiness, for this terrible world.
 entity.spidercreeper.name=Spider Creeper
 entity.spidercreeper.desc=Reform your house from floor, stairs, and even ceiling.
+entity.minispidercreeper.name=Mini Spider Creeper
+entity.minispidercreeper.desc=Little tiny spider creeper. How is the explosion? Of course big.
 
 entity.takumiarrow.name=Creeper Arrow
 

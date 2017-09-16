@@ -81,9 +81,18 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
      */
     public void onUpdate() {
         super.onUpdate();
-
         if (!this.world.isRemote) {
             this.setBesideClimbableBlock(this.isCollidedHorizontally);
+            if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getClass() == EntitySpiderCreeper.class) {
+                int i = this.rand.nextInt(5000 / this.world.getDifficulty().getDifficultyId());
+                if (i == 0) {
+                    for (int t = 0; t < 1 + this.world.getDifficulty().getDifficultyId(); t++) {
+                        EntityMiniSpiderCreeper miniSpiderCreeper = new EntityMiniSpiderCreeper(this.world);
+                        miniSpiderCreeper.copyLocationAndAnglesFrom(this);
+                        this.world.spawnEntity(miniSpiderCreeper);
+                    }
+                }
+            }
         }
     }
 
@@ -227,7 +236,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 334334;
+        return 1334334;
     }
 
     @Override

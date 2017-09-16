@@ -2,6 +2,7 @@ package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
+import com.tntmodders.takumi.entity.mobs.EntityMiniSpiderCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySpiderCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSpider;
@@ -25,6 +26,9 @@ public class RenderSpiderCreeper<T extends EntitySpiderCreeper> extends RenderLi
      * Allows the render to do state modifications necessary before the model is rendered.
      */
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        if (entitylivingbaseIn instanceof EntityMiniSpiderCreeper) {
+            GlStateManager.scale(0.25, 0.25, 0.25);
+        }
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
@@ -52,7 +56,7 @@ public class RenderSpiderCreeper<T extends EntitySpiderCreeper> extends RenderLi
 
 
     protected ResourceLocation getEntityTexture(T entity) {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/spidercreeper.png");
     }
 
     @Override
