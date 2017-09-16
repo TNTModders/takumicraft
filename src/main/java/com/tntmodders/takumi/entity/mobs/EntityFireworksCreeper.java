@@ -70,6 +70,6 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 18;
+        return 22;
     }
 }

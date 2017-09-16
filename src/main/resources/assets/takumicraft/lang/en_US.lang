@@ -87,6 +87,8 @@ entity.wrylycreeper.name=Wryly Creeper
 entity.wrylycreeper.desc=Endless explosion, there is no way to escape.
 entity.fireworkscreeper.name=Fireworks Creeper
 entity.fireworkscreeper.desc=Fireworks! Give you a happiness, for this terrible world.
+entity.spidercreeper.name=Spider Creeper
+entity.spidercreeper.desc=Reform your house from floor, stairs, and even ceiling.
 
 entity.takumiarrow.name=Creeper Arrow
 
