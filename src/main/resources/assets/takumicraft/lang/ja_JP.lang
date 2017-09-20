@@ -88,10 +88,11 @@ entity.wrylycreeper.desc=自爆攻撃?否、この匠、爆発で滅びず、永
 entity.fireworkscreeper.name=花火匠
 entity.fireworkscreeper.desc=夜空に大輪を、匠の印を打ち上げる。たまには夜空を見上げようか。
 entity.spidercreeper.name=蜘蛛匠
-entity.spidercreeper.desc=忍び寄るこの匠は、天井からでも隙間からでも、家をリフォームする。害虫。
+entity.spidercreeper.desc=忍び寄るこの匠は、天井からでも隙間からでも、家をリフォームする害虫。
 entity.minispidercreeper.name=子蜘蛛匠
 entity.minispidercreeper.desc=蜘蛛匠から産まれるこの匠は、隙間からでもリフォームするお邪魔虫。
-
+entity.happinesscreeper.name=微匠
+entity.happinesscreeper.desc=「ほほえみ」と読む。回復効果のある大爆発を起こす。
 entity.takumiarrow.name=匠式弾
 
 #advancements

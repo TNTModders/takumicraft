@@ -91,6 +91,8 @@ entity.spidercreeper.name=Spider Creeper
 entity.spidercreeper.desc=Reform your house from floor, stairs, and even ceiling.
 entity.minispidercreeper.name=Mini Spider Creeper
 entity.minispidercreeper.desc=Little tiny spider creeper. How is the explosion? Of course big.
+entity.happinesscreeper.name=Happiness Creeper
+entity.happinesscreeper.desc=Heal or destroy? This cause a huge explosion heal you.
 
 entity.takumiarrow.name=Creeper Arrow
 
