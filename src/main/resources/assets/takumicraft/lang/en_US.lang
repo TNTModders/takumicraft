@@ -143,6 +143,8 @@ entity.lostcreeper.name=Lost Creeper
 entity.lostcreeper.desc=<entity data had lost>
 entity.fallcreeper.name=Fall Creeper
 entity.fallcreeper.desc=All things fallen. Blocks, entities, even this game fall and shut down...
+entity.diamondcreeper.name=Diamond Creeper
+entity.diamondcreeper.desc=A creeper with diamond heart. Too hard, too strong.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements
