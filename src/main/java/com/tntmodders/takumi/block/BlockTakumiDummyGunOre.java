@@ -24,6 +24,7 @@ public class BlockTakumiDummyGunOre extends Block {
         this.setUnlocalizedName("dummy_gunore");
         this.setHardness(5f);
         this.setResistance(0f);
+        this.setHarvestLevel("pickaxe", 1);
     }
 
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {

@@ -133,7 +133,12 @@ entity.glasscreeper.name=Glass Creeper
 entity.glasscreeper.desc=Anti-Explosion glass for you! A peaceful transparent creeper.
 entity.glowstonecreeper.name=GlowStone Creeper
 entity.glowstonecreeper.desc=Lighting up nether, this creeper make a light by the explosion.
-
+entity.stonecreeper.name=Stone Creeper
+entity.stonecreeper.desc=Destroy stones. The cave will be filled with this explosion like a storm.
+entity.woodcreeper.name=Wood Creeper
+entity.woodcreeper.desc=Destroy woods. The forest will be filled with this explosion like a burning.
+entity.dirtcreeper.name=Dirt Creeper
+entity.dirtcreeper.desc=Destroy dirt. The ground will be filled with this explosion like a earthquake.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements
