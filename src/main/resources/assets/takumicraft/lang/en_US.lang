@@ -139,6 +139,8 @@ entity.woodcreeper.name=Wood Creeper
 entity.woodcreeper.desc=Destroy woods. The forest will be filled with this explosion like a burning.
 entity.dirtcreeper.name=Dirt Creeper
 entity.dirtcreeper.desc=Destroy dirt. The ground will be filled with this explosion like a earthquake.
+entity.lostcreeper.name=Lost Creeper
+entity.lostcreeper.desc=<entity data had lost>
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

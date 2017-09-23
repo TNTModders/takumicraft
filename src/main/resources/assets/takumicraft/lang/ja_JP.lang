@@ -139,6 +139,8 @@ entity.woodcreeper.name=木匠
 entity.woodcreeper.desc=木に指向性を示す爆発を起こす。森は忽ち爆発の噴火に沈む。
 entity.dirtcreeper.name=土匠
 entity.dirtcreeper.desc=土に指向性を示す爆発を起こす。大地は忽ち爆発の地震に沈む。
+entity.lostcreeper.name=失匠
+entity.lostcreeper.desc=<データが消失しています>
 entity.takumiarrow.name=匠式弾
 
 #advancements
