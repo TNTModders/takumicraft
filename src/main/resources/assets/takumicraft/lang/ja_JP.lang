@@ -131,6 +131,8 @@ entity.ghastcreeper.name=ガスト匠
 entity.ghastcreeper.desc=大爆発火球を放つ姿はまるで爆撃機。ネザーの地は地獄の形相と化す。
 entity.glasscreeper.name=硝子匠
 entity.glasscreeper.desc=透明で見えづらい匠。硬質硝子を貴方にどうぞ。
+entity.glowstonecreeper.name=グロウストーン匠
+entity.glowstonecreeper.desc=爆発でグロウストーンを生み出す、ネザーの匠。明るい。
 entity.takumiarrow.name=匠式弾
 
 #advancements

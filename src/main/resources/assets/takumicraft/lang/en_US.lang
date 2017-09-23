@@ -131,6 +131,8 @@ entity.ghastcreeper.name=Ghast Creeper
 entity.ghastcreeper.desc=Strong fireball, make nether to hell. Like a storm, or a heavy bomber.
 entity.glasscreeper.name=Glass Creeper
 entity.glasscreeper.desc=Anti-Explosion glass for you! A peaceful transparent creeper.
+entity.glowstonecreeper.name=GlowStone Creeper
+entity.glowstonecreeper.desc=Lighting up nether, this creeper make a light by the explosion.
 
 entity.takumiarrow.name=Creeper Arrow
 
