@@ -31,12 +31,36 @@
           }
         ]
       }
+    },
+    "creeperglass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperglass"
+          }
+        ]
+      }
     }
   },
-  "requirements": [
-    [
-      "creeperiron",
-      "creeperbrick"
-    ]
-  ]
+  "creeperstainedglass": {
+    "trigger": "minecraft:inventory_changed",
+    "conditions": {
+      "items": [
+        {
+          "item": "takumicraft:creeperstainedglass"
+        }
+      ]
+    }
+  }
+},
+
+"requirements": [
+[
+"creeperiron",
+"creeperbrick",
+"creeperglass",
+"creeperstainedglass"
+]
+]
 }

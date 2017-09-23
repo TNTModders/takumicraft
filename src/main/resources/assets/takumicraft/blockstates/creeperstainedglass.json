@@ -1,0 +1,53 @@
+{
+  "variants": {
+    "color=white": {
+      "model": "takumicraft:white_creeperstainedglass"
+    },
+    "color=orange": {
+      "model": "takumicraft:orange_creeperstainedglass"
+    },
+    "color=magenta": {
+      "model": "takumicraft:magenta_creeperstainedglass"
+    },
+    "color=light_blue": {
+      "model": "takumicraft:light_blue_creeperstainedglass"
+    },
+    "color=yellow": {
+      "model": "takumicraft:yellow_creeperstainedglass"
+    },
+    "color=lime": {
+      "model": "takumicraft:lime_creeperstainedglass"
+    },
+    "color=pink": {
+      "model": "takumicraft:pink_creeperstainedglass"
+    },
+    "color=gray": {
+      "model": "takumicraft:gray_creeperstainedglass"
+    },
+    "color=silver": {
+      "model": "takumicraft:silver_creeperstainedglass"
+    },
+    "color=cyan": {
+      "model": "takumicraft:cyan_creeperstainedglass"
+    },
+    "color=purple": {
+      "model": "takumicraft:purple_creeperstainedglass"
+    },
+    "color=blue": {
+      "model": "takumicraft:blue_creeperstainedglass"
+    },
+    "color=brown": {
+      "model": "takumicraft:brown_creeperstainedglass"
+    },
+    "color=green": {
+      "model": "takumicraft:green_creeperstainedglass"
+    },
+    "color=red": {
+      "model": "takumicraft:red_creeperstainedglass"
+    },
+    "color=black": {
+      "model": "takumicraft:black_creeperstainedglass"
+    }
+  }
+}
+

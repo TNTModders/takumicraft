@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.ITakumiMetaBlock;
 import com.tntmodders.takumi.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -46,11 +47,15 @@ public class TakumiItemCore {
             try {
                 if (field.get(TakumiItemCore.INSTANCE) instanceof Block) {
                     Block block = ((Block) field.get(TakumiBlockCore.INSTANCE));
-                    Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
+                    Item item = new ItemBlock(block);
+                    if (block instanceof ITakumiMetaBlock) {
+                        item = ((ITakumiMetaBlock) block).getItem();
+                    }
+                    item = item.setRegistryName(block.getRegistryName());
                     registry.register(item);
                     TakumiItemCore.itemBlocks.add(item);
                     TakumiCraftCore.LOGGER.info("Registered Item : " + block.getUnlocalizedName());
-
+                    OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

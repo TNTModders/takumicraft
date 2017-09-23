@@ -1,12 +1,18 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import net.minecraft.block.BlockStainedGlassPane;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -29,7 +35,7 @@ public class TakumiModelCore {
                     if (item.getHasSubtypes()) {
                         NonNullList<ItemStack> stacks = NonNullList.create();
                         item.getSubItems(TakumiCraftCore.TAB_CREEPER, stacks);
-                        for(int i = 0; i < stacks.size(); i++){
+                        for (int i = 0; i < stacks.size(); i++) {
                             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i), "inventory"));
                             TakumiCraftCore.LOGGER.info("Registered item model with metadata" + i + " : " + s + "_" + i);
                         }
@@ -48,9 +54,23 @@ public class TakumiModelCore {
             if (item.getHasSubtypes()) {
                 NonNullList<ItemStack> stacks = NonNullList.create();
                 item.getSubItems(TakumiCraftCore.TAB_CREEPER, stacks);
-                for(int i = 0; i < stacks.size(); i++){
-                    ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i), "inventory"));
-                    TakumiCraftCore.LOGGER.info("Registered block model with metadata" + i + " : " + s + "_" + i);
+                for (int i = 0; i < stacks.size(); i++) {
+                    if (item instanceof ItemCloth) {
+                        if (((ItemCloth) item).getBlock() == TakumiBlockCore.CREEPER_STAINED_GLASS_PANE) {
+                            ModelLoader.setCustomStateMapper(((ItemCloth) item).getBlock(), new StateMapperBase() {
+                                @Override
+                                protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                                    return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperstainedglasspane_" +
+                                            state.getValue(BlockStainedGlassPane.COLOR).getName()), "normal");
+                                }
+                            });
+                        }
+                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, EnumDyeColor.byMetadata(i).getName() + "_" + s), "inventory"));
+                        TakumiCraftCore.LOGGER.info("Registered block model with color " + EnumDyeColor.byMetadata(i).getName() + " : " + EnumDyeColor.byMetadata(i).getName() + "_" + s);
+                    } else {
+                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i), "inventory"));
+                        TakumiCraftCore.LOGGER.info("Registered block model with metadata " + i + " : " + s + "_" + i);
+                    }
                 }
             } else {
                 ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
@@ -59,7 +79,7 @@ public class TakumiModelCore {
         }
     }
 
-    public static void registerEntityRender(Class clazz, ITakumiEntity entity){
+    public static void registerEntityRender(Class clazz, ITakumiEntity entity) {
         RenderingRegistry.registerEntityRenderingHandler(clazz, new TakumiRenderFactory() {
             @Override
             public Render createRenderFor(RenderManager manager) {

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "QQQ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperglass"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperglasspane",
+    "count": 16
+  }
+}

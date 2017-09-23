@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "GGG"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "G": {
+      "item": "minecraft:stained_glass",
+      "data": 9
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperstainedglass",
+    "count": 8,
+    "data": 9
+  }
+}

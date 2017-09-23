@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "QQQ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperstainedglass",
+      "data": 9
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperstainedglasspane",
+    "count": 16,
+    "data": 9
+  }
+}

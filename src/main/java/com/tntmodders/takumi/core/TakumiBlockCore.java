@@ -4,7 +4,6 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Field;
@@ -20,6 +19,10 @@ public class TakumiBlockCore {
     public static final Block DUMMY_GUNORE = new BlockTakumiDummyGunOre();
     public static final Block CREEPER_LOG = new BlockTakumiLog();
     public static final Block CREEPER_LEAVES = new BlockTakumiLeaf();
+    public static final Block CREEPER_GLASS = new BlockTakumiGlass();
+    public static final Block CREEPER_GLASS_PANE = new BlockTakumiGlassPane();
+    public static final Block CREEPER_STAINED_GLASS = new BlockTakumiStainedGlass();
+    public static final BlockTakumiStainedGlassPane CREEPER_STAINED_GLASS_PANE = new BlockTakumiStainedGlassPane();
 
     public static void register(IForgeRegistry<Block> registry) {
         Class clazz = TakumiBlockCore.class;
@@ -28,7 +31,6 @@ public class TakumiBlockCore {
                 if (field.get(TakumiBlockCore.INSTANCE) instanceof Block) {
                     Block block = ((Block) field.get(TakumiBlockCore.INSTANCE));
                     registry.register(block);
-                    OreDictionary.registerOre(block.getRegistryName().getResourcePath(), block);
                     TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName());
                 }
             } catch (IllegalAccessException e) {
