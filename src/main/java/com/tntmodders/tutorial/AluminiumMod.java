@@ -25,13 +25,12 @@ import java.util.List;
 
 @Mod(modid = "aluminiummod", version = "1.0", name = "AluminiumMod")
 public class AluminiumMod {
-    @Mod.Instance("aluminiummod")
-    public static AluminiumMod aluminiumInstance;
-
     public static final Item ALUMINIUM = new ItemAluminium();
     public static final Block ALUMINIUM_BLOCK = new BlockAluminium();
     public static final Item COLOR_ALUMINIUM = new ItemColorAluminium();
     public static final AluminiumRecipeHolder HOLDER = new AluminiumRecipeHolder();
+    @Mod.Instance("aluminiummod")
+    public static AluminiumMod aluminiumInstance;
 
     @Mod.EventHandler
     public void construct(FMLConstructionEvent event) {
@@ -56,7 +55,7 @@ public class AluminiumMod {
         ModelLoader.setCustomModelResourceLocation(ALUMINIUM, 0, new ModelResourceLocation(new ResourceLocation("aluminiummod", "aluminium"), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ALUMINIUM_BLOCK), 0, new ModelResourceLocation(new ResourceLocation("aluminiummod", "aluminium_block"), "inventory"));
         //メタデータの分だけモデルを登録する。
-        for(int i = 0; i < 16; i++){
+        for (int i = 0; i < 16; i++) {
             ModelLoader.setCustomModelResourceLocation(COLOR_ALUMINIUM, i, new ModelResourceLocation(new ResourceLocation("aluminiummod", "color_aluminium_" + i), "inventory"));
         }
     }
@@ -83,8 +82,8 @@ public class AluminiumMod {
             Item item = stack.getItem();
             int meta = stack.getMetadata();
             ItemStack itemStack = new ItemStack(item, 1, meta);
-            if (!AluminiumMod.HOLDER.map.isEmpty() && AluminiumMod.HOLDER.map.containsKey(itemStack)) {
-                List<ResourceLocation> list = AluminiumMod.HOLDER.map.get(itemStack);
+            if (!AluminiumRecipeHolder.map.isEmpty() && AluminiumRecipeHolder.map.containsKey(itemStack)) {
+                List<ResourceLocation> list = AluminiumRecipeHolder.map.get(itemStack);
                 player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
             }
         }

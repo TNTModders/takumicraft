@@ -23,22 +23,9 @@ public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends 
     }
 
     /**
-     * Allows the render to do state modifications necessary before the model is rendered.
-     */
-    protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
-        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F);
-        f = f * f;
-        f = f * f;
-        float f2 = (1.0F + f * 0.4F) * f1;
-        float f3 = (1.0F + f * 0.1F) / f1;
-        GlStateManager.scale(f2, f3, f2);
-    }
-
-    /**
      * Gets an RGBA int color multiplier to apply.
      */
+    @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 
@@ -52,8 +39,24 @@ public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends 
     }
 
     /**
+     * Allows the render to do state modifications necessary before the model is rendered.
+     */
+    @Override
+    protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
+        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
+        f = MathHelper.clamp(f, 0.0F, 1.0F);
+        f = f * f;
+        f = f * f;
+        float f2 = (1.0F + f * 0.4F) * f1;
+        float f3 = (1.0F + f * 0.1F) / f1;
+        GlStateManager.scale(f2, f3, f2);
+    }
+
+    /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }

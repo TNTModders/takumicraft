@@ -50,6 +50,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         this.moveHelper = new EntityGhastCreeper.GhastMoveHelper(this);
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAICreeperSwell(this));
         this.tasks.addTask(3, new EntityAIAvoidEntity<>(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
@@ -59,12 +60,93 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
     }
 
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
+    }
+
+    @Override
     public void fall(float distance, float damageMultiplier) {
     }
 
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(ATTACKING, Boolean.FALSE);
+    }
+
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("ExplosionPower", this.explosionStrength);
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("ExplosionPower", 99)) {
+            this.explosionStrength = compound.getInteger("ExplosionPower");
+        }
+    }
+
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+            this.setDead();
+        }
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return SoundEvents.ENTITY_GHAST_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_GHAST_DEATH;
+    }
+
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_GHAST;
+    }
+
+    @Override
     protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
     }
 
+    /**
+     * returns true if this entity is by a ladder, false otherwise
+     */
+    @Override
+    public boolean isOnLadder() {
+        return false;
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    @Override
+    protected float getSoundVolume() {
+        return 10.0F;
+    }
+
+    @Override
     public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
         if (this.isInWater()) {
             this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.02F);
@@ -112,13 +194,6 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         this.limbSwing += this.limbSwingAmount;
     }
 
-    /**
-     * returns true if this entity is by a ladder, false otherwise
-     */
-    public boolean isOnLadder() {
-        return false;
-    }
-
     @SideOnly(Side.CLIENT)
     public boolean isAttacking() {
         return this.dataManager.get(ATTACKING);
@@ -132,20 +207,15 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         return this.explosionStrength * (this.getPowered() ? 2 : 1);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            this.setDead();
-        }
+    @Override
+    public SoundCategory getSoundCategory() {
+        return SoundCategory.HOSTILE;
     }
 
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.isEntityInvulnerable(source)) {
             return false;
@@ -157,78 +227,28 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    protected void entityInit() {
-        super.entityInit();
-        this.dataManager.register(ATTACKING, Boolean.FALSE);
-    }
-
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
-    }
-
-    public SoundCategory getSoundCategory() {
-        return SoundCategory.HOSTILE;
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_GHAST_AMBIENT;
-    }
-
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-        return SoundEvents.ENTITY_GHAST_HURT;
-    }
-
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_GHAST_DEATH;
-    }
-
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_GHAST;
-    }
-
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    protected float getSoundVolume() {
-        return 10.0F;
-    }
-
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         return this.rand.nextInt(20) == 0 && super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_GHAST_AMBIENT;
     }
 
     /**
      * Will return how many at most can spawn in a chunk at once.
      */
+    @Override
     public int getMaxSpawnedInChunk() {
         return 1;
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setInteger("ExplosionPower", this.explosionStrength);
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-
-        if (compound.hasKey("ExplosionPower", 99)) {
-            this.explosionStrength = compound.getInteger("ExplosionPower");
-        }
-    }
-
+    @Override
     public float getEyeHeight() {
         return 2.6F;
     }
@@ -258,18 +278,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 8978312;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return true;
-    }
-
-    @Override
-    public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
     }
 
     @Override
@@ -280,6 +290,16 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 26;
+    }
+
+    @Override
+    public void customSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 8978312;
     }
 
     @Override
@@ -299,6 +319,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return this.parentEntity.getAttackTarget() != null;
         }
@@ -306,6 +327,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             this.attackTimer = 0;
         }
@@ -313,6 +335,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Reset the task's internal state. Called when this task is interrupted by another one
          */
+        @Override
         public void resetTask() {
             this.parentEntity.setAttacking(false);
         }
@@ -320,6 +343,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
             double d0 = 64.0D;
@@ -368,6 +392,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return true;
         }
@@ -375,6 +400,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             if (this.parentEntity.getAttackTarget() == null) {
                 this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
@@ -404,6 +430,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             EntityMoveHelper entitymovehelper = this.parentEntity.getMoveHelper();
 
@@ -421,6 +448,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
+        @Override
         public boolean shouldContinueExecuting() {
             return false;
         }
@@ -428,6 +456,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             Random random = this.parentEntity.getRNG();
             double d0 = this.parentEntity.posX + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
@@ -446,6 +475,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
             this.parentEntity = ghast;
         }
 
+        @Override
         public void onUpdateMoveHelper() {
             if (this.action == EntityMoveHelper.Action.MOVE_TO) {
                 double d0 = this.posX - this.parentEntity.posX;

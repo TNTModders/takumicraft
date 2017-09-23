@@ -265,10 +265,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         }
     }
 
-    public void setDecorationDefaults() {
-        this.leafDistanceLimit = 5;
-    }
-
+    @Override
     public boolean generate(World worldIn, Random rand, BlockPos position) {
         this.world = worldIn;
         this.basePos = position;
@@ -289,6 +286,11 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
             this.world = null; //Fix vanilla Mem leak, holds latest world
             return true;
         }
+    }
+
+    @Override
+    public void setDecorationDefaults() {
+        this.leafDistanceLimit = 5;
     }
 
     /**

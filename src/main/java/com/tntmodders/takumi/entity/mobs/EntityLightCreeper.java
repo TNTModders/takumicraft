@@ -18,11 +18,13 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getBrightnessForRender() {
         return 15728880;
     }
 
+    @Override
     public float getBrightness() {
         return 1.0F;
     }
@@ -35,30 +37,6 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, 400, 0));
-            }
-        }
-        float power = this.getPowered() ? 6f : 3f;
-        if (event.getExplosion() instanceof TakumiExplosion) {
-            power = ((TakumiExplosion) event.getExplosion()).getSize();
-        }
-        if (power > 0.5) {
-            for (BlockPos pos : event.getAffectedBlocks()) {
-
-                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(this.world.getBlockState(pos)) > 0.5f &&
-                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
-                    this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
-                }
-            }
-        }
-        return true;
     }
 
     @Override
@@ -94,5 +72,29 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 10;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, 400, 0));
+            }
+        }
+        float power = this.getPowered() ? 6f : 3f;
+        if (event.getExplosion() instanceof TakumiExplosion) {
+            power = ((TakumiExplosion) event.getExplosion()).getSize();
+        }
+        if (power > 0.5) {
+            for (BlockPos pos : event.getAffectedBlocks()) {
+
+                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(this.world.getBlockState(pos)) > 0.5f &&
+                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
+                    this.world.setBlockToAir(pos);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
+                }
+            }
+        }
+        return true;
     }
 }

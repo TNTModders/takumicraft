@@ -22,6 +22,7 @@ public class LayerStrayCreeperClothing implements LayerRenderer<EntitySkeletonCr
         this.renderer = p_i47183_1_;
     }
 
+    @Override
     public void doRenderLayer(EntitySkeletonCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn instanceof EntityStrayCreeper) {
             this.layerModel.setModelAttributes(this.renderer.getMainModel());
@@ -32,6 +33,7 @@ public class LayerStrayCreeperClothing implements LayerRenderer<EntitySkeletonCr
         }
     }
 
+    @Override
     public boolean shouldCombineTextures() {
         return true;
     }

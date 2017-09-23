@@ -13,16 +13,6 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
-    public ItemStack getItemFireworks() {
-        ItemStack item = new ItemStack(Items.FIREWORKS, 1);
-        try {
-            item.setTagCompound(JsonToNBT.getTagFromJson("{Fireworks:{Flight:0,Explosions:[{Type:3,Flicker:1,Trail:1,Colors:[I;65280],FadeColors:[I;65280]}]}}"));
-        } catch (NBTException e) {
-            e.printStackTrace();
-        }
-        return item;
-    }
-
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -36,6 +26,16 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                 this.world.spawnEntity(firework);
             }
         }
+    }
+
+    public ItemStack getItemFireworks() {
+        ItemStack item = new ItemStack(Items.FIREWORKS, 1);
+        try {
+            item.setTagCompound(JsonToNBT.getTagFromJson("{Fireworks:{Flight:0,Explosions:[{Type:3,Flicker:1,Trail:1,Colors:[I;65280],FadeColors:[I;65280]}]}}"));
+        } catch (NBTException e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 
     @Override

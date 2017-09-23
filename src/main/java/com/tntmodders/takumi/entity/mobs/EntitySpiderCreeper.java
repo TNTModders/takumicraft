@@ -44,6 +44,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         this.setSize(1.4F, 0.9F);
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAICreeperSwell(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -57,20 +58,14 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(3, new EntitySpiderCreeper.AISpiderTarget<>(this, EntityIronGolem.class));
     }
 
-    /**
-     * Returns the Y offset from the entity's position for any entity riding this one.
-     */
-    public double getMountedYOffset() {
-        return (double) (this.height * 0.5F);
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
     }
 
-    /**
-     * Returns new PathNavigateGround instance
-     */
-    protected PathNavigate createNavigator(World worldIn) {
-        return new PathNavigateClimber(this, worldIn);
-    }
-
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(CLIMBING, (byte) 0);
@@ -79,6 +74,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
         if (!this.world.isRemote) {
@@ -96,85 +92,40 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SPIDER_AMBIENT;
-    }
-
+    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_SPIDER_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SPIDER_DEATH;
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
-    }
-
+    @Override
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_SPIDER;
     }
 
     /**
-     * returns true if this entity is by a ladder, false otherwise
+     * Returns new PathNavigateGround instance
      */
-    public boolean isOnLadder() {
-        return this.isBesideClimbableBlock();
+    @Override
+    protected PathNavigate createNavigator(World worldIn) {
+        return new PathNavigateClimber(this, worldIn);
     }
 
-    /**
-     * Sets the Entity inside a web block.
-     */
-    public void setInWeb() {
-    }
-
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
-    public EnumCreatureAttribute getCreatureAttribute() {
-        return EnumCreatureAttribute.ARTHROPOD;
-    }
-
-    public boolean isPotionApplicable(PotionEffect potioneffectIn) {
-        return potioneffectIn.getPotion() != MobEffects.POISON && super.isPotionApplicable(potioneffectIn);
-    }
-
-    /**
-     * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
-     * setBesideClimableBlock.
-     */
-    public boolean isBesideClimbableBlock() {
-        return (this.dataManager.get(CLIMBING) & 1) != 0;
-    }
-
-    /**
-     * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
-     * false.
-     */
-    public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = this.dataManager.get(CLIMBING);
-
-        if (climbing) {
-            b0 = (byte) (b0 | 1);
-        } else {
-            b0 = (byte) (b0 & -2);
-        }
-
-        this.dataManager.set(CLIMBING, b0);
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_SPIDER_AMBIENT;
     }
 
     /**
      * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
      * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
      */
+    @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
@@ -206,17 +157,78 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         return livingdata;
     }
 
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
+
+    /**
+     * Returns the Y offset from the entity's position for any entity riding this one.
+     */
+    @Override
+    public double getMountedYOffset() {
+        return (double) (this.height * 0.5F);
+    }
+
+    /**
+     * Sets the Entity inside a web block.
+     */
+    @Override
+    public void setInWeb() {
+    }
+
+    @Override
     public float getEyeHeight() {
         return 0.65F;
     }
 
     @Override
-    public void takumiExplode() {
+    public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+        return potioneffectIn.getPotion() != MobEffects.POISON && super.isPotionApplicable(potioneffectIn);
     }
 
-    @SideOnly(Side.CLIENT)
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderSpiderCreeper<>(manager);
+    /**
+     * returns true if this entity is by a ladder, false otherwise
+     */
+    @Override
+    public boolean isOnLadder() {
+        return this.isBesideClimbableBlock();
+    }
+
+    /**
+     * Get this Entity's EnumCreatureAttribute
+     */
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.ARTHROPOD;
+    }
+
+    /**
+     * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
+     * setBesideClimableBlock.
+     */
+    public boolean isBesideClimbableBlock() {
+        return (this.dataManager.get(CLIMBING) & 1) != 0;
+    }
+
+    /**
+     * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
+     * false.
+     */
+    public void setBesideClimbableBlock(boolean climbing) {
+        byte b0 = this.dataManager.get(CLIMBING);
+
+        if (climbing) {
+            b0 = (byte) (b0 | 1);
+        } else {
+            b0 = (byte) (b0 & -2);
+        }
+
+        this.dataManager.set(CLIMBING, b0);
+    }
+
+    @Override
+    public void takumiExplode() {
     }
 
     @Override
@@ -254,6 +266,12 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         return 23;
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderSpiderCreeper<>(manager);
+    }
+
     static class AISpiderAttack extends EntityAIAttackMelee {
         public AISpiderAttack(EntitySpiderCreeper spider) {
             super(spider, 1.0D, true);
@@ -262,6 +280,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
+        @Override
         public boolean shouldContinueExecuting() {
             float f = this.attacker.getBrightness();
 
@@ -273,6 +292,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
             }
         }
 
+        @Override
         protected double getAttackReachSqr(EntityLivingBase attackTarget) {
             return (double) (4.0F + attackTarget.width);
         }
@@ -286,6 +306,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             float f = this.taskOwner.getBrightness();
             return !(f >= 0.5F) && super.shouldExecute();

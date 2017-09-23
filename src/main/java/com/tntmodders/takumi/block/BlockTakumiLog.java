@@ -23,12 +23,14 @@ public class BlockTakumiLog extends BlockLog {
         this.setDefaultState(this.blockState.getBaseState().withProperty(BlockTakumiLog.LOG_AXIS, BlockTakumiLog.EnumAxis.Y));
     }
 
+    @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
     }
 
+    @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!worldIn.isRemote && player.getHeldItem(EnumHand.MAIN_HAND).getItem() != Items.DIAMOND_PICKAXE) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
@@ -43,15 +45,18 @@ public class BlockTakumiLog extends BlockLog {
         return 1.5f;
     }
 
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, BlockTakumiLog.LOG_AXIS);
-    }
-
+    @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(BlockTakumiLog.LOG_AXIS, BlockTakumiLog.EnumAxis.values()[meta]);
     }
 
+    @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(BlockTakumiLog.LOG_AXIS).ordinal();
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, BlockTakumiLog.LOG_AXIS);
     }
 }

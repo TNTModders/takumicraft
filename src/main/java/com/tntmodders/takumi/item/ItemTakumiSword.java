@@ -22,15 +22,7 @@ public class ItemTakumiSword extends ItemSword {
         this.setUnlocalizedName("takumisword");
     }
 
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
-        return true;
-    }
-
-    public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
-    }
-
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.isItemEnchanted()) {
             try {
@@ -40,6 +32,7 @@ public class ItemTakumiSword extends ItemSword {
         }
     }
 
+    @Override
     public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
         if (!stack.isItemEnchanted()) {
             try {
@@ -49,6 +42,18 @@ public class ItemTakumiSword extends ItemSword {
         }
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.RARE;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {

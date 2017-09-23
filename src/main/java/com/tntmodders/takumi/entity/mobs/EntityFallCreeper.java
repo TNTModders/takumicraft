@@ -61,11 +61,6 @@ public class EntityFallCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0xffdddd;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return false;
     }
@@ -78,5 +73,10 @@ public class EntityFallCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 33;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0xffdddd;
     }
 }

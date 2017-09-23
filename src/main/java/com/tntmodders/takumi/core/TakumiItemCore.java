@@ -17,7 +17,6 @@ import java.util.List;
 
 public class TakumiItemCore {
     public static final TakumiItemCore INSTANCE = new TakumiItemCore();
-    public static List<Item> itemBlocks = new ArrayList<Item>();
     public static final Item TAKUMI_SHIELD = new ItemTakumiShield();
     public static final Item TAKUMI_BOOK = new ItemTakumiBook();
     public static final Item TAKUMI_BUCKET = new ItemTakumiBucket(Blocks.AIR);
@@ -26,6 +25,7 @@ public class TakumiItemCore {
     public static final ItemTakumiArrow TAKUMI_ARROW_HA = new ItemTakumiArrow("ha", 2, 1, false);
     public static final Item TAKUMI_SWORD = new ItemTakumiSword();
     public static final Item TAKUMI_BOLT_STONE = new ItemTakumiBoltStone();
+    public static List<Item> itemBlocks = new ArrayList<Item>();
 
     public static void register(IForgeRegistry<Item> registry) {
         Class clazz = TakumiItemCore.class;

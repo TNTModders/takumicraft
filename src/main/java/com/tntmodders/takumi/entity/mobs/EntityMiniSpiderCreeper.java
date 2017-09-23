@@ -9,6 +9,7 @@ public class EntityMiniSpiderCreeper extends EntitySpiderCreeper {
         this.setHealth(4f);
     }
 
+    @Override
     public float getEyeHeight() {
         return super.getEyeHeight() / 4;
     }

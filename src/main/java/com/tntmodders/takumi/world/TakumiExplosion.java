@@ -74,6 +74,7 @@ public class TakumiExplosion extends Explosion {
     /**
      * Does the first part of the explosion (destroy blocks)
      */
+    @Override
     public void doExplosionA() {
         Set<BlockPos> set = Sets.newHashSet();
         int i = 16;
@@ -176,6 +177,7 @@ public class TakumiExplosion extends Explosion {
         }
     }
 
+    @Override
     public void doExplosionB(boolean spawnParticles) {
         this.world.playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
 
@@ -229,6 +231,7 @@ public class TakumiExplosion extends Explosion {
         }
     }
 
+    @Override
     public Map<EntityPlayer, Vec3d> getPlayerKnockbackMap() {
         return this.playerKnockbackMap;
     }
@@ -236,6 +239,7 @@ public class TakumiExplosion extends Explosion {
     /**
      * Returns either the entity that placed the explosive block, the entity that caused the explosion or null.
      */
+    @Override
     @Nullable
     public EntityLivingBase getExplosivePlacedBy() {
         if (this.exploder == null) {
@@ -247,14 +251,17 @@ public class TakumiExplosion extends Explosion {
         }
     }
 
+    @Override
     public void clearAffectedBlockPositions() {
         this.affectedBlockPositions.clear();
     }
 
+    @Override
     public List<BlockPos> getAffectedBlockPositions() {
         return this.affectedBlockPositions;
     }
 
+    @Override
     public Vec3d getPosition() {
         return this.position;
     }

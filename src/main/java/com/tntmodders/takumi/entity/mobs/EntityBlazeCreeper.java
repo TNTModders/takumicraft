@@ -46,6 +46,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         this.isImmuneToFire = true;
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAICreeperSwell(this));
         this.tasks.addTask(4, new EntityBlazeCreeper.AIFireballAttack(this));
@@ -54,9 +55,10 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
@@ -64,50 +66,38 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
     }
 
+    @Override
+    public void fall(float distance, float damageMultiplier) {
+    }
+
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(ON_FIRE, (byte) 0);
     }
 
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_BLAZE_AMBIENT;
-    }
-
+    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_BLAZE_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_BLAZE_DEATH;
     }
 
-    @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender() {
-        return 15728880;
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_BLAZE;
     }
 
-    public float getBrightness() {
-        return 1.0F;
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_BLAZE_AMBIENT;
     }
 
-    public void onLivingUpdate() {
-        if (!this.onGround && this.motionY < 0.0D) {
-            this.motionY *= 0.6D;
-        }
-
-        if (this.world.isRemote) {
-            if (this.rand.nextInt(24) == 0 && !this.isSilent()) {
-                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_BLAZE_BURN, this.getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
-            }
-
-            for (int i = 0; i < 2; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
-            }
-        }
-
-        super.onLivingUpdate();
-    }
-
+    @Override
     protected void updateAITasks() {
         if (this.isWet()) {
             this.attackEntityFrom(DamageSource.DROWN, 1.0F);
@@ -130,20 +120,48 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         super.updateAITasks();
     }
 
-    public void fall(float distance, float damageMultiplier) {
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender() {
+        return 15728880;
     }
 
+    @Override
+    public float getBrightness() {
+        return 1.0F;
+    }
+
+    @Override
     public boolean isBurning() {
         return this.isCharged();
     }
 
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_BLAZE;
-    }
-
     public boolean isCharged() {
         return (this.dataManager.get(ON_FIRE) & 1) != 0;
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        if (!this.onGround && this.motionY < 0.0D) {
+            this.motionY *= 0.6D;
+        }
+
+        if (this.world.isRemote) {
+            if (this.rand.nextInt(24) == 0 && !this.isSilent()) {
+                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_BLAZE_BURN, this.getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
+            }
+
+            for (int i = 0; i < 2; ++i) {
+                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+            }
+        }
+
+        super.onLivingUpdate();
+    }
+
+    @Override
+    protected boolean isValidLightLevel() {
+        return true;
     }
 
     public void setOnFire(boolean onFire) {
@@ -156,16 +174,6 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         }
 
         this.dataManager.set(ON_FIRE, b0);
-    }
-
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderBlazeCreeper<>(manager);
     }
 
     @Override
@@ -191,11 +199,6 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 16733457;
-    }
-
-    @Override
     public int getSecondaryColor() {
         return 39168;
     }
@@ -206,11 +209,6 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
-    }
-
-    @Override
     public String getRegisterName() {
         return "blazecreeper";
     }
@@ -218,6 +216,22 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 12;
+    }
+
+    @Override
+    public void customSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 16733457;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderBlazeCreeper<>(manager);
     }
 
     static class AIFireballAttack extends EntityAIBase {
@@ -233,6 +247,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             EntityLivingBase entitylivingbase = this.blaze.getAttackTarget();
             return entitylivingbase != null && entitylivingbase.isEntityAlive();
@@ -241,6 +256,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             this.attackStep = 0;
         }
@@ -248,6 +264,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Reset the task's internal state. Called when this task is interrupted by another one
          */
+        @Override
         public void resetTask() {
             this.blaze.setOnFire(false);
         }
@@ -255,6 +272,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             --this.attackTime;
             EntityLivingBase entitylivingbase = this.blaze.getAttackTarget();

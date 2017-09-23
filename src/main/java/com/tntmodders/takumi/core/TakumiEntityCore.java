@@ -29,6 +29,10 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TakumiEntityCore {
+    public static final EnumCreatureType CREATURE_TAKUMI =
+            EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 50, Material.AIR, false, true);
+    public static final EnumCreatureType WATER_TAKUMI =
+            EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material.WATER, false, false);
     public static List<Biome> biomes = new ArrayList<>();
     public static List<ITakumiEntity> entityList = new ArrayList<>();
 
@@ -149,7 +153,6 @@ public class TakumiEntityCore {
         });
     }
 
-
     static class EntityComparator implements Comparator<EntityHolder> {
         @Override
         public int compare(EntityHolder o1, EntityHolder o2) {
@@ -166,9 +169,4 @@ public class TakumiEntityCore {
             this.entity = ent;
         }
     }
-
-    public static final EnumCreatureType CREATURE_TAKUMI =
-            EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 50, Material.AIR, false, true);
-    public static final EnumCreatureType WATER_TAKUMI =
-            EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material.WATER, false, false);
 }

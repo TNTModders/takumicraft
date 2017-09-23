@@ -14,6 +14,7 @@ public class EntitySandstormCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     public void onLivingUpdate() {
         if (this.world.isRemote) {
             this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
@@ -42,6 +43,11 @@ public class EntitySandstormCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 65280;
+    }
+
+    @Override
     public void takumiExplode() {
     }
 
@@ -58,11 +64,6 @@ public class EntitySandstormCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getExplosionPower() {
         return 3;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 65280;
     }
 
     @Override

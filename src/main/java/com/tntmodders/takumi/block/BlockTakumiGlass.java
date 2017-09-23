@@ -20,6 +20,7 @@ public class BlockTakumiGlass extends BlockGlass {
         this.setLightLevel(0.4f);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;

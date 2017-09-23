@@ -43,14 +43,16 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntitySkeletonCreeper.class, DataSerializers.BOOLEAN);
     private final EntityAIAttackRangedTakumiBow<EntitySkeletonCreeper> aiArrowAttack = new EntityAIAttackRangedTakumiBow<>(this, 1.0D, 20, 15.0F);
     private final EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 1.2D, false) {
-        public void resetTask() {
-            super.resetTask();
-            EntitySkeletonCreeper.this.setSwingingArms(false);
-        }
-
+        @Override
         public void startExecuting() {
             super.startExecuting();
             EntitySkeletonCreeper.this.setSwingingArms(true);
+        }
+
+        @Override
+        public void resetTask() {
+            super.resetTask();
+            EntitySkeletonCreeper.this.setSwingingArms(false);
         }
     };
 
@@ -60,6 +62,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         this.setCombatTask();
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAICreeperSwell(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -74,36 +77,128 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
     }
 
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_SKELETON;
-    }
-
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(SWINGING_ARMS, Boolean.FALSE);
     }
 
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.setCombatTask();
+    }
+
+    /**
+     * sets this entity's combat AI.
+     */
+    public void setCombatTask() {
+        if (this.world != null && !this.world.isRemote) {
+            this.tasks.removeTask(this.aiAttackOnCollide);
+            this.tasks.removeTask(this.aiArrowAttack);
+            ItemStack itemstack = this.getHeldItemMainhand();
+
+            if (itemstack.getItem() == TakumiItemCore.TAKUMI_BOW) {
+                int i = 20;
+
+                if (this.world.getDifficulty() != EnumDifficulty.HARD) {
+                    i = 40;
+                }
+
+                this.aiArrowAttack.setAttackCooldown(i);
+                this.tasks.addTask(1, this.aiArrowAttack);
+            } else {
+                this.tasks.addTask(1, this.aiAttackOnCollide);
+            }
+        }
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return SoundEvents.ENTITY_SKELETON_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_SKELETON_DEATH;
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
+        if (!this.world.isRemote) {
+            if (this.rand.nextInt(5) == 0) {
+                this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
+            }
+            if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
+                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
+            }
+        }
+    }
+
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_SKELETON;
+    }
+
+    @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
         this.playSound(this.getStepSound(), 0.15F, 1.0F);
     }
 
     /**
+     * Returns the Y Offset of this entity.
+     */
+    @Override
+    public double getYOffset() {
+        return -0.6D;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return 1.74F;
+    }
+
+    protected SoundEvent getStepSound() {
+        return SoundEvents.ENTITY_SKELETON_STEP;
+    }
+
+    /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
+    }
+
+    /**
+     * Handles updating while riding another entity
+     */
+    @Override
+    public void updateRidden() {
+        super.updateRidden();
+
+        if (this.getRidingEntity() instanceof EntityCreature) {
+            EntityCreature entitycreature = (EntityCreature) this.getRidingEntity();
+            this.renderYawOffset = entitycreature.renderYawOffset;
+        }
     }
 
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         if (this.world.isDaytime() && !this.world.isRemote) {
             float f = this.getBrightness();
@@ -135,21 +230,56 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         super.onLivingUpdate();
     }
 
-    /**
-     * Handles updating while riding another entity
-     */
-    public void updateRidden() {
-        super.updateRidden();
-
-        if (this.getRidingEntity() instanceof EntityCreature) {
-            EntityCreature entitycreature = (EntityCreature) this.getRidingEntity();
-            this.renderYawOffset = entitycreature.renderYawOffset;
+    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack, boolean flg) {
+        super.setItemStackToSlot(slotIn, stack);
+        if (flg && !this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
+            this.setCombatTask();
         }
+    }
+
+    /**
+     * Attack the specified entity using a ranged attack.
+     */
+    @Override
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
+        EntityArrow entityarrow = this.getArrow(distanceFactor);
+        double d0 = target.posX - this.posX;
+        double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - entityarrow.posY;
+        double d2 = target.posZ - this.posZ;
+        double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+        entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - this.world.getDifficulty().getDifficultyId() * 4));
+        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.world.spawnEntity(entityarrow);
+    }
+
+    protected EntityArrow getArrow(float v) {
+        return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean isSwingingArms() {
+        return this.dataManager.get(SWINGING_ARMS);
+    }
+
+    @Override
+    public void setSwingingArms(boolean swingingArms) {
+        this.dataManager.set(SWINGING_ARMS, swingingArms);
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_SKELETON_AMBIENT;
+    }
+
+    @Override
+    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
+        this.setItemStackToSlot(slotIn, stack, true);
     }
 
     /**
      * Gives armor or weapon for entity based on given DifficultyInstance
      */
+    @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
         this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_BOW));
@@ -159,6 +289,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
      * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
      * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
      */
+    @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
@@ -179,128 +310,8 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         return livingdata;
     }
 
-    /**
-     * sets this entity's combat AI.
-     */
-    public void setCombatTask() {
-        if (this.world != null && !this.world.isRemote) {
-            this.tasks.removeTask(this.aiAttackOnCollide);
-            this.tasks.removeTask(this.aiArrowAttack);
-            ItemStack itemstack = this.getHeldItemMainhand();
-
-            if (itemstack.getItem() == TakumiItemCore.TAKUMI_BOW) {
-                int i = 20;
-
-                if (this.world.getDifficulty() != EnumDifficulty.HARD) {
-                    i = 40;
-                }
-
-                this.aiArrowAttack.setAttackCooldown(i);
-                this.tasks.addTask(1, this.aiArrowAttack);
-            } else {
-                this.tasks.addTask(1, this.aiAttackOnCollide);
-            }
-        }
-    }
-
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (!this.world.isRemote) {
-            if (this.rand.nextInt(5) == 0) {
-                this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
-            }
-            if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
-                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
-            }
-        }
-    }
-
-    /**
-     * Attack the specified entity using a ranged attack.
-     */
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-        EntityArrow entityarrow = this.getArrow(distanceFactor);
-        double d0 = target.posX - this.posX;
-        double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - entityarrow.posY;
-        double d2 = target.posZ - this.posZ;
-        double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
-        entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - this.world.getDifficulty().getDifficultyId() * 4));
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.spawnEntity(entityarrow);
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        this.setCombatTask();
-    }
-
-    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack, boolean flg) {
-        super.setItemStackToSlot(slotIn, stack);
-        if (flg && !this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
-            this.setCombatTask();
-        }
-    }
-
-    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
-        this.setItemStackToSlot(slotIn, stack, true);
-    }
-
-    public float getEyeHeight() {
-        return 1.74F;
-    }
-
-    /**
-     * Returns the Y Offset of this entity.
-     */
-    public double getYOffset() {
-        return -0.6D;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isSwingingArms() {
-        return this.dataManager.get(SWINGING_ARMS);
-    }
-
-    public void setSwingingArms(boolean swingingArms) {
-        this.dataManager.set(SWINGING_ARMS, swingingArms);
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SKELETON_AMBIENT;
-    }
-
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.ENTITY_SKELETON_HURT;
-    }
-
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SKELETON_DEATH;
-    }
-
-    protected SoundEvent getStepSound() {
-        return SoundEvents.ENTITY_SKELETON_STEP;
-    }
-
-    protected EntityArrow getArrow(float v) {
-        return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
-    }
-
     @Override
     public void takumiExplode() {
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderSkeletonCreeper<>(manager);
     }
 
     @Override
@@ -336,5 +347,16 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     @Override
     public int getRegisterID() {
         return 14;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderSkeletonCreeper<>(manager);
     }
 }

@@ -25,6 +25,7 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
         super(renderManagerIn, new ModelSkeletonCreeper(), 0.5F);
         this.addLayer(new LayerHeldItem(this));
         this.addLayer(new LayerBipedArmor(this) {
+            @Override
             protected void initArmor() {
                 this.modelLeggings = new ModelSkeleton(0.5F, true);
                 this.modelArmor = new ModelSkeleton(1.0F, true);
@@ -34,10 +35,20 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
         this.addLayer(new LayerStrayCreeperClothing(this));
     }
 
-    public void transformHeldFull3DItemLayer() {
-        GlStateManager.translate(0.09375F, 0.1875F, 0.0F);
+    @Override
+    protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
+        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
+
+        if ((int) (f * 10.0F) % 2 == 0) {
+            return 0;
+        } else {
+            int i = (int) (f * 0.2F * 255.0F);
+            i = MathHelper.clamp(i, 0, 255);
+            return i << 24 | 822083583;
+        }
     }
 
+    @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         if (entitylivingbaseIn instanceof EntityWitherSkeletonCreeper) {
             GlStateManager.scale(1.2F, 1.2F, 1.2F);
@@ -52,23 +63,17 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
         GlStateManager.scale(f2, f3, f2);
     }
 
-    protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
-        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-
-        if ((int) (f * 10.0F) % 2 == 0) {
-            return 0;
-        } else {
-            int i = (int) (f * 0.2F * 255.0F);
-            i = MathHelper.clamp(i, 0, 255);
-            return i << 24 | 822083583;
-        }
-    }
-
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
+    }
+
+    @Override
+    public void transformHeldFull3DItemLayer() {
+        GlStateManager.translate(0.09375F, 0.1875F, 0.0F);
     }
 
     @Override

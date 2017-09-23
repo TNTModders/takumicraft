@@ -56,6 +56,13 @@ public interface ITakumiEntity {
         private final int point;
         private final int spawnWeight;
 
+        EnumTakumiRank(int lv, int exp, int poi, int sw) {
+            this.level = lv;
+            this.experiment = exp;
+            this.point = poi;
+            this.spawnWeight = sw;
+        }
+
         public int getSpawnWeight() {
             return spawnWeight;
         }
@@ -70,13 +77,6 @@ public interface ITakumiEntity {
 
         public int getPoint() {
             return point;
-        }
-
-        EnumTakumiRank(int lv, int exp, int poi, int sw) {
-            this.level = lv;
-            this.experiment = exp;
-            this.point = poi;
-            this.spawnWeight = sw;
         }
     }
 
@@ -115,10 +115,8 @@ public interface ITakumiEntity {
         NORMAL_MD(7, true, true);
 
         private final int id;
-
-        EnumTakumiType(int i) {
-            this.id = i;
-        }
+        private boolean isMagic = false;
+        private boolean isDest = false;
 
         EnumTakumiType(int i, boolean dest, boolean magic) {
             this(i);
@@ -126,8 +124,9 @@ public interface ITakumiEntity {
             this.isMagic = magic;
         }
 
-        private boolean isMagic = false;
-        private boolean isDest = false;
+        EnumTakumiType(int i) {
+            this.id = i;
+        }
 
         public boolean isMagic() {
             return isMagic;

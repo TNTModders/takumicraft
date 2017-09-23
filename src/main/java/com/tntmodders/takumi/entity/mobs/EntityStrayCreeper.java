@@ -30,30 +30,56 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
         super(worldIn);
     }
 
+    @Override
     public boolean getCanSpawnHere() {
         return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
     }
 
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_STRAY_AMBIENT;
+    @Override
+    public int getPrimaryColor() {
+        return 11184895;
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_STRAY_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_STRAY_DEATH;
     }
 
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
+        if (this.rand.nextInt(5) == 0 && !this.world.isRemote) {
+            this.entityDropItem(this.getHeldItem(EnumHand.OFF_HAND), 0);
+        }
+    }
+
+    @Override
     protected SoundEvent getStepSound() {
         return SoundEvents.ENTITY_STRAY_STEP;
     }
 
+    @Override
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
+        super.attackEntityWithRangedAttack(target, distanceFactor);
+        this.setEquipmentBasedOnDifficulty(this.world.getDifficultyForLocation(new BlockPos(this)));
+    }
+
+    @Override
     protected EntityArrow getArrow(float v) {
         return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
     }
 
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_STRAY_AMBIENT;
+    }
+
+    @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
         ItemStack stack = new ItemStack(Items.POTIONITEM);
@@ -63,18 +89,6 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
         }
         PotionUtils.addPotionToItemStack(stack, type);
         this.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, stack);
-    }
-
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
-        super.attackEntityWithRangedAttack(target, distanceFactor);
-        this.setEquipmentBasedOnDifficulty(this.world.getDifficultyForLocation(new BlockPos(this)));
-    }
-
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (this.rand.nextInt(5) == 0 && !this.world.isRemote) {
-            this.entityDropItem(this.getHeldItem(EnumHand.OFF_HAND), 0);
-        }
     }
 
     @Override
@@ -110,10 +124,6 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
         return EnumTakumiType.NORMAL_M;
     }
 
-    @Override
-    public int getPrimaryColor() {
-        return 11184895;
-    }
 
     @Override
     public int getExplosionPower() {

@@ -23,22 +23,25 @@ public class RenderParrotCreeper extends RenderLiving<EntityParrotCreeper> imple
     }
 
     /**
-     * Allows the render to do state modifications necessary before the model is rendered.
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected void preRenderCallback(EntityParrotCreeper entitylivingbaseIn, float partialTickTime) {
-        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F);
-        f = f * f;
-        f = f * f;
-        float f2 = (1.0F + f * 0.4F) * f1;
-        float f3 = (1.0F + f * 0.1F) / f1;
-        GlStateManager.scale(f2, f3, f2);
+    @Override
+    protected ResourceLocation getEntityTexture(EntityParrotCreeper entity) {
+        return TEXTURE;
+    }
+
+    /**
+     * Defines what float the third param in setRotationAngles of ModelBase is
+     */
+    @Override
+    public float handleRotationFloat(EntityParrotCreeper livingBase, float partialTicks) {
+        return this.getCustomBob(livingBase, partialTicks);
     }
 
     /**
      * Gets an RGBA int color multiplier to apply.
      */
+    @Override
     protected int getColorMultiplier(EntityParrotCreeper entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 
@@ -52,17 +55,18 @@ public class RenderParrotCreeper extends RenderLiving<EntityParrotCreeper> imple
     }
 
     /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     * Allows the render to do state modifications necessary before the model is rendered.
      */
-    protected ResourceLocation getEntityTexture(EntityParrotCreeper entity) {
-        return TEXTURE;
-    }
-
-    /**
-     * Defines what float the third param in setRotationAngles of ModelBase is
-     */
-    public float handleRotationFloat(EntityParrotCreeper livingBase, float partialTicks) {
-        return this.getCustomBob(livingBase, partialTicks);
+    @Override
+    protected void preRenderCallback(EntityParrotCreeper entitylivingbaseIn, float partialTickTime) {
+        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
+        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
+        f = MathHelper.clamp(f, 0.0F, 1.0F);
+        f = f * f;
+        f = f * f;
+        float f2 = (1.0F + f * 0.4F) * f1;
+        float f3 = (1.0F + f * 0.1F) / f1;
+        GlStateManager.scale(f2, f3, f2);
     }
 
     private float getCustomBob(EntityParrotCreeper parrot, float p_192861_2_) {

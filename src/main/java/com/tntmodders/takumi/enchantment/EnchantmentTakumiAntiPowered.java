@@ -14,6 +14,7 @@ public class EnchantmentTakumiAntiPowered extends Enchantment {
         this.setName("takumi_anti_powered");
     }
 
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         return stack.getItem() == Items.DIAMOND_SWORD && super.canApplyAtEnchantingTable(stack);
     }

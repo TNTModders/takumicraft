@@ -24,6 +24,41 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.LOW;
+    }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.GROUND_M;
+    }
+
+    @Override
+    public int getExplosionPower() {
+        return 3;
+    }
+
+    @Override
+    public int getSecondaryColor() {
+        return 4128831;
+    }
+
+    @Override
+    public boolean isCustomSpawn() {
+        return false;
+    }
+
+    @Override
+    public String getRegisterName() {
+        return "endercreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 9;
+    }
+
+    @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
@@ -101,40 +136,5 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
         entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         return true;
 
-    }
-
-    @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.LOW;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.GROUND_M;
-    }
-
-    @Override
-    public int getExplosionPower() {
-        return 3;
-    }
-
-    @Override
-    public int getSecondaryColor() {
-        return 4128831;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return false;
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "endercreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 9;
     }
 }

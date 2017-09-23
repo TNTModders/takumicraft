@@ -69,6 +69,7 @@ public class ModelParrotCreeper extends ModelBase {
     /**
      * Sets the models various rotation angles then renders the model.
      */
+    @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.body.render(scale);
         this.wingLeft.render(scale);
@@ -84,6 +85,7 @@ public class ModelParrotCreeper extends ModelBase {
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
+    @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         float f = ageInTicks * 0.3F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
@@ -141,6 +143,7 @@ public class ModelParrotCreeper extends ModelBase {
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
+    @Override
     public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         this.feather.rotateAngleX = -0.2214F;
         this.body.rotateAngleX = 0.4937F;

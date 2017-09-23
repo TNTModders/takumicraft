@@ -14,6 +14,7 @@ public class EntityFrostCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     public void onLivingUpdate() {
         if (this.world.isRemote) {
             for (int i = 0; i < 2; ++i) {
@@ -44,6 +45,11 @@ public class EntityFrostCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 65280;
+    }
+
+    @Override
     public void takumiExplode() {
     }
 
@@ -60,11 +66,6 @@ public class EntityFrostCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getExplosionPower() {
         return 3;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 65280;
     }
 
     @Override

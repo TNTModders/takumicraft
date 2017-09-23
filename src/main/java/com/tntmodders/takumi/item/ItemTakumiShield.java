@@ -15,6 +15,7 @@ public class ItemTakumiShield extends ItemShield {
         this.setUnlocalizedName("takumishield");
     }
 
+    @Override
     public String getItemStackDisplayName(ItemStack stack) {
         if (stack.getSubCompound("BlockEntityTag") != null) {
             EnumDyeColor enumdyecolor = TileEntityBanner.getColor(stack);

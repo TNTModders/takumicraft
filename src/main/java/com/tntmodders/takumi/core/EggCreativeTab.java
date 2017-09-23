@@ -16,15 +16,15 @@ public class EggCreativeTab extends CreativeTabs {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public ItemStack getTabIconItem() {
-        ItemStack itemStack = new ItemStack(Items.SPAWN_EGG);
-        ItemMonsterPlacer.applyEntityIdToItemStack(itemStack, new ResourceLocation("minecraft:creeper"));
-        return itemStack;
+    public String getTranslatedTabLabel() {
+        return TakumiUtils.takumiTranslate("takumicraft.egg.name");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel() {
-        return TakumiUtils.takumiTranslate("takumicraft.egg.name");
+    public ItemStack getTabIconItem() {
+        ItemStack itemStack = new ItemStack(Items.SPAWN_EGG);
+        ItemMonsterPlacer.applyEntityIdToItemStack(itemStack, new ResourceLocation("minecraft:creeper"));
+        return itemStack;
     }
 }

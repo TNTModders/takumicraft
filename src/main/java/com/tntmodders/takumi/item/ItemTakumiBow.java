@@ -20,6 +20,7 @@ public class ItemTakumiBow extends ItemBow {
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumibow");
         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
+            @Override
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (entityIn == null) {

@@ -20,30 +20,14 @@ public class BlockTakumiLeaf extends Block {
         this.setUnlocalizedName("takumileaf");
     }
 
-  /*  @Override
-    public BlockPlanks.EnumType getWoodType(int meta) {
-        return null;
-    }
-
     @Override
-    public NonNullList<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
-        return NonNullList.withSize(1, new ItemStack(this, 1));
-    }
-
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, BlockTakumiLeaf.CHECK_DECAY, BlockTakumiLeaf.DECAYABLE);
-    }
-
-    public int getMetaFromState(IBlockState state) {
-        return 0;
-    }*/
-
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
     }
 
+    @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!worldIn.isRemote && player.getHeldItem(EnumHand.MAIN_HAND).getItem() != Items.DIAMOND_PICKAXE) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());

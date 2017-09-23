@@ -21,12 +21,14 @@ public class BlockTakumiCreeperBomb extends Block {
         this.setLightLevel(1f);
     }
 
+    @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
     }
 
+    @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());

@@ -29,10 +29,6 @@ public class EntityTakumiArrow extends EntityArrow {
     }
 
     @Override
-    protected ItemStack getArrowStack() {
-        return stack;
-    }
-
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.typeOfHit == RayTraceResult.Type.ENTITY) {
             if (raytraceResultIn.entityHit == this.shootingEntity) {
@@ -48,15 +44,22 @@ public class EntityTakumiArrow extends EntityArrow {
         }
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setInteger("power", this.power);
         compound.setInteger("pierce", this.pierce);
         compound.setBoolean("destroy", this.destroy);
     }
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         this.power = compound.getInteger("power");
         this.pierce = compound.getInteger("pierce");
         this.destroy = compound.getBoolean("destroy");
+    }
+
+    @Override
+    protected ItemStack getArrowStack() {
+        return stack;
     }
 }

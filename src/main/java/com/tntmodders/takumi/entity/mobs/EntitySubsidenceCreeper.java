@@ -17,13 +17,18 @@ public class EntitySubsidenceCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
     }
 
+    @Override
+    public void fall(float distance, float damageMultiplier) {
+    }
 
+    @Override
     protected void updateAITasks() {
         --this.heightOffsetUpdateTime;
         if (this.heightOffsetUpdateTime <= 0) {
@@ -39,13 +44,12 @@ public class EntitySubsidenceCreeper extends EntityTakumiAbstractCreeper {
         super.updateAITasks();
     }
 
-    public void fall(float distance, float damageMultiplier) {
-    }
-
+    @Override
     protected float getJumpUpwardsMotion() {
         return super.getJumpUpwardsMotion() * 3;
     }
 
+    @Override
     public void onLivingUpdate() {
         if (!this.onGround) {
             this.motionY *= 0.6D;
@@ -55,16 +59,6 @@ public class EntitySubsidenceCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.SUBSIDENCE, 400, 0));
-            }
-        }
-        return true;
     }
 
     @Override
@@ -100,5 +94,15 @@ public class EntitySubsidenceCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 20;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.SUBSIDENCE, 400, 0));
+            }
+        }
+        return true;
     }
 }

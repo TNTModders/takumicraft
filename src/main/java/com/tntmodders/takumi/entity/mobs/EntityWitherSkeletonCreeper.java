@@ -30,18 +30,8 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     }
 
     @Override
-    public String getRegisterName() {
-        return "witherskeletoncreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 15;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return true;
+    public void customSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER, Biomes.HELL);
     }
 
     @Override
@@ -50,49 +40,19 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     }
 
     @Override
-    public int getSecondaryColor() {
-        return 7846775;
-    }
-
-    @Override
-    public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER, Biomes.HELL);
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
-            }
-        }
-        return true;
-    }
-
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_WITHER_SKELETON;
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
-    }
-
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_WITHER_SKELETON_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_WITHER_SKELETON_DEATH;
-    }
-
-    protected SoundEvent getStepSound() {
-        return SoundEvents.ENTITY_WITHER_SKELETON_STEP;
     }
 
     /**
      * Called when the mob's health reaches 0.
      */
+    @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
 
@@ -106,19 +66,43 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
         }
     }
 
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_WITHER_SKELETON;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return 2.1F;
+    }
+
+    @Override
+    protected SoundEvent getStepSound() {
+        return SoundEvents.ENTITY_WITHER_SKELETON_STEP;
+    }
+
+    @Override
+    protected EntityArrow getArrow(float p_190726_1_) {
+        EntityArrow entityarrow = super.getArrow(p_190726_1_);
+        entityarrow.setFire(100);
+        return entityarrow;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
+    }
+
     /**
      * Gives armor or weapon for entity based on given DifficultyInstance
      */
+    @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_SWORD));
     }
 
-    /**
-     * Enchants Entity's current equipments based on given DifficultyInstance
-     */
-    protected void setEnchantmentBasedOnDifficulty(DifficultyInstance difficulty) {
-    }
-
+    @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         IEntityLivingData ientitylivingdata = super.onInitialSpawn(difficulty, livingdata);
@@ -127,10 +111,44 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
         return ientitylivingdata;
     }
 
-    public float getEyeHeight() {
-        return 2.1F;
+    @Override
+    public int getSecondaryColor() {
+        return 7846775;
     }
 
+    @Override
+    public boolean isCustomSpawn() {
+        return true;
+    }
+
+    @Override
+    public String getRegisterName() {
+        return "witherskeletoncreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 15;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Enchants Entity's current equipments based on given DifficultyInstance
+     */
+    @Override
+    protected void setEnchantmentBasedOnDifficulty(DifficultyInstance difficulty) {
+    }
+
+    @Override
     public boolean attackEntityAsMob(Entity entityIn) {
         if (!super.attackEntityAsMob(entityIn)) {
             return false;
@@ -141,11 +159,5 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
 
             return true;
         }
-    }
-
-    protected EntityArrow getArrow(float p_190726_1_) {
-        EntityArrow entityarrow = super.getArrow(p_190726_1_);
-        entityarrow.setFire(100);
-        return entityarrow;
     }
 }

@@ -54,64 +54,10 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         EntityLiving.registerFixesMob(fixer, EntityZombieVillagerCreeper.class);
     }
 
-    protected void entityInit() {
-        super.entityInit();
-        this.dataManager.register(CONVERTING, Boolean.FALSE);
-        this.dataManager.register(PROFESSION, 0);
-    }
-
-    public int getProfession() {
-        return Math.max(this.dataManager.get(PROFESSION), 0);
-    }
-
-    public void setProfession(int profession) {
-        this.dataManager.set(PROFESSION, profession);
-    }
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setInteger("Profession", this.getProfession());
-        compound.setString("ProfessionName", this.getForgeProfession().getRegistryName().toString());
-        compound.setInteger("ConversionTime", this.isConverting() ? this.conversionTime : -1);
-
-        if (this.converstionStarter != null) {
-            compound.setUniqueId("ConversionPlayer", this.converstionStarter);
-        }
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        this.setProfession(compound.getInteger("Profession"));
-        if (compound.hasKey("ProfessionName")) {
-            net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession p = net.minecraftforge.fml.common.registry.ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new net.minecraft.util.ResourceLocation(compound.getString("ProfessionName")));
-            if (p == null) p = net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER;
-            this.setForgeProfession(p);
-        }
-
-        if (compound.hasKey("ConversionTime", 99) && compound.getInteger("ConversionTime") > -1) {
-            this.startConverting(compound.hasUniqueId("ConversionPlayer") ? compound.getUniqueId("ConversionPlayer") : null, compound.getInteger("ConversionTime"));
-        }
-    }
-
-    /**
-     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
-     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
-     */
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        this.setProfession(this.world.rand.nextInt(6));
-        return super.onInitialSpawn(difficulty, livingdata);
-    }
-
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         if (!this.world.isRemote && this.isConverting()) {
             int i = this.getConversionProgress();
@@ -124,10 +70,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         super.onUpdate();
     }
 
-    protected void setArmors() {
-
-    }
-
+    @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         super.processInteract(player, hand);
         ItemStack itemstack = player.getHeldItem(hand);
@@ -147,20 +90,6 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         }
     }
 
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    protected boolean canDespawn() {
-        return !this.isConverting();
-    }
-
-    /**
-     * Returns whether this zombie is in the process of converting to a villager
-     */
-    public boolean isConverting() {
-        return this.getDataManager().get(CONVERTING);
-    }
-
     protected void startConverting(@Nullable UUID p_191991_1_, int p_191991_2_) {
         this.converstionStarter = p_191991_1_;
         this.conversionTime = p_191991_2_;
@@ -168,20 +97,6 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         this.removePotionEffect(MobEffects.WEAKNESS);
         this.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, p_191991_2_, Math.min(this.world.getDifficulty().getDifficultyId() - 1, 0)));
         this.world.setEntityState(this, (byte) 16);
-    }
-
-    /**
-     * Handler for {@link World#setEntityState}
-     */
-    @SideOnly(Side.CLIENT)
-    public void handleStatusUpdate(byte id) {
-        if (id == 16) {
-            if (!this.isSilent()) {
-                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, this.getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
-            }
-        } else {
-            super.handleStatusUpdate(id);
-        }
     }
 
     protected void finishConversion() {
@@ -217,6 +132,13 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         this.world.playEvent(null, 1027, new BlockPos((int) this.posX, (int) this.posY, (int) this.posZ), 0);
     }
 
+    /**
+     * Returns whether this zombie is in the process of converting to a villager
+     */
+    public boolean isConverting() {
+        return this.getDataManager().get(CONVERTING);
+    }
+
     protected int getConversionProgress() {
         int i = 1;
 
@@ -245,40 +167,61 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     }
 
     /**
+     * Handler for {@link World#setEntityState}
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id) {
+        if (id == 16) {
+            if (!this.isSilent()) {
+                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, this.getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
+            }
+        } else {
+            super.handleStatusUpdate(id);
+        }
+    }
+
+    /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    @Override
+    protected boolean canDespawn() {
+        return !this.isConverting();
+    }
+
+    /**
      * Gets the pitch of living sounds in living entities.
      */
+    @Override
     protected float getSoundPitch() {
         return this.isChild() ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 2.0F : (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F;
     }
 
-    public SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT;
-    }
-
-    public SoundEvent getHurtSound(DamageSource p_184601_1_) {
-        return SoundEvents.ENTITY_ZOMBIE_VILLAGER_HURT;
-    }
-
-    public SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_ZOMBIE_VILLAGER_DEATH;
-    }
-
+    @Override
     public SoundEvent getStepSound() {
         return SoundEvents.ENTITY_ZOMBIE_VILLAGER_STEP;
     }
 
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_ZOMBIE_VILLAGER;
-    }
-
-    protected ItemStack getSkullDrop() {
-        return ItemStack.EMPTY;
-    }
-
     @Override
-    public int getPrimaryColor() {
-        return 3869451;
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(CONVERTING, Boolean.FALSE);
+        this.dataManager.register(PROFESSION, 0);
+    }
+
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("Profession", this.getProfession());
+        compound.setString("ProfessionName", this.getForgeProfession().getRegistryName().toString());
+        compound.setInteger("ConversionTime", this.isConverting() ? this.conversionTime : -1);
+
+        if (this.converstionStarter != null) {
+            compound.setUniqueId("ConversionPlayer", this.converstionStarter);
+        }
     }
 
     public net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession getForgeProfession() {
@@ -290,20 +233,82 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         return this.prof;
     }
 
+    public int getProfession() {
+        return Math.max(this.dataManager.get(PROFESSION), 0);
+    }
+
     public void setForgeProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof) {
         this.prof = prof;
         this.setProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof));
     }
 
-    @SideOnly(Side.CLIENT)
+    public void setProfession(int profession) {
+        this.dataManager.set(PROFESSION, profession);
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
     @Override
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderZombieVillagerCreeper(manager);
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.setProfession(compound.getInteger("Profession"));
+        if (compound.hasKey("ProfessionName")) {
+            net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession p = net.minecraftforge.fml.common.registry.ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new net.minecraft.util.ResourceLocation(compound.getString("ProfessionName")));
+            if (p == null) p = net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER;
+            this.setForgeProfession(p);
+        }
+
+        if (compound.hasKey("ConversionTime", 99) && compound.getInteger("ConversionTime") > -1) {
+            this.startConverting(compound.hasUniqueId("ConversionPlayer") ? compound.getUniqueId("ConversionPlayer") : null, compound.getInteger("ConversionTime"));
+        }
     }
 
     @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    public SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return SoundEvents.ENTITY_ZOMBIE_VILLAGER_HURT;
+    }
+
+    @Override
+    public SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_ZOMBIE_VILLAGER_DEATH;
+    }
+
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_ZOMBIE_VILLAGER;
+    }
+
+    @Override
+    protected ItemStack getSkullDrop() {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT;
+    }
+
+    /**
+     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
+     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
+     */
+    @Override
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        this.setProfession(this.world.rand.nextInt(6));
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    @Override
+    protected void setArmors() {
+
+    }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.NORMAL_M;
     }
 
     @Override
@@ -317,7 +322,18 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     }
 
     @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL_M;
+    public int getPrimaryColor() {
+        return 3869451;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderZombieVillagerCreeper(manager);
+    }
+
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
 }

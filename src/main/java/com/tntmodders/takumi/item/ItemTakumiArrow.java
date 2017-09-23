@@ -24,6 +24,7 @@ public class ItemTakumiArrow extends ItemArrow {
         this.setUnlocalizedName("takumiarrow_" + name);
     }
 
+    @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
         if (shooter.getActiveItemStack().getItem() == Items.BOW) {
             return ((ItemArrow) Items.ARROW).createArrow(worldIn, stack, shooter);

@@ -16,6 +16,7 @@ public class EntityAITakumiLandOnOwnersShoulder extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         return this.entity.getAttackTarget() != null && this.entity.getAttackTarget() instanceof EntityPlayer;
     }
@@ -24,6 +25,7 @@ public class EntityAITakumiLandOnOwnersShoulder extends EntityAIBase {
      * Determine if this AI Task is interruptible by a higher (= lower value) priority task. All vanilla AITask have
      * this value set to true.
      */
+    @Override
     public boolean isInterruptible() {
         return !this.isSittingOnShoulder;
     }
@@ -31,6 +33,7 @@ public class EntityAITakumiLandOnOwnersShoulder extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.owner = (EntityPlayer) this.entity.getAttackTarget();
         this.isSittingOnShoulder = false;
@@ -39,6 +42,7 @@ public class EntityAITakumiLandOnOwnersShoulder extends EntityAIBase {
     /**
      * Keep ticking a continuous task that has already been started
      */
+    @Override
     public void updateTask() {
         if (!this.isSittingOnShoulder && !this.entity.getLeashed()) {
             if (this.entity.getEntityBoundingBox().intersects(this.owner.getEntityBoundingBox())) {

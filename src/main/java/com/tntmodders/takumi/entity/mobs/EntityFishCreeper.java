@@ -24,6 +24,7 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
         this.setSize(0.4F, 0.3F);
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAICreeperSwell(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -32,14 +33,7 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
 
-    public double getYOffset() {
-        return 0.1D;
-    }
-
-    public float getEyeHeight() {
-        return 0.1F;
-    }
-
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
@@ -47,52 +41,65 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
     }
 
-    protected boolean canTriggerWalking() {
-        return false;
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SILVERFISH_AMBIENT;
-    }
-
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-        return SoundEvents.ENTITY_SILVERFISH_HURT;
-    }
-
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SILVERFISH_DEATH;
-    }
-
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        this.playSound(SoundEvents.ENTITY_SILVERFISH_STEP, 0.15F, 1.0F);
-    }
-
+    @Override
     public void onUpdate() {
         this.renderYawOffset = this.rotationYaw;
         super.onUpdate();
     }
 
-    public void setRenderYawOffset(float offset) {
-        this.rotationYaw = offset;
-        super.setRenderYawOffset(offset);
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return SoundEvents.ENTITY_SILVERFISH_HURT;
     }
 
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_SILVERFISH_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_SILVERFISH_AMBIENT;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_SILVERFISH_STEP, 0.15F, 1.0F);
+    }
+
+    @Override
+    protected boolean canTriggerWalking() {
+        return false;
+    }
+
+    @Override
+    public double getYOffset() {
+        return 0.1D;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return 0.1F;
+    }
+
+    @Override
     public float getBlockPathWeight(BlockPos pos) {
         return this.world.getBlockState(pos.down()).getBlock() == Blocks.STONE ? 10.0F : super.getBlockPathWeight(pos);
     }
 
+    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ARTHROPOD;
     }
 
     @Override
-    public void takumiExplode() {
+    public void setRenderYawOffset(float offset) {
+        this.rotationYaw = offset;
+        super.setRenderYawOffset(offset);
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderFishCreeper(manager);
+    public void takumiExplode() {
     }
 
     @Override
@@ -128,5 +135,11 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 19;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderFishCreeper(manager);
     }
 }

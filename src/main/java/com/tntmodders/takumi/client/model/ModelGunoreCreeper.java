@@ -26,6 +26,7 @@ public class ModelGunoreCreeper extends ModelBase {
         this.box.render(scale);
     }
 
+    @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         this.box.rotateAngleX = 0.0f;
         this.box.rotateAngleY = 0.0f;

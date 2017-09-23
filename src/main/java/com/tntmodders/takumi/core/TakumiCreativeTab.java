@@ -13,13 +13,13 @@ public class TakumiCreativeTab extends CreativeTabs {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public ItemStack getTabIconItem() {
-        return new ItemStack(TakumiBlockCore.CREEPER_BOMB);
+    public String getTranslatedTabLabel() {
+        return TakumiUtils.takumiTranslate("takumicraft.info.name");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel() {
-        return TakumiUtils.takumiTranslate("takumicraft.info.name");
+    public ItemStack getTabIconItem() {
+        return new ItemStack(TakumiBlockCore.CREEPER_BOMB);
     }
 }

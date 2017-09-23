@@ -15,6 +15,7 @@ public class TakumiPotionSubsidence extends Potion {
         this.setPotionName("takumisubsidence");
     }
 
+    @Override
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
         World world = entityLivingBaseIn.world;
         BlockPos pos = new BlockPos(entityLivingBaseIn).down();
@@ -28,12 +29,14 @@ public class TakumiPotionSubsidence extends Potion {
         super.performEffect(entityLivingBaseIn, amplifier);
     }
 
+    @Override
+    public boolean isReady(int duration, int amplifier) {
+        return true;
+    }
+
+    @Override
     public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
         entityLivingBaseIn.noClip = false;
         super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
-    }
-
-    public boolean isReady(int duration, int amplifier) {
-        return true;
     }
 }

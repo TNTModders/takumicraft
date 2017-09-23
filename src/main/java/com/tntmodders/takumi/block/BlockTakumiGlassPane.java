@@ -21,6 +21,7 @@ public class BlockTakumiGlassPane extends BlockPane {
         this.setLightLevel(0.4f);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;

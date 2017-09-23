@@ -29,6 +29,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
         }
     }
 
+    @Override
     public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn.getPowered()) {
             boolean flag = entitylivingbaseIn.isInvisible();
@@ -57,6 +58,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
         }
     }
 
+    @Override
     public boolean shouldCombineTextures() {
         return false;
     }

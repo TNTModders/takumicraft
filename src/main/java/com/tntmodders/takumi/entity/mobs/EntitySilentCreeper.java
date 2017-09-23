@@ -13,27 +13,33 @@ public class EntitySilentCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return null;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return null;
     }
 
+    @Override
     protected SoundEvent getFallSound(int heightIn) {
         return null;
     }
 
+    @Override
     protected float getSoundVolume() {
         return 0f;
     }
 
+    @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
     }
 

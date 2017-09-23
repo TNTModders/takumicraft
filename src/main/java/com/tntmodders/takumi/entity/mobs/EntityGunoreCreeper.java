@@ -18,6 +18,7 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
         this.setSize(1, 1);
     }
 
+    @Override
     public void onUpdate() {
         super.onUpdate();
         this.rotationYaw = 0;
@@ -25,20 +26,15 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
         this.rotationYawHead = 0;
     }
 
-    public void move(MoverType type, double x, double y, double z) {
-    }
-
+    @Override
     protected void setRotation(float yaw, float pitch) {
     }
 
-    public boolean isPushedByWater() {
-        return false;
+    @Override
+    public void move(MoverType type, double x, double y, double z) {
     }
 
-    public EnumPushReaction getPushReaction() {
-        return EnumPushReaction.BLOCK;
-    }
-
+    @Override
     public void applyEntityCollision(Entity entityIn) {
         if (!this.isRidingSameEntity(entityIn)) {
             if (!entityIn.noClip && !this.noClip) {
@@ -76,6 +72,16 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
+
+    @Override
+    public EnumPushReaction getPushReaction() {
+        return EnumPushReaction.BLOCK;
+    }
+
+    @Override
     public boolean canBePushed() {
         return false;
     }
@@ -105,11 +111,6 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 7829367;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return true;
     }
@@ -122,6 +123,11 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 17;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 7829367;
     }
 
     @SideOnly(Side.CLIENT)

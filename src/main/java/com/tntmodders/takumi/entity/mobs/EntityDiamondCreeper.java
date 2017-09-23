@@ -12,6 +12,7 @@ public class EntityDiamondCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100000);
@@ -19,6 +20,7 @@ public class EntityDiamondCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40);
     }
 
+    @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 1);
@@ -51,11 +53,6 @@ public class EntityDiamondCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x9090a0;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return false;
     }
@@ -68,5 +65,10 @@ public class EntityDiamondCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 210;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x9090a0;
     }
 }

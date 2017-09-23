@@ -16,18 +16,6 @@ public class EntityHappinessCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).setHealth(((EntityLivingBase) entity).getMaxHealth());
-                ((EntityLivingBase) entity).clearActivePotions();
-            }
-        }
-        event.getAffectedEntities().clear();
-        return true;
-    }
-
-    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
@@ -60,5 +48,17 @@ public class EntityHappinessCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 25;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).setHealth(((EntityLivingBase) entity).getMaxHealth());
+                ((EntityLivingBase) entity).clearActivePotions();
+            }
+        }
+        event.getAffectedEntities().clear();
+        return true;
     }
 }

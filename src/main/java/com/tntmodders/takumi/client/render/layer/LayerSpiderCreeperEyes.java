@@ -20,6 +20,7 @@ public class LayerSpiderCreeperEyes<T extends EntitySpiderCreeper> implements La
         this.spiderRenderer = spiderRendererIn;
     }
 
+    @Override
     public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.spiderRenderer.bindTexture(SPIDER_EYES);
         GlStateManager.enableBlend();
@@ -49,6 +50,7 @@ public class LayerSpiderCreeperEyes<T extends EntitySpiderCreeper> implements La
         GlStateManager.enableAlpha();
     }
 
+    @Override
     public boolean shouldCombineTextures() {
         return false;
     }

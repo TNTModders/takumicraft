@@ -68,36 +68,6 @@ public class AluminiumRecipeHolder {
         }
     }
 
-    private List<File> getListFile(String path) {
-        List<File> files = new ArrayList<>();
-        ClassLoader loader = AluminiumMod.class.getClassLoader();
-        URL url = loader.getResource(path);
-        if (url.getProtocol().equals("jar")) {
-            String[] strings = url.getPath().split(":");
-            String leadPath = strings[strings.length - 1].split("!")[0];
-            File f = new File(leadPath);
-            JarFile jarFile;
-            try {
-                jarFile = new JarFile(f);
-                Enumeration<JarEntry> enumeration = jarFile.entries();
-                while (enumeration.hasMoreElements()) {
-                    JarEntry entry = enumeration.nextElement();
-                    String s = entry.getName();
-                    if (s != null && s.startsWith(path) && s.endsWith(".json")) {
-                        files.add(new File(loader.getResource(s).getPath()));
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            File packFile = FMLCommonHandler.instance().findContainerFor(AluminiumMod.aluminiumInstance).getSource();
-            File newFile = new File(packFile.toURI().getPath() + path);
-            files = Arrays.asList(newFile.listFiles());
-        }
-        return files;
-    }
-
     private void readStream(InputStream stream, String name) {
         JsonReader reader = new JsonReader(new InputStreamReader(stream));
         JsonObject jsonObject = new Gson().fromJson(reader, JsonObject.class);
@@ -128,8 +98,39 @@ public class AluminiumRecipeHolder {
         }
     }
 
+    private List<File> getListFile(String path) {
+        List<File> files = new ArrayList<>();
+        ClassLoader loader = AluminiumMod.class.getClassLoader();
+        URL url = loader.getResource(path);
+        if (url.getProtocol().equals("jar")) {
+            String[] strings = url.getPath().split(":");
+            String leadPath = strings[strings.length - 1].split("!")[0];
+            File f = new File(leadPath);
+            JarFile jarFile;
+            try {
+                jarFile = new JarFile(f);
+                Enumeration<JarEntry> enumeration = jarFile.entries();
+                while (enumeration.hasMoreElements()) {
+                    JarEntry entry = enumeration.nextElement();
+                    String s = entry.getName();
+                    if (s != null && s.startsWith(path) && s.endsWith(".json")) {
+                        files.add(new File(loader.getResource(s).getPath()));
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            File packFile = FMLCommonHandler.instance().findContainerFor(AluminiumMod.aluminiumInstance).getSource();
+            File newFile = new File(packFile.toURI().getPath() + path);
+            files = Arrays.asList(newFile.listFiles());
+        }
+        return files;
+    }
+
     public static class ItemStackHashMap<K extends ItemStack, V extends List<ResourceLocation>> extends HashMap<K, V> {
 
+        @Override
         public V get(Object key) {
             if (key instanceof ItemStack && this.containsKey(key)) {
                 for (Map.Entry<K, V> entry : this.entrySet()) {

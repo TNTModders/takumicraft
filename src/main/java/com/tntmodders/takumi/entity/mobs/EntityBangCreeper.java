@@ -15,6 +15,7 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 2.5f;
     }
@@ -28,26 +29,6 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
                 }
             }
         }
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        float power = this.getPowered() ? 6f : 3f;
-        if (event.getExplosion() instanceof TakumiExplosion) {
-            power = ((TakumiExplosion) event.getExplosion()).getSize();
-        }
-        if (power > 0.5) {
-            for (BlockPos pos : event.getAffectedBlocks()) {
-
-                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, event.getExplosion()) >=
-                        Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, event.getExplosion()) &&
-                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
-                    this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
-                }
-            }
-        }
-        return true;
     }
 
     @Override
@@ -83,5 +64,25 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 202;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        float power = this.getPowered() ? 6f : 3f;
+        if (event.getExplosion() instanceof TakumiExplosion) {
+            power = ((TakumiExplosion) event.getExplosion()).getSize();
+        }
+        if (power > 0.5) {
+            for (BlockPos pos : event.getAffectedBlocks()) {
+
+                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, event.getExplosion()) >=
+                        Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, event.getExplosion()) &&
+                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
+                    this.world.setBlockToAir(pos);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
+                }
+            }
+        }
+        return true;
     }
 }

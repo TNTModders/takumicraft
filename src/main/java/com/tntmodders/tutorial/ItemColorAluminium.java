@@ -21,18 +21,20 @@ public class ItemColorAluminium extends Item {
     }
 
     //翻訳名を変更する。後ろに.nameが着くためその前まで。
+    @Override
     public String getUnlocalizedName(ItemStack stack) {
         int i = stack.getMetadata();
         return "item.color_aluminium." + i;
     }
 
     //クリエイティブタブに複数のアイテムを登録する。
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
             for (int i = 0; i < 16; ++i) {
                 ItemStack itemStack = new ItemStack(this, 1, i);
-                itemStack.addEnchantment(Enchantments.SILK_TOUCH,1);
+                itemStack.addEnchantment(Enchantments.SILK_TOUCH, 1);
                 itemStack.setCount(64);
                 items.add(itemStack);
             }

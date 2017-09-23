@@ -27,17 +27,20 @@ public class BlockTakumiDummyGunOre extends Block {
         this.setHarvestLevel("pickaxe", 1);
     }
 
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Items.GUNPOWDER;
+    }
+
+    @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
-    }
-
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        if (!worldIn.isRemote) {
-            EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
-            creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-            worldIn.spawnEntity(creeper);
         }
     }
 
@@ -49,27 +52,28 @@ public class BlockTakumiDummyGunOre extends Block {
         return 1.5f;
     }
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Items.GUNPOWDER;
-    }
-
-    @Override
-    public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
-        return 0;
-    }
-
     // 幸運でドロップする量の設定。(幸運で掘った時にドロップする量をランダムにできる)
     @Override
     public int quantityDroppedWithBonus(int level, Random random) {
         return 0;
     }
 
-    public int quantityDropped(Random random) {
-        return 0;
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (!worldIn.isRemote) {
+            EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
+            creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            worldIn.spawnEntity(creeper);
+        }
     }
 
+    @Override
     public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return true;
+    }
+
+    @Override
+    public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
+        return 0;
     }
 }

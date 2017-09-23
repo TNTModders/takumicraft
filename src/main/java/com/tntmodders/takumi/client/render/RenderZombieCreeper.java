@@ -20,6 +20,7 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
     public RenderZombieCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelZombie(), 0.5F);
         LayerBipedArmor layerbipedarmor = new LayerBipedArmor(this) {
+            @Override
             protected void initArmor() {
                 this.modelLeggings = new ModelZombie(0.5F, true);
                 this.modelArmor = new ModelZombie(1.0F, true);
@@ -29,24 +30,10 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
         this.addLayer(new LayerTakumiCharge(this));
     }
 
-
-    /**
-     * Allows the render to do state modifications necessary before the model is rendered.
-     */
-    protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
-        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F);
-        f = f * f;
-        f = f * f;
-        float f2 = (1.0F + f * 0.4F) * f1;
-        float f3 = (1.0F + f * 0.1F) / f1;
-        GlStateManager.scale(f2, f3, f2);
-    }
-
     /**
      * Gets an RGBA int color multiplier to apply.
      */
+    @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 
@@ -59,6 +46,22 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
         }
     }
 
+    /**
+     * Allows the render to do state modifications necessary before the model is rendered.
+     */
+    @Override
+    protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
+        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
+        f = MathHelper.clamp(f, 0.0F, 1.0F);
+        f = f * f;
+        f = f * f;
+        float f2 = (1.0F + f * 0.4F) * f1;
+        float f3 = (1.0F + f * 0.1F) / f1;
+        GlStateManager.scale(f2, f3, f2);
+    }
+
+    @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }

@@ -22,22 +22,20 @@ public class ItemTakumiBoltStone extends Item {
         this.setUnlocalizedName("boltstone");
     }
 
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        EntityLightningBolt bolt = new EntityLightningBolt(attacker.world, target.posX, target.posY, target.posZ, false);
-        attacker.world.addWeatherEffect(bolt);
-        attacker.world.spawnEntity(bolt);
-        if (!(attacker instanceof EntityPlayer) || !(((EntityPlayer) attacker).isCreative())) {
-            stack.shrink(1);
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        Vec3d vec3d = playerIn.getLookVec();
+        vec3d = vec3d.normalize().scale(5);
+        EntityLightningBolt bolt = new EntityLightningBolt(worldIn, playerIn.posX + vec3d.x, playerIn.posY + vec3d.y, playerIn.posZ + vec3d.z, false);
+        worldIn.addWeatherEffect(bolt);
+        worldIn.spawnEntity(bolt);
+        if (!playerIn.isCreative()) {
+            playerIn.getHeldItem(handIn).shrink(1);
         }
-        return false;
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
-
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
-        return true;
-    }
-
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         Vec3d vec3d = entityLiving.getLookVec();
         vec3d = vec3d.normalize().scale(5);
@@ -50,15 +48,20 @@ public class ItemTakumiBoltStone extends Item {
         return stack;
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        Vec3d vec3d = playerIn.getLookVec();
-        vec3d = vec3d.normalize().scale(5);
-        EntityLightningBolt bolt = new EntityLightningBolt(worldIn, playerIn.posX + vec3d.x, playerIn.posY + vec3d.y, playerIn.posZ + vec3d.z, false);
-        worldIn.addWeatherEffect(bolt);
-        worldIn.spawnEntity(bolt);
-        if (!playerIn.isCreative()) {
-            playerIn.getHeldItem(handIn).shrink(1);
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        EntityLightningBolt bolt = new EntityLightningBolt(attacker.world, target.posX, target.posY, target.posZ, false);
+        attacker.world.addWeatherEffect(bolt);
+        attacker.world.spawnEntity(bolt);
+        if (!(attacker instanceof EntityPlayer) || !(((EntityPlayer) attacker).isCreative())) {
+            stack.shrink(1);
         }
-        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return true;
     }
 }

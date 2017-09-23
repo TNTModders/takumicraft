@@ -56,6 +56,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         EntityLiving.registerFixesMob(fixer, EntitySlime.class);
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAICreeperSwell(this));
         this.tasks.addTask(1, new EntitySlimeCreeper.AISlimeFloat(this));
@@ -66,9 +67,43 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(3, new EntityAIFindEntityNearest(this, EntityIronGolem.class));*/
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(SLIME_SIZE, 1);
+    }
+
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("Size", this.getSlimeSize() - 1);
+        compound.setBoolean("wasOnGround", this.wasOnGround);
+    }
+
+    /**
+     * Returns the size of the slime.
+     */
+    public int getSlimeSize() {
+        return this.dataManager.get(SLIME_SIZE);
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        int i = compound.getInteger("Size");
+
+        if (i < 0) {
+            i = 0;
+        }
+
+        this.setSlimeSize(i + 1, false);
+        this.wasOnGround = compound.getBoolean("wasOnGround");
     }
 
     public void setSlimeSize(int size, boolean resetHealth) {
@@ -86,47 +121,9 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     /**
-     * Returns the size of the slime.
-     */
-    public int getSlimeSize() {
-        return this.dataManager.get(SLIME_SIZE);
-    }
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setInteger("Size", this.getSlimeSize() - 1);
-        compound.setBoolean("wasOnGround", this.wasOnGround);
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        int i = compound.getInteger("Size");
-
-        if (i < 0) {
-            i = 0;
-        }
-
-        this.setSlimeSize(i + 1, false);
-        this.wasOnGround = compound.getBoolean("wasOnGround");
-    }
-
-    public boolean isSmallSlime() {
-        return this.getSlimeSize() <= 1;
-    }
-
-    protected EnumParticleTypes getParticleType() {
-        return EnumParticleTypes.SLIME;
-    }
-
-    /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL && this.getSlimeSize() > 0) {
             this.isDead = true;
@@ -163,25 +160,60 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.alterSquishAmount();
     }
 
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_HURT : SoundEvents.ENTITY_SLIME_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_DEATH : SoundEvents.ENTITY_SLIME_DEATH;
+    }
+
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return this.getSlimeSize() == 1 ? LootTableList.ENTITIES_SLIME : LootTableList.EMPTY;
+    }
+
+    protected boolean spawnCustomParticles() {
+        return false;
+    }
+
+    protected EnumParticleTypes getParticleType() {
+        return EnumParticleTypes.SLIME;
+    }
+
+    protected SoundEvent getSquishSound() {
+        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_SQUISH : SoundEvents.ENTITY_SLIME_SQUISH;
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F * (float) this.getSlimeSize();
+    }
+
     protected void alterSquishAmount() {
         this.squishAmount *= 0.6F;
     }
 
+    public boolean isSmallSlime() {
+        return this.getSlimeSize() <= 1;
+    }
+
     /**
-     * Gets the amount of time the slime needs to wait between jumps.
+     * Causes this entity to do an upwards motion (jumping).
      */
-    protected int getJumpDelay() {
-        return this.rand.nextInt(20) + 10;
+    @Override
+    protected void jump() {
+        this.motionY = 0.41999998688697815D;
+        this.isAirBorne = true;
     }
 
-    protected EntitySlimeCreeper createInstance() {
-        EntitySlimeCreeper slime = new EntitySlimeCreeper(this.world);
-        if (this.getPowered()) {
-            TakumiUtils.takumiSetPowered(slime, true);
-        }
-        return slime;
-    }
-
+    @Override
     public void notifyDataManagerChange(DataParameter<?> key) {
         if (SLIME_SIZE.equals(key)) {
             int i = this.getSlimeSize();
@@ -198,8 +230,16 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     /**
+     * Gets the amount of time the slime needs to wait between jumps.
+     */
+    protected int getJumpDelay() {
+        return this.rand.nextInt(20) + 10;
+    }
+
+    /**
      * Will get destroyed next tick.
      */
+    @Override
     public void setDead() {
         if (!this.world.isRemote && this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getSlimeSize() * (this.getPowered() ? 1.5f : 1.0f), true);
@@ -237,8 +277,19 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     /**
+     * Called by a player entity when they collide with an entity
+     */
+    @Override
+    public void onCollideWithPlayer(EntityPlayer entityIn) {
+        if (this.canDamagePlayer()) {
+            this.dealDamage(entityIn);
+        }
+    }
+
+    /**
      * Applies a velocity to the entities, to push them away from eachother.
      */
+    @Override
     public void applyEntityCollision(Entity entityIn) {
         super.applyEntityCollision(entityIn);
 
@@ -247,13 +298,9 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    /**
-     * Called by a player entity when they collide with an entity
-     */
-    public void onCollideWithPlayer(EntityPlayer entityIn) {
-        if (this.canDamagePlayer()) {
-            this.dealDamage(entityIn);
-        }
+    @Override
+    public float getEyeHeight() {
+        return 0.625F * this.height;
     }
 
     protected void dealDamage(EntityLivingBase entityIn) {
@@ -265,15 +312,19 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    public float getEyeHeight() {
-        return 0.625F * this.height;
-    }
-
     /**
      * Indicates weather the slime is able to damage the player (based upon the slime's size)
      */
     protected boolean canDamagePlayer() {
         return !this.isSmallSlime();
+    }
+
+    protected EntitySlimeCreeper createInstance() {
+        EntitySlimeCreeper slime = new EntitySlimeCreeper(this.world);
+        if (this.getPowered()) {
+            TakumiUtils.takumiSetPowered(slime, true);
+        }
+        return slime;
     }
 
     /**
@@ -283,27 +334,39 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         return this.getSlimeSize();
     }
 
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_HURT : SoundEvents.ENTITY_SLIME_HURT;
-    }
-
-    protected SoundEvent getDeathSound() {
-        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_DEATH : SoundEvents.ENTITY_SLIME_DEATH;
-    }
-
-    protected SoundEvent getSquishSound() {
-        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_SQUISH : SoundEvents.ENTITY_SLIME_SQUISH;
-    }
-
+    @Override
     protected Item getDropItem() {
         return this.getSlimeSize() == 1 ? Items.SLIME_BALL : Items.GUNPOWDER;
     }
 
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return this.getSlimeSize() == 1 ? LootTableList.ENTITIES_SLIME : LootTableList.EMPTY;
+    /**
+     * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
+     * use in wolves.
+     */
+    @Override
+    public int getVerticalFaceSpeed() {
+        return 0;
     }
 
+    /**
+     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
+     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
+     */
+    @Override
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        int i = this.rand.nextInt(3);
+
+        if (i < 2 && this.rand.nextFloat() < 0.5F * difficulty.getClampedAdditionalDifficulty()) {
+            ++i;
+        }
+
+        int j = 1 << i;
+        this.setSlimeSize(j, true);
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc.isExplosion() && damageSrc.getTrueSource() != null && damageSrc.getTrueSource().getClass() == EntitySlimeCreeper.class) {
             damageAmount = 0;
@@ -311,9 +374,16 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         super.damageEntity(damageSrc, damageAmount);
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderSlimeCreeper<>(manager);
+    }
+
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         BlockPos blockpos = new BlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
         Chunk chunk = this.world.getChunkFromBlockCoords(blockpos);
@@ -338,58 +408,14 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
 
     /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    protected float getSoundVolume() {
-        return 0.4F * (float) this.getSlimeSize();
-    }
-
-    /**
-     * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
-     * use in wolves.
-     */
-    public int getVerticalFaceSpeed() {
-        return 0;
-    }
-
-    /**
      * Returns true if the slime makes a sound when it jumps (based upon the slime's size)
      */
     protected boolean makesSoundOnJump() {
         return this.getSlimeSize() > 0;
     }
 
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    protected void jump() {
-        this.motionY = 0.41999998688697815D;
-        this.isAirBorne = true;
-    }
-
-    /**
-     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
-     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
-     */
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        int i = this.rand.nextInt(3);
-
-        if (i < 2 && this.rand.nextFloat() < 0.5F * difficulty.getClampedAdditionalDifficulty()) {
-            ++i;
-        }
-
-        int j = 1 << i;
-        this.setSlimeSize(j, true);
-        return super.onInitialSpawn(difficulty, livingdata);
-    }
-
     protected SoundEvent getJumpSound() {
         return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_JUMP : SoundEvents.ENTITY_SLIME_JUMP;
-    }
-
-    protected boolean spawnCustomParticles() {
-        return false;
     }
 
     @Override
@@ -434,12 +460,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         return 11;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderSlimeCreeper<>(manager);
-    }
-
     static class AISlimeAttack extends EntityAIBase {
         private final EntitySlimeCreeper slime;
         private int growTieredTimer;
@@ -452,6 +472,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
 
@@ -467,6 +488,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             this.growTieredTimer = 300;
             super.startExecuting();
@@ -475,6 +497,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
+        @Override
         public boolean shouldContinueExecuting() {
             EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
 
@@ -492,6 +515,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             this.slime.faceEntity(this.slime.getAttackTarget(), 10.0F, 10.0F);
             ((EntitySlimeCreeper.SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.slime.rotationYaw, this.slime.canDamagePlayer());
@@ -511,6 +535,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime.isPotionActive(MobEffects.LEVITATION));
         }
@@ -518,6 +543,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             if (--this.nextRandomizeTime <= 0) {
                 this.nextRandomizeTime = 40 + this.slime.getRNG().nextInt(60);
@@ -540,6 +566,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return this.slime.isInWater() || this.slime.isInLava();
         }
@@ -547,6 +574,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             if (this.slime.getRNG().nextFloat() < 0.8F) {
                 this.slime.getJumpHelper().setJumping();
@@ -567,6 +595,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return true;
         }
@@ -574,6 +603,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             ((EntitySlimeCreeper.SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.0D);
         }
@@ -601,6 +631,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
             this.action = EntityMoveHelper.Action.MOVE_TO;
         }
 
+        @Override
         public void onUpdateMoveHelper() {
             this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);
             this.entity.rotationYawHead = this.entity.rotationYaw;

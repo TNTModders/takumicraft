@@ -11,6 +11,11 @@ public class TakumiASMCore implements IFMLLoadingPlugin {
     }
 
     @Override
+    public String getModContainerClass() {
+        return null;
+    }
+
+    @Override
     public String getSetupClass() {
         return null;
     }
@@ -21,11 +26,6 @@ public class TakumiASMCore implements IFMLLoadingPlugin {
 
     @Override
     public String getAccessTransformerClass() {
-        return null;
-    }
-
-    @Override
-    public String getModContainerClass() {
         return null;
     }
 }

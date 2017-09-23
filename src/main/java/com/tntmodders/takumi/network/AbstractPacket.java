@@ -23,6 +23,10 @@ public abstract class AbstractPacket implements IMessage, IMessageHandler<Abstra
         this.encodeInto(buf);
     }
 
+    public abstract void encodeInto(ByteBuf buffer);
+
+    public abstract void decodeInto(ByteBuf buffer);
+
     @Override
     public IMessage onMessage(AbstractPacket message, MessageContext ctx) {
         EntityPlayer player;
@@ -51,8 +55,4 @@ public abstract class AbstractPacket implements IMessage, IMessageHandler<Abstra
     public EntityPlayer getClientPlayer() {
         return Minecraft.getMinecraft().player;
     }
-
-    public abstract void encodeInto(ByteBuf buffer);
-
-    public abstract void decodeInto(ByteBuf buffer);
 }

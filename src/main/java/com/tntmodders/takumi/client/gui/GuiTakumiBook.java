@@ -53,45 +53,7 @@ public class GuiTakumiBook extends GuiScreen {
         this.bookTotalPages = TakumiEntityCore.entityList.size();
     }
 
-
-    public void initGui() {
-        this.buttonList.clear();
-        this.buttonDone = this.addButton(new GuiButton(0, this.width / 2 - 100, 196, 200, 20, I18n.format("gui.done")));
-        int i = (this.width - 192) / 2;
-        int j = 2;
-        this.buttonNextPage = this.addButton(new NextPageButton(1, i + 120, 156, true));
-        this.buttonPreviousPage = this.addButton(new NextPageButton(2, i + 38, 156, false));
-        this.updateButtons();
-    }
-
-    public void updateScreen() {
-        super.updateScreen();
-        this.time++;
-    }
-
-    private void updateButtons() {
-        this.buttonNextPage.visible = this.currPage < this.bookTotalPages - 1;
-        this.buttonPreviousPage.visible = this.currPage > 0;
-        this.buttonDone.visible = true;
-    }
-
-    protected void actionPerformed(GuiButton button) throws IOException {
-        if (button.enabled) {
-            if (button.id == 0) {
-                this.mc.displayGuiScreen(null);
-            } else if (button.id == 1) {
-                if (this.currPage < this.bookTotalPages - 1) {
-                    ++this.currPage;
-                }
-            } else if (button.id == 2) {
-                if (this.currPage > 0) {
-                    --this.currPage;
-                }
-            }
-            this.updateButtons();
-        }
-    }
-
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         ITakumiEntity takumiEntity = TakumiEntityCore.entityList.get(this.currPage);
         boolean flg = false;
@@ -168,15 +130,6 @@ public class GuiTakumiBook extends GuiScreen {
         return ((EntityLivingBase) entity);
     }
 
-    private void renderSize(EntityLivingBase entity) {
-        if (entity instanceof EntitySquidCreeper) {
-            GL11.glScaled(0.65, 0.65, 0.65);
-            GL11.glTranslated(-1, -1, 0);
-        } else if (entity instanceof EntityGhastCreeper) {
-            GL11.glScaled(0.2, 0.2, 0.2);
-        }
-    }
-
     public void renderEntity(int p_147046_0_, int p_147046_1_, int p_147046_2_, float p_147046_3_, float p_147046_4_, EntityLivingBase p_147046_5_, boolean flg) {
         GL11.glPushMatrix();
         //GL11.glEnable(GL11.GL_COLOR_MATERIAL);
@@ -216,35 +169,10 @@ public class GuiTakumiBook extends GuiScreen {
         GL11.glPopMatrix();
     }
 
-    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {
-        RenderManager manager = Minecraft.getMinecraft().getRenderManager();
-        Render render = null;
-
-        try {
-            render = manager.getEntityRenderObject(p_147939_1_);
-
-            if (render != null && manager.renderEngine != null) {
-                try {
-                    p_147939_1_.world = this.player.world;
-                    render.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
-                } catch (Throwable throwable2) {
-                    throw new ReportedException(CrashReport.makeCrashReport(throwable2, "Rendering entity in world"));
-                }
-
-                try {
-                    render.doRenderShadowAndFire(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
-                } catch (Throwable throwable1) {
-                    throw new ReportedException(CrashReport.makeCrashReport(throwable1, "Post-rendering entity in world"));
-                }
-            }
-        } catch (Throwable throwable3) {
-            throwable3.printStackTrace();
-        }
-    }
-
     /**
      * Executes the click event specified by the given chat component
      */
+    @Override
     public boolean handleComponentClick(ITextComponent component) {
         ClickEvent clickevent = component.getStyle().getClickEvent();
 
@@ -277,6 +205,82 @@ public class GuiTakumiBook extends GuiScreen {
         }
     }
 
+    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {
+        RenderManager manager = Minecraft.getMinecraft().getRenderManager();
+        Render render = null;
+
+        try {
+            render = manager.getEntityRenderObject(p_147939_1_);
+
+            if (render != null && manager.renderEngine != null) {
+                try {
+                    p_147939_1_.world = this.player.world;
+                    render.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                } catch (Throwable throwable2) {
+                    throw new ReportedException(CrashReport.makeCrashReport(throwable2, "Rendering entity in world"));
+                }
+
+                try {
+                    render.doRenderShadowAndFire(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                } catch (Throwable throwable1) {
+                    throw new ReportedException(CrashReport.makeCrashReport(throwable1, "Post-rendering entity in world"));
+                }
+            }
+        } catch (Throwable throwable3) {
+            throwable3.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException {
+        if (button.enabled) {
+            if (button.id == 0) {
+                this.mc.displayGuiScreen(null);
+            } else if (button.id == 1) {
+                if (this.currPage < this.bookTotalPages - 1) {
+                    ++this.currPage;
+                }
+            } else if (button.id == 2) {
+                if (this.currPage > 0) {
+                    --this.currPage;
+                }
+            }
+            this.updateButtons();
+        }
+    }
+
+    @Override
+    public void initGui() {
+        this.buttonList.clear();
+        this.buttonDone = this.addButton(new GuiButton(0, this.width / 2 - 100, 196, 200, 20, I18n.format("gui.done")));
+        int i = (this.width - 192) / 2;
+        int j = 2;
+        this.buttonNextPage = this.addButton(new NextPageButton(1, i + 120, 156, true));
+        this.buttonPreviousPage = this.addButton(new NextPageButton(2, i + 38, 156, false));
+        this.updateButtons();
+    }
+
+    @Override
+    public void updateScreen() {
+        super.updateScreen();
+        this.time++;
+    }
+
+    private void updateButtons() {
+        this.buttonNextPage.visible = this.currPage < this.bookTotalPages - 1;
+        this.buttonPreviousPage.visible = this.currPage > 0;
+        this.buttonDone.visible = true;
+    }
+
+    private void renderSize(EntityLivingBase entity) {
+        if (entity instanceof EntitySquidCreeper) {
+            GL11.glScaled(0.65, 0.65, 0.65);
+            GL11.glTranslated(-1, -1, 0);
+        } else if (entity instanceof EntityGhastCreeper) {
+            GL11.glScaled(0.2, 0.2, 0.2);
+        }
+    }
+
     @SideOnly(Side.CLIENT)
     static class NextPageButton extends GuiButton {
         private final boolean isForward;
@@ -289,6 +293,7 @@ public class GuiTakumiBook extends GuiScreen {
         /**
          * Draws this button to the screen.
          */
+        @Override
         public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
             if (this.visible) {
                 boolean flag = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;

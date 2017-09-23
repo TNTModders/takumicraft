@@ -27,14 +27,14 @@ public class BlockTakumiGunOre extends Block {
         this.setHarvestLevel("pickaxe", 1);
     }
 
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
-        if (!worldIn.isRemote) {
-            this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
+    @Override
+    public int quantityDropped(Random random) {
+        return random.nextInt(1) * random.nextInt(5);
     }
 
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        if (!worldIn.isRemote && !(player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.DIAMOND_PICKAXE)) {
+    @Override
+    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
+        if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
     }
@@ -73,10 +73,14 @@ public class BlockTakumiGunOre extends Block {
         }
     }
 
-    public int quantityDropped(Random random) {
-        return random.nextInt(1) * random.nextInt(5);
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (!worldIn.isRemote && !(player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.DIAMOND_PICKAXE)) {
+            this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
+        }
     }
 
+    @Override
     public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return true;
     }

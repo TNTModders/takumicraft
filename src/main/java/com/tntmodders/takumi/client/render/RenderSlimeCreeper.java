@@ -23,6 +23,7 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
         this.addLayer(new LayerTakumiCharge(this));
     }
 
+    @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 
@@ -36,16 +37,9 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
     }
 
     /**
-     * Renders the desired {@code T} type Entity.
-     */
-    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        this.shadowSize = 0.25F * (float) entity.getSlimeSize();
-        super.doRender(entity, x, y, z, entityYaw, partialTicks);
-    }
-
-    /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
+    @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         float f = 0.999F;
         GlStateManager.scale(0.999F, 0.999F, 0.999F);
@@ -67,6 +61,16 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
         GlStateManager.scale(f2, f3, f2);
     }
 
+    /**
+     * Renders the desired {@code T} type Entity.
+     */
+    @Override
+    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        this.shadowSize = 0.25F * (float) entity.getSlimeSize();
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    }
+
+    @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }

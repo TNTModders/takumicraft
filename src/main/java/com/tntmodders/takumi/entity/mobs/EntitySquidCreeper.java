@@ -47,6 +47,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     }
 
     //from EntitySquid
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntitySquidCreeper.AIMoveRandom(this));
         this.tasks.addTask(2, new EntityAICreeperSwell(this));
@@ -59,51 +60,52 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
 
-    public float getEyeHeight() {
-        return this.height * 0.5F;
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SQUID_AMBIENT;
-    }
-
+    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_SQUID_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SQUID_DEATH;
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    protected float getSoundVolume() {
-        return 0.4F;
-    }
-
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    protected boolean canTriggerWalking() {
-        return false;
-    }
-
+    @Override
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_SQUID;
     }
 
     /**
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * prevent them from trampling crops
+     */
+    @Override
+    protected boolean canTriggerWalking() {
+        return false;
+    }
+
+    @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return this.height * 0.5F;
+    }
+
+    /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         this.prevSquidPitch = this.squidPitch;
@@ -174,31 +176,17 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
-        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-    }
-
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel();
-    }
-
+    @Override
     protected boolean isValidLightLevel() {
         return true;
     }
 
     /**
-     * Handler for {@link World#setEntityState}
+     * Checks if the entity's current position is a valid location to spawn this entity.
      */
-    @SideOnly(Side.CLIENT)
-    public void handleStatusUpdate(byte id) {
-        if (id == 19) {
-            this.squidRotation = 0.0F;
-        } else {
-            super.handleStatusUpdate(id);
-        }
+    @Override
+    public boolean getCanSpawnHere() {
+        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel();
     }
 
     public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn) {
@@ -212,22 +200,30 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     }
 
     //from EntityWaterMob
+    @Override
     public boolean canBreatheUnderwater() {
         return true;
     }
 
-    public boolean isNotColliding() {
-        return this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this);
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F;
     }
 
+    @Override
+    public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
+        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+    }
+
+    @Override
     public int getTalkInterval() {
         return 120;
     }
 
-    protected boolean canDespawn() {
-        return true;
-    }
-
+    @Override
     public void onEntityUpdate() {
         int i = this.getAir();
         super.onEntityUpdate();
@@ -245,8 +241,32 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    public boolean isPushedByWater() {
-        return false;
+    /**
+     * Handler for {@link World#setEntityState}
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id) {
+        if (id == 19) {
+            this.squidRotation = 0.0F;
+        } else {
+            super.handleStatusUpdate(id);
+        }
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_SQUID_AMBIENT;
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return true;
+    }
+
+    @Override
+    public boolean isNotColliding() {
+        return this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this);
     }
 
     @Override
@@ -279,10 +299,6 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void customSpawn() {
-    }
-
-    @Override
     public String getRegisterName() {
         return "squidcreeper";
     }
@@ -292,6 +308,11 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         return 21;
     }
 
+    @Override
+    public void customSpawn() {
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getRender(RenderManager manager) {
         return new RenderSquidCreeper(manager);
@@ -307,6 +328,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return true;
         }
@@ -314,6 +336,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         /**
          * Keep ticking a continuous task that has already been started
          */
+        @Override
         public void updateTask() {
             int i = this.squid.getIdleTime();
 

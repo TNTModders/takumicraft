@@ -37,6 +37,7 @@ public class ItemTakumiBucket extends ItemBucket {
         this.setUnlocalizedName(s);
     }
 
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         boolean flag = this.containedBlock == Blocks.AIR;
         ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -112,6 +113,7 @@ public class ItemTakumiBucket extends ItemBucket {
         }
     }
 
+    @Override
     public boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World worldIn, BlockPos posIn) {
         if (this.containedBlock == Blocks.AIR) {
             return false;

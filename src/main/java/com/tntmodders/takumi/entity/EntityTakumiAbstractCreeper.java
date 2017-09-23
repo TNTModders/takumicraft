@@ -17,6 +17,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         this.experienceValue = this.takumiRank().getExperiment();
     }
 
+    @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
             return;
@@ -36,6 +37,10 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     }
 
     @Override
+    public void customSpawn() {
+    }
+
+    @Override
     public int getPrimaryColor() {
         return 39168;
     }
@@ -49,9 +54,5 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
-    }
-
-    @Override
-    public void customSpawn() {
     }
 }

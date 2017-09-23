@@ -39,10 +39,24 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
         return true;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
-        return new RenderZombieCreeper(manager);
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.MID;
+    }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.NORMAL_D;
+    }
+
+    @Override
+    public int getSecondaryColor() {
+        return 15983273;
+    }
+
+    @Override
+    public boolean isCustomSpawn() {
+        return true;
     }
 
     @Override
@@ -55,27 +69,13 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
         return 203;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.MID;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL_D;
+    public RenderLiving getRender(RenderManager manager) {
+        return new RenderZombieCreeper(manager);
     }
 
     @Override
     public void customSpawn() {
-    }
-
-    @Override
-    public int getSecondaryColor() {
-        return 15983273;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return true;
     }
 }

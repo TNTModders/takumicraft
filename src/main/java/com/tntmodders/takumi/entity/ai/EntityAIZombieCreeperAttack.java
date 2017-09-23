@@ -15,6 +15,7 @@ public class EntityAIZombieCreeperAttack extends EntityAIAttackMelee {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         super.startExecuting();
         this.raiseArmTicks = 0;
@@ -23,6 +24,7 @@ public class EntityAIZombieCreeperAttack extends EntityAIAttackMelee {
     /**
      * Reset the task's internal state. Called when this task is interrupted by another one
      */
+    @Override
     public void resetTask() {
         super.resetTask();
         this.zombie.setArmsRaised(false);
@@ -31,6 +33,7 @@ public class EntityAIZombieCreeperAttack extends EntityAIAttackMelee {
     /**
      * Keep ticking a continuous task that has already been started
      */
+    @Override
     public void updateTask() {
         super.updateTask();
         ++this.raiseArmTicks;

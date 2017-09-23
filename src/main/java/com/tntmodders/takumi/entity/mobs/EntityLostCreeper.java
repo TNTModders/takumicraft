@@ -18,6 +18,41 @@ public class EntityLostCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.LOW;
+    }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.WIND_M;
+    }
+
+    @Override
+    public int getExplosionPower() {
+        return 3;
+    }
+
+    @Override
+    public int getSecondaryColor() {
+        return 4128831;
+    }
+
+    @Override
+    public boolean isCustomSpawn() {
+        return false;
+    }
+
+    @Override
+    public String getRegisterName() {
+        return "lostcreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 32;
+    }
+
+    @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
@@ -51,42 +86,7 @@ public class EntityLostCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.LOW;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.WIND_M;
-    }
-
-    @Override
-    public int getExplosionPower() {
-        return 3;
-    }
-
-    @Override
-    public int getSecondaryColor() {
-        return 4128831;
-    }
-
-    @Override
     public int getPrimaryColor() {
         return 0xaa44ff;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return false;
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "lostcreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 32;
     }
 }

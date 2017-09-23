@@ -19,6 +19,7 @@ public class TakumiWorldGenTrees extends WorldGenAbstractTree {
         this.leaf = leaf;
     }
 
+    @Override
     public boolean generate(World worldIn, Random rand, BlockPos position) {
         int i = rand.nextInt(3) + 5;
 

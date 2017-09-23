@@ -35,14 +35,14 @@ public class TakumiCraftCore {
     //初期設定
     public static final String MODID = "takumicraft";
     public static final String VERSION = "2.0_Dev_1";
-    @Mod.Instance(MODID)
-    public static TakumiCraftCore TakumiInstance;
-    @Mod.Metadata(MODID)
-    public static ModMetadata metadata;
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
     public static final TakumiRecipeHolder HOLDER = new TakumiRecipeHolder();
+    @Mod.Instance(MODID)
+    public static TakumiCraftCore TakumiInstance;
+    @Mod.Metadata(MODID)
+    public static ModMetadata metadata;
 
     @EventHandler
     public void construct(FMLConstructionEvent event) {

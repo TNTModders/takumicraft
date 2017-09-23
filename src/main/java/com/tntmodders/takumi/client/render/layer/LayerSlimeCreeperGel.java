@@ -18,6 +18,7 @@ public class LayerSlimeCreeperGel implements LayerRenderer<EntitySlimeCreeper> {
         this.slimeRenderer = slimeRendererIn;
     }
 
+    @Override
     public void doRenderLayer(EntitySlimeCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (!entitylivingbaseIn.isInvisible()) {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -31,6 +32,7 @@ public class LayerSlimeCreeperGel implements LayerRenderer<EntitySlimeCreeper> {
         }
     }
 
+    @Override
     public boolean shouldCombineTextures() {
         return true;
     }

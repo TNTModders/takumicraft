@@ -62,20 +62,11 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.moveHelper = new EntityFlyHelper(this);
     }
 
-    private static float getPitch(Random random) {
-        return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
-    }
-
     public boolean isFlying() {
         return !this.onGround;
     }
 
-    protected void entityInit() {
-        super.entityInit();
-        this.dataManager.register(TAMED, (byte) 0);
-        this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
-    }
-
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAICreeperSwell(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -92,89 +83,30 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
     }
 
-    public boolean setEntityOnShoulder(EntityPlayer p_191994_1_) {
-        NBTTagCompound nbttagcompound = new NBTTagCompound();
-        nbttagcompound.setString("id", this.getEntityString());
-        this.writeToNBT(nbttagcompound);
-
-        if (p_191994_1_.addShoulderEntity(nbttagcompound)) {
-            this.world.removeEntity(this);
-            return true;
-        } else {
-            return false;
-        }
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.4000000059604645D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate() {
-        ++this.rideCooldownCounter;
-        if (this.getAttackTarget() != null) {
-            this.setOwnerId(this.getAttackTarget().getUniqueID());
-        }
-        super.onUpdate();
-    }
-
+    @Override
     public void fall(float distance, float damageMultiplier) {
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
-    }
-
-    @Nullable
-    public SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_PARROT_AMBIENT;
-    }
-
-    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-        return SoundEvents.ENTITY_PARROT_HURT;
-    }
-
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_PARROT_DEATH;
-    }
-
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 1.0F);
-    }
-
-    protected float playFlySound(float p_191954_1_) {
-        this.playSound(SoundEvents.ENTITY_PARROT_FLY, 0.15F, 1.0F);
-        return p_191954_1_ + this.flapSpeed / 2.0F;
-    }
-
-    protected boolean makeFlySound() {
-        return true;
-    }
-
-    /**
-     * Gets the pitch of living sounds in living entities.
-     */
-    protected float getSoundPitch() {
-        return getPitch(this.rand);
-    }
-
-    public SoundCategory getSoundCategory() {
-        return SoundCategory.NEUTRAL;
-    }
-
-    /**
-     * Returns true if this entity should push and be pushed by other entities when colliding.
-     */
-    public boolean canBePushed() {
-        return true;
-    }
-
-    protected void collideWithEntity(Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer)) {
-            super.collideWithEntity(entityIn);
-        }
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(TAMED, (byte) 0);
+        this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
 
@@ -190,6 +122,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         String s;
@@ -204,37 +137,126 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.setSitting(compound.getBoolean("Sitting"));
     }
 
-    public boolean canBeLeashedTo(EntityPlayer player) {
-        return !this.getLeashed();
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        ++this.rideCooldownCounter;
+        if (this.getAttackTarget() != null) {
+            this.setOwnerId(this.getAttackTarget().getUniqueID());
+        }
+        super.onUpdate();
     }
 
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.4000000059604645D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return SoundEvents.ENTITY_PARROT_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_PARROT_DEATH;
+    }
+
+    @Nullable
+    public UUID getOwnerId() {
+        return (UUID) ((Optional) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
+    }
+
+    public boolean isSitting() {
+        return (this.dataManager.get(TAMED) & 1) != 0;
+    }
+
+    public void setSitting(boolean sitting) {
+        byte b0 = this.dataManager.get(TAMED);
+
+        if (sitting) {
+            this.dataManager.set(TAMED, (byte) (b0 | 1));
+        } else {
+            this.dataManager.set(TAMED, (byte) (b0 & -2));
+        }
+    }
+
+    public void setOwnerId(@Nullable UUID p_184754_1_) {
+        this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
+    }
+
+    public boolean setEntityOnShoulder(EntityPlayer p_191994_1_) {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        nbttagcompound.setString("id", this.getEntityString());
+        this.writeToNBT(nbttagcompound);
+
+        if (p_191994_1_.addShoulderEntity(nbttagcompound)) {
+            this.world.removeEntity(this);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
     }
 
     /**
-     * Returns new PathNavigateGround instance
+     * Gets the pitch of living sounds in living entities.
      */
-    protected PathNavigate createNavigator(World worldIn) {
-        PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
-        pathnavigateflying.setCanOpenDoors(false);
-        pathnavigateflying.setCanFloat(true);
-        pathnavigateflying.setCanEnterDoors(true);
-        return pathnavigateflying;
+    @Override
+    protected float getSoundPitch() {
+        return getPitch(this.rand);
     }
 
+    private static float getPitch(Random random) {
+        return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
+    }
+
+    @Override
+    protected void collideWithEntity(Entity entityIn) {
+        if (!(entityIn instanceof EntityPlayer)) {
+            super.collideWithEntity(entityIn);
+        }
+    }
+
+    /**
+     * Returns true if this entity should push and be pushed by other entities when colliding.
+     */
+    @Override
+    public boolean canBePushed() {
+        return true;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 1.0F);
+    }
+
+    @Override
+    protected float playFlySound(float p_191954_1_) {
+        this.playSound(SoundEvents.ENTITY_PARROT_FLY, 0.15F, 1.0F);
+        return p_191954_1_ + this.flapSpeed / 2.0F;
+    }
+
+    @Override
+    protected boolean makeFlySound() {
+        return true;
+    }
+
+    @Override
     public float getEyeHeight() {
         return this.height * 0.6F;
+    }
+
+    @Override
+    public SoundCategory getSoundCategory() {
+        return SoundCategory.NEUTRAL;
     }
 
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         this.calculateFlapping();
@@ -259,6 +281,54 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.flap += this.flapping * 2.0F;
     }
 
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        Block block = this.world.getBlockState(blockpos.down()).getBlock();
+        return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+    }
+
+    /**
+     * Returns new PathNavigateGround instance
+     */
+    @Override
+    protected PathNavigate createNavigator(World worldIn) {
+        PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
+        pathnavigateflying.setCanOpenDoors(false);
+        pathnavigateflying.setCanFloat(true);
+        pathnavigateflying.setCanEnterDoors(true);
+        return pathnavigateflying;
+    }
+
+    /**
+     * Handler for {@link World#setEntityState}
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void handleStatusUpdate(byte id) {
+        if (id == 7) {
+            this.playTameEffect(true);
+        } else if (id == 6) {
+            this.playTameEffect(false);
+        } else {
+            super.handleStatusUpdate(id);
+        }
+    }
+
+    @Override
+    @Nullable
+    public SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_PARROT_AMBIENT;
+    }
+
+    @Override
+    public boolean canBeLeashedTo(EntityPlayer player) {
+        return !this.getLeashed();
+    }
+
     /**
      * Play the taming effect, will either be hearts or smoke depending on status
      */
@@ -277,41 +347,8 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         }
     }
 
-    /**
-     * Handler for {@link World#setEntityState}
-     */
-    @SideOnly(Side.CLIENT)
-    public void handleStatusUpdate(byte id) {
-        if (id == 7) {
-            this.playTameEffect(true);
-        } else if (id == 6) {
-            this.playTameEffect(false);
-        } else {
-            super.handleStatusUpdate(id);
-        }
-    }
-
-    public boolean isSitting() {
-        return (this.dataManager.get(TAMED) & 1) != 0;
-    }
-
-    public void setSitting(boolean sitting) {
-        byte b0 = this.dataManager.get(TAMED);
-
-        if (sitting) {
-            this.dataManager.set(TAMED, (byte) (b0 | 1));
-        } else {
-            this.dataManager.set(TAMED, (byte) (b0 & -2));
-        }
-    }
-
-    @Nullable
-    public UUID getOwnerId() {
-        return (UUID) ((Optional) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
-    }
-
-    public void setOwnerId(@Nullable UUID p_184754_1_) {
-        this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
+    public boolean isOwner(EntityLivingBase entityIn) {
+        return entityIn == this.getOwner();
     }
 
     @Nullable
@@ -324,10 +361,6 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         }
     }
 
-    public boolean isOwner(EntityLivingBase entityIn) {
-        return entityIn == this.getOwner();
-    }
-
     public boolean shouldAttackEntity(EntityLivingBase target, EntityLivingBase owner) {
         return true;
     }
@@ -336,37 +369,11 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         return this.rideCooldownCounter > 100;
     }
 
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        Block block = this.world.getBlockState(blockpos.down()).getBlock();
-        return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
-    }
-
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
             this.world.createExplosion(this, posX, posY, posZ, this.getPowered() ? 6 : 3, false);
         }
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (!this.world.isRemote && entity instanceof EntityPlayer) {
-                EntityParrot parrot = new EntityParrot(this.world);
-                parrot.copyLocationAndAnglesFrom(this);
-                NBTTagCompound tagCompound = parrot.getEntityData();
-                tagCompound.setBoolean("creeper", true);
-                parrot.setVariant(2);
-                parrot.setCustomNameTag(TakumiUtils.takumiTranslate("entity.parrotcreeper.name"));
-                parrot.setEntityOnShoulder(((EntityPlayer) entity));
-            }
-        }
-        event.getAffectedEntities().clear();
-        return true;
     }
 
     @Override
@@ -395,12 +402,6 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     }
 
     @Override
-    public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI
-                , TakumiEntityCore.biomes.toArray(new Biome[0]));
-    }
-
-    @Override
     public String getRegisterName() {
         return "parrotcreeper";
     }
@@ -410,6 +411,30 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         return 205;
     }
 
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (!this.world.isRemote && entity instanceof EntityPlayer) {
+                EntityParrot parrot = new EntityParrot(this.world);
+                parrot.copyLocationAndAnglesFrom(this);
+                NBTTagCompound tagCompound = parrot.getEntityData();
+                tagCompound.setBoolean("creeper", true);
+                parrot.setVariant(2);
+                parrot.setCustomNameTag(TakumiUtils.takumiTranslate("entity.parrotcreeper.name"));
+                parrot.setEntityOnShoulder(((EntityPlayer) entity));
+            }
+        }
+        event.getAffectedEntities().clear();
+        return true;
+    }
+
+    @Override
+    public void customSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI
+                , TakumiEntityCore.biomes.toArray(new Biome[0]));
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getRender(RenderManager manager) {
         return new RenderParrotCreeper(manager);
