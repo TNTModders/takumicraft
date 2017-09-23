@@ -168,15 +168,21 @@ public class GuiTakumiBook extends GuiScreen {
         return ((EntityLivingBase) entity);
     }
 
+    private void renderSize(EntityLivingBase entity) {
+        if (entity instanceof EntitySquidCreeper) {
+            GL11.glScaled(0.65, 0.65, 0.65);
+            GL11.glTranslated(-1, -1, 0);
+        } else if (entity instanceof EntityGhastCreeper) {
+            GL11.glScaled(0.2, 0.2, 0.2);
+        }
+    }
+
     public void renderEntity(int p_147046_0_, int p_147046_1_, int p_147046_2_, float p_147046_3_, float p_147046_4_, EntityLivingBase p_147046_5_, boolean flg) {
         GL11.glPushMatrix();
         //GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glTranslatef((float) p_147046_0_, (float) p_147046_1_, 50.0F);
         GL11.glScalef((float) (-p_147046_2_), (float) p_147046_2_, (float) p_147046_2_);
-        if (p_147046_5_ instanceof EntitySquidCreeper) {
-            GL11.glScaled(0.65, 0.65, 0.65);
-            GL11.glTranslated(-1, -1, 0);
-        }
+        this.renderSize(p_147046_5_);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         float f2 = p_147046_5_.renderYawOffset;
         float f3 = p_147046_5_.rotationYaw;

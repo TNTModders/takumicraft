@@ -93,6 +93,8 @@ entity.minispidercreeper.name=子蜘蛛匠
 entity.minispidercreeper.desc=蜘蛛匠から産まれるこの匠は、隙間からでもリフォームするお邪魔虫。
 entity.happinesscreeper.name=微匠
 entity.happinesscreeper.desc=「ほほえみ」と読む。回復効果のある大爆発を起こす。
+entity.ghastcreeper.name=ガスト匠
+entity.ghastcreeper.desc=大爆発火球を放つ姿はまるで爆撃機。ネザーの地は地獄の形相と化す。
 entity.takumiarrow.name=匠式弾
 
 #advancements
