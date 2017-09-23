@@ -141,6 +141,8 @@ entity.dirtcreeper.name=Dirt Creeper
 entity.dirtcreeper.desc=Destroy dirt. The ground will be filled with this explosion like a earthquake.
 entity.lostcreeper.name=Lost Creeper
 entity.lostcreeper.desc=<entity data had lost>
+entity.fallcreeper.name=Fall Creeper
+entity.fallcreeper.desc=All things fallen. Blocks, entities, even this game fall and shut down...
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

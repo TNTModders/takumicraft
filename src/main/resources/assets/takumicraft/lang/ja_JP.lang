@@ -141,6 +141,8 @@ entity.dirtcreeper.name=土匠
 entity.dirtcreeper.desc=土に指向性を示す爆発を起こす。大地は忽ち爆発の地震に沈む。
 entity.lostcreeper.name=失匠
 entity.lostcreeper.desc=<データが消失しています>
+entity.fallcreeper.name=落匠
+entity.fallcreeper.desc=世界は砂利に包まれた。大地も、生物も、ゲームすら落ちる世界へと。
 entity.takumiarrow.name=匠式弾
 
 #advancements
