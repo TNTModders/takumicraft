@@ -57,6 +57,7 @@ public class TakumiEntityCore {
                 ITakumiEntity entity = ((ITakumiEntity) clazz.getConstructor(World.class).newInstance(Minecraft.getMinecraft().world));
                 entityHolders.add(new EntityHolder(clazz, entity));
             } catch (Exception e) {
+                //e.printStackTrace();
             }
         }
         entityHolders.sort(new EntityComparator());

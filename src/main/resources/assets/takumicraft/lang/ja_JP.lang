@@ -145,6 +145,8 @@ entity.fallcreeper.name=落匠
 entity.fallcreeper.desc=世界は砂利に包まれた。大地も、生物も、ゲームすら落ちる世界へと。
 entity.diamondcreeper.name=ダイヤモンド匠
 entity.diamondcreeper.desc=硬い身体と強靭な肉体、ダイヤの匠は砕けない。
+entity.redstonecreeper.name=RS匠
+entity.redstonecreeper.desc=素早い動きと高速な爆発、レッドストーンの匠は止まらない。
 entity.takumiarrow.name=匠式弾
 
 #advancements
