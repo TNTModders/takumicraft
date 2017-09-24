@@ -157,6 +157,8 @@ entity.batcreeper.name=Bat Creeper
 entity.batcreeper.desc=Flying bat, of course it is explosive when you see green one.
 entity.weathercreeper.name=Weather Creeper
 entity.weathercreeper.desc=The weather changes to thundering, you know how it mean.
+entity.colorcreeper.name=Color Creeper
+entity.colorcreeper.desc=Changes color of blocks. Colorful world for you!
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements
