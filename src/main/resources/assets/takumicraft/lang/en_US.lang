@@ -153,6 +153,8 @@ entity.ironcreeper.name=Iron Creeper
 entity.ironcreeper.desc=A creeper with iron compactness. Too small, too strong.
 entity.arrowcreeper.name=Arrow Creeper
 entity.arrowcreeper.desc=Hundreds of thousand of arrows, to destroy you.
+entity.batcreeper.name=Bat Creeper
+entity.batcreeper.desc=Flying bat, of course it is explosive when you see green one.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

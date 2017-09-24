@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -117,6 +118,13 @@ public class TakumiEvents {
                 strayCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (strayCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(strayCreeper);
+                }
+                e.setResult(Event.Result.DENY);
+            } else if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntityBat) {
+                EntityBatCreeper batCreeper = new EntityBatCreeper(e.getWorld());
+                batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                if (batCreeper.getCanSpawnHere()) {
+                    e.getWorld().spawnEntity(batCreeper);
                 }
                 e.setResult(Event.Result.DENY);
             }

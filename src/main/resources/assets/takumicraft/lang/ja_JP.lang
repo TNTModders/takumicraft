@@ -153,6 +153,8 @@ entity.ironcreeper.name=鋼匠
 entity.ironcreeper.desc=小型な体躯と俊敏な移動、鋼の匠は当たらない。
 entity.arrowcreeper.name=矢匠
 entity.arrowcreeper.desc=幾千もの矢が、天から地へと降り注ぐ。
+entity.batcreeper.name=蝙蝠匠
+entity.batcreeper.desc=洞窟に潜む緑の蝙蝠、勿論爆発性。
 entity.takumiarrow.name=匠式弾
 
 #advancements
