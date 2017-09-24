@@ -155,6 +155,8 @@ entity.arrowcreeper.name=Arrow Creeper
 entity.arrowcreeper.desc=Hundreds of thousand of arrows, to destroy you.
 entity.batcreeper.name=Bat Creeper
 entity.batcreeper.desc=Flying bat, of course it is explosive when you see green one.
+entity.weathercreeper.name=Weather Creeper
+entity.weathercreeper.desc=The weather changes to thundering, you know how it mean.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements
