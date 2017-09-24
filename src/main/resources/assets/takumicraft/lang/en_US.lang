@@ -151,6 +151,8 @@ entity.emeraldcreeper.name=Emerald Creeper
 entity.emeraldcreeper.desc=A creeper with emerald toughness. Too big, too strong.
 entity.ironcreeper.name=Iron Creeper
 entity.ironcreeper.desc=A creeper with iron compactness. Too small, too strong.
+entity.arrowcreeper.name=Arrow Creeper
+entity.arrowcreeper.desc=Hundreds of thousand of arrows, to destroy you.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

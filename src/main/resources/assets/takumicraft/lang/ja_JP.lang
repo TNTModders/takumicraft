@@ -151,6 +151,8 @@ entity.emeraldcreeper.name=エメラルド匠
 entity.emeraldcreeper.desc=巨大な体躯と強力な耐久、エメラルドの匠は倒れない。
 entity.ironcreeper.name=鋼匠
 entity.ironcreeper.desc=小型な体躯と俊敏な移動、鋼の匠は当たらない。
+entity.arrowcreeper.name=矢匠
+entity.arrowcreeper.desc=幾千もの矢が、天から地へと降り注ぐ。
 entity.takumiarrow.name=匠式弾
 
 #advancements
