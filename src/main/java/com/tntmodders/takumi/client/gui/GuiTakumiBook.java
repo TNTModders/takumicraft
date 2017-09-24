@@ -169,6 +169,43 @@ public class GuiTakumiBook extends GuiScreen {
         GL11.glPopMatrix();
     }
 
+    private void renderSize(EntityLivingBase entity) {
+        if (entity instanceof EntitySquidCreeper) {
+            GL11.glScaled(0.65, 0.65, 0.65);
+            GL11.glTranslated(-1, -1, 0);
+        } else if (entity instanceof EntityGhastCreeper) {
+            GL11.glScaled(0.2, 0.2, 0.2);
+        } else if (entity instanceof EntityEmeraldCreeper) {
+            GL11.glScaled(0.5, 0.5, 0.5);
+        }
+    }
+
+    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {
+        RenderManager manager = Minecraft.getMinecraft().getRenderManager();
+        Render render = null;
+
+        try {
+            render = manager.getEntityRenderObject(p_147939_1_);
+
+            if (render != null && manager.renderEngine != null) {
+                try {
+                    p_147939_1_.world = this.player.world;
+                    render.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                } catch (Throwable throwable2) {
+                    throw new ReportedException(CrashReport.makeCrashReport(throwable2, "Rendering entity in world"));
+                }
+
+                try {
+                    render.doRenderShadowAndFire(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                } catch (Throwable throwable1) {
+                    throw new ReportedException(CrashReport.makeCrashReport(throwable1, "Post-rendering entity in world"));
+                }
+            }
+        } catch (Throwable throwable3) {
+            throwable3.printStackTrace();
+        }
+    }
+
     /**
      * Executes the click event specified by the given chat component
      */
@@ -202,32 +239,6 @@ public class GuiTakumiBook extends GuiScreen {
             }
 
             return flag;
-        }
-    }
-
-    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {
-        RenderManager manager = Minecraft.getMinecraft().getRenderManager();
-        Render render = null;
-
-        try {
-            render = manager.getEntityRenderObject(p_147939_1_);
-
-            if (render != null && manager.renderEngine != null) {
-                try {
-                    p_147939_1_.world = this.player.world;
-                    render.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
-                } catch (Throwable throwable2) {
-                    throw new ReportedException(CrashReport.makeCrashReport(throwable2, "Rendering entity in world"));
-                }
-
-                try {
-                    render.doRenderShadowAndFire(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
-                } catch (Throwable throwable1) {
-                    throw new ReportedException(CrashReport.makeCrashReport(throwable1, "Post-rendering entity in world"));
-                }
-            }
-        } catch (Throwable throwable3) {
-            throwable3.printStackTrace();
         }
     }
 
@@ -270,15 +281,6 @@ public class GuiTakumiBook extends GuiScreen {
         this.buttonNextPage.visible = this.currPage < this.bookTotalPages - 1;
         this.buttonPreviousPage.visible = this.currPage > 0;
         this.buttonDone.visible = true;
-    }
-
-    private void renderSize(EntityLivingBase entity) {
-        if (entity instanceof EntitySquidCreeper) {
-            GL11.glScaled(0.65, 0.65, 0.65);
-            GL11.glTranslated(-1, -1, 0);
-        } else if (entity instanceof EntityGhastCreeper) {
-            GL11.glScaled(0.2, 0.2, 0.2);
-        }
     }
 
     @SideOnly(Side.CLIENT)

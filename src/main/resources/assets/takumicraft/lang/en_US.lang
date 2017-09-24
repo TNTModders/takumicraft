@@ -147,6 +147,10 @@ entity.diamondcreeper.name=Diamond Creeper
 entity.diamondcreeper.desc=A creeper with diamond heart. Too hard, too strong.
 entity.redstonecreeper.name=RedStone Creeper
 entity.redstonecreeper.desc=A creeper with redstone speed. Too fast, too strong.
+entity.emeraldcreeper.name=Emerald Creeper
+entity.emeraldcreeper.desc=A creeper with emerald toughness. Too big, too strong.
+entity.ironcreeper.name=Iron Creeper
+entity.ironcreeper.desc=A creeper with iron compactness. Too small, too strong.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

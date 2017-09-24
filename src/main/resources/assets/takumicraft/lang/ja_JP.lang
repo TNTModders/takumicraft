@@ -144,9 +144,13 @@ entity.lostcreeper.desc=<データが消失しています>
 entity.fallcreeper.name=落匠
 entity.fallcreeper.desc=世界は砂利に包まれた。大地も、生物も、ゲームすら落ちる世界へと。
 entity.diamondcreeper.name=ダイヤモンド匠
-entity.diamondcreeper.desc=硬い身体と強靭な肉体、ダイヤの匠は砕けない。
+entity.diamondcreeper.desc=硬い精神と強靭な肉体、ダイヤの匠は砕けない。
 entity.redstonecreeper.name=RS匠
 entity.redstonecreeper.desc=素早い動きと高速な爆発、レッドストーンの匠は止まらない。
+entity.emeraldcreeper.name=エメラルド匠
+entity.emeraldcreeper.desc=巨大な体躯と強力な耐久、エメラルドの匠は倒れない。
+entity.ironcreeper.name=鋼匠
+entity.ironcreeper.desc=小型な体躯と俊敏な移動、鋼の匠は当たらない。
 entity.takumiarrow.name=匠式弾
 
 #advancements

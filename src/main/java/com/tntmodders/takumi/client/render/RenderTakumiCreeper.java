@@ -43,6 +43,10 @@ public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends 
      */
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        if (entitylivingbaseIn.getSizeAmp() != 1) {
+            double d = entitylivingbaseIn.getSizeAmp();
+            GlStateManager.scale(d, d, d);
+        }
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
