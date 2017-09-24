@@ -20,8 +20,8 @@ public class TakumiBlockCore {
     public static final Block CREEPER_LOG = new BlockTakumiLog();
     public static final Block CREEPER_LEAVES = new BlockTakumiLeaf();
     public static final Block CREEPER_GLASS = new BlockTakumiGlass();
-    public static final Block CREEPER_GLASS_PANE = new BlockTakumiGlassPane();
     public static final Block CREEPER_STAINED_GLASS = new BlockTakumiStainedGlass();
+    public static final Block CREEPER_GLASS_PANE = new BlockTakumiGlassPane();
     public static final BlockTakumiStainedGlassPane CREEPER_STAINED_GLASS_PANE = new BlockTakumiStainedGlassPane();
 
     public static void register(IForgeRegistry<Block> registry) {

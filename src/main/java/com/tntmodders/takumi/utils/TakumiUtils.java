@@ -54,7 +54,7 @@ public class TakumiUtils {
         try {
             Field field = TakumiASMNameMap.getField(ClientAdvancementManager.class, "advancementToProgress");
             field.setAccessible(true);
-            Map<Advancement, AdvancementProgress> advancementToProgress = ((Map) field.get(manager));
+            Map<Advancement, AdvancementProgress> advancementToProgress = ((Map<Advancement, AdvancementProgress>) field.get(manager));
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
@@ -88,7 +88,7 @@ public class TakumiUtils {
     }
 
     public static void takumiSetPowered(EntityCreeper entity, boolean flg) {
-        if (!entity.getPowered()) {
+        if (entity.getPowered() != flg) {
             try {
                 Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
                 field.setAccessible(true);

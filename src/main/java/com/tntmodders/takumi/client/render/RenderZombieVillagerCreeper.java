@@ -3,12 +3,12 @@ package com.tntmodders.takumi.client.render;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.model.ModelZombieVillagerCreeper;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
+import com.tntmodders.takumi.client.render.layer.LayerVillagerCreeperArmor;
 import com.tntmodders.takumi.entity.mobs.EntityZombieVillagerCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerVillagerArmor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,7 +25,7 @@ public class RenderZombieVillagerCreeper<T extends EntityZombieVillagerCreeper> 
 
     public RenderZombieVillagerCreeper(RenderManager p_i47186_1_) {
         super(p_i47186_1_, new ModelZombieVillagerCreeper(), 0.5F);
-        this.addLayer(new LayerVillagerArmor(this));
+        this.addLayer(new LayerVillagerCreeperArmor(this));
         this.addLayer(new LayerTakumiCharge(this));
     }
 

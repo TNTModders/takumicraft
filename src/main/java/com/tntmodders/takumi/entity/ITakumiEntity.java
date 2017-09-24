@@ -45,8 +45,8 @@ public interface ITakumiEntity {
     int getRegisterID();
 
     enum EnumTakumiRank {
-        LOW(1, 5, 10, 40),
-        MID(2, 10, 50, 4),
+        LOW(1, 5, 10, 75),
+        MID(2, 10, 50, 10),
         HIGH(3, 100, 250, 0),
         BOSS(4, 500, 500, 0),
         TAKUMI(0, 0, 0, 0);
