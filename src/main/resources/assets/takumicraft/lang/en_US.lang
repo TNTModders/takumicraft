@@ -159,6 +159,10 @@ entity.weathercreeper.name=Weather Creeper
 entity.weathercreeper.desc=The weather changes to thundering, you know how it mean.
 entity.colorcreeper.name=Color Creeper
 entity.colorcreeper.desc=Changes color of blocks. Colorful world for you!
+entity.cowcreeper.name=Cow Creeper
+entity.cowcreeper.desc=A creeper looks like a cow. Not provide a milk, but explosion.
+entity.pigcreeper.name=Pig Creeper
+entity.pigcreeper.desc=A creeper looks like a pig. The prototype of creeper became a creeper.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

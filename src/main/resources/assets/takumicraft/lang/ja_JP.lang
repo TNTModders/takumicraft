@@ -159,6 +159,10 @@ entity.weathercreeper.name=天匠
 entity.weathercreeper.desc=天候を司り、雷雨を起こす匠。聡明ならばこの意味は歴然であろう。
 entity.colorcreeper.name=色匠
 entity.colorcreeper.desc=ブロックの色や形を変える厄介者。せっかくの絵画も台無しに……
+entity.cowcreeper.name=牛匠
+entity.cowcreeper.desc=牛型の匠。ミルクの代わりに爆発をあげよう!
+entity.pigcreeper.name=豚匠
+entity.pigcreeper.desc=豚型の匠。匠の元もついに匠と化し、爆発する緑の豚に。
 entity.takumiarrow.name=匠式弾
 
 #advancements
