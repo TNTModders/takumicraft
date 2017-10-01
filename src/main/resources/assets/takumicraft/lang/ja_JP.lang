@@ -165,6 +165,8 @@ entity.pigcreeper.name=豚匠
 entity.pigcreeper.desc=豚型の匠。匠の元もついに匠と化し、爆発する緑の豚に。
 entity.horsecreeper.name=馬匠
 entity.horsecreeper.desc=馬型の匠。速く走り、早くスティーブを爆破する。
+entity.rabbitcreeper.name=兎匠
+entity.rabbitcreeper.desc=兎型の匠。飛び跳ねるので厄介である。殺人兎の悪夢再び。
 entity.takumiarrow.name=匠式弾
 
 #advancements

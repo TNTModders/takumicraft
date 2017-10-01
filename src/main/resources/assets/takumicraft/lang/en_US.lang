@@ -165,6 +165,8 @@ entity.pigcreeper.name=Pig Creeper
 entity.pigcreeper.desc=A creeper looks like a pig. The prototype of creeper became a creeper.
 entity.horsecreeper.name=Horse Creeper
 entity.horsecreeper.desc=A creeper looks like a horse. Fast running, and fast killing.
+entity.rabbitcreeper.name=Rabbit Creeper
+entity.rabbitcreeper.desc=A creeper looks like a rabbit. Killer Rabbit again.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

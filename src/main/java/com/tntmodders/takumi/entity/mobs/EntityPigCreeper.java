@@ -124,7 +124,7 @@ public class EntityPigCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getPrimaryColor() {
-        return 0xeeeeff;
+        return 0xff6666;
     }
 
     @Override

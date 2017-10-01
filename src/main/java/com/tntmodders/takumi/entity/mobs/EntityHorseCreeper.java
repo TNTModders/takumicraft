@@ -114,7 +114,7 @@ public class EntityHorseCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getPrimaryColor() {
-        return 0x883300;
+        return 0x559900;
     }
 
     @Override
