@@ -163,6 +163,8 @@ entity.cowcreeper.name=牛匠
 entity.cowcreeper.desc=牛型の匠。ミルクの代わりに爆発をあげよう!
 entity.pigcreeper.name=豚匠
 entity.pigcreeper.desc=豚型の匠。匠の元もついに匠と化し、爆発する緑の豚に。
+entity.horsecreeper.name=馬匠
+entity.horsecreeper.desc=馬型の匠。速く走り、早くスティーブを爆破する。
 entity.takumiarrow.name=匠式弾
 
 #advancements
