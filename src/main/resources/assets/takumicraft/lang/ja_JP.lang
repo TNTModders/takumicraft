@@ -167,6 +167,8 @@ entity.horsecreeper.name=馬匠
 entity.horsecreeper.desc=馬型の匠。速く走り、早くスティーブを爆破する。
 entity.rabbitcreeper.name=兎匠
 entity.rabbitcreeper.desc=兎型の匠。飛び跳ねるので厄介である。殺人兎の悪夢再び。
+entity.musiccreeper.name=音匠
+entity.musiccreeper.desc=音を奏で自慢の曲をプレイヤーに披露する。SAN値はピンチ、現地は死地に。
 entity.takumiarrow.name=匠式弾
 
 #advancements
