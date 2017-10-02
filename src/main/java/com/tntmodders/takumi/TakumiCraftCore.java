@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.2]", name = "匠Craft [ Takumi Craft ]")
+@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.1]", name = "匠Craft [ Takumi Craft ]")
 public class TakumiCraftCore {
     //初期設定
     public static final String MODID = "takumicraft";
