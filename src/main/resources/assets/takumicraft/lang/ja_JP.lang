@@ -47,6 +47,22 @@ tile.creeperstainedglasspane.brown.name=匠式茶色硬質板硝子
 tile.creeperstainedglasspane.green.name=匠式緑色硬質板硝子
 tile.creeperstainedglasspane.red.name=匠式赤色硬質板硝子
 tile.creeperstainedglasspane.black.name=匠式黒色硬質板硝子
+tile.creeperwool.white.name=匠式白色硬質羊毛
+tile.creeperwool.orange.name=匠式橙色硬質羊毛
+tile.creeperwool.magenta.name=匠式桃色硬質羊毛
+tile.creeperwool.lightBlue.name=匠式空色硬質羊毛
+tile.creeperwool.yellow.name=匠式黄色硬質羊毛
+tile.creeperwool.lime.name=匠式黄緑硬質羊毛
+tile.creeperwool.pink.name=匠式桜色硬質羊毛
+tile.creeperwool.gray.name=匠式灰色硬質羊毛
+tile.creeperwool.silver.name=匠式灰白硬質羊毛
+tile.creeperwool.cyan.name=匠式青緑硬質羊毛
+tile.creeperwool.purple.name=匠式紫色硬質羊毛
+tile.creeperwool.blue.name=匠式青色硬質羊毛
+tile.creeperwool.brown.name=匠式茶色硬質羊毛
+tile.creeperwool.green.name=匠式緑色硬質羊毛
+tile.creeperwool.red.name=匠式赤色硬質羊毛
+tile.creeperwool.black.name=匠式黒色硬質羊毛
 
 #item
 item.takumibook.name=匠の書
@@ -169,6 +185,8 @@ entity.rabbitcreeper.name=兎匠
 entity.rabbitcreeper.desc=兎型の匠。飛び跳ねるので厄介である。殺人兎の悪夢再び。
 entity.musiccreeper.name=音匠
 entity.musiccreeper.desc=音を奏で自慢の曲をプレイヤーに披露する。SAN値はピンチ、現地は死地に。
+entity.sheepcreeper.name=羊匠
+entity.sheepcreeper.desc=羊型の匠。カラフルに爆発しましょう！全十六色、シークレット有り。
 entity.takumiarrow.name=匠式弾
 
 #advancements

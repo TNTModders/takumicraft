@@ -47,6 +47,22 @@ tile.creeperstainedglasspane.brown.name=Creeper Brown Glass Pane
 tile.creeperstainedglasspane.green.name=Creeper Green Glass Pane
 tile.creeperstainedglasspane.red.name=Creeper Red Glass Pane
 tile.creeperstainedglasspane.black.name=Creeper Black Glass Pane
+tile.creeperwool.white.name=Creeper White Wool
+tile.creeperwool.orange.name=Creeper Orange Wool
+tile.creeperwool.magenta.name=Creeper Magenta Wool
+tile.creeperwool.light_blue.name=Creeper Light Blue Wool
+tile.creeperwool.yellow.name=Creeper Yellow Wool
+tile.creeperwool.lime.name=Creeper Lime Wool
+tile.creeperwool.pink.name=Creeper Pink Wool
+tile.creeperwool.gray.name=Creeper Glay Wool
+tile.creeperwool.silver.name=Creeper Silver Wool
+tile.creeperwool.cyan.name=Creeper Cyan Wool
+tile.creeperwool.purple.name=Creeper Purple Wool
+tile.creeperwool.blue.name=Creeper Blue Wool
+tile.creeperwool.brown.name=Creeper Brown Wool
+tile.creeperwool.green.name=Creeper Green Wool
+tile.creeperwool.red.name=Creeper Red Wool
+tile.creeperwool.black.name=Creeper Black Wool
 
 #item
 item.takumibook.name=Creeper Book
@@ -169,6 +185,8 @@ entity.rabbitcreeper.name=Rabbit Creeper
 entity.rabbitcreeper.desc=A creeper looks like a rabbit. Killer Rabbit again.
 entity.musiccreeper.name=Music Creeper
 entity.musiccreeper.desc=Terrible sound for you! Give you a record, for special present for you.
+entity.sheepcreeper.name=Sheep Creeper
+entity.sheepcreeper.desc=A creeper looks like a sheep. Don't you like colorful explosion?
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements

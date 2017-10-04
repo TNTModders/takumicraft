@@ -1,0 +1,53 @@
+{
+  "variants": {
+    "color=white": {
+      "model": "takumicraft:white_creeperwool"
+    },
+    "color=orange": {
+      "model": "takumicraft:orange_creeperwool"
+    },
+    "color=magenta": {
+      "model": "takumicraft:magenta_creeperwool"
+    },
+    "color=light_blue": {
+      "model": "takumicraft:light_blue_creeperwool"
+    },
+    "color=yellow": {
+      "model": "takumicraft:yellow_creeperwool"
+    },
+    "color=lime": {
+      "model": "takumicraft:lime_creeperwool"
+    },
+    "color=pink": {
+      "model": "takumicraft:pink_creeperwool"
+    },
+    "color=gray": {
+      "model": "takumicraft:gray_creeperwool"
+    },
+    "color=silver": {
+      "model": "takumicraft:silver_creeperwool"
+    },
+    "color=cyan": {
+      "model": "takumicraft:cyan_creeperwool"
+    },
+    "color=purple": {
+      "model": "takumicraft:purple_creeperwool"
+    },
+    "color=blue": {
+      "model": "takumicraft:blue_creeperwool"
+    },
+    "color=brown": {
+      "model": "takumicraft:brown_creeperwool"
+    },
+    "color=green": {
+      "model": "takumicraft:green_creeperwool"
+    },
+    "color=red": {
+      "model": "takumicraft:red_creeperwool"
+    },
+    "color=black": {
+      "model": "takumicraft:black_creeperwool"
+    }
+  }
+}
+
