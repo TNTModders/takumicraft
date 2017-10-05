@@ -187,6 +187,8 @@ entity.musiccreeper.name=Music Creeper
 entity.musiccreeper.desc=Terrible sound for you! Give you a record, for special present for you.
 entity.sheepcreeper.name=Sheep Creeper
 entity.sheepcreeper.desc=A creeper looks like a sheep. Don't you like colorful explosion?
+entity.wolfcreeper.name=Wolf Creeper
+entity.wolfcreeper.desc=A creeper looks like a wolf. Call dependents from the darkness of night.
 entity.takumiarrow.name=Creeper Arrow
 
 #advancements
