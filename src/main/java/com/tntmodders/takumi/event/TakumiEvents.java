@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.item.AbstractEntityTakumiGrenade;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -62,14 +63,23 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(ExplosionEvent.Detonate event) {
-        if (event.getExplosion() instanceof TakumiExplosion && ((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
-            EntityTakumiArrow takumiArrow = ((EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder());
-            if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
-                PotionType type = PotionUtils.getPotionFromItem(((EntityStrayCreeper) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
-                for (Entity entity : event.getAffectedEntities()) {
-                    if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
-                        PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
-                        ((EntityLivingBase) entity).addPotionEffect(effect);
+
+        if (event.getExplosion() instanceof TakumiExplosion) {
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
+                AbstractEntityTakumiGrenade grenade = ((AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder());
+                if (grenade.getThrower() != null) {
+                    event.getAffectedEntities().remove(grenade.getThrower());
+                }
+            }
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
+                EntityTakumiArrow takumiArrow = ((EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder());
+                if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
+                    PotionType type = PotionUtils.getPotionFromItem(((EntityStrayCreeper) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
+                    for (Entity entity : event.getAffectedEntities()) {
+                        if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
+                            PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
+                            ((EntityLivingBase) entity).addPotionEffect(effect);
+                        }
                     }
                 }
             }

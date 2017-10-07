@@ -189,7 +189,10 @@ entity.sheepcreeper.name=羊匠
 entity.sheepcreeper.desc=羊型の匠。カラフルに爆発しましょう！全十六色、シークレット有り。
 entity.wolfcreeper.name=狼匠
 entity.wolfcreeper.desc=狼型の匠。仲間を呼んで悪いスティーブを倒す。骨をあげても仲良くならない。
+entity.snowcreeper.name=雪匠
+entity.snowcreeper.desc=深々と雪がつもる山に現れる雪男。積もり積もるは顔の恨みか将又爆ぜる雪か。
 entity.takumiarrow.name=匠式弾
+entity.takumisnowball.name=爆裂雪玉
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

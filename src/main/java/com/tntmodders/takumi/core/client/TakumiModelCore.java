@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemCloth;
@@ -79,7 +80,7 @@ public class TakumiModelCore {
         }
     }
 
-    public static void registerEntityRender(Class clazz, ITakumiEntity entity) {
+    public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {
         RenderingRegistry.registerEntityRenderingHandler(clazz, new TakumiRenderFactory() {
             @Override
             public Render createRenderFor(RenderManager manager) {

@@ -189,7 +189,10 @@ entity.sheepcreeper.name=Sheep Creeper
 entity.sheepcreeper.desc=A creeper looks like a sheep. Don't you like colorful explosion?
 entity.wolfcreeper.name=Wolf Creeper
 entity.wolfcreeper.desc=A creeper looks like a wolf. Call dependents from the darkness of night.
+entity.snowcreeper.name=Snow Creeper
+entity.snowcreeper.desc=A snowman summons explosive snow. Spawns in the further mountain.
 entity.takumiarrow.name=Creeper Arrow
+entity.takumisnowball.name=Creeper Snowball
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

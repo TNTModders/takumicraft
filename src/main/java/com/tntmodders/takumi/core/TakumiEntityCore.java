@@ -5,13 +5,16 @@ import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
+import com.tntmodders.takumi.entity.item.EntityTakumiSnowBall;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderArrow;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -20,7 +23,6 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import javax.annotation.Nullable;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -142,16 +144,17 @@ public class TakumiEntityCore {
 
     private static void itemRegister() {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"), EntityTakumiArrow.class, "takumiarrow", 900, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumisnowball"), EntityTakumiSnowBall.class, "takumiasnowball", 901, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     private static void renderRegister() {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiArrow.class, manager -> new RenderArrow<EntityArrow>(manager) {
-            @Nullable
             @Override
             protected ResourceLocation getEntityTexture(EntityArrow entity) {
                 return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/item/carrow.png");
             }
         });
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiSnowBall.class, manager -> new RenderSnowball<>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem()));
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
