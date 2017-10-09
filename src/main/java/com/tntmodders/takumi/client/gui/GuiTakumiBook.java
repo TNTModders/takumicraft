@@ -126,6 +126,8 @@ public class GuiTakumiBook extends GuiScreen {
         } else if (entity instanceof EntitySquidCreeper) {
             ((EntitySquidCreeper) entity).tentacleAngle = 45;
             ((EntitySquidCreeper) entity).squidPitch = 60;
+        } else if (entity instanceof EntitySheepCreeper) {
+            ((EntitySheepCreeper) entity).setSheared(true);
         }
         return ((EntityLivingBase) entity);
     }

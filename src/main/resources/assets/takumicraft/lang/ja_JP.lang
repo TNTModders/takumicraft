@@ -112,7 +112,7 @@ entity.skeletoncreeper.desc=爆発性の矢を放つ。ワールドは爆風巻�
 entity.witherskeletoncreeper.name=ウィザースケルトン匠
 entity.witherskeletoncreeper.desc=ウィザー状態の爆発を起こす。ネザーは阿鼻驚嘆の悪夢に陥る。
 entity.objetcreeper.name=オブジェ匠
-entity.objetcreepr.desc=爆発的な芸術を、硬質ブロックの対爆オブジェを作り出す匠。
+entity.objetcreeper.desc=爆発的な芸術を、硬質ブロックの対爆オブジェを作り出す匠。
 entity.gunorecreeper.name=火薬岩匠
 entity.gunorecreeper.desc=火薬岩に化けた匠。掘ればその途端、正体をあらわす。
 entity.treecreeper.name=森守匠
@@ -191,6 +191,8 @@ entity.wolfcreeper.name=狼匠
 entity.wolfcreeper.desc=狼型の匠。仲間を呼んで悪いスティーブを倒す。骨をあげても仲良くならない。
 entity.snowcreeper.name=雪匠
 entity.snowcreeper.desc=深々と雪がつもる山に現れる雪男。積もり積もるは顔の恨みか将又爆ぜる雪か。
+entity.voidcreeper.name=虚無匠
+entity.voidcreeper.desc=上を消し飛ばせ、平面をもたらせ。大地を削り、新たなる世界へ導く。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

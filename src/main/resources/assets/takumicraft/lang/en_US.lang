@@ -112,7 +112,7 @@ entity.skeletoncreeper.desc=Skeleton shooting explosive arrow. The world is goin
 entity.witherskeletoncreeper.name=Wither Skeleton Creeper
 entity.witherskeletoncreeper.desc=Wither damaging explosion, this is a nightmare of nether.
 entity.objetcreeper.name=Objet Creeper
-entity.objetcreepr.desc=Create an objet to you, explosively anti-explosion art.
+entity.objetcreeper.desc=Create an objet to you, explosively anti-explosion art.
 entity.gunorecreeper.name=Gunpowder Ore Creeper
 entity.gunorecreeper.desc=This is not a block, but a creeper. You pick this, soon this explodes.
 entity.treecreeper.name=Tree Creeper
@@ -191,6 +191,8 @@ entity.wolfcreeper.name=Wolf Creeper
 entity.wolfcreeper.desc=A creeper looks like a wolf. Call dependents from the darkness of night.
 entity.snowcreeper.name=Snow Creeper
 entity.snowcreeper.desc=A snowman summons explosive snow. Spawns in the further mountain.
+entity.voidcreeper.name=Void Creeper
+entity.voidcreeper.desc=Nothing is there but air. Flat world made by creeper.
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
 
