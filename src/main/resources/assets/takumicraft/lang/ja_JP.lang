@@ -193,6 +193,8 @@ entity.snowcreeper.name=雪匠
 entity.snowcreeper.desc=深々と雪がつもる山に現れる雪男。積もり積もるは顔の恨みか将又爆ぜる雪か。
 entity.voidcreeper.name=虚無匠
 entity.voidcreeper.desc=上を消し飛ばせ、平面をもたらせ。大地を削り、新たなる世界へ導く。
+entity.lapiscreeper.name=ラピスラズリ匠
+entity.lapiscreeper.desc=不思議な動きに魔法の力、ラピスラズリの匠は見つからない。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

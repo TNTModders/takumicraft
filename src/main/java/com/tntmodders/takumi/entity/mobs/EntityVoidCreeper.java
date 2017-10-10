@@ -49,7 +49,7 @@ public class EntityVoidCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 214;
+        return 215;
     }
 
     @Override
