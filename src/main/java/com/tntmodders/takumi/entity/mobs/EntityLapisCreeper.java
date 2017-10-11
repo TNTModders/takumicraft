@@ -101,11 +101,25 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-        for (int i = 0; i < 2; ++i) {
-            this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc != DamageSource.FALL) {
+            super.damageEntity(damageSrc, damageAmount);
         }
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x9090a0;
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        if (this.world.isRemote) {
+            for (int i = 0; i < 2; ++i) {
+                this.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY - 1 + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+            }
+        }
+        super.onLivingUpdate();
     }
 
     @Override
@@ -147,11 +161,6 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
         return 214;
     }
 
-    @Override
-    public int getPrimaryColor() {
-        return 0x9090a0;
-    }
-
     class AIMoveControl extends EntityMoveHelper {
         public AIMoveControl(EntityLapisCreeper vex) {
             super(vex);
@@ -172,9 +181,9 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                     EntityLapisCreeper.this.motionY *= 0.5D;
                     EntityLapisCreeper.this.motionZ *= 0.5D;
                 } else {
-                    EntityLapisCreeper.this.motionX += d0 / d3 * 0.05D * this.speed * 0.25;
-                    EntityLapisCreeper.this.motionY += d1 / d3 * 0.05D * this.speed * 0.25;
-                    EntityLapisCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed * 0.25;
+                    EntityLapisCreeper.this.motionX += d0 / d3 * 0.05D * this.speed * 0.5;
+                    EntityLapisCreeper.this.motionY += d1 / d3 * 0.05D * this.speed * 0.5;
+                    EntityLapisCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed * 0.5;
 
                     if (EntityLapisCreeper.this.getAttackTarget() == null) {
                         EntityLapisCreeper.this.rotationYaw = -((float) MathHelper.atan2(EntityLapisCreeper.this.motionX, EntityLapisCreeper.this.motionZ)) * (180F / (float) Math.PI);
@@ -189,6 +198,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
+
 
     class AIMoveRandom extends EntityAIBase {
         public AIMoveRandom() {
