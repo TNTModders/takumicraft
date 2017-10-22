@@ -195,6 +195,8 @@ entity.voidcreeper.name=虚無匠
 entity.voidcreeper.desc=上を消し飛ばせ、平面をもたらせ。大地を削り、新たなる世界へ導く。
 entity.lapiscreeper.name=ラピスラズリ匠
 entity.lapiscreeper.desc=不思議な動きに魔法の力、ラピスラズリの匠は見つからない。
+entity.witchcreeper.name=ウイッチ匠
+entity.witchcreeper.desc=ポーション魔も爆風とともに、プレイヤーを惑わし追い詰める。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

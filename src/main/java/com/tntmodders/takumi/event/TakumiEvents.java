@@ -6,6 +6,7 @@ import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.AbstractEntityTakumiGrenade;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
+import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
@@ -32,6 +33,8 @@ import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.List;
 
 public class TakumiEvents {
     @SubscribeEvent
@@ -63,7 +66,6 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(ExplosionEvent.Detonate event) {
-
         if (event.getExplosion() instanceof TakumiExplosion) {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
                 AbstractEntityTakumiGrenade grenade = ((AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder());
@@ -78,6 +80,16 @@ public class TakumiEvents {
                     for (Entity entity : event.getAffectedEntities()) {
                         if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
                             PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
+                            ((EntityLivingBase) entity).addPotionEffect(effect);
+                        }
+                    }
+                }
+            }
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiPotion) {
+                for (Entity entity : event.getAffectedEntities()) {
+                    if (entity instanceof EntityLivingBase) {
+                        List<PotionEffect> effects = PotionUtils.getEffectsFromStack(((EntityTakumiPotion) ((TakumiExplosion) event.getExplosion()).getExploder()).getPotion());
+                        for (PotionEffect effect : effects) {
                             ((EntityLivingBase) entity).addPotionEffect(effect);
                         }
                     }
