@@ -197,6 +197,8 @@ entity.lapiscreeper.name=ラピスラズリ匠
 entity.lapiscreeper.desc=不思議な動きに魔法の力、ラピスラズリの匠は見つからない。
 entity.witchcreeper.name=ウイッチ匠
 entity.witchcreeper.desc=ポーション魔も爆風とともに、プレイヤーを惑わし追い詰める。
+entity.destructioncreeper.name=改築ノ匠
+entity.destructioncreeper.desc=改築、分解、連爆。この匠、ただ着々と家を消し飛ばす。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 
