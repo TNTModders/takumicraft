@@ -1,14 +1,16 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.collect.Lists;
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderDestructionCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
+import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -31,6 +33,20 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (!this.world.isRemote) {
+            float power = this.getPowered() ? 8f : 4f;
+            if (event.getExplosion() instanceof TakumiExplosion) {
+                power = ((TakumiExplosion) event.getExplosion()).getSize();
+            }
+            if (power > 0.5) {
+                for (BlockPos pos : event.getAffectedBlocks()) {
+                    if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().hasTileEntity(this.world.getBlockState(pos)) &&
+                            this.world.getBlockState(pos).getBlock().createTileEntity(this.world, this.world.getBlockState(pos)) instanceof IInventory &&
+                            TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
+                        //this.world.setBlockToAir(pos);
+                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f, false, true);
+                    }
+                }
+            }
             Map<IBlockState, IRecipe> map = new HashMap<>();
             Map<IBlockState, Integer> count = new HashMap<>();
             for (BlockPos pos : event.getAffectedBlocks()) {
@@ -56,8 +72,6 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
                 }
                 this.world.setBlockToAir(pos);
             }
-            TakumiCraftCore.LOGGER.info(map);
-            TakumiCraftCore.LOGGER.info(count);
             if (!map.isEmpty()) {
                 for (Map.Entry<IBlockState, IRecipe> entry : Lists.newArrayList(map.entrySet())) {
                     IRecipe recipe = entry.getValue();
@@ -76,7 +90,7 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
             }
-            event.getAffectedBlocks().clear();
+            //event.getAffectedBlocks().clear();
             event.getAffectedEntities().clear();
         }
         return true;
@@ -103,7 +117,7 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 3;
+        return 4;
     }
 
     @Override
