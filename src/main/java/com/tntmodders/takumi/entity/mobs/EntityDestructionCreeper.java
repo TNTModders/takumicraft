@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.collect.Lists;
-import com.tntmodders.takumi.client.render.RenderDestructionCreeper;
+import com.tntmodders.takumi.client.render.RenderVillagerCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
@@ -98,7 +98,7 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public RenderLiving getRender(RenderManager manager) {
-        return new RenderDestructionCreeper(manager);
+        return new RenderVillagerCreeper(manager);
     }
 
     @Override
