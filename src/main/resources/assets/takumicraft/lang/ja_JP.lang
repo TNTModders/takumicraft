@@ -201,6 +201,8 @@ entity.destructioncreeper.name=改築ノ匠
 entity.destructioncreeper.desc=改築、分解、連爆。この匠、ただ着々と家を消し飛ばす。
 entity.creativecreeper.name=新築ノ匠
 entity.creativecreeper.desc=新築、構成、連爆。この匠、ただ黙々と家を建て残す。
+entity.earthcreeper.name=大地ノ匠
+entity.earthcreeper.desc=大地は隆起する、この匠の荒々しい力によって。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

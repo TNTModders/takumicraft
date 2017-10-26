@@ -1,4 +1,4 @@
-package com.tntmodders.takumi.client;
+package com.tntmodders.takumi.client.model;
 
 import com.tntmodders.takumi.entity.mobs.EntityRabbitCreeper;
 import net.minecraft.client.model.ModelBase;

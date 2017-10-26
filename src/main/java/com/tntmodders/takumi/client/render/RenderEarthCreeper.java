@@ -1,9 +1,9 @@
 package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.client.model.ModelRabbitCreeper;
+import com.tntmodders.takumi.client.model.ModelEarthCreeper;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
-import com.tntmodders.takumi.entity.mobs.EntityRabbitCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityEarthCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderRabbitCreeper<T extends EntityRabbitCreeper> extends RenderLiving<T> implements ITakumiRender {
-    public RenderRabbitCreeper(RenderManager renderManagerIn) {
-        super(renderManagerIn, new ModelRabbitCreeper(), 0.5f);
+public class RenderEarthCreeper<T extends EntityEarthCreeper> extends RenderLiving<T> implements ITakumiRender {
+    public RenderEarthCreeper(RenderManager renderManagerIn) {
+        super(renderManagerIn, new ModelEarthCreeper(0.0f), 0.5f);
         this.addLayer(new LayerTakumiCharge(this));
     }
 
@@ -55,6 +55,6 @@ public class RenderRabbitCreeper<T extends EntityRabbitCreeper> extends RenderLi
 
     @Override
     public ModelBase getPoweredModel() {
-        return new ModelRabbitCreeper();
+        return new ModelEarthCreeper(2.0f);
     }
 }
