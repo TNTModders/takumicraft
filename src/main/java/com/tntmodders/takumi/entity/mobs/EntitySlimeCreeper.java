@@ -276,6 +276,14 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
+    protected EntitySlimeCreeper createInstance() {
+        EntitySlimeCreeper slime = new EntitySlimeCreeper(this.world);
+        if (this.getPowered()) {
+            TakumiUtils.takumiSetPowered(slime, true);
+        }
+        return slime;
+    }
+
     /**
      * Called by a player entity when they collide with an entity
      */
@@ -303,15 +311,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         return 0.625F * this.height;
     }
 
-    protected void dealDamage(EntityLivingBase entityIn) {
-        int i = this.getSlimeSize();
-
-        if (this.canEntityBeSeen(entityIn) && this.getDistanceSqToEntity(entityIn) < 0.6D * (double) i * 0.6D * (double) i && entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttackStrength())) {
-            this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.applyEnchantments(this, entityIn);
-        }
-    }
-
     /**
      * Indicates weather the slime is able to damage the player (based upon the slime's size)
      */
@@ -319,12 +318,13 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         return !this.isSmallSlime();
     }
 
-    protected EntitySlimeCreeper createInstance() {
-        EntitySlimeCreeper slime = new EntitySlimeCreeper(this.world);
-        if (this.getPowered()) {
-            TakumiUtils.takumiSetPowered(slime, true);
+    protected void dealDamage(EntityLivingBase entityIn) {
+        int i = this.getSlimeSize();
+
+        if (this.canEntityBeSeen(entityIn) && this.getDistanceSqToEntity(entityIn) < 0.6D * (double) i * 0.6D * (double) i && entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttackStrength())) {
+            this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.applyEnchantments(this, entityIn);
         }
-        return slime;
     }
 
     /**
@@ -475,14 +475,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public boolean shouldExecute() {
             EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
-
-            if (entitylivingbase == null) {
-                return false;
-            } else if (!entitylivingbase.isEntityAlive()) {
-                return false;
-            } else {
-                return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage;
-            }
+            return entitylivingbase != null && entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage);
         }
 
         /**
@@ -500,16 +493,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public boolean shouldContinueExecuting() {
             EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
-
-            if (entitylivingbase == null) {
-                return false;
-            } else if (!entitylivingbase.isEntityAlive()) {
-                return false;
-            } else if (entitylivingbase instanceof EntityPlayer && ((EntityPlayer) entitylivingbase).capabilities.disableDamage) {
-                return false;
-            } else {
-                return --this.growTieredTimer > 0;
-            }
+            return entitylivingbase != null && entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage) && --this.growTieredTimer > 0;
         }
 
         /**

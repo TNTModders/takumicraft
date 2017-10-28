@@ -25,7 +25,7 @@ public class TakumiItemCore {
     public static final ItemTakumiArrow TAKUMI_ARROW_HA = new ItemTakumiArrow("ha", 2, 1, false);
     public static final Item TAKUMI_SWORD = new ItemTakumiSword();
     public static final Item TAKUMI_BOLT_STONE = new ItemTakumiBoltStone();
-    public static List<Item> itemBlocks = new ArrayList<Item>();
+    public static List<Item> itemBlocks = new ArrayList<>();
 
     public static void register(IForgeRegistry<Item> registry) {
         Class clazz = TakumiItemCore.class;

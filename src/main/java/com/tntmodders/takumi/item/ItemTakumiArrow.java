@@ -29,7 +29,6 @@ public class ItemTakumiArrow extends ItemArrow {
         if (shooter.getActiveItemStack().getItem() == Items.BOW) {
             return ((ItemArrow) Items.ARROW).createArrow(worldIn, stack, shooter);
         }
-        EntityTakumiArrow entityTakumiArrow = new EntityTakumiArrow(worldIn, new ItemStack(this), shooter);
-        return entityTakumiArrow;
+        return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter);
     }
 }

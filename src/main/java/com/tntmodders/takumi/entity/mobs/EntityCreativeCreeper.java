@@ -4,6 +4,7 @@ import com.tntmodders.takumi.client.render.RenderVillagerCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -160,9 +161,9 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                         for (int y = oy + 3; y >= oy + 1; y--) {
                             this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
                             if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
-                                Class clazz = (TakumiEntityCore.entityList.get(this.rand.nextInt(TakumiEntityCore.entityList.size()))).getClass();
+                                Class<? extends ITakumiEntity> clazz = (TakumiEntityCore.entityList.get(this.rand.nextInt(TakumiEntityCore.entityList.size()))).getClass();
                                 try {
-                                    Entity creeper = (Entity) (clazz.getConstructor(World.class).newInstance(this.world));
+                                    Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(this.world);
                                     creeper.world = this.world;
                                     creeper.setPosition(x, y, z);
                                     this.world.spawnEntity(creeper);

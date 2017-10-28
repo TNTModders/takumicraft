@@ -59,9 +59,9 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
                     d0 = d0 * (double) (1.0F - this.entityCollisionReduction);
                     d1 = d1 * (double) (1.0F - this.entityCollisionReduction);
 
-                    if (!this.isBeingRidden()) {
+/*                    if (!this.isBeingRidden()) {
                         //this.addVelocity(-d0, 0.0D, -d1);
-                    }
+                    }*/
 
                     if (!entityIn.isBeingRidden()) {
                         entityIn.addVelocity(d0, 0.0D, d1);

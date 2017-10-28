@@ -154,7 +154,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
         }
 
         if (source.isMagicDamage()) {
-            damage = (float) ((double) damage * 0.15D);
+            damage = (float) (damage * 0.15D);
         }
 
         return damage;
@@ -166,7 +166,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
         if (!this.isDrinkingPotion()) {
-            double d0 = target.posY + (double) target.getEyeHeight() - 1.100000023841858D;
+            double d0 = target.posY + target.getEyeHeight() - 1.100000023841858D;
             double d1 = target.posX + target.motionX - this.posX;
             double d2 = d0 - this.posY;
             double d3 = target.posZ + target.motionZ - this.posZ;
@@ -183,7 +183,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
 
             EntityPotion entitypotion = new EntityTakumiPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
             entitypotion.rotationPitch -= -15.0F;
-            entitypotion.setThrowableHeading(d1, d2 + (double) (f * 0.2F), d3, 0.75F, 8.0F);
+            entitypotion.setThrowableHeading(d1, d2 + (f * 0.2F), d3, 0.75F, 8.0F);
             this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
             this.world.spawnEntity(entitypotion);
         }
@@ -265,7 +265,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
         entityareaeffectcloud.setRadiusOnUse(-0.5F);
         entityareaeffectcloud.setWaitTime(10);
         entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration());
-        entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float) entityareaeffectcloud.getDuration());
+        entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / entityareaeffectcloud.getDuration());
         entityareaeffectcloud.addEffect(type.getEffects().get(0));
         this.world.spawnEntity(entityareaeffectcloud);
     }

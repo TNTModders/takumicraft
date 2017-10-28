@@ -27,7 +27,8 @@ public class ItemTakumiSword extends ItemSword {
         if (!stack.isItemEnchanted()) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
-            } finally {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -37,7 +38,8 @@ public class ItemTakumiSword extends ItemSword {
         if (!stack.isItemEnchanted()) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
-            } finally {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

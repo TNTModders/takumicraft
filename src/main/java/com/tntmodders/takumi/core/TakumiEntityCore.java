@@ -52,8 +52,7 @@ public class TakumiEntityCore {
 
         List<File> files = TakumiUtils.getListFile("com/tntmodders/takumi/entity/mobs/");
         ArrayList<EntityHolder> entityHolders = new ArrayList<>();
-        for (int i = 0; i < files.size(); i++) {
-            File file = files.get(i);
+        for (File file : files) {
             try {
                 ClassLoader loader = TakumiCraftCore.class.getClassLoader();
                 Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
@@ -105,7 +104,7 @@ public class TakumiEntityCore {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        FileReader h_fr = null;
+                        FileReader h_fr;
                         String buf = "";
 
                         String h_s;

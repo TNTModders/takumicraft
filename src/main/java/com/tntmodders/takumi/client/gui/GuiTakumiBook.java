@@ -184,7 +184,7 @@ public class GuiTakumiBook extends GuiScreen {
 
     void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {
         RenderManager manager = Minecraft.getMinecraft().getRenderManager();
-        Render render = null;
+        Render render;
 
         try {
             render = manager.getEntityRenderObject(p_147939_1_);

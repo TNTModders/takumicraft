@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
@@ -95,8 +95,8 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
 
             boolean foundGround = false;
             while (!foundGround && yInt > 0) {
-                Block block = entity.world.getBlockState(new BlockPos(xInt, yInt - 1, zInt)).getBlock();
-                if (block.getMaterial(entity.world.getBlockState(new BlockPos(xInt, yInt - 1, zInt))).blocksMovement()) {
+                IBlockState block = entity.world.getBlockState(new BlockPos(xInt, yInt - 1, zInt));
+                if (block.getMaterial().blocksMovement()) {
                     foundGround = true;
                 } else {
                     --entity.posY;

@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityTippedArrow;
@@ -53,10 +52,10 @@ public class EntityArrowCreeper extends EntityTakumiAbstractCreeper {
             double y = this.posY + this.rand.nextInt(10) - 5;
             double z = this.posZ + this.rand.nextInt(10) - 5;
 
-            EntityLivingBase target = this.getAttackTarget();
+/*            EntityLivingBase target = this.getAttackTarget();
             if (target == null) {
                 target = this.world.playerEntities.get(0);
-            }
+            }*/
             EntityTippedArrow entityarrow = new EntityTippedArrow(this.world, x, y, z);
             entityarrow.setDamage(this.world.getDifficulty().getDifficultyId() * 8);
             entityarrow.setIsCritical(true);

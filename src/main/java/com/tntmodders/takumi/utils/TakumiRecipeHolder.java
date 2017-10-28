@@ -40,7 +40,7 @@ public class TakumiRecipeHolder {
                     JarEntry entry = enumeration.nextElement();
                     String s = entry.getName();
                     if (s != null && s.startsWith(path) && s.endsWith(".json")) {
-                        InputStream stream = null;
+                        InputStream stream;
                         try {
                             stream = loader.getResourceAsStream(s);
                             this.readStream(stream, s);
@@ -59,7 +59,7 @@ public class TakumiRecipeHolder {
             if (list.size() > 0) {
                 for (File recipe : list) {
                     //TakumiCraftCore.LOGGER.info(recipe);
-                    InputStream stream = null;
+                    InputStream stream;
                     try {
                         stream = new FileInputStream(recipe);
                         this.readStream(stream, recipe.getName());
@@ -85,7 +85,7 @@ public class TakumiRecipeHolder {
                 i = jsonObject.getAsJsonObject("key").getAsJsonObject("Q").get("data").getAsInt();
             }
             ItemStack stack = new ItemStack(item, 1, i);
-            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<ResourceLocation>();
+            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<>();
             locations.add(location);
             map.put(stack, locations);
         } else if (jsonObject.has("ingredients") && jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().has("item")) {
@@ -96,7 +96,7 @@ public class TakumiRecipeHolder {
                 i = jsonObject.getAsJsonArray("ingredients").get(0).getAsJsonObject().get("data").getAsInt();
             }
             ItemStack stack = new ItemStack(item, 1, i);
-            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<ResourceLocation>();
+            List<ResourceLocation> locations = map.containsKey(stack) ? map.get(stack) : new ArrayList<>();
             locations.add(location);
             map.put(stack, locations);
         }

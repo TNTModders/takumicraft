@@ -46,17 +46,17 @@ public class ItemTakumiBucket extends ItemBucket {
         if (ret != null) return ret;
 
         if (raytraceresult == null) {
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+            return new ActionResult<>(EnumActionResult.PASS, itemstack);
         } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+            return new ActionResult<>(EnumActionResult.PASS, itemstack);
         } else {
             BlockPos blockpos = raytraceresult.getBlockPos();
 
             if (!worldIn.isBlockModifiable(playerIn, blockpos)) {
-                return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+                return new ActionResult<>(EnumActionResult.FAIL, itemstack);
             } else if (flag) {
                 if (!playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+                    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                 } else {
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
                     Material material = iblockstate.getMaterial();
@@ -65,14 +65,14 @@ public class ItemTakumiBucket extends ItemBucket {
                         worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                         playerIn.addStat(StatList.getObjectUseStats(this));
                         playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(itemstack, playerIn, TakumiItemCore.TAKUMI_SPRING_BUCKET));
+                        return new ActionResult<>(EnumActionResult.SUCCESS, this.fillBucket(itemstack, playerIn, TakumiItemCore.TAKUMI_SPRING_BUCKET));
                     } /*else if (material == Material.LAVA && ((Integer) iblockstate.getValue(BlockLiquid.LEVEL)).intValue() == 0) {
                         playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL_LAVA, 1.0F, 1.0F);
                         worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                         playerIn.addStat(StatList.getObjectUseStats(this));
                         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(itemstack, playerIn, Items.LAVA_BUCKET));
                     } */ else {
-                        return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+                        return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                     }
                 }
             } else {
@@ -80,7 +80,7 @@ public class ItemTakumiBucket extends ItemBucket {
                 BlockPos blockpos1 = flag1 && raytraceresult.sideHit == EnumFacing.UP ? blockpos : blockpos.offset(raytraceresult.sideHit);
 
                 if (!playerIn.canPlayerEdit(blockpos1, raytraceresult.sideHit, itemstack)) {
-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+                    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                 } else if (this.tryPlaceContainedLiquid(playerIn, worldIn, blockpos1)) {
                     if (playerIn instanceof EntityPlayerMP) {
                         CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
@@ -89,7 +89,7 @@ public class ItemTakumiBucket extends ItemBucket {
                     playerIn.addStat(StatList.getObjectUseStats(this));
                     return !playerIn.capabilities.isCreativeMode ? new ActionResult(EnumActionResult.SUCCESS, new ItemStack(TakumiItemCore.TAKUMI_BUCKET)) : new ActionResult(EnumActionResult.SUCCESS, itemstack);
                 } else {
-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+                    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                 }
             }
         }
@@ -133,7 +133,7 @@ public class ItemTakumiBucket extends ItemBucket {
                     worldIn.playSound(player, posIn, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
 
                     for (int k = 0; k < 8; ++k) {
-                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double) l + Math.random(), (double) i + Math.random(), (double) j + Math.random(), 0.0D, 0.0D, 0.0D);
+                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, l + Math.random(), (double) i + Math.random(), (double) j + Math.random(), 0.0D, 0.0D, 0.0D);
                     }
                 } else {
                     if (!worldIn.isRemote && (flag || flag1) && !material.isLiquid()) {

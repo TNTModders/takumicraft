@@ -353,7 +353,7 @@ public class ModelHorseCreeper extends ModelBase {
         this.mane.rotateAngleY = this.head.rotateAngleY;
         this.muleLeftChest.rotateAngleX = f14 / 5.0F;
         this.muleRightChest.rotateAngleX = -f14 / 5.0F;
-        float f15 = ((float) Math.PI / 2F);
+        float f15;
         float f16 = ((float) Math.PI * 3F / 2F);
         float f17 = -1.0471976F;
         float f18 = 0.2617994F * f9;
@@ -392,13 +392,7 @@ public class ModelHorseCreeper extends ModelBase {
         this.frontLeftHoof.rotationPointZ = this.frontLeftShin.rotationPointZ;
         this.frontRightHoof.rotationPointY = this.frontRightShin.rotationPointY;
         this.frontRightHoof.rotationPointZ = this.frontRightShin.rotationPointZ;
-
         f15 = -1.3089F + p_78086_3_ * 1.5F;
-
-        if (f15 > 0.0F) {
-            f15 = 0.0F;
-        }
-
         this.tailBase.rotateAngleY = MathHelper.cos(f12 * 0.7F);
         f15 = 0.0F;
 
