@@ -126,17 +126,17 @@ public class GuiTakumiBook extends GuiScreen {
         } else if (entity instanceof EntitySquidCreeper) {
             ((EntitySquidCreeper) entity).tentacleAngle = 45;
             ((EntitySquidCreeper) entity).squidPitch = 60;
-        } else if (entity instanceof EntitySheepCreeper) {
+        } else if (entity instanceof EntitySheepCreeper && !flg) {
             ((EntitySheepCreeper) entity).setSheared(true);
         }
-        return ((EntityLivingBase) entity);
+        return (EntityLivingBase) entity;
     }
 
     public void renderEntity(int p_147046_0_, int p_147046_1_, int p_147046_2_, float p_147046_3_, float p_147046_4_, EntityLivingBase p_147046_5_, boolean flg) {
         GL11.glPushMatrix();
         //GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-        GL11.glTranslatef((float) p_147046_0_, (float) p_147046_1_, 50.0F);
-        GL11.glScalef((float) (-p_147046_2_), (float) p_147046_2_, (float) p_147046_2_);
+        GL11.glTranslatef(p_147046_0_, p_147046_1_, 50.0F);
+        GL11.glScalef(-p_147046_2_, p_147046_2_, p_147046_2_);
         this.renderSize(p_147046_5_);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         float f2 = p_147046_5_.renderYawOffset;
@@ -147,18 +147,18 @@ public class GuiTakumiBook extends GuiScreen {
         RenderHelper.disableStandardItemLighting();
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-((float) Math.atan((double) (p_147046_4_ / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-        p_147046_5_.renderYawOffset = -10 + (time * 0.5f);
-        p_147046_5_.rotationYaw = -10 + (time * 0.5f);
+        GL11.glRotatef(-((float) Math.atan(p_147046_4_ / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+        p_147046_5_.renderYawOffset = -10 + time * 0.5f;
+        p_147046_5_.rotationYaw = -10 + time * 0.5f;
         p_147046_5_.rotationPitch = 0;
-        p_147046_5_.rotationYawHead = -10f + (time * 0.5f);
-        p_147046_5_.prevRotationYawHead = -10f + (time * 0.5f);
-        GL11.glTranslatef(0.0F, ((float) p_147046_5_.getYOffset()), 0.0F);
+        p_147046_5_.rotationYawHead = -10f + time * 0.5f;
+        p_147046_5_.prevRotationYawHead = -10f + time * 0.5f;
+        GL11.glTranslatef(0.0F, (float) p_147046_5_.getYOffset(), 0.0F);
         Minecraft.getMinecraft().getRenderManager().playerViewY = 180.0F;
         if (!flg) {
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
         }
-        this.renderEntityWithPosYaw(p_147046_5_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f, false);
+        this.renderEntityWithPosYaw(p_147046_5_);
         p_147046_5_.renderYawOffset = f2;
         p_147046_5_.rotationYaw = f3;
         p_147046_5_.rotationPitch = f4;
@@ -179,10 +179,12 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glScaled(0.2, 0.2, 0.2);
         } else if (entity instanceof EntityEmeraldCreeper) {
             GL11.glScaled(0.5, 0.5, 0.5);
+        } else if (entity instanceof EntityDarkCreeper) {
+            GL11.glScaled(0.7, 0.7, 0.7);
         }
     }
 
-    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_, double p_147939_2_, double p_147939_4_, double p_147939_6_, float p_147939_8_, float p_147939_9_, boolean p_147939_10_) {
+    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_) {
         RenderManager manager = Minecraft.getMinecraft().getRenderManager();
         Render render;
 
@@ -192,13 +194,13 @@ public class GuiTakumiBook extends GuiScreen {
             if (render != null && manager.renderEngine != null) {
                 try {
                     p_147939_1_.world = this.player.world;
-                    render.doRender(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                    render.doRender(p_147939_1_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
                 } catch (Throwable throwable2) {
                     throw new ReportedException(CrashReport.makeCrashReport(throwable2, "Rendering entity in world"));
                 }
 
                 try {
-                    render.doRenderShadowAndFire(p_147939_1_, p_147939_2_, p_147939_4_, p_147939_6_, p_147939_8_, p_147939_9_);
+                    render.doRenderShadowAndFire(p_147939_1_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
                 } catch (Throwable throwable1) {
                     throw new ReportedException(CrashReport.makeCrashReport(throwable1, "Post-rendering entity in world"));
                 }
