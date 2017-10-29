@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -71,7 +72,8 @@ public class EntityArtCreeper extends EntityTakumiAbstractCreeper {
                     iRecipe = list.get(this.rand.nextInt(list.size()));
                     if (iRecipe.getRecipeOutput().getItem() instanceof ItemBlock) {
                         IBlockState blockState = ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock().getStateFromMeta(iRecipe.getRecipeOutput().getMetadata());
-                        if (blockState.isFullCube() && blockState.getBlockHardness(this.world, pos) > -1) {
+                        if (!(blockState.getBlock().hasTileEntity(blockState) && blockState.getBlock().createTileEntity(this.world, blockState) instanceof IInventory)
+                                && blockState.isFullCube() && blockState.getBlockHardness(this.world, pos) > -1) {
                             this.world.setBlockState(pos, blockState);
                             flg = true;
                         }
