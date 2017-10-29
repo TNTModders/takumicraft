@@ -140,6 +140,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
+    @Deprecated
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         IBlockState iblockstate;
