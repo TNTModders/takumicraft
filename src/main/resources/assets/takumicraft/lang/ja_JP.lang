@@ -209,6 +209,8 @@ entity.rewritecreeper.name=変化匠
 entity.rewritecreeper.desc=周囲のブロックをランダムで一種類に書き換える。大惨事から超儲かる爆発。
 entity.artcreeper.name=藝術匠
 entity.artcreeper.desc=周囲にブロックをランダムで設置する。まさにアーティスティック。
+entity.reversecreeper.name=天邪鬼匠
+entity.reversecreeper.desc=。きつにくゃじのまあ、みくたのこ
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 
