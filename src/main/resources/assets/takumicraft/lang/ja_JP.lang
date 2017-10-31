@@ -211,6 +211,8 @@ entity.artcreeper.name=藝術匠
 entity.artcreeper.desc=周囲にブロックをランダムで設置する。まさにアーティスティック。
 entity.reversecreeper.name=天邪鬼匠
 entity.reversecreeper.desc=。きつにくゃじのまあ、みくたのこ
+entity.chunkcreeper.name=チャンク匠
+entity.chunkcreeper.desc=一チャンクまるごと、空白が広がる。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 
