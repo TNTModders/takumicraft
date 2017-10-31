@@ -31,10 +31,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -42,6 +39,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,7 +51,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
-    protected static final IAttribute SPAWN_REINFORCEMENTS_CHANCE = (new RangedAttribute(null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)).setDescription("Spawn Reinforcements Chance");
+    protected static final IAttribute SPAWN_REINFORCEMENTS_CHANCE = new RangedAttribute(null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription("Spawn Reinforcements Chance");
     private static final UUID BABY_SPEED_BOOST_ID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
     private static final AttributeModifier BABY_SPEED_BOOST = new AttributeModifier(BABY_SPEED_BOOST_ID, "Baby speed boost", 0.5D, 1);
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityZombieCreeper.class, DataSerializers.BOOLEAN);
@@ -106,19 +104,8 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         return this.isChild() ? 0.0D : -0.45D;
     }
 
-    /**
-     * This method gets called when the entity kills another one.
-     */
-    @Override
-    public void onKillEntity(EntityLivingBase entityLivingIn) {
-        super.onKillEntity(entityLivingIn);
-
-        if ((this.world.getDifficulty() == EnumDifficulty.NORMAL || this.world.getDifficulty() == EnumDifficulty.HARD) && entityLivingIn instanceof EntityVillager) {
-            if (this.world.getDifficulty() != EnumDifficulty.EASY && this.rand.nextBoolean()) {
-                return;
-            }
-            this.changeVillager(((EntityVillager) entityLivingIn));
-        }
+    public static void registerFixesZombie(DataFixer fixer) {
+        EntityLiving.registerFixesMob(fixer, EntityZombieCreeper.class);
     }
 
     protected void changeVillager(EntityVillager entityvillager) {
@@ -159,24 +146,12 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         return f;
     }
 
-    public static void registerFixesZombie(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityZombieCreeper.class);
-    }
-
     /**
      * If Animal, checks if the age timer is negative
      */
     @Override
     public boolean isChild() {
         return this.getDataManager().get(IS_CHILD);
-    }
-
-    protected void applyEntityAI() {
-        this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 1.0D, false));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, EntityPigZombie.class));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
     }
 
     /**
@@ -221,6 +196,21 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         super.setSize(this.zombieWidth * size, this.zombieHeight * size);
     }
 
+    /**
+     * This method gets called when the entity kills another one.
+     */
+    @Override
+    public void onKillEntity(EntityLivingBase entityLivingIn) {
+        super.onKillEntity(entityLivingIn);
+
+        if ((this.world.getDifficulty() == EnumDifficulty.NORMAL || this.world.getDifficulty() == EnumDifficulty.HARD) && entityLivingIn instanceof EntityVillager) {
+            if (this.world.getDifficulty() != EnumDifficulty.EASY && this.rand.nextBoolean()) {
+                return;
+            }
+            this.changeVillager((EntityVillager) entityLivingIn);
+        }
+    }
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -233,6 +223,14 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.applyEntityAI();
     }
 
+    protected void applyEntityAI() {
+        this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 1.0D, false));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, EntityPigZombie.class));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
+    }
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -240,7 +238,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(this.rand.nextDouble() * net.minecraftforge.common.ForgeModContainer.zombieSummonBaseChance);
+        this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(this.rand.nextDouble() * ForgeModContainer.zombieSummonBaseChance);
     }
 
     @Override
@@ -286,15 +284,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_ZOMBIE_HURT;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isArmsRaised() {
-        return this.getDataManager().get(ARMS_RAISED);
-    }
-
-    public void setArmsRaised(boolean armsRaised) {
-        this.getDataManager().set(ARMS_RAISED, armsRaised);
     }
 
     @Override
@@ -369,10 +358,19 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
+    @SideOnly(Side.CLIENT)
+    public boolean isArmsRaised() {
+        return this.getDataManager().get(ARMS_RAISED);
+    }
+
+    public void setArmsRaised(boolean armsRaised) {
+        this.getDataManager().set(ARMS_RAISED, armsRaised);
+    }
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         if (this.isChild()) {
-            return ((int) (super.getExperiencePoints(player) * 2.5));
+            return (int) (super.getExperiencePoints(player) * 2.5);
         }
 
         return super.getExperiencePoints(player);
@@ -408,7 +406,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
 
         if (livingdata == null) {
-            livingdata = new EntityZombieCreeper.GroupData(this.world.rand.nextFloat() < net.minecraftforge.common.ForgeModContainer.zombieBabyChance);
+            livingdata = new EntityZombieCreeper.GroupData(this.world.rand.nextFloat() < ForgeModContainer.zombieBabyChance);
         }
 
         if (livingdata instanceof EntityZombieCreeper.GroupData) {
@@ -440,17 +438,17 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.setEquipmentBasedOnDifficulty(difficulty);
         this.setEnchantmentBasedOnDifficulty(difficulty);
 
-        if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty()) {
+        if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty() && this.getClass() != EntityZombieVillagerCreeper.class) {
             Calendar calendar = this.world.getCurrentDate();
 
-            if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.rand.nextFloat() < 0.25F) {
+            if (calendar.get(Calendar.MONTH) + 1 == 10 && calendar.get(Calendar.DATE) == 31) {
                 this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(this.rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
                 this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
             }
         }
 
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
-        double d0 = this.rand.nextDouble() * 1.5D * (double) f;
+        double d0 = this.rand.nextDouble() * 1.5D * f;
 
         if (d0 > 1.0D) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random zombie-spawn bonus", d0, 2));
@@ -463,10 +461,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         }
 
         return livingdata;
-    }
-
-    protected boolean shouldBurnInDay() {
-        return true;
     }
 
     @Override
@@ -500,6 +494,10 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         super.onLivingUpdate();
     }
 
+    protected boolean shouldBurnInDay() {
+        return true;
+    }
+
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (super.attackEntityFrom(source, amount)) {
@@ -524,7 +522,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
                     int j1 = j + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
                     int k1 = k + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
 
-                    if (this.world.getBlockState(new BlockPos(i1, j1 - 1, k1)).isSideSolid(this.world, new BlockPos(i1, j1 - 1, k1), net.minecraft.util.EnumFacing.UP) && this.world.getLightFromNeighbors(new BlockPos(i1, j1, k1)) < 10) {
+                    if (this.world.getBlockState(new BlockPos(i1, j1 - 1, k1)).isSideSolid(this.world, new BlockPos(i1, j1 - 1, k1), EnumFacing.UP) && this.world.getLightFromNeighbors(new BlockPos(i1, j1, k1)) < 10) {
                         entityzombie.setPosition((double) i1, (double) j1, (double) k1);
 
                         if (!this.world.isAnyPlayerWithinRangeAt((double) i1, (double) j1, (double) k1, 7.0D) && this.world.checkNoEntityCollision(entityzombie.getEntityBoundingBox(), entityzombie) && this.world.getCollisionBoxes(entityzombie, entityzombie.getEntityBoundingBox()).isEmpty() && !this.world.containsAnyLiquid(entityzombie.getEntityBoundingBox())) {
@@ -627,7 +625,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityVillager) {
                 removeList.add(entity);
-                this.changeVillager(((EntityVillager) entity));
+                this.changeVillager((EntityVillager) entity);
             } else if (entity instanceof EntityZombieCreeper) {
                 removeList.add(entity);
             }
