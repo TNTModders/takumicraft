@@ -6,6 +6,7 @@ import com.tntmodders.takumi.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.oredict.OreDictionary;
@@ -25,6 +26,10 @@ public class TakumiItemCore {
     public static final ItemTakumiArrow TAKUMI_ARROW_HA = new ItemTakumiArrow("ha", 2, 1, false);
     public static final Item TAKUMI_SWORD = new ItemTakumiSword();
     public static final Item TAKUMI_BOLT_STONE = new ItemTakumiBoltStone();
+    public static final Item TAKUMI_CREEPER_HELMET = new ItemCreeperArmor(EntityEquipmentSlot.HEAD);
+    public static final Item TAKUMI_CREEPER_CHEST = new ItemCreeperArmor(EntityEquipmentSlot.CHEST);
+    public static final Item TAKUMI_CREEPER_LEGS = new ItemCreeperArmor(EntityEquipmentSlot.LEGS);
+    public static final Item TAKUMI_CREEPER_BOOTS = new ItemCreeperArmor(EntityEquipmentSlot.FEET);
     public static List<Item> itemBlocks = new ArrayList<>();
 
     public static void register(IForgeRegistry<Item> registry) {
@@ -32,7 +37,7 @@ public class TakumiItemCore {
         for (Field field : clazz.getFields()) {
             try {
                 if (field.get(TakumiItemCore.INSTANCE) instanceof Item) {
-                    Item item = ((Item) field.get(TakumiItemCore.INSTANCE));
+                    Item item = (Item) field.get(TakumiItemCore.INSTANCE);
                     registry.register(item);
                     OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
                     TakumiCraftCore.LOGGER.info("Registered Item : " + item.getUnlocalizedName());
@@ -46,7 +51,7 @@ public class TakumiItemCore {
         for (Field field : clazz.getFields()) {
             try {
                 if (field.get(TakumiItemCore.INSTANCE) instanceof Block) {
-                    Block block = ((Block) field.get(TakumiBlockCore.INSTANCE));
+                    Block block = (Block) field.get(TakumiBlockCore.INSTANCE);
                     Item item = new ItemBlock(block);
                     if (block instanceof ITakumiMetaBlock) {
                         item = ((ITakumiMetaBlock) block).getItem();

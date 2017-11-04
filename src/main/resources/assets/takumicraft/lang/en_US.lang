@@ -3,6 +3,7 @@
 takumicraft.info.name=Takumi Craft
 takumicraft.description.name=Woo! Takumi has come!!!
 takumicraft.credits.name=The texture of "Yukari Creeper" is made by Noraushi/Bahamut.
+takumicraft.message.armor=Be a Creeper.
 
 #tile
 tile.creeperbomb.name=Creeper Bomb
@@ -72,6 +73,10 @@ item.takumibow.name=Creeper Bow
 item.takumiarrow_ha.name=Creeper Blast Arrow
 item.takumisword.name=Creeper Sword
 item.boltstone.name=Bolt Stone
+item.takumiarmor_head.name=Creeper Armor Head
+item.takumiarmor_chest.name=Creeper Armor Chest
+item.takumiarmor_legs.name=Creeper Armor Leggings
+item.takumiarmor_feet.name=Creeper Armor Feets
 
 #entity
 #desc max: 72 chars
@@ -237,6 +242,7 @@ advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 
 #enchantment
 enchantment.takumi_anti_powered=Anti-powered
+enchantment.takumi_explosion_protection=Explosion Protection
 
 #potion
 takumisubsidence=Subsidence
