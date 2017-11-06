@@ -11,10 +11,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBiped<T> implements ITakumiRender {
 
     public RenderZombieCreeper(RenderManager renderManagerIn) {

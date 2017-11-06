@@ -3,7 +3,6 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.client.render.RenderGunoreCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.material.EnumPushReaction;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
@@ -132,7 +131,7 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderGunoreCreeper(manager);
     }
 }

@@ -3,7 +3,6 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.client.render.RenderFishCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -139,7 +138,7 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderFishCreeper(manager);
     }
 }

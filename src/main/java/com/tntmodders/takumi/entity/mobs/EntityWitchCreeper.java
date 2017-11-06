@@ -4,7 +4,6 @@ import com.tntmodders.takumi.client.render.RenderWitchCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,7 +44,7 @@ import java.util.UUID;
 public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements IRangedAttackMob {
 
     private static final UUID MODIFIER_UUID = UUID.fromString("5CD17E52-A79A-43D3-A529-90FDE04B181E");
-    private static final AttributeModifier MODIFIER = (new AttributeModifier(MODIFIER_UUID, "Drinking speed penalty", -0.25D, 0)).setSaved(false);
+    private static final AttributeModifier MODIFIER = new AttributeModifier(MODIFIER_UUID, "Drinking speed penalty", -0.25D, 0).setSaved(false);
     private static final DataParameter<Boolean> IS_AGGRESSIVE = EntityDataManager.createKey(EntityWitchCreeper.class, DataSerializers.BOOLEAN);
     private int witchAttackTimer;
 
@@ -183,7 +182,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
 
             EntityPotion entitypotion = new EntityTakumiPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
             entitypotion.rotationPitch -= -15.0F;
-            entitypotion.setThrowableHeading(d1, d2 + (f * 0.2F), d3, 0.75F, 8.0F);
+            entitypotion.setThrowableHeading(d1, d2 + f * 0.2F, d3, 0.75F, 8.0F);
             this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
             this.world.spawnEntity(entitypotion);
         }
@@ -311,7 +310,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
     }
 
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderWitchCreeper(manager);
     }
 }

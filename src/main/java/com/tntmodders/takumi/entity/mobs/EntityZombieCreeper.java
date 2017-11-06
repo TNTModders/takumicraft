@@ -6,7 +6,6 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperAttack;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperSwell;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -641,7 +640,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderZombieCreeper(manager);
     }
 

@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -27,7 +26,7 @@ public interface ITakumiEntity {
     boolean isCustomSpawn();
 
     @SideOnly(Side.CLIENT)
-    RenderLiving getRender(RenderManager manager);
+    Object getRender(RenderManager manager);
 
     @SideOnly(Side.CLIENT)
     ResourceLocation getArmor();
@@ -162,7 +161,7 @@ public interface ITakumiEntity {
         private boolean getStrongMD(EnumTakumiType enemyType) {
             if (!this.isDest && !this.isMagic && !enemyType.isDest && !enemyType.isMagic) {
                 return true;
-            } else if ((this.isDest && enemyType.isMagic) || (this.isMagic && enemyType.isMagic)) {
+            } else if (this.isDest && enemyType.isMagic || this.isMagic && enemyType.isMagic) {
                 return true;
             }
             return false;

@@ -15,10 +15,8 @@ import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends RenderBiped<T> implements ITakumiRender {
 
     public RenderSkeletonCreeper(RenderManager renderManagerIn) {

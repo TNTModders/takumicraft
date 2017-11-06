@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -421,7 +420,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
                 tagCompound.setBoolean("creeper", true);
                 parrot.setVariant(2);
                 parrot.setCustomNameTag(TakumiUtils.takumiTranslate("entity.parrotcreeper.name"));
-                parrot.setEntityOnShoulder(((EntityPlayer) entity));
+                parrot.setEntityOnShoulder((EntityPlayer) entity);
             }
         }
         event.getAffectedEntities().clear();
@@ -436,7 +435,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderParrotCreeper(manager);
     }
 }

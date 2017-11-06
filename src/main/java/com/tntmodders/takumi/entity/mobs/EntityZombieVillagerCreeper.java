@@ -3,7 +3,6 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.client.render.RenderZombieVillagerCreeper;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
@@ -29,6 +28,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,7 +45,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     private int conversionTime;
     private UUID converstionStarter;
     @Nullable
-    private net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof;
+    private VillagerRegistry.VillagerProfession prof;
 
     public EntityZombieVillagerCreeper(World worldIn) {
         super(worldIn);
@@ -224,11 +225,11 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         }
     }
 
-    public net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession getForgeProfession() {
+    public VillagerRegistry.VillagerProfession getForgeProfession() {
         if (this.prof == null) {
-            this.prof = net.minecraftforge.fml.common.registry.VillagerRegistry.getById(this.getProfession());
+            this.prof = VillagerRegistry.getById(this.getProfession());
             if (this.prof == null)
-                return net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER;
+                return VillagerRegistry.FARMER;
         }
         return this.prof;
     }
@@ -237,9 +238,9 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         return Math.max(this.dataManager.get(PROFESSION), 0);
     }
 
-    public void setForgeProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof) {
+    public void setForgeProfession(VillagerRegistry.VillagerProfession prof) {
         this.prof = prof;
-        this.setProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof));
+        this.setProfession(VillagerRegistry.getId(prof));
     }
 
     public void setProfession(int profession) {
@@ -254,8 +255,8 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         super.readEntityFromNBT(compound);
         this.setProfession(compound.getInteger("Profession"));
         if (compound.hasKey("ProfessionName")) {
-            net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession p = net.minecraftforge.fml.common.registry.ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new net.minecraft.util.ResourceLocation(compound.getString("ProfessionName")));
-            if (p == null) p = net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER;
+            VillagerRegistry.VillagerProfession p = ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new ResourceLocation(compound.getString("ProfessionName")));
+            if (p == null) p = VillagerRegistry.FARMER;
             this.setForgeProfession(p);
         }
 
@@ -328,7 +329,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderZombieVillagerCreeper(manager);
     }
 

@@ -4,7 +4,6 @@ import com.tntmodders.takumi.client.render.RenderWolfCreeper;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -162,7 +161,7 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
         List<EntityWolf> list = new ArrayList<>();
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityWolf) {
-                list.add(((EntityWolf) entity));
+                list.add((EntityWolf) entity);
             }
         }
         event.getAffectedEntities().removeAll(list);
@@ -181,7 +180,7 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderWolfCreeper<>(manager);
     }
 
@@ -242,7 +241,7 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
 
         if (flag) {
             this.applyEnchantments(this, entityIn);

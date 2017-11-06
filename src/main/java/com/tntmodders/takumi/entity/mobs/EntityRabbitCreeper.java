@@ -6,7 +6,6 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -236,7 +235,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         } else if (lvt_1_1_ instanceof BiomeDesert) {
             return 4;
         } else {
-            return lvt_2_1_ < 50 ? 0 : (lvt_2_1_ < 90 ? 5 : 2);
+            return lvt_2_1_ < 50 ? 0 : lvt_2_1_ < 90 ? 5 : 2;
         }
     }
 
@@ -370,7 +369,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderRabbitCreeper<>(manager);
     }
 

@@ -4,7 +4,6 @@ import com.tntmodders.takumi.client.render.RenderSnowCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.item.EntityTakumiSnowBall;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
@@ -198,7 +197,7 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
     }
 
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderSnowCreeper(manager);
     }
 }

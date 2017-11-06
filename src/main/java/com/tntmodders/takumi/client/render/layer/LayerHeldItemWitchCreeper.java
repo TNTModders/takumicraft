@@ -11,10 +11,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class LayerHeldItemWitchCreeper implements LayerRenderer<EntityWitchCreeper> {
     private final RenderWitchCreeper witchRenderer;
 

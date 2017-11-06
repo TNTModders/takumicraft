@@ -2,7 +2,6 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderBlazeCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
@@ -230,7 +229,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderBlazeCreeper<>(manager);
     }
 

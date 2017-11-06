@@ -8,10 +8,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class LayerSpiderCreeperEyes<T extends EntitySpiderCreeper> implements LayerRenderer<T> {
     private static final ResourceLocation SPIDER_EYES = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/spidercreeper_eyes.png");
     private final RenderSpiderCreeper<T> spiderRenderer;

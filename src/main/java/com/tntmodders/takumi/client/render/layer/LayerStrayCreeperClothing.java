@@ -8,10 +8,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class LayerStrayCreeperClothing implements LayerRenderer<EntitySkeletonCreeper> {
     private static final ResourceLocation STRAY_CLOTHES_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID,
             "textures/entity/straycreeper_overlay.png");

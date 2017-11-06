@@ -5,7 +5,6 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIAttackRangedTakumiBow;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -202,7 +201,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     public void onLivingUpdate() {
         if (this.world.isDaytime() && !this.world.isRemote) {
             float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
+            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
 
             if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos)) {
                 boolean flag = true;
@@ -301,7 +300,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty()) {
             Calendar calendar = this.world.getCurrentDate();
 
-            if (((calendar.get(Calendar.MONTH) + 1) == 10) && (calendar.get(Calendar.DATE) == 31) && (this.rand.nextFloat() < 0.25F)) {
+            if (calendar.get(Calendar.MONTH) + 1 == 10 && calendar.get(Calendar.DATE) == 31 && this.rand.nextFloat() < 0.25F) {
                 this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(this.rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
                 this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
             }
@@ -356,7 +355,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderSkeletonCreeper<>(manager);
     }
 }

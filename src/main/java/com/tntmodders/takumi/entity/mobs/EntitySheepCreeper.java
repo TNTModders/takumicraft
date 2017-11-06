@@ -8,7 +8,6 @@ import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,6 +27,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -37,6 +37,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements IShearable {
@@ -233,16 +235,16 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     }
 
     @Override
-    public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos) {
+    public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
         return !this.getSheared() && !this.isChild();
     }
 
     @Override
-    public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         this.setSheared(true);
         int i = 1 + this.rand.nextInt(3);
 
-        java.util.List<ItemStack> ret = new java.util.ArrayList<>();
+        List<ItemStack> ret = new ArrayList<>();
         for (int j = 0; j < i; ++j)
             ret.add(new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_WOOL), 1, this.getFleeceColor().getMetadata()));
 
@@ -318,7 +320,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     }
 
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderSheepCreeper(manager);
     }
 

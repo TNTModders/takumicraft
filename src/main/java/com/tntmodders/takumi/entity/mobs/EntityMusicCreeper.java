@@ -2,15 +2,15 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import java.lang.reflect.Field;
 
 public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
     public EntityMusicCreeper(World worldIn) {
@@ -62,16 +62,16 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
             this.world.spawnParticle(EnumParticleTypes.NOTE, this.posX + rand.nextFloat() - 0.5, this.posY + rand.nextFloat(), this.posZ + rand.nextFloat() - 0.5,
                     -this.motionX, -this.motionY, -this.motionZ);
         }
-        try {
+        /*try {
             Field field = EntityCreeper.class.getDeclaredField("timeSinceIgnited");
             field.setAccessible(true);
-            int timeSinceIgnited = ((int) field.get(this));
+            int timeSinceIgnited = (int) field.get(this);
             if (timeSinceIgnited == 30 && FMLCommonHandler.instance().getSide().isClient()) {
                 Minecraft.getMinecraft().world.playRecord(this.getPosition(), SoundEvents.RECORD_13);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         super.onUpdate();
     }
 
@@ -81,5 +81,15 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
             this.dropItem(Items.RECORD_13, 1);
         }
         super.onDeath(cause);
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityPlayer && FMLCommonHandler.instance().getSide().isClient()) {
+                Minecraft.getMinecraft().world.playRecord(this.getPosition(), SoundEvents.RECORD_13);
+            }
+        }
+        return true;
     }
 }

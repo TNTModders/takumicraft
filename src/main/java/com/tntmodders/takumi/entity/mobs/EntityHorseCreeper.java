@@ -4,7 +4,6 @@ import com.tntmodders.takumi.client.render.RenderHorseCreeper;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -112,7 +111,7 @@ public class EntityHorseCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderHorseCreeper(manager);
     }
 

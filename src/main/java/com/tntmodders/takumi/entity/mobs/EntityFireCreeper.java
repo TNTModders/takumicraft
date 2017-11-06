@@ -13,9 +13,9 @@ public class EntityFireCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         int range = this.getPowered() ? 6 : 2;
-        for (int x = ((int) this.posX) - range; x < ((int) this.posX) + range; x++) {
-            for (int y = ((int) this.posY) - range; y < ((int) this.posY) + range; y++) {
-                for (int z = ((int) this.posZ) - range; z < ((int) this.posZ) + range; z++) {
+        for (int x = (int) this.posX - range; x < (int) this.posX + range; x++) {
+            for (int y = (int) this.posY - range; y < (int) this.posY + range; y++) {
+                for (int z = (int) this.posZ - range; z < (int) this.posZ + range; z++) {
                     BlockPos pos = new BlockPos(x, y, z);
                     if (this.world.isAirBlock(pos) && Blocks.FIRE.canPlaceBlockAt(this.world, pos)) {
                         this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());

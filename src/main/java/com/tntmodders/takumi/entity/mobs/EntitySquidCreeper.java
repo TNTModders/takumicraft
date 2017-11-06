@@ -2,7 +2,6 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderSquidCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -114,11 +113,11 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         this.lastTentacleAngle = this.tentacleAngle;
         this.squidRotation += this.rotationVelocity;
 
-        if ((double) this.squidRotation > (Math.PI * 2D)) {
+        if ((double) this.squidRotation > Math.PI * 2D) {
             if (this.world.isRemote) {
-                this.squidRotation = ((float) Math.PI * 2F);
+                this.squidRotation = (float) Math.PI * 2F;
             } else {
-                this.squidRotation = (float) ((double) this.squidRotation - (Math.PI * 2D));
+                this.squidRotation = (float) ((double) this.squidRotation - Math.PI * 2D);
 
                 if (this.rand.nextInt(10) == 0) {
                     this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
@@ -314,7 +313,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderSquidCreeper(manager);
     }
 

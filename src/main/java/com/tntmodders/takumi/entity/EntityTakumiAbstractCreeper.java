@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity;
 
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.DamageSource;
@@ -47,7 +46,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderTakumiCreeper<>(manager);
     }
 

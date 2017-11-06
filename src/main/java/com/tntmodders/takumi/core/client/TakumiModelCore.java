@@ -4,11 +4,13 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumDyeColor;
@@ -31,7 +33,7 @@ public class TakumiModelCore {
         for (Field field : clazz.getFields()) {
             try {
                 if (field.get(TakumiItemCore.INSTANCE) instanceof Item) {
-                    Item item = ((Item) field.get(TakumiItemCore.INSTANCE));
+                    Item item = (Item) field.get(TakumiItemCore.INSTANCE);
                     String s = item.getUnlocalizedName().substring(5);
                     if (item.getHasSubtypes()) {
                         NonNullList<ItemStack> stacks = NonNullList.create();
@@ -84,7 +86,16 @@ public class TakumiModelCore {
         RenderingRegistry.registerEntityRenderingHandler(clazz, new TakumiRenderFactory() {
             @Override
             public Render createRenderFor(RenderManager manager) {
-                return entity.getRender(manager);
+                return (RenderLiving) entity.getRender(manager);
+            }
+        });
+    }
+
+    public static void registerFluid(Block block, String name) {
+        ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState p_178132_1_) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, name), "fluid");
             }
         });
     }

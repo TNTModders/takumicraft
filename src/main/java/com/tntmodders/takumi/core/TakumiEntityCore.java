@@ -23,6 +23,8 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -42,7 +44,7 @@ public class TakumiEntityCore {
     public static void register() {
         for (Field fileld : Biomes.class.getDeclaredFields()) {
             try {
-                TakumiEntityCore.biomes.add(((Biome) fileld.get(null)));
+                TakumiEntityCore.biomes.add((Biome) fileld.get(null));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -56,7 +58,7 @@ public class TakumiEntityCore {
             try {
                 ClassLoader loader = TakumiCraftCore.class.getClassLoader();
                 Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
-                ITakumiEntity entity = ((ITakumiEntity) clazz.getConstructor(World.class).newInstance(Minecraft.getMinecraft().world));
+                ITakumiEntity entity = (ITakumiEntity) clazz.getConstructor(World.class).newInstance((World) null);
                 entityHolders.add(new EntityHolder(clazz, entity));
             } catch (Exception e) {
                 //e.printStackTrace();
@@ -148,6 +150,7 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumipotion"), EntityTakumiPotion.class, "takumipotion", 902, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
+    @SideOnly(Side.CLIENT)
     private static void renderRegister() {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiArrow.class, manager -> new RenderArrow<EntityArrow>(manager) {
             @Override

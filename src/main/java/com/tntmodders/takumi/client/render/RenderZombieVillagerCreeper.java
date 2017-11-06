@@ -11,10 +11,8 @@ import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderZombieVillagerCreeper<T extends EntityZombieVillagerCreeper> extends RenderBiped<T> implements ITakumiRender {
     private static final ResourceLocation ZOMBIE_VILLAGER_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_villager.png");
     private static final ResourceLocation ZOMBIE_VILLAGER_FARMER_LOCATION = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_farmer.png");

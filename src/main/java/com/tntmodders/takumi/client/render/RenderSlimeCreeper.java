@@ -11,10 +11,8 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLiving<T> implements ITakumiRender {
 
     public RenderSlimeCreeper(RenderManager p_i47193_1_) {

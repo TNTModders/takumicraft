@@ -11,10 +11,8 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderWitchCreeper<T extends EntityWitchCreeper> extends RenderLiving<T> implements ITakumiRender {
 
     public RenderWitchCreeper(RenderManager renderManagerIn) {
@@ -25,7 +23,7 @@ public class RenderWitchCreeper<T extends EntityWitchCreeper> extends RenderLivi
 
     @Override
     public ModelWitch getMainModel() {
-        return ((ModelWitch) this.mainModel);
+        return (ModelWitch) this.mainModel;
     }
 
     @Override

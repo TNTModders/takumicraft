@@ -31,6 +31,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -53,7 +54,7 @@ public class TakumiEvents {
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered()
                 && ((EntityCreeper) event.getEntityLiving()).world.isThundering()) {
-            TakumiUtils.takumiSetPowered(((EntityCreeper) event.getEntityLiving()), true);
+            TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), true);
         }
         if (event.getEntityLiving() instanceof EntityParrot) {
             if (event.getEntityLiving().getEntityData().hasKey("creeper") && event.getEntityLiving().getEntityData().getBoolean("creeper")) {
@@ -68,13 +69,13 @@ public class TakumiEvents {
     public void onExplosion(ExplosionEvent.Detonate event) {
         if (event.getExplosion() instanceof TakumiExplosion) {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
-                AbstractEntityTakumiGrenade grenade = ((AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder());
+                AbstractEntityTakumiGrenade grenade = (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();
                 if (grenade.getThrower() != null) {
                     event.getAffectedEntities().remove(grenade.getThrower());
                 }
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
-                EntityTakumiArrow takumiArrow = ((EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder());
+                EntityTakumiArrow takumiArrow = (EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder();
                 if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
                     PotionType type = PotionUtils.getPotionFromItem(((EntityStrayCreeper) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
                     for (Entity entity : event.getAffectedEntities()) {
@@ -171,10 +172,10 @@ public class TakumiEvents {
             ItemStack stack = ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand();
             if (!EnchantmentHelper.getEnchantments(stack).isEmpty() && EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED) &&
                     event.getEntityLiving() instanceof EntityCreeper && ((EntityCreeper) event.getEntityLiving()).getPowered()) {
-                event.getEntityLiving().attackEntityFrom(DamageSource.causeMobDamage(((EntityLivingBase) event.getSource().getTrueSource())).setMagicDamage(), 20f);
-                TakumiUtils.takumiSetPowered(((EntityCreeper) event.getEntityLiving()), false);
+                event.getEntityLiving().attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) event.getSource().getTrueSource()).setMagicDamage(), 20f);
+                TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), false);
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-                    TakumiUtils.giveAdvancementImpossible(((EntityPlayerMP) event.getSource().getTrueSource()),
+                    TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
                             new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                             new ResourceLocation(TakumiCraftCore.MODID, "disarmament"));
                 }
@@ -184,8 +185,8 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onKillEntity(LivingDeathEvent event) {
-        if ((event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving() instanceof EntityCreeper) &&
-                event.getSource().getTrueSource() instanceof EntityPlayerMP) {
+        if (FMLCommonHandler.instance().getSide().isClient() &&
+                (event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving() instanceof EntityCreeper) && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
             boolean isOK = true;
             for (ITakumiEntity takumiEntity : TakumiEntityCore.entityList) {
                 if (!TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "slay_" + takumiEntity.getRegisterName()))
@@ -195,7 +196,7 @@ public class TakumiEvents {
                 }
             }
             if (isOK && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-                TakumiUtils.giveAdvancementImpossible(((EntityPlayerMP) event.getSource().getTrueSource()), new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(), new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                         new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
             }
         }

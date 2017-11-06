@@ -2,7 +2,6 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderSkeletonCreeper;
 import com.tntmodders.takumi.core.TakumiItemCore;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -110,7 +109,7 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public RenderLiving getRender(RenderManager manager) {
+    public Object getRender(RenderManager manager) {
         return new RenderSkeletonCreeper<>(manager);
     }
 

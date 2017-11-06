@@ -21,9 +21,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.server.FMLServerHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +56,7 @@ public class TakumiUtils {
         try {
             Field field = TakumiASMNameMap.getField(ClientAdvancementManager.class, "advancementToProgress");
             field.setAccessible(true);
-            Map<Advancement, AdvancementProgress> advancementToProgress = ((Map<Advancement, AdvancementProgress>) field.get(manager));
+            Map<Advancement, AdvancementProgress> advancementToProgress = (Map<Advancement, AdvancementProgress>) field.get(manager);
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
@@ -77,6 +79,20 @@ public class TakumiUtils {
         }
     }
 
+    public static World getDummyWorld() {
+        return FMLCommonHandler.instance().getSide().isClient() ? TakumiUtils.getClientWorld() : TakumiUtils.getServerWorld();
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static World getClientWorld() {
+        return Minecraft.getMinecraft().world;
+    }
+
+    @SideOnly(Side.SERVER)
+    private static World getServerWorld() {
+        return FMLServerHandler.instance().getServer().getWorld(0);
+    }
+
     public static float takumiGetBlockResistance(Entity entity, IBlockState state, BlockPos pos) {
         float f = entity.getExplosionResistance(null, entity.world, pos, state);
         if (f >= 1200) {
@@ -92,7 +108,7 @@ public class TakumiUtils {
             try {
                 Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
                 field.setAccessible(true);
-                DataParameter<Boolean> parameter = ((DataParameter<Boolean>) field.get(entity));
+                DataParameter<Boolean> parameter = (DataParameter<Boolean>) field.get(entity);
                 entity.getDataManager().set(parameter, flg);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -133,7 +149,7 @@ public class TakumiUtils {
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy) {
         boolean flg = world instanceof WorldServer;
         TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy);
-        if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(world, explosion)) {
+        if (ForgeEventFactory.onExplosionStart(world, explosion)) {
             return;
         }
         explosion.doExplosionA();
