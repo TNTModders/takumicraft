@@ -27,12 +27,11 @@ public class EntityFallCreeper extends EntityTakumiAbstractCreeper {
                     blockZ = z + oz;
 
                     BlockPos pos = new BlockPos(blockX, blockY, blockZ);
-
                     if (!par1World.isAirBlock(pos)) {
                         if (par1World.getBlockState(pos).getBlockHardness(world, pos) != -1
-                                && TakumiUtils.takumiGetBlockResistance(this, par1World.getBlockState(pos), pos) < 2000) {
-                            if (!world.isRemote)
-                                par1World.setBlockState(pos, Blocks.GRAVEL.getDefaultState());
+                                && TakumiUtils.takumiGetBlockResistance(this, par1World.getBlockState(pos), pos) != -1
+                                && !world.isRemote) {
+                            par1World.setBlockState(pos, Blocks.GRAVEL.getDefaultState());
                         }
                     }
                 }

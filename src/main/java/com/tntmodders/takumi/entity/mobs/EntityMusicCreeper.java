@@ -1,16 +1,11 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
     public EntityMusicCreeper(World worldIn) {
@@ -19,6 +14,7 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
+        this.world.playRecord(this.getPosition(), SoundEvents.RECORD_13);
     }
 
     @Override
@@ -83,13 +79,9 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
         super.onDeath(cause);
     }
 
-    @Override
+/*    @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityPlayer && FMLCommonHandler.instance().getSide().isClient()) {
-                Minecraft.getMinecraft().world.playRecord(this.getPosition(), SoundEvents.RECORD_13);
-            }
-        }
+
         return true;
-    }
+    }*/
 }
