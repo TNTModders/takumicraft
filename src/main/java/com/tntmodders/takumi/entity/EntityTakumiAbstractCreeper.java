@@ -17,17 +17,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     }
 
     @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc == DamageSource.LIGHTNING_BOLT) {
-            return;
-        }
-       /* if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
-                (damageSrc.isFireDamage() && this.takumiType() == EnumTakumiType.FIRE) ||
-                (damageSrc == DamageSource.DROWN && this.takumiType() == EnumTakumiType.WATER) ||
-                (damageSrc == DamageSource.FALL && this.takumiType() == EnumTakumiType.WIND)) {
-            return;
-        }*/
-        super.damageEntity(damageSrc, damageAmount);
+    public boolean canRegister() {
+        return true;
     }
 
     @Override
@@ -53,6 +44,20 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc == DamageSource.LIGHTNING_BOLT) {
+            return;
+        }
+       /* if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
+                (damageSrc.isFireDamage() && this.takumiType() == EnumTakumiType.FIRE) ||
+                (damageSrc == DamageSource.DROWN && this.takumiType() == EnumTakumiType.WATER) ||
+                (damageSrc == DamageSource.FALL && this.takumiType() == EnumTakumiType.WIND)) {
+            return;
+        }*/
+        super.damageEntity(damageSrc, damageAmount);
     }
 
     public double getSizeAmp() {

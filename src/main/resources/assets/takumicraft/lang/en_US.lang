@@ -64,6 +64,7 @@ tile.creeperwool.brown.name=Creeper Brown Wool
 tile.creeperwool.green.name=Creeper Green Wool
 tile.creeperwool.red.name=Creeper Red Wool
 tile.creeperwool.black.name=Creeper Black Wool
+tile.creepersandstarlow.name=Creeper SandStar Raw
 
 #item
 item.takumibook.name=Creeper Book
@@ -220,6 +221,8 @@ entity.chunkcreeper.name=Chunk Creeper
 entity.chunkcreeper.desc=Clear one chunk, and a large empty box appears.
 entity.fightercreeper.name=Fighter Creeper
 entity.fightercreeper.desc=Night of explode! A knight comes riding a horse.
+entity.ceruleancreeper.name=Cerulean Creeper
+entity.ceruleancreeper.desc=Attacks our friends, darkness and explosive eat them.
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
 entity.takumipotion.name=Explosive Potion

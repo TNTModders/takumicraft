@@ -7,6 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ITakumiEntity {
+    boolean canRegister();
+
     void takumiExplode();
 
     boolean takumiExplodeEvent(ExplosionEvent.Detonate event);
@@ -38,6 +40,7 @@ public interface ITakumiEntity {
      * MID      : 201 ~ 400
      * HIGH    : 401 ~ 500
      * BOSS    :501 ~ 600
+     * COLL     :700 ~
      * TAK       :777
      * ITEM     :900~
      */
@@ -111,7 +114,8 @@ public interface ITakumiEntity {
         WIND_MD(4, true, true),
         WATER_MD(5, true, true),
         DRAGON_MD(6, true, true),
-        NORMAL_MD(7, true, true);
+        NORMAL_MD(7, true, true),
+        CERULEAN(8, false, false);
 
         private final int id;
         private boolean isMagic = false;

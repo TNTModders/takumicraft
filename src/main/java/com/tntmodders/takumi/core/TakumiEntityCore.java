@@ -68,6 +68,9 @@ public class TakumiEntityCore {
         for (EntityHolder holder : entityHolders) {
             Class clazz = holder.clazz;
             ITakumiEntity entity = holder.entity;
+            if (!entity.canRegister()) {
+                break;
+            }
             ResourceLocation location = new ResourceLocation(TakumiCraftCore.MODID, entity.getRegisterName());
             EntityRegistry.registerModEntity(location, clazz, location.getResourcePath(), entity.getRegisterID(), TakumiCraftCore.TakumiInstance, 64, 2, true,
                     entity.getPrimaryColor(), entity.getSecondaryColor());

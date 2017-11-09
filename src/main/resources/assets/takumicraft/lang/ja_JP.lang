@@ -64,6 +64,7 @@ tile.creeperwool.brown.name=匠式茶色硬質羊毛
 tile.creeperwool.green.name=匠式緑色硬質羊毛
 tile.creeperwool.red.name=匠式赤色硬質羊毛
 tile.creeperwool.black.name=匠式黒色硬質羊毛
+tile.creepersandstarlow.name=爆発性サンドスターロウ
 
 #item
 item.takumibook.name=匠の書
@@ -220,6 +221,8 @@ entity.chunkcreeper.name=チャンク匠
 entity.chunkcreeper.desc=一チャンクまるごと、空白が広がる。
 entity.fightercreeper.name=武匠
 entity.fightercreeper.desc=家臣を連れ、騎士は凱旋する。一対一と侮るなかれ。
+entity.ceruleancreeper.name=セルリアン匠
+entity.ceruleancreeper.desc=フレンズを襲う、セルリアンの匠。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

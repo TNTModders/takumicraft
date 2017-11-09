@@ -11,7 +11,7 @@ public class ItemTakumiShield extends ItemShield {
     public ItemTakumiShield() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "takumishield");
-        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        //this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumishield");
     }
 

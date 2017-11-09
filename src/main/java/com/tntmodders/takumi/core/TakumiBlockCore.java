@@ -24,13 +24,14 @@ public class TakumiBlockCore {
     public static final Block CREEPER_GLASS_PANE = new BlockTakumiGlassPane();
     public static final BlockTakumiStainedGlassPane CREEPER_STAINED_GLASS_PANE = new BlockTakumiStainedGlassPane();
     public static final Block CREEPER_WOOL = new BlockTakumiWool();
+    public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
 
     public static void register(IForgeRegistry<Block> registry) {
         Class clazz = TakumiBlockCore.class;
         for (Field field : clazz.getFields()) {
             try {
                 if (field.get(TakumiBlockCore.INSTANCE) instanceof Block) {
-                    Block block = ((Block) field.get(TakumiBlockCore.INSTANCE));
+                    Block block = (Block) field.get(TakumiBlockCore.INSTANCE);
                     registry.register(block);
                     TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName());
                 }

@@ -17,7 +17,7 @@ public class BlockTakumiCreeperBomb extends Block {
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creeperbomb");
         this.setResistance(0f);
-        this.setHardness(2f);
+        this.setHardness(0.5f);
         this.setLightLevel(1f);
     }
 
