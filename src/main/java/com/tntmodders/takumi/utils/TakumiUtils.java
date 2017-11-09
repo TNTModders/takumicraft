@@ -204,7 +204,7 @@ public class TakumiUtils {
     private static HttpsURLConnection getHttpsConnection() throws Exception {
 
         HttpsURLConnection urlconn;
-        URL connectURL = new URL("https://www.tntmodders.com/takumicraft/version.json");
+        URL connectURL = new URL("https://www.tntmodders.com/takumicraft_json/version.json");
 
         if ("https".equals(connectURL.getProtocol())) {
             TrustManager[] tm = {new X509TrustManager() {
