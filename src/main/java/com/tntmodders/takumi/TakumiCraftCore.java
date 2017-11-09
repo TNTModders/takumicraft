@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 public class TakumiCraftCore {
     //初期設定
     public static final String MODID = "takumicraft";
-    public static final String VERSION = "2.0_Dev_1";
+    public static final String VERSION = "2.0_CBT1000";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
