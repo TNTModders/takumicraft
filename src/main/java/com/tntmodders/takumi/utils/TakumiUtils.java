@@ -27,10 +27,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
-import java.io.File;
-import java.io.IOException;
+import javax.net.ssl.*;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -165,5 +167,81 @@ public class TakumiUtils {
                 }
             }
         }
+    }
+
+    public static boolean canUseTheVersion() {
+        try {
+            String title;
+            HttpsURLConnection connection = TakumiUtils.getHttpsConnection();
+            InputStream stream = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            StringBuilder lines = new StringBuilder(4096);
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
+                TakumiCraftCore.LOGGER.info(line);
+                if (line.contains("version")) {
+                    line = line.replaceAll("\"", "").replaceAll("version", "")
+                            .replaceAll(":", "").replaceAll(",", "").trim();
+                    if (!line.equalsIgnoreCase(TakumiCraftCore.VERSION)) {
+                        return false;
+                    }
+                } else if (line.contains("can_use")) {
+                    line = line.replaceAll("\"can_use\":", "").trim();
+                    if (!line.equalsIgnoreCase("true")) {
+                        return false;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private static HttpsURLConnection getHttpsConnection() throws Exception {
+
+        HttpsURLConnection urlconn;
+        URL connectURL = new URL("https://www.tntmodders.com/takumicraft/version.json");
+
+        if ("https".equals(connectURL.getProtocol())) {
+            TrustManager[] tm = {new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType)
+                        throws CertificateException {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType)
+                        throws CertificateException {
+                }
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+            }};
+            SSLContext sslcontext = SSLContext.getInstance("SSL");
+            sslcontext.init(null, tm, null);
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+
+            urlconn = (HttpsURLConnection) connectURL.openConnection();
+            urlconn.setSSLSocketFactory(sslcontext
+                    .getSocketFactory());
+        } else {
+            urlconn = (HttpsURLConnection) connectURL.openConnection();
+        }
+
+        urlconn.setRequestMethod("GET");
+        urlconn.connect();
+
+        return urlconn;
     }
 }

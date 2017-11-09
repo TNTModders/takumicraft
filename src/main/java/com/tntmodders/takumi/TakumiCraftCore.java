@@ -5,13 +5,17 @@ import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.event.TakumiEvents;
 import com.tntmodders.takumi.utils.TakumiRecipeHolder;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.gen.TakumiGunOreGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.util.ReportedException;
+import net.minecraft.world.MinecraftException;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -46,6 +50,11 @@ public class TakumiCraftCore {
 
     @EventHandler
     public void construct(FMLConstructionEvent event) {
+        if (!TakumiUtils.canUseTheVersion()) {
+            CrashReport report = CrashReport.makeCrashReport(new MinecraftException("TakumiCraft Exception"),
+                    "TakumiCraft : You cannot use this version.");
+            throw new ReportedException(report);
+        }
         TakumiModInfoCore.load(metadata);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new TakumiEvents());
