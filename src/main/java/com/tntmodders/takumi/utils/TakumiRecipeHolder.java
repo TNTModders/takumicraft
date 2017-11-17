@@ -103,7 +103,6 @@ public class TakumiRecipeHolder {
     }
 
     public static class ItemStackHashMap<K extends ItemStack, V extends List<ResourceLocation>> extends HashMap<K, V> {
-
         @Override
         public V get(Object key) {
             if (key instanceof ItemStack && this.containsKey(key)) {
@@ -119,7 +118,7 @@ public class TakumiRecipeHolder {
         @Override
         public boolean containsKey(Object key) {
             if (key instanceof ItemStack) {
-                ItemStack itemStack = ((ItemStack) key);
+                ItemStack itemStack = (ItemStack) key;
                 for (ItemStack stack : this.keySet()) {
                     if (stack.getItem() == itemStack.getItem() && stack.getMetadata() == itemStack.getMetadata()) {
                         return true;

@@ -2,9 +2,11 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.ITakumiMetaBlock;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -16,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -76,6 +79,17 @@ public class TakumiUtils {
             ItemStack itemStack = new ItemStack(item, 1, meta);
             if (!TakumiRecipeHolder.map.isEmpty() && TakumiRecipeHolder.map.containsKey(itemStack)) {
                 List<ResourceLocation> list = TakumiRecipeHolder.map.get(itemStack);
+                try {
+                    if (Block.getBlockFromItem(item) instanceof ITakumiMetaBlock) {
+                        NonNullList<ItemStack> list1 = NonNullList.create();
+                        Block.getBlockFromItem(item).getSubBlocks(null, list1);
+                        for (ItemStack aList1 : list1) {
+                            list.addAll(TakumiRecipeHolder.map.get(aList1));
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
             }
         }
