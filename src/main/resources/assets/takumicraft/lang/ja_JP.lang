@@ -274,3 +274,8 @@ item.banner.creeper.white=白色の匠模様
 
 #other
 takumicraft.egg.name=スポーンエッグ
+
+#config
+config.takumicraft.category.general=匠Craft設定
+config.takumicraft.cerulean.prop=セルリアン匠 描画
+config.takumicraft.cerulean.desc=セルリアン匠が正しく描画されない時にfalseにして下さい。

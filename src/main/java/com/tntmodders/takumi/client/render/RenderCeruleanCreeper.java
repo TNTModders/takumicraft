@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityCeruleanCreeper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,25 +18,29 @@ public class RenderCeruleanCreeper<T extends EntityCeruleanCreeper> extends Rend
     @Override
     protected void renderModel(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
         boolean flag = entitylivingbaseIn.isInvisible();
-        GlStateManager.depthMask(!flag);
-        GlStateManager.matrixMode(5890);
-        GlStateManager.loadIdentity();
-        float f = entitylivingbaseIn.ticksExisted + ageInTicks;
-        GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableBlend();
-        GlStateManager.color(1F, 1F, 1F, 0.1025F);
-        GlStateManager.disableLighting();
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.SRC_COLOR);
-        Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+        if (TakumiConfigCore.isTransparentCeruleanCreeper) {
+            GlStateManager.depthMask(!flag);
+            GlStateManager.matrixMode(5890);
+            GlStateManager.loadIdentity();
+            float f = entitylivingbaseIn.ticksExisted + ageInTicks;
+            GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
+            GlStateManager.matrixMode(5888);
+            GlStateManager.enableBlend();
+            GlStateManager.color(1F, 1F, 1F, 0.1025F);
+            GlStateManager.disableLighting();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.SRC_COLOR);
+            Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+        }
         super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-        Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
-        GlStateManager.matrixMode(5890);
-        GlStateManager.loadIdentity();
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableLighting();
-        GlStateManager.disableBlend();
-        GlStateManager.depthMask(flag);
+        if (TakumiConfigCore.isTransparentCeruleanCreeper) {
+            Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+            GlStateManager.matrixMode(5890);
+            GlStateManager.loadIdentity();
+            GlStateManager.matrixMode(5888);
+            GlStateManager.enableLighting();
+            GlStateManager.disableBlend();
+            GlStateManager.depthMask(flag);
+        }
     }
 
     private class RenderCeruleanEye<E extends EntityCeruleanCreeper> implements LayerRenderer<E> {

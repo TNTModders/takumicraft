@@ -5,17 +5,13 @@ import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.event.TakumiEvents;
 import com.tntmodders.takumi.utils.TakumiRecipeHolder;
-import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.gen.TakumiGunOreGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
-import net.minecraft.util.ReportedException;
-import net.minecraft.world.MinecraftException;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -34,11 +30,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.1]", name = "匠Craft [ Takumi Craft ]")
+@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.1]",
+        name = "匠Craft [ Takumi Craft ]", guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory")
 public class TakumiCraftCore {
     //初期設定
     public static final String MODID = "takumicraft";
-    public static final String VERSION = "2.0_CBT1000";
+    public static final String VERSION = "2.0_CBT1001";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
@@ -50,11 +47,11 @@ public class TakumiCraftCore {
 
     @EventHandler
     public void construct(FMLConstructionEvent event) {
-        if (!TakumiUtils.canUseTheVersion()) {
+       /* if (!TakumiUtils.canUseTheVersion()) {
             CrashReport report = CrashReport.makeCrashReport(new MinecraftException("TakumiCraft Exception"),
                     "TakumiCraft : You cannot use this version.");
             throw new ReportedException(report);
-        }
+        }*/
         TakumiModInfoCore.load(metadata);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new TakumiEvents());
@@ -99,6 +96,7 @@ public class TakumiCraftCore {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        TakumiConfigCore.loadConfig(event);
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 5);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
     }

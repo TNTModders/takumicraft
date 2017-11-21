@@ -276,3 +276,9 @@ item.banner.creeper.white=White Creeper Charge
 
 #other
 takumicraft.egg.name=Spawn Eggs
+
+
+#config
+config.takumicraft.category.general=TakumiCraft Config
+config.takumicraft.cerulean.prop=Transparency of CeruleanCreeper
+config.takumicraft.cerulean.desc=Change false if the graphic of CeruleanCreeper doesn't work.

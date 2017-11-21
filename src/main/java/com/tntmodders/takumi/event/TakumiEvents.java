@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
@@ -31,6 +32,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -41,6 +43,13 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onPickupItem(EntityItemPickupEvent event) {
         TakumiUtils.takumiUnlockRecipes(event.getItem().getItem(), event.getEntityPlayer());
+    }
+
+    @SubscribeEvent
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        // コンフィグが変更された時に呼ばれる。
+        if (event.getModID().equals(TakumiCraftCore.MODID))
+            TakumiConfigCore.syncConfig();
     }
 
     @SubscribeEvent
