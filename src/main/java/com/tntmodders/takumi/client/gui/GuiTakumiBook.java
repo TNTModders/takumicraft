@@ -108,6 +108,9 @@ public class GuiTakumiBook extends GuiScreen {
     }
 
     protected EntityLivingBase getEntity(ITakumiEntity entity, boolean flg) {
+        if (entity instanceof EntityGiantCreeper) {
+            return new EntityZombieCreeper(((EntityGiantCreeper) entity).world);
+        }
         if (entity instanceof EntitySilentCreeper && !flg) {
             return new EntityCreeper(((EntitySilentCreeper) entity).world);
         } else if (entity instanceof EntitySlimeCreeper) {

@@ -49,6 +49,8 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
      */
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        double d = entitylivingbaseIn.getSizeAmp();
+        GlStateManager.scale(d, d, d);
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
@@ -61,7 +63,7 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
 
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
     }
 
     @Override

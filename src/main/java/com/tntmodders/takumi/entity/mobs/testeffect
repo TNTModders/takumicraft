@@ -1,13 +1,5 @@
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        for (float f1 = -1; f1 <= 1; f1 += 0.1) {
-            for (float f2 = -1; f2 <= 1; f2 += 0.1) {
-                for (float f3 = -1; f3 <= 1; f3 += 0.1) {
-                    if (f1 * f1 + f2 * f2 + f3 * f3 < 1 && f1 * f1 + f2 * f2 + f3 * f3 > 0.81 && this.rand.nextInt(5) == 0) {
-                        this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + f1 * this.ticksExisted / 20, this.posY + f2 * this.ticksExisted / 20, this.posZ + f3 * this.ticksExisted / 20, 0.0D, 0.0D, 0.0D);
-                    }
-                }
-            }
-        }
+
     }

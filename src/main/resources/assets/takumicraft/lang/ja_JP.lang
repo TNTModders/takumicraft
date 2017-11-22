@@ -223,6 +223,12 @@ entity.fightercreeper.name=武匠
 entity.fightercreeper.desc=家臣を連れ、騎士は凱旋する。一対一と侮るなかれ。
 entity.ceruleancreeper.name=セルリアン匠
 entity.ceruleancreeper.desc=フレンズを襲う、セルリアンの匠。
+entity.boltcreeper.name=雷匠
+entity.boltcreeper.desc=雷鳴激しく轟き、この匠は現れる。抗え、焼き尽くされる前に。
+entity.ofalencreeper.name=王覇錬匠
+entity.ofalencreeper.desc=異世界の鉱石の力を纏い、この匠は現れる。戦え、魔には武を以て。
+entity.giantcreeper.name=ジャイアント匠
+entity.giantcreeper.desc=極大の脅威に他ならぬ、この匠は現れる。挑め、全て崩れるまで。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 
