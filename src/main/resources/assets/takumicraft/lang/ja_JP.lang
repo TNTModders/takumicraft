@@ -229,6 +229,8 @@ entity.ofalencreeper.name=王覇錬匠
 entity.ofalencreeper.desc=異世界の鉱石の力を纏い、この匠は現れる。戦え、魔には武を以て。
 entity.giantcreeper.name=ジャイアント匠
 entity.giantcreeper.desc=極大の脅威に他ならぬ、この匠は現れる。挑め、全て崩れるまで。
+entity.tntcreeper.name=TNT匠
+entity.tntcreeper.desc=飛散する爆弾の雨の中、この匠は現れる。討て、燃え盛る業炎へ。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

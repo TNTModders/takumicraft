@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumibook"
+    },
+    "title": {
+      "translate": "entity.tntcreeper.name"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.slay.desc"
+    }
+  },
+  "parent": "takumicraft:slay_root",
+  "criteria": {
+    "tntcreeper": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "takumicraft:tntcreeper"
+        }
+      }
+    }
+  }
+}

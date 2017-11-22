@@ -29,7 +29,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
 
     @Override
     public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (entitylivingbaseIn.getPowered()) {
+        if (entitylivingbaseIn.getPowered() && !entitylivingbaseIn.isInvisible()) {
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);
             this.creeperRenderer.bindTexture(entitylivingbaseIn.getArmor());
