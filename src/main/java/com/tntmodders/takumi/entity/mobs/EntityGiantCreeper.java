@@ -19,8 +19,13 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
 
     public EntityGiantCreeper(World worldIn) {
         super(worldIn);
-        this.setSize(6f, 19.5f);
+        this.setSize(6f, 20f);
         this.isImmuneToFire = true;
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return false;
     }
 
     @Override
@@ -29,39 +34,30 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
             this.setDead();
         }
         if (this.getDataManager().get(EXPLODED)) {
+            if (!this.isInvisible()) {
+                this.setInvisible(true);
+            }
             int di = 40;
             for (float f1 = -1; f1 <= 1; f1 += 0.025) {
                 for (float f2 = -1; f2 <= 1; f2 += 0.025) {
                     for (float f3 = -1; f3 <= 1; f3 += 0.025) {
                         if (f1 * f1 + f2 * f2 * 1.5 + f3 * f3 < 1 && f1 * f1 + f2 * f2 * 1.5 + f3 * f3 > 0.81) {
-                            if (this.rand.nextInt(10) == 0) {
-                                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + f1 * this.ticksExisted / di, this.posY + f2 * this.ticksExisted / di,
-                                        this.posZ + f3 * this.ticksExisted / di, 0.0D, 0.0D, 0.0D);
+                            if (this.rand.nextInt(15) == 0) {
+                                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + f1 * 1.1 * this.ticksExisted / di,
+                                        this.posY + f2 * 1.1 * this.ticksExisted / di, this.posZ + f3 * 1.1 * this.ticksExisted / di, f1 / 5, f2 / 5, f3 / 5);
                             }
                             int x = (int) Math.floor(this.posX + f1 * this.ticksExisted / di);
                             int y = (int) Math.floor(this.posY + f2 * this.ticksExisted / di);
                             int z = (int) Math.floor(this.posZ + f3 * this.ticksExisted / di);
-                         /*   if (!this.world.isRemote && Math.abs(this.posX + f1 * this.ticksExisted / 20 - x) < 0.1 &&
-                                    Math.abs(this.posY + f1 * this.ticksExisted / 20 - y) < 0.1 && Math.abs(this.posZ + f1 * this.ticksExisted / 20 - z) < 0.1)*/
                             BlockPos pos = new BlockPos(x, y, z);
-                            if (!this.world.isAirBlock(pos) && this.rand.nextInt(this.ticksExisted / 40 < 20 ? 20 : this.ticksExisted / 40 < 75 ? this.ticksExisted / 40 : this.ticksExisted / 160) == 0) {
+                            if (!this.world.isAirBlock(pos) && this.rand.nextInt((int) Math.sqrt(this.ticksExisted) + 1) == 0) {
                                 this.world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), 2.5f, true);
-                             /*if(this.rand.nextBoolean()){
-                                 for(int t = 0; t < 3; t++){
-                                     this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + f1 * this.ticksExisted / 40, this.posY + f2 * this.ticksExisted / 40,
-                                             this.posZ + f3 * this.ticksExisted / 40, 0.0D, 0.0D, 0.0D);
-                                 }
-                             }
-                             this.world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-                             for (int i = 0; i < 6; i++) {
-                                 this.world.setBlockState(pos.offset(EnumFacing.values()[i]), Blocks.AIR.getDefaultState(), 4);
-                             }*/
                             }
                         }
                     }
                 }
             }
-            if (this.ticksExisted > (this.getPowered() ? 75 * di : 50 * di)) {
+            if (this.ticksExisted > (this.getPowered() ? 75 * di : 60 * di)) {
                 this.getDataManager().set(EXPLODED, false);
                 this.dead = true;
                 this.setDead();
@@ -80,7 +76,7 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.5f;
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
+import com.tntmodders.takumi.entity.mobs.EntityGiantCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelZombie;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
@@ -22,6 +24,13 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
             protected void initArmor() {
                 this.modelLeggings = new ModelZombie(0.5F, true);
                 this.modelArmor = new ModelZombie(1.0F, true);
+            }
+
+            @Override
+            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                if (!(entitylivingbaseIn instanceof EntityGiantCreeper && entitylivingbaseIn.getIsInvulnerable())) {
+                    super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+                }
             }
         };
         this.addLayer(layerbipedarmor);
