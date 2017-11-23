@@ -231,6 +231,8 @@ entity.giantcreeper.name=ジャイアント匠
 entity.giantcreeper.desc=極大の脅威に他ならぬ、この匠は現れる。挑め、全て崩れるまで。
 entity.tntcreeper.name=TNT匠
 entity.tntcreeper.desc=飛散する爆弾の雨の中、この匠は現れる。討て、燃え盛る業炎へ。
+entity.yukaricreeper.name=ゆかり匠
+entity.yukaricreeper.desc=全てが平坦に帰す爆発に、この匠は現れる。結べ、月と広い大地を。
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 
