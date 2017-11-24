@@ -15,7 +15,7 @@ set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%
-set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_91
+set JAVA_HOME=%JAVA_HOME%
 
 @rem Find java.exe
 if defined JAVA_HOME goto findJavaFromJavaHome
