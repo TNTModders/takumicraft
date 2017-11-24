@@ -57,7 +57,7 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.GROUND_MD;
+        return EnumTakumiType.YUKARI;
     }
 
     @Override

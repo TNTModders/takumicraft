@@ -115,12 +115,12 @@ public interface ITakumiEntity {
         WATER_MD(5, true, true),
         DRAGON_MD(6, true, true),
         NORMAL_MD(7, true, true),
-        CERULEAN(8, false, false);
+        CERULEAN(8, false, false),
+        YUKARI(9, false, false);
 
         private final int id;
         private boolean isMagic = false;
         private boolean isDest = false;
-
         EnumTakumiType(int i, boolean dest, boolean magic) {
             this(i);
             this.isDest = dest;
@@ -129,6 +129,10 @@ public interface ITakumiEntity {
 
         EnumTakumiType(int i) {
             this.id = i;
+        }
+
+        public int getId() {
+            return id;
         }
 
         public boolean isMagic() {
