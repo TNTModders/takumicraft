@@ -48,14 +48,10 @@ public class EntityArrowCreeper extends EntityTakumiAbstractCreeper {
 
         for (int t = 0; t < 1000 * (this.getPowered() ? 2 : 1); t++) {
             Random rand = new Random();
-            double x = this.posX + this.rand.nextInt(20) - 10;
+            double x = this.posX + this.rand.nextInt(10) - 5;
             double y = this.posY + this.rand.nextInt(10) - 5;
             double z = this.posZ + this.rand.nextInt(10) - 5;
 
-/*            EntityLivingBase target = this.getAttackTarget();
-            if (target == null) {
-                target = this.world.playerEntities.get(0);
-            }*/
             EntityTippedArrow entityarrow = new EntityTippedArrow(this.world, x, y, z);
             entityarrow.setDamage(this.world.getDifficulty().getDifficultyId() * 8);
             entityarrow.setIsCritical(true);
