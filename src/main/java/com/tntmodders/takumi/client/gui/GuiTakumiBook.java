@@ -67,7 +67,7 @@ public class GuiTakumiBook extends GuiScreen {
         this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
         this.drawTexturedModalRect(i, 2, 0, 0, this.bookImageWidth, this.bookImageHeight);
         if (takumiEntity.takumiType().getId() >= 8) {
-            flg = true;
+            flg = false;
         }
         ResourceLocation location = flg ? new ResourceLocation(TakumiCraftCore.MODID, "textures/book/" + takumiEntity.takumiType().getName() + ".png")
                 : new ResourceLocation(TakumiCraftCore.MODID, "textures/book/underfound.png");

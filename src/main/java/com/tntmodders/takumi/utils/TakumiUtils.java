@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.utils;
 
+import com.google.common.reflect.ClassPath;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.ITakumiMetaBlock;
@@ -130,6 +131,7 @@ public class TakumiUtils {
         }
     }
 
+    @Deprecated
     public static List<File> getListFile(String path) {
         List<File> files = new ArrayList<>();
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
@@ -156,6 +158,49 @@ public class TakumiUtils {
             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
             File newFile = new File(packFile.toURI().getPath() + path);
             files = Arrays.asList(newFile.listFiles());
+        }
+        return files;
+    }
+
+    public static List<Class> getListClass(String path) {
+        List<Class> files = new ArrayList<>();
+        ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+        URL url = loader.getResource(path);
+        if (url.getProtocol().equals("jar")) {
+            String[] strings = url.getPath().split(":");
+            String leadPath = strings[strings.length - 1].split("!")[0];
+            File f = new File(leadPath);
+            JarFile jarFile;
+            try {
+                Set<ClassPath.ClassInfo> set = ClassPath.from(loader).getAllClasses();
+                List<ClassPath.ClassInfo> list = new ArrayList<>();
+                TakumiCraftCore.LOGGER.info("takumiclassesoutput");
+                for (ClassPath.ClassInfo classInfo : set) {
+                    try {
+                        if (classInfo.getName().contains("com.tntmodders")) {
+                            TakumiCraftCore.LOGGER.info(classInfo.getName());
+                            files.add(classInfo.load());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
+            File newFile = new File(packFile.toURI().getPath() + path);
+            for (File file : newFile.listFiles()) {
+                ClassLoader loader0 = TakumiCraftCore.class.getClassLoader();
+                Class clazz = null;
+                try {
+                    clazz = loader0.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                files.add(clazz);
+            }
         }
         return files;
     }
