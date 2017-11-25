@@ -109,7 +109,7 @@ public class GuiTakumiBook extends GuiScreen {
         }
     }
 
-    protected EntityLivingBase getEntity(ITakumiEntity entity, boolean flg) {
+    private EntityLivingBase getEntity(ITakumiEntity entity, boolean flg) {
         if (entity instanceof EntityGiantCreeper) {
             return new EntityZombieCreeper(((EntityGiantCreeper) entity).world);
         }
@@ -186,6 +186,8 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glScaled(0.5, 0.5, 0.5);
         } else if (entity instanceof EntityDarkCreeper) {
             GL11.glScaled(0.7, 0.7, 0.7);
+        } else if (entity instanceof EntityRareCreeper) {
+            GL11.glScaled(0.3d, 0.3d, 0.3d);
         }
     }
 
