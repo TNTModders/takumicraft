@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.utils;
 
-import com.google.common.reflect.ClassPath;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.ITakumiMetaBlock;
@@ -137,8 +136,10 @@ public class TakumiUtils {
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
         URL url = loader.getResource(path);
         if (url.getProtocol().equals("jar")) {
-            String[] strings = url.getPath().split(":");
-            String leadPath = strings[strings.length - 1].split("!")[0];
+            String[] strings = url.getPath().split(":/");
+            String leadPath = strings[strings.length - 2] + ":/" + strings[strings.length - 1].split("!")[0];
+            leadPath = leadPath.replaceAll("%20", " ");
+            TakumiCraftCore.LOGGER.info("leadpath : " + leadPath);
             File f = new File(leadPath);
             JarFile jarFile;
             try {
@@ -162,7 +163,7 @@ public class TakumiUtils {
         return files;
     }
 
-    public static List<Class> getListClass(String path) {
+   /* public static List<Class> getListClass(String path) {
         List<Class> files = new ArrayList<>();
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
         URL url = loader.getResource(path);
@@ -203,7 +204,7 @@ public class TakumiUtils {
             }
         }
         return files;
-    }
+    }*/
 
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy) {
         boolean flg = world instanceof WorldServer;

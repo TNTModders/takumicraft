@@ -52,12 +52,24 @@ public class TakumiEntityCore {
         TakumiEntityCore.biomes.remove(Biomes.HELL);
         TakumiEntityCore.biomes.remove(Biomes.VOID);
 
-        List<Class> files = TakumiUtils.getListClass("com/tntmodders/takumi/entity/mobs/");
+        /*List<Class> files = TakumiUtils.getListClass("com/tntmodders/takumi/entity/mobs/");
         ArrayList<EntityHolder> entityHolders = new ArrayList<>();
         for (Class clazz : files) {
             try {
-                /*ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-                Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));*/
+                *//*ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+                Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));*//*
+                ITakumiEntity entity = (ITakumiEntity) clazz.getConstructor(World.class).newInstance((World) null);
+                entityHolders.add(new EntityHolder(clazz, entity));
+            } catch (Exception e) {
+                //e.printStackTrace();
+            }
+        }*/
+        List<File> files = TakumiUtils.getListFile("com/tntmodders/takumi/entity/mobs/");
+        ArrayList<EntityHolder> entityHolders = new ArrayList<>();
+        for (File file : files) {
+            try {
+                ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+                Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
                 ITakumiEntity entity = (ITakumiEntity) clazz.getConstructor(World.class).newInstance((World) null);
                 entityHolders.add(new EntityHolder(clazz, entity));
             } catch (Exception e) {

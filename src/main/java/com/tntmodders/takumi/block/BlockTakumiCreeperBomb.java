@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class BlockTakumiCreeperBomb extends Block {
 
     public BlockTakumiCreeperBomb() {
-        super(Material.SAND);
+        super(Material.TNT);
         this.setRegistryName(TakumiCraftCore.MODID, "creeperbomb");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creeperbomb");
