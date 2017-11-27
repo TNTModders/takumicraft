@@ -2,7 +2,9 @@ package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
+import com.tntmodders.takumi.entity.mobs.EntityFighterCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityGiantCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityHuskCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelZombie;
@@ -72,7 +74,9 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
 
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
+        return entity instanceof EntityFighterCreeper ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/fightercreeper.png") :
+                entity instanceof EntityHuskCreeper ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/huskcreeper.png") :
+                        new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
     }
 
     @Override

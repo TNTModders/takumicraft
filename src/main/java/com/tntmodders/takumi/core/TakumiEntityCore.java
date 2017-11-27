@@ -39,7 +39,11 @@ public class TakumiEntityCore {
     public static final EnumCreatureType WATER_TAKUMI =
             EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material.WATER, false, false);
     public static List<Biome> biomes = new ArrayList<>();
-    public static List<ITakumiEntity> entityList = new ArrayList<>();
+    private static List<ITakumiEntity> entityList = new ArrayList<>();
+
+    public static List<ITakumiEntity> getEntityList() {
+        return entityList;
+    }
 
     public static void register() {
         for (Field fileld : Biomes.class.getDeclaredFields()) {

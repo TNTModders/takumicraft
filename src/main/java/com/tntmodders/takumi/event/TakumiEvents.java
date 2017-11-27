@@ -197,7 +197,7 @@ public class TakumiEvents {
         if (FMLCommonHandler.instance().getSide().isClient() &&
                 (event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving() instanceof EntityCreeper) && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
             boolean isOK = true;
-            for (ITakumiEntity takumiEntity : TakumiEntityCore.entityList) {
+            for (ITakumiEntity takumiEntity : TakumiEntityCore.getEntityList()) {
                 if (!TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "slay_" + takumiEntity.getRegisterName()))
                         && takumiEntity.getClass() != event.getEntityLiving().getClass()) {
                     isOK = false;
