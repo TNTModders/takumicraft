@@ -239,6 +239,8 @@ entity.rarecreeper.name=希匠
 entity.rarecreeper.desc=氷塊出づる戦場にて、この匠は現れる。防げ、破壊と氷の追跡を。
 entity.annivcreeper.name=祝匠
 entity.annivcreeper.desc=砂糖とクリームの爆発に、この匠は現れる。祝え、太陽とこの大空を。
+entity.leadcreeper.name=導匠
+entity.leadcreeper.desc=集まれ、たくみの森。皆まとめてスティーブにどうぞ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

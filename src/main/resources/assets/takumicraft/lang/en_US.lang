@@ -239,6 +239,8 @@ entity.rarecreeper.name=Rare Creeper
 entity.rarecreeper.desc=Ice cannon powered! Freeze and explode, at all.
 entity.annivcreeper.name=Anniv Creeper
 entity.annivcreeper.desc=Anniversary powered! Eat cake, celebration for you!
+entity.leadcreeper.name=Lead Creeper
+entity.leadcreeper.desc=A leader of creepers, gathering everybody.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
