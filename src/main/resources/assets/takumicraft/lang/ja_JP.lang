@@ -243,6 +243,8 @@ entity.leadcreeper.name=導匠
 entity.leadcreeper.desc=集まれ、たくみの森。皆まとめてスティーブにどうぞ。
 entity.catcreeper.name=猫匠
 entity.catcreeper.desc=すっごーい!キミは、匠さんを集めるのが上手なフレンズなんだね!
+entity.rushcreeper.name=突匠
+entity.rushcreeper.desc=その匠、最強につき。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

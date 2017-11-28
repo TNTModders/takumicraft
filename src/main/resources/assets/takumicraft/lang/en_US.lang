@@ -243,6 +243,8 @@ entity.leadcreeper.name=Lead Creeper
 entity.leadcreeper.desc=A leader of creepers, gathering everybody.
 entity.catcreeper.name=Cat Creeper
 entity.catcreeper.desc=Creepers' natural enemy? No, this is a friend for creepers.
+entity.rushcreeper.name=Rush Creeper
+entity.rushcreeper.desc=Rush!! Faster than wind!!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
