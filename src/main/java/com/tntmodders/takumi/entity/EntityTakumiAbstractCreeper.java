@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity;
 
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
+import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.DamageSource;
@@ -14,6 +15,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
+        this.tasks.addTask(0, new EntityAIFollowCatCreeper(this));
     }
 
     @Override

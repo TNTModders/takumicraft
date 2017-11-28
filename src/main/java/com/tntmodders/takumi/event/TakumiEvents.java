@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.AbstractEntityTakumiGrenade;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
@@ -116,6 +117,9 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void checkSpawn(LivingSpawnEvent.CheckSpawn e) {
+        if (e.getEntityLiving().getClass() == EntityCreeper.class) {
+            ((EntityCreeper) e.getEntityLiving()).tasks.addTask(0, new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
+        }
         if (!e.getWorld().isRemote) {
             if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntitySlime) {
                 EntitySlimeCreeper slimeCreeper = new EntitySlimeCreeper(e.getWorld());

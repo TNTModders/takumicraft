@@ -241,6 +241,8 @@ entity.annivcreeper.name=Anniv Creeper
 entity.annivcreeper.desc=Anniversary powered! Eat cake, celebration for you!
 entity.leadcreeper.name=Lead Creeper
 entity.leadcreeper.desc=A leader of creepers, gathering everybody.
+entity.catcreeper.name=Cat Creeper
+entity.catcreeper.desc=Creepers' natural enemy? No, this is a friend for creepers.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
