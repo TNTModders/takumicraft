@@ -237,6 +237,9 @@ entity.demoncreeper.name=鬼匠
 entity.demoncreeper.desc=火の球飛び交う戦場にて、この匠は現れる。守れ、破壊と炎の追手から。
 entity.rarecreeper.name=希匠
 entity.rarecreeper.desc=氷塊出づる戦場にて、この匠は現れる。防げ、破壊と氷の追跡を。
+entity.annivcreeper.name=祝匠
+entity.annivcreeper.desc=砂糖とクリームの爆発に、この匠は現れる。祝え、太陽とこの大空を。
+
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 

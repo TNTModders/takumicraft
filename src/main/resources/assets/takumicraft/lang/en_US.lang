@@ -237,6 +237,9 @@ entity.demoncreeper.name=Demon Creeper
 entity.demoncreeper.desc=Fireball powered! Flame and explode, at all.
 entity.rarecreeper.name=Rare Creeper
 entity.rarecreeper.desc=Ice cannon powered! Freeze and explode, at all.
+entity.annivcreeper.name=Anniv Creeper
+entity.annivcreeper.desc=Anniversary powered! Eat cake, celebration for you!
+
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
 entity.takumipotion.name=Explosive Potion

@@ -130,7 +130,6 @@ public class TakumiUtils {
         }
     }
 
-    @Deprecated
     public static List<File> getListFile(String path) {
         List<File> files = new ArrayList<>();
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
@@ -139,7 +138,7 @@ public class TakumiUtils {
             String[] strings = url.getPath().split(":/");
             String leadPath = strings[strings.length - 2] + ":/" + strings[strings.length - 1].split("!")[0];
             leadPath = leadPath.replaceAll("%20", " ");
-            TakumiCraftCore.LOGGER.info("leadpath : " + leadPath);
+            //TakumiCraftCore.LOGGER.info("leadpath : " + leadPath);
             File f = new File(leadPath);
             JarFile jarFile;
             try {
