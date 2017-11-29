@@ -53,7 +53,7 @@ public class ItemTakumiBoltStone extends Item {
         EntityLightningBolt bolt = new EntityLightningBolt(attacker.world, target.posX, target.posY, target.posZ, false);
         attacker.world.addWeatherEffect(bolt);
         attacker.world.spawnEntity(bolt);
-        if (!(attacker instanceof EntityPlayer) || !(((EntityPlayer) attacker).isCreative())) {
+        if (!(attacker instanceof EntityPlayer) || !((EntityPlayer) attacker).isCreative()) {
             stack.shrink(1);
         }
         return false;

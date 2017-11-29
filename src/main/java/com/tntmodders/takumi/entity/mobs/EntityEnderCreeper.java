@@ -64,7 +64,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
             if (entity instanceof EntityLivingBase) {
                 boolean done = false;
                 for (int i = 0; i < 50 && !done; i++) {
-                    done = this.teleportTo(((EntityLivingBase) entity));
+                    done = this.teleportTo((EntityLivingBase) entity);
                 }
             }
         }

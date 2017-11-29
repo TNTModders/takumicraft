@@ -103,7 +103,7 @@ public class ModelBatCreeper extends ModelBase {
             this.BatCreeperHead.setRotationPoint(0.0F, 0.0F, 0.0F);
             this.BatCreeperRightWing.setRotationPoint(0.0F, 0.0F, 0.0F);
             this.BatCreeperLeftWing.setRotationPoint(0.0F, 0.0F, 0.0F);
-            this.BatCreeperBody.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F;
+            this.BatCreeperBody.rotateAngleX = (float) Math.PI / 4F + MathHelper.cos(ageInTicks * 0.1F) * 0.15F;
             this.BatCreeperBody.rotateAngleY = 0.0F;
             this.BatCreeperRightWing.rotateAngleY = MathHelper.cos(ageInTicks * 1.3F) * (float) Math.PI * 0.25F;
             this.BatCreeperLeftWing.rotateAngleY = -this.BatCreeperRightWing.rotateAngleY;

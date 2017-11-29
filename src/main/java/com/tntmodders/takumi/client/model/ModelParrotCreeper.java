@@ -180,8 +180,8 @@ public class ModelParrotCreeper extends ModelBase {
                 ++this.legRight.rotateAngleX;
                 this.state = ModelParrotCreeper.State.SITTING;
             } else if (entityparrot.isFlying()) {
-                this.legLeft.rotateAngleX += ((float) Math.PI * 2F / 9F);
-                this.legRight.rotateAngleX += ((float) Math.PI * 2F / 9F);
+                this.legLeft.rotateAngleX += (float) Math.PI * 2F / 9F;
+                this.legRight.rotateAngleX += (float) Math.PI * 2F / 9F;
                 this.state = ModelParrotCreeper.State.FLYING;
             } else {
                 this.state = ModelParrotCreeper.State.STANDING;

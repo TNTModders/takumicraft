@@ -17,12 +17,12 @@ public class EntityObjetCreeper extends EntityTakumiAbstractCreeper {
         if (!this.isDead && !this.world.isRemote) {
             int range = this.getPowered() ? 6 : 4;
             IBlockState state = this.rand.nextBoolean() ? TakumiBlockCore.CREEPER_BRICK.getDefaultState() : TakumiBlockCore.CREEPER_IRON.getDefaultState();
-            for (int x = ((int) this.posX) - range; x < ((int) this.posX) + range; x++) {
-                for (int y = ((int) this.posY); y < ((int) this.posY) + (range * 1.5) + 3; y++) {
-                    for (int z = ((int) this.posZ) - range; z < ((int) this.posZ) + range; z++) {
+            for (int x = (int) this.posX - range; x < (int) this.posX + range; x++) {
+                for (int y = (int) this.posY; y < (int) this.posY + range * 1.5 + 3; y++) {
+                    for (int z = (int) this.posZ - range; z < (int) this.posZ + range; z++) {
                         BlockPos pos = new BlockPos(x, y, z);
                         if (TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
-                            if (y > this.posY + (range * 1.5)) {
+                            if (y > this.posY + range * 1.5) {
                                 if (this.rand.nextInt(8) == 0) {
                                     this.world.setBlockState(pos, TakumiBlockCore.CREEPER_BOMB.getDefaultState());
                                 }

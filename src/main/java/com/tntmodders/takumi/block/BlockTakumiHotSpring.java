@@ -47,7 +47,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
         float f12 = 0.0F;
         if (entity instanceof EntityLivingBase) {
-            EntityLivingBase ent = ((EntityLivingBase) entity);
+            EntityLivingBase ent = (EntityLivingBase) entity;
             f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
             if (ent.isPotionActive(MobEffects.WATER_BREATHING)) {
                 f12 = f12 * 0.3F + 0.6F;

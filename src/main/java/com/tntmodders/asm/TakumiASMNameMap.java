@@ -22,8 +22,8 @@ public class TakumiASMNameMap {
     public static boolean matchName(String name1, String name2) {
         if (name1.equals(name2)) {
             return true;
-        } else if ((FIELD_MAP.containsKey(name1) && FIELD_MAP.get(name1).equals(name2)) ||
-                (METHOD_MAP.containsKey(name1) && METHOD_MAP.get(name1).equals(name2))) {
+        } else if (FIELD_MAP.containsKey(name1) && FIELD_MAP.get(name1).equals(name2) ||
+                METHOD_MAP.containsKey(name1) && METHOD_MAP.get(name1).equals(name2)) {
             return true;
         }
         return false;

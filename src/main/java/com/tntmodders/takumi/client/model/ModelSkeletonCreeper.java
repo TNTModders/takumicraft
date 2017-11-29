@@ -71,7 +71,7 @@ public class ModelSkeletonCreeper extends ModelBiped {
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         ItemStack itemstack = ((EntityLivingBase) entityIn).getHeldItemMainhand();
-        EntitySkeletonCreeper skeletonCreeper = ((EntitySkeletonCreeper) entityIn);
+        EntitySkeletonCreeper skeletonCreeper = (EntitySkeletonCreeper) entityIn;
 
         if (skeletonCreeper.isSwingingArms() && (itemstack.isEmpty() || itemstack.getItem() != Items.BOW)) {
             float f = MathHelper.sin(this.swingProgress * (float) Math.PI);

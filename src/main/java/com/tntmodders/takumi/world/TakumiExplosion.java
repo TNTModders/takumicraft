@@ -24,6 +24,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -126,7 +127,7 @@ public class TakumiExplosion extends Explosion {
         int j2 = MathHelper.floor(this.z - (double) f3 - 1.0D);
         int j1 = MathHelper.floor(this.z + (double) f3 + 1.0D);
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB((double) k1, (double) i2, (double) j2, (double) l1, (double) i1, (double) j1));
-        net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.world, this, list, f3);
+        ForgeEventFactory.onExplosionDetonate(this.world, this, list, f3);
         Vec3d vec3d = new Vec3d(this.x, this.y, this.z);
 
         for (Entity entity : list) {
@@ -147,11 +148,11 @@ public class TakumiExplosion extends Explosion {
                         double d10 = (1.0D - d12) * d14;
                         if (exploder instanceof EntityArrow) {
                             entity.attackEntityFrom(new EntityDamageSourceIndirect("explosion", ((EntityArrow) this.exploder).shootingEntity, this.exploder).setExplosion(),
-                                    (float) ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D)));
+                                    (float) (int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D));
 
                         } else {
                             entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder).setExplosion(),
-                                    (float) ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D)));
+                                    (float) (int) ((d10 * d10 + d10) / 2.0D * 7.0D * (double) f3 + 1.0D));
 
                         }
                         double d11 = d10;

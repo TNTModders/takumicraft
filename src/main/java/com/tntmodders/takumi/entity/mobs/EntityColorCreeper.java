@@ -28,9 +28,9 @@ public class EntityColorCreeper extends EntityTakumiAbstractCreeper {
                     if (property instanceof PropertyBool) {
                         state = state.withProperty(property, this.rand.nextBoolean());
                     } else if (property instanceof PropertyInteger) {
-                        state = state.withProperty(property, ((int) property.getAllowedValues().toArray(new Integer[0])[this.rand.nextInt(property.getAllowedValues().size())]));
+                        state = state.withProperty(property, (int) property.getAllowedValues().toArray(new Integer[0])[this.rand.nextInt(property.getAllowedValues().size())]);
                     } else if (property instanceof PropertyEnum) {
-                        state = state.withProperty(property, ((Enum) property.getAllowedValues().toArray()[this.rand.nextInt(property.getAllowedValues().size())]));
+                        state = state.withProperty(property, (Enum) property.getAllowedValues().toArray()[this.rand.nextInt(property.getAllowedValues().size())]);
                     }
                 }
             }

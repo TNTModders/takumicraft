@@ -136,7 +136,7 @@ public class ModelWolfCreeper extends ModelBase {
         EntityWolfCreeper entitywolf = (EntityWolfCreeper) entitylivingbaseIn;
         this.wolfTail.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.wolfBody.setRotationPoint(0.0F, 14.0F, 2.0F);
-        this.wolfBody.rotateAngleX = ((float) Math.PI / 2F);
+        this.wolfBody.rotateAngleX = (float) Math.PI / 2F;
         this.wolfMane.setRotationPoint(-1.0F, 14.0F, -3.0F);
         this.wolfMane.rotateAngleX = this.wolfBody.rotateAngleX;
         this.wolfTail.setRotationPoint(-1.0F, 12.0F, 8.0F);
