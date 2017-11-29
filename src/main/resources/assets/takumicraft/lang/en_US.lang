@@ -247,6 +247,8 @@ entity.rushcreeper.name=Rush Creeper
 entity.rushcreeper.desc=Rush!! Faster than wind!!
 entity.birdcreeper.name=Bird Creeper
 entity.birdcreeper.desc=A creeper looks like a bird. Fly, and drop a egg.
+entity.callcreeper.name=Call Creeper
+entity.callcreeper.desc=Call of creeper, it makes destroying around.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

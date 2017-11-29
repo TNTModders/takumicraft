@@ -247,6 +247,8 @@ entity.rushcreeper.name=突匠
 entity.rushcreeper.desc=その匠、最強につき。
 entity.birdcreeper.name=鳥匠
 entity.birdcreeper.desc=鳥型の匠。飛ぶ鳥も落とす、タマゴばくだんは怒りとともに。
+entity.callcreeper.name=呼匠
+entity.callcreeper.desc=この匠の呼び声、全ての破壊の始まりか、辺り一面爆発の音。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
