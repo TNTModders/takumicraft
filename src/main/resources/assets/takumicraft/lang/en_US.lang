@@ -242,9 +242,11 @@ entity.annivcreeper.desc=Anniversary powered! Eat cake, celebration for you!
 entity.leadcreeper.name=Lead Creeper
 entity.leadcreeper.desc=A leader of creepers, gathering everybody.
 entity.catcreeper.name=Cat Creeper
-entity.catcreeper.desc=Creepers' natural enemy? No, this is a friend for creepers.
+entity.catcreeper.desc=A creeper looks like a cat. enemy? No, this is a friend for creepers.
 entity.rushcreeper.name=Rush Creeper
 entity.rushcreeper.desc=Rush!! Faster than wind!!
+entity.birdcreeper.name=Bird Creeper
+entity.birdcreeper.desc=A creeper looks like a bird. Fly, and drop a egg.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

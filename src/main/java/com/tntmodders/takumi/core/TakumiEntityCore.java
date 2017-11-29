@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
+import com.tntmodders.takumi.entity.item.EntityTakumiExpEgg;
 import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
 import com.tntmodders.takumi.entity.item.EntityTakumiSnowBall;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -167,6 +168,7 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"), EntityTakumiArrow.class, "takumiarrow", 900, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumisnowball"), EntityTakumiSnowBall.class, "takumiasnowball", 901, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumipotion"), EntityTakumiPotion.class, "takumipotion", 902, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiexpegg"), EntityTakumiExpEgg.class, "takumiexpegg", 903, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -178,12 +180,13 @@ public class TakumiEntityCore {
             }
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiSnowBall.class, manager -> new RenderSnowball<>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiExpEgg.class, manager -> new RenderSnowball<>(manager, Items.EGG, Minecraft.getMinecraft().getRenderItem()));
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
         @Override
         public int compare(EntityHolder o1, EntityHolder o2) {
-            return o1.entity.getRegisterID() < o2.entity.getRegisterID() ? -1 : 1;
+            return Integer.compare(o1.entity.getRegisterID(), o2.entity.getRegisterID());
         }
     }
 
