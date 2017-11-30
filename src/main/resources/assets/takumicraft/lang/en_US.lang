@@ -253,6 +253,8 @@ entity.chestcreeper.name=Chest Creeper
 entity.chestcreeper.desc=All treasures are inside this. Present or explode.
 entity.uppercreeper.name=Upper Creeper
 entity.uppercreeper.desc=Fly away to the sky, whether it will or not is up to you.
+entity.gorgeouscreeper.name=Gorgeous Creeper
+entity.gorgeouscreeper.desc=Gorgeous! A marvelous fireworks... and so on!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

@@ -253,6 +253,8 @@ entity.chestcreeper.name=チェスト匠
 entity.chestcreeper.desc=宝物は、ここに全て置いてきた。危険を覚悟で、いざ挑め。
 entity.uppercreeper.name=アッパー匠
 entity.uppercreeper.desc=上昇！遠方！史上最高！
+entity.gorgeouscreeper.name=烈華匠
+entity.gorgeouscreeper.desc=烈火のように、咲き誇れ、匠の花火......と、あと何か。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
