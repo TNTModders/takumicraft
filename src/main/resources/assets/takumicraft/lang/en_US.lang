@@ -251,6 +251,8 @@ entity.callcreeper.name=Call Creeper
 entity.callcreeper.desc=Call of creeper, it makes destroying around.
 entity.chestcreeper.name=Chest Creeper
 entity.chestcreeper.desc=All treasures are inside this. Present or explode.
+entity.uppercreeper.name=Upper Creeper
+entity.uppercreeper.desc=Fly away to the sky, whether it will or not is up to you.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

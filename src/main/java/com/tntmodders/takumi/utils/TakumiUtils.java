@@ -162,52 +162,55 @@ public class TakumiUtils {
         return files;
     }
 
-   /* public static List<Class> getListClass(String path) {
-        List<Class> files = new ArrayList<>();
-        ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-        URL url = loader.getResource(path);
-        if (url.getProtocol().equals("jar")) {
-            String[] strings = url.getPath().split(":");
-            String leadPath = strings[strings.length - 1].split("!")[0];
-            File f = new File(leadPath);
-            JarFile jarFile;
-            try {
-                Set<ClassPath.ClassInfo> set = ClassPath.from(loader).getAllClasses();
-                List<ClassPath.ClassInfo> list = new ArrayList<>();
-                TakumiCraftCore.LOGGER.info("takumiclassesoutput");
-                for (ClassPath.ClassInfo classInfo : set) {
-                    try {
-                        if (classInfo.getName().contains("com.tntmodders")) {
-                            TakumiCraftCore.LOGGER.info(classInfo.getName());
-                            files.add(classInfo.load());
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
-            File newFile = new File(packFile.toURI().getPath() + path);
-            for (File file : newFile.listFiles()) {
-                ClassLoader loader0 = TakumiCraftCore.class.getClassLoader();
-                Class clazz = null;
-                try {
-                    clazz = loader0.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                files.add(clazz);
-            }
-        }
-        return files;
-    }*/
-
+    /* public static List<Class> getListClass(String path) {
+         List<Class> files = new ArrayList<>();
+         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+         URL url = loader.getResource(path);
+         if (url.getProtocol().equals("jar")) {
+             String[] strings = url.getPath().split(":");
+             String leadPath = strings[strings.length - 1].split("!")[0];
+             File f = new File(leadPath);
+             JarFile jarFile;
+             try {
+                 Set<ClassPath.ClassInfo> set = ClassPath.from(loader).getAllClasses();
+                 List<ClassPath.ClassInfo> list = new ArrayList<>();
+                 TakumiCraftCore.LOGGER.info("takumiclassesoutput");
+                 for (ClassPath.ClassInfo classInfo : set) {
+                     try {
+                         if (classInfo.getName().contains("com.tntmodders")) {
+                             TakumiCraftCore.LOGGER.info(classInfo.getName());
+                             files.add(classInfo.load());
+                         }
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                 }
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+         } else {
+             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
+             File newFile = new File(packFile.toURI().getPath() + path);
+             for (File file : newFile.listFiles()) {
+                 ClassLoader loader0 = TakumiCraftCore.class.getClassLoader();
+                 Class clazz = null;
+                 try {
+                     clazz = loader0.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
+                 } catch (ClassNotFoundException e) {
+                     e.printStackTrace();
+                 }
+                 files.add(clazz);
+             }
+         }
+         return files;
+     }*/
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy) {
+        TakumiUtils.takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, 1);
+    }
+
+    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy, double amp) {
         boolean flg = world instanceof WorldServer;
-        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy);
+        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp);
         if (ForgeEventFactory.onExplosionStart(world, explosion)) {
             return;
         }
