@@ -255,6 +255,8 @@ entity.uppercreeper.name=アッパー匠
 entity.uppercreeper.desc=上昇！遠方！史上最高！
 entity.gorgeouscreeper.name=烈華匠
 entity.gorgeouscreeper.desc=烈火のように、咲き誇れ、匠の花火......と、あと何か。
+entity.luckcreeper.name=福匠
+entity.luckcreeper.desc=善良なる匠。"絶対に"攻撃してはいけない、もしも倒せば―。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -307,6 +309,7 @@ item.banner.creeper.white=白色の匠模様
 
 #other
 takumicraft.egg.name=スポーンエッグ
+death.attack.takumicraft.luck=%1$s は福匠を倒してしまった、当然の報いである。
 
 #config
 config.takumicraft.category.general=匠Craft設定

@@ -255,6 +255,8 @@ entity.uppercreeper.name=Upper Creeper
 entity.uppercreeper.desc=Fly away to the sky, whether it will or not is up to you.
 entity.gorgeouscreeper.name=Gorgeous Creeper
 entity.gorgeouscreeper.desc=Gorgeous! A marvelous fireworks... and so on!
+entity.luckcreeper.name=Luck Creeper
+entity.luckcreeper.desc=You were lucky if you found this creeper, but when you kill him...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -309,7 +311,7 @@ item.banner.creeper.white=White Creeper Charge
 
 #other
 takumicraft.egg.name=Spawn Eggs
-
+death.attack.takumicraft.luck=%1$s should be above criticism killing Luck Creeper.
 
 #config
 config.takumicraft.category.general=TakumiCraft Config
