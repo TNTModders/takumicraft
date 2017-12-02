@@ -94,7 +94,7 @@ public class TakumiEntityCore {
             if (entity.isCustomSpawn()) {
                 entity.customSpawn();
             } else if (entity.takumiRank().getSpawnWeight() != 0) {
-                EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 3, 20, EnumCreatureType.MONSTER, biomes.toArray(new Biome[biomes.size()]));
+                EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 5, 20, EnumCreatureType.MONSTER, biomes.toArray(new Biome[biomes.size()]));
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiModelCore.registerEntityRender(clazz, entity);

@@ -48,7 +48,7 @@ public interface ITakumiEntity {
 
     enum EnumTakumiRank {
         LOW(1, 5, 10, 75),
-        MID(2, 10, 50, 10),
+        MID(2, 10, 50, 25),
         HIGH(3, 100, 250, 0),
         BOSS(4, 500, 500, 0),
         TAKUMI(0, 0, 0, 0);
@@ -121,6 +121,7 @@ public interface ITakumiEntity {
         private final int id;
         private boolean isMagic = false;
         private boolean isDest = false;
+
         EnumTakumiType(int i, boolean dest, boolean magic) {
             this(i);
             this.isDest = dest;
@@ -167,12 +168,7 @@ public interface ITakumiEntity {
         }
 
         private boolean getStrongMD(EnumTakumiType enemyType) {
-            if (!this.isDest && !this.isMagic && !enemyType.isDest && !enemyType.isMagic) {
-                return true;
-            } else if (this.isDest && enemyType.isMagic || this.isMagic && enemyType.isMagic) {
-                return true;
-            }
-            return false;
+            return !this.isDest && !this.isMagic && !enemyType.isDest && !enemyType.isMagic || this.isDest && enemyType.isMagic || this.isMagic && enemyType.isMagic;
         }
     }
 }
