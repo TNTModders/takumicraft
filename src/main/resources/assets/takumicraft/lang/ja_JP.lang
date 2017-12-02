@@ -257,6 +257,8 @@ entity.gorgeouscreeper.name=烈華匠
 entity.gorgeouscreeper.desc=烈火のように、咲き誇れ、匠の花火......と、あと何か。
 entity.luckcreeper.name=福匠
 entity.luckcreeper.desc=善良なる匠。"絶対に"攻撃してはいけない、もしも倒せば―。
+entity.onecreeper.name=一匠
+entity.onecreeper.desc=命は一つ、この匠は一撃に賭ける。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

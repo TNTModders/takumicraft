@@ -257,6 +257,8 @@ entity.gorgeouscreeper.name=Gorgeous Creeper
 entity.gorgeouscreeper.desc=Gorgeous! A marvelous fireworks... and so on!
 entity.luckcreeper.name=Luck Creeper
 entity.luckcreeper.desc=You were lucky if you found this creeper, but when you kill him...
+entity.onecreeper.name=One Creeper
+entity.onecreeper.desc=One Creeper, one health.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
