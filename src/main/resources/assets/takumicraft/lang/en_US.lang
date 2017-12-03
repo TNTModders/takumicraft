@@ -263,6 +263,8 @@ entity.antinomycreeper.name=Antinomy Creeper
 entity.antinomycreeper.desc=Fire and ice, this creeper can use two types of magic conflicts.
 entity.bigfishcreeper.name=BigFish Creeper
 entity.bigfishcreeper.desc=Not tiny, but big. Giant-powered fish explode the ore.
+entity.bedcreeper.name=Bed Creeper
+entity.bedcreeper.desc=Bed always detonates, doesn't it?
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
