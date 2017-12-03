@@ -98,8 +98,8 @@ public class TakumiEvents {
                     }
                     event.getWorld().setBlockToAir(pos);
                 });
+                event.getAffectedBlocks().clear();
             }
-            event.getAffectedBlocks().clear();
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {

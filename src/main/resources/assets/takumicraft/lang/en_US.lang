@@ -266,6 +266,8 @@ entity.bigfishcreeper.name=BigFish Creeper
 entity.bigfishcreeper.desc=Not tiny, but big. Giant-powered fish explode the ore.
 entity.bedcreeper.name=Bed Creeper
 entity.bedcreeper.desc=Bed always detonates, doesn't it?
+entity.acidcreeper.name=Acid Creeper
+entity.acidcreeper.desc=All blocks going to acid...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

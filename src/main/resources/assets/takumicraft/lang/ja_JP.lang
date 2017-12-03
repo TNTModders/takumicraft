@@ -266,6 +266,9 @@ entity.bigfishcreeper.name=匠大魚
 entity.bigfishcreeper.desc=小さくなく大きいシルバーフィッシュ。強大な力を得、鉱石をも穿つ。
 entity.bedcreeper.name=寝台匠
 entity.bedcreeper.desc=ベッドって爆発物だろ？ネザーみたいにさ！
+entity.acidcreeper.name=腐匠
+entity.acidcreeper.desc=沈め、沈め、腐蝕に沈め。
+
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
