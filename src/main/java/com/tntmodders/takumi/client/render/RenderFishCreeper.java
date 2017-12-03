@@ -38,6 +38,7 @@ public class RenderFishCreeper<T extends EntityFishCreeper> extends RenderLiving
      */
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
+        GlStateManager.scale(entitylivingbaseIn.getSizeAmp(), entitylivingbaseIn.getSizeAmp(), entitylivingbaseIn.getSizeAmp());
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
@@ -50,7 +51,7 @@ public class RenderFishCreeper<T extends EntityFishCreeper> extends RenderLiving
 
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/fishcreeper.png");
     }
 
     @Override

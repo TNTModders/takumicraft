@@ -3,6 +3,7 @@ package com.tntmodders.takumi.client.gui;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -33,7 +34,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,14 +43,13 @@ public class GuiTakumiBook extends GuiScreen {
     private static final ResourceLocation BOOK_GUI_TEXTURES = new ResourceLocation("textures/gui/book.png");
     private static final ResourceLocation BOOK_GUI_TEXTURES_SP = new ResourceLocation(TakumiCraftCore.MODID, "textures/book/book.png");
     private final EntityPlayer player;
-    private final int bookImageWidth = 192;
-    private final int bookImageHeight = 192;
+    private final int bookImage = 192;
     private int time = 0;
     private GuiTakumiBook.NextPageButton buttonNextPage;
     private GuiTakumiBook.NextPageButton buttonPreviousPage;
     private GuiButton buttonDone;
     private int currPage;
-    private int bookTotalPages = 1;
+    private int bookTotalPages;
 
     public GuiTakumiBook(EntityPlayer player) {
         this.player = player;
@@ -72,23 +71,23 @@ public class GuiTakumiBook extends GuiScreen {
             int i = (this.width - 192) / 2;
             int j = 2;
             this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
-            this.drawTexturedModalRect(i, 2, 0, 0, this.bookImageWidth, this.bookImageHeight);
+            this.drawTexturedModalRect(i, 2, 0, 0, this.bookImage, this.bookImage);
 
             ResourceLocation location = flg && takumiEntity.takumiType().getId() < 8 ? new ResourceLocation(TakumiCraftCore.MODID, "textures/book/" + takumiEntity.takumiType().getName() + ".png")
                     : new ResourceLocation(TakumiCraftCore.MODID, "textures/book/underfound.png");
             this.mc.getTextureManager().bindTexture(location);
-            this.drawTexturedModalRect(i, 2, 0, 0, this.bookImageWidth, this.bookImageHeight);
+            this.drawTexturedModalRect(i, 2, 0, 0, this.bookImage, this.bookImage);
 
             if (flg) {
                 if (takumiEntity.takumiType().isMagic()) {
                     ResourceLocation location2 = new ResourceLocation(TakumiCraftCore.MODID, "textures/book/magic.png");
                     this.mc.getTextureManager().bindTexture(location2);
-                    this.drawTexturedModalRect(i, 2, 0, 0, this.bookImageWidth, this.bookImageHeight);
+                    this.drawTexturedModalRect(i, 2, 0, 0, this.bookImage, this.bookImage);
                 }
                 if (takumiEntity.takumiType().isDest()) {
                     ResourceLocation location2 = new ResourceLocation(TakumiCraftCore.MODID, "textures/book/dest.png");
                     this.mc.getTextureManager().bindTexture(location2);
-                    this.drawTexturedModalRect(i, 2, 0, 0, this.bookImageWidth, this.bookImageHeight);
+                    this.drawTexturedModalRect(i, 2, 0, 0, this.bookImage, this.bookImage);
                 }
             }
 
@@ -106,17 +105,17 @@ public class GuiTakumiBook extends GuiScreen {
             this.fontRenderer.drawSplitString(s5, i + 80, 34, 70, 0);
             this.fontRenderer.drawSplitString(s6, i + 40, 100, 116, 0);
             super.drawScreen(mouseX, mouseY, partialTicks);
-            int k = (this.width - this.bookImageWidth) / 2;
+            int k = (this.width - this.bookImage) / 2;
             byte b0 = 2;
             if (base != null) {
-                this.renderEntity(k + 51, b0 + 75, 30, (float) (k + 51) - this.bookImageWidth, (float) (b0 + 75 - 50) - this.bookImageHeight, base, flg);
+                this.renderEntity(k + 51, b0 + 75, 30, (float) (k + 51) - this.bookImage, (float) (b0 + 75 - 50) - this.bookImage, base, flg);
             }
             GL11.glPopMatrix();
         } else {
             this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES_SP);
             GL11.glPushMatrix();
             GL11.glScaled(1.85, 1, 1);
-            this.drawTexturedModalRect(2, 2, 0, 0, this.mc.displayWidth, this.bookImageHeight);
+            this.drawTexturedModalRect(2, 2, 0, 0, this.mc.displayWidth, this.bookImage);
             GL11.glPopMatrix();
             super.drawScreen(mouseX, mouseY, partialTicks);
         }
@@ -192,21 +191,29 @@ public class GuiTakumiBook extends GuiScreen {
         GL11.glPopMatrix();
     }
 
-    private void renderSize(EntityLivingBase entity) {
-        if (this.currPage == Integer.MAX_VALUE) {
-            GL11.glScaled(0.3, 0.3, 0.3);
-        }
-        if (entity instanceof EntitySquidCreeper) {
-            GL11.glScaled(0.65, 0.65, 0.65);
-            GL11.glTranslated(-1, -1, 0);
-        } else if (entity instanceof EntityGhastCreeper) {
-            GL11.glScaled(0.2, 0.2, 0.2);
-        } else if (entity instanceof EntityEmeraldCreeper) {
-            GL11.glScaled(0.5, 0.5, 0.5);
-        } else if (entity instanceof EntityDarkCreeper) {
-            GL11.glScaled(0.7, 0.7, 0.7);
-        } else if (entity instanceof EntityRareCreeper) {
-            GL11.glScaled(0.3d, 0.3d, 0.3d);
+    @Override
+    protected void actionPerformed(GuiButton button) {
+        if (button.enabled) {
+            if (button.id == 900) {
+                this.mc.displayGuiScreen(null);
+            } else if (button.id == 901) {
+                if (this.currPage < this.bookTotalPages - 1) {
+                    ++this.currPage;
+                }
+            } else if (button.id == 902) {
+                if (this.currPage > 0) {
+                    --this.currPage;
+                }
+            } else if (button.id == 903) {
+                this.currPage = this.currPage == Integer.MAX_VALUE ? 0 : Integer.MAX_VALUE;
+                this.buttonNextPage.enabled = !this.buttonNextPage.enabled;
+                this.buttonPreviousPage.enabled = !this.buttonPreviousPage.enabled;
+            } else if (button.id < TakumiEntityCore.getEntityList().size() && this.currPage == Integer.MAX_VALUE) {
+                this.currPage = button.id;
+                this.buttonNextPage.enabled = !this.buttonNextPage.enabled;
+                this.buttonPreviousPage.enabled = !this.buttonPreviousPage.enabled;
+            }
+            this.updateButtons();
         }
     }
 
@@ -273,36 +280,10 @@ public class GuiTakumiBook extends GuiScreen {
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException {
-        if (button.enabled) {
-            if (button.id == 900) {
-                this.mc.displayGuiScreen(null);
-            } else if (button.id == 901) {
-                if (this.currPage < this.bookTotalPages - 1) {
-                    ++this.currPage;
-                }
-            } else if (button.id == 902) {
-                if (this.currPage > 0) {
-                    --this.currPage;
-                }
-            } else if (button.id == 903) {
-                this.currPage = this.currPage == Integer.MAX_VALUE ? 0 : Integer.MAX_VALUE;
-                this.buttonNextPage.enabled = !this.buttonNextPage.enabled;
-                this.buttonPreviousPage.enabled = !this.buttonPreviousPage.enabled;
-            } else if (button.id < TakumiEntityCore.getEntityList().size() && this.currPage == Integer.MAX_VALUE) {
-                this.currPage = button.id;
-                this.buttonNextPage.enabled = !this.buttonNextPage.enabled;
-                this.buttonPreviousPage.enabled = !this.buttonPreviousPage.enabled;
-            }
-            this.updateButtons();
-        }
-    }
-
-    @Override
     public void initGui() {
         this.buttonList.clear();
         this.buttonDone = this.addButton(new GuiButton(900, this.width / 2 - 100, 196, 200, 20, I18n.format("gui.done")));
-        int i = (this.width - this.bookImageWidth) / 2;
+        int i = (this.width - this.bookImage) / 2;
         int j = 2;
         this.buttonNextPage = this.addButton(new NextPageButton(901, i + 120, 156, true));
         this.buttonPreviousPage = this.addButton(new NextPageButton(902, i + 38, 156, false));
@@ -312,6 +293,24 @@ public class GuiTakumiBook extends GuiScreen {
             this.addButton(new CreeperButton(t, (this.width - 11 * 40) / 2 + 11 * (t % 40), j + 15 + 25 * (int) Math.floor(t / 40)));
         }
         this.updateButtons();
+    }
+
+    private void renderSize(EntityLivingBase entity) {
+        if (this.currPage == Integer.MAX_VALUE) {
+            GL11.glScaled(0.3, 0.3, 0.3);
+        }
+        if (entity instanceof EntityTakumiAbstractCreeper && ((EntityTakumiAbstractCreeper) entity).getSizeAmp() != 1) {
+            double d = ((EntityTakumiAbstractCreeper) entity).getSizeAmp();
+            GL11.glScaled(1 / d, 1 / d, 1 / d);
+        }
+        if (entity instanceof EntitySquidCreeper) {
+            GL11.glScaled(0.65, 0.65, 0.65);
+            GL11.glTranslated(-1, -1, 0);
+        } else if (entity instanceof EntityGhastCreeper) {
+            GL11.glScaled(0.2, 0.2, 0.2);
+        } else if (entity instanceof EntityDarkCreeper) {
+            GL11.glScaled(0.7, 0.7, 0.7);
+        }
     }
 
     @Override

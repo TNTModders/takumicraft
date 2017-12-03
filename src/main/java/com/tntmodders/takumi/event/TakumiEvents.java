@@ -121,21 +121,29 @@ public class TakumiEvents {
             ((EntityCreeper) e.getEntityLiving()).tasks.addTask(0, new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
         }
         if (!e.getWorld().isRemote) {
-            if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntitySlime) {
+            if (e.getEntityLiving().getRNG().nextInt(5) == 0 && e.getEntityLiving() instanceof EntitySlime) {
                 EntitySlimeCreeper slimeCreeper = new EntitySlimeCreeper(e.getWorld());
                 slimeCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 slimeCreeper.setSlimeSize(e.getEntityLiving().getRNG().nextBoolean() ? 1 : e.getEntityLiving().getRNG().nextBoolean() ? 2 : 4, false);
                 if (slimeCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(slimeCreeper);
+                    e.setResult(Event.Result.DENY);
                 }
-                e.setResult(Event.Result.DENY);
+            }
+            if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntityFishCreeper) {
+                EntityBigFishCreeper bigFishCreeper = new EntityBigFishCreeper(e.getWorld());
+                bigFishCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                if (bigFishCreeper.getCanSpawnHere()) {
+                    e.getWorld().spawnEntity(bigFishCreeper);
+                    e.setResult(Event.Result.DENY);
+                }
             } else if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntitySquid) {
                 EntitySquidCreeper squidCreeper = new EntitySquidCreeper(e.getWorld());
                 squidCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (squidCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(squidCreeper);
+                    e.setResult(Event.Result.DENY);
                 }
-                e.setResult(Event.Result.DENY);
             } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class || e.getEntityLiving().getClass() == EntityZombieVillagerCreeper.class) &&
                     (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT_HILLS ||
                             e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.MUTATED_DESERT)) {
@@ -143,8 +151,8 @@ public class TakumiEvents {
                 huskCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (huskCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(huskCreeper);
+                    e.setResult(Event.Result.DENY);
                 }
-                e.setResult(Event.Result.DENY);
             } else if (e.getEntityLiving().getClass() == EntitySkeletonCreeper.class &&
                     (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_MOUNTAINS || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_PLAINS ||
                             e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_BEACH || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_TAIGA ||
@@ -154,15 +162,15 @@ public class TakumiEvents {
                 strayCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (strayCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(strayCreeper);
+                    e.setResult(Event.Result.DENY);
                 }
-                e.setResult(Event.Result.DENY);
-            } else if (e.getEntityLiving().getRNG().nextInt(10) == 0 && e.getEntityLiving() instanceof EntityBat) {
+            } else if (e.getEntityLiving().getRNG().nextInt(5) == 0 && e.getEntityLiving() instanceof EntityBat) {
                 EntityBatCreeper batCreeper = new EntityBatCreeper(e.getWorld());
                 batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (batCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(batCreeper);
+                    e.setResult(Event.Result.DENY);
                 }
-                e.setResult(Event.Result.DENY);
             }
         }
     }

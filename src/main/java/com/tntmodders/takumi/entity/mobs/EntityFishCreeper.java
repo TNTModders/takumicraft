@@ -29,7 +29,7 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
     @Override

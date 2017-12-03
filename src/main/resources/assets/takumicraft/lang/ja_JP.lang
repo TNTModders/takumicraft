@@ -261,6 +261,8 @@ entity.onecreeper.name=一匠
 entity.onecreeper.desc=命は一つ、この匠は一撃に賭ける。
 entity.antinomycreeper.name=氷炎ノ匠
 entity.antinomycreeper.desc=相反する力を宿し開放せよ。この匠、災いを呼ぶ者。
+entity.bigfishcreeper.name=匠大魚
+entity.bigfishcreeper.desc=小さくなく大きいシルバーフィッシュ。強大な力を得、鉱石をも穿つ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
