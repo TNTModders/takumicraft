@@ -259,6 +259,8 @@ entity.luckcreeper.name=福匠
 entity.luckcreeper.desc=善良なる匠。"絶対に"攻撃してはいけない、もしも倒せば―。
 entity.onecreeper.name=一匠
 entity.onecreeper.desc=命は一つ、この匠は一撃に賭ける。
+entity.antinomycreeper.name=氷炎ノ匠
+entity.antinomycreeper.desc=相反する力を宿し開放せよ。この匠、災いを呼ぶ者。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

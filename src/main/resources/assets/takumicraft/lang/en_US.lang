@@ -259,6 +259,8 @@ entity.luckcreeper.name=Luck Creeper
 entity.luckcreeper.desc=You were lucky if you found this creeper, but when you kill him...
 entity.onecreeper.name=One Creeper
 entity.onecreeper.desc=One Creeper, one health.
+entity.antinomycreeper.name=Antinomy Creeper
+entity.antinomycreeper.desc=Fire and ice, this creeper can use two types of magic conflicts.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
