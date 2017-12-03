@@ -1,6 +1,8 @@
 package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiAcid;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
@@ -12,6 +14,7 @@ import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,8 +30,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -77,6 +82,25 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(ExplosionEvent.Detonate event) {
+        if (!event.getWorld().isRemote) {
+            if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() == TakumiBlockCore.ACID_BLOCK) {
+                IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
+                int i = state.getValue(BlockTakumiAcid.META) + 1;
+                event.getAffectedBlocks().forEach(pos -> {
+                    if (i < 16) {
+                        for (EnumFacing facing : EnumFacing.values()) {
+                            if (!event.getAffectedBlocks().contains(pos.offset(facing)) && !event.getWorld().isAirBlock(pos.offset(facing))
+                                    && event.getWorld().getBlockState(pos.offset(facing)).getBlockHardness(event.getWorld(), pos.offset(facing)) != -1
+                                    && event.getWorld().getBlockState(pos.offset(facing)).getBlock() != TakumiBlockCore.ACID_BLOCK) {
+                                event.getWorld().setBlockState(pos.offset(facing), TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META, i));
+                            }
+                        }
+                    }
+                    event.getWorld().setBlockToAir(pos);
+                });
+            }
+            event.getAffectedBlocks().clear();
+        }
         if (event.getExplosion() instanceof TakumiExplosion) {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
                 AbstractEntityTakumiGrenade grenade = (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();

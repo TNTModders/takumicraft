@@ -65,6 +65,7 @@ tile.creeperwool.green.name=Creeper Green Wool
 tile.creeperwool.red.name=Creeper Red Wool
 tile.creeperwool.black.name=Creeper Black Wool
 tile.creepersandstarlow.name=Creeper SandStar Raw
+tile.acidblock.name=Acid Block
 
 #item
 item.takumibook.name=Creeper Book

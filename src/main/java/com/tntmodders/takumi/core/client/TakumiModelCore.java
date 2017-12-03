@@ -1,9 +1,11 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.tileentity.RenderAcidBlock;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.tileentity.TileEntityAcidBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -98,5 +101,9 @@ public class TakumiModelCore {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, name), "fluid");
             }
         });
+    }
+
+    public static void registerTileRender() {
+        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock", new RenderAcidBlock<>());
     }
 }

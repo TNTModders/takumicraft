@@ -25,6 +25,7 @@ public class TakumiBlockCore {
     public static final BlockTakumiStainedGlassPane CREEPER_STAINED_GLASS_PANE = new BlockTakumiStainedGlassPane();
     public static final Block CREEPER_WOOL = new BlockTakumiWool();
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
+    public static final Block ACID_BLOCK = new BlockTakumiAcid();
 
     public static void register(IForgeRegistry<Block> registry) {
         Class clazz = TakumiBlockCore.class;
