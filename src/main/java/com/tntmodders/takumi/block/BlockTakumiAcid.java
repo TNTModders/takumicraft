@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockTakumiAcid extends BlockContainer {
     public static final PropertyInteger META = PropertyInteger.create("acidmeta", 0, 15);
@@ -38,6 +39,11 @@ public class BlockTakumiAcid extends BlockContainer {
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(META);
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
     }
 
     @Override

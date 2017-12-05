@@ -17,7 +17,7 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 2.5f;
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
 
     @Override
