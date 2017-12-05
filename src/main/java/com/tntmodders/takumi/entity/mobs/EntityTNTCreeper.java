@@ -47,7 +47,7 @@ public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 504;
+        return 404;
     }
 
     @Override

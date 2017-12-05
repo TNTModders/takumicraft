@@ -67,7 +67,7 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 507;
+        return 407;
     }
 
     @Override

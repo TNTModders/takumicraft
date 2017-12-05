@@ -144,7 +144,7 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
 
     @Override
     public int getRegisterID() {
-        return 503;
+        return 403;
     }
 
     @Override

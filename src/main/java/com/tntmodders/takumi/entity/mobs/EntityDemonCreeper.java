@@ -93,7 +93,7 @@ public class EntityDemonCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 506;
+        return 406;
     }
 
     @Override

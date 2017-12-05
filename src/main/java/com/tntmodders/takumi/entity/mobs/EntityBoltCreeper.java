@@ -71,7 +71,7 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 501;
+        return 401;
     }
 
     @Override
