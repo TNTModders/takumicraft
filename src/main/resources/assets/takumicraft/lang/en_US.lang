@@ -270,6 +270,8 @@ entity.acidcreeper.name=Acid Creeper
 entity.acidcreeper.desc=All blocks going to acid...
 entity.piercecreeper.name=Pierce Creeper
 entity.piercecreeper.desc=Armor, wall, and ground. All things it can pierce.
+entity.kingcreeper.name=King Creeper
+entity.kingcreeper.desc=King has come, the world was bombed.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
