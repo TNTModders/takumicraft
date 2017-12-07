@@ -103,10 +103,8 @@ public class EntityCatCreeper extends EntityTakumiAbstractCreeper {
 
             IBlockState iblockstate = this.world.getBlockState(blockpos.down());
             Block block = iblockstate.getBlock();
-
-            if (block == Blocks.GRASS || block.isLeaves(iblockstate, this.world, blockpos.down())) {
-                return true;
-            }
+    
+            return block == Blocks.GRASS || block.isLeaves(iblockstate, this.world, blockpos.down());
         }
 
         return false;
