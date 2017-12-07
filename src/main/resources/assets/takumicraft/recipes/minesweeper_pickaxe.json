@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiminetool_pickaxe"
+  }
+}

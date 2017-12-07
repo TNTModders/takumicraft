@@ -79,7 +79,10 @@ item.boltstone.name=Bolt Stone
 item.takumiarmor_head.name=Creeper Armor Head
 item.takumiarmor_chest.name=Creeper Armor Chest
 item.takumiarmor_legs.name=Creeper Armor Leggings
-item.takumiarmor_feet.name=Creeper Armor Feets
+item.takumiarmor_feet.name=Creeper Armor Feet
+item.takumiminetool_pickaxe.name=Minesweeper Pickaxe
+item.takumiminetool_shovel.name=Minesweeper Shovel
+item.takumiminetool_axe.name=Minesweeper Axe
 
 #entity
 #desc max: 72 chars
@@ -297,6 +300,7 @@ advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 #enchantment
 enchantment.takumi_anti_powered=Anti-powered
 enchantment.takumi_explosion_protection=Explosion Protection
+enchantment.takumi_minesweeper=Minesweeper
 
 #potion
 takumisubsidence=Subsidence

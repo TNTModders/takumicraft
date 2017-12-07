@@ -80,6 +80,9 @@ item.takumiarmor_head.name=匠式装甲[頭]
 item.takumiarmor_chest.name=匠式装甲[胴]
 item.takumiarmor_legs.name=匠式装甲[腰]
 item.takumiarmor_feet.name=匠式装甲[足]
+item.takumiminetool_pickaxe.name=対地雷ピッケル
+item.takumiminetool_shovel.name=対地雷ショベル
+item.takumiminetool_axe.name=対地雷斧
 
 #entity
 ＃descは36文字まで。
@@ -296,6 +299,7 @@ advancements.takumicraft.slay.desc=が匠の書に追加された
 #enchantment
 enchantment.takumi_anti_powered=巨匠特攻
 enchantment.takumi_explosion_protection=爆発無効
+enchantment.takumi_minesweeper=地雷除去
 
 #potion
 takumisubsidence=潜行

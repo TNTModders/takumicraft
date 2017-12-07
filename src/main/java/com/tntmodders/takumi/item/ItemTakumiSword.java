@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTakumiSword extends ItemSword {
     public ItemTakumiSword() {
-        super(TakumiToolMaterial.ANTI_POWERED);
+        super(TakumiToolMaterial.TAKUMI_MATERIAL);
         this.setRegistryName(TakumiCraftCore.MODID, "takumisword");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumisword");

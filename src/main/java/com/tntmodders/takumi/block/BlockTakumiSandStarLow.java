@@ -62,14 +62,14 @@ public class BlockTakumiSandStarLow extends Block {
     @Deprecated
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!this.tryTouchWater(worldIn, pos, state)) {
+        if (this.tryTouchWater(worldIn, pos, state)) {
             super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         }
     }
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        if (!this.tryTouchWater(worldIn, pos, state)) {
+        if (this.tryTouchWater(worldIn, pos, state)) {
             super.onBlockAdded(worldIn, pos, state);
         }
     }
@@ -115,6 +115,6 @@ public class BlockTakumiSandStarLow extends Block {
             worldIn.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState(), 3);
             worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, false);
         }
-        return flag;
+        return !flag;
     }
 }
