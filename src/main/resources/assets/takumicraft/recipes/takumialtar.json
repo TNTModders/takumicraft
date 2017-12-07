@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "DQD",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "E": {
+      "item": "minecraft:emerald_block"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumialtar"
+  }
+}

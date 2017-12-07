@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "takumicraft:blocks/caltar_side",
+    "down": "takumicraft:blocks/caltar_bottom",
+    "up": "takumicraft:blocks/caltar_top",
+    "north": "takumicraft:blocks/caltar_side",
+    "south": "takumicraft:blocks/caltar_side",
+    "west": "takumicraft:blocks/caltar_side",
+    "east": "takumicraft:blocks/caltar_side"
+  }
+}

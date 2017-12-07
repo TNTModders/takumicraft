@@ -10,11 +10,12 @@ import java.lang.reflect.Field;
 
 public class TakumiBlockCore {
     public static final TakumiBlockCore INSTANCE = new TakumiBlockCore();
-
+    
     public static final Block CREEPER_BOMB = new BlockTakumiCreeperBomb();
     public static final Block GUNORE = new BlockTakumiGunOre();
     public static final Block HOT_SPRING = new BlockTakumiHotSpring();
-    public static final Block CREEPER_BRICK = new BlockTakumiAntiExplosion(Material.SAND, "creeperbrick", 2.5f, "pickaxe");
+    public static final Block CREEPER_BRICK = new BlockTakumiAntiExplosion(Material.SAND, "creeperbrick", 2.5f,
+            "pickaxe");
     public static final Block CREEPER_IRON = new BlockTakumiAntiExplosion(Material.IRON, "creeperiron", 5f, "pickaxe");
     public static final Block DUMMY_GUNORE = new BlockTakumiDummyGunOre();
     public static final Block CREEPER_LOG = new BlockTakumiLog();
@@ -26,7 +27,8 @@ public class TakumiBlockCore {
     public static final Block CREEPER_WOOL = new BlockTakumiWool();
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
     public static final Block ACID_BLOCK = new BlockTakumiAcid();
-
+    public static final Block CREEPER_ALTAR = new BlockTakumiAltar();
+    
     public static void register(IForgeRegistry<Block> registry) {
         Class clazz = TakumiBlockCore.class;
         for (Field field : clazz.getFields()) {

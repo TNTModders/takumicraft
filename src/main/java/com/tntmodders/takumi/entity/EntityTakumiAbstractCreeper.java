@@ -17,40 +17,42 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         this.experienceValue = this.takumiRank().getExperiment();
         this.tasks.addTask(0, new EntityAIFollowCatCreeper(this));
     }
-
+    
     @Override
     public boolean canRegister() {
         return true;
     }
-
+    
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         return true;
     }
-
+    
     @Override
     public void customSpawn() {
     }
-
+    
     @Override
     public int getPrimaryColor() {
         return 39168;
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderTakumiCreeper<>(manager);
     }
-
+    
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
-
+    
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
+            return;
+        } else if (damageSrc == DamageSource.IN_WALL && this.takumiRank().getLevel() >= 3) {
             return;
         }
        /* if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
@@ -61,7 +63,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         }*/
         super.damageEntity(damageSrc, damageAmount);
     }
-
+    
     public double getSizeAmp() {
         return 1;
     }
