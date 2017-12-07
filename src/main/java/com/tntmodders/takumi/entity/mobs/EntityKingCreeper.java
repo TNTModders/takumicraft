@@ -14,6 +14,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -100,7 +101,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         if (this.lastSource != null && this.lastSource.isProjectile() && this.lastSource.getTrueSource() != null) {
             this.projectileCounter();
         }
-        int maxID = 6;
+        int maxID = 14;
         int always = 0;
         float power = this.getPowered() ? 10 : 6;
         if (!this.world.isRemote) {
@@ -112,7 +113,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         switch (this.getAttackID()) {
-            //ランダム爆発
+            //ランダム爆発1
             case 1: {
                 if (!this.world.isRemote) {
                     for (int i = 0; i < (this.getPowered() ? 20 : 10); i++) {
@@ -221,6 +222,100 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
+            }
+            //十字爆発
+            case 7: {
+                if (!this.world.isRemote) {
+                    for (int x = -4; x <= 4; x++) {
+                        this.world.createExplosion(this, this.posX + x, this.posY, this.posZ,
+                                power / 3 * 2, true);
+                    }
+                    for (int z = -4; z <= 4; z++) {
+                        this.world.createExplosion(this, this.posX, this.posY, this.posZ + z,
+                                power / 3 * 2, true);
+                    }
+                }
+                break;
+            }
+            //ランダム爆発2
+            case 8: {
+                for (int t = 0; t <= 2 + rand.nextInt(3) * power / 5; t++) {
+                    int x = rand.nextInt(11) - 5;
+                    int y = rand.nextInt(11) - 5;
+                    int z = rand.nextInt(11) - 5;
+                    if (!this.world.isRemote)
+                        this.world.createExplosion(this, this.posX + x, this.posY + y, this.posZ + z, power / 3, true);
+                }
+                break;
+            }
+            //火薬岩の塔
+            case 9: {
+                if (!this.world.isRemote) {
+                    int x = (int) this.posX;
+                    int y = (int) this.posY;
+                    int z = (int) this.posZ;
+                    for (int t = 0; t <= 10; t++) {
+                        int v = MathHelper.getInt(this.rand, -4, 4);
+                        int w = MathHelper.getInt(this.rand, -4, 4);
+                        for (int ty = 0; ty < 6; ty++) {
+                            if (this.world.getBlockState(
+                                    new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
+                                            (int) (this.posZ + w))).getBlock() == Blocks.AIR) {
+                                this.world.setBlockState(new BlockPos((int) (this.posX + v),
+                                                (int) (this.posY + ty), (int) (this.posZ + w)),
+                                        this.rand.nextInt(20) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
+                                                TakumiBlockCore.GUNORE.getDefaultState());
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+            //回復爆発
+            case 10: {
+                if (!world.isRemote)
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, power, true);
+                this.heal(25);
+                break;
+            }
+            //多重爆発
+            case 11: {
+                if (!this.world.isRemote) {
+                    for (int t = 0; t < power; t++) {
+                        this.world.createExplosion(this, this.posX, this.posY, this.posZ, power / 1.5f, true);
+                    }
+                }
+                break;
+            }
+            //全方位火球
+            case 12: {
+                Entity var1 = this.getAttackTarget();
+                if (var1 != null) {
+                    for (int t = -18; t < 18; t++) {
+                
+                        float f1 = MathHelper.sqrt(this.getDistanceToEntity(var1)) * 0.5F;
+                        double d0 = var1.posX - this.posX;
+                        double d1 = var1.getEntityBoundingBox().minY + var1.height / 2.0F - (this.posY +
+                                this.height / 2.0F);
+                        double d2 = var1.posZ - this.posZ;
+                        EntityLargeFireball entityLargefireball = new EntityLargeFireball(this.world, this, d0 + this
+                                .rand.nextGaussian() * f1, d1, d2 + this.rand.nextGaussian() * f1);
+                        entityLargefireball.rotationYaw += t * 10;
+                        entityLargefireball.posY = this.posY + this.height / 2.0F + 0.5D;
+                        entityLargefireball.explosionPower = 2;
+                
+                        this.world.spawnEntity(entityLargefireball);
+                    }
+                } else if (!this.world.isRemote) {
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, power / 2.5f, true);
+                }
+                break;
+            }
+            //匠化爆発
+            case 13: {
+            }
+            //煙幕
+            case 14: {
             }
             default: {
                 if (!this.world.isRemote) {
