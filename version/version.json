@@ -1,0 +1,13 @@
+{
+  "homepage": "https://www.tntmodders.com/takumicraft/",
+  "1.12.2": {
+    "2.0.1-β": "test",
+    "2.0.0-β": "The first update for upgrading minecraft version."
+  },
+  "promos": {
+    "1.12.2-latest": "2.0.1-β",
+    // Declare the latest "bleeding-edge" version of your mod for the given Minecraft version
+    "1.12.2-recommended": "2.0.1-β"
+    // Declare the latest "stable" version of your mod for the given Minecraft version
+  }
+}

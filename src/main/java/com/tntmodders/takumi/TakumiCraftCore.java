@@ -31,11 +31,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.2]",
-        name = "匠Craft [ Takumi Craft ]", guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory")
+        name = "匠Craft [ Takumi Craft ]", guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory",
+        updateJSON = "https://www.tntmodders.com/takumicraft_json/version.json")
 public class TakumiCraftCore {
     //初期設定
     public static final String MODID = "takumicraft";
-    public static final String VERSION = "2.0_beta1000";
+    public static final String VERSION = "2.0.0-β";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
@@ -44,7 +45,7 @@ public class TakumiCraftCore {
     public static TakumiCraftCore TakumiInstance;
     @Mod.Metadata(MODID)
     public static ModMetadata metadata;
-
+    
     @EventHandler
     public void construct(FMLConstructionEvent event) {
        /* if (!TakumiUtils.canUseTheVersion()) {
@@ -58,50 +59,50 @@ public class TakumiCraftCore {
         TakumiFluidCore.register();
         TakumiTileEntityCore.register();
     }
-
+    
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
         TakumiModelCore.register();
     }
-
+    
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
         TakumiBlockCore.register(event.getRegistry());
     }
-
+    
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         TakumiItemCore.register(event.getRegistry());
     }
-
+    
     @SubscribeEvent
     public void registerEntities(RegistryEvent.Register<EntityEntry> event) {
         TakumiEntityCore.register();
     }
-
+    
     @SubscribeEvent
     public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
         TakumiEnchantmentCore.register(event.getRegistry());
     }
-
+    
     @SubscribeEvent
     public void registerPotions(RegistryEvent.Register<Potion> event) {
         TakumiPotionCore.register(event.getRegistry());
     }
-
+    
     @SubscribeEvent
     public void registerPotionType(RegistryEvent.Register<PotionType> event) {
         TakumiPotionCore.registerPotionType(event.getRegistry());
     }
-
+    
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         TakumiConfigCore.loadConfig(event);
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 5);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
     }
-
+    
     @EventHandler
     public void init(FMLInitializationEvent event) {
         HOLDER.register();
