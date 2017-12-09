@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.block;
 
+import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
 import com.tntmodders.takumi.item.ItemTakumiMonsterBomb;
 import com.tntmodders.takumi.tileentity.TileEntityMonsterBomb;
 import net.minecraft.block.ITileEntityProvider;
@@ -100,7 +101,7 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
             if (worldIn.isRemote) {
                 return;
             }
-            
+    
             int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack); Item item = this.getItemDropped(state, worldIn.rand, i);
             
             if (item == Items.AIR) {
@@ -132,7 +133,7 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
             if (!world.isRemote) {
                 EntityCreeper creeper = this.entityClass.getConstructor(World.class).newInstance(world);
                 creeper.setPosition(x + 0.5, y + 0.5, z + 0.5); Field field = EntityCreeper.class.getDeclaredField("fuseTime");
-                field.setAccessible(true); field.set(creeper, 1); if (world.isThundering()) {
+                field.setAccessible(true); field.set(creeper, 1); if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
                     creeper.onStruckByLightning(null);
                 } creeper.setInvisible(true); creeper.ignite(); world.spawnEntity(creeper); creeper.onUpdate();
                 creeper.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE); creeper.onUpdate();

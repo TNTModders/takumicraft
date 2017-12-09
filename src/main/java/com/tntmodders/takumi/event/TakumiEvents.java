@@ -24,9 +24,11 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Biomes;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -91,7 +93,8 @@ public class TakumiEvents {
     public void onExplosion(Detonate event) {
         if (!event.getWorld().isRemote) {
             if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() == TakumiBlockCore.ACID_BLOCK) {
-                IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())); int i = state.getValue(BlockTakumiAcid.META) + 1;
+                IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
+                int i = state.getValue(BlockTakumiAcid.META) + 1;
                 event.getAffectedBlocks().forEach(pos -> {
                     if (i < 16) {
                         for (EnumFacing facing : EnumFacing.values()) {
@@ -106,8 +109,6 @@ public class TakumiEvents {
                     } event.getWorld().setBlockToAir(pos);
                 }); event.getAffectedBlocks().clear();
             }
-        } if (!(event.getExplosion() instanceof TakumiExplosion) && event.getExplosion().getExplosivePlacedBy() != null) {
-        
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
@@ -174,7 +175,10 @@ public class TakumiEvents {
                 if (squidCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(squidCreeper); e.setResult(Result.DENY);
                 }
-            } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class || e.getEntityLiving().getClass() == EntityZombieVillagerCreeper.class) && (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT_HILLS || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.MUTATED_DESERT)) {
+            } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class || e.getEntityLiving().getClass() ==
+                    EntityZombieVillagerCreeper.class) && (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT || e.getWorld
+                    ().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT_HILLS || e.getWorld().getBiome(e.getEntityLiving().getPosition
+                    ()) == Biomes.MUTATED_DESERT)) {
                 EntityHuskCreeper huskCreeper = new EntityHuskCreeper(e.getWorld());
                 huskCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (huskCreeper.getCanSpawnHere()) {
@@ -231,6 +235,9 @@ public class TakumiEvents {
     
     @SubscribeEvent
     public void onKillEntity(LivingDeathEvent event) {
+        if (!event.getEntityLiving().world.isRemote && event.getSource().getTrueSource() instanceof EntityPlayer && TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) && event.getEntityLiving().getRNG().nextInt(10) == 0) {
+            event.getEntityLiving().dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
+        }
         if (FMLCommonHandler.instance().getSide().isClient() && (event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving()
                 instanceof EntityCreeper) && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
             boolean isOK = true;

@@ -145,7 +145,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         EntityZombieVillagerCreeper entityzombievillager = new EntityZombieVillagerCreeper(this.world);
         entityzombievillager.copyLocationAndAnglesFrom(entityvillager);
         this.world.removeEntity(entityvillager);
-        entityzombievillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityzombievillager)), newGroupData(false));
+        entityzombievillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityzombievillager)), new GroupData(false));
         entityzombievillager.setProfession(entityvillager.getProfession());
         entityzombievillager.setChild(entityvillager.isChild());
         entityzombievillager.setNoAI(entityvillager.isAIDisabled());
