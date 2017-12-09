@@ -51,7 +51,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         for (EnumDyeColor enumdyecolor : EnumDyeColor.values()) {
             DYE_TO_RGB.put(enumdyecolor, createSheepColor(enumdyecolor));
         }
-    
+
         DYE_TO_RGB.put(EnumDyeColor.WHITE, new float[]{0.9019608F, 0.9019608F, 0.9019608F});
     }
     
@@ -120,42 +120,25 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     @Nullable
     protected ResourceLocation getLootTable() {
-        {
-            switch (this.getFleeceColor()) {
-                case WHITE:
-                default:
-                    return LootTableList.ENTITIES_SHEEP_WHITE;
-                case ORANGE:
-                    return LootTableList.ENTITIES_SHEEP_ORANGE;
-                case MAGENTA:
-                    return LootTableList.ENTITIES_SHEEP_MAGENTA;
-                case LIGHT_BLUE:
-                    return LootTableList.ENTITIES_SHEEP_LIGHT_BLUE;
-                case YELLOW:
-                    return LootTableList.ENTITIES_SHEEP_YELLOW;
-                case LIME:
-                    return LootTableList.ENTITIES_SHEEP_LIME;
-                case PINK:
-                    return LootTableList.ENTITIES_SHEEP_PINK;
-                case GRAY:
-                    return LootTableList.ENTITIES_SHEEP_GRAY;
-                case SILVER:
-                    return LootTableList.ENTITIES_SHEEP_SILVER;
-                case CYAN:
-                    return LootTableList.ENTITIES_SHEEP_CYAN;
-                case PURPLE:
-                    return LootTableList.ENTITIES_SHEEP_PURPLE;
-                case BLUE:
-                    return LootTableList.ENTITIES_SHEEP_BLUE;
-                case BROWN:
-                    return LootTableList.ENTITIES_SHEEP_BROWN;
-                case GREEN:
-                    return LootTableList.ENTITIES_SHEEP_GREEN;
-                case RED:
-                    return LootTableList.ENTITIES_SHEEP_RED;
-                case BLACK:
-                    return LootTableList.ENTITIES_SHEEP_BLACK;
-            }
+        switch (this.getFleeceColor()) {
+            case WHITE:
+            default:
+                return LootTableList.ENTITIES_SHEEP_WHITE; case ORANGE:
+                return LootTableList.ENTITIES_SHEEP_ORANGE; case MAGENTA:
+                return LootTableList.ENTITIES_SHEEP_MAGENTA; case LIGHT_BLUE:
+                return LootTableList.ENTITIES_SHEEP_LIGHT_BLUE; case YELLOW:
+                return LootTableList.ENTITIES_SHEEP_YELLOW; case LIME:
+                return LootTableList.ENTITIES_SHEEP_LIME; case PINK:
+                return LootTableList.ENTITIES_SHEEP_PINK; case GRAY:
+                return LootTableList.ENTITIES_SHEEP_GRAY; case SILVER:
+                return LootTableList.ENTITIES_SHEEP_SILVER; case CYAN:
+                return LootTableList.ENTITIES_SHEEP_CYAN; case PURPLE:
+                return LootTableList.ENTITIES_SHEEP_PURPLE; case BLUE:
+                return LootTableList.ENTITIES_SHEEP_BLUE; case BROWN:
+                return LootTableList.ENTITIES_SHEEP_BROWN; case GREEN:
+                return LootTableList.ENTITIES_SHEEP_GREEN; case RED:
+                return LootTableList.ENTITIES_SHEEP_RED; case BLACK:
+                return LootTableList.ENTITIES_SHEEP_BLACK;
         }
     }
     
@@ -187,12 +170,12 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     public List <ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         this.setSheared(true);
         int i = 1 + this.rand.nextInt(3);
-        
+    
         List <ItemStack> ret = new ArrayList <>();
         for (int j = 0; j < i; ++j) {
             ret.add(new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_WOOL), 1, this.getFleeceColor().getMetadata()));
         }
-        
+    
         this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
         return ret;
     }
@@ -246,7 +229,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
      */
     public void setSheared(boolean sheared) {
         byte b0 = this.dataManager.get(DYE_COLOR);
-        
+    
         if (sheared) {
             this.dataManager.set(DYE_COLOR, (byte) (b0 | 16));
         } else {
@@ -314,8 +297,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
-                                TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore.biomes.toArray(new Biome[0]));
     }
     
     @Override

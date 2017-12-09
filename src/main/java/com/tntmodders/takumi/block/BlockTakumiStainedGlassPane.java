@@ -6,7 +6,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemCloth;
 
-public class BlockTakumiStainedGlassPane extends BlockStainedGlassPane implements ITakumiMetaBlock {
+public class BlockTakumiStainedGlassPane extends BlockStainedGlassPane implements ITakumiItemBlock {
     
     public BlockTakumiStainedGlassPane() {
         super();

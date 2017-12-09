@@ -34,8 +34,7 @@ public class TakumiGuiFactory implements IModGuiFactory {
     private static class TakumiConfigGui extends GuiConfig {
         
         public TakumiConfigGui(GuiScreen parent) {
-            super(parent, new ConfigElement(TakumiConfigCore.cfg.getCategory(TakumiConfigCore.GENERAL)).getChildElements(), TakumiCraftCore.MODID,
-                  false, false, TakumiCraftCore.MODID);
+            super(parent, new ConfigElement(TakumiConfigCore.cfg.getCategory(TakumiConfigCore.GENERAL)).getChildElements(), TakumiCraftCore.MODID, false, false, TakumiCraftCore.MODID);
         }
     }
 }

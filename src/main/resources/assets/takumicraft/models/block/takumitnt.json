@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "takumicraft:blocks/takumitnt_bottom",
+    "top": "takumicraft:blocks/takumitnt_top",
+    "side": "takumicraft:blocks/takumitnt_side"
+  }
+}

@@ -48,7 +48,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     //from EntitySquid
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(0, new EntitySquidCreeper.AIMoveRandom(this));
+        this.tasks.addTask(0, new AIMoveRandom(this));
         this.tasks.addTask(2, new EntityAICreeperSwell(this));
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
@@ -112,7 +112,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         this.prevSquidRotation = this.squidRotation;
         this.lastTentacleAngle = this.tentacleAngle;
         this.squidRotation += this.rotationVelocity;
-    
+
         if ((double) this.squidRotation > Math.PI * 2D) {
             if (this.world.isRemote) {
                 this.squidRotation = (float) Math.PI * 2F;
@@ -151,8 +151,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
             }
         
             float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-            this.renderYawOffset +=
-                    (-((float) MathHelper.atan2(this.motionX, this.motionZ)) * (180F / (float) Math.PI) - this.renderYawOffset) * 0.1F;
+            this.renderYawOffset += (-((float) MathHelper.atan2(this.motionX, this.motionZ)) * (180F / (float) Math.PI) - this.renderYawOffset) * 0.1F;
             this.rotationYaw = this.renderYawOffset;
             this.squidYaw = (float) ((double) this.squidYaw + Math.PI * (double) this.rotateSpeed * 1.5D);
             this.squidPitch += (-((float) MathHelper.atan2((double) f1, this.motionY)) * (180F / (float) Math.PI) - this.squidPitch) * 0.1F;

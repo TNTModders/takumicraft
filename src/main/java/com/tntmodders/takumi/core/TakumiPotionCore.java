@@ -15,8 +15,8 @@ public class TakumiPotionCore {
     }
     
     public static void registerPotionType(IForgeRegistry <PotionType> event) {
-        PotionType type = new PotionType(SUBSIDENCE.getRegistryName().getResourcePath(), new PotionEffect(SUBSIDENCE, 400)).setRegistryName(
-                SUBSIDENCE.getRegistryName());
+        PotionType type = new PotionType(SUBSIDENCE.getRegistryName().getResourcePath(), new PotionEffect(SUBSIDENCE, 400)).setRegistryName
+                (SUBSIDENCE.getRegistryName());
         event.register(type);
     }
 }

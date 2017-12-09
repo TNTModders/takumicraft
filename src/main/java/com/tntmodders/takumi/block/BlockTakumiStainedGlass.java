@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemCloth;
 
-public class BlockTakumiStainedGlass extends BlockStainedGlass implements ITakumiMetaBlock {
+public class BlockTakumiStainedGlass extends BlockStainedGlass implements ITakumiItemBlock {
     
     public BlockTakumiStainedGlass() {
         super(Material.GLASS);

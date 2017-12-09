@@ -36,7 +36,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -48,8 +48,8 @@ import java.util.UUID;
 public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements EntityFlying {
     
     protected static final DataParameter <Byte> TAMED = EntityDataManager.createKey(EntityTameable.class, DataSerializers.BYTE);
-    protected static final DataParameter <Optional <UUID>> OWNER_UNIQUE_ID =
-            EntityDataManager.createKey(EntityTameable.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    protected static final DataParameter <Optional <UUID>> OWNER_UNIQUE_ID = EntityDataManager.createKey(EntityTameable.class, DataSerializers
+            .OPTIONAL_UNIQUE_ID);
     public float flap;
     public float flapSpeed;
     public float oFlapSpeed;
@@ -110,13 +110,13 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-    
+
         if (this.getOwnerId() == null) {
             compound.setString("OwnerUUID", "");
         } else {
             compound.setString("OwnerUUID", this.getOwnerId().toString());
         }
-    
+
         compound.setBoolean("Sitting", this.isSitting());
     }
     
@@ -127,14 +127,14 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         String s;
-    
+
         if (compound.hasKey("OwnerUUID", 8)) {
             s = compound.getString("OwnerUUID");
         } else {
             String s1 = compound.getString("Owner");
             s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
         }
-    
+
         this.setSitting(compound.getBoolean("Sitting"));
     }
     
@@ -291,8 +291,8 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         int k = MathHelper.floor(this.posZ);
         BlockPos blockpos = new BlockPos(i, j, k);
         Block block = this.world.getBlockState(blockpos.down()).getBlock();
-        return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight(
-                blockpos) > 8 && super.getCanSpawnHere();
+        return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight
+                (blockpos) > 8 && super.getCanSpawnHere();
     }
     
     /**
@@ -348,8 +348,8 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
             double d1 = this.rand.nextGaussian() * 0.02D;
             double d2 = this.rand.nextGaussian() * 0.02D;
             this.world.spawnParticle(enumparticletypes, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width,
-                                     this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height),
-                                     this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
+                    this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width *
+                            2.0F) - (double) this.width, d0, d1, d2);
         }
     }
     
@@ -418,7 +418,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (!this.world.isRemote && entity instanceof EntityPlayer) {
                 EntityParrot parrot = new EntityParrot(this.world);
@@ -436,8 +436,8 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
-                                TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override

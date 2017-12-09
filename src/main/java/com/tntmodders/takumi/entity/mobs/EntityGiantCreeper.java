@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityGiantCreeper extends EntityZombieCreeper {
     
@@ -44,9 +44,8 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
                     for (float f3 = -1; f3 <= 1; f3 += 0.025) {
                         if (f1 * f1 + f2 * f2 * 1.5 + f3 * f3 < 1 && f1 * f1 + f2 * f2 * 1.5 + f3 * f3 > 0.81) {
                             if (this.rand.nextInt(15) == 0) {
-                                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + f1 * 1.1 * this.ticksExisted / di,
-                                                         this.posY + f2 * 1.1 * this.ticksExisted / di, this.posZ + f3 * 1.1 * this.ticksExisted / di,
-                                                         f1 / 5, f2 / 5, f3 / 5);
+                                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + f1 * 1.1 * this.ticksExisted / di, this.posY +
+                                        f2 * 1.1 * this.ticksExisted / di, this.posZ + f3 * 1.1 * this.ticksExisted / di, f1 / 5, f2 / 5, f3 / 5);
                             }
                             int x = (int) Math.floor(this.posX + f1 * this.ticksExisted / di);
                             int y = (int) Math.floor(this.posY + f2 * this.ticksExisted / di);
@@ -150,7 +149,7 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         if (!event.getWorld().isRemote) {
             for (BlockPos pos : event.getAffectedBlocks()) {
                 event.getWorld().setBlockToAir(pos);

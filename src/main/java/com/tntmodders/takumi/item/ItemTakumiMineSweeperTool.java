@@ -27,20 +27,17 @@ import java.util.Set;
 
 public class ItemTakumiMineSweeperTool extends ItemTool {
     
-    private static final Set <Block> EFFECTIVE_ON_PICK =
-            Sets.newHashSet(Blocks.ACTIVATOR_RAIL, Blocks.COAL_ORE, Blocks.COBBLESTONE, Blocks.DETECTOR_RAIL, Blocks.DIAMOND_BLOCK,
-                            Blocks.DIAMOND_ORE, Blocks.DOUBLE_STONE_SLAB, Blocks.GOLDEN_RAIL, Blocks.GOLD_BLOCK, Blocks.GOLD_ORE, Blocks.ICE,
-                            Blocks.IRON_BLOCK, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.LAPIS_ORE, Blocks.LIT_REDSTONE_ORE,
-                            Blocks.MOSSY_COBBLESTONE, Blocks.NETHERRACK, Blocks.PACKED_ICE, Blocks.RAIL, Blocks.REDSTONE_ORE, Blocks.SANDSTONE,
-                            Blocks.RED_SANDSTONE, Blocks.STONE, Blocks.STONE_SLAB, Blocks.STONE_BUTTON, Blocks.STONE_PRESSURE_PLATE);
+    private static final Set <Block> EFFECTIVE_ON_PICK = Sets.newHashSet(Blocks.ACTIVATOR_RAIL, Blocks.COAL_ORE, Blocks.COBBLESTONE, Blocks
+            .DETECTOR_RAIL, Blocks.DIAMOND_BLOCK, Blocks.DIAMOND_ORE, Blocks.DOUBLE_STONE_SLAB, Blocks.GOLDEN_RAIL, Blocks.GOLD_BLOCK, Blocks
+            .GOLD_ORE, Blocks.ICE, Blocks.IRON_BLOCK, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.LAPIS_ORE, Blocks.LIT_REDSTONE_ORE, Blocks
+            .MOSSY_COBBLESTONE, Blocks.NETHERRACK, Blocks.PACKED_ICE, Blocks.RAIL, Blocks.REDSTONE_ORE, Blocks.SANDSTONE, Blocks.RED_SANDSTONE,
+            Blocks.STONE, Blocks.STONE_SLAB, Blocks.STONE_BUTTON, Blocks.STONE_PRESSURE_PLATE);
     
-    private static final Set <Block> EFFECTIVE_ON_SHOVEL =
-            Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW,
-                            Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);
+    private static final Set <Block> EFFECTIVE_ON_SHOVEL = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL,
+            Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);
     
-    private static final Set <Block> EFFECTIVE_ON_AXE =
-            Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN,
-                            Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE);
+    private static final Set <Block> EFFECTIVE_ON_AXE = Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST,
+            Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE);
     
     
     private static final Map <EnumTakumiTool, Set <Block>> TOOL_SET_MAP = new HashMap <>();
@@ -69,12 +66,10 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
                 Material material = state.getMaterial();
                 return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getStrVsBlock(stack, state) :
                        this.efficiencyOnProperMaterial;
-            }
-            case PICKAXE: {
+            } case PICKAXE:
                 Material material = state.getMaterial();
                 return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getStrVsBlock(stack, state) :
                        this.efficiencyOnProperMaterial;
-            }
         }
         return super.getStrVsBlock(stack, state);
     }
@@ -115,10 +110,9 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             case SHOVEL: {
                 Block block = blockIn.getBlock();
                 return block == Blocks.SNOW_LAYER || block == Blocks.SNOW;
-            }
-            case PICKAXE: {
+            } case PICKAXE:
                 Block block = blockIn.getBlock();
-                
+        
                 if (block == Blocks.OBSIDIAN) {
                     return this.toolMaterial.getHarvestLevel() > 3;
                 } else if (block != Blocks.DIAMOND_BLOCK && block != Blocks.DIAMOND_ORE) {
@@ -147,7 +141,6 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
                 } else {
                     return this.toolMaterial.getHarvestLevel() >= 2;
                 }
-            }
         }
         return super.canHarvestBlock(blockIn);
     }

@@ -9,7 +9,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class EntityColorCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (BlockPos pos : event.getAffectedBlocks()) {
             IBlockState state = this.world.getBlockState(pos);
             ArrayList <IProperty> list = Lists.newArrayList(state.getPropertyKeys());
@@ -29,11 +29,11 @@ public class EntityColorCreeper extends EntityTakumiAbstractCreeper {
                     if (property instanceof PropertyBool) {
                         state = state.withProperty(property, this.rand.nextBoolean());
                     } else if (property instanceof PropertyInteger) {
-                        state = state.withProperty(property, (int) property.getAllowedValues().toArray(new Integer[0])[this.rand.nextInt(
-                                property.getAllowedValues().size())]);
+                        state = state.withProperty(property, (int) property.getAllowedValues().toArray(new Integer[0])[this.rand.nextInt(property
+                                .getAllowedValues().size())]);
                     } else if (property instanceof PropertyEnum) {
-                        state = state.withProperty(property, (Enum) property.getAllowedValues().toArray()[this.rand.nextInt(
-                                property.getAllowedValues().size())]);
+                        state = state.withProperty(property, (Enum) property.getAllowedValues().toArray()[this.rand.nextInt(property
+                                .getAllowedValues().size())]);
                     }
                 }
             }

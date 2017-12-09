@@ -67,6 +67,8 @@ tile.creeperwool.black.name=Creeper Black Wool
 tile.creepersandstarlow.name=Creeper SandStar Raw
 tile.acidblock.name=Acid Block
 tile.takumialtar.name=Creeper Altar
+tile.takumitnt.name=Creeper TNT
+tile.monsterbomb.name=Bomb
 
 #item
 item.takumibook.name=Creeper Book
@@ -280,6 +282,7 @@ entity.kingcreeper.desc=King has come, the world was bombed.
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
 entity.takumipotion.name=Explosive Potion
+entity.takumitnt.name=Creeper TNT
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

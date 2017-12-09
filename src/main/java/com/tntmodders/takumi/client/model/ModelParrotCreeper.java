@@ -23,7 +23,7 @@ public class ModelParrotCreeper extends ModelBase {
     ModelRenderer feather;
     ModelRenderer legLeft;
     ModelRenderer legRight;
-    private ModelParrotCreeper.State state = ModelParrotCreeper.State.STANDING;
+    private State state = State.STANDING;
     
     public ModelParrotCreeper() {
         this.textureWidth = 32;
@@ -99,12 +99,12 @@ public class ModelParrotCreeper extends ModelBase {
         this.wingRight.rotationPointX = -1.5F;
         this.wingLeft.rotationPointX = 1.5F;
     
-        if (this.state != ModelParrotCreeper.State.FLYING) {
-            if (this.state == ModelParrotCreeper.State.SITTING) {
+        if (this.state != State.FLYING) {
+            if (this.state == State.SITTING) {
                 return;
             }
         
-            if (this.state == ModelParrotCreeper.State.PARTY) {
+            if (this.state == State.PARTY) {
                 float f1 = MathHelper.cos((float) entityIn.ticksExisted);
                 float f2 = MathHelper.sin((float) entityIn.ticksExisted);
                 this.head.rotationPointX = f1;
@@ -162,8 +162,7 @@ public class ModelParrotCreeper extends ModelBase {
             EntityParrotCreeper entityparrot = (EntityParrotCreeper) entitylivingbaseIn;
             if (entityparrot.getCreeperState() > 0) {
                 this.legLeft.rotateAngleZ = -0.34906584F;
-                this.legRight.rotateAngleZ = 0.34906584F;
-                this.state = ModelParrotCreeper.State.PARTY;
+                this.legRight.rotateAngleZ = 0.34906584F; this.state = State.PARTY;
                 return;
             }
             if (entityparrot.isSitting()) {
@@ -179,14 +178,12 @@ public class ModelParrotCreeper extends ModelBase {
                 ++this.legLeft.rotationPointY;
                 ++this.legRight.rotationPointY;
                 ++this.legLeft.rotateAngleX;
-                ++this.legRight.rotateAngleX;
-                this.state = ModelParrotCreeper.State.SITTING;
+                ++this.legRight.rotateAngleX; this.state = State.SITTING;
             } else if (entityparrot.isFlying()) {
                 this.legLeft.rotateAngleX += (float) Math.PI * 2F / 9F;
-                this.legRight.rotateAngleX += (float) Math.PI * 2F / 9F;
-                this.state = ModelParrotCreeper.State.FLYING;
+                this.legRight.rotateAngleX += (float) Math.PI * 2F / 9F; this.state = State.FLYING;
             } else {
-                this.state = ModelParrotCreeper.State.STANDING;
+                this.state = State.STANDING;
             }
         
             this.legLeft.rotateAngleZ = 0.0F;

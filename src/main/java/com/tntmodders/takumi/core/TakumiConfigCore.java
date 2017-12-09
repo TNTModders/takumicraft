@@ -42,9 +42,8 @@ public class TakumiConfigCore {
     public static void syncConfig() {
         // 各項目の設定値を反映させる。
         // General
-        isTransparentCeruleanCreeper = cfg.getBoolean("isTransparentCeruleanCreeper", GENERAL, isTransparentCeruleanCreeper,
-                                                      TakumiUtils.takumiTranslate("config.takumicraft.cerulean.desc"),
-                                                      "config.takumicraft.cerulean.prop");
+        isTransparentCeruleanCreeper = cfg.getBoolean("isTransparentCeruleanCreeper", GENERAL, isTransparentCeruleanCreeper, TakumiUtils
+                .takumiTranslate("config.takumicraft.cerulean.desc"), "config.takumicraft.cerulean.prop");
         // Difficulty
         //amountSmelting = (byte) cfg.getInt("amountSmelting", HOGE, amountSmelting, 1, Byte.MAX_VALUE, "Smelting amount of Aluminium Ingot from
         // Aluminium Ore.", "config.aluminium.prop.amountSmelting");

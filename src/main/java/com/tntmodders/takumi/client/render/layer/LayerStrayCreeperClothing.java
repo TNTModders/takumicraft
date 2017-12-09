@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerStrayCreeperClothing implements LayerRenderer <EntitySkeletonCreeper> {
     
-    private static final ResourceLocation STRAY_CLOTHES_TEXTURES =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/straycreeper_overlay.png");
+    private static final ResourceLocation STRAY_CLOTHES_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/straycreeper_overlay.png");
     private final RenderLivingBase <?> renderer;
     private final ModelSkeletonCreeper layerModel = new ModelSkeletonCreeper(0.25F, true);
     

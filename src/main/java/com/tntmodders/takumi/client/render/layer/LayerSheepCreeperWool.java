@@ -26,7 +26,7 @@ public class LayerSheepCreeperWool implements LayerRenderer <EntitySheepCreeper>
             float netHeadYaw, float headPitch, float scale) {
         if (!entitylivingbaseIn.getSheared() && !entitylivingbaseIn.isInvisible()) {
             this.sheepRenderer.bindTexture(TEXTURE);
-    
+
             if (entitylivingbaseIn.getRainbow()) {
                 int i1 = 25;
                 int i = entitylivingbaseIn.ticksExisted / 25 + entitylivingbaseIn.getEntityId();
@@ -36,8 +36,8 @@ public class LayerSheepCreeperWool implements LayerRenderer <EntitySheepCreeper>
                 float f = ((float) (entitylivingbaseIn.ticksExisted % 25) + partialTicks) / 25.0F;
                 float[] afloat1 = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(k));
                 float[] afloat2 = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(l));
-                GlStateManager.color(afloat1[0] * (1.0F - f) + afloat2[0] * f, afloat1[1] * (1.0F - f) + afloat2[1] * f,
-                                     afloat1[2] * (1.0F - f) + afloat2[2] * f);
+                GlStateManager.color(afloat1[0] * (1.0F - f) + afloat2[0] * f, afloat1[1] * (1.0F - f) + afloat2[1] * f, afloat1[2] * (1.0F - f) +
+                        afloat2[2] * f);
             } else {
                 float[] afloat = EntitySheep.getDyeRgb(entitylivingbaseIn.getFleeceColor());
                 GlStateManager.color(afloat[0], afloat[1], afloat[2]);

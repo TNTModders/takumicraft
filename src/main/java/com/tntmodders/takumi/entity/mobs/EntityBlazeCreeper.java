@@ -47,8 +47,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(1, new EntityAICreeperSwell(this));
-        this.tasks.addTask(4, new EntityBlazeCreeper.AIFireballAttack(this));
+        this.tasks.addTask(1, new EntityAICreeperSwell(this)); this.tasks.addTask(4, new AIFireballAttack(this));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -148,14 +147,13 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         
         if (this.world.isRemote) {
             if (this.rand.nextInt(24) == 0 && !this.isSilent()) {
-                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_BLAZE_BURN, this.getSoundCategory(),
-                                     1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
+                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_BLAZE_BURN, this.getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
             }
             
             for (int i = 0; i < 2; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width,
-                                         this.posY + this.rand.nextDouble() * (double) this.height,
-                                         this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this
+                        .posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width,
+                        0.0D, 0.0D, 0.0D);
             }
         }
         
@@ -291,9 +289,8 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
                 this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
             } else if (d0 < this.getFollowDistance() * this.getFollowDistance()) {
                 double d1 = entitylivingbase.posX - this.blaze.posX;
-                double d2 =
-                        entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (this.blaze.posY + (double)
-                                (this.blaze.height / 2.0F));
+                double d2 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (this.blaze.posY + (double)
+                        (this.blaze.height / 2.0F));
                 double d3 = entitylivingbase.posZ - this.blaze.posZ;
         
                 if (this.attackTime <= 0) {
@@ -315,9 +312,8 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
                         this.blaze.world.playEvent(null, 1018, new BlockPos((int) this.blaze.posX, (int) this.blaze.posY, (int) this.blaze.posZ), 0);
                 
                         for (int i = 0; i < 3 * (this.blaze.getPowered() ? 2 : 1); ++i) {
-                            EntitySmallFireball entitysmallfireball =
-                                    new EntitySmallFireball(this.blaze.world, this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double) f, d2,
-                                                            d3 + this.blaze.getRNG().nextGaussian() * (double) f);
+                            EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.blaze.world, this.blaze, d1 + this.blaze.getRNG
+                                    ().nextGaussian() * (double) f, d2, d3 + this.blaze.getRNG().nextGaussian() * (double) f);
                             entitysmallfireball.posY = this.blaze.posY + (double) (this.blaze.height / 2.0F) + 0.5D;
                             this.blaze.world.spawnEntity(entitysmallfireball);
                         }

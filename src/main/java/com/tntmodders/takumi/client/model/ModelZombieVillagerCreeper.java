@@ -10,14 +10,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelZombieVillagerCreeper extends ModelBiped {
-
+    
     public ModelZombieVillagerCreeper() {
         this(0.0F, 0.0F, false);
     }
-
+    
     public ModelZombieVillagerCreeper(float p_i1165_1_, float p_i1165_2_, boolean p_i1165_3_) {
         super(p_i1165_1_, 0.0F, 64, p_i1165_3_ ? 32 : 64);
-
+        
         if (p_i1165_3_) {
             this.bipedHead = new ModelRenderer(this, 0, 0);
             this.bipedHead.addBox(-4.0F, -10.0F, -4.0F, 8, 8, 8, p_i1165_1_);
@@ -57,7 +57,7 @@ public class ModelZombieVillagerCreeper extends ModelBiped {
             this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, p_i1165_1_);
         }
     }
-
+    
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how

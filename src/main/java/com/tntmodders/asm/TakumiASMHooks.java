@@ -1,11 +1,18 @@
 package com.tntmodders.asm;
 
+import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
 import java.lang.reflect.Field;
 
 public class TakumiASMHooks {
+    
     
     public static void TakumiExplodeHook(EntityCreeper creeper) {
         try {
@@ -18,6 +25,15 @@ public class TakumiASMHooks {
             }
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public static void TakumiRenderByItemHook(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof ItemBlock && Block.getBlockFromItem(itemStack.getItem()) instanceof BlockTakumiMonsterBomb) {
+            GlStateManager.pushMatrix(); GlStateManager.disableCull();
+            TileEntityRendererDispatcher.instance.render(((BlockTakumiMonsterBomb) Block.getBlockFromItem(itemStack.getItem()))
+                    .tileEntityMonsterBomb, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+            GlStateManager.enableCull(); GlStateManager.popMatrix();
         }
     }
 }

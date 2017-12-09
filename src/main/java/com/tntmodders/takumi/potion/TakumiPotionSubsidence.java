@@ -20,8 +20,8 @@ public class TakumiPotionSubsidence extends Potion {
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
         World world = entityLivingBaseIn.world;
         BlockPos pos = new BlockPos(entityLivingBaseIn).down();
-        if (world.getBlockState(pos).getBlockHardness(world, pos) < 0 || world.getBlockState(pos).getBlock() == Blocks.BEDROCK || world.getBlockState(
-                pos.down()).getBlockHardness(world, pos.down()) < 0 || world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
+        if (world.getBlockState(pos).getBlockHardness(world, pos) < 0 || world.getBlockState(pos).getBlock() == Blocks.BEDROCK || world
+                .getBlockState(pos.down()).getBlockHardness(world, pos.down()) < 0 || world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
             entityLivingBaseIn.noClip = false;
         } else {
             entityLivingBaseIn.noClip = true;

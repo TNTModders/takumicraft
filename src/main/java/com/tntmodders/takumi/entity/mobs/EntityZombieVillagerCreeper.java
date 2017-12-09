@@ -25,11 +25,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,7 +48,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     private int conversionTime;
     private UUID converstionStarter;
     @Nullable
-    private VillagerRegistry.VillagerProfession prof;
+    private VillagerProfession prof;
     
     public EntityZombieVillagerCreeper(World worldIn) {
         super(worldIn);
@@ -64,7 +66,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         if (!this.world.isRemote && this.isConverting()) {
             int i = this.getConversionProgress();
             this.conversionTime -= i;
-    
+
             if (this.conversionTime <= 0) {
                 this.finishConversion();
             }
@@ -114,8 +116,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         int i = 1;
         
         if (this.rand.nextFloat() < 0.01F) {
-            int j = 0;
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+            int j = 0; MutableBlockPos blockpos$mutableblockpos = new MutableBlockPos();
             
             for (int k = (int) this.posX - 4; k < (int) this.posX + 4 && j < 14; ++k) {
                 for (int l = (int) this.posY - 4; l < (int) this.posY + 4 && j < 14; ++l) {
@@ -143,19 +144,19 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         entityvillager.setProfession(this.getForgeProfession());
         entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), null, false);
         entityvillager.setLookingForHome();
-    
+
         if (this.isChild()) {
             entityvillager.setGrowingAge(-24000);
         }
-    
+
         this.world.removeEntity(this);
         entityvillager.setNoAI(this.isAIDisabled());
-    
+
         if (this.hasCustomName()) {
             entityvillager.setCustomNameTag(this.getCustomNameTag());
             entityvillager.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
         }
-    
+
         this.world.spawnEntity(entityvillager);
     
         if (this.converstionStarter != null) {
@@ -170,7 +171,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         this.world.playEvent(null, 1027, new BlockPos((int) this.posX, (int) this.posY, (int) this.posZ), 0);
     }
     
-    public VillagerRegistry.VillagerProfession getForgeProfession() {
+    public VillagerProfession getForgeProfession() {
         if (this.prof == null) {
             this.prof = VillagerRegistry.getById(this.getProfession());
             if (this.prof == null) { return VillagerRegistry.FARMER; }
@@ -186,7 +187,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         this.dataManager.set(PROFESSION, profession);
     }
     
-    public void setForgeProfession(VillagerRegistry.VillagerProfession prof) {
+    public void setForgeProfession(VillagerProfession prof) {
         this.prof = prof;
         this.setProfession(VillagerRegistry.getId(prof));
     }
@@ -199,8 +200,8 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     public void handleStatusUpdate(byte id) {
         if (id == 16) {
             if (!this.isSilent()) {
-                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE,
-                                     this.getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
+                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, this
+                        .getSoundCategory(), 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F, false);
             }
         } else {
             super.handleStatusUpdate(id);
@@ -259,15 +260,14 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         super.readEntityFromNBT(compound);
         this.setProfession(compound.getInteger("Profession"));
         if (compound.hasKey("ProfessionName")) {
-            VillagerRegistry.VillagerProfession p =
-                    ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new ResourceLocation(compound.getString("ProfessionName")));
+            VillagerProfession p = ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new ResourceLocation(compound.getString("ProfessionName")));
             if (p == null) { p = VillagerRegistry.FARMER; }
             this.setForgeProfession(p);
         }
     
         if (compound.hasKey("ConversionTime", 99) && compound.getInteger("ConversionTime") > -1) {
-            this.startConverting(compound.hasUniqueId("ConversionPlayer") ? compound.getUniqueId("ConversionPlayer") : null,
-                                 compound.getInteger("ConversionTime"));
+            this.startConverting(compound.hasUniqueId("ConversionPlayer") ? compound.getUniqueId("ConversionPlayer") :
+                                 null, compound.getInteger("ConversionTime"));
         }
     }
     

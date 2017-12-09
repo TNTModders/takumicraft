@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityLuckCreeper extends EntityTakumiAbstractCreeper {
     
@@ -62,14 +62,14 @@ public class EntityLuckCreeper extends EntityTakumiAbstractCreeper {
     public void onDeath(DamageSource cause) {
         if (cause.getTrueSource() != null && cause.getTrueSource() instanceof EntityLivingBase && !(cause.getTrueSource() instanceof EntityPlayer
                 && ((EntityPlayer) cause.getTrueSource()).isCreative())) {
-            cause.getTrueSource().attackEntityFrom(new EntityDamageSource("takumicraft.luck", this).setDamageIsAbsolute(),
-                                                   ((EntityLivingBase) cause.getTrueSource()).getMaxHealth() + 1);
+            cause.getTrueSource().attackEntityFrom(new EntityDamageSource("takumicraft.luck", this).setDamageIsAbsolute(), ((EntityLivingBase)
+                    cause.getTrueSource()).getMaxHealth() + 1);
         }
         super.onDeath(cause);
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
                 ((EntityLivingBase) entity).heal(((EntityLivingBase) entity).getMaxHealth());

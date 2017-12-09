@@ -20,6 +20,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
@@ -48,7 +49,7 @@ public class ItemTakumiBucket extends ItemBucket {
         
         if (raytraceresult == null) {
             return new ActionResult <>(EnumActionResult.PASS, itemstack);
-        } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
+        } else if (raytraceresult.typeOfHit != Type.BLOCK) {
             return new ActionResult <>(EnumActionResult.PASS, itemstack);
         } else {
             BlockPos blockpos = raytraceresult.getBlockPos();
@@ -66,8 +67,8 @@ public class ItemTakumiBucket extends ItemBucket {
                         worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                         playerIn.addStat(StatList.getObjectUseStats(this));
                         playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-                        return new ActionResult <>(EnumActionResult.SUCCESS,
-                                                   this.fillBucket(itemstack, playerIn, TakumiItemCore.TAKUMI_SPRING_BUCKET));
+                        return new ActionResult <>(EnumActionResult.SUCCESS, this.fillBucket(itemstack, playerIn, TakumiItemCore
+                                .TAKUMI_SPRING_BUCKET));
                     } /*else if (material == Material.LAVA && ((Integer) iblockstate.getValue(BlockLiquid.LEVEL)).intValue() == 0) {
                         playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL_LAVA, 1.0F, 1.0F);
                         worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
@@ -136,12 +137,12 @@ public class ItemTakumiBucket extends ItemBucket {
                     int l = posIn.getX();
                     int i = posIn.getY();
                     int j = posIn.getZ();
-                    worldIn.playSound(player, posIn, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F,
-                                      2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
+                    worldIn.playSound(player, posIn, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (worldIn.rand.nextFloat
+                            () - worldIn.rand.nextFloat()) * 0.8F);
                     
                     for (int k = 0; k < 8; ++k) {
-                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, l + Math.random(), (double) i + Math.random(),
-                                              (double) j + Math.random(), 0.0D, 0.0D, 0.0D);
+                        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, l + Math.random(), (double) i + Math.random(), (double) j + Math
+                                .random(), 0.0D, 0.0D, 0.0D);
                     }
                 } else {
                     if (!worldIn.isRemote && (flag || flag1) && !material.isLiquid()) {

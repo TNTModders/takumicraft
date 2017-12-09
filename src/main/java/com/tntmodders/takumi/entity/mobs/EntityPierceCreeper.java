@@ -74,9 +74,8 @@ public class EntityPierceCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private boolean canDeath() {
-        return this.world.getBlockState(this.getPosition().down()).getBlockHardness(this.world,
-                                                                                    this.getPosition().down()) < 0 && !this.world.isAirBlock(
-                this.getPosition().down()) && this.onGround;
+        return this.world.getBlockState(this.getPosition().down()).getBlockHardness(this.world, this.getPosition().down()) < 0 && !this.world
+                .isAirBlock(this.getPosition().down()) && this.onGround;
     }
     
     @Override

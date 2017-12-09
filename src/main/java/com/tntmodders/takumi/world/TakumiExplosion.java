@@ -109,8 +109,8 @@ public class TakumiExplosion extends Explosion {
                                 f -= (f2 + 0.3F) * 0.3F;
                             }
         
-                            if (f > 0.0F && (this.exploder == null || this.exploder.canExplosionDestroyBlock(this, this.world, blockpos, iblockstate,
-                                                                                                             f))) {
+                            if (f > 0.0F && (this.exploder == null || this.exploder.canExplosionDestroyBlock(this, this.world, blockpos,
+                                    iblockstate, f))) {
                                 set.add(blockpos);
                             }
         
@@ -152,13 +152,12 @@ public class TakumiExplosion extends Explosion {
                         double d14 = this.world.getBlockDensity(vec3d, entity.getEntityBoundingBox());
                         double d10 = (1.0D - d12) * d14;
                         if (exploder instanceof EntityArrow) {
-                            entity.attackEntityFrom(new EntityDamageSourceIndirect("explosion", ((EntityArrow) this.exploder).shootingEntity,
-                                                                                   this.exploder).setExplosion(),
-                                                    (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
+                            entity.attackEntityFrom(new EntityDamageSourceIndirect("explosion", ((EntityArrow) this.exploder).shootingEntity, this
+                                    .exploder).setExplosion(), (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
                             
                         } else {
-                            entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder).setExplosion(),
-                                                    (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
+                            entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder).setExplosion(), (int) ((d10 * d10 + d10) /
+                                    2.0D * 7.0D * f3 + 1.0D));
                             
                         }
                         d10 = d10 * this.amp;
@@ -185,8 +184,8 @@ public class TakumiExplosion extends Explosion {
     
     @Override
     public void doExplosionB(boolean spawnParticles) {
-        this.world.playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F,
-                             (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+        this.world.playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.rand
+                .nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
         
         if (this.size >= 2.0F && this.damagesTerrain) {
             this.world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
@@ -215,8 +214,7 @@ public class TakumiExplosion extends Explosion {
                     d3 = d3 * d7;
                     d4 = d4 * d7;
                     d5 = d5 * d7;
-                    this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d0 + this.x) / 2.0D, (d1 + this.y) / 2.0D, (d2 + this.z) / 2.0D, d3,
-                                             d4, d5);
+                    this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d0 + this.x) / 2.0D, (d1 + this.y) / 2.0D, (d2 + this.z) / 2.0D, d3, d4, d5);
                     this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
                 }
     
@@ -232,8 +230,7 @@ public class TakumiExplosion extends Explosion {
         
         if (this.causesFire) {
             for (BlockPos blockpos1 : this.affectedBlockPositions) {
-                if (this.world.getBlockState(blockpos1).getMaterial() == Material.AIR && this.world.getBlockState(
-                        blockpos1.down()).isFullBlock() && this.random.nextInt(3) == 0) {
+                if (this.world.getBlockState(blockpos1).getMaterial() == Material.AIR && this.world.getBlockState(blockpos1.down()).isFullBlock() && this.random.nextInt(3) == 0) {
                     this.world.setBlockState(blockpos1, Blocks.FIRE.getDefaultState());
                 }
             }

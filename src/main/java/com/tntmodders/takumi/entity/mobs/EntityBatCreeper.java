@@ -67,13 +67,11 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
             if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1)) {
                 this.spawnPosition = null;
             }
-            
-            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.distanceSq((double) (int) this.posX,
-                                                                                                          (double) (int) this.posY,
-                                                                                                          (double) (int) this.posZ) < 4.0D) {
-                this.spawnPosition =
-                        new BlockPos((int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7), (int) this.posY + this.rand.nextInt(6) - 2,
-                                     (int) this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
+    
+            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.distanceSq((double) (int) this.posX, (double) (int)
+                    this.posY, (double) (int) this.posZ) < 4.0D) {
+                this.spawnPosition = new BlockPos((int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7), (int) this.posY + this.rand
+                        .nextInt(6) - 2, (int) this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
             }
             
             double d0 = (double) this.spawnPosition.getX() + 0.5D - this.posX;
@@ -268,8 +266,8 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private boolean isDateAroundHalloween(Calendar p_175569_1_) {
-        return p_175569_1_.get(Calendar.MONTH) + 1 == 10 && p_175569_1_.get(Calendar.DATE) >= 20 || p_175569_1_.get(
-                Calendar.MONTH) + 1 == 11 && p_175569_1_.get(Calendar.DATE) <= 3;
+        return p_175569_1_.get(Calendar.MONTH) + 1 == 10 && p_175569_1_.get(Calendar.DATE) >= 20 || p_175569_1_.get(Calendar.MONTH) + 1 == 11 &&
+                p_175569_1_.get(Calendar.DATE) <= 3;
     }
     
     @Override

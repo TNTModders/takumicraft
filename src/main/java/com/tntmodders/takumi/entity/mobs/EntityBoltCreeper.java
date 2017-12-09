@@ -31,10 +31,12 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         for (int i = 0; i < 10 * (this.getPowered() ? 3 : 1); i++) {
-            BlockPos pos = this.getPosition().add(MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
-                                                  MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
-                                                  MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1),
-                                                                        5 * (this.getPowered() ? 2 : 1)));
+            BlockPos pos = this.getPosition().add(MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 :
+                                                                                                                          1)), MathHelper
+                    .nextDouble(this.rand, -5 * (
+                    this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)), MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 :
+                                                                                                                         1), 5 * (this.getPowered() ?
+                                                                                                                                  2 : 1)));
             EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
             this.world.addWeatherEffect(bolt);
             this.world.spawnEntity(bolt);

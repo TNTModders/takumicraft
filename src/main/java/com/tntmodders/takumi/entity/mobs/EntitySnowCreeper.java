@@ -92,9 +92,9 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
                 j = MathHelper.floor(this.posY);
                 k = MathHelper.floor(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(i, j, k);
-                
-                if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR && this.world.getBiome(blockpos).getFloatTemperature(
-                        blockpos) < 0.8F && Blocks.SNOW_LAYER.canPlaceBlockAt(this.world, blockpos)) {
+    
+                if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR && this.world.getBiome(blockpos).getFloatTemperature(blockpos)
+                        < 0.8F && Blocks.SNOW_LAYER.canPlaceBlockAt(this.world, blockpos)) {
                     this.world.setBlockState(blockpos, Blocks.SNOW_LAYER.getDefaultState());
                 }
             }
@@ -145,8 +145,8 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
                 arrow.motionX = 0;
                 arrow.motionZ = 0;
                 arrow.motionY = -0.5;
-                arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
-                                          (float) (14 - this.world.getDifficulty().getDifficultyId() * 8), 1f);
+                arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ, (float) (14 - this.world.getDifficulty().getDifficultyId() *
+                        8), 1f);
                 this.world.spawnEntity(arrow);
             }
         }
@@ -189,9 +189,9 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER, Biomes.COLD_BEACH,
-                                Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.MUTATED_TAIGA_COLD, Biomes.FROZEN_RIVER, Biomes.ICE_PLAINS,
-                                Biomes.ICE_MOUNTAINS, Biomes.MUTATED_ICE_FLATS, Biomes.EXTREME_HILLS);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER, Biomes.COLD_BEACH, Biomes
+                .COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.MUTATED_TAIGA_COLD, Biomes.FROZEN_RIVER, Biomes.ICE_PLAINS, Biomes.ICE_MOUNTAINS,
+                Biomes.MUTATED_ICE_FLATS, Biomes.EXTREME_HILLS);
     }
     
     @Override

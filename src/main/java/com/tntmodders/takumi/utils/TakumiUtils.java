@@ -2,7 +2,7 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.ITakumiMetaBlock;
+import com.tntmodders.takumi.block.ITakumiItemBlock;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -79,7 +79,7 @@ public class TakumiUtils {
             if (!TakumiRecipeHolder.map.isEmpty() && TakumiRecipeHolder.map.containsKey(itemStack)) {
                 List <ResourceLocation> list = TakumiRecipeHolder.map.get(itemStack);
                 try {
-                    if (Block.getBlockFromItem(item) instanceof ITakumiMetaBlock) {
+                    if (Block.getBlockFromItem(item) instanceof ITakumiItemBlock) {
                         NonNullList <ItemStack> list1 = NonNullList.create();
                         Block.getBlockFromItem(item).getSubBlocks(null, list1);
                         for (ItemStack aList1 : list1) {
@@ -95,7 +95,7 @@ public class TakumiUtils {
     }
     
     public static World getDummyWorld() {
-        return FMLCommonHandler.instance().getSide().isClient() ? TakumiUtils.getClientWorld() : TakumiUtils.getServerWorld();
+        return FMLCommonHandler.instance().getSide().isClient() ? getClientWorld() : getServerWorld();
     }
     
     @SideOnly(Side.CLIENT)
@@ -206,7 +206,7 @@ public class TakumiUtils {
          return files;
      }*/
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy) {
-        TakumiUtils.takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, 1);
+        takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, 1);
     }
     
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy,
@@ -225,8 +225,8 @@ public class TakumiUtils {
     
             for (EntityPlayer entityplayer : world.playerEntities) {
                 if (entityplayer.getDistanceSq(x, y, z) < 4096.0D) {
-                    ((EntityPlayerMP) entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z, power, explosion.getAffectedBlockPositions(),
-                                                                                               explosion.getPlayerKnockbackMap().get(entityplayer)));
+                    ((EntityPlayerMP) entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z, power, explosion.getAffectedBlockPositions
+                            (), explosion.getPlayerKnockbackMap().get(entityplayer)));
                 }
             }
         }

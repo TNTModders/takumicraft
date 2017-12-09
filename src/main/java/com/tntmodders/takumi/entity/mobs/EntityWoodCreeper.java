@@ -8,7 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityWoodCreeper extends EntityTakumiAbstractCreeper {
     
@@ -65,7 +65,7 @@ public class EntityWoodCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         float power = this.getPowered() ? 6f : 3f;
         if (event.getExplosion() instanceof TakumiExplosion) {
             power = ((TakumiExplosion) event.getExplosion()).getSize();
@@ -73,12 +73,10 @@ public class EntityWoodCreeper extends EntityTakumiAbstractCreeper {
         if (power > 0.1) {
             for (BlockPos pos : event.getAffectedBlocks()) {
                 String s = this.world.getBlockState(pos).getBlock().getHarvestTool(this.world.getBlockState(pos));
-                if (!this.world.isRemote && s != null && s.equalsIgnoreCase("axe") && TakumiUtils.takumiGetBlockResistance(this,
-                                                                                                                           this.world.getBlockState(
-                                                                                                                                   pos), pos) != -1) {
+                if (!this.world.isRemote && s != null && s.equalsIgnoreCase("axe") && TakumiUtils.takumiGetBlockResistance(this, this.world
+                        .getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.1f, false,
-                                                      true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.1f, false, true);
                 }
             }
         }

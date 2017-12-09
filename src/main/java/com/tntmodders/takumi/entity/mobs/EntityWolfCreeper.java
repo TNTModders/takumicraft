@@ -18,7 +18,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -158,7 +158,7 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         List <EntityWolf> list = new ArrayList <>();
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityWolf) {
@@ -171,8 +171,8 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
-                                TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override
@@ -224,8 +224,7 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
                 for (int j = 0; j < i; ++j) {
                     float f1 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
                     float f2 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2,
-                                             this.motionX, this.motionY, this.motionZ);
+                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2, this.motionX, this.motionY, this.motionZ);
                 }
             }
         }
@@ -243,8 +242,8 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
-                                                 (float) (int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (int) this.getEntityAttribute(SharedMonsterAttributes
+                .ATTACK_DAMAGE).getAttributeValue());
         
         if (flag) {
             this.applyEnchantments(this, entityIn);

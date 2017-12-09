@@ -20,9 +20,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemCreeperArmor extends ItemArmor {
+public class ItemTakumiArmor extends ItemArmor {
     
-    public ItemCreeperArmor(EntityEquipmentSlot equipmentSlotIn) {
+    public ItemTakumiArmor(EntityEquipmentSlot equipmentSlotIn) {
         super(TakumiArmorMaterial.CREEPER, 5, equipmentSlotIn);
         this.setRegistryName(TakumiCraftCore.MODID, "takumiarmor_" + equipmentSlotIn.getName());
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
@@ -115,7 +115,7 @@ public class ItemCreeperArmor extends ItemArmor {
         }
         boolean flg = true;
         for (ItemStack stack : player.getArmorInventoryList()) {
-            if (!(stack.getItem() instanceof ItemCreeperArmor)) {
+            if (!(stack.getItem() instanceof ItemTakumiArmor)) {
                 flg = false;
                 break;
             }

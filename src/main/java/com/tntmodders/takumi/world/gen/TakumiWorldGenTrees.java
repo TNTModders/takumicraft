@@ -2,6 +2,7 @@ package com.tntmodders.takumi.world.gen;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -42,8 +43,8 @@ public class TakumiWorldGenTrees extends WorldGenAbstractTree {
                     k = 2;
                 }
     
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-    
+                MutableBlockPos blockpos$mutableblockpos = new MutableBlockPos();
+                
                 for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
                     for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
                         if (j >= 0 && j < worldIn.getHeight()) {

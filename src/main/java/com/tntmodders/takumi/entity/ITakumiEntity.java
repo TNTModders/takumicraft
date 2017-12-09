@@ -2,7 +2,7 @@ package com.tntmodders.takumi.entity;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -12,7 +12,7 @@ public interface ITakumiEntity {
     
     void takumiExplode();
     
-    boolean takumiExplodeEvent(ExplosionEvent.Detonate event);
+    boolean takumiExplodeEvent(Detonate event);
     
     EnumTakumiRank takumiRank();
     
@@ -80,24 +80,16 @@ public interface ITakumiEntity {
     }
     
     enum EnumTakumiType {
-        TAKUMI(0), FIRE(1), GRASS(2), GROUND(3), WIND(4), WATER(5), DRAGON(6), NORMAL(7), TAKUMI_D(0, true, false), FIRE_D(1, true, false), GRASS_D(2,
-                                                                                                                                                    true,
-                                                                                                                                                    false), GROUND_D(
-                3, true, false), WIND_D(4, true, false), WATER_D(5, true, false), DRAGON_D(6, true, false), NORMAL_D(7, true, false), TAKUMI_M(0,
-                                                                                                                                               false,
-                                                                                                                                               true), FIRE_M(
-                1, false, true), GRASS_M(2, false, true), GROUND_M(3, false, true), WIND_M(4, false, true), WATER_M(5, false, true), DRAGON_M(6,
-                                                                                                                                              false,
-                                                                                                                                              true)
-        , NORMAL_M(
-                7, false, true), TAKUMI_MD(0, true, true), FIRE_MD(1, true, true), GRASS_MD(2, true, true), GROUND_MD(3, true, true), WIND_MD(4, true,
-                                                                                                                                              true)
-        , WATER_MD(
-                5, true, true), DRAGON_MD(6, true, true), NORMAL_MD(7, true, true), CERULEAN(8, false, false), YUKARI(9, false, false);
+        TAKUMI(0), FIRE(1), GRASS(2), GROUND(3), WIND(4), WATER(5), DRAGON(6), NORMAL(7), TAKUMI_D(0, true, false), FIRE_D(1, true, false), GRASS_D
+                (2, true, false), GROUND_D(3, true, false), WIND_D(4, true, false), WATER_D(5, true, false), DRAGON_D(6, true, false), NORMAL_D(7,
+                true, false), TAKUMI_M(0, false, true), FIRE_M(1, false, true), GRASS_M(2, false, true), GROUND_M(3, false, true), WIND_M(4, false,
+                true), WATER_M(5, false, true), DRAGON_M(6, false, true), NORMAL_M(7, false, true), TAKUMI_MD(0, true, true), FIRE_MD(1, true,
+                true), GRASS_MD(2, true, true), GROUND_MD(3, true, true), WIND_MD(4, true, true), WATER_MD(5, true, true), DRAGON_MD(6, true, true)
+        , NORMAL_MD(7, true, true), CERULEAN(8, false, false), YUKARI(9, false, false);
         
         private final int id;
-        private boolean isMagic = false;
-        private boolean isDest = false;
+        private boolean isMagic;
+        private boolean isDest;
         
         EnumTakumiType(int i, boolean dest, boolean magic) {
             this(i);
@@ -145,7 +137,8 @@ public interface ITakumiEntity {
         }
         
         private boolean getStrongMD(EnumTakumiType enemyType) {
-            return !this.isDest && !this.isMagic && !enemyType.isDest && !enemyType.isMagic || this.isDest && enemyType.isMagic || this.isMagic && enemyType.isMagic;
+            return !this.isDest && !this.isMagic && !enemyType.isDest && !enemyType.isMagic || this.isDest && enemyType.isMagic || this.isMagic &&
+                    enemyType.isMagic;
         }
     }
 }

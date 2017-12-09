@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class EntityRewriteCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     @Deprecated
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             List <IRecipe> list = Lists.newArrayList(CraftingManager.REGISTRY.iterator());
             IRecipe iRecipe;
@@ -69,12 +69,11 @@ public class EntityRewriteCreeper extends EntityTakumiAbstractCreeper {
             while (!flg) {
                 iRecipe = list.get(this.rand.nextInt(list.size()));
                 if (iRecipe.getRecipeOutput().getItem() instanceof ItemBlock) {
-                    blockState =
-                            ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock().getStateFromMeta(iRecipe.getRecipeOutput().getMetadata());
-                    if (!(blockState.getBlock().hasTileEntity(blockState) && blockState.getBlock().createTileEntity(this.world,
-                                                                                                                    blockState) instanceof
-                            IInventory) && blockState.getBlock().canPlaceBlockAt(
-                            this.world, this.getPosition()) && blockState.getBlockHardness(this.world, this.getPosition()) > -1) {
+                    blockState = ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock().getStateFromMeta(iRecipe.getRecipeOutput()
+                            .getMetadata());
+                    if (!(blockState.getBlock().hasTileEntity(blockState) && blockState.getBlock().createTileEntity(this.world, blockState)
+                            instanceof IInventory) && blockState.getBlock().canPlaceBlockAt(this.world, this.getPosition()) && blockState
+                            .getBlockHardness(this.world, this.getPosition()) > -1) {
                         this.world.setBlockState(this.getPosition(), blockState);
                         if (blockState.getBlock().canPlaceBlockAt(this.world, this.getPosition().up())) {
                             flg = true;

@@ -118,8 +118,8 @@ public class EntityPigCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
-                                TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override

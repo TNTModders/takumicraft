@@ -14,8 +14,8 @@ import net.minecraft.util.math.MathHelper;
 public class RenderGhastCreeper <T extends EntityGhastCreeper> extends RenderLiving <T> implements ITakumiRender {
     
     private static final ResourceLocation GHAST_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/ghastcreeper.png");
-    private static final ResourceLocation GHAST_SHOOTING_TEXTURES =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/ghastcreeper_shooting.png");
+    private static final ResourceLocation GHAST_SHOOTING_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/ghastcreeper_shooting.png");
     
     public RenderGhastCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelGhast(), 0.5f);

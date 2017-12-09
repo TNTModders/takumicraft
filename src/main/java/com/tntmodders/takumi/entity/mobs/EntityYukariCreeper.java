@@ -1,13 +1,14 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,15 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         List <BlockPos> posList = new ArrayList <>();
         for (BlockPos pos : event.getAffectedBlocks()) {
             if (pos.getY() > this.posY) {
                 this.world.setBlockToAir(pos);
             } else if (this.world.isAirBlock(pos) || this.world.getBlockState(pos).getMaterial().isLiquid()) {
-                this.world.setBlockState(pos, this.world.getBlockState(this.getPosition().down()));
+                IBlockState state = this.world.getBlockState(this.getPosition().down()); if (!(state.getBlock() instanceof BlockTakumiMonsterBomb)) {
+                    this.world.setBlockState(pos, state);
+                }
             }
         }
         event.getAffectedBlocks().clear();
@@ -44,8 +47,8 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
             for (int x = -i; x <= i; x++) {
                 for (int z = -i; z <= i; z++) {
                     if (x * x + z * z < i * i) {
-                        this.world.createExplosion(this, this.posX + x, this.posY, this.posZ + z,
-                                                   (float) Math.sqrt(i - Math.sqrt(x * x + z * z) + 1) * 1.75f, true);
+                        this.world.createExplosion(this, this.posX + x, this.posY, this.posZ + z, (float) Math.sqrt(i - Math.sqrt(x * x + z * z) +
+                                1) * 1.75f, true);
                     }
                 }
             }

@@ -17,7 +17,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import javax.annotation.Nullable;
@@ -56,10 +56,10 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-    
+
         if (cause.getTrueSource() instanceof EntityCreeper) {
             EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
-        
+    
             if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
                 entitycreeper.incrementDroppedSkulls();
                 this.entityDropItem(new ItemStack(Items.SKULL, 1, 1), 0.0F);
@@ -135,7 +135,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));

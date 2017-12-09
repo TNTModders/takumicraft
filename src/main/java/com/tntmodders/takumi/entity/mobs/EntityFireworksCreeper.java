@@ -19,11 +19,11 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 3f, false);
             for (int i = 0; i < (this.getPowered() ? 6 : 3); i++) {
-                ItemStack item = EntityFireworksCreeper.getItemFireworks();
+                ItemStack item = getItemFireworks();
                 double x = this.posX + i * 2 - i;
                 double z = this.posZ + i * 2 - i;
                 EntityFireworkRocket firework = new EntityFireworkRocket(world, x, this.world.getHeight((int) x, (int) z), z, item);
-    
+
                 this.world.spawnEntity(firework);
             }
         }
@@ -32,8 +32,8 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
     public static ItemStack getItemFireworks() {
         ItemStack item = new ItemStack(Items.FIREWORKS, 1);
         try {
-            item.setTagCompound(
-                    JsonToNBT.getTagFromJson("{Fireworks:{Flight:0,Explosions:[{Type:3,Flicker:1,Trail:1,Colors:[I;65280],FadeColors:[I;65280]}]}}"));
+            item.setTagCompound(JsonToNBT.getTagFromJson("{Fireworks:{Flight:0,Explosions:[{Type:3,Flicker:1,Trail:1,Colors:[I;65280]," +
+                    "FadeColors:[I;65280]}]}}"));
         } catch (NBTException e) {
             e.printStackTrace();
         }

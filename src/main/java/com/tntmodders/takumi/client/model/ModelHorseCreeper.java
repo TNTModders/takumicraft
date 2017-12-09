@@ -364,14 +364,14 @@ public class ModelHorseCreeper extends ModelBase {
         this.frontLeftLeg.rotationPointZ = -2.0F * f9 + -8.0F * f10;
         this.frontRightLeg.rotationPointY = this.frontLeftLeg.rotationPointY;
         this.frontRightLeg.rotationPointZ = this.frontLeftLeg.rotationPointZ;
-        this.backLeftShin.rotationPointY =
-                this.backLeftLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f18 + f10 * -f13 * 0.5F * p_78086_3_) * 7.0F;
-        this.backLeftShin.rotationPointZ =
-                this.backLeftLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f18 + f10 * -f13 * 0.5F * p_78086_3_) * 7.0F;
-        this.backRightShin.rotationPointY =
-                this.backRightLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f18 + f10 * f13 * 0.5F * p_78086_3_) * 7.0F;
-        this.backRightShin.rotationPointZ =
-                this.backRightLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f18 + f10 * f13 * 0.5F * p_78086_3_) * 7.0F;
+        this.backLeftShin.rotationPointY = this.backLeftLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f18 + f10 * -f13 * 0.5F *
+                p_78086_3_) * 7.0F;
+        this.backLeftShin.rotationPointZ = this.backLeftLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f18 + f10 * -f13 * 0.5F *
+                p_78086_3_) * 7.0F;
+        this.backRightShin.rotationPointY = this.backRightLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f18 + f10 * f13 * 0.5F *
+                p_78086_3_) * 7.0F;
+        this.backRightShin.rotationPointZ = this.backRightLeg.rotationPointZ + MathHelper.cos((float) Math.PI * 3F / 2F + f18 + f10 * f13 * 0.5F *
+                p_78086_3_) * 7.0F;
         float f20 = (-1.0471976F + f19) * f9 + f14 * f10;
         float f21 = (-1.0471976F + -f19) * f9 + -f14 * f10;
         this.frontLeftShin.rotationPointY = this.frontLeftLeg.rotationPointY + MathHelper.sin((float) Math.PI / 2F + f20) * 7.0F;
@@ -385,18 +385,12 @@ public class ModelHorseCreeper extends ModelBase {
         this.backRightShin.rotateAngleX = -0.08726646F * f9 + (f13 * 0.5F * p_78086_3_ - Math.max(0.0F, -f13 * 0.5F * p_78086_3_)) * f10;
         this.backRightHoof.rotateAngleX = this.backRightShin.rotateAngleX;
         this.frontLeftLeg.rotateAngleX = f20;
-        this.frontLeftShin.rotateAngleX =
-                (this.frontLeftLeg.rotateAngleX + (float) Math.PI * Math.max(0.0F, 0.2F + f19 * 0.2F)) * f9 + (f14 + Math.max(0.0F,
-                                                                                                                              f13 * 0.5F *
-                                                                                                                                      p_78086_3_))
-                        * f10;
+        this.frontLeftShin.rotateAngleX = (this.frontLeftLeg.rotateAngleX + (float) Math.PI * Math.max(0.0F, 0.2F + f19 * 0.2F)) * f9 + (f14 + Math
+                .max(0.0F, f13 * 0.5F * p_78086_3_)) * f10;
         this.frontLeftHoof.rotateAngleX = this.frontLeftShin.rotateAngleX;
         this.frontRightLeg.rotateAngleX = f21;
-        this.frontRightShin.rotateAngleX =
-                (this.frontRightLeg.rotateAngleX + (float) Math.PI * Math.max(0.0F, 0.2F - f19 * 0.2F)) * f9 + (-f14 + Math.max(0.0F,
-                                                                                                                                -f13 * 0.5F *
-                                                                                                                                        p_78086_3_)
-                ) * f10;
+        this.frontRightShin.rotateAngleX = (this.frontRightLeg.rotateAngleX + (float) Math.PI * Math.max(0.0F, 0.2F - f19 * 0.2F)) * f9 + (-f14 +
+                Math.max(0.0F, -f13 * 0.5F * p_78086_3_)) * f10;
         this.frontRightHoof.rotateAngleX = this.frontRightShin.rotateAngleX;
         this.backLeftHoof.rotationPointY = this.backLeftShin.rotationPointY;
         this.backLeftHoof.rotationPointZ = this.backLeftShin.rotationPointZ;

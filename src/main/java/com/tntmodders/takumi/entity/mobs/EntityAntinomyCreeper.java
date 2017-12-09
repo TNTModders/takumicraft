@@ -22,12 +22,10 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
         if (this.world.isRemote) {
             this.setFire(10);
             for (int i = 0; i < 4; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width,
-                                         this.posY + this.rand.nextDouble() * this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width,
-                                         0.0D, 0.0D, 0.0D);
-                this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
-                                         this.posY + this.rand.nextDouble() * (double) this.height,
-                                         this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+                this.world.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this
+                        .posY + this.rand.nextDouble() * this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+                this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX + (this.rand.nextDouble() - 0.5D) * this.width, this.posY + this.rand
+                        .nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
             }
         }
         super.onLivingUpdate();
@@ -38,9 +36,8 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote) {
             int i = this.getPowered() ? 50 : 25;
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, i / 7, false);
-            for (EntityLivingBase entityLivingBase : this.world.getEntities(EntityLivingBase.class,
-                                                                            input -> EntityAntinomyCreeper.this.getDistanceSqToEntity(
-                                                                                    input) < i * i)) {
+            for (EntityLivingBase entityLivingBase : this.world.getEntities(EntityLivingBase.class, input -> EntityAntinomyCreeper.this
+                    .getDistanceSqToEntity(input) < i * i)) {
                 this.buildIce(entityLivingBase.getPosition());
                 for (int i1 = 0; i1 < (this.getPowered() ? 5 : 2); i1++) {
                     this.buildIce(entityLivingBase.getPosition().add(this.rand.nextInt(7) - 3, 0, this.rand.nextInt(7) - 3));

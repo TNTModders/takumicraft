@@ -15,18 +15,18 @@ import net.minecraft.util.math.MathHelper;
 
 public class RenderZombieVillagerCreeper <T extends EntityZombieVillagerCreeper> extends RenderBiped <T> implements ITakumiRender {
     
-    private static final ResourceLocation ZOMBIE_VILLAGER_TEXTURES =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_villager.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_FARMER_LOCATION =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_farmer.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_LIBRARIAN_LOC =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_librarian.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_PRIEST_LOCATION =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_priest.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_SMITH_LOCATION =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_smith.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_BUTCHER_LOCATION =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_butcher.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/zombie_villager/zombie_villager.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_FARMER_LOCATION = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/zombie_villager/zombie_farmer.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_LIBRARIAN_LOC = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/zombie_villager/zombie_librarian.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_PRIEST_LOCATION = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/zombie_villager/zombie_priest.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_SMITH_LOCATION = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/zombie_villager/zombie_smith.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_BUTCHER_LOCATION = new ResourceLocation(TakumiCraftCore.MODID,
+            "textures/entity/zombie_villager/zombie_butcher.png");
     
     public RenderZombieVillagerCreeper(RenderManager p_i47186_1_) {
         super(p_i47186_1_, new ModelZombieVillagerCreeper(), 0.5F);

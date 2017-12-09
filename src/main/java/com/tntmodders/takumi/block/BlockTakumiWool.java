@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemCloth;
 
-public class BlockTakumiWool extends BlockColored implements ITakumiMetaBlock {
+public class BlockTakumiWool extends BlockColored implements ITakumiItemBlock {
     
     public BlockTakumiWool() {
         super(Material.CLOTH);

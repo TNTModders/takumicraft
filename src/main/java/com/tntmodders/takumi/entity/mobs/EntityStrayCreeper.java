@@ -19,7 +19,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -130,10 +130,10 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
-            PotionEffect effect =
-                    new PotionEffect(PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion(), 400);
+            PotionEffect effect = new PotionEffect(PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion
+                    (), 400);
             for (Entity entity : event.getAffectedEntities()) {
                 if (entity instanceof EntityLivingBase) {
                     ((EntityLivingBase) entity).addPotionEffect(effect);

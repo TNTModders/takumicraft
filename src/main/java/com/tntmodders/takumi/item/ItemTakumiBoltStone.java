@@ -40,8 +40,8 @@ public class ItemTakumiBoltStone extends Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         Vec3d vec3d = entityLiving.getLookVec();
         vec3d = vec3d.normalize().scale(5);
-        EntityLightningBolt bolt =
-                new EntityLightningBolt(worldIn, entityLiving.posX + vec3d.x, entityLiving.posY + vec3d.y, entityLiving.posZ + vec3d.z, false);
+        EntityLightningBolt bolt = new EntityLightningBolt(worldIn, entityLiving.posX + vec3d.x, entityLiving.posY + vec3d.y, entityLiving.posZ +
+                vec3d.z, false);
         worldIn.addWeatherEffect(bolt);
         worldIn.spawnEntity(bolt);
         if (entityLiving instanceof EntityPlayer && !((EntityPlayer) entityLiving).isCreative()) {

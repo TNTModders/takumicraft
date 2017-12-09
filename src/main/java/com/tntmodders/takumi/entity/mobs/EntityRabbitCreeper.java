@@ -44,9 +44,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityRabbitCreeper(World worldIn) {
         super(worldIn);
-        this.setSize(0.4F, 0.5F);
-        this.jumpHelper = new EntityRabbitCreeper.RabbitJumpHelper(this);
-        this.moveHelper = new EntityRabbitCreeper.RabbitMoveHelper(this);
+        this.setSize(0.4F, 0.5F); this.jumpHelper = new RabbitJumpHelper(this); this.moveHelper = new RabbitMoveHelper(this);
         this.setMovementSpeed(0.0D);
     }
     
@@ -100,12 +98,10 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(1, new EntityRabbitCreeper.AIPanic(this, 2.2D));
-        this.tasks.addTask(4, new EntityRabbitCreeper.AIAvoidEntity <>(this, EntityPlayer.class, 8.0F, 2.2D, 2.2D));
-        this.tasks.addTask(4, new EntityRabbitCreeper.AIAvoidEntity <>(this, EntityWolf.class, 10.0F, 2.2D, 2.2D));
-        this.tasks.addTask(4, new EntityRabbitCreeper.AIAvoidEntity <>(this, EntityMob.class, 4.0F, 2.2D, 2.2D));
-        this.tasks.addTask(5, new EntityRabbitCreeper.AIRaidFarm(this));
+        super.initEntityAI(); this.tasks.addTask(1, new AIPanic(this, 2.2D));
+        this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityPlayer.class, 8.0F, 2.2D, 2.2D));
+        this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityWolf.class, 10.0F, 2.2D, 2.2D));
+        this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityMob.class, 4.0F, 2.2D, 2.2D)); this.tasks.addTask(5, new AIRaidFarm(this));
     }
     
     @Override
@@ -159,7 +155,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     return 0.5F;
                 }
             }
-    
+
             return this.moveHelper.getSpeed() <= 0.6D ? 0.2F : 0.3F;
         } else {
             return 0.5F;
@@ -245,9 +241,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private boolean isRabbitBreedingItem(Item p_isRabbitBreedingItem_1_) {
-        return p_isRabbitBreedingItem_1_ == Items.CARROT || p_isRabbitBreedingItem_1_ == Items.GOLDEN_CARROT || p_isRabbitBreedingItem_1_ == Item
-                .getItemFromBlock(
-                Blocks.YELLOW_FLOWER);
+        return p_isRabbitBreedingItem_1_ == Items.CARROT || p_isRabbitBreedingItem_1_ == Items.GOLDEN_CARROT || p_isRabbitBreedingItem_1_ == Item.getItemFromBlock(Blocks.YELLOW_FLOWER);
     }
     
     private boolean isCarrotEaten() {
@@ -257,10 +251,9 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     protected void createEatingParticles() {
         BlockCarrot lvt_1_1_ = (BlockCarrot) Blocks.CARROTS;
         IBlockState lvt_2_1_ = lvt_1_1_.withAge(lvt_1_1_.getMaxAge());
-        this.world.spawnParticle(EnumParticleTypes.BLOCK_DUST, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width,
-                                 this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height),
-                                 this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, 0.0D, 0.0D, 0.0D,
-                                 Block.getStateId(lvt_2_1_));
+        this.world.spawnParticle(EnumParticleTypes.BLOCK_DUST, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this
+                .width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width
+                * 2.0F) - (double) this.width, 0.0D, 0.0D, 0.0D, Block.getStateId(lvt_2_1_));
         this.carrotTicks = 40;
     }
     
@@ -310,8 +303,8 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     this.wasOnGround = true;
                 }
             }
-            
-            EntityRabbitCreeper.RabbitJumpHelper lvt_1_2_ = (EntityRabbitCreeper.RabbitJumpHelper) this.jumpHelper;
+    
+            RabbitJumpHelper lvt_1_2_ = (RabbitJumpHelper) this.jumpHelper;
             if (!lvt_1_2_.getIsJumping()) {
                 if (this.moveHelper.isUpdating() && this.currentMoveTypeDuration == 0) {
                     Path lvt_2_1_ = this.navigator.getPath();
@@ -319,7 +312,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     if (lvt_2_1_ != null && lvt_2_1_.getCurrentPathIndex() < lvt_2_1_.getCurrentPathLength()) {
                         lvt_3_1_ = lvt_2_1_.getPosition(this);
                     }
-    
+
                     this.calculateRotationYaw(lvt_3_1_.x, lvt_3_1_.z);
                     this.startJumping();
                 }
@@ -337,8 +330,8 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private void calculateRotationYaw(double p_calculateRotationYaw_1_, double p_calculateRotationYaw_3_) {
-        this.rotationYaw =
-                (float) (MathHelper.atan2(p_calculateRotationYaw_3_ - this.posZ, p_calculateRotationYaw_1_ - this.posX) * 57.2957763671875D) - 90.0F;
+        this.rotationYaw = (float) (MathHelper.atan2(p_calculateRotationYaw_3_ - this.posZ, p_calculateRotationYaw_1_ - this.posX) *
+                57.2957763671875D) - 90.0F;
     }
     
     public void startJumping() {
@@ -348,7 +341,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private void enableJumpControl() {
-        ((EntityRabbitCreeper.RabbitJumpHelper) this.jumpHelper).setCanJump(true);
+        ((RabbitJumpHelper) this.jumpHelper).setCanJump(true);
     }
     
     private void updateMoveTypeDuration() {
@@ -361,13 +354,13 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private void disableJumpControl() {
-        ((EntityRabbitCreeper.RabbitJumpHelper) this.jumpHelper).setCanJump(false);
+        ((RabbitJumpHelper) this.jumpHelper).setCanJump(false);
     }
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
-                                TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override
@@ -442,9 +435,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public void updateTask() {
             super.updateTask();
-            this.rabbit.getLookHelper().setLookPosition((double) this.destinationBlock.getX() + 0.5D, (double) (this.destinationBlock.getY() + 1),
-                                                        (double) this.destinationBlock.getZ() + 0.5D, 10.0F,
-                                                        (float) this.rabbit.getVerticalFaceSpeed());
+            this.rabbit.getLookHelper().setLookPosition((double) this.destinationBlock.getX() + 0.5D, (double) (this.destinationBlock.getY() + 1), (double) this.destinationBlock.getZ() + 0.5D, 10.0F, (float) this.rabbit.getVerticalFaceSpeed());
             if (this.getIsAboveDestination()) {
                 World lvt_1_1_ = this.rabbit.world;
                 BlockPos lvt_2_1_ = this.destinationBlock.up();
@@ -521,7 +512,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         
         @Override
         public void onUpdateMoveHelper() {
-            if (this.rabbit.onGround && !this.rabbit.isJumping && !((EntityRabbitCreeper.RabbitJumpHelper) this.rabbit.jumpHelper).getIsJumping()) {
+            if (this.rabbit.onGround && !this.rabbit.isJumping && !((RabbitJumpHelper) this.rabbit.jumpHelper).getIsJumping()) {
                 this.rabbit.setMovementSpeed(0.0D);
             } else if (this.isUpdating()) {
                 this.rabbit.setMovementSpeed(this.nextJumpSpeed);

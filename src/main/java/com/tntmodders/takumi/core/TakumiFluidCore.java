@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TakumiFluidCore {
     
-    public static final Fluid HOT_SPRING = new Fluid("takumihotspring", new ResourceLocation(TakumiCraftCore.MODID, "blocks/hotspring_still"),
-                                                     new ResourceLocation(TakumiCraftCore.MODID, "blocks/hotspring_flow"));
+    public static final Fluid HOT_SPRING = new Fluid("takumihotspring", new ResourceLocation(TakumiCraftCore.MODID, "blocks/hotspring_still"), new
+            ResourceLocation(TakumiCraftCore.MODID, "blocks/hotspring_flow"));
     
     public static void register() {
         FluidRegistry.registerFluid(HOT_SPRING);

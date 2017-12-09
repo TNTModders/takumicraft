@@ -65,7 +65,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                     this.setAggressive(false);
                     ItemStack itemstack = this.getHeldItemMainhand();
                     this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-    
+
                     if (itemstack.getItem() == Items.POTIONITEM) {
                         List <PotionEffect> list = PotionUtils.getEffectsFromStack(itemstack);
                         
@@ -75,43 +75,41 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                             }
                         }
                     }
-    
+
                     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(MODIFIER);
                 }
             } else {
                 PotionType potiontype = null;
-    
+
                 if (this.rand.nextFloat() < 0.15F && this.isInsideOfMaterial(Material.WATER) && !this.isPotionActive(MobEffects.WATER_BREATHING)) {
                     potiontype = PotionTypes.WATER_BREATHING;
-                } else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.getLastDamageSource() != null && this.getLastDamageSource()
-                        .isFireDamage()) && !this.isPotionActive(
-                        MobEffects.FIRE_RESISTANCE)) {
+                } else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.getLastDamageSource() != null && this.getLastDamageSource().isFireDamage()) && !this.isPotionActive(MobEffects.FIRE_RESISTANCE)) {
                     potiontype = PotionTypes.FIRE_RESISTANCE;
                 } else if (this.rand.nextFloat() < 0.05F && this.getHealth() < this.getMaxHealth()) {
                     potiontype = PotionTypes.HEALING;
-                } else if (this.rand.nextFloat() < 0.5F && this.getAttackTarget() != null && !this.isPotionActive(
-                        MobEffects.SPEED) && this.getAttackTarget().getDistanceSqToEntity(this) > 121.0D) {
+                } else if (this.rand.nextFloat() < 0.5F && this.getAttackTarget() != null && !this.isPotionActive(MobEffects.SPEED) && this
+                        .getAttackTarget().getDistanceSqToEntity(this) > 121.0D) {
                     potiontype = PotionTypes.SWIFTNESS;
                 }
-    
+
                 if (potiontype != null) {
-                    this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-                                            PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), potiontype));
+                    this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM),
+                            potiontype));
                     this.witchAttackTimer = this.getHeldItemMainhand().getMaxItemUseDuration();
                     this.setAggressive(true);
-                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_DRINK, this.getSoundCategory(), 1.0F,
-                                         0.8F + this.rand.nextFloat() * 0.4F);
+                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_DRINK, this.getSoundCategory(), 1.0F, 0.8F
+                            + this.rand.nextFloat() * 0.4F);
                     IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
                     iattributeinstance.removeModifier(MODIFIER);
                     iattributeinstance.applyModifier(MODIFIER);
                 }
             }
-    
+
             if (this.rand.nextFloat() < 7.5E-4F) {
                 this.world.setEntityState(this, (byte) 15);
             }
         }
-    
+
         super.onLivingUpdate();
     }
     
@@ -134,9 +132,9 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
     public void handleStatusUpdate(byte id) {
         if (id == 15) {
             for (int i = 0; i < this.rand.nextInt(35) + 10; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.posX + this.rand.nextGaussian() * 0.12999999523162842D,
-                                         this.getEntityBoundingBox().maxY + 0.5D + this.rand.nextGaussian() * 0.12999999523162842D,
-                                         this.posZ + this.rand.nextGaussian() * 0.12999999523162842D, 0.0D, 0.0D, 0.0D);
+                this.world.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.posX + this.rand.nextGaussian() * 0.12999999523162842D, this
+                        .getEntityBoundingBox().maxY + 0.5D + this.rand.nextGaussian() * 0.12999999523162842D, this.posZ + this.rand.nextGaussian()
+                        * 0.12999999523162842D, 0.0D, 0.0D, 0.0D);
             }
         } else {
             super.handleStatusUpdate(id);
@@ -187,12 +185,12 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                 potiontype = PotionTypes.WEAKNESS;
             }
     
-            EntityPotion entitypotion =
-                    new EntityTakumiPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), potiontype));
+            EntityPotion entitypotion = new EntityTakumiPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items
+                    .SPLASH_POTION), potiontype));
             entitypotion.rotationPitch -= -15.0F;
             entitypotion.setThrowableHeading(d1, d2 + f * 0.2F, d3, 0.75F, 8.0F);
-            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
-                                 0.8F + this.rand.nextFloat() * 0.4F);
+            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this
+                    .rand.nextFloat() * 0.4F);
             this.world.spawnEntity(entitypotion);
         }
     }
@@ -252,21 +250,14 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
     public void takumiExplode() {
         PotionType type = PotionTypes.HARMING;
         switch (this.rand.nextInt(4)) {
-            case 0: {
-                break;
-            }
-            case 1: {
+            case 0:
+                break; case 1:
                 type = PotionTypes.POISON;
-                break;
-            }
-            case 2: {
+                break; case 2:
                 type = PotionTypes.SLOWNESS;
-                break;
-            }
-            case 3: {
+                break; case 3:
                 type = PotionTypes.WEAKNESS;
                 break;
-            }
         }
         EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
         entityareaeffectcloud.setRadius(5F);

@@ -26,8 +26,8 @@ public class EntityAIZombieCreeperSwell extends EntityAIBase {
     @Override
     public boolean shouldExecute() {
         EntityLivingBase entitylivingbase = this.swellingCreeper.getAttackTarget();
-        return this.swellingCreeper.getCreeperState() > 0 || entitylivingbase != null && this.swellingCreeper.getDistanceSqToEntity(
-                entitylivingbase) < 25.0D;
+        return this.swellingCreeper.getCreeperState() > 0 || entitylivingbase != null && this.swellingCreeper.getDistanceSqToEntity
+                (entitylivingbase) < 25.0D;
     }
     
     /**

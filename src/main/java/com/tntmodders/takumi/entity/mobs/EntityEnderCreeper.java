@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.Random;
 
@@ -60,7 +60,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
                 boolean done = false;
@@ -107,8 +107,8 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
     
             if (foundGround) {
                 entity.setPosition(entity.posX, entity.posY, entity.posZ);
-                if (entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && !entity.world.containsAnyLiquid(
-                        entity.getEntityBoundingBox())) {
+                if (entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && !entity.world.containsAnyLiquid(entity
+                        .getEntityBoundingBox())) {
                     flag = true;
                 }
             }
@@ -132,9 +132,9 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
             double d9 = d5 + (entity.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
             entity.world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
         }
-        
-        entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT,
-                               entity.getSoundCategory(), 1.0F, 1.0F);
+    
+        entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, entity
+                .getSoundCategory(), 1.0F, 1.0F);
         entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         return true;
         

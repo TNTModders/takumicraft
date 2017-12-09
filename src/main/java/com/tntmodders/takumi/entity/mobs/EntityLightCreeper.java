@@ -9,7 +9,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -76,7 +76,7 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, 400, 0));
@@ -89,12 +89,10 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
     
-                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(
-                        this.world.getBlockState(pos)) > 0.5f && TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos),
-                                                                                                      pos) != -1) {
+                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(this.world.getBlockState(pos)) > 0.5f &&
+                        TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false,
-                                                      true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
                 }
             }
         }

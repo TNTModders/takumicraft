@@ -48,8 +48,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     private boolean wasOnGround;
     
     public EntitySlimeCreeper(World worldIn) {
-        super(worldIn);
-        this.moveHelper = new EntitySlimeCreeper.SlimeMoveHelper(this);
+        super(worldIn); this.moveHelper = new SlimeMoveHelper(this);
     }
     
     public static void registerFixesSlime(DataFixer fixer) {
@@ -58,11 +57,9 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(0, new EntityAICreeperSwell(this));
-        this.tasks.addTask(1, new EntitySlimeCreeper.AISlimeFloat(this));
-        this.tasks.addTask(2, new EntitySlimeCreeper.AISlimeAttack(this));
-        this.tasks.addTask(3, new EntitySlimeCreeper.AISlimeFaceRandom(this));
-        this.tasks.addTask(5, new EntitySlimeCreeper.AISlimeHop(this));
+        this.tasks.addTask(0, new EntityAICreeperSwell(this)); this.tasks.addTask(1, new AISlimeFloat(this));
+        this.tasks.addTask(2, new AISlimeAttack(this)); this.tasks.addTask(3, new AISlimeFaceRandom(this));
+        this.tasks.addTask(5, new AISlimeHop(this));
 /*        this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
         this.targetTasks.addTask(3, new EntityAIFindEntityNearest(this, EntityIronGolem.class));*/
     }
@@ -97,11 +94,11 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         int i = compound.getInteger("Size");
-    
+
         if (i < 0) {
             i = 0;
         }
-    
+
         this.setSlimeSize(i + 1, false);
         this.wasOnGround = compound.getBoolean("wasOnGround");
     }
@@ -114,11 +111,11 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL && this.getSlimeSize() > 0) {
             this.isDead = true;
         }
-    
+
         this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
         this.prevSquishFactor = this.squishFactor;
         super.onUpdate();
-    
+
         if (this.onGround && !this.wasOnGround) {
             int i = this.getSlimeSize();
             if (spawnCustomParticles()) {
@@ -135,13 +132,13 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                 double d1 = this.posZ + f3;
                 world.spawnParticle(enumparticletypes, d0, this.getEntityBoundingBox().minY, d1, 0.0D, 0.0D, 0.0D);
             }
-        
+
             this.playSound(this.getSquishSound(), this.getSoundVolume(), ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
             this.squishAmount = -0.5F;
         } else if (!this.onGround && this.wasOnGround) {
             this.squishAmount = 1.0F;
         }
-    
+
         this.wasOnGround = this.onGround;
         this.alterSquishAmount();
     }
@@ -186,36 +183,9 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.squishAmount *= 0.6F;
     }
     
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    @Override
-    protected void jump() {
-        this.motionY = 0.41999998688697815D;
-        this.isAirBorne = true;
-    }
-    
-    @Override
-    public void notifyDataManagerChange(DataParameter <?> key) {
-        if (SLIME_SIZE.equals(key)) {
-            int i = this.getSlimeSize();
-            this.setSize(0.51000005F * i, 0.51000005F * i);
-            this.rotationYaw = this.rotationYawHead;
-            this.renderYawOffset = this.rotationYawHead;
-    
-            if (this.isInWater() && this.rand.nextInt(20) == 0) {
-                this.doWaterSplashEffect();
-            }
-        }
-    
-        super.notifyDataManagerChange(key);
-    }
-    
     public void setSlimeSize(int size, boolean resetHealth) {
-        this.dataManager.set(SLIME_SIZE, size);
-        this.setSize(0.51000005F * size, 0.51000005F * size);
-        this.setPosition(this.posX, this.posY, this.posZ);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(size * size);
+        this.dataManager.set(SLIME_SIZE, size); this.setSize(0.51000005F * size, 0.51000005F * size);
+        this.setPosition(this.posX, this.posY, this.posZ); this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(size * size);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F + 0.1F * size);
         
         if (resetHealth) {
@@ -225,8 +195,33 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.experienceValue = size;
     }
     
+    /**
+     * Causes this entity to do an upwards motion (jumping).
+     */
+    @Override
+    protected void jump() {
+        this.motionY = 0.41999998688697815D;
+        this.isAirBorne = true;
+    }
+    
     public boolean isSmallSlime() {
         return this.getSlimeSize() <= 1;
+    }
+    
+    @Override
+    public void notifyDataManagerChange(DataParameter <?> key) {
+        if (SLIME_SIZE.equals(key)) {
+            int i = this.getSlimeSize();
+            this.setSize(0.51000005F * i, 0.51000005F * i);
+            this.rotationYaw = this.rotationYawHead;
+            this.renderYawOffset = this.rotationYawHead;
+
+            if (this.isInWater() && this.rand.nextInt(20) == 0) {
+                this.doWaterSplashEffect();
+            }
+        }
+
+        super.notifyDataManagerChange(key);
     }
     
     /**
@@ -271,8 +266,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
             
             entityslime.setSlimeSize(i / 2, true);
             entityslime.setLocationAndAngles(this.posX + f, this.posY + 0.5D, this.posZ + f1, this.rand.nextFloat() * 360.0F, 0.0F);
-            entityslime.setVelocitySlime(this.rand.nextDouble() * (this.rand.nextBoolean() ? -1 : 1), 1,
-                                         this.rand.nextDouble() * (this.rand.nextBoolean() ? -1 : 1));
+            entityslime.setVelocitySlime(this.rand.nextDouble() * (this.rand.nextBoolean() ? -1 : 1), 1, this.rand.nextDouble() * (
+                    this.rand.nextBoolean() ? -1 : 1));
             this.world.spawnEntity(entityslime);
         }
     }
@@ -307,7 +302,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void applyEntityCollision(Entity entityIn) {
         super.applyEntityCollision(entityIn);
-    
+
         if (entityIn instanceof EntityIronGolem && this.canDamagePlayer()) {
             this.dealDamage((EntityLivingBase) entityIn);
         }
@@ -327,9 +322,9 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     
     protected void dealDamage(EntityLivingBase entityIn) {
         int i = this.getSlimeSize();
-        
-        if (this.canEntityBeSeen(entityIn) && this.getDistanceSqToEntity(entityIn) < 0.6D * i * 0.6D * i && entityIn.attackEntityFrom(
-                DamageSource.causeMobDamage(this), this.getAttackStrength())) {
+    
+        if (this.canEntityBeSeen(entityIn) && this.getDistanceSqToEntity(entityIn) < 0.6D * i * 0.6D * i && entityIn.attackEntityFrom(DamageSource
+                .causeMobDamage(this), this.getAttackStrength())) {
             this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.applyEnchantments(this, entityIn);
         }
@@ -366,11 +361,11 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
             @Nullable
                     IEntityLivingData livingdata) {
         int i = this.rand.nextInt(3);
-    
+
         if (i < 2 && this.rand.nextFloat() < 0.5F * difficulty.getClampedAdditionalDifficulty()) {
             ++i;
         }
-    
+
         int j = 1 << i;
         this.setSlimeSize(j, true);
         return super.onInitialSpawn(difficulty, livingdata);
@@ -397,16 +392,14 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     public boolean getCanSpawnHere() {
         BlockPos blockpos = new BlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
         Chunk chunk = this.world.getChunkFromBlockCoords(blockpos);
-    
+
         if (this.world.getWorldInfo().getTerrainType().handleSlimeSpawnReduction(rand, world)) {
             return false;
         } else {
             if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
                 Biome biome = this.world.getBiome(blockpos);
     
-                if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() <
-                        this.world.getCurrentMoonPhaseFactor() && this.world.getLightFromNeighbors(
-                        new BlockPos(this)) <= this.rand.nextInt(8)) {
+                if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() < this.world.getCurrentMoonPhaseFactor() && this.world.getLightFromNeighbors(new BlockPos(this)) <= this.rand.nextInt(8)) {
                     return super.getCanSpawnHere();
                 }
     
@@ -414,7 +407,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                     return super.getCanSpawnHere();
                 }
             }
-        
+    
             return false;
         }
     }
@@ -517,7 +510,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public void updateTask() {
             this.slime.faceEntity(this.slime.getAttackTarget(), 10.0F, 10.0F);
-            ((EntitySlimeCreeper.SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.slime.rotationYaw, this.slime.canDamagePlayer());
+            ((SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.slime.rotationYaw, this.slime.canDamagePlayer());
         }
     }
     
@@ -537,9 +530,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public boolean shouldExecute() {
-            return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime
-                    .isPotionActive(
-                    MobEffects.LEVITATION));
+            return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime.isPotionActive(MobEffects.LEVITATION));
         }
         
         /**
@@ -552,7 +543,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                 this.chosenDegrees = this.slime.getRNG().nextInt(360);
             }
     
-            ((EntitySlimeCreeper.SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.chosenDegrees, false);
+            ((SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.chosenDegrees, false);
         }
     }
     
@@ -583,7 +574,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                 this.slime.getJumpHelper().setJumping();
             }
     
-            ((EntitySlimeCreeper.SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.2D);
+            ((SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.2D);
         }
     }
     
@@ -609,7 +600,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public void updateTask() {
-            ((EntitySlimeCreeper.SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.0D);
+            ((SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.0D);
         }
     }
     
@@ -632,8 +623,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         }
         
         public void setSpeed(double speedIn) {
-            this.speed = speedIn;
-            this.action = EntityMoveHelper.Action.MOVE_TO;
+            this.speed = speedIn; this.action = Action.MOVE_TO;
         }
         
         @Override
@@ -641,15 +631,15 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
             this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);
             this.entity.rotationYawHead = this.entity.rotationYaw;
             this.entity.renderYawOffset = this.entity.rotationYaw;
-            
-            if (this.action != EntityMoveHelper.Action.MOVE_TO) {
+    
+            if (this.action != Action.MOVE_TO) {
                 this.entity.setMoveForward(0.0F);
             } else {
-                this.action = EntityMoveHelper.Action.WAIT;
+                this.action = Action.WAIT;
                 
                 if (this.entity.onGround) {
-                    this.entity.setAIMoveSpeed(
-                            (float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+                    this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                            .getAttributeValue()));
                     
                     if (this.jumpDelay-- <= 0) {
                         this.jumpDelay = this.slime.getJumpDelay();
@@ -661,8 +651,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                         this.slime.getJumpHelper().setJumping();
     
                         if (this.slime.makesSoundOnJump()) {
-                            this.slime.playSound(this.slime.getJumpSound(), this.slime.getSoundVolume(),
-                                                 ((this.slime.getRNG().nextFloat() - this.slime.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+                            this.slime.playSound(this.slime.getJumpSound(), this.slime.getSoundVolume(), ((this.slime.getRNG().nextFloat() - this
+                                    .slime.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
                         }
                     } else {
                         this.slime.moveStrafing = 0.0F;
@@ -670,8 +660,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                         this.entity.setAIMoveSpeed(0.0F);
                     }
                 } else {
-                    this.entity.setAIMoveSpeed(
-                            (float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+                    this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
+                            .getAttributeValue()));
                 }
             }
         }

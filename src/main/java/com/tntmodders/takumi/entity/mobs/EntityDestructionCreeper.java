@@ -16,12 +16,13 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
     
@@ -31,7 +32,7 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             float power = this.getPowered() ? 8f : 4f;
             if (event.getExplosion() instanceof TakumiExplosion) {
@@ -39,15 +40,11 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
             }
             if (power > 0.5) {
                 for (BlockPos pos : event.getAffectedBlocks()) {
-                    if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().hasTileEntity(
-                            this.world.getBlockState(pos)) && this.world.getBlockState(pos).getBlock().createTileEntity(this.world,
-                                                                                                                        this.world.getBlockState(
-                                                                                                                                pos)) instanceof
-                            IInventory && TakumiUtils.takumiGetBlockResistance(
-                            this, this.world.getBlockState(pos), pos) != -1) {
+                    if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().hasTileEntity(this.world.getBlockState(pos)) && this.world
+                            .getBlockState(pos).getBlock().createTileEntity(this.world, this.world.getBlockState(pos)) instanceof IInventory &&
+                            TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                         //this.world.setBlockToAir(pos);
-                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f,
-                                                          false, true);
+                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f, false, true);
                     }
                 }
             }
@@ -77,7 +74,7 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
                 this.world.setBlockToAir(pos);
             }
             if (!map.isEmpty()) {
-                for (Map.Entry <IBlockState, IRecipe> entry : Lists.newArrayList(map.entrySet())) {
+                for (Entry <IBlockState, IRecipe> entry : Lists.newArrayList(map.entrySet())) {
                     IRecipe recipe = entry.getValue();
                     int i = count.get(entry.getKey());
                     List <ItemStack> stackList = new ArrayList <>();

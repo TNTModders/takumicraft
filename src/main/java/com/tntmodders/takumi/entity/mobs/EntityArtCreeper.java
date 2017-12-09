@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class EntityArtCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     @Deprecated
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             List <IRecipe> list = Lists.newArrayList(CraftingManager.REGISTRY.iterator());
             for (BlockPos pos : event.getAffectedBlocks()) {
@@ -72,12 +72,10 @@ public class EntityArtCreeper extends EntityTakumiAbstractCreeper {
                 while (!flg) {
                     iRecipe = list.get(this.rand.nextInt(list.size()));
                     if (iRecipe.getRecipeOutput().getItem() instanceof ItemBlock) {
-                        IBlockState blockState = ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock().getStateFromMeta(
-                                iRecipe.getRecipeOutput().getMetadata());
-                        if (!(blockState.getBlock().hasTileEntity(blockState) && blockState.getBlock().createTileEntity(this.world,
-                                                                                                                        blockState) instanceof
-                                IInventory) && blockState.isFullCube() && blockState.getBlockHardness(
-                                this.world, pos) > -1) {
+                        IBlockState blockState = ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock().getStateFromMeta(iRecipe
+                                .getRecipeOutput().getMetadata());
+                        if (!(blockState.getBlock().hasTileEntity(blockState) && blockState.getBlock().createTileEntity(this.world, blockState)
+                                instanceof IInventory) && blockState.isFullCube() && blockState.getBlockHardness(this.world, pos) > -1) {
                             this.world.setBlockState(pos, blockState);
                             flg = true;
                         }

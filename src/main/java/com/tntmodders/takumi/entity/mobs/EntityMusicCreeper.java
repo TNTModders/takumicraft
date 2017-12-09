@@ -56,8 +56,8 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         if (this.isEntityAlive() && this.rand.nextInt(10) == 0) {
-            this.world.spawnParticle(EnumParticleTypes.NOTE, this.posX + rand.nextFloat() - 0.5, this.posY + rand.nextFloat(),
-                                     this.posZ + rand.nextFloat() - 0.5, -this.motionX, -this.motionY, -this.motionZ);
+            this.world.spawnParticle(EnumParticleTypes.NOTE, this.posX + rand.nextFloat() - 0.5, this.posY + rand.nextFloat(), this.posZ + rand
+                    .nextFloat() - 0.5, -this.motionX, -this.motionY, -this.motionZ);
         }
         /*try {
             Field field = EntityCreeper.class.getDeclaredField("timeSinceIgnited");

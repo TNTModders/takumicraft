@@ -67,6 +67,8 @@ tile.creeperwool.black.name=匠式黒色硬質羊毛
 tile.creepersandstarlow.name=爆発性サンドスターロウ
 tile.acidblock.name=腐蝕ブロック
 tile.takumialtar.name=王匠の祭壇
+tile.takumitnt.name=匠式高性能TNT
+tile.monsterbomb.name=式高性能爆弾
 
 #item
 item.takumibook.name=匠の書
@@ -279,6 +281,8 @@ entity.kingcreeper.desc=跪け、命乞いをしろ。王は凱旋する、匠�
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
+entity.explosionpotion.name=爆裂ポーション
+entity.takumitnt.name=匠式高性能TNT
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

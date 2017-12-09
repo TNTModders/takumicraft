@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "explode=true": [
+      {
+        "model": "takumicraft:takumitnt"
+      },
+      {
+        "model": "takumicraft:takumitnt",
+        "y": 90
+      },
+      {
+        "model": "takumicraft:takumitnt",
+        "y": 180
+      },
+      {
+        "model": "takumicraft:takumitnt",
+        "y": 270
+      }
+    ],
+    "explode=false": [
+      {
+        "model": "takumicraft:takumitnt"
+      },
+      {
+        "model": "takumicraft:takumitnt",
+        "y": 90
+      },
+      {
+        "model": "takumicraft:takumitnt",
+        "y": 180
+      },
+      {
+        "model": "takumicraft:takumitnt",
+        "y": 270
+      }
+    ]
+  }
+}

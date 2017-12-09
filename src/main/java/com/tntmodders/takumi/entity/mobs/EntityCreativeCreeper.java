@@ -73,7 +73,7 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
         int r = this.rand.nextInt(4);
         switch (r) {
             /*豆腐*/
-            case 0: {
+            case 0:
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
@@ -91,10 +91,9 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-            }
-
+    
             /*TNTハウス*/
-            case 1: {
+            case 1:
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
@@ -116,10 +115,9 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-            }
-
+    
             /*高性能爆弾*/
-            case 2: {
+            case 2:
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
@@ -143,10 +141,9 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-            }
-
+    
             /*モンスターハウス*/
-            case 3: {
+            case 3:
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
@@ -160,10 +157,10 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     for (int z = oz - 3; z <= oz + 3; z++) {
                         for (int y = oy + 3; y >= oy + 1; y--) {
                             this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
-                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(
-                                    new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
-                                Class <? extends ITakumiEntity> clazz =
-                                        TakumiEntityCore.getEntityList().get(this.rand.nextInt(TakumiEntityCore.getEntityList().size())).getClass();
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(new BlockPos
+                                    (x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
+                                Class <? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(this.rand.nextInt(TakumiEntityCore
+                                        .getEntityList().size())).getClass();
                                 try {
                                     Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(this.world);
                                     creeper.world = this.world;
@@ -177,7 +174,6 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-            }
         }
     }
 }

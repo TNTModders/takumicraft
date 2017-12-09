@@ -1,8 +1,9 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.ITakumiMetaBlock;
+import com.tntmodders.takumi.block.ITakumiItemBlock;
 import com.tntmodders.takumi.item.*;
+import com.tntmodders.takumi.item.ItemTakumiMineSweeperTool.EnumTakumiTool;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -27,22 +28,22 @@ public class TakumiItemCore {
     public static final ItemTakumiArrow TAKUMI_ARROW_HA = new ItemTakumiArrow("ha", 2, 1, false);
     public static final Item TAKUMI_SWORD = new ItemTakumiSword();
     public static final Item TAKUMI_BOLT_STONE = new ItemTakumiBoltStone();
-    public static final Item TAKUMI_CREEPER_HELMET = new ItemCreeperArmor(EntityEquipmentSlot.HEAD);
-    public static final Item TAKUMI_CREEPER_CHEST = new ItemCreeperArmor(EntityEquipmentSlot.CHEST);
-    public static final Item TAKUMI_CREEPER_LEGS = new ItemCreeperArmor(EntityEquipmentSlot.LEGS);
-    public static final Item TAKUMI_CREEPER_BOOTS = new ItemCreeperArmor(EntityEquipmentSlot.FEET);
-    public static final Item TAKUMI_MINE_PICKAXE = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool.EnumTakumiTool.PICKAXE);
-    public static final Item TAKUMI_MINE_SHOVEL = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool.EnumTakumiTool.SHOVEL);
-    public static final Item TAKUMI_MINE_AXE = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool.EnumTakumiTool.AXE);
+    public static final Item TAKUMI_CREEPER_HELMET = new ItemTakumiArmor(EntityEquipmentSlot.HEAD);
+    public static final Item TAKUMI_CREEPER_CHEST = new ItemTakumiArmor(EntityEquipmentSlot.CHEST);
+    public static final Item TAKUMI_CREEPER_LEGS = new ItemTakumiArmor(EntityEquipmentSlot.LEGS);
+    public static final Item TAKUMI_CREEPER_BOOTS = new ItemTakumiArmor(EntityEquipmentSlot.FEET);
+    public static final Item TAKUMI_MINE_PICKAXE = new ItemTakumiMineSweeperTool(EnumTakumiTool.PICKAXE);
+    public static final Item TAKUMI_MINE_SHOVEL = new ItemTakumiMineSweeperTool(EnumTakumiTool.SHOVEL);
+    public static final Item TAKUMI_MINE_AXE = new ItemTakumiMineSweeperTool(EnumTakumiTool.AXE);
     
     public static List <Item> itemBlocks = new ArrayList <>();
     
     public static void register(IForgeRegistry <Item> registry) {
-        Class clazz = TakumiItemCore.class;
+        Class <TakumiItemCore> clazz = TakumiItemCore.class;
         for (Field field : clazz.getFields()) {
             try {
-                if (field.get(TakumiItemCore.INSTANCE) instanceof Item) {
-                    Item item = (Item) field.get(TakumiItemCore.INSTANCE);
+                if (field.get(INSTANCE) instanceof Item) {
+                    Item item = (Item) field.get(INSTANCE);
                     registry.register(item);
                     OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
                     TakumiCraftCore.LOGGER.info("Registered Item : " + item.getUnlocalizedName());
@@ -51,19 +52,16 @@ public class TakumiItemCore {
                 e.printStackTrace();
             }
         }
-        
-        clazz = TakumiBlockCore.class;
-        for (Field field : clazz.getFields()) {
+    
+        Class <TakumiBlockCore> clazz2 = TakumiBlockCore.class; for (Field field : clazz2.getFields()) {
             try {
-                if (field.get(TakumiItemCore.INSTANCE) instanceof Block) {
+                if (field.get(INSTANCE) instanceof Block) {
                     Block block = (Block) field.get(TakumiBlockCore.INSTANCE);
-                    Item item = new ItemBlock(block);
-                    if (block instanceof ITakumiMetaBlock) {
-                        item = ((ITakumiMetaBlock) block).getItem();
+                    Item item = new ItemBlock(block); if (block instanceof ITakumiItemBlock) {
+                        item = ((ITakumiItemBlock) block).getItem();
                     }
                     item = item.setRegistryName(block.getRegistryName());
-                    registry.register(item);
-                    TakumiItemCore.itemBlocks.add(item);
+                    registry.register(item); itemBlocks.add(item);
                     TakumiCraftCore.LOGGER.info("Registered Item : " + block.getUnlocalizedName());
                     OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
                 }

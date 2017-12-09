@@ -17,12 +17,12 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("advancementToProgress", "field_192803_d");
     
         METHOD_MAP.put("onUpdate", "func_70071_h_");
-        METHOD_MAP.put("explode", "func_146077_cc");
+        METHOD_MAP.put("explode", "func_146077_cc"); METHOD_MAP.put("renderByItem", "func_179022_a");
     }
     
     public static boolean matchName(String name1, String name2) {
-        return name1.equals(name2) || FIELD_MAP.containsKey(name1) && FIELD_MAP.get(name1).equals(name2) || METHOD_MAP.containsKey(
-                name1) && METHOD_MAP.get(name1).equals(name2);
+        return name1.equals(name2) || FIELD_MAP.containsKey(name1) && FIELD_MAP.get(name1).equals(name2) || METHOD_MAP.containsKey(name1) &&
+                METHOD_MAP.get(name1).equals(name2);
     }
     
     public static Field getField(Class clazz, String sourceName) throws NoSuchFieldException {

@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
     
@@ -68,7 +68,7 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         float power = this.getPowered() ? 6f : 3f;
         if (event.getExplosion() instanceof TakumiExplosion) {
             power = ((TakumiExplosion) event.getExplosion()).getSize();
@@ -76,14 +76,11 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
     
-                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this,
-                                                                                                            event.getExplosion()) >= Blocks
-                        .OBSIDIAN.getExplosionResistance(
-                        world, pos, this, event.getExplosion()) && TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos),
-                                                                                                        pos) != -1) {
+                if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, event.getExplosion())
+                        >= Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, event.getExplosion()) && TakumiUtils.takumiGetBlockResistance
+                        (this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false,
-                                                      true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
                 }
             }
         }

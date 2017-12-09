@@ -95,10 +95,8 @@ public class EntityCatCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public boolean isNotColliding() {
-        if (this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this) && this.world.getCollisionBoxes(this,
-                                                                                                                 this.getEntityBoundingBox())
-                .isEmpty() && !this.world.containsAnyLiquid(
-                this.getEntityBoundingBox())) {
+        if (this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this) && this.world.getCollisionBoxes(this, this.getEntityBoundingBox())
+                .isEmpty() && !this.world.containsAnyLiquid(this.getEntityBoundingBox())) {
             BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
             
             if (blockpos.getY() < this.world.getSeaLevel()) {
@@ -171,8 +169,8 @@ public class EntityCatCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
-                                TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override

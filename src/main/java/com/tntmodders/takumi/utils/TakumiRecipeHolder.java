@@ -77,8 +77,8 @@ public class TakumiRecipeHolder {
     private void readStream(InputStream stream, String name) {
         JsonReader reader = new JsonReader(new InputStreamReader(stream));
         JsonObject jsonObject = new Gson().fromJson(reader, JsonObject.class);
-        ResourceLocation location =
-                new ResourceLocation(TakumiCraftCore.MODID, name.replaceAll("assets/takumicraft/recipes/", "").replaceAll(".json", ""));
+        ResourceLocation location = new ResourceLocation(TakumiCraftCore.MODID, name.replaceAll("assets/takumicraft/recipes/", "").replaceAll("" +
+                ".json", ""));
         
         if (jsonObject.getAsJsonObject("key").has("Q")) {
             Item item = Item.getByNameOrId(jsonObject.getAsJsonObject("key").getAsJsonObject("Q").get("item").getAsString());
@@ -109,7 +109,7 @@ public class TakumiRecipeHolder {
         @Override
         public V get(Object key) {
             if (key instanceof ItemStack && this.containsKey(key)) {
-                for (Map.Entry <K, V> entry : this.entrySet()) {
+                for (Entry <K, V> entry : this.entrySet()) {
                     if (entry.getKey().getItem() == ((ItemStack) key).getItem() && entry.getKey().getMetadata() == ((ItemStack) key).getMetadata()) {
                         return entry.getValue();
                     }
