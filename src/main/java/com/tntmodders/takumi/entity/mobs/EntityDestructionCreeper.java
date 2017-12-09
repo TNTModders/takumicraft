@@ -24,11 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityDestructionCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 1.95F);
     }
-
+    
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (!this.world.isRemote) {
@@ -38,16 +39,20 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
             }
             if (power > 0.5) {
                 for (BlockPos pos : event.getAffectedBlocks()) {
-                    if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().hasTileEntity(this.world.getBlockState(pos)) &&
-                            this.world.getBlockState(pos).getBlock().createTileEntity(this.world, this.world.getBlockState(pos)) instanceof IInventory &&
-                            TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
+                    if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().hasTileEntity(
+                            this.world.getBlockState(pos)) && this.world.getBlockState(pos).getBlock().createTileEntity(this.world,
+                                                                                                                        this.world.getBlockState(
+                                                                                                                                pos)) instanceof
+                            IInventory && TakumiUtils.takumiGetBlockResistance(
+                            this, this.world.getBlockState(pos), pos) != -1) {
                         //this.world.setBlockToAir(pos);
-                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f, false, true);
+                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f,
+                                                          false, true);
                     }
                 }
             }
-            Map<IBlockState, IRecipe> map = new HashMap<>();
-            Map<IBlockState, Integer> count = new HashMap<>();
+            Map <IBlockState, IRecipe> map = new HashMap <>();
+            Map <IBlockState, Integer> count = new HashMap <>();
             for (BlockPos pos : event.getAffectedBlocks()) {
                 IBlockState state = this.world.getBlockState(pos);
                 if (state.getMaterial() != Material.AIR) {
@@ -72,10 +77,10 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
                 this.world.setBlockToAir(pos);
             }
             if (!map.isEmpty()) {
-                for (Map.Entry<IBlockState, IRecipe> entry : Lists.newArrayList(map.entrySet())) {
+                for (Map.Entry <IBlockState, IRecipe> entry : Lists.newArrayList(map.entrySet())) {
                     IRecipe recipe = entry.getValue();
                     int i = count.get(entry.getKey());
-                    List<ItemStack> stackList = new ArrayList<>();
+                    List <ItemStack> stackList = new ArrayList <>();
                     for (Ingredient ingredient : recipe.getIngredients()) {
                         for (ItemStack stack : ingredient.getMatchingStacks()) {
                             if (!stackList.contains(stack)) {
@@ -94,46 +99,46 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
         }
         return true;
     }
-
+    
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderVillagerCreeper(manager);
     }
-
+    
     @Override
     public void takumiExplode() {
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GROUND_D;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 4;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0x005500;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "destructioncreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 217;

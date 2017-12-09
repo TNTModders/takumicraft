@@ -9,8 +9,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelSheepCreeper2 extends ModelQuadruped {
+    
     private float headRotationAngleX;
-
+    
     public ModelSheepCreeper2() {
         super(12, 0.0F);
         this.head = new ModelRenderer(this, 0, 0);
@@ -20,7 +21,7 @@ public class ModelSheepCreeper2 extends ModelQuadruped {
         this.body.addBox(-4.0F, -10.0F, -7.0F, 8, 16, 6, 0.0F);
         this.body.setRotationPoint(0.0F, 5.0F, 2.0F);
     }
-
+    
     /**
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
@@ -30,14 +31,15 @@ public class ModelSheepCreeper2 extends ModelQuadruped {
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
         this.head.rotationPointY = 6.0F;
     }
-
+    
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
+            Entity entityIn) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         this.head.rotateAngleX = this.headRotationAngleX;
     }

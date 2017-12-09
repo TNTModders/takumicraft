@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelZombieVillagerCreeper extends ModelBiped {
+
     public ModelZombieVillagerCreeper() {
         this(0.0F, 0.0F, false);
     }
@@ -63,7 +64,8 @@ public class ModelZombieVillagerCreeper extends ModelBiped {
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
+            Entity entityIn) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         EntityZombieCreeper entityzombie = (EntityZombieCreeper) entityIn;
         float f = MathHelper.sin(this.swingProgress * (float) Math.PI);

@@ -8,16 +8,18 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 
 
-public class LayerSlimeCreeperGel implements LayerRenderer<EntitySlimeCreeper> {
+public class LayerSlimeCreeperGel implements LayerRenderer <EntitySlimeCreeper> {
+    
     private final RenderSlimeCreeper slimeRenderer;
     private final ModelBase slimeModel = new ModelSlime(0);
-
+    
     public LayerSlimeCreeperGel(RenderSlimeCreeper slimeRendererIn) {
         this.slimeRenderer = slimeRendererIn;
     }
-
+    
     @Override
-    public void doRenderLayer(EntitySlimeCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(EntitySlimeCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+            float netHeadYaw, float headPitch, float scale) {
         if (!entitylivingbaseIn.isInvisible()) {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             GlStateManager.enableNormalize();
@@ -29,7 +31,7 @@ public class LayerSlimeCreeperGel implements LayerRenderer<EntitySlimeCreeper> {
             GlStateManager.disableNormalize();
         }
     }
-
+    
     @Override
     public boolean shouldCombineTextures() {
         return true;

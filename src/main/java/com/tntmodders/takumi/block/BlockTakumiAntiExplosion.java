@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public class BlockTakumiAntiExplosion extends Block {
-
+    
     public BlockTakumiAntiExplosion(Material material, String s, float hardness, String tool) {
         super(material);
         this.setRegistryName(TakumiCraftCore.MODID, s);

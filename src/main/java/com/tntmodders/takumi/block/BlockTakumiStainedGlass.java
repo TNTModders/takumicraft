@@ -8,6 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemCloth;
 
 public class BlockTakumiStainedGlass extends BlockStainedGlass implements ITakumiMetaBlock {
+    
     public BlockTakumiStainedGlass() {
         super(Material.GLASS);
         this.setRegistryName(TakumiCraftCore.MODID, "creeperstainedglass");
@@ -18,7 +19,7 @@ public class BlockTakumiStainedGlass extends BlockStainedGlass implements ITakum
         this.setSoundType(SoundType.GLASS);
         this.setLightLevel(0.4f);
     }
-
+    
     @Override
     public ItemBlock getItem() {
         return new ItemCloth(this);

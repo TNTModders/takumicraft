@@ -8,6 +8,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 public class EnchantmentTakumiMineSweeper extends Enchantment {
+    
     public EnchantmentTakumiMineSweeper() {
         super(Rarity.RARE, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
         this.setRegistryName(TakumiCraftCore.MODID, "takumi_minesweeper");

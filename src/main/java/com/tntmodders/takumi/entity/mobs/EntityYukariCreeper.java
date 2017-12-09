@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityYukariCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        List<BlockPos> posList = new ArrayList<>();
+        List <BlockPos> posList = new ArrayList <>();
         for (BlockPos pos : event.getAffectedBlocks()) {
             if (pos.getY() > this.posY) {
                 this.world.setBlockToAir(pos);
@@ -30,12 +31,12 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedBlocks().clear();
         return true;
     }
-
+    
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/yukaricreeper_armor.png");
     }
-
+    
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -43,48 +44,49 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
             for (int x = -i; x <= i; x++) {
                 for (int z = -i; z <= i; z++) {
                     if (x * x + z * z < i * i) {
-                        this.world.createExplosion(this, this.posX + x, this.posY, this.posZ + z, (float) Math.sqrt(i - Math.sqrt(x * x + z * z) + 1) * 1.75f, true);
+                        this.world.createExplosion(this, this.posX + x, this.posY, this.posZ + z,
+                                                   (float) Math.sqrt(i - Math.sqrt(x * x + z * z) + 1) * 1.75f, true);
                     }
                 }
             }
         }
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.HIGH;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.YUKARI;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 10;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0xff00ff;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "yukaricreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 405;
     }
-
+    
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 1f;

@@ -6,10 +6,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityFireCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityFireCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
     @Override
     public void takumiExplode() {
         int range = this.getPowered() ? 6 : 2;
@@ -24,37 +25,37 @@ public class EntityFireCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.FIRE;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 0;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 16733525;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "firecreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 7;

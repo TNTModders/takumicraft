@@ -7,10 +7,11 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityOfalenCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -25,47 +26,47 @@ public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.HIGH;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GROUND_MD;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 4;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0xdd0000;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "ofalencreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 402;
     }
-
+    
     @Override
     public int getPrimaryColor() {
         return 0x0000dd;
     }
-
+    
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 1f;

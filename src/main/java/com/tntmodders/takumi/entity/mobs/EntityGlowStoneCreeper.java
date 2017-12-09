@@ -14,21 +14,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityGlowStoneCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityGlowStoneCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public int getBrightnessForRender() {
         return 15728880;
     }
-
+    
     @Override
     public float getBrightness() {
         return 1.0F;
     }
-
+    
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         for (BlockPos pos : event.getAffectedBlocks()) {
@@ -37,53 +38,53 @@ public class EntityGlowStoneCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
         return true;
     }
-
+    
     @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 3, 10, EnumCreatureType.MONSTER, Biomes.HELL);
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER,
-                TakumiEntityCore.biomes.toArray(new Biome[0]));
+                                TakumiEntityCore.biomes.toArray(new Biome[0]));
     }
-
+    
     @Override
     public int getPrimaryColor() {
         return 16776960;
     }
-
+    
     @Override
     public void takumiExplode() {
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GROUND;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 2;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 12303206;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "glowstonecreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 28;

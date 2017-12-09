@@ -10,10 +10,11 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityWrylyCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
     @Override
     protected void despawnEntity() {
         Event.Result result;
@@ -26,18 +27,18 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
             }
         } else {
             Entity entity = this.world.getClosestPlayerToEntity(this, -1.0D);
-
+    
             if (entity != null) {
                 double d0 = entity.posX - this.posX;
                 double d1 = entity.posY - this.posY;
                 double d2 = entity.posZ - this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-
+        
                 if (this.canDespawn() && d3 > 16384.0D) {
                     this.setHealth(0);
                     this.setDead();
                 }
-
+        
                 if (this.idleTime > 600 && this.rand.nextInt(800) == 0 && d3 > 1024.0D && this.canDespawn()) {
                     this.setHealth(0);
                     this.setDead();
@@ -47,7 +48,7 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-
+    
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -62,52 +63,52 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
         }
         super.setDead();
     }
-
+    
     @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
     }
-
+    
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return !source.isExplosion() && super.attackEntityFrom(source, amount);
     }
-
+    
     @Override
     public void takumiExplode() {
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.WIND;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 3;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 8913151;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "wrylycreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 209;

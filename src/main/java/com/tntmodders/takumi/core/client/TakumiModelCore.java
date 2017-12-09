@@ -31,6 +31,7 @@ import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class TakumiModelCore {
+    
     public static void register() {
         Class clazz = TakumiItemCore.class;
         for (Field field : clazz.getFields()) {
@@ -39,14 +40,16 @@ public class TakumiModelCore {
                     Item item = (Item) field.get(TakumiItemCore.INSTANCE);
                     String s = item.getUnlocalizedName().substring(5);
                     if (item.getHasSubtypes()) {
-                        NonNullList<ItemStack> stacks = NonNullList.create();
+                        NonNullList <ItemStack> stacks = NonNullList.create();
                         item.getSubItems(TakumiCraftCore.TAB_CREEPER, stacks);
                         for (int i = 0; i < stacks.size(); i++) {
-                            ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i), "inventory"));
+                            ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(
+                                    new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i), "inventory"));
                             TakumiCraftCore.LOGGER.info("Registered item model with metadata" + i + " : " + s + "_" + i);
                         }
                     } else {
-                        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
+                        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s),
+                                                                                                      "inventory"));
                         TakumiCraftCore.LOGGER.info("Registered item model: " + s);
                     }
                 }
@@ -54,11 +57,11 @@ public class TakumiModelCore {
                 e.printStackTrace();
             }
         }
-
+        
         for (Item item : TakumiItemCore.itemBlocks) {
             String s = item.getUnlocalizedName().substring(5);
             if (item.getHasSubtypes()) {
-                NonNullList<ItemStack> stacks = NonNullList.create();
+                NonNullList <ItemStack> stacks = NonNullList.create();
                 item.getSubItems(TakumiCraftCore.TAB_CREEPER, stacks);
                 for (int i = 0; i < stacks.size(); i++) {
                     if (item instanceof ItemCloth) {
@@ -66,26 +69,33 @@ public class TakumiModelCore {
                             ModelLoader.setCustomStateMapper(((ItemCloth) item).getBlock(), new StateMapperBase() {
                                 @Override
                                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                                    return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperstainedglasspane_" +
-                                            state.getValue(BlockStainedGlassPane.COLOR).getName()), "normal");
+                                    return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID,
+                                                                                          "creeperstainedglasspane_" + state.getValue(
+                                                                                                  BlockStainedGlassPane.COLOR).getName()), "normal");
                                 }
                             });
                         }
-                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, EnumDyeColor.byMetadata(i).getName() + "_" + s), "inventory"));
-                        TakumiCraftCore.LOGGER.info("Registered block model with color " + EnumDyeColor.byMetadata(i).getName() + " : " + EnumDyeColor.byMetadata(i).getName() + "_" + s);
+                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(
+                                new ResourceLocation(TakumiCraftCore.MODID, EnumDyeColor.byMetadata(i).getName() + "_" + s), "inventory"));
+                        TakumiCraftCore.LOGGER.info(
+                                "Registered block model with color " + EnumDyeColor.byMetadata(i).getName() + " : " + EnumDyeColor.byMetadata(
+                                        i).getName() + "_" + s);
                     } else {
-                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i), "inventory"));
+                        ModelLoader.setCustomModelResourceLocation(item, i,
+                                                                   new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i),
+                                                                                             "inventory"));
                         TakumiCraftCore.LOGGER.info("Registered block model with metadata " + i + " : " + s + "_" + i);
                     }
                 }
             } else {
-                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
+                ModelLoader.setCustomModelResourceLocation(item, 0,
+                                                           new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
                 TakumiCraftCore.LOGGER.info("Registered block model: " + s);
             }
         }
     }
-
-    public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {
+    
+    public static void registerEntityRender(Class <Entity> clazz, ITakumiEntity entity) {
         RenderingRegistry.registerEntityRenderingHandler(clazz, new TakumiRenderFactory() {
             @Override
             public Render createRenderFor(RenderManager manager) {
@@ -93,7 +103,7 @@ public class TakumiModelCore {
             }
         });
     }
-
+    
     public static void registerFluid(Block block, String name) {
         ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
             @Override
@@ -102,8 +112,8 @@ public class TakumiModelCore {
             }
         });
     }
-
+    
     public static void registerTileRender() {
-        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock", new RenderAcidBlock<>());
+        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock", new RenderAcidBlock <>());
     }
 }

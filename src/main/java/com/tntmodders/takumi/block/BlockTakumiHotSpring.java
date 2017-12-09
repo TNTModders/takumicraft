@@ -19,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTakumiHotSpring extends BlockFluidClassic {
+    
     public BlockTakumiHotSpring() {
         super(TakumiFluidCore.HOT_SPRING, TakumiMaterial.HOT_SPRING);
         this.setRegistryName(TakumiCraftCore.MODID, "takumihotspring");
@@ -26,7 +27,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
         this.setLightLevel(1f);
         this.setResistance(10000000f);
     }
-
+    
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 20 == 0) {
@@ -36,12 +37,14 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
             }
         }
     }
-
+    
     @Override
-    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity, double yToTest, Material materialIn, boolean testingHead) {
-        return materialIn == Material.WATER ? true : super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
+    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity, double yToTest, Material
+            materialIn, boolean testingHead) {
+        return materialIn == Material.WATER ? true :
+               super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {

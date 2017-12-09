@@ -11,19 +11,20 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderEarthCreeper<T extends EntityEarthCreeper> extends RenderLiving<T> implements ITakumiRender {
+public class RenderEarthCreeper <T extends EntityEarthCreeper> extends RenderLiving <T> implements ITakumiRender {
+    
     public RenderEarthCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelEarthCreeper(0.0f), 0.5f);
         this.addLayer(new LayerTakumiCharge(this));
     }
-
+    
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-
+    
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -32,7 +33,7 @@ public class RenderEarthCreeper<T extends EntityEarthCreeper> extends RenderLivi
             return i << 24 | 822083583;
         }
     }
-
+    
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -47,12 +48,12 @@ public class RenderEarthCreeper<T extends EntityEarthCreeper> extends RenderLivi
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-
+    
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-
+    
     @Override
     public ModelBase getPoweredModel() {
         return new ModelEarthCreeper(2.0f);

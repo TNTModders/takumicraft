@@ -13,29 +13,30 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderDarkCreeper<T extends EntityDarkCreeper> extends RenderLiving<T> implements ITakumiRender {
+public class RenderDarkCreeper <T extends EntityDarkCreeper> extends RenderLiving <T> implements ITakumiRender {
+    
     public RenderDarkCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelEnderman(0.0f), 0.5f);
         this.addLayer(new LayerDarkCreeperHeldBlock(this));
         this.addLayer(new LayerTakumiCharge(this));
     }
-
+    
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         IBlockState iblockstate = entity.getHeldBlockState();
         ModelEnderman modelenderman = (ModelEnderman) this.getMainModel();
         modelenderman.isCarrying = iblockstate != null;
         modelenderman.isAttacking = entity.isScreaming();
-
+        
         if (entity.isScreaming()) {
             double d0 = 0.02D;
             x += entity.getRNG().nextGaussian() * 0.02D;
             z += entity.getRNG().nextGaussian() * 0.02D;
         }
-
+        
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
-
+    
     /**
      * Gets an RGBA int color multiplier to apply.
      */
@@ -50,7 +51,7 @@ public class RenderDarkCreeper<T extends EntityDarkCreeper> extends RenderLiving
             return i << 24 | 822083583;
         }
     }
-
+    
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -65,12 +66,12 @@ public class RenderDarkCreeper<T extends EntityDarkCreeper> extends RenderLiving
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-
+    
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-
+    
     @Override
     public ModelBase getPoweredModel() {
         return new ModelEnderman(2.0f);

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TakumiItemCore {
+    
     public static final TakumiItemCore INSTANCE = new TakumiItemCore();
     public static final Item TAKUMI_SHIELD = new ItemTakumiShield();
     public static final Item TAKUMI_BOOK = new ItemTakumiBook();
@@ -30,16 +31,13 @@ public class TakumiItemCore {
     public static final Item TAKUMI_CREEPER_CHEST = new ItemCreeperArmor(EntityEquipmentSlot.CHEST);
     public static final Item TAKUMI_CREEPER_LEGS = new ItemCreeperArmor(EntityEquipmentSlot.LEGS);
     public static final Item TAKUMI_CREEPER_BOOTS = new ItemCreeperArmor(EntityEquipmentSlot.FEET);
-    public static final Item TAKUMI_MINE_PICKAXE = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool
-            .EnumTakumiTool.PICKAXE);
-    public static final Item TAKUMI_MINE_SHOVEL = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool
-            .EnumTakumiTool.SHOVEL);
-    public static final Item TAKUMI_MINE_AXE = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool
-            .EnumTakumiTool.AXE);
+    public static final Item TAKUMI_MINE_PICKAXE = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool.EnumTakumiTool.PICKAXE);
+    public static final Item TAKUMI_MINE_SHOVEL = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool.EnumTakumiTool.SHOVEL);
+    public static final Item TAKUMI_MINE_AXE = new ItemTakumiMineSweeperTool(ItemTakumiMineSweeperTool.EnumTakumiTool.AXE);
     
-    public static List<Item> itemBlocks = new ArrayList<>();
+    public static List <Item> itemBlocks = new ArrayList <>();
     
-    public static void register(IForgeRegistry<Item> registry) {
+    public static void register(IForgeRegistry <Item> registry) {
         Class clazz = TakumiItemCore.class;
         for (Field field : clazz.getFields()) {
             try {

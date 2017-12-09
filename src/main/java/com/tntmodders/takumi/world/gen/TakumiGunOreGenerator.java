@@ -12,13 +12,14 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 public class TakumiGunOreGenerator implements IWorldGenerator {
+    
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (world.provider instanceof WorldProviderSurface) {
             this.generateOre(world, random, chunkX << 4, chunkZ << 4);
         }
     }
-
+    
     private void generateOre(World world, Random random, int x, int z) {
         //1チャンクで生成したい回数だけ繰り返す。
         if (world.provider instanceof WorldProviderSurface) {
@@ -26,9 +27,9 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
                 int genX = x + random.nextInt(16);
                 int genY = 1 + random.nextInt(64);
                 int genZ = z + random.nextInt(16);
-                new WorldGenMinable(random.nextInt(50) == 0 ?
-                        TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
-                        TakumiBlockCore.GUNORE.getDefaultState(), 25).generate(world, random, new BlockPos(genX, genY, genZ));
+                new WorldGenMinable(
+                        random.nextInt(50) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() : TakumiBlockCore.GUNORE.getDefaultState(),
+                        25).generate(world, random, new BlockPos(genX, genY, genZ));
             }
         }
     }

@@ -8,10 +8,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityRedStoneCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityRedStoneCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -19,7 +20,7 @@ public class EntityRedStoneCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(128);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
     }
-
+    
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
@@ -27,46 +28,46 @@ public class EntityRedStoneCreeper extends EntityTakumiAbstractCreeper {
         }
         super.onDeath(source);
     }
-
+    
     @Override
     public void takumiExplode() {
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.FIRE;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 5;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0xff0000;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "redstonecreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 211;
     }
-
+    
     @Override
     public int getPrimaryColor() {
         return 0xa09090;

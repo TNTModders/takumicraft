@@ -7,20 +7,21 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public abstract class AbstractEntityTakumiGrenade extends EntityThrowable {
+    
     protected int count = 0;
-
+    
     public AbstractEntityTakumiGrenade(World worldIn) {
         super(worldIn);
     }
-
+    
     public AbstractEntityTakumiGrenade(World worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
     }
-
+    
     public AbstractEntityTakumiGrenade(World worldIn, EntityLivingBase throwerIn) {
         super(worldIn, throwerIn);
     }
-
+    
     @Override
     protected void onImpact(RayTraceResult result) {
         this.count++;
@@ -32,10 +33,10 @@ public abstract class AbstractEntityTakumiGrenade extends EntityThrowable {
             }
         }
     }
-
+    
     public abstract int getCount();
-
+    
     public abstract int getPower();
-
+    
     public abstract boolean getDestroy();
 }

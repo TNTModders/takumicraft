@@ -13,18 +13,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 
-public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLiving<T> implements ITakumiRender {
-
+public class RenderSlimeCreeper <T extends EntitySlimeCreeper> extends RenderLiving <T> implements ITakumiRender {
+    
     public RenderSlimeCreeper(RenderManager p_i47193_1_) {
         super(p_i47193_1_, new ModelSlime(16), 0.25F);
         this.addLayer(new LayerSlimeCreeperGel(this));
         this.addLayer(new LayerTakumiCharge(this));
     }
-
+    
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-
+        
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -33,7 +33,7 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
             return i << 24 | 822083583;
         }
     }
-
+    
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -42,12 +42,14 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
         float f = 0.999F;
         GlStateManager.scale(0.999F, 0.999F, 0.999F);
         float f1 = (float) entitylivingbaseIn.getSlimeSize();
-        float f2 = (entitylivingbaseIn.prevSquishFactor + (entitylivingbaseIn.squishFactor - entitylivingbaseIn.prevSquishFactor) * partialTickTime) / (f1 * 0.5F + 1.0F);
+        float f2 =
+                (entitylivingbaseIn.prevSquishFactor + (entitylivingbaseIn.squishFactor - entitylivingbaseIn.prevSquishFactor) * partialTickTime) /
+                        (f1 * 0.5F + 1.0F);
         float f3 = 1.0F / (f2 + 1.0F);
         GlStateManager.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
         this.creeperSwell(entitylivingbaseIn, partialTickTime);
     }
-
+    
     private void creeperSwell(T entitylivingbaseIn, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
@@ -58,7 +60,7 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-
+    
     /**
      * Renders the desired {@code T} type Entity.
      */
@@ -67,12 +69,12 @@ public class RenderSlimeCreeper<T extends EntitySlimeCreeper> extends RenderLivi
         this.shadowSize = 0.25F * (float) entity.getSlimeSize();
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
-
+    
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-
+    
     @Override
     public ModelBase getPoweredModel() {
         return new ModelSlime(0);

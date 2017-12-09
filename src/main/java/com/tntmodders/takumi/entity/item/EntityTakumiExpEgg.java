@@ -5,19 +5,20 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.world.World;
 
 public class EntityTakumiExpEgg extends AbstractEntityTakumiGrenade {
+    
     public EntityTakumiExpEgg(World worldIn) {
         super(worldIn);
     }
-
+    
     public EntityTakumiExpEgg(World worldIn, EntityLivingBase throwerIn) {
         super(worldIn, throwerIn);
     }
-
+    
     @Override
     public int getCount() {
         return 1;
     }
-
+    
     @Override
     public int getPower() {
         int i = 3;
@@ -26,7 +27,7 @@ public class EntityTakumiExpEgg extends AbstractEntityTakumiGrenade {
         }
         return i;
     }
-
+    
     @Override
     public boolean getDestroy() {
         return true;

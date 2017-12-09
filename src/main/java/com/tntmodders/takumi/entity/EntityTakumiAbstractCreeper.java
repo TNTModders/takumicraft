@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
+    
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
@@ -40,7 +41,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @SideOnly(Side.CLIENT)
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderTakumiCreeper<>(manager);
+        return new RenderTakumiCreeper <>(manager);
     }
     
     @Override

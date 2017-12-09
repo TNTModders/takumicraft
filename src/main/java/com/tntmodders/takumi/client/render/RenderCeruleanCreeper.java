@@ -9,14 +9,16 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderCeruleanCreeper<T extends EntityCeruleanCreeper> extends RenderTakumiCreeper<T> {
+public class RenderCeruleanCreeper <T extends EntityCeruleanCreeper> extends RenderTakumiCreeper <T> {
+    
     public RenderCeruleanCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn);
-        this.addLayer(new RenderCeruleanEye<>(this));
+        this.addLayer(new RenderCeruleanEye <>(this));
     }
-
+    
     @Override
-    protected void renderModel(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+    protected void renderModel(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+            float scaleFactor) {
         boolean flag = entitylivingbaseIn.isInvisible();
         if (TakumiConfigCore.isTransparentCeruleanCreeper) {
             GlStateManager.depthMask(!flag);
@@ -42,23 +44,25 @@ public class RenderCeruleanCreeper<T extends EntityCeruleanCreeper> extends Rend
             GlStateManager.depthMask(flag);
         }
     }
-
-    private class RenderCeruleanEye<E extends EntityCeruleanCreeper> implements LayerRenderer<E> {
+    
+    private class RenderCeruleanEye <E extends EntityCeruleanCreeper> implements LayerRenderer <E> {
+        
         final RenderCeruleanCreeper renderCeruleanCreeper;
         final ResourceLocation location = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/ceruleancreeper_eye.png");
-
+        
         public RenderCeruleanEye(RenderCeruleanCreeper creeper) {
             this.renderCeruleanCreeper = creeper;
         }
-
+        
         @Override
-        public void doRenderLayer(E entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        public void doRenderLayer(E entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float
+                netHeadYaw, float headPitch, float scale) {
             this.renderCeruleanCreeper.bindTexture(location);
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
             mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
         }
-
+        
         @Override
         public boolean shouldCombineTextures() {
             return false;

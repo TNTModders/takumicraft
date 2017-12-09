@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
+    
     private float headRotationCourse;
     private float headRotationCourseOld;
     /**
@@ -43,12 +44,12 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
      */
     private float timeWolfIsShaking;
     private float prevTimeWolfIsShaking;
-
+    
     public EntityWolfCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 0.85F);
     }
-
+    
     /**
      * True if the wolf is wet
      */
@@ -56,7 +57,7 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     public boolean isWolfWet() {
         return this.isWet;
     }
-
+    
     /**
      * Used when calculating the amount of shading to apply while the wolf is wet.
      */
@@ -64,25 +65,25 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     public float getShadingWhileWet(float p_70915_1_) {
         return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * p_70915_1_) / 2.0F * 0.25F;
     }
-
+    
     @SideOnly(Side.CLIENT)
     public float getShakeAngle(float p_70923_1_, float p_70923_2_) {
         float f = (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * p_70923_1_ + p_70923_2_) / 1.8F;
-
+        
         if (f < 0.0F) {
             f = 0.0F;
         } else if (f > 1.0F) {
             f = 1.0F;
         }
-
+        
         return MathHelper.sin(f * (float) Math.PI) * MathHelper.sin(f * (float) Math.PI * 11.0F) * 0.15F * (float) Math.PI;
     }
-
+    
     @SideOnly(Side.CLIENT)
     public float getInterestedAngle(float p_70917_1_) {
         return (this.headRotationCourseOld + (this.headRotationCourse - this.headRotationCourseOld) * p_70917_1_) * 0.15F * (float) Math.PI;
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public void handleStatusUpdate(byte id) {
@@ -94,18 +95,18 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
             super.handleStatusUpdate(id);
         }
     }
-
+    
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_WOLF_GROWL;
     }
-
+    
     @SideOnly(Side.CLIENT)
     public float getTailRotation() {
         return 1.5393804F;
-
+        
     }
-
+    
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -120,45 +121,45 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 3;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0xeeffee;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "wolfcreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 44;
     }
-
+    
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        List<EntityWolf> list = new ArrayList<>();
+        List <EntityWolf> list = new ArrayList <>();
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityWolf) {
                 list.add((EntityWolf) entity);
@@ -167,30 +168,30 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedEntities().removeAll(list);
         return true;
     }
-
+    
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI
-                , TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
+                                TakumiEntityCore.biomes.toArray(new Biome[0]));
     }
-
+    
     @Override
     public int getPrimaryColor() {
         return 0x664400;
     }
-
+    
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderWolfCreeper<>(manager);
+        return new RenderWolfCreeper <>(manager);
     }
-
+    
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
     }
-
+    
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -205,57 +206,59 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
             if (this.timeWolfIsShaking == 0.0F) {
                 this.playSound(SoundEvents.ENTITY_WOLF_SHAKE, this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             }
-
+    
             this.prevTimeWolfIsShaking = this.timeWolfIsShaking;
             this.timeWolfIsShaking += 0.05F;
-
+    
             if (this.prevTimeWolfIsShaking >= 2.0F) {
                 this.isWet = false;
                 this.isShaking = false;
                 this.prevTimeWolfIsShaking = 0.0F;
                 this.timeWolfIsShaking = 0.0F;
             }
-
+    
             if (this.timeWolfIsShaking > 0.4F) {
                 float f = (float) this.getEntityBoundingBox().minY;
                 int i = (int) (MathHelper.sin((this.timeWolfIsShaking - 0.4F) * (float) Math.PI) * 7.0F);
-
+        
                 for (int j = 0; j < i; ++j) {
                     float f1 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
                     float f2 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2, this.motionX, this.motionY, this.motionZ);
+                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2,
+                                             this.motionX, this.motionY, this.motionZ);
                 }
             }
         }
     }
-
+    
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_WOLF_HURT;
     }
-
+    
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_WOLF_DEATH;
     }
-
+    
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),
+                                                 (float) (int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+        
         if (flag) {
             this.applyEnchantments(this, entityIn);
         }
-
+        
         return flag;
     }
-
+    
     @Override
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_WOLF;
     }
-
+    
     /**
      * Returns the volume for the sounds this mob makes.
      */
@@ -263,11 +266,11 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     protected float getSoundVolume() {
         return 0.4F;
     }
-
+    
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-
+        
         if (!this.world.isRemote && this.isWet && !this.isShaking && !this.hasPath() && this.onGround) {
             this.isShaking = true;
             this.timeWolfIsShaking = 0.0F;
@@ -275,12 +278,12 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
             this.world.setEntityState(this, (byte) 8);
         }
     }
-
+    
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
         this.playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
     }
-
+    
     @Override
     public float getEyeHeight() {
         return this.height * 0.8F;

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockTakumiAltar extends Block {
+    
     public BlockTakumiAltar() {
         super(Material.TNT, MapColor.GREEN);
         this.setRegistryName(TakumiCraftCore.MODID, "takumialtar");
@@ -31,8 +32,8 @@ public class BlockTakumiAltar extends Block {
     }
     
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand
-            hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float
+            hitX, float hitY, float hitZ) {
         boolean flg = super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
         Entity entity = null;
         if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
@@ -40,7 +41,7 @@ public class BlockTakumiAltar extends Block {
         } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
             entity = new EntityAnnivCreeper(worldIn);
         } else {
-            List<ITakumiEntity> entities = new ArrayList<>();
+            List <ITakumiEntity> entities = new ArrayList <>();
             TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
                 if (iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.HIGH) {
                     entities.add(iTakumiEntity);
@@ -48,10 +49,8 @@ public class BlockTakumiAltar extends Block {
             });
             entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
             try {
-                entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass()
-                        .getConstructor(World.class).newInstance(worldIn);
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
-                    InvocationTargetException e) {
+                entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(worldIn);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
@@ -63,8 +62,7 @@ public class BlockTakumiAltar extends Block {
                 worldIn.setBlockToAir(pos.down());
             }
             if (!worldIn.isRemote) {
-                worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5
-                        , 3f, true);
+                worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
                 if (worldIn.spawnEntity(entity)) {
                     flg = true;
                 }

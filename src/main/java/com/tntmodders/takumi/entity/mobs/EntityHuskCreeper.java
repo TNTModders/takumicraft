@@ -15,12 +15,43 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityHuskCreeper extends EntityZombieCreeper {
+    
     private static final Biome[] biomes = {Biomes.DESERT, Biomes.DESERT_HILLS, Biomes.MUTATED_DESERT};
-
+    
     public EntityHuskCreeper(World worldIn) {
         super(worldIn);
     }
-
+    
+    @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.MID;
+    }
+    
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.NORMAL_D;
+    }
+    
+    @Override
+    public int getSecondaryColor() {
+        return 15983273;
+    }
+    
+    @Override
+    public boolean isCustomSpawn() {
+        return true;
+    }
+    
+    @Override
+    public String getRegisterName() {
+        return "huskcreeper";
+    }
+    
+    @Override
+    public int getRegisterID() {
+        return 203;
+    }
+    
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
@@ -37,43 +68,13 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
         }
         return true;
     }
-
-    @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.MID;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL_D;
-    }
-
-    @Override
-    public int getSecondaryColor() {
-        return 15983273;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return true;
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "huskcreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 203;
-    }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderZombieCreeper(manager);
     }
-
+    
     @Override
     public void customSpawn() {
     }

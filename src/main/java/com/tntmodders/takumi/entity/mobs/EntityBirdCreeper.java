@@ -24,46 +24,46 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import javax.annotation.Nullable;
 
 public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
-
+    
     public float wingRotation;
     public float destPos;
     public float oFlapSpeed;
     public float oFlap;
     public float wingRotDelta = 1.0F;
-
+    
     public EntityBirdCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.4F, 0.7F);
         this.setPathPriority(PathNodeType.WATER, 0.0F);
     }
-
+    
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
-
+    
     @Override
     public void fall(float distance, float damageMultiplier) {
     }
-
+    
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_CHICKEN_HURT;
     }
-
+    
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_CHICKEN_DEATH;
     }
-
+    
     @Override
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_CHICKEN;
     }
-
+    
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
@@ -74,30 +74,30 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
         this.oFlapSpeed = this.destPos;
         this.destPos = (float) (this.destPos + (this.onGround ? -1 : 4) * 0.3D);
         this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
-
+        
         if (!this.onGround && this.wingRotDelta < 1.0F) {
             this.wingRotDelta = 1.0F;
         }
-
+        
         this.wingRotDelta = (float) (this.wingRotDelta * 0.9D);
-
+        
         if (!this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
-
+        
         this.wingRotation += this.wingRotDelta * 2.0F;
     }
-
+    
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return !source.isExplosion() && super.attackEntityFrom(source, amount);
     }
-
+    
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT;
     }
-
+    
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -112,28 +112,28 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
         }
         super.setDead();
     }
-
+    
     @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
         this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }
-
+    
     @Override
     public float getEyeHeight() {
         return this.height;
     }
-
+    
     @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
     }
-
+    
     @Override
     protected float getJumpUpwardsMotion() {
         return 1f;
     }
-
+    
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -143,50 +143,50 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
             this.world.spawnEntity(expEgg);
         }
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 0;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0x77ff77;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "birdcreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 229;
     }
-
+    
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI
-                , TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.CREATURE_TAKUMI,
+                                TakumiEntityCore.biomes.toArray(new Biome[0]));
     }
-
+    
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderBirdCreeper<>(manager);
+        return new RenderBirdCreeper <>(manager);
     }
 }

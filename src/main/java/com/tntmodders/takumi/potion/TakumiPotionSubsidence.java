@@ -9,18 +9,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TakumiPotionSubsidence extends Potion {
+    
     public TakumiPotionSubsidence() {
         super(true, 551559);
         this.setRegistryName(TakumiCraftCore.MODID, "takumisubsidence");
         this.setPotionName("takumisubsidence");
     }
-
+    
     @Override
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
         World world = entityLivingBaseIn.world;
         BlockPos pos = new BlockPos(entityLivingBaseIn).down();
-        if (world.getBlockState(pos).getBlockHardness(world, pos) < 0 || world.getBlockState(pos).getBlock() == Blocks.BEDROCK ||
-                world.getBlockState(pos.down()).getBlockHardness(world, pos.down()) < 0 || world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
+        if (world.getBlockState(pos).getBlockHardness(world, pos) < 0 || world.getBlockState(pos).getBlock() == Blocks.BEDROCK || world.getBlockState(
+                pos.down()).getBlockHardness(world, pos.down()) < 0 || world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
             entityLivingBaseIn.noClip = false;
         } else {
             entityLivingBaseIn.noClip = true;
@@ -28,12 +29,12 @@ public class TakumiPotionSubsidence extends Potion {
         }
         super.performEffect(entityLivingBaseIn, amplifier);
     }
-
+    
     @Override
     public boolean isReady(int duration, int amplifier) {
         return true;
     }
-
+    
     @Override
     public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
         entityLivingBaseIn.noClip = false;

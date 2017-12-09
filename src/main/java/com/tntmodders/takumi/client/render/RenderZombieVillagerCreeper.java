@@ -13,20 +13,27 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 
-public class RenderZombieVillagerCreeper<T extends EntityZombieVillagerCreeper> extends RenderBiped<T> implements ITakumiRender {
-    private static final ResourceLocation ZOMBIE_VILLAGER_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_villager.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_FARMER_LOCATION = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_farmer.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_LIBRARIAN_LOC = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_librarian.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_PRIEST_LOCATION = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_priest.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_SMITH_LOCATION = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_smith.png");
-    private static final ResourceLocation ZOMBIE_VILLAGER_BUTCHER_LOCATION = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_butcher.png");
-
+public class RenderZombieVillagerCreeper <T extends EntityZombieVillagerCreeper> extends RenderBiped <T> implements ITakumiRender {
+    
+    private static final ResourceLocation ZOMBIE_VILLAGER_TEXTURES =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_villager.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_FARMER_LOCATION =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_farmer.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_LIBRARIAN_LOC =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_librarian.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_PRIEST_LOCATION =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_priest.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_SMITH_LOCATION =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_smith.png");
+    private static final ResourceLocation ZOMBIE_VILLAGER_BUTCHER_LOCATION =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombie_villager/zombie_butcher.png");
+    
     public RenderZombieVillagerCreeper(RenderManager p_i47186_1_) {
         super(p_i47186_1_, new ModelZombieVillagerCreeper(), 0.5F);
         this.addLayer(new LayerVillagerCreeperArmor(this));
         this.addLayer(new LayerTakumiCharge(this));
     }
-
+    
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
@@ -48,23 +55,23 @@ public class RenderZombieVillagerCreeper<T extends EntityZombieVillagerCreeper> 
                 return ZOMBIE_VILLAGER_TEXTURES;
         }
     }
-
+    
     @Override
     protected void applyRotations(T entityLiving, float p_77043_2_, float rotationYaw, float partialTicks) {
         if (entityLiving.isConverting()) {
             rotationYaw += (float) (Math.cos((double) entityLiving.ticksExisted * 3.25D) * Math.PI * 0.25D);
         }
-
+        
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
-
+    
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-
+    
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -73,7 +80,7 @@ public class RenderZombieVillagerCreeper<T extends EntityZombieVillagerCreeper> 
             return i << 24 | 822083583;
         }
     }
-
+    
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
@@ -85,7 +92,7 @@ public class RenderZombieVillagerCreeper<T extends EntityZombieVillagerCreeper> 
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-
+    
     @Override
     public ModelBase getPoweredModel() {
         return new ModelZombieVillagerCreeper(2.0f, 0.0f, true);

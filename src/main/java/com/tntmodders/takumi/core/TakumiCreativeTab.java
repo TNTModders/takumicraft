@@ -7,16 +7,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TakumiCreativeTab extends CreativeTabs {
+    
     public TakumiCreativeTab() {
         super("Takumi Craft");
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public String getTranslatedTabLabel() {
         return TakumiUtils.takumiTranslate("takumicraft.info.name");
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public ItemStack getTabIconItem() {

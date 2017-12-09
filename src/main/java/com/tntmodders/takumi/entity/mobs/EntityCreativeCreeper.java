@@ -15,16 +15,17 @@ import net.minecraft.world.World;
 import java.lang.reflect.InvocationTargetException;
 
 public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
+    
     public EntityCreativeCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 1.95F);
     }
-
+    
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderVillagerCreeper<>(manager);
+        return new RenderVillagerCreeper <>(manager);
     }
-
+    
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -32,42 +33,42 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
             this.buildHouse((int) this.posX, (int) this.posY, (int) this.posZ);
         }
     }
-
+    
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-
+    
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GROUND_M;
     }
-
+    
     @Override
     public int getExplosionPower() {
         return 0;
     }
-
+    
     @Override
     public int getSecondaryColor() {
         return 0x000055;
     }
-
+    
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-
+    
     @Override
     public String getRegisterName() {
         return "creativecreeper";
     }
-
+    
     @Override
     public int getRegisterID() {
         return 218;
     }
-
+    
     private void buildHouse(int ox, int oy, int oz) {
         int r = this.rand.nextInt(4);
         switch (r) {
@@ -159,8 +160,10 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     for (int z = oz - 3; z <= oz + 3; z++) {
                         for (int y = oy + 3; y >= oy + 1; y--) {
                             this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
-                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
-                                Class<? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(this.rand.nextInt(TakumiEntityCore.getEntityList().size())).getClass();
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(
+                                    new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
+                                Class <? extends ITakumiEntity> clazz =
+                                        TakumiEntityCore.getEntityList().get(this.rand.nextInt(TakumiEntityCore.getEntityList().size())).getClass();
                                 try {
                                     Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(this.world);
                                     creeper.world = this.world;

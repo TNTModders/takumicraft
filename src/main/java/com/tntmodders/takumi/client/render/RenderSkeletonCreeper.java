@@ -17,8 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 
-public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends RenderBiped<T> implements ITakumiRender {
-
+public class RenderSkeletonCreeper <T extends EntitySkeletonCreeper> extends RenderBiped <T> implements ITakumiRender {
+    
     public RenderSkeletonCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelSkeletonCreeper(), 0.5F);
         this.addLayer(new LayerHeldItem(this));
@@ -32,11 +32,11 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
         this.addLayer(new LayerTakumiCharge(this));
         this.addLayer(new LayerStrayCreeperClothing(this));
     }
-
+    
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-
+        
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -45,7 +45,7 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
             return i << 24 | 822083583;
         }
     }
-
+    
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         if (entitylivingbaseIn instanceof EntityWitherSkeletonCreeper) {
@@ -60,7 +60,7 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-
+    
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
@@ -68,12 +68,12 @@ public class RenderSkeletonCreeper<T extends EntitySkeletonCreeper> extends Rend
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-
+    
     @Override
     public void transformHeldFull3DItemLayer() {
         GlStateManager.translate(0.09375F, 0.1875F, 0.0F);
     }
-
+    
     @Override
     public ModelBase getPoweredModel() {
         return new ModelSkeletonCreeper(2.0f, false);

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TakumiTileEntityCore {
+    
     public static void register() {
         GameRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock");
         if (FMLCommonHandler.instance().getSide().isClient()) {

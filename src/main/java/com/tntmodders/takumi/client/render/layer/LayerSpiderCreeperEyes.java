@@ -10,27 +10,29 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 
 
-public class LayerSpiderCreeperEyes<T extends EntitySpiderCreeper> implements LayerRenderer<T> {
+public class LayerSpiderCreeperEyes <T extends EntitySpiderCreeper> implements LayerRenderer <T> {
+    
     private static final ResourceLocation SPIDER_EYES = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/spidercreeper_eyes.png");
-    private final RenderSpiderCreeper<T> spiderRenderer;
-
-    public LayerSpiderCreeperEyes(RenderSpiderCreeper<T> spiderRendererIn) {
+    private final RenderSpiderCreeper <T> spiderRenderer;
+    
+    public LayerSpiderCreeperEyes(RenderSpiderCreeper <T> spiderRendererIn) {
         this.spiderRenderer = spiderRendererIn;
     }
-
+    
     @Override
-    public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+            float headPitch, float scale) {
         this.spiderRenderer.bindTexture(SPIDER_EYES);
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-
+        
         if (entitylivingbaseIn.isInvisible()) {
             GlStateManager.depthMask(false);
         } else {
             GlStateManager.depthMask(true);
         }
-
+        
         int i = 61680;
         int j = i % 65536;
         int k = i / 65536;
@@ -47,7 +49,7 @@ public class LayerSpiderCreeperEyes<T extends EntitySpiderCreeper> implements La
         GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
     }
-
+    
     @Override
     public boolean shouldCombineTextures() {
         return false;

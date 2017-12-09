@@ -17,8 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 
-public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBiped<T> implements ITakumiRender {
-
+public class RenderZombieCreeper <T extends EntityZombieCreeper> extends RenderBiped <T> implements ITakumiRender {
+    
     public RenderZombieCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelZombie(), 0.5F);
         LayerBipedArmor layerbipedarmor = new LayerBipedArmor(this) {
@@ -27,9 +27,10 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
                 this.modelLeggings = new ModelZombie(0.5F, true);
                 this.modelArmor = new ModelZombie(1.0F, true);
             }
-
+    
             @Override
-            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
+                    ageInTicks, float netHeadYaw, float headPitch, float scale) {
                 if (!(entitylivingbaseIn instanceof EntityGiantCreeper && entitylivingbaseIn.getIsInvulnerable())) {
                     super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
                 }
@@ -38,14 +39,14 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
         this.addLayer(layerbipedarmor);
         this.addLayer(new LayerTakumiCharge(this));
     }
-
+    
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-
+    
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -54,7 +55,7 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
             return i << 24 | 822083583;
         }
     }
-
+    
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -71,14 +72,14 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-
+    
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return entity instanceof EntityFighterCreeper ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/fightercreeper.png") :
-                entity instanceof EntityHuskCreeper ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/huskcreeper.png") :
-                        new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
+               entity instanceof EntityHuskCreeper ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/huskcreeper.png") :
+               new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
     }
-
+    
     @Override
     public ModelBase getPoweredModel() {
         return new ModelZombie(2.0f, true);

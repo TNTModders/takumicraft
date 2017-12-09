@@ -11,11 +11,12 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 
 
-public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCreeper> {
+public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCreeper> {
+    
     private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     private final RenderLiving creeperRenderer;
     private final ModelBase creeperModel;
-
+    
     public LayerTakumiCharge(RenderLiving creeperRendererIn) {
         this.creeperRenderer = creeperRendererIn;
         if (creeperRenderer.getMainModel() instanceof ModelCreeper) {
@@ -26,9 +27,10 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
             this.creeperModel = creeperRenderer.getMainModel();
         }
     }
-
+    
     @Override
-    public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
+            ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn.getPowered() && !entitylivingbaseIn.isInvisible()) {
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);
@@ -54,7 +56,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
             GlStateManager.depthMask(flag);
         }
     }
-
+    
     @Override
     public boolean shouldCombineTextures() {
         return false;

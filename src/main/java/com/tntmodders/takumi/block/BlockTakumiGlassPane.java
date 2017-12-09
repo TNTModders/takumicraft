@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTakumiGlassPane extends BlockPane {
-
+    
     public BlockTakumiGlassPane() {
         super(Material.GLASS, false);
         this.setRegistryName(TakumiCraftCore.MODID, "creeperglasspane");
@@ -20,7 +20,7 @@ public class BlockTakumiGlassPane extends BlockPane {
         this.setSoundType(SoundType.GLASS);
         this.setLightLevel(0.4f);
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {

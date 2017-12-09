@@ -6,6 +6,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import java.lang.reflect.Field;
 
 public class TakumiASMHooks {
+    
     public static void TakumiExplodeHook(EntityCreeper creeper) {
         try {
             if (creeper instanceof EntityTakumiAbstractCreeper) {

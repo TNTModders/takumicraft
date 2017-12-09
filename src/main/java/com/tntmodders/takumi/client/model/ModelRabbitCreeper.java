@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelRabbitCreeper extends ModelBase {
+    
     private final ModelRenderer rabbitLeftFoot;
     private final ModelRenderer rabbitRightFoot;
     private final ModelRenderer rabbitLeftThigh;
@@ -25,7 +26,7 @@ public class ModelRabbitCreeper extends ModelBase {
     private final ModelRenderer rabbitTail;
     private final ModelRenderer rabbitNose;
     private float jumpRotation;
-
+    
     public ModelRabbitCreeper() {
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
@@ -92,15 +93,16 @@ public class ModelRabbitCreeper extends ModelBase {
         this.rabbitNose.mirror = true;
         this.setRotationOffset(this.rabbitNose, 0.0F, 0.0F);
     }
-
+    
     private void setRotationOffset(ModelRenderer p_setRotationOffset_1_, float p_setRotationOffset_2_, float p_setRotationOffset_3_) {
         p_setRotationOffset_1_.rotateAngleX = p_setRotationOffset_2_;
         p_setRotationOffset_1_.rotateAngleY = p_setRotationOffset_3_;
         p_setRotationOffset_1_.rotateAngleZ = 0.0F;
     }
-
+    
     @Override
-    public void render(Entity p_render_1_, float p_render_2_, float p_render_3_, float p_render_4_, float p_render_5_, float p_render_6_, float p_render_7_) {
+    public void render(Entity p_render_1_, float p_render_2_, float p_render_3_, float p_render_4_, float p_render_5_, float p_render_6_, float
+            p_render_7_) {
         this.setRotationAngles(p_render_2_, p_render_3_, p_render_4_, p_render_5_, p_render_6_, p_render_7_, p_render_1_);
         if (this.isChild) {
             float lvt_8_1_ = 1.5F;
@@ -142,11 +144,12 @@ public class ModelRabbitCreeper extends ModelBase {
             this.rabbitNose.render(p_render_7_);
             GlStateManager.popMatrix();
         }
-
+        
     }
-
+    
     @Override
-    public void setRotationAngles(float p_setRotationAngles_1_, float p_setRotationAngles_2_, float p_setRotationAngles_3_, float p_setRotationAngles_4_, float p_setRotationAngles_5_, float p_setRotationAngles_6_, Entity p_setRotationAngles_7_) {
+    public void setRotationAngles(float p_setRotationAngles_1_, float p_setRotationAngles_2_, float p_setRotationAngles_3_, float
+            p_setRotationAngles_4_, float p_setRotationAngles_5_, float p_setRotationAngles_6_, Entity p_setRotationAngles_7_) {
         float lvt_8_1_ = p_setRotationAngles_3_ - (float) p_setRotationAngles_7_.ticksExisted;
         EntityRabbitCreeper lvt_9_1_ = (EntityRabbitCreeper) p_setRotationAngles_7_;
         this.rabbitNose.rotateAngleX = p_setRotationAngles_5_ * 0.017453292F;
@@ -165,9 +168,10 @@ public class ModelRabbitCreeper extends ModelBase {
         this.rabbitLeftArm.rotateAngleX = (this.jumpRotation * -40.0F - 11.0F) * 0.017453292F;
         this.rabbitRightArm.rotateAngleX = (this.jumpRotation * -40.0F - 11.0F) * 0.017453292F;
     }
-
+    
     @Override
-    public void setLivingAnimations(EntityLivingBase p_setLivingAnimations_1_, float p_setLivingAnimations_2_, float p_setLivingAnimations_3_, float p_setLivingAnimations_4_) {
+    public void setLivingAnimations(EntityLivingBase p_setLivingAnimations_1_, float p_setLivingAnimations_2_, float p_setLivingAnimations_3_,
+            float p_setLivingAnimations_4_) {
         super.setLivingAnimations(p_setLivingAnimations_1_, p_setLivingAnimations_2_, p_setLivingAnimations_3_, p_setLivingAnimations_4_);
         this.jumpRotation = MathHelper.sin(((EntityRabbitCreeper) p_setLivingAnimations_1_).setJumpCompletion(p_setLivingAnimations_4_) * 3.1415927F);
     }
