@@ -1,31 +1,22 @@
 package com.tntmodders.takumi.block;
 
-import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.entity.mobs.EntityGunoreCreeper;
-import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockTakumiDummyGunOre extends Block {
+public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
     
     public BlockTakumiDummyGunOre() {
-        super(Material.ROCK);
-        this.setRegistryName(TakumiCraftCore.MODID, "dummy_gunore");
-        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("dummy_gunore");
-        this.setHardness(5f);
-        this.setResistance(0f);
+        super("dummy_gunore", 10f, Material.ROCK, MapColor.STONE);
         this.setHarvestLevel("pickaxe", 1);
     }
     
@@ -40,32 +31,18 @@ public class BlockTakumiDummyGunOre extends Block {
     }
     
     @Override
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
-        if (!worldIn.isRemote) {
-            this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
-    }
-    
-    public void explode(World world, int x, int y, int z) {
-        world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, getPower(), true);
-    }
-    
-    float getPower() {
-        return 1.5f;
-    }
-    
-    // 幸運でドロップする量の設定。(幸運で掘った時にドロップする量をランダムにできる)
-    @Override
     public int quantityDroppedWithBonus(int level, Random random) {
         return 0;
     }
     
     @Override
+    public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
+        return 0;
+    }
+    
+    @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        if (!worldIn.isRemote && !(player.getHeldItemMainhand() != null && EnchantmentHelper
-                .getEnchantments(player.getHeldItemMainhand()).containsKey(TakumiEnchantmentCore
-                        .MINESWEEPER) && (player.getHeldItemMainhand().getStrVsBlock(state) > 1.0f || this
-                .getHarvestTool(state) == null))) {
+        if (!worldIn.isRemote) {
             EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
             creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             worldIn.spawnEntity(creeper);
@@ -73,12 +50,7 @@ public class BlockTakumiDummyGunOre extends Block {
     }
     
     @Override
-    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-        return true;
-    }
-    
-    @Override
-    public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
-        return 0;
+    float getPower() {
+        return 5f;
     }
 }

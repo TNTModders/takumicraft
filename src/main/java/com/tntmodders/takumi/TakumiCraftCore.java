@@ -30,10 +30,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.2]",
-        name = "匠Craft [ Takumi Craft ]", guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory",
-        updateJSON = "https://raw.githubusercontent.com/TNTModders/takumicraft/master/version/version.json")
+@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.2]", name = "匠Craft [ Takumi Craft ]",
+     guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory",
+     updateJSON = "https://raw.githubusercontent.com/TNTModders/takumicraft/master/version/version.json")
 public class TakumiCraftCore {
+    
     //初期設定
     public static final String MODID = "takumicraft";
     public static final String VERSION = "2.0.0-β";
@@ -67,32 +68,32 @@ public class TakumiCraftCore {
     }
     
     @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register<Block> event) {
+    public void registerBlocks(RegistryEvent.Register <Block> event) {
         TakumiBlockCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event) {
+    public void registerItems(RegistryEvent.Register <Item> event) {
         TakumiItemCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerEntities(RegistryEvent.Register<EntityEntry> event) {
+    public void registerEntities(RegistryEvent.Register <EntityEntry> event) {
         TakumiEntityCore.register();
     }
     
     @SubscribeEvent
-    public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
+    public void registerEnchantments(RegistryEvent.Register <Enchantment> event) {
         TakumiEnchantmentCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerPotions(RegistryEvent.Register<Potion> event) {
+    public void registerPotions(RegistryEvent.Register <Potion> event) {
         TakumiPotionCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerPotionType(RegistryEvent.Register<PotionType> event) {
+    public void registerPotionType(RegistryEvent.Register <PotionType> event) {
         TakumiPotionCore.registerPotionType(event.getRegistry());
     }
     

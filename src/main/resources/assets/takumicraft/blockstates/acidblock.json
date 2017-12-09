@@ -1,20 +1,52 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {
-      "particle": "takumicraft:blocks/acidblock"
-    },
-    "model": "takumicraft:",
-    "uvlock": false
-  },
   "variants": {
-    "normal": [
-      {
-      }
-    ],
-    "inventory": [
-      {
-      }
-    ]
+    "acidmeta=0": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=1": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=2": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=3": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=4": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=5": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=6": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=7": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=8": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=9": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=10": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=11": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=12": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=13": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=14": {
+      "model": "takumicraft:acidblock"
+    },
+    "acidmeta=15": {
+      "model": "takumicraft:acidblock"
+    }
   }
 }
