@@ -12,6 +12,9 @@
     "frame": "goal"
   },
   "parent": "takumicraft:creeperbomb",
+  "rewards": {
+    "experience": 10000
+  },
   "criteria": {
     "impossible": {
       "trigger": "minecraft:impossible"

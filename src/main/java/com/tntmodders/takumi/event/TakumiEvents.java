@@ -2,10 +2,7 @@ package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiAcid;
-import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.core.TakumiConfigCore;
-import com.tntmodders.takumi.core.TakumiEnchantmentCore;
-import com.tntmodders.takumi.core.TakumiEntityCore;
+import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.AbstractEntityTakumiGrenade;
@@ -29,6 +26,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -92,6 +90,8 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onExplosion(Detonate event) {
         if (!event.getWorld().isRemote) {
+            event.getAffectedEntities().removeIf(entity -> entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getActiveItemStack()
+                    .getItem() == TakumiItemCore.TAKUMI_SHIELD);
             if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() == TakumiBlockCore.ACID_BLOCK) {
                 IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
                 int i = state.getValue(BlockTakumiAcid.META) + 1;
@@ -229,6 +229,12 @@ public class TakumiEvents {
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
                     TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(), new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"), new ResourceLocation(TakumiCraftCore.MODID, "disarmament"));
                 }
+            }
+        }
+        if (event.getSource().isExplosion() && event.getSource() != DamageSource.GENERIC && event.getEntityLiving().getActiveItemStack().getItem()
+                instanceof ItemShield) {
+            if (event.getEntityLiving().getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_SHIELD) {
+                event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setExplosion().setDamageIsAbsolute(), event.getAmount());
             }
         }
     }

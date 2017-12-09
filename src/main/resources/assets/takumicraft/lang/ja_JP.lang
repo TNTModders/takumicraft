@@ -85,6 +85,7 @@ item.takumiarmor_feet.name=匠式装甲[足]
 item.takumiminetool_pickaxe.name=対地雷ピッケル
 item.takumiminetool_shovel.name=対地雷ショベル
 item.takumiminetool_axe.name=対地雷斧
+item.takumishield.name=匠式防盾
 
 #entity
 ＃descは36文字まで。
@@ -297,6 +298,8 @@ advancements.takumicraft.boltstone.title=進化せよ!
 advancements.takumicraft.boltstone.desc=かみなりのいしの入手 進化せよ、巨匠の道へ。
 advancements.takumicraft.allcomplete.title=完全覇者
 advancements.takumicraft.allcomplete.desc=匠の書の制覇 次なる匠を待たれよ。
+advancements.takumicraft.takumishield.title=爆風もへっちゃら
+advancements.takumicraft.takumishield.desc=匠式防盾の入手 (見た目以外は)完璧な盾だ。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 

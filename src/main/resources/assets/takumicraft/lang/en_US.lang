@@ -85,6 +85,7 @@ item.takumiarmor_feet.name=Creeper Armor Feet
 item.takumiminetool_pickaxe.name=Minesweeper Pickaxe
 item.takumiminetool_shovel.name=Minesweeper Shovel
 item.takumiminetool_axe.name=Minesweeper Axe
+item.takumishield.name=Creeper Shield
 
 #entity
 #desc max: 72 chars
@@ -297,6 +298,8 @@ advancements.takumicraft.boltstone.title=Getting powered!
 advancements.takumicraft.boltstone.desc=Got a boltstone.
 advancements.takumicraft.allcomplete.title=All Complete
 advancements.takumicraft.allcomplete.desc=Complete the Creeper Book.
+advancements.takumicraft.takumishield.title=Super Shield
+advancements.takumicraft.takumishield.desc=Don't care about explosion.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 

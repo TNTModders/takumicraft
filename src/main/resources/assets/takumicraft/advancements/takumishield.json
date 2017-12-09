@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumishield"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.takumishield.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.takumishield.desc"
+    }
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "takumishield": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:takumishield"
+          }
+        ]
+      }
+    }
+  }
+}

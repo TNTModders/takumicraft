@@ -41,26 +41,26 @@
           }
         ]
       }
-    }
-  },
-  "creeperstainedglass": {
-    "trigger": "minecraft:inventory_changed",
-    "conditions": {
-      "items": [
-        {
-          "item": "takumicraft:creeperstainedglass"
-        }
-      ]
+    },
+    "creeperstainedglass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperstainedglass"
+          }
+        ]
+      }
+    },
+    "creeperwool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperwool"
+          }
+        ]
+      }
     }
   }
-},
-
-"requirements": [
-[
-"creeperiron",
-"creeperbrick",
-"creeperglass",
-"creeperstainedglass"
-]
-]
 }
