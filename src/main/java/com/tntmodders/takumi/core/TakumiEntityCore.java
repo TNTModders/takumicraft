@@ -35,10 +35,10 @@ import java.util.Objects;
 
 public class TakumiEntityCore {
     
-    public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 50,
-            Material.AIR, false, true);
-    public static final EnumCreatureType WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material
-            .WATER, false, false);
+    public static EnumCreatureType CREATURE_TAKUMI /*= EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100,
+            Material.AIR, false, true)*/;
+    public static EnumCreatureType WATER_TAKUMI /*= EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material
+            .WATER, false, false)*/;
     public static List <Biome> biomes = new ArrayList <>();
     private static List <ITakumiEntity> entityList = new ArrayList <>();
     
@@ -47,6 +47,8 @@ public class TakumiEntityCore {
     }
     
     public static void register() {
+        CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100, Material.AIR, false, true);
+        WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 100, Material.WATER, false, false);
         for (Field fileld : Biomes.class.getDeclaredFields()) {
             try {
                 biomes.add((Biome) fileld.get(null));
@@ -110,10 +112,11 @@ public class TakumiEntityCore {
                 }
             }
             if (oldFile != null) {
-                ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-                URL url = loader.getResource(assetS); if (!Objects.equals(url.getProtocol(), "jar")) {
+                ClassLoader loader = TakumiCraftCore.class.getClassLoader(); URL url = loader.getResource(assetS);
+                if (!Objects.equals(url.getProtocol(), "jar")) {
                     String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
-                            oldFile.getAbsolutePath().split("out")[0] + "src" + oldFile.getAbsolutePath().split("out")[1].replaceAll("production", "main").replaceAll("forge1.12", "resources").replaceAll(".json", "")};
+                            oldFile.getAbsolutePath().split("out")[0] + "src" + oldFile.getAbsolutePath().split("out")[1].replaceAll("production",
+                                    "main").replaceAll("forge1.12", "resources").replaceAll(".json", "")};
                     for (String sPath : strings) {
                         String sResource = sPath + entity.getRegisterName() + ".json";
                         File file = new File(sResource);
@@ -161,7 +164,8 @@ public class TakumiEntityCore {
     }
     
     private static void itemRegister() {
-        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"), EntityTakumiArrow.class, "takumiarrow", 900, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"), EntityTakumiArrow.class, "takumiarrow", 900,
+                TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumisnowball"), EntityTakumiSnowBall.class,
                 "takumiasnowball", 901, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumipotion"), EntityTakumiPotion.class, "takumipotion",
@@ -180,7 +184,8 @@ public class TakumiEntityCore {
                 return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/item/carrow.png");
             }
         });
-        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiSnowBall.class, manager -> new RenderSnowball <>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiSnowBall.class, manager -> new RenderSnowball <>(manager, Items.SNOWBALL,
+                Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiExpEgg.class, manager -> new RenderSnowball <>(manager, Items.EGG, Minecraft
                 .getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTNTPrimed.class, RenderTakumiTNTPrimed::new);

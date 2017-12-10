@@ -53,7 +53,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
             return;
-        } else if (damageSrc == DamageSource.IN_WALL && this.takumiRank().getLevel() >= 3) {
+        } if (damageSrc == DamageSource.IN_WALL && this.takumiRank().getLevel() >= 3) {
             return;
         }
        /* if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||
