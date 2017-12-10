@@ -281,6 +281,8 @@ entity.kingcreeper.name=King Creeper
 entity.kingcreeper.desc=King has come, the world was bombed.
 entity.endermitecreeper.name=Endermite Creeper
 entity.endermitecreeper.desc=Warps you somewhere, feeling like flying.
+entity.seaguardiancreeper.name=SeaGuardian Creeper
+entity.seaguardiancreeper.desc=Explosive beam, the weapon to protect our sea.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

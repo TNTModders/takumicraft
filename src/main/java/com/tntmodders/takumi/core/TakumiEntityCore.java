@@ -48,7 +48,7 @@ public class TakumiEntityCore {
     
     public static void register() {
         CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100, Material.AIR, false, true);
-        WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 100, Material.WATER, false, false);
+        WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 25, Material.WATER, false, false);
         for (Field fileld : Biomes.class.getDeclaredFields()) {
             try {
                 biomes.add((Biome) fileld.get(null));
