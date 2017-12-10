@@ -283,6 +283,8 @@ entity.endermitecreeper.name=Endermite Creeper
 entity.endermitecreeper.desc=Warps you somewhere, feeling like flying.
 entity.seaguardiancreeper.name=SeaGuardian Creeper
 entity.seaguardiancreeper.desc=Explosive beam, the weapon to protect our sea.
+entity.roundcreeper.name=Round Creeper
+entity.roundcreeper.desc=Explode around, create a round mistery circle.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
