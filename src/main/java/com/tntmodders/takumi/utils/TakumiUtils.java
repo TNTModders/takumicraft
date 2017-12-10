@@ -136,10 +136,16 @@ public class TakumiUtils {
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
         URL url = loader.getResource(path);
         if (url.getProtocol().equals("jar")) {
-            String[] strings = url.getPath().split(":/");
-            String leadPath = strings[strings.length - 2] + ":/" + strings[strings.length - 1].split("!")[0];
-            leadPath = leadPath.replaceAll("%20", " ");
-            //TakumiCraftCore.LOGGER.info("leadpath : " + leadPath);
+            // TakumiCraftCore.LOGGER.info("urlpath : " + url.getPath());
+/*            String[] strings = url.getPath().split(":/");
+            String leadPath = strings[strings.length - 2] + ":/" + strings[strings.length - 1].split("!")[0];*/
+            String leadPath = url.getPath().split("!")[0];
+            //leadPath = leadPath.replaceAll("%20", " ");
+/*            if (leadPath.contains("file:/") && ! leadPath.matches("file:/*:/")) {
+                TakumiCraftCore.LOGGER.info("tester");
+                leadPath = leadPath.replaceAll("file", "file:/C");
+            }*/
+            TakumiCraftCore.LOGGER.info("leadpath : " + leadPath);
             File f = new File(leadPath);
             JarFile jarFile;
             try {

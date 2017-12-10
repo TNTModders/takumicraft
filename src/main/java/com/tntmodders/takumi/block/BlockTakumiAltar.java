@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
 import com.tntmodders.takumi.entity.mobs.EntityAnnivCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityKingCreeper;
 import net.minecraft.block.Block;
@@ -43,15 +44,15 @@ public class BlockTakumiAltar extends Block {
         } else {
             List <ITakumiEntity> entities = new ArrayList <>();
             TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
-                if (iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.HIGH) {
+                if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
                     entities.add(iTakumiEntity);
                 }
-            });
-            entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
-            try {
-                entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(worldIn);
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-                e.printStackTrace();
+            }); if (!entities.isEmpty()) {
+                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper); try {
+                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(worldIn);
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
         }
         

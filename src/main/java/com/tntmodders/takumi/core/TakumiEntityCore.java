@@ -3,11 +3,10 @@ package com.tntmodders.takumi.core;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderTakumiTNTPrimed;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
-import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
+import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -18,7 +17,7 @@ import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraft.world.biome.BiomeOcean;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -28,27 +27,50 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class TakumiEntityCore {
     
-    public static EnumCreatureType CREATURE_TAKUMI /*= EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100,
-            Material.AIR, false, true)*/;
-    public static EnumCreatureType WATER_TAKUMI /*= EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material
-            .WATER, false, false)*/;
+    private static final List <Class <? extends ITakumiEntity>> CLASS_LIST = new ArrayList <>();
+    /*    public static EnumCreatureType CREATURE_TAKUMI *//*= EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100,
+            Material.AIR, false, true)*//*;
+    public static EnumCreatureType WATER_TAKUMI *//*= EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 50, Material
+            .WATER, false, false)*//*;*/
     public static List <Biome> biomes = new ArrayList <>();
     private static List <ITakumiEntity> entityList = new ArrayList <>();
+    
+    static {
+        CLASS_LIST.addAll(Arrays.asList(EntityAcidCreeper.class, EntityAnnivCreeper.class, EntityAntinomyCreeper.class, EntityArrowCreeper.class,
+                EntityArtCreeper.class, EntityBangCreeper.class, EntityBatCreeper.class, EntityBedCreeper.class, EntityBigFishCreeper.class,
+                EntityBirdCreeper.class, EntityBlazeCreeper.class, EntityBoltCreeper.class, EntityCallCreeper.class, EntityCatCreeper.class,
+                EntityCeruleanCreeper.class, EntityChestCreeper.class, EntityChunkCreeper.class, EntityColorCreeper.class, EntityCowCreeper.class,
+                EntityCreativeCreeper.class, EntityDarkCreeper.class, EntityDemonCreeper.class, EntityDestructionCreeper.class,
+                EntityDiamondCreeper.class, EntityDirtCreeper.class, EntityEarthCreeper.class, EntityEmeraldCreeper.class, EntityEnderCreeper
+                        .class, EntityEndermiteCreeper.class, EntityFallCreeper.class, EntityFighterCreeper.class, EntityFireCreeper.class,
+                EntityFireworksCreeper.class, EntityFishCreeper.class, EntityFrostCreeper.class, EntityGhastCreeper.class, EntityGiantCreeper
+                        .class, EntityGlassCreeper.class, EntityGlowStoneCreeper.class, EntityGorgeousCreeper.class, EntityGunoreCreeper.class,
+                EntityHappinessCreeper.class, EntityHorseCreeper.class, EntityHotSpringCreeper.class, EntityHuskCreeper.class, EntityIceCreeper
+                        .class, EntityInversionCreeper.class, EntityIronCreeper.class, EntityKingCreeper.class, EntityLapisCreeper.class,
+                EntityLavaCreeper.class, EntityLeadCreeper.class, EntityLightCreeper.class, EntityLostCreeper.class, EntityLuckCreeper.class,
+                EntityMagmaCreeper.class, EntityMiniSpiderCreeper.class, EntityMusicCreeper.class, EntityNaturalCreeper.class, EntityObjetCreeper
+                        .class, EntityOfalenCreeper.class, EntityOneCreeper.class, EntityParrotCreeper.class, EntityPierceCreeper.class,
+                EntityPigCreeper.class, EntityRabbitCreeper.class, EntityRareCreeper.class, EntityRedStoneCreeper.class, EntityReverseCreeper
+                        .class, EntityRewriteCreeper.class, EntityRoundCreeper.class, EntityRushCreeper.class, EntitySandCreeper.class,
+                EntitySandstormCreeper.class, EntitySeaGuardianCreeper.class, EntitySheepCreeper.class, EntitySilentCreeper.class,
+                EntitySkeletonCreeper.class, EntitySlimeCreeper.class, EntitySnowCreeper.class, EntitySpiderCreeper.class, EntitySquidCreeper
+                        .class, EntityStoneCreeper.class, EntityStrayCreeper.class, EntitySubsidenceCreeper.class, EntityTNTCreeper.class,
+                EntityTreeCreeper.class, EntityUpperCreeper.class, EntityVoidCreeper.class, EntityWaterCreeper.class, EntityWeatherCreeper.class,
+                EntityWitchCreeper.class, EntityWitherSkeletonCreeper.class, EntityWolfCreeper.class, EntityWoodCreeper.class, EntityWrylyCreeper
+                        .class, EntityYukariCreeper.class, EntityZombieCreeper.class, EntityZombieVillagerCreeper.class));
+    }
     
     public static List <ITakumiEntity> getEntityList() {
         return entityList;
     }
     
     public static void register() {
-        CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100, Material.AIR, false, true);
-        WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 25, Material.WATER, false, false);
+        //CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100, Material.AIR, false, true);
+        //WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 25, Material.WATER, false, false);
         for (Field fileld : Biomes.class.getDeclaredFields()) {
             try {
                 biomes.add((Biome) fileld.get(null));
@@ -56,21 +78,20 @@ public class TakumiEntityCore {
                 e.printStackTrace();
             }
         } biomes.remove(Biomes.HELL); biomes.remove(Biomes.VOID);
-
-        /*List<Class> files = TakumiUtils.getListClass("com/tntmodders/takumi/entity/mobs/");
-        ArrayList<EntityHolder> entityHolders = new ArrayList<>();
-        for (Class clazz : files) {
+    
+        /*List<Class> files = TakumiUtils.getListClass("com/tntmodders/takumi/entity/mobs/");*/
+        ArrayList <EntityHolder> entityHolders = new ArrayList <>(); for (Class clazz : CLASS_LIST) {
             try {
-                *//*ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-                Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));*//*
+                /*ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+                //Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));*/
                 ITakumiEntity entity = (ITakumiEntity) clazz.getConstructor(World.class).newInstance((World) null);
                 entityHolders.add(new EntityHolder(clazz, entity));
             } catch (Exception e) {
                 //e.printStackTrace();
             }
-        }*/
-        List <File> files = TakumiUtils.getListFile("com/tntmodders/takumi/entity/mobs/"); List <EntityHolder> entityHolders = new ArrayList <>();
-        for (File file : files) {
+        }
+        //List <File> files = TakumiUtils.getListFile("com/tntmodders/takumi/entity/mobs/");
+        /*for (File file : files) {
             try {
                 ClassLoader loader = TakumiCraftCore.class.getClassLoader();
                 Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
@@ -79,7 +100,7 @@ public class TakumiEntityCore {
             } catch (Exception e) {
                 //e.printStackTrace();
             }
-        }
+        }*/
         entityHolders.sort(new EntityComparator());
         for (EntityHolder holder : entityHolders) {
             Class clazz = holder.clazz;
@@ -91,10 +112,17 @@ public class TakumiEntityCore {
             EntityRegistry.registerModEntity(location, clazz, location.getResourcePath(), entity.getRegisterID(), TakumiCraftCore.TakumiInstance,
                     64, 2, true, entity.getPrimaryColor(), entity.getSecondaryColor());
             if (entity.isCustomSpawn()) {
-                entity.customSpawn();
+                try {
+                    entity.customSpawn();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else if (entity.takumiRank().getSpawnWeight() != 0) {
-                EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 5, 20, EnumCreatureType.MONSTER, biomes.toArray(new
-                        Biome[biomes.size()]));
+                Biome.REGISTRY.iterator().forEachRemaining(biome -> {
+                    if (!(biome instanceof BiomeOcean)) {
+                        EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 5, 20, EnumCreatureType.MONSTER, biome);
+                    }
+                });
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiModelCore.registerEntityRender(clazz, entity);
