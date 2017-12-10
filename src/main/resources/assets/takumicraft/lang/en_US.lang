@@ -218,7 +218,7 @@ entity.creativecreeper.desc=Create! Reconstruct! That's all!
 entity.earthcreeper.name=Earth Creeper
 entity.earthcreeper.desc=Creates a bulge, becoming a huge mountain.
 entity.darkcreeper.name=Dark Creeper
-entity.darkcreeper.desc=Warps you somewhere, becoming a dark magic.
+entity.darkcreeper.desc=Warps you somewhere, coming a dark magic.
 entity.rewritecreeper.name=Rewrite Creeper
 entity.rewritecreeper.desc=Rewrite blocks! What would it happen!?
 entity.artcreeper.name=Art Creeper
@@ -279,6 +279,8 @@ entity.piercecreeper.name=Pierce Creeper
 entity.piercecreeper.desc=Armor, wall, and ground. All things it can pierce.
 entity.kingcreeper.name=King Creeper
 entity.kingcreeper.desc=King has come, the world was bombed.
+entity.endermitecreeper.name=Endermite Creeper
+entity.endermitecreeper.desc=Warps you somewhere, feeling like flying.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

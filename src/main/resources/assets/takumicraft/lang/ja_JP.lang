@@ -279,6 +279,8 @@ entity.piercecreeper.name=貫匠
 entity.piercecreeper.desc=すべてを貫く、大地の底まで。いざ岩盤へ、去らば。
 entity.kingcreeper.name=王匠
 entity.kingcreeper.desc=跪け、命乞いをしろ。王は凱旋する、匠たちの勝利の時。
+entity.endermitecreeper.name=エンダーマイト匠
+entity.endermitecreeper.desc=飛ぶように転移する、この匠の穢れた力によって。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

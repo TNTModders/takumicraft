@@ -7,7 +7,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,7 +25,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         return true;
     }
     
