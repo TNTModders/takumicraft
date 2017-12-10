@@ -285,6 +285,8 @@ entity.seaguardiancreeper.name=SeaGuardian Creeper
 entity.seaguardiancreeper.desc=Explosive beam, the weapon to protect our sea.
 entity.roundcreeper.name=Round Creeper
 entity.roundcreeper.desc=Explode around, create a round mistery circle.
+entity.inversioncreeper.name=Inversion Creeper
+entity.inversioncreeper.desc=Revercing world...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

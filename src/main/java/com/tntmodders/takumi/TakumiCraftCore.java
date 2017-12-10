@@ -3,6 +3,7 @@ package com.tntmodders.takumi;
 import com.tntmodders.takumi.client.gui.TakumiGuiHandler;
 import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
+import com.tntmodders.takumi.event.TakumiClientEvents;
 import com.tntmodders.takumi.event.TakumiEvents;
 import com.tntmodders.takumi.utils.TakumiRecipeHolder;
 import com.tntmodders.takumi.world.gen.TakumiGunOreGenerator;
@@ -14,9 +15,12 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.Mod.Metadata;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -42,9 +46,9 @@ public class TakumiCraftCore {
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
     public static final TakumiRecipeHolder HOLDER = new TakumiRecipeHolder();
-    @Mod.Instance(MODID)
+    @Instance(MODID)
     public static TakumiCraftCore TakumiInstance;
-    @Mod.Metadata(MODID)
+    @Metadata(MODID)
     public static ModMetadata metadata;
     
     @EventHandler
@@ -56,7 +60,9 @@ public class TakumiCraftCore {
         }*/
         TakumiModInfoCore.load(metadata);
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new TakumiEvents());
+        MinecraftForge.EVENT_BUS.register(new TakumiEvents()); if (FMLCommonHandler.instance().getSide().isClient()) {
+            MinecraftForge.EVENT_BUS.register(new TakumiClientEvents());
+        }
         TakumiFluidCore.register();
         TakumiTileEntityCore.register();
     }
@@ -68,32 +74,32 @@ public class TakumiCraftCore {
     }
     
     @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register <Block> event) {
+    public void registerBlocks(Register <Block> event) {
         TakumiBlockCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerItems(RegistryEvent.Register <Item> event) {
+    public void registerItems(Register <Item> event) {
         TakumiItemCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerEntities(RegistryEvent.Register <EntityEntry> event) {
+    public void registerEntities(Register <EntityEntry> event) {
         TakumiEntityCore.register();
     }
     
     @SubscribeEvent
-    public void registerEnchantments(RegistryEvent.Register <Enchantment> event) {
+    public void registerEnchantments(Register <Enchantment> event) {
         TakumiEnchantmentCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerPotions(RegistryEvent.Register <Potion> event) {
+    public void registerPotions(Register <Potion> event) {
         TakumiPotionCore.register(event.getRegistry());
     }
     
     @SubscribeEvent
-    public void registerPotionType(RegistryEvent.Register <PotionType> event) {
+    public void registerPotionType(Register <PotionType> event) {
         TakumiPotionCore.registerPotionType(event.getRegistry());
     }
     
