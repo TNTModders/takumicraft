@@ -86,8 +86,8 @@ public class TakumiASMTransformer implements IClassTransformer {
                         public void visitMethodInsn(int opcode, String owner, String methodName, String desc, boolean itf) {
                             //書き換え対象のメソッドであることを確認する。
                             String s2 = FMLDeobfuscatingRemapper.INSTANCE.mapMethodName(name, methodName, desc);
-                            if (s2.equals("renderByItem") || s2.equals(TakumiASMNameMap.METHOD_MAP.get("renderByItem")) || methodName.equals
-                                    ("renderByItem") || methodName.equals(TakumiASMNameMap.METHOD_MAP.get("renderByItem"))) {
+                            if (s2.equals("renderByItem") || s2.equals(TakumiASMNameMap.METHOD_MAP.get("renderByItem2")) || methodName.equals
+                                    ("renderByItem") || methodName.equals(TakumiASMNameMap.METHOD_MAP.get("renderByItem2"))) {
                                 //引数として次に渡す値にthisを指定する。
                                 mv.visitVarInsn(ALOAD, 1);
                                 //メソッドを読み込む。INVOKESTATICでstaticメソッドを呼び出す。

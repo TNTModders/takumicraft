@@ -16,8 +16,8 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("blockHardness", "field_149782_v");
         FIELD_MAP.put("advancementToProgress", "field_192803_d");
     
-        METHOD_MAP.put("onUpdate", "func_70071_h_");
-        METHOD_MAP.put("explode", "func_146077_cc"); METHOD_MAP.put("renderByItem", "func_179022_a");
+        METHOD_MAP.put("onUpdate", "func_70071_h_"); METHOD_MAP.put("explode", "func_146077_cc"); METHOD_MAP.put("renderByItem", "func_179022_a");
+        METHOD_MAP.put("renderByItem2", "func_192838_a");
     }
     
     public static boolean matchName(String name1, String name2) {

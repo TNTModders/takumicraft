@@ -59,8 +59,8 @@ public class TakumiCraftCore {
             throw new ReportedException(report);
         }*/
         TakumiModInfoCore.load(metadata);
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new TakumiEvents()); if (FMLCommonHandler.instance().getSide().isClient()) {
+        MinecraftForge.EVENT_BUS.register(this); MinecraftForge.EVENT_BUS.register(new TakumiEvents());
+        if (FMLCommonHandler.instance().getSide().isClient()) {
             MinecraftForge.EVENT_BUS.register(new TakumiClientEvents());
         }
         TakumiFluidCore.register();
