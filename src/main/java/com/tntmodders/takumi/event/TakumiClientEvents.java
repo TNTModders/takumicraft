@@ -2,6 +2,7 @@ package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -11,6 +12,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
+    
+    @SideOnly(Side.CLIENT)
+    public static final ModelShield MODEL_SHIELD = new ModelShield();
     
     @SubscribeEvent
     public void renderWorld(CameraSetup event) {

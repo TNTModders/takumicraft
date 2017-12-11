@@ -4,6 +4,7 @@ import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.event.TakumiClientEvents;
 import com.tntmodders.takumi.item.ItemTakumiShield;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -37,7 +38,7 @@ public class TakumiASMHooks {
                     .tileEntityMonsterBomb, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f); GlStateManager.enableCull(); GlStateManager.popMatrix();
         } else if (itemStack.getItem() == TakumiItemCore.TAKUMI_SHIELD) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(ItemTakumiShield.SHIELD_TEXTURE); GlStateManager.pushMatrix();
-            GlStateManager.scale(1.0F, -1.0F, -1.0F); ((ItemTakumiShield) itemStack.getItem()).modelShield.render(); GlStateManager.popMatrix();
+            GlStateManager.scale(1.0F, -1.0F, -1.0F); TakumiClientEvents.MODEL_SHIELD.render(); GlStateManager.popMatrix();
         }
     }
 }
