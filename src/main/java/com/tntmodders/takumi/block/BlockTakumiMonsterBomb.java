@@ -16,10 +16,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
@@ -92,9 +91,7 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     }
     
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-            @Nullable
-                    TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         if (te instanceof IWorldNameable && ((IWorldNameable) te).hasCustomName()) {
             player.addStat(StatList.getBlockStats(this)); player.addExhaustion(0.005F);
             
@@ -132,13 +129,13 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
         try {
             if (!world.isRemote) {
                 EntityCreeper creeper = this.entityClass.getConstructor(World.class).newInstance(world);
-                creeper.setPosition(x + 0.5, y + 0.5, z + 0.5); Field field = EntityCreeper.class.getDeclaredField("fuseTime");
-                field.setAccessible(true); field.set(creeper, 1); if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
+                creeper.setPosition(x + 0.5, y + 0.5, z + 0.5); NBTTagCompound compound = new NBTTagCompound(); creeper.writeEntityToNBT(compound);
+                compound.setShort("Fuse", (short) 1); creeper.readEntityFromNBT(compound);
+                if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
                     creeper.onStruckByLightning(null);
                 } creeper.setInvisible(true); creeper.ignite(); world.spawnEntity(creeper); creeper.onUpdate();
-                creeper.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE); creeper.onUpdate();
             }
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | NoSuchFieldException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
     }

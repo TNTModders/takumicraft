@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
@@ -51,7 +52,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
         this.isImmuneToFire = true;
         try {
-            Field field = EntityCreeper.class.getDeclaredField("fuseTime");
+            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
             field.setAccessible(true);
             field.set(this, 90);
         } catch (Exception e) {
