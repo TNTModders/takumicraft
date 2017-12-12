@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 
 public class EntityTakumiArrow extends EntityArrow {
@@ -31,7 +32,7 @@ public class EntityTakumiArrow extends EntityArrow {
     
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
-        if (raytraceResultIn.typeOfHit == RayTraceResult.Type.ENTITY) {
+        if (raytraceResultIn.typeOfHit == Type.ENTITY) {
             if (raytraceResultIn.entityHit == this.shootingEntity) {
                 return;
             } else {

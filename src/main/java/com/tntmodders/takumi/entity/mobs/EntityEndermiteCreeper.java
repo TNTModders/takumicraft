@@ -11,7 +11,9 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -32,6 +34,11 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn); this.setSize(0.4F, 0.3F);
     }
     
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.ENDER_EYE;
+    }
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this)); this.tasks.addTask(2, new EntityAICreeperSwell(this));

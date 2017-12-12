@@ -35,8 +35,6 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -456,39 +454,6 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected boolean canDespawn() {
         return false;
-    }
-    
-    @Override
-    protected void despawnEntity() {
-        Result result; if ((this.idleTime & 0x1F) == 0x1F && (result = ForgeEventFactory.canEntityDespawn(this)) != Result.DEFAULT) {
-            if (result == Result.DENY) {
-                this.idleTime = 0;
-            } else {
-                this.setHealth(0);
-                this.setDead();
-            }
-        } else {
-            Entity entity = this.world.getClosestPlayerToEntity(this, -1.0D);
-            
-            if (entity != null) {
-                double d0 = entity.posX - this.posX;
-                double d1 = entity.posY - this.posY;
-                double d2 = entity.posZ - this.posZ;
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                
-                if (this.canDespawn() && d3 > 16384.0D) {
-                    this.setHealth(0);
-                    this.setDead();
-                }
-                
-                if (this.idleTime > 600 && this.rand.nextInt(800) == 0 && d3 > 1024.0D && this.canDespawn()) {
-                    this.setHealth(0);
-                    this.setDead();
-                } else if (d3 < 1024.0D) {
-                    this.idleTime = 0;
-                }
-            }
-        }
     }
     
     @Override

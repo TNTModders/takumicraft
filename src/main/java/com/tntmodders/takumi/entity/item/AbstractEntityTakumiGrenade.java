@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public abstract class AbstractEntityTakumiGrenade extends EntityThrowable {
     
-    protected int count = 0;
+    protected int count;
     
     public AbstractEntityTakumiGrenade(World worldIn) {
         super(worldIn);

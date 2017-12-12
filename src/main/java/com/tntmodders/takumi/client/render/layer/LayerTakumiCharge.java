@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -42,8 +44,7 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
             GlStateManager.matrixMode(5888);
             GlStateManager.enableBlend();
             GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-            GlStateManager.disableLighting();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+            GlStateManager.disableLighting(); GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
             this.creeperModel.setModelAttributes(this.creeperRenderer.getMainModel());
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
             this.creeperModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

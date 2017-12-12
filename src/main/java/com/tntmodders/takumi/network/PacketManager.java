@@ -7,8 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketManager {
     
-    private static SimpleNetworkWrapper networkHandler = null;
-    private int id = 0;
+    private static SimpleNetworkWrapper networkHandler;
+    private int id;
     
     private PacketManager() {
     }

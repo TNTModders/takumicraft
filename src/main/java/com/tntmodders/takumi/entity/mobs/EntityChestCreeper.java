@@ -18,6 +18,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
@@ -42,6 +43,13 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     public EntityChestCreeper(World worldIn) {
         super(worldIn);
         this.setSize(1, 1);
+    }
+    
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Items.DIAMOND, this.rand.nextInt(32));
+        } super.onDeath(source);
     }
     
     @Override

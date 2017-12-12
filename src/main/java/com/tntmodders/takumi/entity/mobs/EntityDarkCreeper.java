@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -83,6 +84,11 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         this.setPathPriority(PathNodeType.WATER, -1.0F);
     }
     
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.ENDER_EYE;
+    }
     /*===================================== Forge Start ==============================*/
     public static void setCarriable(Block block, boolean canCarry) {
         if (canCarry) { CARRIABLE_BLOCKS.add(block); } else { CARRIABLE_BLOCKS.remove(block); }

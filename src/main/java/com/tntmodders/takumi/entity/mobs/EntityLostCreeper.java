@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityLostCreeper extends EntityTakumiAbstractCreeper {
     
@@ -54,7 +54,7 @@ public class EntityLostCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
                 ((EntityLivingBase) entity).getHeldItemMainhand().shrink(this.rand.nextInt(5) + 1);
@@ -62,22 +62,15 @@ public class EntityLostCreeper extends EntityTakumiAbstractCreeper {
                 if (this.getPowered()) {
                     EntityEquipmentSlot slot = EntityEquipmentSlot.MAINHAND;
                     switch (this.rand.nextInt(4)) {
-                        case 0: {
+                        case 0:
                             slot = EntityEquipmentSlot.HEAD;
-                            break;
-                        }
-                        case 1: {
+                            break; case 1:
                             slot = EntityEquipmentSlot.CHEST;
-                            break;
-                        }
-                        case 2: {
+                            break; case 2:
                             slot = EntityEquipmentSlot.LEGS;
-                            break;
-                        }
-                        case 3: {
+                            break; case 3:
                             slot = EntityEquipmentSlot.FEET;
                             break;
-                        }
                     }
                     entity.setItemStackToSlot(slot, ItemStack.EMPTY);
                 }

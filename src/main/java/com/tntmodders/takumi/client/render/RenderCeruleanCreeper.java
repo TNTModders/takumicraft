@@ -5,6 +5,8 @@ import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityCeruleanCreeper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -29,8 +31,7 @@ public class RenderCeruleanCreeper <T extends EntityCeruleanCreeper> extends Ren
             GlStateManager.matrixMode(5888);
             GlStateManager.enableBlend();
             GlStateManager.color(1F, 1F, 1F, 0.1025F);
-            GlStateManager.disableLighting();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.SRC_COLOR);
+            GlStateManager.disableLighting(); GlStateManager.blendFunc(SourceFactor.ZERO, DestFactor.SRC_COLOR);
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
         }
         super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);

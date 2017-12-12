@@ -5,7 +5,7 @@ import com.tntmodders.takumi.entity.mobs.EntityWitchCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -78,7 +78,7 @@ public class LayerHeldItemWitchCreeper implements LayerRenderer <EntityWitchCree
             
             GlStateManager.rotate(-15.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(40.0F, 0.0F, 0.0F, 1.0F);
-            minecraft.getItemRenderer().renderItem(entitylivingbaseIn, itemstack, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND);
+            minecraft.getItemRenderer().renderItem(entitylivingbaseIn, itemstack, TransformType.THIRD_PERSON_RIGHT_HAND);
             GlStateManager.popMatrix();
         }
     }

@@ -5,6 +5,8 @@ import com.tntmodders.takumi.client.render.RenderSpiderCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySpiderCreeper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -24,8 +26,7 @@ public class LayerSpiderCreeperEyes <T extends EntitySpiderCreeper> implements L
             float headPitch, float scale) {
         this.spiderRenderer.bindTexture(SPIDER_EYES);
         GlStateManager.enableBlend();
-        GlStateManager.disableAlpha();
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+        GlStateManager.disableAlpha(); GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
         
         if (entitylivingbaseIn.isInvisible()) {
             GlStateManager.depthMask(false);

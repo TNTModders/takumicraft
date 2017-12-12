@@ -2,7 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -59,8 +59,7 @@ public class EntityArrowCreeper extends EntityTakumiAbstractCreeper {
             entityarrow.setKnockbackStrength(10);
             if (this.getPowered()) {
                 entityarrow.setFire(100);
-            }
-            entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+            } entityarrow.pickupStatus = PickupStatus.CREATIVE_ONLY;
             entityarrow.motionX = 0;
             entityarrow.motionY = -5;
             entityarrow.motionZ = 0;

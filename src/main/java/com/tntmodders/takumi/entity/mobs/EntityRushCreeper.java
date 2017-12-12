@@ -1,13 +1,17 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntityRushCreeper extends EntityTakumiAbstractCreeper {
     
@@ -22,6 +26,12 @@ public class EntityRushCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25);
+    }
+    
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB);
     }
     
     @Override

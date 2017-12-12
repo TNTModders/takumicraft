@@ -3,7 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityChunkCreeper extends EntityTakumiAbstractCreeper {
     
@@ -12,7 +12,7 @@ public class EntityChunkCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedBlocks().clear();
         if (this.getPowered()) {
             for (int i = 0; i < 4 + this.rand.nextInt(5); i++) {

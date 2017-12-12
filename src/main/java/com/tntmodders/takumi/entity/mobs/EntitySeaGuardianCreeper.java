@@ -2,12 +2,14 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.base.Predicate;
 import com.tntmodders.takumi.client.render.RenderSeaGuardianCreeper;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -25,6 +27,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -58,8 +61,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void customSpawn() {
         EntitySpawnPlacementRegistry.setPlacementType(EntitySeaGuardianCreeper.class, SpawnPlacementType.IN_WATER);
-/*        EntityRegistry.addSpawn(EntitySeaGuardianCreeper.class, this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.WATER_TAKUMI, Biomes
-                .OCEAN, Biomes.DEEP_OCEAN, Biomes.FROZEN_OCEAN);*/
+        EntityRegistry.addSpawn(EntitySeaGuardianCreeper.class, this.takumiRank().getSpawnWeight(), 1, 3, TakumiEntityCore.WATER_TAKUMI, Biomes
+                .OCEAN, Biomes.DEEP_OCEAN, Biomes.FROZEN_OCEAN);
     }
     
     @Override

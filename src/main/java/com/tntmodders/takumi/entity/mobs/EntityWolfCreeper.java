@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderWolfCreeper;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -15,8 +16,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -168,8 +171,8 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        //EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
-        //.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override
@@ -221,7 +224,8 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
                 for (int j = 0; j < i; ++j) {
                     float f1 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
                     float f2 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2, this.motionX, this.motionY, this.motionZ);
+                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2,
+                            this.motionX, this.motionY, this.motionZ);
                 }
             }
         }
@@ -273,6 +277,12 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
             this.prevTimeWolfIsShaking = 0.0F;
             this.world.setEntityState(this, (byte) 8);
         }
+    }
+    
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX); int j = MathHelper.floor(this.getEntityBoundingBox().minY); int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k); return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     @Override

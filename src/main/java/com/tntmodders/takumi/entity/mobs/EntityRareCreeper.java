@@ -3,9 +3,11 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.util.Random;
 
@@ -14,6 +16,32 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
     public EntityRareCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.6F * 3, 1.7F * 3);
+    }
+    
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 10); this.dropItem(Item.getItemFromBlock(Blocks.REDSTONE_BLOCK), 10);
+            this.dropItem(Item.getItemFromBlock(Blocks.IRON_BLOCK), 10); this.dropItem(Item.getItemFromBlock(Blocks.EMERALD_BLOCK), 10);
+            this.dropItem(Item.getItemFromBlock(Blocks.LAPIS_BLOCK), 10);
+        } super.onDeath(source);
+    }
+    
+    @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        for (BlockPos pos : event.getAffectedBlocks()) {
+            event.getWorld().setBlockState(pos, Blocks.ICE.getDefaultState());
+        } event.getAffectedBlocks().clear(); return true;
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x0000ff;
+    }
+    
+    @Override
+    public double getSizeAmp() {
+        return 3d;
     }
     
     @Override
@@ -69,24 +97,5 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 407;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        for (BlockPos pos : event.getAffectedBlocks()) {
-            event.getWorld().setBlockState(pos, Blocks.ICE.getDefaultState());
-        }
-        event.getAffectedBlocks().clear();
-        return true;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0x0000ff;
-    }
-    
-    @Override
-    public double getSizeAmp() {
-        return 3d;
     }
 }

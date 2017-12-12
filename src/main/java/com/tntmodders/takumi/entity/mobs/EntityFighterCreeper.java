@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import javax.annotation.Nullable;
 
@@ -61,7 +61,7 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedEntities().removeIf(entity -> entity instanceof EntityHorseCreeper);
         if (!this.world.isRemote) {
             for (int i = 0; i < (6 + this.rand.nextInt(5)) * (this.getPowered() ? 1.5 : 1); i++) {
@@ -164,22 +164,16 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
                 if (this.getItemStackFromSlot(EntityEquipmentSlot.FEET) == ItemStack.EMPTY)
                     this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(TakumiCraftCore.CreeperAB));
             } else*/
-            {
-                if (this.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == ItemStack.EMPTY) {
-                    this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-                }
-                if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD) == ItemStack.EMPTY) {
-                    this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
-                }
-                if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST) == ItemStack.EMPTY) {
-                    this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
-                }
-                if (this.getItemStackFromSlot(EntityEquipmentSlot.LEGS) == ItemStack.EMPTY) {
-                    this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
-                }
-                if (this.getItemStackFromSlot(EntityEquipmentSlot.FEET) == ItemStack.EMPTY) {
-                    this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
-                }
+            if (this.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == ItemStack.EMPTY) {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
+            } if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD) == ItemStack.EMPTY) {
+                this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
+            } if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST) == ItemStack.EMPTY) {
+                this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+            } if (this.getItemStackFromSlot(EntityEquipmentSlot.LEGS) == ItemStack.EMPTY) {
+                this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
+            } if (this.getItemStackFromSlot(EntityEquipmentSlot.FEET) == ItemStack.EMPTY) {
+                this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
             }
         }
     }

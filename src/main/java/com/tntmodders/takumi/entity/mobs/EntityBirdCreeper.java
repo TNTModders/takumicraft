@@ -1,13 +1,16 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderBirdCreeper;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.item.EntityTakumiExpEgg;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import javax.annotation.Nullable;
 
@@ -95,6 +100,12 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT;
     }
     
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.COOKED_CHICKEN;
+    }
+    
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -108,6 +119,17 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.setDead();
+    }
+    
+    @Override
+    public void customSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
+    }
+    
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderBirdCreeper <>(manager);
     }
     
     @Override
@@ -174,16 +196,5 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 229;
-    }
-    
-    @Override
-    public void customSpawn() {
-        //EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
-        //.biomes.toArray(new Biome[0]));
-    }
-    
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderBirdCreeper <>(manager);
     }
 }

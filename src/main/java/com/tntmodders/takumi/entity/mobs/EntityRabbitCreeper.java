@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderRabbitCreeper;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
@@ -27,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDesert;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -41,8 +43,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     private int carrotTicks;
     
     public EntityRabbitCreeper(World worldIn) {
-        super(worldIn);
-        this.setSize(0.4F, 0.5F); this.jumpHelper = new RabbitJumpHelper(this); this.moveHelper = new RabbitMoveHelper(this);
+        super(worldIn); this.setSize(0.4F, 0.5F); this.jumpHelper = new RabbitJumpHelper(this); this.moveHelper = new RabbitMoveHelper(this);
         this.setMovementSpeed(0.0D);
     }
     
@@ -153,7 +154,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     return 0.5F;
                 }
             }
-
+    
             return this.moveHelper.getSpeed() <= 0.6D ? 0.2F : 0.3F;
         } else {
             return 0.5F;
@@ -218,6 +219,12 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         return !this.isEntityInvulnerable(p_attackEntityFrom_1_) && super.attackEntityFrom(p_attackEntityFrom_1_, p_attackEntityFrom_2_);
     }
     
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX); int j = MathHelper.floor(this.getEntityBoundingBox().minY); int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k); return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+    }
+    
     protected SoundEvent getJumpSound() {
         return SoundEvents.ENTITY_RABBIT_JUMP;
     }
@@ -239,7 +246,8 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
     
     private boolean isRabbitBreedingItem(Item p_isRabbitBreedingItem_1_) {
-        return p_isRabbitBreedingItem_1_ == Items.CARROT || p_isRabbitBreedingItem_1_ == Items.GOLDEN_CARROT || p_isRabbitBreedingItem_1_ == Item.getItemFromBlock(Blocks.YELLOW_FLOWER);
+        return p_isRabbitBreedingItem_1_ == Items.CARROT || p_isRabbitBreedingItem_1_ == Items.GOLDEN_CARROT || p_isRabbitBreedingItem_1_ == Item
+                .getItemFromBlock(Blocks.YELLOW_FLOWER);
     }
     
     private boolean isCarrotEaten() {
@@ -310,7 +318,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     if (lvt_2_1_ != null && lvt_2_1_.getCurrentPathIndex() < lvt_2_1_.getCurrentPathLength()) {
                         lvt_3_1_ = lvt_2_1_.getPosition(this);
                     }
-
+    
                     this.calculateRotationYaw(lvt_3_1_.x, lvt_3_1_.z);
                     this.startJumping();
                 }
@@ -357,8 +365,8 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        //EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
-        //.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override
@@ -433,7 +441,8 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public void updateTask() {
             super.updateTask();
-            this.rabbit.getLookHelper().setLookPosition((double) this.destinationBlock.getX() + 0.5D, (double) (this.destinationBlock.getY() + 1), (double) this.destinationBlock.getZ() + 0.5D, 10.0F, (float) this.rabbit.getVerticalFaceSpeed());
+            this.rabbit.getLookHelper().setLookPosition((double) this.destinationBlock.getX() + 0.5D, (double) (this.destinationBlock.getY() + 1),
+                    (double) this.destinationBlock.getZ() + 0.5D, 10.0F, (float) this.rabbit.getVerticalFaceSpeed());
             if (this.getIsAboveDestination()) {
                 World lvt_1_1_ = this.rabbit.world;
                 BlockPos lvt_2_1_ = this.destinationBlock.up();

@@ -4,7 +4,7 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
     
@@ -52,7 +52,7 @@ public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+    public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             for (BlockPos pos : event.getAffectedBlocks()) {
                 this.world.setBlockState(pos, Blocks.TNT.getDefaultState());

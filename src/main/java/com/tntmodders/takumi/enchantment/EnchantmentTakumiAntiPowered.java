@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 public class EnchantmentTakumiAntiPowered extends Enchantment {
     
     public EnchantmentTakumiAntiPowered() {
-        super(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
+        super(Rarity.VERY_RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
         this.setRegistryName(TakumiCraftCore.MODID, "takumi_anti_powered");
         this.setName("takumi_anti_powered");
     }

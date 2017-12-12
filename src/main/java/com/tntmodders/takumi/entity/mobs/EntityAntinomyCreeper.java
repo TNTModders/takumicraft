@@ -1,20 +1,30 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityAntinomyCreeper(World worldIn) {
         super(worldIn);
+    }
+    
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB);
     }
     
     @Override

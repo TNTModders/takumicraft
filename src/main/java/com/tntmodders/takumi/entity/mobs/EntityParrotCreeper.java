@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.base.Optional;
 import com.tntmodders.takumi.client.render.RenderParrotCreeper;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
@@ -34,7 +35,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -107,13 +110,13 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-
+    
         if (this.getOwnerId() == null) {
             compound.setString("OwnerUUID", "");
         } else {
             compound.setString("OwnerUUID", this.getOwnerId().toString());
         }
-
+    
         compound.setBoolean("Sitting", this.isSitting());
     }
     
@@ -124,14 +127,14 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         String s;
-
+    
         if (compound.hasKey("OwnerUUID", 8)) {
             s = compound.getString("OwnerUUID");
         } else {
             String s1 = compound.getString("Owner");
             s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
         }
-
+    
         this.setSitting(compound.getBoolean("Sitting"));
     }
     
@@ -176,9 +179,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         }
     }
     
-    public void setOwnerId(
-            @Nullable
-                    UUID p_184754_1_) {
+    public void setOwnerId(@Nullable UUID p_184754_1_) {
         this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
     }
     
@@ -433,8 +434,8 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     
     @Override
     public void customSpawn() {
-        //EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
-        //.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override
