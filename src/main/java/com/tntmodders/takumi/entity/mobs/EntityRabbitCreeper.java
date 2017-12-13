@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderRabbitCreeper;
-import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
@@ -28,7 +27,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDesert;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,7 +41,10 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     private int carrotTicks;
     
     public EntityRabbitCreeper(World worldIn) {
-        super(worldIn); this.setSize(0.4F, 0.5F); this.jumpHelper = new RabbitJumpHelper(this); this.moveHelper = new RabbitMoveHelper(this);
+        super(worldIn);
+        this.setSize(0.4F, 0.5F);
+        this.jumpHelper = new RabbitJumpHelper(this);
+        this.moveHelper = new RabbitMoveHelper(this);
         this.setMovementSpeed(0.0D);
     }
     
@@ -97,10 +98,12 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     protected void initEntityAI() {
-        super.initEntityAI(); this.tasks.addTask(1, new AIPanic(this, 2.2D));
+        super.initEntityAI();
+        this.tasks.addTask(1, new AIPanic(this, 2.2D));
         this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityPlayer.class, 8.0F, 2.2D, 2.2D));
         this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityWolf.class, 10.0F, 2.2D, 2.2D));
-        this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityMob.class, 4.0F, 2.2D, 2.2D)); this.tasks.addTask(5, new AIRaidFarm(this));
+        this.tasks.addTask(4, new AIAvoidEntity <>(this, EntityMob.class, 4.0F, 2.2D, 2.2D));
+        this.tasks.addTask(5, new AIRaidFarm(this));
     }
     
     @Override
@@ -154,7 +157,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     return 0.5F;
                 }
             }
-    
+            
             return this.moveHelper.getSpeed() <= 0.6D ? 0.2F : 0.3F;
         } else {
             return 0.5F;
@@ -220,9 +223,17 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    protected boolean isValidLightLevel() {
+        return true;
+    }
+    
+    @Override
     public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX); int j = MathHelper.floor(this.getEntityBoundingBox().minY); int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k); return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     protected SoundEvent getJumpSound() {
@@ -309,7 +320,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     this.wasOnGround = true;
                 }
             }
-    
+            
             RabbitJumpHelper lvt_1_2_ = (RabbitJumpHelper) this.jumpHelper;
             if (!lvt_1_2_.getIsJumping()) {
                 if (this.moveHelper.isUpdating() && this.currentMoveTypeDuration == 0) {
@@ -318,7 +329,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                     if (lvt_2_1_ != null && lvt_2_1_.getCurrentPathIndex() < lvt_2_1_.getCurrentPathLength()) {
                         lvt_3_1_ = lvt_2_1_.getPosition(this);
                     }
-    
+                    
                     this.calculateRotationYaw(lvt_3_1_.x, lvt_3_1_.z);
                     this.startJumping();
                 }
@@ -363,11 +374,11 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         ((RabbitJumpHelper) this.jumpHelper).setCanJump(false);
     }
     
-    @Override
+/*    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
                 .biomes.toArray(new Biome[0]));
-    }
+    }*/
     
     @Override
     public int getPrimaryColor() {
@@ -424,7 +435,7 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                 if (!this.rabbit.world.getGameRules().getBoolean("mobGriefing")) {
                     return false;
                 }
-    
+                
                 this.canRaid = false;
                 this.wantsToRaid = this.rabbit.isCarrotEaten();
                 this.wantsToRaid = true;
@@ -457,10 +468,10 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                         lvt_1_1_.setBlockState(lvt_2_1_, lvt_3_1_.withProperty(BlockCarrot.AGE, lvt_5_1_ - 1), 2);
                         lvt_1_1_.playEvent(2001, lvt_2_1_, Block.getStateId(lvt_3_1_));
                     }
-    
+                    
                     this.rabbit.createEatingParticles();
                 }
-    
+                
                 this.canRaid = false;
                 this.runDelay = 10;
             }

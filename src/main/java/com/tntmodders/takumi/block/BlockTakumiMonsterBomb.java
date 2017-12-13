@@ -41,12 +41,20 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     private final String locName;
     
     public BlockTakumiMonsterBomb(Class <? extends EntityCreeper> entityClass, String name) {
-        super("monsterbomb_" + name, 0.1f, Material.TNT, MapColor.GREEN); this.setLightLevel(1f); this.entityClass = entityClass; this.name = name;
-        String locName = "textures/entity/" + name + ".png"; if (Objects.equals(name, "destructioncreeper")) {
+        super("monsterbomb_" + name, 0.1f, Material.TNT, MapColor.GREEN);
+        this.setLightLevel(1f);
+        this.entityClass = entityClass;
+        this.name = name;
+        String locName = "textures/entity/" + name + ".png";
+        if (Objects.equals(name, "destructioncreeper")) {
             locName = "textures/entity/destb.png";
-        } if (Objects.equals(name, "creativecreeper")) {
+        }
+        if (Objects.equals(name, "creativecreeper")) {
             locName = "textures/entity/creab.png";
-        } this.locName = locName; this.tileEntityMonsterBomb = new TileEntityMonsterBomb(locName); this.isBlockContainer = true;
+        }
+        this.locName = locName;
+        this.tileEntityMonsterBomb = new TileEntityMonsterBomb(locName);
+        this.isBlockContainer = true;
         this.setUnlocalizedName("monsterbomb");
     }
     
@@ -81,7 +89,8 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        super.breakBlock(worldIn, pos, state); worldIn.removeTileEntity(pos);
+        super.breakBlock(worldIn, pos, state);
+        worldIn.removeTileEntity(pos);
     }
     
     @Override
@@ -93,20 +102,23 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         if (te instanceof IWorldNameable && ((IWorldNameable) te).hasCustomName()) {
-            player.addStat(StatList.getBlockStats(this)); player.addExhaustion(0.005F);
+            player.addStat(StatList.getBlockStats(this));
+            player.addExhaustion(0.005F);
             
             if (worldIn.isRemote) {
                 return;
             }
-    
-            int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack); Item item = this.getItemDropped(state, worldIn.rand, i);
+            
+            int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+            Item item = this.getItemDropped(state, worldIn.rand, i);
             
             if (item == Items.AIR) {
                 return;
             }
             
             ItemStack itemstack = new ItemStack(item, this.quantityDropped(worldIn.rand));
-            itemstack.setStackDisplayName(((IWorldNameable) te).getName()); spawnAsEntity(worldIn, pos, itemstack);
+            itemstack.setStackDisplayName(((IWorldNameable) te).getName());
+            spawnAsEntity(worldIn, pos, itemstack);
         } else {
             super.harvestBlock(worldIn, player, pos, state, null, stack);
         }
@@ -114,7 +126,8 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     
     @Override
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
-        super.eventReceived(state, worldIn, pos, id, param); TileEntity tileentity = worldIn.getTileEntity(pos);
+        super.eventReceived(state, worldIn, pos, id, param);
+        TileEntity tileentity = worldIn.getTileEntity(pos);
         return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
     
@@ -129,11 +142,18 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
         try {
             if (!world.isRemote) {
                 EntityCreeper creeper = this.entityClass.getConstructor(World.class).newInstance(world);
-                creeper.setPosition(x + 0.5, y + 0.5, z + 0.5); NBTTagCompound compound = new NBTTagCompound(); creeper.writeEntityToNBT(compound);
-                compound.setShort("Fuse", (short) 1); creeper.readEntityFromNBT(compound);
+                creeper.setPosition(x + 0.5, y + 0.5, z + 0.5);
+                NBTTagCompound compound = new NBTTagCompound();
+                creeper.writeEntityToNBT(compound);
+                compound.setShort("Fuse", (short) 1);
+                creeper.readEntityFromNBT(compound);
                 if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
                     creeper.onStruckByLightning(null);
-                } creeper.setInvisible(true); creeper.ignite(); world.spawnEntity(creeper); creeper.onUpdate();
+                }
+                creeper.setInvisible(true);
+                creeper.ignite();
+                world.spawnEntity(creeper);
+                creeper.onUpdate();
             }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();

@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderSheepCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
@@ -30,10 +29,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -294,10 +291,10 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         return 0.4F;
     }
     
-    @Override
+ /*   @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore.biomes.toArray(new Biome[0]));
-    }
+    }*/
     
     @Override
     public int getPrimaryColor() {

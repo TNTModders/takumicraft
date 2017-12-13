@@ -3,13 +3,10 @@ package com.tntmodders.takumi.core;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderTakumiTNTPrimed;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
-import com.tntmodders.takumi.entity.ITakumiAnimals;
 import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.entity.ITakumiWaterMobs;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -21,7 +18,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeOcean;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -35,10 +31,8 @@ import java.util.*;
 
 public class TakumiEntityCore {
     
-    public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", ITakumiAnimals.class, 100, Material.AIR,
-            false, true);
-    public static final EnumCreatureType WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", ITakumiWaterMobs.class, 50, Material.WATER,
-            false, false);
+    /*public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", IMob.class, 100, Material.AIR, false, false);
+    public static final EnumCreatureType WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", IMob.class, 50, Material.WATER, false, false);*/
     private static final List <Class <? extends ITakumiEntity>> CLASS_LIST = new ArrayList <>();
     public static List <Biome> biomes = new ArrayList <>();
     private static List <ITakumiEntity> entityList = new ArrayList <>();
@@ -81,10 +75,13 @@ public class TakumiEntityCore {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        } biomes.remove(Biomes.HELL); biomes.remove(Biomes.VOID);
+        }
+        biomes.remove(Biomes.HELL);
+        biomes.remove(Biomes.VOID);
         
         /*List<Class> files = TakumiUtils.getListClass("com/tntmodders/takumi/entity/mobs/");*/
-        ArrayList <EntityHolder> entityHolders = new ArrayList <>(); for (Class clazz : CLASS_LIST) {
+        ArrayList <EntityHolder> entityHolders = new ArrayList <>();
+        for (Class clazz : CLASS_LIST) {
             try {
                 /*ClassLoader loader = TakumiCraftCore.class.getClassLoader();
                 //Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));*/
@@ -130,7 +127,8 @@ public class TakumiEntityCore {
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiModelCore.registerEntityRender(clazz, entity);
-            } entityList.add(entity);
+            }
+            entityList.add(entity);
             TakumiCraftCore.LOGGER.info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " + entity
                     .takumiRank().name() + " and " + entity.takumiType().name());
             
@@ -144,7 +142,8 @@ public class TakumiEntityCore {
                 }
             }
             if (oldFile != null) {
-                ClassLoader loader = TakumiCraftCore.class.getClassLoader(); URL url = loader.getResource(assetS);
+                ClassLoader loader = TakumiCraftCore.class.getClassLoader();
+                URL url = loader.getResource(assetS);
                 if (!Objects.equals(url.getProtocol(), "jar")) {
                     String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
                             oldFile.getAbsolutePath().split("out")[0] + "src" + oldFile.getAbsolutePath().split("out")[1].replaceAll("production",
@@ -159,7 +158,7 @@ public class TakumiEntityCore {
                         }
                         FileReader h_fr;
                         String buf = "";
-    
+                        
                         String h_s;
                         try {
                             h_fr = new FileReader(oldFile);
@@ -169,7 +168,7 @@ public class TakumiEntityCore {
                                 if (h_s == null) {
                                     break;
                                 }
-    
+                                
                                 h_s = h_s.replaceAll("minecraft:creeper", "takumicraft:" + entity.getRegisterName());
                                 h_s = h_s.replaceAll("creeper_hoge", entity.getRegisterName());
                                 buf = buf + h_s;

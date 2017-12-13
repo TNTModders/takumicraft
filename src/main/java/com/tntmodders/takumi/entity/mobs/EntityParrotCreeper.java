@@ -2,12 +2,9 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.base.Optional;
 import com.tntmodders.takumi.client.render.RenderParrotCreeper;
-import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -19,7 +16,6 @@ import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -35,9 +31,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -110,13 +104,13 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-    
+        
         if (this.getOwnerId() == null) {
             compound.setString("OwnerUUID", "");
         } else {
             compound.setString("OwnerUUID", this.getOwnerId().toString());
         }
-    
+        
         compound.setBoolean("Sitting", this.isSitting());
     }
     
@@ -127,14 +121,14 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         String s;
-    
+        
         if (compound.hasKey("OwnerUUID", 8)) {
             s = compound.getString("OwnerUUID");
         } else {
             String s1 = compound.getString("Owner");
             s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
         }
-    
+        
         this.setSitting(compound.getBoolean("Sitting"));
     }
     
@@ -283,14 +277,17 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     }
     
     @Override
+    protected boolean isValidLightLevel() {
+        return true;
+    }
+    
+    @Override
     public boolean getCanSpawnHere() {
         int i = MathHelper.floor(this.posX);
         int j = MathHelper.floor(this.getEntityBoundingBox().minY);
         int k = MathHelper.floor(this.posZ);
         BlockPos blockpos = new BlockPos(i, j, k);
-        Block block = this.world.getBlockState(blockpos.down()).getBlock();
-        return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight
-                (blockpos) > 8 && super.getCanSpawnHere();
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     /**
@@ -336,11 +333,11 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
      */
     protected void playTameEffect(boolean play) {
         EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
-    
+        
         if (!play) {
             enumparticletypes = EnumParticleTypes.SMOKE_NORMAL;
         }
-    
+        
         for (int i = 0; i < 7; ++i) {
             double d0 = this.rand.nextGaussian() * 0.02D;
             double d1 = this.rand.nextGaussian() * 0.02D;
@@ -432,12 +429,12 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         return true;
     }
     
-    @Override
+/*    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
                 .biomes.toArray(new Biome[0]));
     }
-    
+    */
     @Override
     @SideOnly(Side.CLIENT)
     public Object getRender(RenderManager manager) {
