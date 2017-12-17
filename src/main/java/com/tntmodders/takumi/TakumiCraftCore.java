@@ -58,8 +58,7 @@ public class TakumiCraftCore {
                     "TakumiCraft : You cannot use this version.");
             throw new ReportedException(report);
         }*/
-        TakumiModInfoCore.load(metadata);
-        MinecraftForge.EVENT_BUS.register(this); MinecraftForge.EVENT_BUS.register(new TakumiEvents());
+        TakumiModInfoCore.load(metadata); MinecraftForge.EVENT_BUS.register(this); MinecraftForge.EVENT_BUS.register(new TakumiEvents());
         if (FMLCommonHandler.instance().getSide().isClient()) {
             MinecraftForge.EVENT_BUS.register(new TakumiClientEvents());
         }
@@ -105,8 +104,7 @@ public class TakumiCraftCore {
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        TakumiConfigCore.loadConfig(event);
-        GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 5);
+        TakumiConfigCore.loadConfig(event); GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 15);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
     }
     

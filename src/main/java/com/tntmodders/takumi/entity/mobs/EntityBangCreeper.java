@@ -90,7 +90,8 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
                         >= Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, event.getExplosion()) && TakumiUtils.takumiGetBlockResistance
                         (this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false,
+                            true);
                 }
             }
         }

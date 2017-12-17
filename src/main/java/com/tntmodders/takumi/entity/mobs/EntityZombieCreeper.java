@@ -74,8 +74,16 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.setSize(0.6F, 1.95F);
     }
     
-    public static void registerFixesZombie(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityZombieCreeper.class);
+    /**
+     * Sets the width and height of the entity.
+     */
+    @Override
+    protected final void setSize(float width, float height) {
+        boolean flag = this.zombieWidth > 0.0F && this.zombieHeight > 0.0F; this.zombieWidth = width; this.zombieHeight = height;
+        
+        if (!flag) {
+            this.multiplySize(1.0F);
+        }
     }
     
     @Override
@@ -111,18 +119,31 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         return EnumCreatureAttribute.UNDEAD;
     }
     
-    /**
-     * Sets the width and height of the entity.
-     */
     @Override
-    protected final void setSize(float width, float height) {
-        boolean flag = this.zombieWidth > 0.0F && this.zombieHeight > 0.0F;
-        this.zombieWidth = width;
-        this.zombieHeight = height;
-
-        if (!flag) {
-            this.multiplySize(1.0F);
+    public void notifyDataManagerChange(DataParameter <?> key) {
+        if (IS_CHILD.equals(key)) {
+            this.setChildSize(this.isChild());
         }
+    
+        super.notifyDataManagerChange(key);
+    }
+    
+    /**
+     * Set whether this zombie is a child.
+     */
+    public void setChild(boolean childZombie) {
+        this.getDataManager().set(IS_CHILD, childZombie);
+        
+        if (this.world != null && !this.world.isRemote) {
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+            iattributeinstance.removeModifier(BABY_SPEED_BOOST);
+            
+            if (childZombie) {
+                iattributeinstance.applyModifier(BABY_SPEED_BOOST);
+            }
+        }
+        
+        this.setChildSize(childZombie);
     }
     
     /**
@@ -162,21 +183,10 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     }
     
     /**
-     * Set whether this zombie is a child.
+     * sets the size of the entity to be half of its current size if true.
      */
-    public void setChild(boolean childZombie) {
-        this.getDataManager().set(IS_CHILD, childZombie);
-
-        if (this.world != null && !this.world.isRemote) {
-            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-            iattributeinstance.removeModifier(BABY_SPEED_BOOST);
-
-            if (childZombie) {
-                iattributeinstance.applyModifier(BABY_SPEED_BOOST);
-            }
-        }
-
-        this.setChildSize(childZombie);
+    public void setChildSize(boolean isChild) {
+        this.multiplySize(isChild ? 0.5F : 1.0F);
     }
     
     @Override
@@ -190,15 +200,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         return f;
     }
     
-    @Override
-    public void notifyDataManagerChange(DataParameter <?> key) {
-        if (IS_CHILD.equals(key)) {
-            this.setChildSize(this.isChild());
-        }
-
-        super.notifyDataManagerChange(key);
-    }
-    
     /**
      * Multiplies the height and width by the provided float.
      */
@@ -206,11 +207,8 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         super.setSize(this.zombieWidth * size, this.zombieHeight * size);
     }
     
-    /**
-     * sets the size of the entity to be half of its current size if true.
-     */
-    public void setChildSize(boolean isChild) {
-        this.multiplySize(isChild ? 0.5F : 1.0F);
+    public static void registerFixesZombie(DataFixer fixer) {
+        EntityLiving.registerFixesMob(fixer, EntityZombieCreeper.class);
     }
     
     @Override
@@ -258,11 +256,11 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-    
+
         if (this.isChild()) {
             compound.setBoolean("IsBaby", true);
         }
-    
+
         compound.setBoolean("CanBreakDoors", this.isBreakDoorsTaskSet());
     }
     
@@ -276,11 +274,11 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-    
+
         if (compound.getBoolean("IsBaby")) {
             this.setChild(true);
         }
-    
+
         this.setBreakDoorsAItask(compound.getBoolean("CanBreakDoors"));
     }
     
@@ -294,44 +292,18 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         return SoundEvents.ENTITY_ZOMBIE_DEATH;
     }
     
-    /**
-     * Called when the mob's health reaches 0.
-     */
-    @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        for (ItemStack itemStack : this.getArmorInventoryList()) {
-            if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null && itemStack.getItem() != Item.getItemFromBlock(Blocks
-                    .PUMPKIN) && itemStack.getItem() != Item.getItemFromBlock(Blocks.LIT_PUMPKIN)) {
-                this.entityDropItem(itemStack, 0.0f);
-            }
-        }
-        if (cause.getTrueSource() instanceof EntityCreeper) {
-            EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
-    
-            if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
-                entitycreeper.incrementDroppedSkulls();
-                ItemStack itemstack = this.getSkullDrop();
-        
-                if (!itemstack.isEmpty()) {
-                    this.entityDropItem(itemstack, 0.0F);
-                }
-            }
-        }
-    }
-    
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean flag = super.attackEntityAsMob(entityIn);
-        
+    
         if (flag) {
             float f = this.world.getDifficultyForLocation(new BlockPos(this)).getAdditionalDifficulty();
-            
+        
             if (this.getHeldItemMainhand().isEmpty() && this.isBurning() && this.rand.nextFloat() < f * 0.3F) {
                 entityIn.setFire(2 * (int) f);
             }
         }
-        
+    
         return flag;
     }
     
@@ -339,10 +311,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_ZOMBIE;
-    }
-    
-    protected ItemStack getSkullDrop() {
-        return new ItemStack(Items.SKULL, 1, 2);
     }
     
     /**
@@ -361,6 +329,60 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         }
     }
     
+    /**
+     * Called when the mob's health reaches 0.
+     */
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause); for (ItemStack itemStack : this.getArmorInventoryList()) {
+            if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null && itemStack.getItem() != Item.getItemFromBlock(Blocks
+                    .PUMPKIN) && itemStack.getItem() != Item.getItemFromBlock(Blocks.LIT_PUMPKIN)) {
+                this.entityDropItem(itemStack, 0.0f);
+            }
+        } if (cause.getTrueSource() instanceof EntityCreeper) {
+            EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
+            
+            if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
+                entitycreeper.incrementDroppedSkulls(); ItemStack itemstack = this.getSkullDrop();
+                
+                if (!itemstack.isEmpty()) {
+                    this.entityDropItem(itemstack, 0.0F);
+                }
+            }
+        }
+    }
+    
+    protected ItemStack getSkullDrop() {
+        return new ItemStack(Items.SKULL, 1, 2);
+    }
+    
+    @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        List <Entity> removeList = new ArrayList <>(); for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityVillager) {
+                removeList.add(entity); this.changeVillager((EntityVillager) entity);
+            } else if (entity instanceof EntityZombieCreeper) {
+                removeList.add(entity);
+            }
+        } event.getAffectedEntities().removeAll(removeList); return true;
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderZombieCreeper <>(manager);
+    }
+    
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+    
     @SideOnly(Side.CLIENT)
     public boolean isArmsRaised() {
         return this.getDataManager().get(ARMS_RAISED);
@@ -375,7 +397,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         if (this.isChild()) {
             return (int) (super.getExperiencePoints(player) * 2.5);
         }
-        
+    
         return super.getExperiencePoints(player);
     }
     
@@ -397,96 +419,13 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         }
     }
     
-    @Override
-    public void onLivingUpdate() {
-        if (this.world.isDaytime() && !this.world.isRemote && !this.isChild() && this.shouldBurnInDay()) {
-            float f = this.getBrightness();
-    
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(new BlockPos(this.posX, this.posY + (double)
-                    this.getEyeHeight(), this.posZ))) {
-                boolean flag = true;
-                ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-                
-                if (!itemstack.isEmpty()) {
-                    if (itemstack.isItemStackDamageable()) {
-                        itemstack.setItemDamage(itemstack.getItemDamage() + this.rand.nextInt(2));
-                        
-                        if (itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
-                            this.renderBrokenItemStack(itemstack);
-                            this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
-                        }
-                    }
-                    
-                    flag = false;
-                }
-                
-                if (flag) {
-                    this.setFire(8);
-                }
-            }
-        }
-        
-        super.onLivingUpdate();
-    }
-    
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (super.attackEntityFrom(source, amount)) {
-            EntityLivingBase entitylivingbase = this.getAttackTarget();
-            
-            if (entitylivingbase == null && source.getTrueSource() instanceof EntityLivingBase) {
-                entitylivingbase = (EntityLivingBase) source.getTrueSource();
-            }
-            
-            int i = MathHelper.floor(this.posX);
-            int j = MathHelper.floor(this.posY);
-            int k = MathHelper.floor(this.posZ);
-            
-            if (entitylivingbase != null && this.world.getDifficulty() == EnumDifficulty.HARD && (double) this.rand.nextFloat() < this
-                    .getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).getAttributeValue() && this.world.getGameRules().getBoolean("doMobSpawning")) {
-                EntityZombieCreeper entityzombie = new EntityZombieCreeper(this.world);
-                
-                
-                for (int l = 0; l < 50; ++l) {
-                    int i1 = i + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
-                    int j1 = j + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
-                    int k1 = k + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
-    
-                    if (this.world.getBlockState(new BlockPos(i1, j1 - 1, k1)).isSideSolid(this.world, new BlockPos(i1, j1 - 1, k1), EnumFacing.UP)
-                            && this.world.getLightFromNeighbors(new BlockPos(i1, j1, k1)) < 10) {
-                        entityzombie.setPosition(i1, j1, k1);
-        
-                        if (!this.world.isAnyPlayerWithinRangeAt((double) i1, (double) j1, (double) k1, 7.0D) && this.world.checkNoEntityCollision
-                                (entityzombie.getEntityBoundingBox(), entityzombie) && this.world.getCollisionBoxes(entityzombie, entityzombie
-                                .getEntityBoundingBox()).isEmpty() && !this.world.containsAnyLiquid(entityzombie.getEntityBoundingBox())) {
-                            this.world.spawnEntity(entityzombie);
-                            if (entitylivingbase != null) { entityzombie.setAttackTarget(entitylivingbase); }
-                            entityzombie.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityzombie)), null);
-                            this.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement caller "
-                                    + "charge", -0.05000000074505806D, 0));
-                            entityzombie.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement " +
-                                    "" + "callee charge", -0.05000000074505806D, 0));
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
     /**
      * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
      * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
      */
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata); float f = difficulty.getClampedAdditionalDifficulty();
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
         
@@ -545,6 +484,86 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         }
         
         return livingdata;
+    }
+    
+    @Override
+    public void onLivingUpdate() {
+        if (this.world.isDaytime() && !this.world.isRemote && !this.isChild() && this.shouldBurnInDay()) {
+            float f = this.getBrightness();
+    
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(new BlockPos(this.posX, this.posY + (double)
+                    this.getEyeHeight(), this.posZ))) {
+                boolean flag = true;
+                ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+        
+                if (!itemstack.isEmpty()) {
+                    if (itemstack.isItemStackDamageable()) {
+                        itemstack.setItemDamage(itemstack.getItemDamage() + this.rand.nextInt(2));
+    
+                        if (itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
+                            this.renderBrokenItemStack(itemstack);
+                            this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
+                        }
+                    }
+            
+                    flag = false;
+                }
+        
+                if (flag) {
+                    this.setFire(8);
+                }
+            }
+        }
+    
+        super.onLivingUpdate();
+    }
+    
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (super.attackEntityFrom(source, amount)) {
+            EntityLivingBase entitylivingbase = this.getAttackTarget();
+    
+            if (entitylivingbase == null && source.getTrueSource() instanceof EntityLivingBase) {
+                entitylivingbase = (EntityLivingBase) source.getTrueSource();
+            }
+    
+            int i = MathHelper.floor(this.posX);
+            int j = MathHelper.floor(this.posY);
+            int k = MathHelper.floor(this.posZ);
+    
+            if (entitylivingbase != null && this.world.getDifficulty() == EnumDifficulty.HARD && (double) this.rand.nextFloat() < this
+                    .getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).getAttributeValue() && this.world.getGameRules().getBoolean("doMobSpawning")) {
+                EntityZombieCreeper entityzombie = new EntityZombieCreeper(this.world);
+        
+        
+                for (int l = 0; l < 50; ++l) {
+                    int i1 = i + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
+                    int j1 = j + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
+                    int k1 = k + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
+            
+                    if (this.world.getBlockState(new BlockPos(i1, j1 - 1, k1)).isSideSolid(this.world, new BlockPos(i1, j1 - 1, k1), EnumFacing.UP)
+                            && this.world.getLightFromNeighbors(new BlockPos(i1, j1, k1)) < 10) {
+                        entityzombie.setPosition(i1, j1, k1);
+                
+                        if (!this.world.isAnyPlayerWithinRangeAt((double) i1, (double) j1, (double) k1, 7.0D) && this.world.checkNoEntityCollision
+                                (entityzombie.getEntityBoundingBox(), entityzombie) && this.world.getCollisionBoxes(entityzombie, entityzombie
+                                .getEntityBoundingBox()).isEmpty() && !this.world.containsAnyLiquid(entityzombie.getEntityBoundingBox())) {
+                            this.world.spawnEntity(entityzombie);
+                            if (entitylivingbase != null) { entityzombie.setAttackTarget(entitylivingbase); }
+                            entityzombie.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityzombie)), null);
+                            this.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement caller "
+                                    + "charge", -0.05000000074505806D, 0));
+                            entityzombie.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement " + "" + "" + "callee charge", -0.05000000074505806D, 0));
+                            break;
+                        }
+                    }
+                }
+            }
+    
+            return true;
+        } else {
+            return false;
+        }
     }
     
     protected void setArmors() {
@@ -625,37 +644,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 1;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        List <Entity> removeList = new ArrayList <>();
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityVillager) {
-                removeList.add(entity);
-                this.changeVillager((EntityVillager) entity);
-            } else if (entity instanceof EntityZombieCreeper) {
-                removeList.add(entity);
-            }
-        }
-        event.getAffectedEntities().removeAll(removeList);
-        return true;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderZombieCreeper <>(manager);
-    }
-    
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
     
     class GroupData implements IEntityLivingData {

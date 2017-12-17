@@ -53,6 +53,21 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     }
     
     @Override
+    public void setDead() {
+        this.clear(); super.setDead();
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x005500;
+    }
+    
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderChestCreeper <>(manager);
+    }
+    
+    @Override
     public boolean canBePushed() {
         return false;
     }
@@ -116,36 +131,26 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
         return 231;
     }
     
-    @Override
-    public int getPrimaryColor() {
-        return 0x005500;
-    }
-    
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderChestCreeper <>(manager);
-    }
-    
     public ItemStack addItem(ItemStack stack) {
         ItemStack itemstack = stack.copy();
-        
+    
         for (int i = 0; i < this.slotsCount; ++i) {
             ItemStack itemstack1 = this.getStackInSlot(i);
-            
+        
             if (itemstack1.isEmpty()) {
                 this.setInventorySlotContents(i, itemstack);
                 this.markDirty();
                 return ItemStack.EMPTY;
             }
-            
+        
             if (ItemStack.areItemsEqual(itemstack1, itemstack)) {
                 int j = Math.min(this.getInventoryStackLimit(), itemstack1.getMaxStackSize());
                 int k = Math.min(itemstack.getCount(), j - itemstack1.getCount());
-                
+            
                 if (k > 0) {
                     itemstack1.grow(k);
                     itemstack.shrink(k);
-                    
+                
                     if (itemstack.isEmpty()) {
                         this.markDirty();
                         return ItemStack.EMPTY;
@@ -153,11 +158,11 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
                 }
             }
         }
-        
+    
         if (itemstack.getCount() != stack.getCount()) {
             this.markDirty();
         }
-        
+    
         return itemstack;
     }
     
@@ -165,11 +170,11 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
         for (int i = 0; i < this.getSizeInventory(); ++i) {
             this.setInventorySlotContents(i, ItemStack.EMPTY);
         }
-        
+    
         for (int k = 0; k < p_70486_1_.tagCount(); ++k) {
             NBTTagCompound nbttagcompound = p_70486_1_.getCompoundTagAt(k);
             int j = nbttagcompound.getByte("Slot") & 255;
-            
+        
             if (j >= 0 && j < this.getSizeInventory()) {
                 this.setInventorySlotContents(j, new ItemStack(nbttagcompound));
             }
@@ -191,7 +196,7 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
                 return false;
             }
         }
-        
+    
         return true;
     }
     
@@ -314,12 +319,6 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public void clear() {
         this.inventoryContents.clear();
-    }
-    
-    @Override
-    public void setDead() {
-        this.clear();
-        super.setDead();
     }
     
     @Override

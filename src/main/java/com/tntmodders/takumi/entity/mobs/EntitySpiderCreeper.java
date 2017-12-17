@@ -47,8 +47,8 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAICreeperSwell(this));
-        this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.8F)); this.tasks.addTask(4, new AISpiderAttack(this));
+        this.tasks.addTask(1, new EntityAISwimming(this)); this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.8F));
+        this.tasks.addTask(4, new AISpiderAttack(this));
         this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
@@ -126,9 +126,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
 
         if (this.world.rand.nextInt(100) == 0) {

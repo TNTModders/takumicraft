@@ -18,11 +18,28 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
         super(worldIn);
     }
     
+    @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        event.getAffectedEntities().removeIf(entity -> entity instanceof EntityHorseCreeper); if (!this.world.isRemote) {
+            for (int i = 0; i < (6 + this.rand.nextInt(5)) * (this.getPowered() ? 1.5 : 1); i++) {
+                EntityZombieCreeper zombieCreeper = new EntityZombieCreeper(this.world); zombieCreeper.copyLocationAndAnglesFrom(this);
+                for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
+                    zombieCreeper.setItemStackToSlot(slot, this.getItemStackFromSlot(slot));
+                } if (this.getPowered()) {
+                    TakumiUtils.takumiSetPowered(zombieCreeper, true);
+                } zombieCreeper.setAttackTarget(this.getAttackTarget()); this.world.spawnEntity(zombieCreeper);
+            }
+        } return true;
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x000077;
+    }
+    
     @Nullable
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         this.addRandomArmor();
         EntityHorseCreeper horseCreeper = new EntityHorseCreeper(this.world);
         horseCreeper.copyLocationAndAnglesFrom(this);
@@ -58,31 +75,6 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
     @Override
     public int getRegisterID() {
         return 225;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedEntities().removeIf(entity -> entity instanceof EntityHorseCreeper);
-        if (!this.world.isRemote) {
-            for (int i = 0; i < (6 + this.rand.nextInt(5)) * (this.getPowered() ? 1.5 : 1); i++) {
-                EntityZombieCreeper zombieCreeper = new EntityZombieCreeper(this.world);
-                zombieCreeper.copyLocationAndAnglesFrom(this);
-                for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-                    zombieCreeper.setItemStackToSlot(slot, this.getItemStackFromSlot(slot));
-                }
-                if (this.getPowered()) {
-                    TakumiUtils.takumiSetPowered(zombieCreeper, true);
-                }
-                zombieCreeper.setAttackTarget(this.getAttackTarget());
-                this.world.spawnEntity(zombieCreeper);
-            }
-        }
-        return true;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0x000077;
     }
     
     private void addRandomArmor() {

@@ -76,6 +76,11 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     }
     
     @Override
+    public double getSizeAmp() {
+        return 10;
+    }
+    
+    @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
@@ -162,10 +167,5 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     @Override
     public int getPrimaryColor() {
         return 0;
-    }
-    
-    @Override
-    public double getSizeAmp() {
-        return 10;
     }
 }

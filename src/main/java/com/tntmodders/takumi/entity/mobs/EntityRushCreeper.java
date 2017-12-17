@@ -96,15 +96,15 @@ public class EntityRushCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public int getPrimaryColor() {
-        return 0xaa0000;
-    }
-    
-    @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && !damageSrc.isMagicDamage() && damageSrc != DamageSource.FALL && damageSrc !=
                 DamageSource.IN_WALL && damageSrc != DamageSource.DROWN) {
             super.damageEntity(damageSrc, damageAmount);
         }
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0xaa0000;
     }
 }

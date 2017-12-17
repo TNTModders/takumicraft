@@ -69,6 +69,7 @@ tile.acidblock.name=腐蝕ブロック
 tile.takumialtar.name=王匠の祭壇
 tile.takumitnt.name=匠式高性能TNT
 tile.monsterbomb.name=式高性能爆弾
+tile.takumiblock.name=匠式超硬質ブロック
 
 #item
 item.takumibook.name=匠の書

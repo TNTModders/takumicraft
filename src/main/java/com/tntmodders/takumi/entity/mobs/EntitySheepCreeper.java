@@ -49,7 +49,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         for (EnumDyeColor enumdyecolor : EnumDyeColor.values()) {
             DYE_TO_RGB.put(enumdyecolor, createSheepColor(enumdyecolor));
         }
-    
+
         DYE_TO_RGB.put(EnumDyeColor.WHITE, new float[]{0.9019608F, 0.9019608F, 0.9019608F});
     }
     
@@ -164,18 +164,17 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         this.dataManager.set(RAINBOW, rainbow);
     }
     
-    @Override
-    public List <ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        this.setSheared(true);
-        int i = 1 + this.rand.nextInt(3);
-    
-        List <ItemStack> ret = new ArrayList <>();
-        for (int j = 0; j < i; ++j) {
-            ret.add(new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_WOOL), 1, this.getFleeceColor().getMetadata()));
+    /**
+     * make a sheep sheared if set to true
+     */
+    public void setSheared(boolean sheared) {
+        byte b0 = this.dataManager.get(DYE_COLOR);
+        
+        if (sheared) {
+            this.dataManager.set(DYE_COLOR, (byte) (b0 | 16));
+        } else {
+            this.dataManager.set(DYE_COLOR, (byte) (b0 & -17));
         }
-    
-        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-        return ret;
     }
     
     @Override
@@ -222,17 +221,15 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         return !this.getSheared() && !this.isChild();
     }
     
-    /**
-     * make a sheep sheared if set to true
-     */
-    public void setSheared(boolean sheared) {
-        byte b0 = this.dataManager.get(DYE_COLOR);
-    
-        if (sheared) {
-            this.dataManager.set(DYE_COLOR, (byte) (b0 | 16));
-        } else {
-            this.dataManager.set(DYE_COLOR, (byte) (b0 & -17));
+    @Override
+    public List <ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        this.setSheared(true); int i = 1 + this.rand.nextInt(3);
+        
+        List <ItemStack> ret = new ArrayList <>(); for (int j = 0; j < i; ++j) {
+            ret.add(new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_WOOL), 1, this.getFleeceColor().getMetadata()));
         }
+        
+        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F); return ret;
     }
     
     @Override
@@ -293,7 +290,8 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     
  /*   @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore.biomes.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+        .biomes.toArray(new Biome[0]));
     }*/
     
     @Override

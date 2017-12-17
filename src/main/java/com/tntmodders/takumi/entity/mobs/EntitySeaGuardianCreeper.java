@@ -192,7 +192,7 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
             } else {
                 this.clientSideTailAnimationSpeed += (0.125F - this.clientSideTailAnimationSpeed) * 0.2F;
             }
-            
+    
             this.clientSideTailAnimation += this.clientSideTailAnimationSpeed; this.clientSideSpikesAnimationO = this.clientSideSpikesAnimation;
             
             if (!this.isInWater()) {

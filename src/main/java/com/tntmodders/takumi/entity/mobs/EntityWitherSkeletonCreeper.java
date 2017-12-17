@@ -50,6 +50,12 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
         return SoundEvents.ENTITY_WITHER_SKELETON_DEATH;
     }
     
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_WITHER_SKELETON;
+    }
+    
     /**
      * Called when the mob's health reaches 0.
      */
@@ -59,7 +65,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
 
         if (cause.getTrueSource() instanceof EntityCreeper) {
             EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
-    
+
             if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
                 entitycreeper.incrementDroppedSkulls();
                 this.entityDropItem(new ItemStack(Items.SKULL, 1, 1), 0.0F);
@@ -68,9 +74,12 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     }
     
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_WITHER_SKELETON;
+    public boolean takumiExplodeEvent(Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+            }
+        } return true;
     }
     
     @Override
@@ -105,9 +114,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         IEntityLivingData ientitylivingdata = super.onInitialSpawn(difficulty, livingdata);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         this.setCombatTask();
@@ -132,16 +139,6 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     @Override
     public int getRegisterID() {
         return 15;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
-            }
-        }
-        return true;
     }
     
     /**

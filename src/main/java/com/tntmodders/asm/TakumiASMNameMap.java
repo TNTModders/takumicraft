@@ -13,8 +13,8 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("explosionRadius", "field_82226_g");
         FIELD_MAP.put("POWERED", "field_184714_b");
         FIELD_MAP.put("size", "field_77280_f");
-        FIELD_MAP.put("blockHardness", "field_149782_v");
-        FIELD_MAP.put("advancementToProgress", "field_192803_d"); FIELD_MAP.put("fuseTime", "field_82225_f");
+        FIELD_MAP.put("blockHardness", "field_149782_v"); FIELD_MAP.put("advancementToProgress", "field_192803_d");
+        FIELD_MAP.put("fuseTime", "field_82225_f");
     
         METHOD_MAP.put("onUpdate", "func_70071_h_"); METHOD_MAP.put("explode", "func_146077_cc"); METHOD_MAP.put("renderByItem", "func_179022_a");
         METHOD_MAP.put("renderByItem2", "func_192838_a");

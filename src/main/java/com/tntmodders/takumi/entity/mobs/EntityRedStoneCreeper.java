@@ -30,6 +30,11 @@ public class EntityRedStoneCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public int getPrimaryColor() {
+        return 0xa09090;
+    }
+    
+    @Override
     public void takumiExplode() {
     }
     
@@ -66,10 +71,5 @@ public class EntityRedStoneCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 211;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0xa09090;
     }
 }

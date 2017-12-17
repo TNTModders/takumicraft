@@ -43,8 +43,8 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
             GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
             GlStateManager.matrixMode(5888);
             GlStateManager.enableBlend();
-            GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-            GlStateManager.disableLighting(); GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
+            GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F); GlStateManager.disableLighting();
+            GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
             this.creeperModel.setModelAttributes(this.creeperRenderer.getMainModel());
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
             this.creeperModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

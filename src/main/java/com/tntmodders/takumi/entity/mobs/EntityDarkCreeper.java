@@ -84,11 +84,6 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         this.setPathPriority(PathNodeType.WATER, -1.0F);
     }
     
-    @Nullable
-    @Override
-    protected Item getDropItem() {
-        return Items.ENDER_EYE;
-    }
     /*===================================== Forge Start ==============================*/
     public static void setCarriable(Block block, boolean canCarry) {
         if (canCarry) { CARRIABLE_BLOCKS.add(block); } else { CARRIABLE_BLOCKS.remove(block); }
@@ -104,11 +99,12 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         this.tasks.addTask(1, new EntityAICreeperSwell(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this)); this.tasks.addTask(10, new AIPlaceBlock(this));
-        this.tasks.addTask(11, new AITakeBlock(this)); this.targetTasks.addTask(1, new AIFindPlayer(this));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F)); this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(10, new AIPlaceBlock(this)); this.tasks.addTask(11, new AITakeBlock(this));
+        this.targetTasks.addTask(1, new AIFindPlayer(this));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget <>(this, EntityEndermite.class, 10, true, false, EntityEndermite::isSpawnedByPlayer));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget <>(this, EntityEndermite.class, 10, true, false,
+                EntityEndermite::isSpawnedByPlayer));
     }
     
     @Override
@@ -190,9 +186,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     /**
      * Sets this enderman's held block state
      */
-    public void setHeldBlockState(
-            @Nullable
-                    IBlockState state) {
+    public void setHeldBlockState(@Nullable IBlockState state) {
         this.dataManager.set(CARRIED_BLOCK, Optional.fromNullable(state));
     }
     
@@ -321,44 +315,22 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         boolean flag = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ());
     
         if (flag) {
-            this.world.playSound(null, this.prevPosX, this.prevPosY, this.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
+            this.world.playSound(null, this.prevPosX, this.prevPosY, this.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, this.getSoundCategory(),
+                    1.0F, 1.0F);
             this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         }
     
         return flag;
     }
-    /*===================================== Forge End ==============================*/
     
     @Override
     public void takumiExplode() {
     }
-    
-    @Override
-    public void setAttackTarget(
-            @Nullable
-                    EntityLivingBase entitylivingbaseIn) {
-        super.setAttackTarget(entitylivingbaseIn);
-        IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-        
-        if (entitylivingbaseIn == null) {
-            this.targetChangeTime = 0; this.dataManager.set(SCREAMING, Boolean.FALSE); iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
-        } else {
-            this.targetChangeTime = this.ticksExisted; this.dataManager.set(SCREAMING, Boolean.TRUE);
-            
-            if (!iattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
-                iattributeinstance.applyModifier(ATTACKING_SPEED_BOOST);
-            }
-        }
-    }
+    /*===================================== Forge End ==============================*/
     
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
-    }
-    
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return this.isScreaming() ? SoundEvents.ENTITY_ENDERMEN_SCREAM : SoundEvents.ENTITY_ENDERMEN_AMBIENT;
     }
     
     @Override
@@ -367,39 +339,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    protected void updateAITasks() {
-        if (this.isWet()) {
-            this.attackEntityFrom(DamageSource.DROWN, 1.0F);
-        }
-        
-        if (this.world.isDaytime() && this.ticksExisted >= this.targetChangeTime + 600) {
-            float f = this.getBrightness();
-            
-            if (f > 0.5F && this.world.canSeeSky(new BlockPos(this)) && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
-                this.setAttackTarget(null); this.teleportRandomly();
-            }
-        }
-        
-        super.updateAITasks();
-    }
-    
-    @Override
     public int getExplosionPower() {
         return 3;
-    }
-    
-    /**
-     * Drop the equipment for this entity.
-     */
-    @Override
-    protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
-        super.dropEquipment(wasRecentlyHit, lootingModifier); IBlockState iblockstate = this.getHeldBlockState();
-        
-        if (iblockstate != null) {
-            Item item = Item.getItemFromBlock(iblockstate.getBlock());
-            int i = item.getHasSubtypes() ? iblockstate.getBlock().getMetaFromState(iblockstate) : 0;
-            this.entityDropItem(new ItemStack(item, 1, i), 0.0F);
-        }
     }
     
     @Override
@@ -420,6 +361,64 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 220;
+    }
+    
+    @Override
+    public void setAttackTarget(@Nullable EntityLivingBase entitylivingbaseIn) {
+        super.setAttackTarget(entitylivingbaseIn);
+        IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+        
+        if (entitylivingbaseIn == null) {
+            this.targetChangeTime = 0; this.dataManager.set(SCREAMING, Boolean.FALSE); iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
+        } else {
+            this.targetChangeTime = this.ticksExisted; this.dataManager.set(SCREAMING, Boolean.TRUE);
+            
+            if (!iattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
+                iattributeinstance.applyModifier(ATTACKING_SPEED_BOOST);
+            }
+        }
+    }
+    
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return this.isScreaming() ? SoundEvents.ENTITY_ENDERMEN_SCREAM : SoundEvents.ENTITY_ENDERMEN_AMBIENT;
+    }
+    
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.ENDER_EYE;
+    }
+    
+    @Override
+    protected void updateAITasks() {
+        if (this.isWet()) {
+            this.attackEntityFrom(DamageSource.DROWN, 1.0F);
+        }
+        
+        if (this.world.isDaytime() && this.ticksExisted >= this.targetChangeTime + 600) {
+            float f = this.getBrightness();
+            
+            if (f > 0.5F && this.world.canSeeSky(new BlockPos(this)) && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
+                this.setAttackTarget(null); this.teleportRandomly();
+            }
+        }
+        
+        super.updateAITasks();
+    }
+    
+    /**
+     * Drop the equipment for this entity.
+     */
+    @Override
+    protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
+        super.dropEquipment(wasRecentlyHit, lootingModifier); IBlockState iblockstate = this.getHeldBlockState();
+        
+        if (iblockstate != null) {
+            Item item = Item.getItemFromBlock(iblockstate.getBlock());
+            int i = item.getHasSubtypes() ? iblockstate.getBlock().getMetaFromState(iblockstate) : 0;
+            this.entityDropItem(new ItemStack(item, 1, i), 0.0F);
+        }
     }
     
     @Override

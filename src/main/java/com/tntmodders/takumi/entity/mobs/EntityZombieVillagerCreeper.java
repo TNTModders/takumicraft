@@ -94,9 +94,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         }
     }
     
-    protected void startConverting(
-            @Nullable
-                    UUID p_191991_1_, int p_191991_2_) {
+    protected void startConverting(@Nullable UUID p_191991_1_, int p_191991_2_) {
         this.converstionStarter = p_191991_1_;
         this.conversionTime = p_191991_2_;
         this.getDataManager().set(CONVERTING, Boolean.TRUE);
@@ -158,10 +156,10 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         }
 
         this.world.spawnEntity(entityvillager);
-    
+
         if (this.converstionStarter != null) {
             EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.converstionStarter);
-        
+
             if (entityplayer instanceof EntityPlayerMP) {
                 CriteriaTriggers.CURED_ZOMBIE_VILLAGER.trigger((EntityPlayerMP) entityplayer, null, entityvillager);
             }
@@ -293,6 +291,22 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     }
     
     @Override
+    public int getPrimaryColor() {
+        return 3869451;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderZombieVillagerCreeper(manager);
+    }
+    
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+    
+    @Override
     public SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT;
     }
@@ -303,9 +317,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
      */
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         this.setProfession(this.world.rand.nextInt(6));
         return super.onInitialSpawn(difficulty, livingdata);
     }
@@ -328,21 +340,5 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     @Override
     public int getRegisterID() {
         return 2;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 3869451;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderZombieVillagerCreeper(manager);
-    }
-    
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
 }

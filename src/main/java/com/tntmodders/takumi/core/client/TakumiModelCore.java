@@ -3,11 +3,13 @@ package com.tntmodders.takumi.core.client;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.tileentity.RenderAcidBlock;
 import com.tntmodders.takumi.client.render.tileentity.RenderMonsterBomb;
+import com.tntmodders.takumi.client.render.tileentity.RenderTakumiBlock;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.TileEntityAcidBlock;
 import com.tntmodders.takumi.tileentity.TileEntityMonsterBomb;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
@@ -111,5 +113,6 @@ public class TakumiModelCore {
     public static void registerTileRender() {
         ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock", new RenderAcidBlock <>());
         ClientRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb", new RenderMonsterBomb <>());
+        ClientRegistry.registerTileEntity(TileEntityTakumiBlock.class, TakumiCraftCore.MODID + ":takumiblock", new RenderTakumiBlock <>());
     }
 }

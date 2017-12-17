@@ -371,56 +371,9 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public int getPrimaryColor() {
-        return 0x00ff00;
-    }
-    
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
-    }
-    
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
-            this.lastSource = damageSrc;
-            if (damageSrc.isProjectile() && damageAmount > 2.5f) {
-                damageAmount = 2.5f;
-            } else if (damageAmount > 20) {
-                damageAmount = 20 + (damageAmount - 20) / 10;
-            }
-            if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
-                this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
-            }
-            this.ignite();
-            super.damageEntity(damageSrc, damageAmount);
-        }
-    }
-    
-    @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
-    }
-    
-    
-    @Override
-    public void setCustomNameTag(String name) {
-        super.setCustomNameTag(name);
-        this.bossInfo.setName(this.getDisplayName());
-    }
-    
-    
-    @Override
-    public void removeTrackingPlayer(EntityPlayerMP player) {
-        super.removeTrackingPlayer(player);
-        this.bossInfo.removePlayer(player);
-    }
-    
-    @Override
-    public void addTrackingPlayer(EntityPlayerMP player) {
-        super.addTrackingPlayer(player);
-        this.bossInfo.addPlayer(player);
     }
     
     @Override
@@ -447,8 +400,26 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public boolean isImmuneToExplosions() {
-        return true;
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
+            this.lastSource = damageSrc; if (damageSrc.isProjectile() && damageAmount > 2.5f) {
+                damageAmount = 2.5f;
+            } else if (damageAmount > 20) {
+                damageAmount = 20 + (damageAmount - 20) / 10;
+            } if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
+                this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
+            } this.ignite(); super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x00ff00;
+    }
+    
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
     }
     
     @Override
@@ -464,5 +435,25 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
+    }
+    
+    @Override
+    public void setCustomNameTag(String name) {
+        super.setCustomNameTag(name); this.bossInfo.setName(this.getDisplayName());
+    }
+    
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
+    
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player); this.bossInfo.addPlayer(player);
+    }
+    
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player); this.bossInfo.removePlayer(player);
     }
 }

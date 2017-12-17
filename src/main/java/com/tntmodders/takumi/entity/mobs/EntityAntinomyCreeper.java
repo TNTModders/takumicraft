@@ -152,13 +152,13 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
                 while (true) {
                     if (l1 > 25) {
                         IBlockState block1 = world.getBlockState(new BlockPos(x + j2, l1, z + k1));
-    
+
                         if (block1.getMaterial() == Material.AIR || block1 == Blocks.DIRT || block1 == Blocks.SNOW || block1 == Blocks.ICE ||
                                 block1 == Blocks.PACKED_ICE) {
                             this.world.setBlockState(new BlockPos(x + j2, l1, z + k1), Blocks.PACKED_ICE.getDefaultState());
                             --l1;
                             --k2;
-        
+    
                             if (k2 <= 0) {
                                 l1 -= this.rand.nextInt(5) + 1;
                                 k2 = this.rand.nextInt(5);
@@ -200,14 +200,14 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public int getPrimaryColor() {
-        return 0x7777ff;
-    }
-    
-    @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (!damageSrc.isFireDamage()) {
             super.damageEntity(damageSrc, damageAmount);
         }
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x7777ff;
     }
 }

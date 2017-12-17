@@ -83,7 +83,8 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
 
                 if (this.rand.nextFloat() < 0.15F && this.isInsideOfMaterial(Material.WATER) && !this.isPotionActive(MobEffects.WATER_BREATHING)) {
                     potiontype = PotionTypes.WATER_BREATHING;
-                } else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.getLastDamageSource() != null && this.getLastDamageSource().isFireDamage()) && !this.isPotionActive(MobEffects.FIRE_RESISTANCE)) {
+                } else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.getLastDamageSource() != null && this.getLastDamageSource()
+                        .isFireDamage()) && !this.isPotionActive(MobEffects.FIRE_RESISTANCE)) {
                     potiontype = PotionTypes.FIRE_RESISTANCE;
                 } else if (this.rand.nextFloat() < 0.05F && this.getHealth() < this.getMaxHealth()) {
                     potiontype = PotionTypes.HEALING;
@@ -152,15 +153,15 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     protected float applyPotionDamageCalculations(DamageSource source, float damage) {
         damage = super.applyPotionDamageCalculations(source, damage);
-    
+
         if (source.getTrueSource() == this) {
             damage = 0.0F;
         }
-    
+
         if (source.isMagicDamage()) {
             damage = (float) (damage * 0.15D);
         }
-    
+
         return damage;
     }
     
@@ -252,10 +253,8 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
         switch (this.rand.nextInt(4)) {
             case 0:
                 break; case 1:
-                type = PotionTypes.POISON;
-                break; case 2:
-                type = PotionTypes.SLOWNESS;
-                break; case 3:
+                type = PotionTypes.POISON; break; case 2:
+                type = PotionTypes.SLOWNESS; break; case 3:
                 type = PotionTypes.WEAKNESS;
                 break;
         }

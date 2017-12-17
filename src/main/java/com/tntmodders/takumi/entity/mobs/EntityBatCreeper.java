@@ -43,6 +43,16 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
         return (this.dataManager.get(HANGING) & 1) != 0;
     }
     
+    public void setIsBatHanging(boolean isHanging) {
+        byte b0 = this.dataManager.get(HANGING);
+        
+        if (isHanging) {
+            this.dataManager.set(HANGING, (byte) (b0 | 1));
+        } else {
+            this.dataManager.set(HANGING, (byte) (b0 & -2));
+        }
+    }
+    
     @Override
     protected void updateAITasks() {
         super.updateAITasks();
@@ -88,16 +98,6 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
             if (this.rand.nextInt(100) == 0 && this.world.getBlockState(blockpos1).isNormalCube()) {
                 this.setIsBatHanging(true);
             }
-        }
-    }
-    
-    public void setIsBatHanging(boolean isHanging) {
-        byte b0 = this.dataManager.get(HANGING);
-        
-        if (isHanging) {
-            this.dataManager.set(HANGING, (byte) (b0 | 1));
-        } else {
-            this.dataManager.set(HANGING, (byte) (b0 & -2));
         }
     }
     

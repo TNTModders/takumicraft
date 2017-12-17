@@ -47,7 +47,8 @@ public class EntityBedCreeper extends EntityTakumiAbstractCreeper {
                     if (EntityBedCreeper.this.world.getTileEntity(pos) instanceof IInventory) {
                         ((IInventory) EntityBedCreeper.this.world.getTileEntity(pos)).clear();
                         EntityBedCreeper.this.world.setBlockToAir(pos);
-                    } else if (EntityBedCreeper.this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world, pos, null)) {
+                    } else if (EntityBedCreeper.this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world, pos,
+                            null)) {
                         EntityBedCreeper.this.world.setBlockToAir(pos);
                     }
                 });

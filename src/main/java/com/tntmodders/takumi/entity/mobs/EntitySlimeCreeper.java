@@ -183,16 +183,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.squishAmount *= 0.6F;
     }
     
-    public void setSlimeSize(int size, boolean resetHealth) {
-        this.dataManager.set(SLIME_SIZE, size); this.setSize(0.51000005F * size, 0.51000005F * size);
-        this.setPosition(this.posX, this.posY, this.posZ); this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(size * size);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F + 0.1F * size);
-        
-        if (resetHealth) {
-            this.setHealth(this.getMaxHealth());
-        }
-        
-        this.experienceValue = size;
+    public boolean isSmallSlime() {
+        return this.getSlimeSize() <= 1;
     }
     
     /**
@@ -202,10 +194,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     protected void jump() {
         this.motionY = 0.41999998688697815D;
         this.isAirBorne = true;
-    }
-    
-    public boolean isSmallSlime() {
-        return this.getSlimeSize() <= 1;
     }
     
     @Override
@@ -222,6 +210,18 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         }
 
         super.notifyDataManagerChange(key);
+    }
+    
+    public void setSlimeSize(int size, boolean resetHealth) {
+        this.dataManager.set(SLIME_SIZE, size); this.setSize(0.51000005F * size, 0.51000005F * size);
+        this.setPosition(this.posX, this.posY, this.posZ); this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(size * size);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F + 0.1F * size);
+        
+        if (resetHealth) {
+            this.setHealth(this.getMaxHealth());
+        }
+        
+        this.experienceValue = size;
     }
     
     /**
@@ -286,6 +286,19 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.motionZ = z;
     }
     
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc.isExplosion() && damageSrc.getTrueSource() != null && damageSrc.getTrueSource().getClass() == EntitySlimeCreeper.class) {
+            damageAmount = 0;
+        } super.damageEntity(damageSrc, damageAmount);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderSlimeCreeper <>(manager);
+    }
+    
     /**
      * Called by a player entity when they collide with an entity
      */
@@ -322,7 +335,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     
     protected void dealDamage(EntityLivingBase entityIn) {
         int i = this.getSlimeSize();
-    
+
         if (this.canEntityBeSeen(entityIn) && this.getDistanceSqToEntity(entityIn) < 0.6D * i * 0.6D * i && entityIn.attackEntityFrom(DamageSource
                 .causeMobDamage(this), this.getAttackStrength())) {
             this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
@@ -357,9 +370,7 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         int i = this.rand.nextInt(3);
 
         if (i < 2 && this.rand.nextFloat() < 0.5F * difficulty.getClampedAdditionalDifficulty()) {
@@ -369,20 +380,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         int j = 1 << i;
         this.setSlimeSize(j, true);
         return super.onInitialSpawn(difficulty, livingdata);
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderSlimeCreeper <>(manager);
-    }
-    
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc.isExplosion() && damageSrc.getTrueSource() != null && damageSrc.getTrueSource().getClass() == EntitySlimeCreeper.class) {
-            damageAmount = 0;
-        }
-        super.damageEntity(damageSrc, damageAmount);
     }
     
     /**
@@ -399,15 +396,16 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
             if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
                 Biome biome = this.world.getBiome(blockpos);
     
-                if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() < this.world.getCurrentMoonPhaseFactor() && this.world.getLightFromNeighbors(new BlockPos(this)) <= this.rand.nextInt(8)) {
+                if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() <
+                        this.world.getCurrentMoonPhaseFactor() && this.world.getLightFromNeighbors(new BlockPos(this)) <= this.rand.nextInt(8)) {
                     return super.getCanSpawnHere();
                 }
-    
+
                 if (this.rand.nextInt(10) == 0 && chunk.getRandomWithSeed(987234911L).nextInt(10) == 0 && this.posY < 40.0D) {
                     return super.getCanSpawnHere();
                 }
             }
-    
+
             return false;
         }
     }
@@ -530,7 +528,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public boolean shouldExecute() {
-            return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime.isPotionActive(MobEffects.LEVITATION));
+            return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime
+                    .isPotionActive(MobEffects.LEVITATION));
         }
         
         /**

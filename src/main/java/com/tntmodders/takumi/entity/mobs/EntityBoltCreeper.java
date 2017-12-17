@@ -24,8 +24,23 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public void setDead() {
+        if (!this.world.isRemote && !this.getPowered() && this.getHealth() > 0) {
+            EntityBoltCreeper creeper = new EntityBoltCreeper(this.world); creeper.copyLocationAndAnglesFrom(this); creeper.onStruckByLightning(null);
+            this.world.spawnEntity(creeper);
+        } super.setDead();
+    }
+    
+    @Override
     public void onStruckByLightning(EntityLightningBolt lightningBolt) {
         TakumiUtils.takumiSetPowered(this, true);
+    }
+    
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && damageSrc != DamageSource.LIGHTNING_BOLT) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
     }
     
     @Override
@@ -76,23 +91,5 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 401;
-    }
-    
-    @Override
-    public void setDead() {
-        if (!this.world.isRemote && !this.getPowered() && this.getHealth() > 0) {
-            EntityBoltCreeper creeper = new EntityBoltCreeper(this.world);
-            creeper.copyLocationAndAnglesFrom(this);
-            creeper.onStruckByLightning(null);
-            this.world.spawnEntity(creeper);
-        }
-        super.setDead();
-    }
-    
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && damageSrc != DamageSource.LIGHTNING_BOLT) {
-            super.damageEntity(damageSrc, damageAmount);
-        }
     }
 }

@@ -44,8 +44,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     public EntityGhastCreeper(World worldIn) {
         super(worldIn);
         this.setSize(4.0F, 4.0F);
-        this.isImmuneToFire = true;
-        this.experienceValue = 5; this.moveHelper = new GhastMoveHelper(this);
+        this.isImmuneToFire = true; this.experienceValue = 5; this.moveHelper = new GhastMoveHelper(this);
     }
     
     @Override
@@ -88,7 +87,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-    
+
         if (compound.hasKey("ExplosionPower", 99)) {
             this.explosionStrength = compound.getInteger("ExplosionPower");
         }
@@ -100,7 +99,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         super.onUpdate();
-    
+
         if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             this.setDead();
         }
@@ -158,9 +157,10 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
             this.motionZ *= 0.5D;
         } else {
             float f = 0.91F;
-    
+
             if (this.onGround) {
-                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
+                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
+                        MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
     
             float f1 = 0.16277136F / (f * f * f);
@@ -168,7 +168,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
             f = 0.91F;
     
             if (this.onGround) {
-                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
+                f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
+                        MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
     
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
@@ -358,7 +359,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
                         double d1 = 4.0D;
                         Vec3d vec3d = this.parentEntity.getLook(1.0F);
                         double d2 = entitylivingbase.posX - (this.parentEntity.posX + vec3d.x * 4.0D);
-                        double d3 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
+                        double d3 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (0.5D + this
+                                .parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
                         double d4 = entitylivingbase.posZ - (this.parentEntity.posZ + vec3d.z * 4.0D);
                         world.playEvent(null, 1016, new BlockPos(this.parentEntity), 0);
                         EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, this.parentEntity, d2, d3, d4);
@@ -401,7 +403,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public void updateTask() {
             if (this.parentEntity.getAttackTarget() == null) {
-                this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
+                this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float)
+                        Math.PI);
                 this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
             } else {
                 EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
@@ -482,11 +485,11 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
                 double d1 = this.posY - this.parentEntity.posY;
                 double d2 = this.posZ - this.parentEntity.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-        
+    
                 if (this.courseChangeCooldown-- <= 0) {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
                     d3 = (double) MathHelper.sqrt(d3);
-            
+        
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3)) {
                         this.parentEntity.motionX += d0 / d3 * 0.1D;
                         this.parentEntity.motionY += d1 / d3 * 0.1D;

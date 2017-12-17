@@ -47,6 +47,7 @@ public class TakumiBlockCore {
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_CALL = new BlockTakumiMonsterBomb(EntityCallCreeper.class, "callcreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_COLOR = new BlockTakumiMonsterBomb(EntityColorCreeper.class, "colorcreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_PIERCE = new BlockTakumiMonsterBomb(EntityPierceCreeper.class, "piercecreeper");
+    public static final Block TAKUMI_BLOCK = new BlockTakumiBlock();
     
     public static final Map <Class <? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap <>();
     
@@ -56,8 +57,8 @@ public class TakumiBlockCore {
             try {
                 if (field.get(INSTANCE) instanceof Block) {
                     Block block = (Block) field.get(INSTANCE);
-                    registry.register(block);
-                    TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName()); if (block instanceof BlockTakumiMonsterBomb) {
+                    registry.register(block); TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName());
+                    if (block instanceof BlockTakumiMonsterBomb) {
                         BOMB_MAP.put(((BlockTakumiMonsterBomb) block).getEntityClass(), (BlockTakumiMonsterBomb) block);
                     }
                 }

@@ -30,6 +30,16 @@ public class EntityEmeraldCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public int getPrimaryColor() {
+        return 0x90a090;
+    }
+    
+    @Override
+    public double getSizeAmp() {
+        return 2.0;
+    }
+    
+    @Override
     public void takumiExplode() {
     }
     
@@ -66,15 +76,5 @@ public class EntityEmeraldCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 212;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0x90a090;
-    }
-    
-    @Override
-    public double getSizeAmp() {
-        return 2.0;
     }
 }

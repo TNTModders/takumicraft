@@ -161,8 +161,7 @@ public class ModelParrotCreeper extends ModelBase {
         if (entitylivingbaseIn instanceof EntityParrotCreeper) {
             EntityParrotCreeper entityparrot = (EntityParrotCreeper) entitylivingbaseIn;
             if (entityparrot.getCreeperState() > 0) {
-                this.legLeft.rotateAngleZ = -0.34906584F;
-                this.legRight.rotateAngleZ = 0.34906584F; this.state = State.PARTY;
+                this.legLeft.rotateAngleZ = -0.34906584F; this.legRight.rotateAngleZ = 0.34906584F; this.state = State.PARTY;
                 return;
             }
             if (entityparrot.isSitting()) {
@@ -177,11 +176,10 @@ public class ModelParrotCreeper extends ModelBase {
                 this.wingRight.rotationPointY = 18.84F;
                 ++this.legLeft.rotationPointY;
                 ++this.legRight.rotationPointY;
-                ++this.legLeft.rotateAngleX;
-                ++this.legRight.rotateAngleX; this.state = State.SITTING;
+                ++this.legLeft.rotateAngleX; ++this.legRight.rotateAngleX; this.state = State.SITTING;
             } else if (entityparrot.isFlying()) {
-                this.legLeft.rotateAngleX += (float) Math.PI * 2F / 9F;
-                this.legRight.rotateAngleX += (float) Math.PI * 2F / 9F; this.state = State.FLYING;
+                this.legLeft.rotateAngleX += (float) Math.PI * 2F / 9F; this.legRight.rotateAngleX += (float) Math.PI * 2F / 9F;
+                this.state = State.FLYING;
             } else {
                 this.state = State.STANDING;
             }

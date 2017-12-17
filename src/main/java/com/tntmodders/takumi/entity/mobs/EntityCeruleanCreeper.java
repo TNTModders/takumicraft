@@ -25,6 +25,23 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public void onUpdate() {
+        super.onUpdate(); if (this.inWater) {
+            this.setDead(); if (!this.world.isRemote) {
+                this.world.createExplosion(this, this.posX + 0.5, this.posY, this.posZ + 0.5, 2f, true);
+            } this.world.setBlockState(this.getPosition(), Blocks.OBSIDIAN.getDefaultState());
+            this.world.setBlockState(this.getPosition().up(), Blocks.OBSIDIAN.getDefaultState());
+        }
+    }
+    
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.REGISTRY.getObject(new ResourceLocation("japaricraftmod", "darksandstar")), 1);
+        } super.onDeath(cause);
+    }
+    
+    @Override
     public boolean canRegister() {
         return Item.REGISTRY.containsKey(new ResourceLocation("japaricraftmod", "darksandstar"));
         //return true;
@@ -37,13 +54,13 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
             }
         }
-        
+    
         for (BlockPos pos : event.getAffectedBlocks()) {
             if (!this.world.isAirBlock(pos)) {
                 this.world.setBlockState(pos, TakumiBlockCore.CREEPER_SANDSTAR_LOW.getDefaultState());
             }
         }
-        
+    
         event.getAffectedBlocks().clear();
         event.getAffectedEntities().clear();
         return true;
@@ -57,27 +74,6 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderCeruleanCreeper <>(manager);
-    }
-    
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.inWater) {
-            this.setDead();
-            if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX + 0.5, this.posY, this.posZ + 0.5, 2f, true);
-            }
-            this.world.setBlockState(this.getPosition(), Blocks.OBSIDIAN.getDefaultState());
-            this.world.setBlockState(this.getPosition().up(), Blocks.OBSIDIAN.getDefaultState());
-        }
-    }
-    
-    @Override
-    public void onDeath(DamageSource cause) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.REGISTRY.getObject(new ResourceLocation("japaricraftmod", "darksandstar")), 1);
-        }
-        super.onDeath(cause);
     }
     
     @Override

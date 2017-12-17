@@ -76,7 +76,8 @@ public class EntityStoneCreeper extends EntityTakumiAbstractCreeper {
                 if (!this.world.isRemote && s != null && s.equalsIgnoreCase("pickaxe") && TakumiUtils.takumiGetBlockResistance(this, this.world
                         .getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
-                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false, true);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.2f, false,
+                            true);
                 }
             }
         }

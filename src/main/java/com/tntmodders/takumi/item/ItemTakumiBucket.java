@@ -119,9 +119,7 @@ public class ItemTakumiBucket extends ItemBucket {
     }
     
     @Override
-    public boolean tryPlaceContainedLiquid(
-            @Nullable
-                    EntityPlayer player, World worldIn, BlockPos posIn) {
+    public boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World worldIn, BlockPos posIn) {
         if (this.containedBlock == Blocks.AIR) {
             return false;
         } else {

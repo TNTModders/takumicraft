@@ -118,7 +118,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
                 this.squidRotation = (float) Math.PI * 2F;
             } else {
                 this.squidRotation = (float) ((double) this.squidRotation - Math.PI * 2D);
-    
+
                 if (this.rand.nextInt(10) == 0) {
                     this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
                 }

@@ -51,7 +51,7 @@ public class RenderSeaGuardianCreeper <T extends EntitySeaGuardianCreeper> exten
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        
+    
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime); float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F); f = f * f; f = f * f; float f2 = (1.0F + f * 0.4F) * f1; float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
@@ -162,7 +162,7 @@ public class RenderSeaGuardianCreeper <T extends EntitySeaGuardianCreeper> exten
                 this.guardianSpines[i] = new ModelRenderer(this, 0, 0); this.guardianSpines[i].addBox(-1.0F, -4.5F, -1.0F, 2, 9, 2);
                 this.guardianBody.addChild(this.guardianSpines[i]);
             }
-            
+    
             this.guardianEye = new ModelRenderer(this, 8, 0); this.guardianEye.addBox(-1.0F, 15.0F, 0.0F, 2, 2, 1);
             this.guardianBody.addChild(this.guardianEye); this.guardianTail = new ModelRenderer[3];
             this.guardianTail[0] = new ModelRenderer(this, 40, 0); this.guardianTail[0].addBox(-2.0F, 14.0F, 7.0F, 4, 4, 8);
@@ -206,7 +206,7 @@ public class RenderSeaGuardianCreeper <T extends EntitySeaGuardianCreeper> exten
                 this.guardianSpines[i].rotationPointY = 16.0F + afloat4[i] * (1.0F + MathHelper.cos(ageInTicks * 1.5F + i) * 0.01F - f1);
                 this.guardianSpines[i].rotationPointZ = afloat5[i] * (1.0F + MathHelper.cos(ageInTicks * 1.5F + i) * 0.01F - f1);
             }
-            
+    
             this.guardianEye.rotationPointZ = -8.25F; Entity entity = Minecraft.getMinecraft().getRenderViewEntity();
             
             if (entityguardian.hasTargetedEntity()) {
@@ -221,13 +221,13 @@ public class RenderSeaGuardianCreeper <T extends EntitySeaGuardianCreeper> exten
                 } else {
                     this.guardianEye.rotationPointY = 1.0F;
                 }
-                
+    
                 Vec3d vec3d2 = entityIn.getLook(0.0F); vec3d2 = new Vec3d(vec3d2.x, 0.0D, vec3d2.z);
                 Vec3d vec3d3 = new Vec3d(vec3d1.x - vec3d.x, 0.0D, vec3d1.z - vec3d.z).normalize().rotateYaw((float) Math.PI / 2F);
                 double d1 = vec3d2.dotProduct(vec3d3);
                 this.guardianEye.rotationPointX = MathHelper.sqrt((float) Math.abs(d1)) * 2.0F * (float) Math.signum(d1);
             }
-            
+    
             this.guardianEye.showModel = true; float f2 = entityguardian.getTailAnimation(f);
             this.guardianTail[0].rotateAngleY = MathHelper.sin(f2) * (float) Math.PI * 0.05F;
             this.guardianTail[1].rotateAngleY = MathHelper.sin(f2) * (float) Math.PI * 0.1F; this.guardianTail[1].rotationPointX = -1.5F;

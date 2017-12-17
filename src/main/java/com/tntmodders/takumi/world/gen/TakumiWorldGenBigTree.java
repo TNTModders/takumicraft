@@ -57,8 +57,8 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         }
     
         int j = this.basePos.getY() + this.height;
-        int k = this.heightLimit - this.leafDistanceLimit;
-        this.foliageCoords = Lists.newArrayList(); this.foliageCoords.add(new FoliageCoordinates(this.basePos.up(k), j));
+        int k = this.heightLimit - this.leafDistanceLimit; this.foliageCoords = Lists.newArrayList();
+        this.foliageCoords.add(new FoliageCoordinates(this.basePos.up(k), j));
         
         for (; k >= 0; --k) {
             float f = this.layerSize(k);
@@ -253,7 +253,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         for (FoliageCoordinates worldgenbigtree$foliagecoordinates : this.foliageCoords) {
             int i = worldgenbigtree$foliagecoordinates.getBranchBase();
             BlockPos blockpos = new BlockPos(this.basePos.getX(), i, this.basePos.getZ());
-        
+    
             if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY())) {
                 this.limb(blockpos, worldgenbigtree$foliagecoordinates, this.log.getBlock());
             }

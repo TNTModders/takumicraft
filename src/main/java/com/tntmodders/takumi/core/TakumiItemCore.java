@@ -56,12 +56,11 @@ public class TakumiItemCore {
         Class <TakumiBlockCore> clazz2 = TakumiBlockCore.class; for (Field field : clazz2.getFields()) {
             try {
                 if (field.get(INSTANCE) instanceof Block) {
-                    Block block = (Block) field.get(TakumiBlockCore.INSTANCE);
-                    Item item = new ItemBlock(block); if (block instanceof ITakumiItemBlock) {
+                    Block block = (Block) field.get(TakumiBlockCore.INSTANCE); Item item = new ItemBlock(block);
+                    if (block instanceof ITakumiItemBlock) {
                         item = ((ITakumiItemBlock) block).getItem();
                     }
-                    item = item.setRegistryName(block.getRegistryName());
-                    registry.register(item); itemBlocks.add(item);
+                    item = item.setRegistryName(block.getRegistryName()); registry.register(item); itemBlocks.add(item);
                     TakumiCraftCore.LOGGER.info("Registered Item : " + block.getUnlocalizedName());
                     OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
                 }

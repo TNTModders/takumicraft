@@ -69,6 +69,7 @@ tile.acidblock.name=Acid Block
 tile.takumialtar.name=Creeper Altar
 tile.takumitnt.name=Creeper TNT
 tile.monsterbomb.name=Bomb
+tile.takumiblock.name=Creeper Super Block
 
 #item
 item.takumibook.name=Creeper Book

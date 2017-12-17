@@ -19,8 +19,8 @@ public class BlockTakumiLog extends BlockLog {
     public BlockTakumiLog() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "takumilog");
-        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("takumilog"); this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockTakumiLog.EnumAxis.Y));
+        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER); this.setUnlocalizedName("takumilog");
+        this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockTakumiLog.EnumAxis.Y));
         this.setHarvestLevel("axe", 1);
     }
     

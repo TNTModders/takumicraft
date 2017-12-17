@@ -34,11 +34,6 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn); this.setSize(0.4F, 0.3F);
     }
     
-    @Nullable
-    @Override
-    protected Item getDropItem() {
-        return Items.ENDER_EYE;
-    }
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this)); this.tasks.addTask(2, new EntityAICreeperSwell(this));
@@ -47,7 +42,7 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
-    
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes(); this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
@@ -79,6 +74,12 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_ENDERMITE_AMBIENT;
+    }
+    
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.ENDER_EYE;
     }
     
     @Override
@@ -183,14 +184,14 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         Random rand = new Random(); int distance = 128; double x = entity.posX + (rand.nextDouble() - 0.5D) * distance;
         double y = entity.posY + rand.nextInt(distance + 1) - distance / 2; double z = entity.posZ + (rand.nextDouble() - 0.5D) * distance;
         EnderTeleportEvent event = new EnderTeleportEvent(entity, x, y, z, 0);
-        
+    
         double d3 = entity.posX; double d4 = entity.posY; double d5 = entity.posZ; entity.posX = event.getTargetX(); entity.posY = event.getTargetY();
         entity.posZ = event.getTargetZ();
-        
+    
         int xInt = MathHelper.floor(entity.posX); int yInt = MathHelper.floor(entity.posY); int zInt = MathHelper.floor(entity.posZ);
-        
+    
         boolean flag = false; if (entity.world.isAirBlock(new BlockPos(xInt, yInt, zInt))) {
-            
+        
             boolean foundGround = false; while (!foundGround && yInt > 0) {
                 BlockPos pos = new BlockPos(xInt, yInt - 1, zInt); IBlockState block = entity.world.getBlockState(pos);
                 if (block.getMaterial().blocksMovement() && entity.world.isAirBlock(pos.up(20)) && entity.world.isAirBlock(pos.up(21))) {
@@ -214,7 +215,7 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         }
         
         entity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
-        
+    
         short short1 = 128; for (int l = 0; l < short1; ++l) {
             double d6 = l / (short1 - 1.0D); float f = (rand.nextFloat() - 0.5F) * 0.2F; float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
             float f2 = (rand.nextFloat() - 0.5F) * 0.2F; double d7 = d3 + (entity.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
@@ -224,8 +225,7 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         }
         
         entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, entity
-                .getSoundCategory(), 1.0F, 1.0F);
-        entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F); return true;
+                .getSoundCategory(), 1.0F, 1.0F); entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F); return true;
         
     }
     

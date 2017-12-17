@@ -63,14 +63,24 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     }
     
     /**
-     * Handles updating while riding another entity
+     * sets this entity's combat AI.
      */
-    @Override
-    public void updateRidden() {
-        super.updateRidden();
+    public void setCombatTask() {
+        if (this.world != null && !this.world.isRemote) {
+            this.tasks.removeTask(this.aiAttackOnCollide); this.tasks.removeTask(this.aiArrowAttack);
+            ItemStack itemstack = this.getHeldItemMainhand();
         
-        if (this.getRidingEntity() instanceof EntityCreature) {
-            EntityCreature entitycreature = (EntityCreature) this.getRidingEntity(); this.renderYawOffset = entitycreature.renderYawOffset;
+            if (itemstack.getItem() == TakumiItemCore.TAKUMI_BOW) {
+                int i = 20;
+            
+                if (this.world.getDifficulty() != EnumDifficulty.HARD) {
+                    i = 40;
+                }
+            
+                this.aiArrowAttack.setAttackCooldown(i); this.tasks.addTask(1, this.aiArrowAttack);
+            } else {
+                this.tasks.addTask(1, this.aiAttackOnCollide);
+            }
         }
     }
     
@@ -121,6 +131,12 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     }
     
     @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LootTableList.ENTITIES_SKELETON;
+    }
+    
+    @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
         if (!this.world.isRemote) {
@@ -134,9 +150,14 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     }
     
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return LootTableList.ENTITIES_SKELETON;
+    public boolean takumiExplodeEvent(Detonate event) {
+        return true;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderSkeletonCreeper <>(manager);
     }
     
     @Override
@@ -167,6 +188,18 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
+    }
+    
+    /**
+     * Handles updating while riding another entity
+     */
+    @Override
+    public void updateRidden() {
+        super.updateRidden();
+        
+        if (this.getRidingEntity() instanceof EntityCreature) {
+            EntityCreature entitycreature = (EntityCreature) this.getRidingEntity(); this.renderYawOffset = entitycreature.renderYawOffset;
+        }
     }
     
     /**
@@ -203,35 +236,13 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
                 }
             }
         }
-    
+
         super.onLivingUpdate();
     }
     
     public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack, boolean flg) {
         super.setItemStackToSlot(slotIn, stack); if (flg && !this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
             this.setCombatTask();
-        }
-    }
-    
-    /**
-     * sets this entity's combat AI.
-     */
-    public void setCombatTask() {
-        if (this.world != null && !this.world.isRemote) {
-            this.tasks.removeTask(this.aiAttackOnCollide); this.tasks.removeTask(this.aiArrowAttack);
-            ItemStack itemstack = this.getHeldItemMainhand();
-            
-            if (itemstack.getItem() == TakumiItemCore.TAKUMI_BOW) {
-                int i = 20;
-                
-                if (this.world.getDifficulty() != EnumDifficulty.HARD) {
-                    i = 40;
-                }
-                
-                this.aiArrowAttack.setAttackCooldown(i); this.tasks.addTask(1, this.aiArrowAttack);
-            } else {
-                this.tasks.addTask(1, this.aiAttackOnCollide);
-            }
         }
     }
     
@@ -290,9 +301,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
      */
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata); this.setEquipmentBasedOnDifficulty(difficulty);
         this.setEnchantmentBasedOnDifficulty(difficulty); this.setCombatTask();
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
@@ -346,16 +355,5 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     @Override
     public int getRegisterID() {
         return 14;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        return true;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderSkeletonCreeper <>(manager);
     }
 }

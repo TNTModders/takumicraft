@@ -25,8 +25,7 @@ public class LayerSpiderCreeperEyes <T extends EntitySpiderCreeper> implements L
     public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
             float headPitch, float scale) {
         this.spiderRenderer.bindTexture(SPIDER_EYES);
-        GlStateManager.enableBlend();
-        GlStateManager.disableAlpha(); GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
+        GlStateManager.enableBlend(); GlStateManager.disableAlpha(); GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
         
         if (entitylivingbaseIn.isInvisible()) {
             GlStateManager.depthMask(false);

@@ -23,11 +23,7 @@ public class ItemTakumiBow extends ItemBow {
         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
             @Override
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack,
-                    @Nullable
-                            World worldIn,
-                    @Nullable
-                            EntityLivingBase entityIn) {
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (entityIn == null) {
                     return 0.0F;
                 } else {

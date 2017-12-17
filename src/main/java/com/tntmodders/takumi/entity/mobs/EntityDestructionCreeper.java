@@ -44,7 +44,8 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
                             .getBlockState(pos).getBlock().createTileEntity(this.world, this.world.getBlockState(pos)) instanceof IInventory &&
                             TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                         //this.world.setBlockToAir(pos);
-                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f, false, true);
+                        TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power - 0.15f,
+                                false, true);
                     }
                 }
             }

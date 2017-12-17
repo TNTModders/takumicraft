@@ -30,8 +30,8 @@ public class RenderCeruleanCreeper <T extends EntityCeruleanCreeper> extends Ren
             GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
             GlStateManager.matrixMode(5888);
             GlStateManager.enableBlend();
-            GlStateManager.color(1F, 1F, 1F, 0.1025F);
-            GlStateManager.disableLighting(); GlStateManager.blendFunc(SourceFactor.ZERO, DestFactor.SRC_COLOR);
+            GlStateManager.color(1F, 1F, 1F, 0.1025F); GlStateManager.disableLighting();
+            GlStateManager.blendFunc(SourceFactor.ZERO, DestFactor.SRC_COLOR);
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
         }
         super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
