@@ -309,6 +309,8 @@ advancements.takumicraft.allcomplete.title=All Complete
 advancements.takumicraft.allcomplete.desc=Complete the Creeper Book.
 advancements.takumicraft.takumishield.title=Super Shield
 advancements.takumicraft.takumishield.desc=Don't care about explosion.
+advancements.takumicraft.takumiblock.title=Harden the world
+advancements.takumicraft.takumiblock.desc=Got a Creeper Super Block.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 

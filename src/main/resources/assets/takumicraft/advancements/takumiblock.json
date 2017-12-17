@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumiblock"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.takumiblock.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.takumiblock.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "takumicraft:antiexplosion",
+  "criteria": {
+    "takumiblock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:takumiblock"
+          }
+        ]
+      }
+    }
+  }
+}

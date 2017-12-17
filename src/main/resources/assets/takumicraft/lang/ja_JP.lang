@@ -309,6 +309,8 @@ advancements.takumicraft.allcomplete.title=完全覇者
 advancements.takumicraft.allcomplete.desc=匠の書の制覇 次なる匠を待たれよ。
 advancements.takumicraft.takumishield.title=爆風もへっちゃら
 advancements.takumicraft.takumishield.desc=匠式防盾の入手 (見た目以外は)完璧な盾だ。
+advancements.takumicraft.takumiblock.title=超硬質化
+advancements.takumicraft.takumiblock.desc=匠式超硬質ブロックの入手 絶対無敵、模様も完全。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 
