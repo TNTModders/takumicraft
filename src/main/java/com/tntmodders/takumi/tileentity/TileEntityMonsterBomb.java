@@ -10,7 +10,8 @@ public class TileEntityMonsterBomb extends TileEntity {
     public ResourceLocation location;
     
     public TileEntityMonsterBomb(String name) {
-        this(); this.location = new ResourceLocation(TakumiCraftCore.MODID, name);
+        this();
+        this.location = new ResourceLocation(TakumiCraftCore.MODID, name);
     }
     
     public TileEntityMonsterBomb() {
@@ -21,11 +22,13 @@ public class TileEntityMonsterBomb extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         if (this.location == null) {
             this.location = new ResourceLocation(compound.getString("monster"));
-        } super.readFromNBT(compound);
+        }
+        super.readFromNBT(compound);
     }
     
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setString("monster", this.location.toString()); return super.writeToNBT(compound);
+        compound.setString("monster", this.location.toString());
+        return super.writeToNBT(compound);
     }
 }

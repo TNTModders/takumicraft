@@ -47,7 +47,8 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(1, new EntityAICreeperSwell(this)); this.tasks.addTask(4, new AIFireballAttack(this));
+        this.tasks.addTask(1, new EntityAICreeperSwell(this));
+        this.tasks.addTask(4, new AIFireballAttack(this));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -280,23 +281,23 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
             --this.attackTime;
             EntityLivingBase entitylivingbase = this.blaze.getAttackTarget();
             double d0 = this.blaze.getDistanceSqToEntity(entitylivingbase);
-    
+            
             if (d0 < 4.0D) {
                 if (this.attackTime <= 0) {
                     this.attackTime = 20;
                     this.blaze.attackEntityAsMob(entitylivingbase);
                 }
-        
+                
                 this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
             } else if (d0 < this.getFollowDistance() * this.getFollowDistance()) {
                 double d1 = entitylivingbase.posX - this.blaze.posX;
                 double d2 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (this.blaze.posY + (double)
                         (this.blaze.height / 2.0F));
                 double d3 = entitylivingbase.posZ - this.blaze.posZ;
-        
+                
                 if (this.attackTime <= 0) {
                     ++this.attackStep;
-            
+                    
                     if (this.attackStep == 1) {
                         this.attackTime = 60;
                         this.blaze.setOnFire(true);
@@ -307,11 +308,11 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
                         this.attackStep = 0;
                         this.blaze.setOnFire(false);
                     }
-            
+                    
                     if (this.attackStep > 1) {
                         float f = MathHelper.sqrt(MathHelper.sqrt(d0)) * 0.5F;
                         this.blaze.world.playEvent(null, 1018, new BlockPos((int) this.blaze.posX, (int) this.blaze.posY, (int) this.blaze.posZ), 0);
-                
+                        
                         for (int i = 0; i < 3 * (this.blaze.getPowered() ? 2 : 1); ++i) {
                             EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.blaze.world, this.blaze, d1 + this.blaze.getRNG
                                     ().nextGaussian() * (double) f, d2, d3 + this.blaze.getRNG().nextGaussian() * (double) f);
@@ -320,13 +321,13 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
                         }
                     }
                 }
-        
+                
                 this.blaze.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
             } else {
                 this.blaze.getNavigator().clearPathEntity();
                 this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
             }
-    
+            
             super.updateTask();
         }
         

@@ -87,7 +87,7 @@ public class ModelCatCreeper extends ModelBase {
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-    
+        
         if (this.isChild) {
             float f = 2.0F;
             GlStateManager.pushMatrix();
@@ -128,10 +128,10 @@ public class ModelCatCreeper extends ModelBase {
             Entity entityIn) {
         this.ocelotHead.rotateAngleX = headPitch * 0.017453292F;
         this.ocelotHead.rotateAngleY = netHeadYaw * 0.017453292F;
-    
+        
         if (this.state != 3) {
             this.ocelotBody.rotateAngleX = (float) Math.PI / 2F;
-        
+            
             if (this.state == 2) {
                 this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
                 this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 0.3F) * limbSwingAmount;
@@ -143,7 +143,7 @@ public class ModelCatCreeper extends ModelBase {
                 this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
                 this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
                 this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
-            
+                
                 if (this.state == 1) {
                     this.ocelotTail2.rotateAngleX = 1.7278761F + (float) Math.PI / 4F * MathHelper.cos(limbSwing) * limbSwingAmount;
                 } else {
@@ -176,7 +176,7 @@ public class ModelCatCreeper extends ModelBase {
         this.ocelotBackRightLeg.rotationPointY = 18.0F;
         this.ocelotBackRightLeg.rotationPointZ = 5.0F;
         this.ocelotTail.rotateAngleX = 0.9F;
-    
+        
         if (entitylivingbaseIn.isSneaking()) {
             ++this.ocelotBody.rotationPointY;
             this.ocelotHead.rotationPointY += 2.0F;

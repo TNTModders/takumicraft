@@ -23,12 +23,14 @@ import net.minecraft.world.World;
 public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityLapisCreeper(World worldIn) {
-        super(worldIn); this.moveHelper = new AIMoveControl(this);
+        super(worldIn);
+        this.moveHelper = new AIMoveControl(this);
     }
     
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(1, new EntityAISwimming(this)); this.tasks.addTask(2, new EntityAICreeperSwell(this));
+        this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAICreeperSwell(this));
         this.tasks.addTask(2, new AIMoveRandom());
         this.tasks.addTask(3, new EntityAIAvoidEntity <>(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
@@ -87,14 +89,14 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
         PooledMutableBlockPos blockpos$pooledmutableblockpos1 = PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY -
                 0.001D, axisalignedbb.maxZ - 0.001D);
         PooledMutableBlockPos blockpos$pooledmutableblockpos2 = PooledMutableBlockPos.retain();
-
+        
         if (this.world.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1)) {
             for (int i = blockpos$pooledmutableblockpos.getX(); i <= blockpos$pooledmutableblockpos1.getX(); ++i) {
                 for (int j = blockpos$pooledmutableblockpos.getY(); j <= blockpos$pooledmutableblockpos1.getY(); ++j) {
                     for (int k = blockpos$pooledmutableblockpos.getZ(); k <= blockpos$pooledmutableblockpos1.getZ(); ++k) {
                         blockpos$pooledmutableblockpos2.setPos(i, j, k);
                         IBlockState iblockstate = this.world.getBlockState(blockpos$pooledmutableblockpos2);
-
+                        
                         try {
                             iblockstate.getBlock().onEntityCollidedWithBlock(this.world, blockpos$pooledmutableblockpos2, iblockstate, this);
                             this.onInsideBlock(iblockstate);
@@ -108,7 +110,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                 }
             }
         }
-
+        
         blockpos$pooledmutableblockpos.release();
         blockpos$pooledmutableblockpos1.release();
         blockpos$pooledmutableblockpos2.release();
@@ -179,7 +181,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                 double d2 = this.posZ - EntityLapisCreeper.this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
                 d3 = (double) MathHelper.sqrt(d3);
-    
+                
                 if (d3 < EntityLapisCreeper.this.getEntityBoundingBox().getAverageEdgeLength()) {
                     this.action = Action.WAIT;
                     EntityLapisCreeper.this.motionX *= 0.5D;
@@ -189,7 +191,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                     EntityLapisCreeper.this.motionX += d0 / d3 * 0.05D * this.speed * 0.5;
                     EntityLapisCreeper.this.motionY += d1 / d3 * 0.05D * this.speed * 0.5;
                     EntityLapisCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed * 0.5;
-        
+                    
                     if (EntityLapisCreeper.this.getAttackTarget() == null) {
                         EntityLapisCreeper.this.rotationYaw = -((float) MathHelper.atan2(EntityLapisCreeper.this.motionX, EntityLapisCreeper.this
                                 .motionZ)) * (180F / (float) Math.PI);
@@ -244,7 +246,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                         EntityLapisCreeper.this.getLookHelper().setLookPosition((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.5D,
                                 (double) blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
                     }
-    
+                    
                     break;
                 }
             }

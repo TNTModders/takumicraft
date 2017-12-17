@@ -39,37 +39,60 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (te.getBlock() != null && te.getBlock() != Blocks.AIR) {
-            GlStateManager.pushMatrix(); BlockPos pos = new BlockPos(x, y, z);
+            GlStateManager.pushMatrix();
+            BlockPos pos = new BlockPos(x, y, z);
             IBlockState state = te.state != null ? te.state : te.getBlock().getStateFromMeta(te.getMeta());
-            Tessellator tessellator = Tessellator.getInstance(); BufferBuilder buffer = tessellator.getBuffer();
-            this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE); this.draw(te, x, y, z, state, pos, buffer, tessellator); GlStateManager.popMatrix();
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder buffer = tessellator.getBuffer();
+            this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            this.draw(te, x, y, z, state, pos, buffer, tessellator);
+            GlStateManager.popMatrix();
         } else {
-            GlStateManager.pushMatrix(); GlStateManager.depthMask(true); this.bindTexture(TEXTURE_ARMOR); GlStateManager.matrixMode(GL11.GL_TEXTURE);
-            GlStateManager.loadIdentity(); float f = Minecraft.getMinecraft().world.getWorldTime();
-            GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F); GlStateManager.matrixMode(GL11.GL_MODELVIEW); GlStateManager.enableBlend();
-            float f4 = 0.5F; GlStateManager.color(f4, f4, f4, 1.0F); GlStateManager.enableLighting();
-            GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE); GlStateManager.matrixMode(GL11.GL_TEXTURE); GlStateManager.loadIdentity();
+            GlStateManager.pushMatrix();
+            GlStateManager.depthMask(true);
+            this.bindTexture(TEXTURE_ARMOR);
+            GlStateManager.matrixMode(GL11.GL_TEXTURE);
+            GlStateManager.loadIdentity();
+            float f = Minecraft.getMinecraft().world.getWorldTime();
+            GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
+            GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+            GlStateManager.enableBlend();
+            float f4 = 0.5F;
+            GlStateManager.color(f4, f4, f4, 1.0F);
+            GlStateManager.enableLighting();
+            GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+            GlStateManager.matrixMode(GL11.GL_TEXTURE);
+            GlStateManager.loadIdentity();
             GlStateManager.matrixMode(GL11.GL_MODELVIEW);
             
             GlStateManager.translate((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
             Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE_ARMOR);
-            takumiBlocks.get(Minecraft.getMinecraft().player.ticksExisted % 64).render(); GlStateManager.disableLighting();
-            GlStateManager.disableBlend(); GlStateManager.popMatrix();
+            takumiBlocks.get(Minecraft.getMinecraft().player.ticksExisted % 64).render();
+            GlStateManager.disableLighting();
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
         }
     }
     
     private void draw(T te, double x, double y, double z, IBlockState state, BlockPos pos, BufferBuilder buffer, Tessellator tessellator) {
-        RenderHelper.disableStandardItemLighting(); GlStateManager.blendFunc(770, 771); GlStateManager.enableBlend(); GlStateManager.disableCull();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.blendFunc(770, 771);
+        GlStateManager.enableBlend();
+        GlStateManager.disableCull();
         
         if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(7425);
         } else {
             GlStateManager.shadeModel(7424);
-        } buffer.begin(7, DefaultVertexFormats.BLOCK); buffer.setTranslation((float) x - pos.getX(), (float) y - pos.getY(), (float) z - pos.getZ());
-        World world = this.getWorld(); IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
+        }
+        buffer.begin(7, DefaultVertexFormats.BLOCK);
+        buffer.setTranslation((float) x - pos.getX(), (float) y - pos.getY(), (float) z - pos.getZ());
+        World world = this.getWorld();
+        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
         state = state.getBlock().getExtendedState(state, world, pos);
         Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(world, model, state, pos, buffer, true);
-        buffer.setTranslation(0.0D, 0.0D, 0.0D); tessellator.draw();
+        buffer.setTranslation(0.0D, 0.0D, 0.0D);
+        tessellator.draw();
     }
     
     private class ModelTakumiBlock extends ModelBase {
@@ -77,7 +100,8 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
         private final ModelRenderer box;
         
         public ModelTakumiBlock(int i) {
-            this.box = new ModelRenderer(this, i, i); this.box.addBox(-8, -8, -8, 16, 16, 16);
+            this.box = new ModelRenderer(this, i, i);
+            this.box.addBox(-8, -8, -8, 16, 16, 16);
         }
         
         public void render() {

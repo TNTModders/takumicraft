@@ -91,7 +91,7 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-
+            
             /*TNTハウス*/
             case 1:
                 for (int x = ox - 4; x <= ox + 4; x++) {
@@ -115,7 +115,7 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-    
+            
             /*高性能爆弾*/
             case 2:
                 for (int x = ox - 4; x <= ox + 4; x++) {
@@ -141,7 +141,7 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 break;
-    
+            
             /*モンスターハウス*/
             case 3:
                 for (int x = ox - 4; x <= ox + 4; x++) {
@@ -151,25 +151,28 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                         }
                     }
                 }
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState()); this.world.setBlockState(new BlockPos
-                    (ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState()); for (int x = ox - 2; x <= ox + 2; x++) {
-                for (int z = oz - 2; z <= oz + 2; z++) {
-                    for (int y = oy + 2; y >= oy + 1; y--) {
-                        for (int i = 0; i < (this.getPowered() ? 4 : 2); i++) {
-                            this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
-                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(new BlockPos
-                                    (x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
-                                Class <? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(this.rand.nextInt(TakumiEntityCore
-                                        .getEntityList().size())).getClass();
-                                try {
-                                    Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(this.world);
-                                    if (((ITakumiEntity) creeper).takumiRank() == EnumTakumiRank.LOW || ((ITakumiEntity) creeper).takumiRank() ==
-                                            EnumTakumiRank.MID) {
-                                        creeper.world = this.world; creeper.setPosition(x, y, z); this.world.spawnEntity(creeper);
+                this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
+                this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                for (int x = ox - 2; x <= ox + 2; x++) {
+                    for (int z = oz - 2; z <= oz + 2; z++) {
+                        for (int y = oy + 2; y >= oy + 1; y--) {
+                            for (int i = 0; i < (this.getPowered() ? 4 : 2); i++) {
+                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
+                                if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && this.world.getBlockState(new
+                                        BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR && this.rand.nextInt(5) == 0) {
+                                    Class <? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(this.rand.nextInt(TakumiEntityCore
+                                            .getEntityList().size())).getClass();
+                                    try {
+                                        Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(this.world);
+                                        if (((ITakumiEntity) creeper).takumiRank() == EnumTakumiRank.LOW || ((ITakumiEntity) creeper).takumiRank()
+                                                == EnumTakumiRank.MID) {
+                                            creeper.world = this.world;
+                                            creeper.setPosition(x, y, z);
+                                            this.world.spawnEntity(creeper);
+                                        }
+                                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                                        e.printStackTrace();
                                     }
-                                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                                    e.printStackTrace();
-                                }
                                 }
                             }
                         }

@@ -30,7 +30,7 @@ public class RenderSpiderCreeper <T extends EntitySpiderCreeper> extends RenderL
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-    
+        
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {

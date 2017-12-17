@@ -93,7 +93,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
         
         boolean flag = false;
         if (entity.world.isAirBlock(new BlockPos(xInt, yInt, zInt))) {
-    
+            
             boolean foundGround = false;
             while (!foundGround && yInt > 0) {
                 IBlockState block = entity.world.getBlockState(new BlockPos(xInt, yInt - 1, zInt));
@@ -104,7 +104,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
                     --yInt;
                 }
             }
-    
+            
             if (foundGround) {
                 entity.setPosition(entity.posX, entity.posY, entity.posZ);
                 if (entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && !entity.world.containsAnyLiquid(entity
@@ -132,7 +132,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
             double d9 = d5 + (entity.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
             entity.world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
         }
-    
+        
         entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, entity
                 .getSoundCategory(), 1.0F, 1.0F);
         entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);

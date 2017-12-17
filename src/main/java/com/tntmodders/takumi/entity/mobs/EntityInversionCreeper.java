@@ -23,7 +23,8 @@ public class EntityInversionCreeper extends EntityTakumiAbstractCreeper {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 600));
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 590));
             }
-        }); return true;
+        });
+        return true;
     }
     
     @Override

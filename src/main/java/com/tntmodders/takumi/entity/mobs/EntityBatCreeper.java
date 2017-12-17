@@ -64,7 +64,7 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
                 if (this.rand.nextInt(200) == 0) {
                     this.rotationYawHead = (float) this.rand.nextInt(360);
                 }
-    
+                
                 if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null) {
                     this.setIsBatHanging(false);
                     this.world.playEvent(null, 1025, blockpos, 0);
@@ -77,7 +77,7 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
             if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1)) {
                 this.spawnPosition = null;
             }
-    
+            
             if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.distanceSq((double) (int) this.posX, (double) (int)
                     this.posY, (double) (int) this.posZ) < 4.0D) {
                 this.spawnPosition = new BlockPos((int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7), (int) this.posY + this.rand
@@ -141,7 +141,7 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         super.onUpdate();
-    
+        
         if (this.getIsBatHanging()) {
             this.motionX = 0.0D;
             this.motionY = 0.0D;
@@ -237,7 +237,7 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
             if (!this.world.isRemote && this.getIsBatHanging()) {
                 this.setIsBatHanging(false);
             }
-    
+            
             return super.attackEntityFrom(source, amount);
         }
     }
@@ -248,19 +248,19 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean getCanSpawnHere() {
         BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
-    
+        
         if (blockpos.getY() >= this.world.getSeaLevel()) {
             return false;
         } else {
             int i = this.world.getLightFromNeighbors(blockpos);
             int j = 4;
-        
+            
             if (this.isDateAroundHalloween(this.world.getCurrentDate())) {
                 j = 7;
             } else if (this.rand.nextBoolean()) {
                 return false;
             }
-        
+            
             return i <= this.rand.nextInt(j) && super.getCanSpawnHere();
         }
     }

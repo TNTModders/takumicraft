@@ -190,13 +190,13 @@ public class EntityHorseCreeper extends EntityTakumiAbstractCreeper {
             this.rotationYawHead = this.renderYawOffset;
             p_191986_1_ = entitylivingbase.moveStrafing * 0.5F;
             p_191986_3_ = entitylivingbase.moveForward;
-    
+            
             if (p_191986_3_ <= 0.0F) {
                 p_191986_3_ *= 0.25F;
             }
-    
+            
             this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
-    
+            
             if (this.canPassengerSteer()) {
                 this.setAIMoveSpeed((float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
                 super.travel(p_191986_1_, p_191986_2_, p_191986_3_);
@@ -205,16 +205,16 @@ public class EntityHorseCreeper extends EntityTakumiAbstractCreeper {
                 this.motionY = 0.0D;
                 this.motionZ = 0.0D;
             }
-    
+            
             this.prevLimbSwingAmount = this.limbSwingAmount;
             double d1 = this.posX - this.prevPosX;
             double d0 = this.posZ - this.prevPosZ;
             float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
-    
+            
             if (f2 > 1.0F) {
                 f2 = 1.0F;
             }
-    
+            
             this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
             this.limbSwing += this.limbSwingAmount;
         } else {

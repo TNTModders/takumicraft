@@ -26,7 +26,7 @@ public class LayerSheepCreeperWool implements LayerRenderer <EntitySheepCreeper>
             float netHeadYaw, float headPitch, float scale) {
         if (!entitylivingbaseIn.getSheared() && !entitylivingbaseIn.isInvisible()) {
             this.sheepRenderer.bindTexture(TEXTURE);
-
+            
             if (entitylivingbaseIn.getRainbow()) {
                 int i1 = 25;
                 int i = entitylivingbaseIn.ticksExisted / 25 + entitylivingbaseIn.getEntityId();
@@ -42,7 +42,7 @@ public class LayerSheepCreeperWool implements LayerRenderer <EntitySheepCreeper>
                 float[] afloat = EntitySheep.getDyeRgb(entitylivingbaseIn.getFleeceColor());
                 GlStateManager.color(afloat[0], afloat[1], afloat[2]);
             }
-    
+            
             this.sheepModel.setModelAttributes(this.sheepRenderer.getMainModel());
             this.sheepModel.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
             this.sheepModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

@@ -65,7 +65,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                     this.setAggressive(false);
                     ItemStack itemstack = this.getHeldItemMainhand();
                     this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-
+                    
                     if (itemstack.getItem() == Items.POTIONITEM) {
                         List <PotionEffect> list = PotionUtils.getEffectsFromStack(itemstack);
                         
@@ -75,12 +75,12 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                             }
                         }
                     }
-
+                    
                     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(MODIFIER);
                 }
             } else {
                 PotionType potiontype = null;
-
+                
                 if (this.rand.nextFloat() < 0.15F && this.isInsideOfMaterial(Material.WATER) && !this.isPotionActive(MobEffects.WATER_BREATHING)) {
                     potiontype = PotionTypes.WATER_BREATHING;
                 } else if (this.rand.nextFloat() < 0.15F && (this.isBurning() || this.getLastDamageSource() != null && this.getLastDamageSource()
@@ -92,7 +92,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                         .getAttackTarget().getDistanceSqToEntity(this) > 121.0D) {
                     potiontype = PotionTypes.SWIFTNESS;
                 }
-
+                
                 if (potiontype != null) {
                     this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM),
                             potiontype));
@@ -105,12 +105,12 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
                     iattributeinstance.applyModifier(MODIFIER);
                 }
             }
-
+            
             if (this.rand.nextFloat() < 7.5E-4F) {
                 this.world.setEntityState(this, (byte) 15);
             }
         }
-
+        
         super.onLivingUpdate();
     }
     
@@ -153,15 +153,15 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     protected float applyPotionDamageCalculations(DamageSource source, float damage) {
         damage = super.applyPotionDamageCalculations(source, damage);
-
+        
         if (source.getTrueSource() == this) {
             damage = 0.0F;
         }
-
+        
         if (source.isMagicDamage()) {
             damage = (float) (damage * 0.15D);
         }
-
+        
         return damage;
     }
     
@@ -177,7 +177,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
             double d3 = target.posZ + target.motionZ - this.posZ;
             float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
             PotionType potiontype = PotionTypes.HARMING;
-    
+            
             if (f >= 8.0F && !target.isPotionActive(MobEffects.SLOWNESS)) {
                 potiontype = PotionTypes.SLOWNESS;
             } else if (target.getHealth() >= 8.0F && !target.isPotionActive(MobEffects.POISON)) {
@@ -185,7 +185,7 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
             } else if (f <= 3.0F && !target.isPotionActive(MobEffects.WEAKNESS) && this.rand.nextFloat() < 0.25F) {
                 potiontype = PotionTypes.WEAKNESS;
             }
-    
+            
             EntityPotion entitypotion = new EntityTakumiPotion(this.world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items
                     .SPLASH_POTION), potiontype));
             entitypotion.rotationPitch -= -15.0F;
@@ -252,9 +252,14 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
         PotionType type = PotionTypes.HARMING;
         switch (this.rand.nextInt(4)) {
             case 0:
-                break; case 1:
-                type = PotionTypes.POISON; break; case 2:
-                type = PotionTypes.SLOWNESS; break; case 3:
+                break;
+            case 1:
+                type = PotionTypes.POISON;
+                break;
+            case 2:
+                type = PotionTypes.SLOWNESS;
+                break;
+            case 3:
                 type = PotionTypes.WEAKNESS;
                 break;
         }

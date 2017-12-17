@@ -82,7 +82,7 @@ public class TakumiExplosion extends Explosion {
     public void doExplosionA() {
         Set <BlockPos> set = Sets.newHashSet();
         int i = 16;
-    
+        
         for (int j = 0; j < 16; ++j) {
             for (int k = 0; k < 16; ++k) {
                 for (int l = 0; l < 16; ++l) {
@@ -98,22 +98,22 @@ public class TakumiExplosion extends Explosion {
                         double d4 = this.x;
                         double d6 = this.y;
                         double d8 = this.z;
-    
+                        
                         for (float f1 = 0.3F; f > 0.0F; f -= 0.22500001F) {
                             BlockPos blockpos = new BlockPos(d4, d6, d8);
                             IBlockState iblockstate = this.world.getBlockState(blockpos);
-        
+                            
                             if (iblockstate.getMaterial() != Material.AIR) {
                                 float f2 = this.exploder != null ? this.exploder.getExplosionResistance(this, this.world, blockpos, iblockstate) :
                                            iblockstate.getBlock().getExplosionResistance(world, blockpos, null, this);
                                 f -= (f2 + 0.3F) * 0.3F;
                             }
-        
+                            
                             if (f > 0.0F && (this.exploder == null || this.exploder.canExplosionDestroyBlock(this, this.world, blockpos,
                                     iblockstate, f))) {
                                 set.add(blockpos);
                             }
-        
+                            
                             d4 += d0 * 0.30000001192092896D;
                             d6 += d1 * 0.30000001192092896D;
                             d8 += d2 * 0.30000001192092896D;
@@ -122,7 +122,7 @@ public class TakumiExplosion extends Explosion {
                 }
             }
         }
-    
+        
         this.affectedBlockPositions.addAll(set);
         float f3 = this.size * 2.0F;
         int k1 = MathHelper.floor(this.x - f3 - 1.0D);
@@ -134,17 +134,17 @@ public class TakumiExplosion extends Explosion {
         List <Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
         ForgeEventFactory.onExplosionDetonate(this.world, this, list, f3);
         Vec3d vec3d = new Vec3d(this.x, this.y, this.z);
-    
+        
         for (Entity entity : list) {
             if (!entity.isImmuneToExplosions()) {
                 double d12 = entity.getDistance(this.x, this.y, this.z) / f3;
-    
+                
                 if (d12 <= 1.0D) {
                     double d5 = entity.posX - this.x;
                     double d7 = entity.posY + entity.getEyeHeight() - this.y;
                     double d9 = entity.posZ - this.z;
                     double d13 = MathHelper.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
-        
+                    
                     if (d13 != 0.0D) {
                         d5 = d5 / d13;
                         d7 = d7 / d13;
@@ -168,10 +168,10 @@ public class TakumiExplosion extends Explosion {
                         entity.motionX += d5 * d11;
                         entity.motionY += d7 * d11;
                         entity.motionZ += d9 * d11;
-            
+                        
                         if (entity instanceof EntityPlayer) {
                             EntityPlayer entityplayer = (EntityPlayer) entity;
-                
+                            
                             if (!entityplayer.isSpectator() && (!entityplayer.isCreative() || !entityplayer.capabilities.isFlying)) {
                                 this.playerKnockbackMap.put(entityplayer, new Vec3d(d5 * d10, d7 * d10, d9 * d10));
                             }
@@ -197,7 +197,7 @@ public class TakumiExplosion extends Explosion {
             for (BlockPos blockpos : this.affectedBlockPositions) {
                 IBlockState iblockstate = this.world.getBlockState(blockpos);
                 Block block = iblockstate.getBlock();
-    
+                
                 if (spawnParticles) {
                     double d0 = blockpos.getX() + this.world.rand.nextFloat();
                     double d1 = blockpos.getY() + this.world.rand.nextFloat();
@@ -214,15 +214,16 @@ public class TakumiExplosion extends Explosion {
                     d3 = d3 * d7;
                     d4 = d4 * d7;
                     d5 = d5 * d7;
-                    this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d0 + this.x) / 2.0D, (d1 + this.y) / 2.0D, (d2 + this.z) / 2.0D, d3, d4, d5);
+                    this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d0 + this.x) / 2.0D, (d1 + this.y) / 2.0D, (d2 + this.z) / 2.0D,
+                            d3, d4, d5);
                     this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
                 }
-    
+                
                 if (iblockstate.getMaterial() != Material.AIR) {
                     if (block.canDropFromExplosion(this)) {
                         block.dropBlockAsItemWithChance(this.world, blockpos, this.world.getBlockState(blockpos), 1.0F / this.size, 0);
                     }
-        
+                    
                     block.onBlockExploded(this.world, blockpos, this);
                 }
             }
@@ -230,7 +231,8 @@ public class TakumiExplosion extends Explosion {
         
         if (this.causesFire) {
             for (BlockPos blockpos1 : this.affectedBlockPositions) {
-                if (this.world.getBlockState(blockpos1).getMaterial() == Material.AIR && this.world.getBlockState(blockpos1.down()).isFullBlock() && this.random.nextInt(3) == 0) {
+                if (this.world.getBlockState(blockpos1).getMaterial() == Material.AIR && this.world.getBlockState(blockpos1.down()).isFullBlock()
+                        && this.random.nextInt(3) == 0) {
                     this.world.setBlockState(blockpos1, Blocks.FIRE.getDefaultState());
                 }
             }

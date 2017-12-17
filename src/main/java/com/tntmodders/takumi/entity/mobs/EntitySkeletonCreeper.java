@@ -48,7 +48,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
             super.startExecuting();
             EntitySkeletonCreeper.this.setSwingingArms(true);
         }
-
+        
         @Override
         public void resetTask() {
             super.resetTask();
@@ -67,17 +67,19 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
      */
     public void setCombatTask() {
         if (this.world != null && !this.world.isRemote) {
-            this.tasks.removeTask(this.aiAttackOnCollide); this.tasks.removeTask(this.aiArrowAttack);
+            this.tasks.removeTask(this.aiAttackOnCollide);
+            this.tasks.removeTask(this.aiArrowAttack);
             ItemStack itemstack = this.getHeldItemMainhand();
-        
+            
             if (itemstack.getItem() == TakumiItemCore.TAKUMI_BOW) {
                 int i = 20;
-            
+                
                 if (this.world.getDifficulty() != EnumDifficulty.HARD) {
                     i = 40;
                 }
-            
-                this.aiArrowAttack.setAttackCooldown(i); this.tasks.addTask(1, this.aiArrowAttack);
+                
+                this.aiArrowAttack.setAttackCooldown(i);
+                this.tasks.addTask(1, this.aiArrowAttack);
             } else {
                 this.tasks.addTask(1, this.aiAttackOnCollide);
             }
@@ -198,7 +200,8 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
         super.updateRidden();
         
         if (this.getRidingEntity() instanceof EntityCreature) {
-            EntityCreature entitycreature = (EntityCreature) this.getRidingEntity(); this.renderYawOffset = entitycreature.renderYawOffset;
+            EntityCreature entitycreature = (EntityCreature) this.getRidingEntity();
+            this.renderYawOffset = entitycreature.renderYawOffset;
         }
     }
     
@@ -213,35 +216,36 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
             BlockPos blockpos =
                     this.getRidingEntity() instanceof EntityBoat ? new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ).up() :
                     new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-
+            
             if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos)) {
                 boolean flag = true;
                 ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-
+                
                 if (!itemstack.isEmpty()) {
                     if (itemstack.isItemStackDamageable()) {
                         itemstack.setItemDamage(itemstack.getItemDamage() + this.rand.nextInt(2));
-
+                        
                         if (itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
                             this.renderBrokenItemStack(itemstack);
                             this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
                         }
                     }
-
+                    
                     flag = false;
                 }
-
+                
                 if (flag) {
                     this.setFire(8);
                 }
             }
         }
-
+        
         super.onLivingUpdate();
     }
     
     public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack, boolean flg) {
-        super.setItemStackToSlot(slotIn, stack); if (flg && !this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
+        super.setItemStackToSlot(slotIn, stack);
+        if (flg && !this.world.isRemote && slotIn == EntityEquipmentSlot.MAINHAND) {
             this.setCombatTask();
         }
     }
@@ -302,19 +306,21 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        livingdata = super.onInitialSpawn(difficulty, livingdata); this.setEquipmentBasedOnDifficulty(difficulty);
-        this.setEnchantmentBasedOnDifficulty(difficulty); this.setCombatTask();
+        livingdata = super.onInitialSpawn(difficulty, livingdata);
+        this.setEquipmentBasedOnDifficulty(difficulty);
+        this.setEnchantmentBasedOnDifficulty(difficulty);
+        this.setCombatTask();
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
-    
+        
         if (this.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty()) {
             Calendar calendar = this.world.getCurrentDate();
-        
+            
             if (calendar.get(Calendar.MONTH) + 1 == 10 && calendar.get(Calendar.DATE) == 31 && this.rand.nextFloat() < 0.25F) {
                 this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(this.rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
                 this.inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
             }
         }
-    
+        
         return livingdata;
     }
     

@@ -47,8 +47,10 @@ public class BlockTakumiAltar extends Block {
                 if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
                     entities.add(iTakumiEntity);
                 }
-            }); if (!entities.isEmpty()) {
-                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper); try {
+            });
+            if (!entities.isEmpty()) {
+                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
+                try {
                     entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(worldIn);
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     e.printStackTrace();

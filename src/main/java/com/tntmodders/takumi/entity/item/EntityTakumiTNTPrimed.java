@@ -24,13 +24,25 @@ public class EntityTakumiTNTPrimed extends Entity {
     private int fuse;
     
     public EntityTakumiTNTPrimed(World worldIn, double x, double y, double z, EntityLivingBase igniter) {
-        this(worldIn); this.setPosition(x, y, z); float f = (float) (Math.random() * (Math.PI * 2D)); this.motionX = -((float) Math.sin(f)) * 0.02F;
-        this.motionY = 0.20000000298023224D; this.motionZ = -((float) Math.cos(f)) * 0.02F; this.setFuse(80); this.prevPosX = x; this.prevPosY = y;
-        this.prevPosZ = z; this.tntPlacedBy = igniter;
+        this(worldIn);
+        this.setPosition(x, y, z);
+        float f = (float) (Math.random() * (Math.PI * 2D));
+        this.motionX = -((float) Math.sin(f)) * 0.02F;
+        this.motionY = 0.20000000298023224D;
+        this.motionZ = -((float) Math.cos(f)) * 0.02F;
+        this.setFuse(80);
+        this.prevPosX = x;
+        this.prevPosY = y;
+        this.prevPosZ = z;
+        this.tntPlacedBy = igniter;
     }
     
     public EntityTakumiTNTPrimed(World worldIn) {
-        super(worldIn); this.fuse = 80; this.preventEntitySpawning = true; this.isImmuneToFire = true; this.setSize(0.98F, 0.98F);
+        super(worldIn);
+        this.fuse = 80;
+        this.preventEntitySpawning = true;
+        this.isImmuneToFire = true;
+        this.setSize(0.98F, 0.98F);
     }
     
     @Override
@@ -43,17 +55,23 @@ public class EntityTakumiTNTPrimed extends Entity {
      */
     @Override
     public void onUpdate() {
-        this.prevPosX = this.posX; this.prevPosY = this.posY; this.prevPosZ = this.posZ;
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
         
         if (!this.hasNoGravity()) {
             this.motionY -= 0.03999999910593033D;
         }
-    
-        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ); this.motionX *= 0.9800000190734863D; this.motionY *= 0.9800000190734863D;
+        
+        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+        this.motionX *= 0.9800000190734863D;
+        this.motionY *= 0.9800000190734863D;
         this.motionZ *= 0.9800000190734863D;
         
         if (this.onGround) {
-            this.motionX *= 0.699999988079071D; this.motionZ *= 0.699999988079071D; this.motionY *= -0.5D;
+            this.motionX *= 0.699999988079071D;
+            this.motionZ *= 0.699999988079071D;
+            this.motionY *= -0.5D;
         }
         
         --this.fuse;
@@ -127,11 +145,13 @@ public class EntityTakumiTNTPrimed extends Entity {
     }
     
     public void setFuse(int fuseIn) {
-        this.dataManager.set(FUSE, fuseIn); this.fuse = fuseIn;
+        this.dataManager.set(FUSE, fuseIn);
+        this.fuse = fuseIn;
     }
     
     private void explode() {
-        float f = 4.0F; this.world.createExplosion(this, this.posX, this.posY + this.height / 16.0F, this.posZ, 7.0F, true);
+        float f = 4.0F;
+        this.world.createExplosion(this, this.posX, this.posY + this.height / 16.0F, this.posZ, 7.0F, true);
     }
     
     /**

@@ -24,7 +24,8 @@ public class LayerSlimeCreeperGel implements LayerRenderer <EntitySlimeCreeper> 
             float netHeadYaw, float headPitch, float scale) {
         if (!entitylivingbaseIn.isInvisible()) {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            GlStateManager.enableNormalize(); GlStateManager.enableBlend();
+            GlStateManager.enableNormalize();
+            GlStateManager.enableBlend();
             GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
             this.slimeModel.setModelAttributes(this.slimeRenderer.getMainModel());
             this.slimeModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

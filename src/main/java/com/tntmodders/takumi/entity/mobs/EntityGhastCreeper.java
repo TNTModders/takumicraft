@@ -44,14 +44,18 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     public EntityGhastCreeper(World worldIn) {
         super(worldIn);
         this.setSize(4.0F, 4.0F);
-        this.isImmuneToFire = true; this.experienceValue = 5; this.moveHelper = new GhastMoveHelper(this);
+        this.isImmuneToFire = true;
+        this.experienceValue = 5;
+        this.moveHelper = new GhastMoveHelper(this);
     }
     
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAICreeperSwell(this));
-        this.tasks.addTask(3, new EntityAIAvoidEntity <>(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D)); this.tasks.addTask(5, new AIRandomFly(this));
-        this.tasks.addTask(7, new AILookAround(this)); this.tasks.addTask(7, new AIFireballAttack(this));
+        this.tasks.addTask(3, new EntityAIAvoidEntity <>(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
+        this.tasks.addTask(5, new AIRandomFly(this));
+        this.tasks.addTask(7, new AILookAround(this));
+        this.tasks.addTask(7, new AIFireballAttack(this));
         this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
     }
     
@@ -87,7 +91,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-
+        
         if (compound.hasKey("ExplosionPower", 99)) {
             this.explosionStrength = compound.getInteger("ExplosionPower");
         }
@@ -99,7 +103,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         super.onUpdate();
-
+        
         if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             this.setDead();
         }
@@ -157,21 +161,21 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
             this.motionZ *= 0.5D;
         } else {
             float f = 0.91F;
-
+            
             if (this.onGround) {
                 f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
                         MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
-    
+            
             float f1 = 0.16277136F / (f * f * f);
             this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, this.onGround ? 0.1F * f1 : 0.02F);
             f = 0.91F;
-    
+            
             if (this.onGround) {
                 f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
                         MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
-    
+            
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
             this.motionX *= (double) f;
             this.motionY *= (double) f;
@@ -345,16 +349,16 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         public void updateTask() {
             EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
             double d0 = 64.0D;
-    
+            
             if (entitylivingbase != null) {
                 if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D && this.parentEntity.canEntityBeSeen(entitylivingbase)) {
                     World world = this.parentEntity.world;
                     ++this.attackTimer;
-    
+                    
                     if (this.attackTimer == 10) {
                         world.playEvent(null, 1015, new BlockPos(this.parentEntity), 0);
                     }
-    
+                    
                     if (this.attackTimer == 20) {
                         double d1 = 4.0D;
                         Vec3d vec3d = this.parentEntity.getLook(1.0F);
@@ -375,7 +379,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
                     --this.attackTimer;
                 }
             }
-    
+            
             this.parentEntity.setAttacking(this.attackTimer > 10);
         }
     }
@@ -409,7 +413,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
             } else {
                 EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
                 double d0 = 64.0D;
-    
+                
                 if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D) {
                     double d1 = entitylivingbase.posX - this.parentEntity.posX;
                     double d2 = entitylivingbase.posZ - this.parentEntity.posZ;
@@ -435,7 +439,7 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public boolean shouldExecute() {
             EntityMoveHelper entitymovehelper = this.parentEntity.getMoveHelper();
-    
+            
             if (!entitymovehelper.isUpdating()) {
                 return true;
             } else {
@@ -485,11 +489,11 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
                 double d1 = this.posY - this.parentEntity.posY;
                 double d2 = this.posZ - this.parentEntity.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-    
+                
                 if (this.courseChangeCooldown-- <= 0) {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
                     d3 = (double) MathHelper.sqrt(d3);
-        
+                    
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3)) {
                         this.parentEntity.motionX += d0 / d3 * 0.1D;
                         this.parentEntity.motionY += d1 / d3 * 0.1D;
@@ -509,15 +513,15 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
             double d1 = (y - this.parentEntity.posY) / p_179926_7_;
             double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
             AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
-    
+            
             for (int i = 1; (double) i < p_179926_7_; ++i) {
                 axisalignedbb = axisalignedbb.offset(d0, d1, d2);
-        
+                
                 if (!this.parentEntity.world.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty()) {
                     return false;
                 }
             }
-    
+            
             return true;
         }
     }

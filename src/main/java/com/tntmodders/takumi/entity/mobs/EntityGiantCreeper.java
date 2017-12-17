@@ -112,6 +112,22 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     }
     
     @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        if (!event.getWorld().isRemote) {
+            for (BlockPos pos : event.getAffectedBlocks()) {
+                event.getWorld().setBlockToAir(pos);
+            }
+        }
+        event.getAffectedBlocks().clear();
+        return true;
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0;
+    }
+    
+    @Override
     public void takumiExplode() {
         this.setInvisible(true);
         this.ticksExisted = 0;
@@ -151,21 +167,5 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     @Override
     public int getRegisterID() {
         return 403;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        if (!event.getWorld().isRemote) {
-            for (BlockPos pos : event.getAffectedBlocks()) {
-                event.getWorld().setBlockToAir(pos);
-            }
-        }
-        event.getAffectedBlocks().clear();
-        return true;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0;
     }
 }

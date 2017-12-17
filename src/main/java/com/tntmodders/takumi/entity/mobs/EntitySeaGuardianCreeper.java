@@ -46,13 +46,18 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     private boolean clientSideTouchedGround;
     
     public EntitySeaGuardianCreeper(World worldIn) {
-        super(worldIn); this.experienceValue = 10; this.setSize(0.85F, 0.85F); this.moveHelper = new GuardianMoveHelper(this);
-        this.clientSideTailAnimation = this.rand.nextFloat(); this.clientSideTailAnimationO = this.clientSideTailAnimation;
+        super(worldIn);
+        this.experienceValue = 10;
+        this.setSize(0.85F, 0.85F);
+        this.moveHelper = new GuardianMoveHelper(this);
+        this.clientSideTailAnimation = this.rand.nextFloat();
+        this.clientSideTailAnimationO = this.clientSideTailAnimation;
     }
     
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedEntities().forEach(entity -> entity.setAir(0)); return true;
+        event.getAffectedEntities().forEach(entity -> entity.setAir(0));
+        return true;
     }
     
     @Override
@@ -75,18 +80,24 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void initEntityAI() {
         EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
-        this.wander = new EntityAIWander(this, 1.0D, 80); this.tasks.addTask(2, new EntityAICreeperSwell(this));
-        this.tasks.addTask(4, new AIGuardianAttack(this)); this.tasks.addTask(5, entityaimovetowardsrestriction); this.tasks.addTask(7, this.wander);
+        this.wander = new EntityAIWander(this, 1.0D, 80);
+        this.tasks.addTask(2, new EntityAICreeperSwell(this));
+        this.tasks.addTask(4, new AIGuardianAttack(this));
+        this.tasks.addTask(5, entityaimovetowardsrestriction);
+        this.tasks.addTask(7, this.wander);
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntitySeaGuardianCreeper.class, 12.0F, 0.01F));
-        this.tasks.addTask(9, new EntityAILookIdle(this)); this.wander.setMutexBits(3); entityaimovetowardsrestriction.setMutexBits(3);
+        this.tasks.addTask(9, new EntityAILookIdle(this));
+        this.wander.setMutexBits(3);
+        entityaimovetowardsrestriction.setMutexBits(3);
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 10, true, false, new GuardianTargetSelector
                 (this)));
     }
     
     @Override
     protected void applyEntityAttributes() {
-        super.applyEntityAttributes(); this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
@@ -94,7 +105,9 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     protected void entityInit() {
-        super.entityInit(); this.dataManager.register(MOVING, Boolean.FALSE); this.dataManager.register(TARGET_ENTITY, 0);
+        super.entityInit();
+        this.dataManager.register(MOVING, Boolean.FALSE);
+        this.dataManager.register(TARGET_ENTITY, 0);
     }
     
     @Override
@@ -192,8 +205,9 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
             } else {
                 this.clientSideTailAnimationSpeed += (0.125F - this.clientSideTailAnimationSpeed) * 0.2F;
             }
-    
-            this.clientSideTailAnimation += this.clientSideTailAnimationSpeed; this.clientSideSpikesAnimationO = this.clientSideSpikesAnimation;
+            
+            this.clientSideTailAnimation += this.clientSideTailAnimationSpeed;
+            this.clientSideSpikesAnimationO = this.clientSideSpikesAnimation;
             
             if (!this.isInWater()) {
                 this.clientSideSpikesAnimation = this.rand.nextFloat();
@@ -221,11 +235,17 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
                 EntityLivingBase entitylivingbase = this.getTargetedEntity();
                 
                 if (entitylivingbase != null) {
-                    this.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F); this.getLookHelper().onUpdateLook();
-                    double d5 = this.getAttackAnimationScale(0.0F); double d0 = entitylivingbase.posX - this.posX;
+                    this.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F);
+                    this.getLookHelper().onUpdateLook();
+                    double d5 = this.getAttackAnimationScale(0.0F);
+                    double d0 = entitylivingbase.posX - this.posX;
                     double d1 = entitylivingbase.posY + entitylivingbase.height * 0.5F - (this.posY + this.getEyeHeight());
-                    double d2 = entitylivingbase.posZ - this.posZ; double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2); d0 = d0 / d3; d1 = d1 / d3;
-                    d2 = d2 / d3; double d4 = this.rand.nextDouble();
+                    double d2 = entitylivingbase.posZ - this.posZ;
+                    double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+                    d0 = d0 / d3;
+                    d1 = d1 / d3;
+                    d2 = d2 / d3;
+                    double d4 = this.rand.nextDouble();
                     
                     while (d4 < d3) {
                         d4 += 1.8D - d5 + this.rand.nextDouble() * (1.7D - d5);
@@ -239,8 +259,11 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         if (this.inWater) {
             this.setAir(300);
         } else if (this.onGround) {
-            this.motionY += 0.5D; this.motionX += (this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F;
-            this.motionZ += (this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F; this.rotationYaw = this.rand.nextFloat() * 360.0F; this.onGround = false;
+            this.motionY += 0.5D;
+            this.motionX += (this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F;
+            this.motionZ += (this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F;
+            this.rotationYaw = this.rand.nextFloat() * 360.0F;
+            this.onGround = false;
             this.isAirBorne = true;
         }
         
@@ -275,15 +298,20 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     public EntityLivingBase getTargetedEntity() {
         if (!this.hasTargetedEntity()) {
             return null;
-        } if (this.world.isRemote) {
+        }
+        if (this.world.isRemote) {
             if (this.targetedEntity != null) {
                 return this.targetedEntity;
-            } Entity entity = this.world.getEntityByID(this.dataManager.get(TARGET_ENTITY));
+            }
+            Entity entity = this.world.getEntityByID(this.dataManager.get(TARGET_ENTITY));
             
             if (entity instanceof EntityLivingBase) {
-                this.targetedEntity = (EntityLivingBase) entity; return this.targetedEntity;
-            } return null;
-        } return this.getAttackTarget();
+                this.targetedEntity = (EntityLivingBase) entity;
+                return this.targetedEntity;
+            }
+            return null;
+        }
+        return this.getAttackTarget();
     }
     
     private void setTargetedEntity(int entityId) {
@@ -349,8 +377,11 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
         if (this.isServerWorld() && this.isInWater()) {
-            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.1F); this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.8999999761581421D; this.motionY *= 0.8999999761581421D; this.motionZ *= 0.8999999761581421D;
+            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.1F);
+            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.8999999761581421D;
+            this.motionY *= 0.8999999761581421D;
+            this.motionZ *= 0.8999999761581421D;
             
             if (!this.isMoving() && this.getAttackTarget() == null) {
                 this.motionY -= 0.005D;
@@ -365,7 +396,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         super.notifyDataManagerChange(key);
         
         if (Objects.equals(TARGET_ENTITY, key)) {
-            this.clientSideAttackTime = 0; this.targetedEntity = null;
+            this.clientSideAttackTime = 0;
+            this.targetedEntity = null;
         }
     }
     
@@ -414,7 +446,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         private int tickCounter;
         
         public AIGuardianAttack(EntitySeaGuardianCreeper guardian) {
-            this.guardian = guardian; this.setMutexBits(3);
+            this.guardian = guardian;
+            this.setMutexBits(3);
         }
         
         /**
@@ -422,7 +455,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public boolean shouldExecute() {
-            EntityLivingBase entitylivingbase = this.guardian.getAttackTarget(); return entitylivingbase != null && entitylivingbase.isEntityAlive();
+            EntityLivingBase entitylivingbase = this.guardian.getAttackTarget();
+            return entitylivingbase != null && entitylivingbase.isEntityAlive();
         }
         
         /**
@@ -438,8 +472,10 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public void startExecuting() {
-            this.tickCounter = -10; this.guardian.getNavigator().clearPathEntity();
-            this.guardian.getLookHelper().setLookPositionWithEntity(this.guardian.getAttackTarget(), 90.0F, 90.0F); this.guardian.isAirBorne = true;
+            this.tickCounter = -10;
+            this.guardian.getNavigator().clearPathEntity();
+            this.guardian.getLookHelper().setLookPositionWithEntity(this.guardian.getAttackTarget(), 90.0F, 90.0F);
+            this.guardian.isAirBorne = true;
         }
         
         /**
@@ -447,7 +483,9 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public void resetTask() {
-            this.guardian.setTargetedEntity(0); this.guardian.setAttackTarget(null); this.guardian.wander.makeUpdate();
+            this.guardian.setTargetedEntity(0);
+            this.guardian.setAttackTarget(null);
+            this.guardian.wander.makeUpdate();
         }
         
         /**
@@ -455,7 +493,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public void updateTask() {
-            EntityLivingBase entitylivingbase = this.guardian.getAttackTarget(); this.guardian.getNavigator().clearPathEntity();
+            EntityLivingBase entitylivingbase = this.guardian.getAttackTarget();
+            this.guardian.getNavigator().clearPathEntity();
             this.guardian.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F);
             
             if (!this.guardian.canEntityBeSeen(entitylivingbase)) {
@@ -477,7 +516,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
                     entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this.guardian), (float) this.guardian.getEntityAttribute
                             (SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
                     this.guardian.world.createExplosion(this.guardian, entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ,
-                            this.guardian.getPowered() ? 2.5f : 1.25f, true); this.guardian.setAttackTarget(null);
+                            this.guardian.getPowered() ? 2.5f : 1.25f, true);
+                    this.guardian.setAttackTarget(null);
                 }
                 
                 super.updateTask();
@@ -490,14 +530,18 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         private final EntitySeaGuardianCreeper entityGuardian;
         
         public GuardianMoveHelper(EntitySeaGuardianCreeper guardian) {
-            super(guardian); this.entityGuardian = guardian;
+            super(guardian);
+            this.entityGuardian = guardian;
         }
         
         @Override
         public void onUpdateMoveHelper() {
             if (this.action == Action.MOVE_TO && !this.entityGuardian.getNavigator().noPath()) {
-                double d0 = this.posX - this.entityGuardian.posX; double d1 = this.posY - this.entityGuardian.posY;
-                double d2 = this.posZ - this.entityGuardian.posZ; double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2); d1 = d1 / d3;
+                double d0 = this.posX - this.entityGuardian.posX;
+                double d1 = this.posY - this.entityGuardian.posY;
+                double d2 = this.posZ - this.entityGuardian.posZ;
+                double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+                d1 = d1 / d3;
                 float f = (float) (MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F;
                 this.entityGuardian.rotationYaw = this.limitAngle(this.entityGuardian.rotationYaw, f, 90.0F);
                 this.entityGuardian.renderYawOffset = this.entityGuardian.rotationYaw;
@@ -505,25 +549,32 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
                 this.entityGuardian.setAIMoveSpeed(this.entityGuardian.getAIMoveSpeed() + (f1 - this.entityGuardian.getAIMoveSpeed()) * 0.125F);
                 double d4 = Math.sin((this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.5D) * 0.05D;
                 double d5 = Math.cos(this.entityGuardian.rotationYaw * 0.017453292F);
-                double d6 = Math.sin(this.entityGuardian.rotationYaw * 0.017453292F); this.entityGuardian.motionX += d4 * d5;
+                double d6 = Math.sin(this.entityGuardian.rotationYaw * 0.017453292F);
+                this.entityGuardian.motionX += d4 * d5;
                 this.entityGuardian.motionZ += d4 * d6;
                 d4 = Math.sin((this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.75D) * 0.05D;
                 this.entityGuardian.motionY += d4 * (d6 + d5) * 0.25D;
                 this.entityGuardian.motionY += this.entityGuardian.getAIMoveSpeed() * d1 * 0.1D;
-                EntityLookHelper entitylookhelper = this.entityGuardian.getLookHelper(); double d7 = this.entityGuardian.posX + d0 / d3 * 2.0D;
+                EntityLookHelper entitylookhelper = this.entityGuardian.getLookHelper();
+                double d7 = this.entityGuardian.posX + d0 / d3 * 2.0D;
                 double d8 = this.entityGuardian.getEyeHeight() + this.entityGuardian.posY + d1 / d3;
-                double d9 = this.entityGuardian.posZ + d2 / d3 * 2.0D; double d10 = entitylookhelper.getLookPosX();
-                double d11 = entitylookhelper.getLookPosY(); double d12 = entitylookhelper.getLookPosZ();
+                double d9 = this.entityGuardian.posZ + d2 / d3 * 2.0D;
+                double d10 = entitylookhelper.getLookPosX();
+                double d11 = entitylookhelper.getLookPosY();
+                double d12 = entitylookhelper.getLookPosZ();
                 
                 if (!entitylookhelper.getIsLooking()) {
-                    d10 = d7; d11 = d8; d12 = d9;
+                    d10 = d7;
+                    d11 = d8;
+                    d12 = d9;
                 }
                 
                 this.entityGuardian.getLookHelper().setLookPosition(d10 + (d7 - d10) * 0.125D, d11 + (d8 - d11) * 0.125D, d12 + (d9 - d12) *
                         0.125D, 10.0F, 40.0F);
                 this.entityGuardian.setMoving(true);
             } else {
-                this.entityGuardian.setAIMoveSpeed(0.0F); this.entityGuardian.setMoving(false);
+                this.entityGuardian.setAIMoveSpeed(0.0F);
+                this.entityGuardian.setMoving(false);
             }
         }
     }

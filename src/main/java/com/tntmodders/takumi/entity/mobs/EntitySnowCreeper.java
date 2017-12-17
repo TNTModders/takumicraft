@@ -92,7 +92,7 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
                 j = MathHelper.floor(this.posY);
                 k = MathHelper.floor(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(i, j, k);
-    
+                
                 if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR && this.world.getBiome(blockpos).getFloatTemperature(blockpos)
                         < 0.8F && Blocks.SNOW_LAYER.canPlaceBlockAt(this.world, blockpos)) {
                     this.world.setBlockState(blockpos, Blocks.SNOW_LAYER.getDefaultState());
@@ -140,7 +140,7 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
                 double z = this.posZ + this.rand.nextInt(20) - 10;
                 double y = this.world.getHeight(new BlockPos(x, 0, z)).getY() + 100;
                 EntityTakumiSnowBall arrow = new EntityTakumiSnowBall(this.world, this);
-    
+                
                 arrow.setLocationAndAngles(x, y, z, 0, 0);
                 arrow.motionX = 0;
                 arrow.motionZ = 0;

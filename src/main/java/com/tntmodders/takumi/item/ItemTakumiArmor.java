@@ -38,15 +38,15 @@ public class ItemTakumiArmor extends ItemArmor {
                 case HEAD:
                     itemStack.addEnchantment(Enchantments.THORNS, 10);
                     break;
-    
+                
                 case CHEST:
                     itemStack.addEnchantment(Enchantments.PROJECTILE_PROTECTION, 10);
                     break;
-    
+                
                 case LEGS:
                     itemStack.addEnchantment(Enchantments.FIRE_PROTECTION, 10);
                     break;
-    
+                
                 case FEET:
                     itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
             }
@@ -62,15 +62,15 @@ public class ItemTakumiArmor extends ItemArmor {
                 case HEAD:
                     itemStack.addEnchantment(Enchantments.THORNS, 10);
                     break;
-    
+                
                 case CHEST:
                     itemStack.addEnchantment(Enchantments.PROJECTILE_PROTECTION, 10);
                     break;
-    
+                
                 case LEGS:
                     itemStack.addEnchantment(Enchantments.FIRE_PROTECTION, 10);
                     break;
-    
+                
                 case FEET:
                     itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
             }
@@ -126,15 +126,15 @@ public class ItemTakumiArmor extends ItemArmor {
                 case HEAD:
                     itemStack.addEnchantment(Enchantments.THORNS, 10);
                     break;
-    
+                
                 case CHEST:
                     itemStack.addEnchantment(Enchantments.PROJECTILE_PROTECTION, 10);
                     break;
-    
+                
                 case LEGS:
                     itemStack.addEnchantment(Enchantments.FIRE_PROTECTION, 10);
                     break;
-    
+                
                 case FEET:
                     itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
             }

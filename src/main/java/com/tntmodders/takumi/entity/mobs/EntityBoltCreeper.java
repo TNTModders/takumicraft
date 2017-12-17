@@ -26,9 +26,12 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void setDead() {
         if (!this.world.isRemote && !this.getPowered() && this.getHealth() > 0) {
-            EntityBoltCreeper creeper = new EntityBoltCreeper(this.world); creeper.copyLocationAndAnglesFrom(this); creeper.onStruckByLightning(null);
+            EntityBoltCreeper creeper = new EntityBoltCreeper(this.world);
+            creeper.copyLocationAndAnglesFrom(this);
+            creeper.onStruckByLightning(null);
             this.world.spawnEntity(creeper);
-        } super.setDead();
+        }
+        super.setDead();
     }
     
     @Override

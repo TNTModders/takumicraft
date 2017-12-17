@@ -10,7 +10,8 @@ public class ItemTakumiMonsterBomb extends ItemBlock {
     private final BlockTakumiMonsterBomb monsterBomb;
     
     public ItemTakumiMonsterBomb(BlockTakumiMonsterBomb block) {
-        super(block); this.monsterBomb = block;
+        super(block);
+        this.monsterBomb = block;
     }
     
     @Override

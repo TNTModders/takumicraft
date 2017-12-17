@@ -13,7 +13,8 @@ public class TakumiPotionCore {
     public static final Potion INVERSION = new PotionInversion();
     
     public static void register(IForgeRegistry <Potion> event) {
-        event.register(SUBSIDENCE); event.register(INVERSION);
+        event.register(SUBSIDENCE);
+        event.register(INVERSION);
     }
     
     public static void registerPotionType(IForgeRegistry <PotionType> event) {

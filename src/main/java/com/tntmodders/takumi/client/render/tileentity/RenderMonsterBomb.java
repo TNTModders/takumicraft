@@ -13,9 +13,17 @@ public class RenderMonsterBomb <T extends TileEntityMonsterBomb> extends TileEnt
     
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        GlStateManager.pushMatrix(); GlStateManager.enableDepth(); GlStateManager.depthFunc(515); GlStateManager.depthMask(true);
-        GlStateManager.disableCull(); GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5); GlStateManager.scale(2, 2, 2);
-        GlStateManager.rotate(180, 1, 0, 0); GlStateManager.translate(-0.25, -0.25, -0.25); this.bindTexture(te.location); this.modelBase.render();
+        GlStateManager.pushMatrix();
+        GlStateManager.enableDepth();
+        GlStateManager.depthFunc(515);
+        GlStateManager.depthMask(true);
+        GlStateManager.disableCull();
+        GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
+        GlStateManager.scale(2, 2, 2);
+        GlStateManager.rotate(180, 1, 0, 0);
+        GlStateManager.translate(-0.25, -0.25, -0.25);
+        this.bindTexture(te.location);
+        this.modelBase.render();
         GlStateManager.popMatrix();
     }
     
@@ -25,7 +33,8 @@ public class RenderMonsterBomb <T extends TileEntityMonsterBomb> extends TileEnt
         private final ModelRenderer box;
         
         public ModelMonsterBomb() {
-            this.box = new ModelRenderer(this, 0, 0); this.box.addBox(0, 0, 0, 8, 8, 8);
+            this.box = new ModelRenderer(this, 0, 0);
+            this.box.addBox(0, 0, 0, 8, 8, 8);
         }
         
         public void render() {

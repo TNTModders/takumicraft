@@ -32,8 +32,13 @@ import java.util.List;
 public class BlockTakumiBlock extends BlockContainer {
     
     public BlockTakumiBlock() {
-        super(Material.BARRIER); this.setRegistryName(TakumiCraftCore.MODID, "takumiblock"); this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("takumiblock"); this.setLightLevel(1f); this.setLightOpacity(255); this.setBlockUnbreakable();
+        super(Material.BARRIER);
+        this.setRegistryName(TakumiCraftCore.MODID, "takumiblock");
+        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        this.setUnlocalizedName("takumiblock");
+        this.setLightLevel(1f);
+        this.setLightOpacity(255);
+        this.setBlockUnbreakable();
         this.setResistance(10000000);
     }
     
@@ -51,8 +56,10 @@ public class BlockTakumiBlock extends BlockContainer {
                     worldIn, pos).getActualState(worldIn, pos);
             ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock()
                     .getMetaFromState(blockState));
-            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).state = blockState; return blockState;
-        } return super.getActualState(state, worldIn, pos);
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).state = blockState;
+            return blockState;
+        }
+        return super.getActualState(state, worldIn, pos);
     }
     
     @Override
@@ -67,7 +74,8 @@ public class BlockTakumiBlock extends BlockContainer {
             IBlockState blockState = ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock)
                     worldIn.getTileEntity(pos)).getMeta());
             return blockState.getBoundingBox(worldIn, pos);
-        } return super.getBoundingBox(state, worldIn, pos);
+        }
+        return super.getBoundingBox(state, worldIn, pos);
     }
     
     @Override
@@ -81,8 +89,10 @@ public class BlockTakumiBlock extends BlockContainer {
                 blockState.addCollisionBoxToList(worldIn, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
             } catch (Exception e) {
                 //e.printStackTrace();
-            } return;
-        } super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
+            }
+            return;
+        }
+        super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn, p_185477_7_);
     }
     
     @Override
@@ -92,7 +102,8 @@ public class BlockTakumiBlock extends BlockContainer {
             IBlockState blockState = ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock)
                     worldIn.getTileEntity(pos)).getMeta());
             return blockState.getCollisionBoundingBox(worldIn, pos);
-        } return super.getCollisionBoundingBox(state, worldIn, pos);
+        }
+        return super.getCollisionBoundingBox(state, worldIn, pos);
     }
     
     @Override
@@ -101,7 +112,8 @@ public class BlockTakumiBlock extends BlockContainer {
             IBlockState blockState = ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock)
                     worldIn.getTileEntity(pos)).getMeta());
             return blockState.getSelectedBoundingBox(worldIn, pos);
-        } return super.getSelectedBoundingBox(state, worldIn, pos);
+        }
+        return super.getSelectedBoundingBox(state, worldIn, pos);
     }
     
     @Override
@@ -115,7 +127,8 @@ public class BlockTakumiBlock extends BlockContainer {
             IBlockState state = ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock) worldIn
                     .getTileEntity(pos)).getMeta());
             return state.collisionRayTrace(worldIn, pos, start, end);
-        } return super.collisionRayTrace(blockState, worldIn, pos, start, end);
+        }
+        return super.collisionRayTrace(blockState, worldIn, pos, start, end);
     }
     
     @Override
@@ -133,31 +146,42 @@ public class BlockTakumiBlock extends BlockContainer {
                     .MODEL) {
                 if (!playerIn.isCreative()) {
                     if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null && !worldIn.isRemote) {
-                        EntityItem item = new EntityItem(worldIn); item.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                        EntityItem item = new EntityItem(worldIn);
+                        item.setPosition(pos.getX(), pos.getY(), pos.getZ());
                         item.setItem(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos, ((TileEntityTakumiBlock)
                                 worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock) worldIn.getTileEntity(pos))
                                 .getMeta())));
                         worldIn.spawnEntity(item);
-                    } playerIn.getHeldItem(hand).shrink(1);
+                    }
+                    playerIn.getHeldItem(hand).shrink(1);
                 }
                 
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath(block.getRegistryName().toString());
                 IBlockState blockState = block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, playerIn.getHeldItem(hand).getMetadata
                         (), playerIn, hand);
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(block.getMetaFromState(blockState));
-                worldIn.notifyNeighborsOfStateChange(pos, block, true); this.getActualState(state, worldIn, pos); return true;
+                worldIn.notifyNeighborsOfStateChange(pos, block, true);
+                this.getActualState(state, worldIn, pos);
+                return true;
             }
-        } if (playerIn.getHeldItem(hand).isEmpty() && worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock) {
+        }
+        if (playerIn.getHeldItem(hand).isEmpty() && worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock) {
             if (!playerIn.isCreative()) {
                 if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null && !worldIn.isRemote) {
-                    EntityItem item = new EntityItem(worldIn); item.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                    EntityItem item = new EntityItem(worldIn);
+                    item.setPosition(pos.getX(), pos.getY(), pos.getZ());
                     item.setItem(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos, ((TileEntityTakumiBlock)
                             worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta())));
                     worldIn.spawnEntity(item);
                 }
-            } ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath(""); ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(0);
-            worldIn.notifyNeighborsOfStateChange(pos, this, true); this.getActualState(state, worldIn, pos); return true;
-        } return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+            }
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath("");
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(0);
+            worldIn.notifyNeighborsOfStateChange(pos, this, true);
+            this.getActualState(state, worldIn, pos);
+            return true;
+        }
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
     
     @Override
@@ -167,8 +191,10 @@ public class BlockTakumiBlock extends BlockContainer {
             if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().dropBlockAsItem(worldIn, pos, ((TileEntityTakumiBlock) worldIn
                         .getTileEntity(pos)).getBlock().getStateFromMeta(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta()), 0);
-            } this.dropBlockAsItem(worldIn, pos, this.getDefaultState(), 0);
-        } worldIn.setBlockToAir(pos);
+            }
+            this.dropBlockAsItem(worldIn, pos, this.getDefaultState(), 0);
+        }
+        worldIn.setBlockToAir(pos);
     }
     
     @Override
@@ -178,7 +204,8 @@ public class BlockTakumiBlock extends BlockContainer {
     
     @Override
     public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(world, pos, neighbor); this.getActualState(world.getBlockState(pos), world, pos);
+        super.onNeighborChange(world, pos, neighbor);
+        this.getActualState(world.getBlockState(pos), world, pos);
     }
     
     @Override
@@ -189,14 +216,16 @@ public class BlockTakumiBlock extends BlockContainer {
                     hitY, hitZ, meta, placer, hand);
             ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock()
                     .getMetaFromState(state));
-        } return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
+        }
+        return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
     }
     
     @Override
     public boolean canBeConnectedTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock && ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
             return ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().canBeConnectedTo(worldIn, pos, facing);
-        } return super.canBeConnectedTo(worldIn, pos, facing);
+        }
+        return super.canBeConnectedTo(worldIn, pos, facing);
     }
     
     @Nullable

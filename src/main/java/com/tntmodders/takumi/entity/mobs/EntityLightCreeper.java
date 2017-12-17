@@ -88,7 +88,7 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
         }
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
-
+                
                 if (!this.world.isRemote && this.world.getBlockState(pos).getBlock().getLightValue(this.world.getBlockState(pos)) > 0.5f &&
                         TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);

@@ -27,7 +27,7 @@ public class EntityGorgeousCreeper extends EntityTakumiAbstractCreeper {
                 double x = this.posX + i * 2 - i;
                 double z = this.posZ + i * 2 - i;
                 EntityFireworkRocket firework = new EntityFireworkRocket(world, x, this.world.getHeight((int) x, (int) z), z, item);
-    
+                
                 this.world.spawnEntity(firework);
             }
         }

@@ -57,7 +57,8 @@ public class TakumiBlockCore {
             try {
                 if (field.get(INSTANCE) instanceof Block) {
                     Block block = (Block) field.get(INSTANCE);
-                    registry.register(block); TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName());
+                    registry.register(block);
+                    TakumiCraftCore.LOGGER.info("Registered Block : " + block.getUnlocalizedName());
                     if (block instanceof BlockTakumiMonsterBomb) {
                         BOMB_MAP.put(((BlockTakumiMonsterBomb) block).getEntityClass(), (BlockTakumiMonsterBomb) block);
                     }

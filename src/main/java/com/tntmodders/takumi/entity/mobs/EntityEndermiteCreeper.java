@@ -31,28 +31,34 @@ import java.util.Random;
 public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityEndermiteCreeper(World worldIn) {
-        super(worldIn); this.setSize(0.4F, 0.3F);
+        super(worldIn);
+        this.setSize(0.4F, 0.3F);
     }
     
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(1, new EntityAISwimming(this)); this.tasks.addTask(2, new EntityAICreeperSwell(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false)); this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F)); this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAICreeperSwell(this));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
+        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
-
+    
     @Override
     protected void applyEntityAttributes() {
-        super.applyEntityAttributes(); this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
     }
     
     @Override
     public void onUpdate() {
-        this.renderYawOffset = this.rotationYaw; super.onUpdate();
+        this.renderYawOffset = this.rotationYaw;
+        super.onUpdate();
     }
     
     @Override
@@ -127,7 +133,8 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void setRenderYawOffset(float offset) {
-        this.rotationYaw = offset; super.setRenderYawOffset(offset);
+        this.rotationYaw = offset;
+        super.setRenderYawOffset(offset);
     }
     
     @Override
@@ -173,31 +180,46 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
-                boolean done = false; for (int i = 0; i < 50 && !done; i++) {
+                boolean done = false;
+                for (int i = 0; i < 50 && !done; i++) {
                     done = this.teleportTo((EntityLivingBase) entity);
                 }
             }
-        } return true;
+        }
+        return true;
     }
     
     protected boolean teleportTo(EntityLivingBase entity) {
-        Random rand = new Random(); int distance = 128; double x = entity.posX + (rand.nextDouble() - 0.5D) * distance;
-        double y = entity.posY + rand.nextInt(distance + 1) - distance / 2; double z = entity.posZ + (rand.nextDouble() - 0.5D) * distance;
+        Random rand = new Random();
+        int distance = 128;
+        double x = entity.posX + (rand.nextDouble() - 0.5D) * distance;
+        double y = entity.posY + rand.nextInt(distance + 1) - distance / 2;
+        double z = entity.posZ + (rand.nextDouble() - 0.5D) * distance;
         EnderTeleportEvent event = new EnderTeleportEvent(entity, x, y, z, 0);
-    
-        double d3 = entity.posX; double d4 = entity.posY; double d5 = entity.posZ; entity.posX = event.getTargetX(); entity.posY = event.getTargetY();
-        entity.posZ = event.getTargetZ();
-    
-        int xInt = MathHelper.floor(entity.posX); int yInt = MathHelper.floor(entity.posY); int zInt = MathHelper.floor(entity.posZ);
-    
-        boolean flag = false; if (entity.world.isAirBlock(new BlockPos(xInt, yInt, zInt))) {
         
-            boolean foundGround = false; while (!foundGround && yInt > 0) {
-                BlockPos pos = new BlockPos(xInt, yInt - 1, zInt); IBlockState block = entity.world.getBlockState(pos);
+        double d3 = entity.posX;
+        double d4 = entity.posY;
+        double d5 = entity.posZ;
+        entity.posX = event.getTargetX();
+        entity.posY = event.getTargetY();
+        entity.posZ = event.getTargetZ();
+        
+        int xInt = MathHelper.floor(entity.posX);
+        int yInt = MathHelper.floor(entity.posY);
+        int zInt = MathHelper.floor(entity.posZ);
+        
+        boolean flag = false;
+        if (entity.world.isAirBlock(new BlockPos(xInt, yInt, zInt))) {
+            
+            boolean foundGround = false;
+            while (!foundGround && yInt > 0) {
+                BlockPos pos = new BlockPos(xInt, yInt - 1, zInt);
+                IBlockState block = entity.world.getBlockState(pos);
                 if (block.getMaterial().blocksMovement() && entity.world.isAirBlock(pos.up(20)) && entity.world.isAirBlock(pos.up(21))) {
                     foundGround = true;
                 } else {
-                    --entity.posY; --yInt;
+                    --entity.posY;
+                    --yInt;
                 }
             }
             
@@ -211,21 +233,28 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
         }
         
         if (!flag) {
-            entity.setPosition(d3, d4, d5); return false;
+            entity.setPosition(d3, d4, d5);
+            return false;
         }
         
         entity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
-    
-        short short1 = 128; for (int l = 0; l < short1; ++l) {
-            double d6 = l / (short1 - 1.0D); float f = (rand.nextFloat() - 0.5F) * 0.2F; float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
-            float f2 = (rand.nextFloat() - 0.5F) * 0.2F; double d7 = d3 + (entity.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
+        
+        short short1 = 128;
+        for (int l = 0; l < short1; ++l) {
+            double d6 = l / (short1 - 1.0D);
+            float f = (rand.nextFloat() - 0.5F) * 0.2F;
+            float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
+            float f2 = (rand.nextFloat() - 0.5F) * 0.2F;
+            double d7 = d3 + (entity.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
             double d8 = d4 + (entity.posY - d4) * d6 + rand.nextDouble() * entity.height;
             double d9 = d5 + (entity.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
             entity.world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
         }
         
         entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, entity
-                .getSoundCategory(), 1.0F, 1.0F); entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F); return true;
+                .getSoundCategory(), 1.0F, 1.0F);
+        entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
+        return true;
         
     }
     

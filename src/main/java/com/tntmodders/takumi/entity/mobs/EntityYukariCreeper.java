@@ -26,7 +26,8 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
             if (pos.getY() > this.posY) {
                 this.world.setBlockToAir(pos);
             } else if (this.world.isAirBlock(pos) || this.world.getBlockState(pos).getMaterial().isLiquid()) {
-                IBlockState state = this.world.getBlockState(this.getPosition().down()); if (!(state.getBlock() instanceof BlockTakumiMonsterBomb)) {
+                IBlockState state = this.world.getBlockState(this.getPosition().down());
+                if (!(state.getBlock() instanceof BlockTakumiMonsterBomb)) {
                     this.world.setBlockState(pos, state);
                 }
             }

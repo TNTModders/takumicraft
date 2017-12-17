@@ -66,7 +66,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         if (!this.world.isRemote && this.isConverting()) {
             int i = this.getConversionProgress();
             this.conversionTime -= i;
-
+            
             if (this.conversionTime <= 0) {
                 this.finishConversion();
             }
@@ -114,7 +114,8 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         int i = 1;
         
         if (this.rand.nextFloat() < 0.01F) {
-            int j = 0; MutableBlockPos blockpos$mutableblockpos = new MutableBlockPos();
+            int j = 0;
+            MutableBlockPos blockpos$mutableblockpos = new MutableBlockPos();
             
             for (int k = (int) this.posX - 4; k < (int) this.posX + 4 && j < 14; ++k) {
                 for (int l = (int) this.posY - 4; l < (int) this.posY + 4 && j < 14; ++l) {
@@ -142,29 +143,29 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         entityvillager.setProfession(this.getForgeProfession());
         entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), null, false);
         entityvillager.setLookingForHome();
-
+        
         if (this.isChild()) {
             entityvillager.setGrowingAge(-24000);
         }
-
+        
         this.world.removeEntity(this);
         entityvillager.setNoAI(this.isAIDisabled());
-
+        
         if (this.hasCustomName()) {
             entityvillager.setCustomNameTag(this.getCustomNameTag());
             entityvillager.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
         }
-
+        
         this.world.spawnEntity(entityvillager);
-
+        
         if (this.converstionStarter != null) {
             EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.converstionStarter);
-
+            
             if (entityplayer instanceof EntityPlayerMP) {
                 CriteriaTriggers.CURED_ZOMBIE_VILLAGER.trigger((EntityPlayerMP) entityplayer, null, entityvillager);
             }
         }
-    
+        
         entityvillager.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0));
         this.world.playEvent(null, 1027, new BlockPos((int) this.posX, (int) this.posY, (int) this.posZ), 0);
     }
@@ -244,7 +245,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         compound.setInteger("Profession", this.getProfession());
         compound.setString("ProfessionName", this.getForgeProfession().getRegistryName().toString());
         compound.setInteger("ConversionTime", this.isConverting() ? this.conversionTime : -1);
-    
+        
         if (this.converstionStarter != null) {
             compound.setUniqueId("ConversionPlayer", this.converstionStarter);
         }
@@ -262,7 +263,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
             if (p == null) { p = VillagerRegistry.FARMER; }
             this.setForgeProfession(p);
         }
-    
+        
         if (compound.hasKey("ConversionTime", 99) && compound.getInteger("ConversionTime") > -1) {
             this.startConverting(compound.hasUniqueId("ConversionPlayer") ? compound.getUniqueId("ConversionPlayer") :
                                  null, compound.getInteger("ConversionTime"));
@@ -324,7 +325,7 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     
     @Override
     protected void setArmors() {
-    
+
     }
     
     @Override

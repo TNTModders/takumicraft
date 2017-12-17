@@ -228,7 +228,7 @@ public class TakumiUtils {
             if (!fire) {
                 explosion.clearAffectedBlockPositions();
             }
-    
+            
             for (EntityPlayer entityplayer : world.playerEntities) {
                 if (entityplayer.getDistanceSq(x, y, z) < 4096.0D) {
                     ((EntityPlayerMP) entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z, power, explosion.getAffectedBlockPositions

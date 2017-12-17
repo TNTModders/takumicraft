@@ -39,14 +39,14 @@ public abstract class AbstractPacket implements IMessage, IMessageHandler <Abstr
                     reply = ((MessageToClient) message).handleClientSide(player);
                 }
                 break;
-    
+            
             case SERVER:
                 if (message instanceof MessageToServer) {
                     player = ((NetHandlerPlayServer) ctx.netHandler).player;
                     reply = ((MessageToServer) message).handleServerSide(player);
                 }
                 break;
-    
+            
             default:
         }
         return reply;

@@ -26,32 +26,39 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(this.getDropItem(), this.rand.nextInt(3));
-        } super.onDeath(source);
+        }
+        super.onDeath(source);
     }
     
     @Override
     protected void despawnEntity() {
-        Result result; if (this.isNoDespawnRequired()) {
+        Result result;
+        if (this.isNoDespawnRequired()) {
             this.idleTime = 0;
         } else if ((this.idleTime & 0x1F) == 0x1F && (result = ForgeEventFactory.canEntityDespawn(this)) != Result.DEFAULT) {
             if (result == Result.DENY) {
                 this.idleTime = 0;
             } else {
-                this.setHealth(0); this.setDead();
+                this.setHealth(0);
+                this.setDead();
             }
         } else {
             Entity entity = this.world.getClosestPlayerToEntity(this, -1.0D);
             
             if (entity != null) {
-                double d0 = entity.posX - this.posX; double d1 = entity.posY - this.posY; double d2 = entity.posZ - this.posZ;
+                double d0 = entity.posX - this.posX;
+                double d1 = entity.posY - this.posY;
+                double d2 = entity.posZ - this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
                 
                 if (this.canDespawn() && d3 > 16384.0D) {
-                    this.setHealth(0); this.setDead();
+                    this.setHealth(0);
+                    this.setDead();
                 }
                 
                 if (this.idleTime > 600 && this.rand.nextInt(800) == 0 && d3 > 1024.0D && this.canDespawn()) {
-                    this.setHealth(0); this.setDead();
+                    this.setHealth(0);
+                    this.setDead();
                 } else if (d3 < 1024.0D) {
                     this.idleTime = 0;
                 }
@@ -68,7 +75,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
             return;
-        } if (damageSrc == DamageSource.IN_WALL && this.takumiRank().getLevel() >= 3) {
+        }
+        if (damageSrc == DamageSource.IN_WALL && this.takumiRank().getLevel() >= 3) {
             return;
         }
        /* if ((this.takumiRank().getLevel() > 2 && damageSrc.isExplosion()) ||

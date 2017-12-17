@@ -23,6 +23,29 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
     }
     
     @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, this.getPowered() ? 2 : 0));
+            }
+        }
+        if (!this.world.isRemote) {
+            for (int i = 0; i < 3 * this.world.getDifficulty().getDifficultyId(); i++) {
+                EntityHusk husk = new EntityHusk(this.world);
+                husk.copyLocationAndAnglesFrom(this);
+                this.world.spawnEntity(husk);
+            }
+        }
+        return true;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderZombieCreeper(manager);
+    }
+    
+    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
@@ -50,29 +73,6 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
     @Override
     public int getRegisterID() {
         return 203;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, this.getPowered() ? 2 : 0));
-            }
-        }
-        if (!this.world.isRemote) {
-            for (int i = 0; i < 3 * this.world.getDifficulty().getDifficultyId(); i++) {
-                EntityHusk husk = new EntityHusk(this.world);
-                husk.copyLocationAndAnglesFrom(this);
-                this.world.spawnEntity(husk);
-            }
-        }
-        return true;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderZombieCreeper(manager);
     }
     
     @Override

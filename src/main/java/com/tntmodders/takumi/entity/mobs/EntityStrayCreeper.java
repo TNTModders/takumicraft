@@ -58,6 +58,26 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     }
     
     @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
+            PotionEffect effect = new PotionEffect(PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion
+                    (), 400);
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(effect);
+                }
+            }
+        }
+        return true;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderSkeletonCreeper <>(manager);
+    }
+    
+    @Override
     protected SoundEvent getStepSound() {
         return SoundEvents.ENTITY_STRAY_STEP;
     }
@@ -127,25 +147,5 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     @Override
     public int getRegisterID() {
         return 204;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
-            PotionEffect effect = new PotionEffect(PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion
-                    (), 400);
-            for (Entity entity : event.getAffectedEntities()) {
-                if (entity instanceof EntityLivingBase) {
-                    ((EntityLivingBase) entity).addPotionEffect(effect);
-                }
-            }
-        }
-        return true;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderSkeletonCreeper <>(manager);
     }
 }

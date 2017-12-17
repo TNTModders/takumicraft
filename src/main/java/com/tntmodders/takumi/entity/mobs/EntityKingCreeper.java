@@ -272,7 +272,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 Entity var1 = this.getAttackTarget();
                 if (var1 != null) {
                     for (int t = -18; t < 18; t++) {
-    
+                        
                         float f1 = MathHelper.sqrt(this.getDistanceToEntity(var1)) * 0.5F;
                         double d0 = var1.posX - this.posX;
                         double d1 = var1.getEntityBoundingBox().minY + var1.height / 2.0F - (this.posY + this.height / 2.0F);
@@ -282,7 +282,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         entityLargefireball.rotationYaw += t * 10;
                         entityLargefireball.posY = this.posY + this.height / 2.0F + 0.5D;
                         entityLargefireball.explosionPower = 2;
-    
+                        
                         this.world.spawnEntity(entityLargefireball);
                     }
                 } else if (!this.world.isRemote) {
@@ -402,13 +402,17 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
-            this.lastSource = damageSrc; if (damageSrc.isProjectile() && damageAmount > 2.5f) {
+            this.lastSource = damageSrc;
+            if (damageSrc.isProjectile() && damageAmount > 2.5f) {
                 damageAmount = 2.5f;
             } else if (damageAmount > 20) {
                 damageAmount = 20 + (damageAmount - 20) / 10;
-            } if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
+            }
+            if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
                 this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
-            } this.ignite(); super.damageEntity(damageSrc, damageAmount);
+            }
+            this.ignite();
+            super.damageEntity(damageSrc, damageAmount);
         }
     }
     
@@ -439,7 +443,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void setCustomNameTag(String name) {
-        super.setCustomNameTag(name); this.bossInfo.setName(this.getDisplayName());
+        super.setCustomNameTag(name);
+        this.bossInfo.setName(this.getDisplayName());
     }
     
     @Override
@@ -449,11 +454,13 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
-        super.addTrackingPlayer(player); this.bossInfo.addPlayer(player);
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
     }
     
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
-        super.removeTrackingPlayer(player); this.bossInfo.removePlayer(player);
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
     }
 }

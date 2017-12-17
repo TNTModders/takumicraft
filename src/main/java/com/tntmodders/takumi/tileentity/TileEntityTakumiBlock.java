@@ -15,18 +15,24 @@ public class TileEntityTakumiBlock extends TileEntity {
     
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound); this.setPath(compound.getString("location")); this.setMeta(compound.getInteger("meta"));
+        super.readFromNBT(compound);
+        this.setPath(compound.getString("location"));
+        this.setMeta(compound.getInteger("meta"));
     }
     
     public void setPath(String path) {
-        this.location = path; this.block = Block.getBlockFromName(this.location);
+        this.location = path;
+        this.block = Block.getBlockFromName(this.location);
     }
     
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound); if (this.location != null) {
+        super.writeToNBT(compound);
+        if (this.location != null) {
             compound.setString("location", this.location);
-        } compound.setInteger("meta", this.meta); return compound;
+        }
+        compound.setInteger("meta", this.meta);
+        return compound;
     }
     
     @Override

@@ -17,11 +17,12 @@ public class EntityTreeCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 6 : 3, false); WorldGenAbstractTree tree =
-                    this.getPowered() ?
-                    new TakumiWorldGenBigTree(true, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore.CREEPER_LEAVES.getDefaultState()) :
-                    new TakumiWorldGenTrees(true, false, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore.CREEPER_LEAVES
-                            .getDefaultState());
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 6 : 3, false);
+            WorldGenAbstractTree tree = this.getPowered() ?
+                                        new TakumiWorldGenBigTree(true, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore
+                                                .CREEPER_LEAVES.getDefaultState()) :
+                                        new TakumiWorldGenTrees(true, false, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore
+                                                .CREEPER_LEAVES.getDefaultState());
             tree.generate(this.world, this.rand, new BlockPos(this));
         }
     }

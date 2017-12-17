@@ -63,9 +63,15 @@ public class EntityLostCreeper extends EntityTakumiAbstractCreeper {
                     EntityEquipmentSlot slot = EntityEquipmentSlot.MAINHAND;
                     switch (this.rand.nextInt(4)) {
                         case 0:
-                            slot = EntityEquipmentSlot.HEAD; break; case 1:
-                            slot = EntityEquipmentSlot.CHEST; break; case 2:
-                            slot = EntityEquipmentSlot.LEGS; break; case 3:
+                            slot = EntityEquipmentSlot.HEAD;
+                            break;
+                        case 1:
+                            slot = EntityEquipmentSlot.CHEST;
+                            break;
+                        case 2:
+                            slot = EntityEquipmentSlot.LEGS;
+                            break;
+                        case 3:
                             slot = EntityEquipmentSlot.FEET;
                             break;
                     }

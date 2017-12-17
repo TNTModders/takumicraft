@@ -75,7 +75,7 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
             GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_SOURCE0_ALPHA, OpenGlHelper.GL_PREVIOUS);
             GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_OPERAND0_ALPHA, 770);
             this.brightnessBuffer.position(0);
-
+            
             float f1 = (i >> 24 & 255) / 255.0F;
             float f2 = (i >> 16 & 255) / 255.0F;
             float f3 = (i >> 8 & 255) / 255.0F;
@@ -84,8 +84,8 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
             this.brightnessBuffer.put(f3);
             this.brightnessBuffer.put(f4);
             this.brightnessBuffer.put(1.0F - f1);
-    
-    
+            
+            
             this.brightnessBuffer.flip();
             GlStateManager.glTexEnv(8960, 8705, this.brightnessBuffer);
             GlStateManager.setActiveTexture(OpenGlHelper.GL_TEXTURE2);
@@ -171,7 +171,8 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
         }
         
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
+                scale) {
         }
     }
 }

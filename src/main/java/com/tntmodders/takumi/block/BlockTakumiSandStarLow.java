@@ -103,7 +103,7 @@ public class BlockTakumiSandStarLow extends Block {
         for (EnumFacing enumfacing : EnumFacing.values()) {
             if (enumfacing != EnumFacing.DOWN) {
                 BlockPos blockpos = pos.offset(enumfacing);
-    
+                
                 if (worldIn.getBlockState(blockpos).getMaterial() == Material.WATER) {
                     flag = true;
                     break;

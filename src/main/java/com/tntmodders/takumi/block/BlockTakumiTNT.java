@@ -14,7 +14,9 @@ import net.minecraft.world.World;
 public class BlockTakumiTNT extends BlockTNT {
     
     public BlockTakumiTNT() {
-        super(); this.setRegistryName(TakumiCraftCore.MODID, "takumitnt"); this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        super();
+        this.setRegistryName(TakumiCraftCore.MODID, "takumitnt");
+        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumitnt");
     }
     

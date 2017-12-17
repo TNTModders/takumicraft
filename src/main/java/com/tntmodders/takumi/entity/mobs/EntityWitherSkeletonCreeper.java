@@ -62,10 +62,10 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-
+        
         if (cause.getTrueSource() instanceof EntityCreeper) {
             EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
-
+            
             if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
                 entitycreeper.incrementDroppedSkulls();
                 this.entityDropItem(new ItemStack(Items.SKULL, 1, 1), 0.0F);
@@ -79,7 +79,8 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
             if (entity instanceof EntityLivingBase) {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
             }
-        } return true;
+        }
+        return true;
     }
     
     @Override
@@ -156,7 +157,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
             if (entityIn instanceof EntityLivingBase) {
                 ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
             }
-    
+            
             return true;
         }
     }

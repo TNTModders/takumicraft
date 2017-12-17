@@ -45,24 +45,25 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
      */
     void generateLeafNodeList() {
         this.height = (int) ((double) this.heightLimit * this.heightAttenuation);
-    
+        
         if (this.height >= this.heightLimit) {
             this.height = this.heightLimit - 1;
         }
-    
+        
         int i = (int) (1.382D + Math.pow(this.leafDensity * (double) this.heightLimit / 13.0D, 2.0D));
-    
+        
         if (i < 1) {
             i = 1;
         }
-    
+        
         int j = this.basePos.getY() + this.height;
-        int k = this.heightLimit - this.leafDistanceLimit; this.foliageCoords = Lists.newArrayList();
+        int k = this.heightLimit - this.leafDistanceLimit;
+        this.foliageCoords = Lists.newArrayList();
         this.foliageCoords.add(new FoliageCoordinates(this.basePos.up(k), j));
         
         for (; k >= 0; --k) {
             float f = this.layerSize(k);
-    
+            
             if (f >= 0.0F) {
                 for (int l = 0; l < i; ++l) {
                     double d0 = this.scaleWidth * (double) f * ((double) this.rand.nextFloat() + 0.328D);
@@ -71,14 +72,14 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
                     double d3 = d0 * Math.cos(d1) + 0.5D;
                     BlockPos blockpos = this.basePos.add(d2, (double) (k - 1), d3);
                     BlockPos blockpos1 = blockpos.up(this.leafDistanceLimit);
-    
+                    
                     if (this.checkBlockLine(blockpos, blockpos1) == -1) {
                         int i1 = this.basePos.getX() - blockpos.getX();
                         int j1 = this.basePos.getZ() - blockpos.getZ();
                         double d4 = (double) blockpos.getY() - Math.sqrt((double) (i1 * i1 + j1 * j1)) * this.branchSlope;
                         int k1 = d4 > (double) j ? j : (int) d4;
                         BlockPos blockpos2 = new BlockPos(this.basePos.getX(), k1, this.basePos.getZ());
-        
+                        
                         if (this.checkBlockLine(blockpos2, blockpos) == -1) {
                             this.foliageCoords.add(new FoliageCoordinates(blockpos, blockpos2.getY()));
                         }
@@ -98,13 +99,13 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
             float f = (float) this.heightLimit / 2.0F;
             float f1 = f - (float) y;
             float f2 = MathHelper.sqrt(f * f - f1 * f1);
-    
+            
             if (f1 == 0.0F) {
                 f2 = f;
             } else if (Math.abs(f1) >= f) {
                 return 0.0F;
             }
-    
+            
             return f2 * 0.5F;
         }
     }
@@ -114,8 +115,11 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
      * (in blocks) before a non-air, non-leaf block is encountered and/or the end is encountered.
      */
     int checkBlockLine(BlockPos posOne, BlockPos posTwo) {
-        BlockPos blockpos = posTwo.add(-posOne.getX(), -posOne.getY(), -posOne.getZ()); int i = this.getGreatestDistance(blockpos);
-        float f = (float) blockpos.getX() / (float) i; float f1 = (float) blockpos.getY() / (float) i; float f2 = (float) blockpos.getZ() / (float) i;
+        BlockPos blockpos = posTwo.add(-posOne.getX(), -posOne.getY(), -posOne.getZ());
+        int i = this.getGreatestDistance(blockpos);
+        float f = (float) blockpos.getX() / (float) i;
+        float f1 = (float) blockpos.getY() / (float) i;
+        float f2 = (float) blockpos.getZ() / (float) i;
         
         if (i == 0) {
             return -1;
@@ -156,7 +160,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         int i = MathHelper.abs(posIn.getX());
         int j = MathHelper.abs(posIn.getY());
         int k = MathHelper.abs(posIn.getZ());
-    
+        
         if (k > i && k > j) {
             return k;
         } else {
@@ -171,7 +175,8 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
             for (int k = -i; k <= i; ++k) {
                 if (Math.pow((double) Math.abs(j) + 0.5D, 2.0D) + Math.pow((double) Math.abs(k) + 0.5D, 2.0D) <= (double) (p_181631_2_ *
                         p_181631_2_)) {
-                    BlockPos blockpos = pos.add(j, 0, k); IBlockState state = this.world.getBlockState(blockpos);
+                    BlockPos blockpos = pos.add(j, 0, k);
+                    IBlockState state = this.world.getBlockState(blockpos);
                     
                     if (state.getBlock().isAir(state, world, blockpos) || state.getBlock().isLeaves(state, world, blockpos)) {
                         this.setBlockAndNotifyAdequately(this.world, blockpos, p_181631_3_);
@@ -199,7 +204,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         BlockPos blockpos1 = this.basePos.up(this.height);
         Block block = this.log.getBlock();
         this.limb(blockpos, blockpos1, block);
-    
+        
         if (this.trunkSize == 2) {
             this.limb(blockpos.east(), blockpos1.east(), block);
             this.limb(blockpos.east().south(), blockpos1.east().south(), block);
@@ -216,7 +221,9 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
     
     void limb(BlockPos p_175937_1_, BlockPos p_175937_2_, Block p_175937_3_) {
         BlockPos blockpos = p_175937_2_.add(-p_175937_1_.getX(), -p_175937_1_.getY(), -p_175937_1_.getZ());
-        int i = this.getGreatestDistance(blockpos); float f = (float) blockpos.getX() / (float) i; float f1 = (float) blockpos.getY() / (float) i;
+        int i = this.getGreatestDistance(blockpos);
+        float f = (float) blockpos.getX() / (float) i;
+        float f1 = (float) blockpos.getY() / (float) i;
         float f2 = (float) blockpos.getZ() / (float) i;
         
         for (int j = 0; j <= i; ++j) {
@@ -232,8 +239,10 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
     }
     
     private EnumAxis getLogAxis(BlockPos p_175938_1_, BlockPos p_175938_2_) {
-        EnumAxis blocklog$enumaxis = EnumAxis.Y; int i = Math.abs(p_175938_2_.getX() - p_175938_1_.getX());
-        int j = Math.abs(p_175938_2_.getZ() - p_175938_1_.getZ()); int k = Math.max(i, j);
+        EnumAxis blocklog$enumaxis = EnumAxis.Y;
+        int i = Math.abs(p_175938_2_.getX() - p_175938_1_.getX());
+        int j = Math.abs(p_175938_2_.getZ() - p_175938_1_.getZ());
+        int k = Math.max(i, j);
         
         if (k > 0) {
             if (i == k) {
@@ -253,7 +262,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         for (FoliageCoordinates worldgenbigtree$foliagecoordinates : this.foliageCoords) {
             int i = worldgenbigtree$foliagecoordinates.getBranchBase();
             BlockPos blockpos = new BlockPos(this.basePos.getX(), i, this.basePos.getZ());
-    
+            
             if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY())) {
                 this.limb(blockpos, worldgenbigtree$foliagecoordinates, this.log.getBlock());
             }
@@ -295,9 +304,9 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
     private boolean validTreeLocation() {
         BlockPos down = this.basePos.down();
         IBlockState state = this.world.getBlockState(down);
-    
+        
         int i = this.checkBlockLine(this.basePos, this.basePos.up(this.heightLimit - 1));
-    
+        
         if (i == -1) {
             return true;
         } else if (i < 6) {
@@ -306,7 +315,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
             this.heightLimit = i;
             return true;
         }
-    
+        
     }
     
     static class FoliageCoordinates extends BlockPos {

@@ -239,7 +239,7 @@ public class ModelHorseCreeper extends ModelBase {
         boolean flag3 = false;
         float f7 = 1.0f;
         boolean flag4 = p_78088_1_.isBeingRidden();
-    
+        
         this.backLeftLeg.render(p_78088_7_);
         this.backLeftShin.render(p_78088_7_);
         this.backLeftHoof.render(p_78088_7_);
@@ -252,19 +252,19 @@ public class ModelHorseCreeper extends ModelBase {
         this.frontRightLeg.render(p_78088_7_);
         this.frontRightShin.render(p_78088_7_);
         this.frontRightHoof.render(p_78088_7_);
-    
+        
         this.body.render(p_78088_7_);
         this.tailBase.render(p_78088_7_);
         this.tailMiddle.render(p_78088_7_);
         this.tailTip.render(p_78088_7_);
         this.neck.render(p_78088_7_);
         this.mane.render(p_78088_7_);
-    
+        
         this.horseLeftEar.render(p_78088_7_);
         this.horseRightEar.render(p_78088_7_);
-    
+        
         this.head.render(p_78088_7_);
-    
+        
     }
     
     /**
@@ -279,19 +279,19 @@ public class ModelHorseCreeper extends ModelBase {
         float f5 = p_78086_1_.prevRotationPitch + (p_78086_1_.rotationPitch - p_78086_1_.prevRotationPitch) * p_78086_4_;
         float f6 = f4 - f3;
         float f7 = f5 / (180F / (float) Math.PI);
-    
+        
         if (f6 > 20.0F) {
             f6 = 20.0F;
         }
-    
+        
         if (f6 < -20.0F) {
             f6 = -20.0F;
         }
-    
+        
         if (p_78086_3_ > 0.2F) {
             f7 += MathHelper.cos(p_78086_2_ * 0.4F) * 0.15F * p_78086_3_;
         }
-    
+        
         //EntityHorse entityhorse = (EntityHorse)p_78086_1_;
         float f8 = 0f;
         float f9 = 0f;
@@ -403,7 +403,7 @@ public class ModelHorseCreeper extends ModelBase {
         f15 = -1.3089F + p_78086_3_ * 1.5F;
         this.tailBase.rotateAngleY = MathHelper.cos(f12 * 0.7F);
         f15 = 0.0F;
-    
+        
         this.tailMiddle.rotateAngleY = this.tailBase.rotateAngleY;
         this.tailTip.rotateAngleY = this.tailBase.rotateAngleY;
         this.tailMiddle.rotationPointY = this.tailBase.rotationPointY;
@@ -423,11 +423,11 @@ public class ModelHorseCreeper extends ModelBase {
         float f4;
         for (f3 = p_110683_2_ - p_110683_1_; f3 < -180.0F; f3 += 360.0F) {
         }
-    
+        
         while (f3 >= 180.0F) {
             f3 -= 360.0F;
         }
-    
+        
         return p_110683_1_ + p_110683_3_ * f3;
     }
 }

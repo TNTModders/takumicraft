@@ -17,7 +17,8 @@ public class RenderInversionCreeper <T extends EntityTakumiAbstractCreeper> exte
     }
     
     public RenderInversionCreeper(RenderManager renderManagerIn, ModelBase model) {
-        super(renderManagerIn, model, 0.5F); this.addLayer(new LayerTakumiCharge(this));
+        super(renderManagerIn, model, 0.5F);
+        this.addLayer(new LayerTakumiCharge(this));
     }
     
     /**
@@ -30,7 +31,9 @@ public class RenderInversionCreeper <T extends EntityTakumiAbstractCreeper> exte
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
-            int i = (int) (f * 0.2F * 255.0F); i = MathHelper.clamp(i, 0, 255); return i << 24 | 822083583;
+            int i = (int) (f * 0.2F * 255.0F);
+            i = MathHelper.clamp(i, 0, 255);
+            return i << 24 | 822083583;
         }
     }
     
@@ -39,10 +42,19 @@ public class RenderInversionCreeper <T extends EntityTakumiAbstractCreeper> exte
      */
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
-        GlStateManager.rotate(180, 1, 0, 0); GlStateManager.translate(0, 1.65, 0); if (entitylivingbaseIn.getSizeAmp() != 1) {
-            double d = entitylivingbaseIn.getSizeAmp(); GlStateManager.scale(d, d, d);
-        } float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime); float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F); f = f * f; f = f * f; float f2 = (1.0F + f * 0.4F) * f1; float f3 = (1.0F + f * 0.1F) / f1;
+        GlStateManager.rotate(180, 1, 0, 0);
+        GlStateManager.translate(0, 1.65, 0);
+        if (entitylivingbaseIn.getSizeAmp() != 1) {
+            double d = entitylivingbaseIn.getSizeAmp();
+            GlStateManager.scale(d, d, d);
+        }
+        float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
+        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
+        f = MathHelper.clamp(f, 0.0F, 1.0F);
+        f = f * f;
+        f = f * f;
+        float f2 = (1.0F + f * 0.4F) * f1;
+        float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
     

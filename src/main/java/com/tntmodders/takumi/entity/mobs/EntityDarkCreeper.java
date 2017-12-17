@@ -99,8 +99,10 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         this.tasks.addTask(1, new EntityAICreeperSwell(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F)); this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(10, new AIPlaceBlock(this)); this.tasks.addTask(11, new AITakeBlock(this));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(10, new AIPlaceBlock(this));
+        this.tasks.addTask(11, new AITakeBlock(this));
         this.targetTasks.addTask(1, new AIFindPlayer(this));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget <>(this, EntityEndermite.class, 10, true, false,
@@ -130,7 +132,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         IBlockState iblockstate = this.getHeldBlockState();
-    
+        
         if (iblockstate != null) {
             compound.setShort("carried", (short) Block.getIdFromBlock(iblockstate.getBlock()));
             compound.setShort("carriedData", (short) iblockstate.getBlock().getMetaFromState(iblockstate));
@@ -145,17 +147,17 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         IBlockState iblockstate;
-    
+        
         if (compound.hasKey("carried", 8)) {
             iblockstate = Block.getBlockFromName(compound.getString("carried")).getStateFromMeta(compound.getShort("carriedData") & 65535);
         } else {
             iblockstate = Block.getBlockById(compound.getShort("carried")).getStateFromMeta(compound.getShort("carriedData") & 65535);
         }
-    
+        
         if (iblockstate == null || iblockstate.getBlock() == null || iblockstate.getMaterial() == Material.AIR) {
             iblockstate = null;
         }
-    
+        
         this.setHeldBlockState(iblockstate);
     }
     
@@ -206,7 +208,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     public void playEndermanSound() {
         if (this.ticksExisted >= this.lastCreepySound + 400) {
             this.lastCreepySound = this.ticksExisted;
-    
+            
             if (!this.isSilent()) {
                 this.world.playSound(this.posX, this.posY + this.getEyeHeight(), this.posZ, SoundEvents.ENTITY_ENDERMEN_STARE, this
                         .getSoundCategory(), 2.5F, 1.0F, false);
@@ -224,7 +226,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
      */
     private boolean shouldAttackPlayer(EntityPlayer player) {
         ItemStack itemstack = player.inventory.armorInventory.get(3);
-    
+        
         if (itemstack.getItem() == Item.getItemFromBlock(Blocks.PUMPKIN)) {
             return false;
         } else {
@@ -251,7 +253,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
                         0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
             }
         }
-    
+        
         this.isJumping = false;
         super.onLivingUpdate();
     }
@@ -269,15 +271,15 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
                     return true;
                 }
             }
-    
+            
             return false;
         } else {
             boolean flag = super.attackEntityFrom(source, amount);
-    
+            
             if (source.isUnblockable() && this.rand.nextInt(10) != 0) {
                 this.teleportRandomly();
             }
-    
+            
             return flag;
         }
     }
@@ -313,13 +315,13 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
         if (MinecraftForge.EVENT_BUS.post(event)) { return false; }
         boolean flag = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ());
-    
+        
         if (flag) {
             this.world.playSound(null, this.prevPosX, this.prevPosY, this.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, this.getSoundCategory(),
                     1.0F, 1.0F);
             this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         }
-    
+        
         return flag;
     }
     
@@ -369,9 +371,12 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
         
         if (entitylivingbaseIn == null) {
-            this.targetChangeTime = 0; this.dataManager.set(SCREAMING, Boolean.FALSE); iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
+            this.targetChangeTime = 0;
+            this.dataManager.set(SCREAMING, Boolean.FALSE);
+            iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
         } else {
-            this.targetChangeTime = this.ticksExisted; this.dataManager.set(SCREAMING, Boolean.TRUE);
+            this.targetChangeTime = this.ticksExisted;
+            this.dataManager.set(SCREAMING, Boolean.TRUE);
             
             if (!iattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
                 iattributeinstance.applyModifier(ATTACKING_SPEED_BOOST);
@@ -400,7 +405,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
             float f = this.getBrightness();
             
             if (f > 0.5F && this.world.canSeeSky(new BlockPos(this)) && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
-                this.setAttackTarget(null); this.teleportRandomly();
+                this.setAttackTarget(null);
+                this.teleportRandomly();
             }
         }
         
@@ -412,7 +418,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier) {
-        super.dropEquipment(wasRecentlyHit, lootingModifier); IBlockState iblockstate = this.getHeldBlockState();
+        super.dropEquipment(wasRecentlyHit, lootingModifier);
+        IBlockState iblockstate = this.getHeldBlockState();
         
         if (iblockstate != null) {
             Item item = Item.getItemFromBlock(iblockstate.getBlock());
@@ -425,26 +432,43 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
-                boolean done = false; for (int i = 0; i < 50 && !done; i++) {
+                boolean done = false;
+                for (int i = 0; i < 50 && !done; i++) {
                     done = this.teleportTo((EntityLivingBase) entity);
-                } Potion potion = MobEffects.BLINDNESS; switch (this.rand.nextInt(6)) {
+                }
+                Potion potion = MobEffects.BLINDNESS;
+                switch (this.rand.nextInt(6)) {
                     case 0:
-                        break; case 1:
-                        potion = MobEffects.NAUSEA; break; case 2:
-                        potion = MobEffects.SLOWNESS; break; case 3:
-                        potion = MobEffects.HUNGER; break; case 4:
-                        potion = MobEffects.UNLUCK; break; case 5:
+                        break;
+                    case 1:
+                        potion = MobEffects.NAUSEA;
+                        break;
+                    case 2:
+                        potion = MobEffects.SLOWNESS;
+                        break;
+                    case 3:
+                        potion = MobEffects.HUNGER;
+                        break;
+                    case 4:
+                        potion = MobEffects.UNLUCK;
+                        break;
+                    case 5:
                         if (this.rand.nextBoolean() && this.getPowered()) {
                             potion = MobEffects.LEVITATION;
-                        } break;
-                } EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
-                entityareaeffectcloud.setRadius(5F); entityareaeffectcloud.setRadiusOnUse(-0.5F); entityareaeffectcloud.setWaitTime(10);
+                        }
+                        break;
+                }
+                EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
+                entityareaeffectcloud.setRadius(5F);
+                entityareaeffectcloud.setRadiusOnUse(-0.5F);
+                entityareaeffectcloud.setWaitTime(10);
                 entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration());
                 entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / entityareaeffectcloud.getDuration());
                 entityareaeffectcloud.addEffect(new PotionEffect(potion, potion == MobEffects.LEVITATION ? 100 : 1200, this.getPowered() ? 1 : 0));
                 this.world.spawnEntity(entityareaeffectcloud);
             }
-        } return true;
+        }
+        return true;
     }
     
     protected boolean teleportTo(EntityLivingBase entity) {
@@ -468,7 +492,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         
         boolean flag = false;
         if (entity.world.isAirBlock(new BlockPos(xInt, yInt, zInt))) {
-    
+            
             boolean foundGround = false;
             while (!foundGround && yInt > 0) {
                 IBlockState block = entity.world.getBlockState(new BlockPos(xInt, yInt - 1, zInt));
@@ -479,10 +503,11 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
                     --yInt;
                 }
             }
-    
+            
             if (foundGround) {
                 entity.setPosition(entity.posX, entity.posY, entity.posZ);
-                if (entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && !entity.world.containsAnyLiquid(entity.getEntityBoundingBox())) {
+                if (entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && !entity.world.containsAnyLiquid(entity
+                        .getEntityBoundingBox())) {
                     flag = true;
                 }
             }
@@ -506,8 +531,9 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
             double d9 = d5 + (entity.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
             entity.world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
         }
-    
-        entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, entity.getSoundCategory(), 1.0F, 1.0F);
+        
+        entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, entity
+                .getSoundCategory(), 1.0F, 1.0F);
         entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         return true;
         
@@ -544,7 +570,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public boolean shouldExecute() {
             double d0 = this.getTargetDistance();
-            this.player = this.enderman.world.getNearestAttackablePlayer(this.enderman.posX, this.enderman.posY, this.enderman.posZ, d0, d0, null, p_apply_1_ -> p_apply_1_ != null && AIFindPlayer.this.enderman.shouldAttackPlayer(p_apply_1_));
+            this.player = this.enderman.world.getNearestAttackablePlayer(this.enderman.posX, this.enderman.posY, this.enderman.posZ, d0, d0, null,
+                    p_apply_1_ -> p_apply_1_ != null && AIFindPlayer.this.enderman.shouldAttackPlayer(p_apply_1_));
             return this.player != null;
         }
         
@@ -602,7 +629,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
                         }
                         
                         this.teleportTime = 0;
-                    } else if (this.targetEntity.getDistanceSqToEntity(this.enderman) > 256.0D && this.teleportTime++ >= 30 && this.enderman.teleportToEntity(this.targetEntity)) {
+                    } else if (this.targetEntity.getDistanceSqToEntity(this.enderman) > 256.0D && this.teleportTime++ >= 30 && this.enderman
+                            .teleportToEntity(this.targetEntity)) {
                         this.teleportTime = 0;
                     }
                 }
@@ -625,7 +653,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
          */
         @Override
         public boolean shouldExecute() {
-            return this.enderman.getHeldBlockState() != null && this.enderman.world.getGameRules().getBoolean("mobGriefing") && this.enderman.getRNG().nextInt(2000) == 0;
+            return this.enderman.getHeldBlockState() != null && this.enderman.world.getGameRules().getBoolean("mobGriefing") && this.enderman
+                    .getRNG().nextInt(2000) == 0;
         }
         
         /**
@@ -642,7 +671,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
             IBlockState iblockstate = world.getBlockState(blockpos);
             IBlockState iblockstate1 = world.getBlockState(blockpos.down());
             IBlockState iblockstate2 = this.enderman.getHeldBlockState();
-    
+            
             if (iblockstate2 != null && this.canPlaceBlock(world, blockpos, iblockstate2.getBlock(), iblockstate, iblockstate1)) {
                 world.setBlockState(blockpos, iblockstate2, 3);
                 this.enderman.setHeldBlockState(null);
@@ -650,18 +679,19 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         }
         
         private boolean canPlaceBlock(World p_188518_1_, BlockPos p_188518_2_, Block p_188518_3_, IBlockState p_188518_4_, IBlockState p_188518_5_) {
-            return p_188518_3_.canPlaceBlockAt(p_188518_1_, p_188518_2_) && p_188518_4_.getMaterial() == Material.AIR && p_188518_5_.getMaterial() != Material.AIR && p_188518_5_.isFullCube();
+            return p_188518_3_.canPlaceBlockAt(p_188518_1_, p_188518_2_) && p_188518_4_.getMaterial() == Material.AIR && p_188518_5_.getMaterial()
+                    != Material.AIR && p_188518_5_.isFullCube();
         }
     }
     
     static class AITakeBlock extends EntityAIBase {
-    
+        
         private final EntityDarkCreeper enderman;
-    
+        
         public AITakeBlock(EntityDarkCreeper p_i45841_1_) {
             this.enderman = p_i45841_1_;
         }
-    
+        
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
@@ -670,7 +700,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
             return this.enderman.getHeldBlockState() == null && this.enderman.world.getGameRules().getBoolean("mobGriefing") && this.enderman
                     .getRNG().nextInt(20) == 0;
         }
-    
+        
         /**
          * Keep ticking a continuous task that has already been started
          */
@@ -684,9 +714,10 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
             BlockPos blockpos = new BlockPos(i, j, k);
             IBlockState iblockstate = world.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
-            RayTraceResult raytraceresult = world.rayTraceBlocks(new Vec3d(MathHelper.floor(this.enderman.posX) + 0.5F, j + 0.5F, MathHelper.floor(this.enderman.posZ) + 0.5F), new Vec3d(i + 0.5F, j + 0.5F, k + 0.5F), false, true, false);
+            RayTraceResult raytraceresult = world.rayTraceBlocks(new Vec3d(MathHelper.floor(this.enderman.posX) + 0.5F, j + 0.5F, MathHelper.floor
+                    (this.enderman.posZ) + 0.5F), new Vec3d(i + 0.5F, j + 0.5F, k + 0.5F), false, true, false);
             boolean flag = raytraceresult != null && raytraceresult.getBlockPos().equals(blockpos);
-    
+            
             if (CARRIABLE_BLOCKS.contains(block) && flag) {
                 this.enderman.setHeldBlockState(iblockstate);
                 world.setBlockToAir(blockpos);

@@ -34,15 +34,15 @@ public class TakumiWorldGenTrees extends WorldGenAbstractTree {
         if (position.getY() >= 1 && position.getY() + i + 1 <= 256) {
             for (int j = position.getY(); j <= position.getY() + 1 + i; ++j) {
                 int k = 1;
-    
+                
                 if (j == position.getY()) {
                     k = 0;
                 }
-    
+                
                 if (j >= position.getY() + 1 + i - 2) {
                     k = 2;
                 }
-    
+                
                 MutableBlockPos blockpos$mutableblockpos = new MutableBlockPos();
                 
                 for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {

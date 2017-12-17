@@ -27,7 +27,7 @@ public class RenderZombieCreeper <T extends EntityZombieCreeper> extends RenderB
                 this.modelLeggings = new ModelZombie(0.5F, true);
                 this.modelArmor = new ModelZombie(1.0F, true);
             }
-    
+            
             @Override
             public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
                     ageInTicks, float netHeadYaw, float headPitch, float scale) {
@@ -46,7 +46,7 @@ public class RenderZombieCreeper <T extends EntityZombieCreeper> extends RenderB
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-    
+        
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {

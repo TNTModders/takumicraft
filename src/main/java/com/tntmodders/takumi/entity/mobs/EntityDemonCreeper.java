@@ -24,10 +24,13 @@ public class EntityDemonCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 10); this.dropItem(Item.getItemFromBlock(Blocks.REDSTONE_BLOCK), 10);
-            this.dropItem(Item.getItemFromBlock(Blocks.IRON_BLOCK), 10); this.dropItem(Item.getItemFromBlock(Blocks.EMERALD_BLOCK), 10);
+            this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 10);
+            this.dropItem(Item.getItemFromBlock(Blocks.REDSTONE_BLOCK), 10);
+            this.dropItem(Item.getItemFromBlock(Blocks.IRON_BLOCK), 10);
+            this.dropItem(Item.getItemFromBlock(Blocks.EMERALD_BLOCK), 10);
             this.dropItem(Item.getItemFromBlock(Blocks.LAPIS_BLOCK), 10);
-        } super.onDeath(source);
+        }
+        super.onDeath(source);
     }
     
     @Override

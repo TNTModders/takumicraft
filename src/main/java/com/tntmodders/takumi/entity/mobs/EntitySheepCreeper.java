@@ -49,7 +49,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         for (EnumDyeColor enumdyecolor : EnumDyeColor.values()) {
             DYE_TO_RGB.put(enumdyecolor, createSheepColor(enumdyecolor));
         }
-
+        
         DYE_TO_RGB.put(EnumDyeColor.WHITE, new float[]{0.9019608F, 0.9019608F, 0.9019608F});
     }
     
@@ -121,21 +121,36 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         switch (this.getFleeceColor()) {
             case WHITE:
             default:
-                return LootTableList.ENTITIES_SHEEP_WHITE; case ORANGE:
-                return LootTableList.ENTITIES_SHEEP_ORANGE; case MAGENTA:
-                return LootTableList.ENTITIES_SHEEP_MAGENTA; case LIGHT_BLUE:
-                return LootTableList.ENTITIES_SHEEP_LIGHT_BLUE; case YELLOW:
-                return LootTableList.ENTITIES_SHEEP_YELLOW; case LIME:
-                return LootTableList.ENTITIES_SHEEP_LIME; case PINK:
-                return LootTableList.ENTITIES_SHEEP_PINK; case GRAY:
-                return LootTableList.ENTITIES_SHEEP_GRAY; case SILVER:
-                return LootTableList.ENTITIES_SHEEP_SILVER; case CYAN:
-                return LootTableList.ENTITIES_SHEEP_CYAN; case PURPLE:
-                return LootTableList.ENTITIES_SHEEP_PURPLE; case BLUE:
-                return LootTableList.ENTITIES_SHEEP_BLUE; case BROWN:
-                return LootTableList.ENTITIES_SHEEP_BROWN; case GREEN:
-                return LootTableList.ENTITIES_SHEEP_GREEN; case RED:
-                return LootTableList.ENTITIES_SHEEP_RED; case BLACK:
+                return LootTableList.ENTITIES_SHEEP_WHITE;
+            case ORANGE:
+                return LootTableList.ENTITIES_SHEEP_ORANGE;
+            case MAGENTA:
+                return LootTableList.ENTITIES_SHEEP_MAGENTA;
+            case LIGHT_BLUE:
+                return LootTableList.ENTITIES_SHEEP_LIGHT_BLUE;
+            case YELLOW:
+                return LootTableList.ENTITIES_SHEEP_YELLOW;
+            case LIME:
+                return LootTableList.ENTITIES_SHEEP_LIME;
+            case PINK:
+                return LootTableList.ENTITIES_SHEEP_PINK;
+            case GRAY:
+                return LootTableList.ENTITIES_SHEEP_GRAY;
+            case SILVER:
+                return LootTableList.ENTITIES_SHEEP_SILVER;
+            case CYAN:
+                return LootTableList.ENTITIES_SHEEP_CYAN;
+            case PURPLE:
+                return LootTableList.ENTITIES_SHEEP_PURPLE;
+            case BLUE:
+                return LootTableList.ENTITIES_SHEEP_BLUE;
+            case BROWN:
+                return LootTableList.ENTITIES_SHEEP_BROWN;
+            case GREEN:
+                return LootTableList.ENTITIES_SHEEP_GREEN;
+            case RED:
+                return LootTableList.ENTITIES_SHEEP_RED;
+            case BLACK:
                 return LootTableList.ENTITIES_SHEEP_BLACK;
         }
     }
@@ -223,13 +238,16 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     
     @Override
     public List <ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        this.setSheared(true); int i = 1 + this.rand.nextInt(3);
+        this.setSheared(true);
+        int i = 1 + this.rand.nextInt(3);
         
-        List <ItemStack> ret = new ArrayList <>(); for (int j = 0; j < i; ++j) {
+        List <ItemStack> ret = new ArrayList <>();
+        for (int j = 0; j < i; ++j) {
             ret.add(new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_WOOL), 1, this.getFleeceColor().getMetadata()));
         }
         
-        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F); return ret;
+        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+        return ret;
     }
     
     @Override
@@ -311,7 +329,10 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     
     @Override
     public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX); int j = MathHelper.floor(this.getEntityBoundingBox().minY); int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k); return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
 }

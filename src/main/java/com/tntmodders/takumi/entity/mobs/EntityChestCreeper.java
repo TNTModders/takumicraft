@@ -49,12 +49,14 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(Items.DIAMOND, this.rand.nextInt(32));
-        } super.onDeath(source);
+        }
+        super.onDeath(source);
     }
     
     @Override
     public void setDead() {
-        this.clear(); super.setDead();
+        this.clear();
+        super.setDead();
     }
     
     @Override
@@ -133,24 +135,24 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     
     public ItemStack addItem(ItemStack stack) {
         ItemStack itemstack = stack.copy();
-    
+        
         for (int i = 0; i < this.slotsCount; ++i) {
             ItemStack itemstack1 = this.getStackInSlot(i);
-        
+            
             if (itemstack1.isEmpty()) {
                 this.setInventorySlotContents(i, itemstack);
                 this.markDirty();
                 return ItemStack.EMPTY;
             }
-        
+            
             if (ItemStack.areItemsEqual(itemstack1, itemstack)) {
                 int j = Math.min(this.getInventoryStackLimit(), itemstack1.getMaxStackSize());
                 int k = Math.min(itemstack.getCount(), j - itemstack1.getCount());
-            
+                
                 if (k > 0) {
                     itemstack1.grow(k);
                     itemstack.shrink(k);
-                
+                    
                     if (itemstack.isEmpty()) {
                         this.markDirty();
                         return ItemStack.EMPTY;
@@ -158,11 +160,11 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
                 }
             }
         }
-    
+        
         if (itemstack.getCount() != stack.getCount()) {
             this.markDirty();
         }
-    
+        
         return itemstack;
     }
     
@@ -170,11 +172,11 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
         for (int i = 0; i < this.getSizeInventory(); ++i) {
             this.setInventorySlotContents(i, ItemStack.EMPTY);
         }
-    
+        
         for (int k = 0; k < p_70486_1_.tagCount(); ++k) {
             NBTTagCompound nbttagcompound = p_70486_1_.getCompoundTagAt(k);
             int j = nbttagcompound.getByte("Slot") & 255;
-        
+            
             if (j >= 0 && j < this.getSizeInventory()) {
                 this.setInventorySlotContents(j, new ItemStack(nbttagcompound));
             }
@@ -196,7 +198,7 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
                 return false;
             }
         }
-    
+        
         return true;
     }
     
@@ -214,11 +216,11 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public ItemStack decrStackSize(int index, int count) {
         ItemStack itemstack = ItemStackHelper.getAndSplit(this.inventoryContents, index, count);
-    
+        
         if (!itemstack.isEmpty()) {
             this.markDirty();
         }
-    
+        
         return itemstack;
     }
     
@@ -228,7 +230,7 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public ItemStack removeStackFromSlot(int index) {
         ItemStack itemstack = this.inventoryContents.get(index);
-    
+        
         if (itemstack.isEmpty()) {
             return ItemStack.EMPTY;
         } else {
@@ -243,11 +245,11 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         this.inventoryContents.set(index, stack);
-    
+        
         if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit()) {
             stack.setCount(this.getInventoryStackLimit());
         }
-    
+        
         this.markDirty();
     }
     
@@ -336,17 +338,17 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
                 double d0 = entityIn.posX - this.posX;
                 double d1 = entityIn.posZ - this.posZ;
                 double d2 = MathHelper.absMax(d0, d1);
-    
+                
                 if (d2 >= 0.009999999776482582D) {
                     d2 = MathHelper.sqrt(d2);
                     d0 = d0 / d2;
                     d1 = d1 / d2;
                     double d3 = 1.0D / d2;
-        
+                    
                     if (d3 > 1.0D) {
                         d3 = 1.0D;
                     }
-        
+                    
                     d0 = d0 * d3;
                     d1 = d1 * d3;
                     d0 = d0 * 0.05000000074505806D;
@@ -357,7 +359,7 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
 /*                    if (!this.isBeingRidden()) {
                         //this.addVelocity(-d0, 0.0D, -d1);
                     }*/
-        
+                    
                     if (!entityIn.isBeingRidden()) {
                         entityIn.addVelocity(d0, 0.0D, d1);
                     }

@@ -41,17 +41,17 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
                 double d0 = entityIn.posX - this.posX;
                 double d1 = entityIn.posZ - this.posZ;
                 double d2 = MathHelper.absMax(d0, d1);
-    
+                
                 if (d2 >= 0.009999999776482582D) {
                     d2 = (double) MathHelper.sqrt(d2);
                     d0 = d0 / d2;
                     d1 = d1 / d2;
                     double d3 = 1.0D / d2;
-        
+                    
                     if (d3 > 1.0D) {
                         d3 = 1.0D;
                     }
-        
+                    
                     d0 = d0 * d3;
                     d1 = d1 * d3;
                     d0 = d0 * 0.05000000074505806D;
@@ -62,7 +62,7 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
 /*                    if (!this.isBeingRidden()) {
                         //this.addVelocity(-d0, 0.0D, -d1);
                     }*/
-        
+                    
                     if (!entityIn.isBeingRidden()) {
                         entityIn.addVelocity(d0, 0.0D, d1);
                     }

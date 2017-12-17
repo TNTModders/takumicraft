@@ -47,7 +47,8 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAICreeperSwell(this));
-        this.tasks.addTask(1, new EntityAISwimming(this)); this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.8F));
+        this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.8F));
         this.tasks.addTask(4, new AISpiderAttack(this));
         this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -128,7 +129,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
-
+        
         if (this.world.rand.nextInt(100) == 0) {
             EntitySkeleton entityskeleton = new EntitySkeleton(this.world);
             entityskeleton.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
@@ -136,24 +137,24 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
             this.world.spawnEntity(entityskeleton);
             entityskeleton.startRiding(this);
         }
-
+        
         if (livingdata == null) {
             livingdata = new GroupData();
-
+            
             if (this.world.getDifficulty() == EnumDifficulty.HARD && this.world.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty
                     ()) {
                 ((GroupData) livingdata).setRandomEffect(this.world.rand);
             }
         }
-    
+        
         if (livingdata instanceof GroupData) {
             Potion potion = ((GroupData) livingdata).effect;
-
+            
             if (potion != null) {
                 this.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE));
             }
         }
-    
+        
         return livingdata;
     }
     
@@ -217,13 +218,13 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
      */
     public void setBesideClimbableBlock(boolean climbing) {
         byte b0 = this.dataManager.get(CLIMBING);
-    
+        
         if (climbing) {
             b0 = (byte) (b0 | 1);
         } else {
             b0 = (byte) (b0 & -2);
         }
-    
+        
         this.dataManager.set(CLIMBING, b0);
     }
     
@@ -284,7 +285,7 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public boolean shouldContinueExecuting() {
             float f = this.attacker.getBrightness();
-    
+            
             if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
                 this.attacker.setAttackTarget(null);
                 return false;

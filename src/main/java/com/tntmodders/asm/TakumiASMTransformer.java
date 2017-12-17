@@ -18,7 +18,8 @@ public class TakumiASMTransformer implements IClassTransformer {
         //対象クラス以外を除外する。対象は呼び出し元があるクラスである。
         if ("net.minecraft.entity.monster.EntityCreeper".equals(transformedName)) {
             return this.transformEntityCreeper(name, transformedName, bytes);
-        } if ("net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer".equals(transformedName)) {
+        }
+        if ("net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer".equals(transformedName)) {
             return this.transformTileEntityRenderer(name, transformedName, bytes);
         }
         return bytes;
@@ -68,7 +69,9 @@ public class TakumiASMTransformer implements IClassTransformer {
     }
     
     private byte[] transformTileEntityRenderer(String name, String transformedName, byte[] bytes) {
-        ClassReader cr = new ClassReader(bytes); ClassWriter cw = new ClassWriter(1); ClassVisitor cv = new ClassVisitor(ASM4, cw) {
+        ClassReader cr = new ClassReader(bytes);
+        ClassWriter cw = new ClassWriter(1);
+        ClassVisitor cv = new ClassVisitor(ASM4, cw) {
             //クラス内のメソッドを訪れる。
             @Override
             public MethodVisitor visitMethod(int access, String methodName, String desc, String signature, String[] exceptions) {
@@ -99,9 +102,12 @@ public class TakumiASMTransformer implements IClassTransformer {
                             super.visitMethodInsn(opcode, owner, methodName, desc, itf);
                         }
                     };
-                } return mv;
+                }
+                return mv;
             }
-        }; cr.accept(cv, ClassReader.EXPAND_FRAMES); return cw.toByteArray();
+        };
+        cr.accept(cv, ClassReader.EXPAND_FRAMES);
+        return cw.toByteArray();
     }
 }
 

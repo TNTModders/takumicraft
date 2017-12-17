@@ -59,7 +59,8 @@ public class EntityArrowCreeper extends EntityTakumiAbstractCreeper {
             entityarrow.setKnockbackStrength(10);
             if (this.getPowered()) {
                 entityarrow.setFire(100);
-            } entityarrow.pickupStatus = PickupStatus.CREATIVE_ONLY;
+            }
+            entityarrow.pickupStatus = PickupStatus.CREATIVE_ONLY;
             entityarrow.motionX = 0;
             entityarrow.motionY = -5;
             entityarrow.motionZ = 0;

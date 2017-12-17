@@ -43,7 +43,7 @@ public class RenderParrotCreeper extends RenderLiving <EntityParrotCreeper> impl
     @Override
     protected int getColorMultiplier(EntityParrotCreeper entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-    
+        
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {

@@ -66,7 +66,8 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
                 Material material = state.getMaterial();
                 return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getStrVsBlock(stack, state) :
                        this.efficiencyOnProperMaterial;
-            } case PICKAXE:
+            }
+            case PICKAXE:
                 Material material = state.getMaterial();
                 return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getStrVsBlock(stack, state) :
                        this.efficiencyOnProperMaterial;
@@ -85,7 +86,7 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             } else {
                 IBlockState iblockstate = worldIn.getBlockState(pos);
                 Block block = iblockstate.getBlock();
-    
+                
                 if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS) {
                     IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
                     worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -110,9 +111,10 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             case SHOVEL: {
                 Block block = blockIn.getBlock();
                 return block == Blocks.SNOW_LAYER || block == Blocks.SNOW;
-            } case PICKAXE:
+            }
+            case PICKAXE:
                 Block block = blockIn.getBlock();
-        
+                
                 if (block == Blocks.OBSIDIAN) {
                     return this.toolMaterial.getHarvestLevel() > 3;
                 } else if (block != Blocks.DIAMOND_BLOCK && block != Blocks.DIAMOND_ORE) {

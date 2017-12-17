@@ -48,9 +48,10 @@ public class ModelSkeletonCreeper extends ModelBiped {
      */
     @Override
     public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        this.rightArmPose = ArmPose.EMPTY; this.leftArmPose = ArmPose.EMPTY;
+        this.rightArmPose = ArmPose.EMPTY;
+        this.leftArmPose = ArmPose.EMPTY;
         ItemStack itemstack = entitylivingbaseIn.getHeldItem(EnumHand.MAIN_HAND);
-    
+        
         if (itemstack.getItem() == Items.BOW && ((AbstractSkeleton) entitylivingbaseIn).isSwingingArms()) {
             if (entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT) {
                 this.rightArmPose = ArmPose.BOW_AND_ARROW;
@@ -58,7 +59,7 @@ public class ModelSkeletonCreeper extends ModelBiped {
                 this.leftArmPose = ArmPose.BOW_AND_ARROW;
             }
         }
-    
+        
         super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     }
     
@@ -73,7 +74,7 @@ public class ModelSkeletonCreeper extends ModelBiped {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         ItemStack itemstack = ((EntityLivingBase) entityIn).getHeldItemMainhand();
         EntitySkeletonCreeper skeletonCreeper = (EntitySkeletonCreeper) entityIn;
-    
+        
         if (skeletonCreeper.isSwingingArms() && (itemstack.isEmpty() || itemstack.getItem() != Items.BOW)) {
             float f = MathHelper.sin(this.swingProgress * (float) Math.PI);
             float f1 = MathHelper.sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
