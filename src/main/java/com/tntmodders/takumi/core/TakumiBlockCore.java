@@ -48,6 +48,7 @@ public class TakumiBlockCore {
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_COLOR = new BlockTakumiMonsterBomb(EntityColorCreeper.class, "colorcreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_PIERCE = new BlockTakumiMonsterBomb(EntityPierceCreeper.class, "piercecreeper");
     public static final Block TAKUMI_BLOCK = new BlockTakumiBlock();
+    public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();
     
     public static final Map <Class <? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap <>();
     

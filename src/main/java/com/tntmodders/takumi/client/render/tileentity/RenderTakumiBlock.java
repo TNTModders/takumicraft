@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.client.render.tileentity;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -15,6 +16,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -47,7 +49,10 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
             this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             this.draw(te, x, y, z, state, pos, buffer, tessellator);
             GlStateManager.popMatrix();
-        } else {
+        }
+        if (te.getBlock() == null || Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(TakumiBlockCore
+                .TAKUMI_BLOCK) || Minecraft.getMinecraft().player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(TakumiBlockCore
+                .TAKUMI_BLOCK)) {
             GlStateManager.pushMatrix();
             GlStateManager.depthMask(true);
             this.bindTexture(TEXTURE_ARMOR);

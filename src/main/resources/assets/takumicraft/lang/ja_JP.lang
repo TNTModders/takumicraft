@@ -70,6 +70,7 @@ tile.takumialtar.name=王匠の祭壇
 tile.takumitnt.name=匠式高性能TNT
 tile.monsterbomb.name=式高性能爆弾
 tile.takumiblock.name=匠式超硬質ブロック
+tile.takumicreepered.name=匠化ブロック
 
 #item
 item.takumibook.name=匠の書
@@ -288,6 +289,8 @@ entity.roundcreeper.name=円匠
 entity.roundcreeper.desc=周りに爆風、丸に爆破、大地をくり抜き、荒らし回る。
 entity.inversioncreeper.name=狂匠
 entity.inversioncreeper.desc=世界は、逆転する……。
+entity.craftsmancreeper.name=巧匠
+entity.craftsmancreeper.desc=なんということでしょう、匠の力で全てが匠に。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

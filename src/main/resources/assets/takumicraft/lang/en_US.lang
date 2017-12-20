@@ -70,6 +70,7 @@ tile.takumialtar.name=Creeper Altar
 tile.takumitnt.name=Creeper TNT
 tile.monsterbomb.name=Bomb
 tile.takumiblock.name=Creeper Super Block
+tile.takumicreepered.name=Creepered Block
 
 #item
 item.takumibook.name=Creeper Book
@@ -288,6 +289,8 @@ entity.roundcreeper.name=Round Creeper
 entity.roundcreeper.desc=Explode around, create a round mistery circle.
 entity.inversioncreeper.name=Inversion Creeper
 entity.inversioncreeper.desc=Revercing world...
+entity.craftsmancreeper.name=Craftsman Creeper
+entity.craftsmancreeper.desc=Everything came into creeper, by creeper.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

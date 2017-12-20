@@ -23,6 +23,11 @@ public class TileEntityTakumiBlock extends TileEntity {
     public void setPath(String path) {
         this.location = path;
         this.block = Block.getBlockFromName(this.location);
+        try {
+            this.state = this.block.getDefaultState().getActualState(this.world, this.pos);
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
     }
     
     @Override
@@ -56,5 +61,9 @@ public class TileEntityTakumiBlock extends TileEntity {
     public void setMeta(int meta) {
         
         this.meta = meta;
+    }
+    
+    public void setState(IBlockState state) {
+        this.state = state;
     }
 }
