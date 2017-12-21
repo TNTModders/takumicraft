@@ -352,6 +352,7 @@ item.banner.creeper.white=White Creeper Charge
 #other
 takumicraft.egg.name=Spawn Eggs
 death.attack.takumicraft.luck=%1$s should be above criticism killing Luck Creeper.
+takumicraft.newyear.item.name=New Year Present
 
 #config
 config.takumicraft.category.general=TakumiCraft Config

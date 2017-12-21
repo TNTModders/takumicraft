@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -55,7 +56,7 @@ public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             for (BlockPos pos : event.getAffectedBlocks()) {
-                this.world.setBlockState(pos, Blocks.TNT.getDefaultState());
+                this.world.setBlockState(pos, this.getPowered() ? TakumiBlockCore.TAKUMI_TNT.getDefaultState() : Blocks.TNT.getDefaultState());
                 if (!event.getAffectedBlocks().contains(pos.up())) {
                     this.world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                 }

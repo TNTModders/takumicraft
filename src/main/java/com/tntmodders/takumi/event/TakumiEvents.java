@@ -25,6 +25,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
@@ -49,6 +51,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -254,6 +257,17 @@ public class TakumiEvents {
         if (!event.getEntityLiving().world.isRemote && event.getSource().getTrueSource() instanceof EntityPlayer && TakumiBlockCore.BOMB_MAP
                 .containsKey(event.getEntityLiving().getClass()) && event.getEntityLiving().getRNG().nextInt(10) == 0) {
             event.getEntityLiving().dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
+        }
+        if (!event.getEntityLiving().world.isRemote) {
+            Calendar calendar = event.getEntityLiving().world.getCurrentDate();
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int date = calendar.get(Calendar.DATE);
+            if (month == 12 && (date == 24 || date == 25)) {
+                event.getEntityLiving().dropItem(Item.getItemFromBlock(Blocks.CHEST), 1);
+            } else if (month == 1 && date < 8) {
+                event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4).setStackDisplayName(TakumiUtils.takumiTranslate
+                        ("takumicraft.newyear.item.name")), 0.1f);
+            }
         }
         if (FMLCommonHandler.instance().getSide().isClient() && (event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving()
                 instanceof EntityCreeper) && event.getSource().getTrueSource() instanceof EntityPlayerMP) {

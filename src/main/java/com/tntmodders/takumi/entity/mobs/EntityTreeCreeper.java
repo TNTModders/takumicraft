@@ -8,6 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+import java.util.Calendar;
+
 public class EntityTreeCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityTreeCreeper(World worldIn) {
@@ -24,6 +26,17 @@ public class EntityTreeCreeper extends EntityTakumiAbstractCreeper {
                                         new TakumiWorldGenTrees(true, false, TakumiBlockCore.CREEPER_LOG.getDefaultState(), TakumiBlockCore
                                                 .CREEPER_LEAVES.getDefaultState());
             tree.generate(this.world, this.rand, new BlockPos(this));
+            
+            Calendar calendar = this.world.getCurrentDate();
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int date = calendar.get(Calendar.DATE);
+            if (month == 12 && (date == 24 || date == 25)) {
+                for (int i = 0; i < 45; i++) {
+                    BlockPos pos = this.getPosition().add(this.rand.nextInt(40) - 20, 0, this.rand.nextInt(40) - 20);
+                    pos = pos.up(this.world.getHeight(pos).getY() - pos.getY());
+                    EntityFireworksCreeper.createTree(this, pos);
+                }
+            }
         }
     }
     

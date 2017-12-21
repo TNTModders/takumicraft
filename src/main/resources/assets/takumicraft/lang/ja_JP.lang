@@ -351,6 +351,7 @@ item.banner.creeper.white=白色の匠模様
 #other
 takumicraft.egg.name=スポーンエッグ
 death.attack.takumicraft.luck=%1$s は福匠を倒してしまった、当然の報いである。
+takumicraft.newyear.item.name=新春匠式魔除け
 
 #config
 config.takumicraft.category.general=匠Craft設定
