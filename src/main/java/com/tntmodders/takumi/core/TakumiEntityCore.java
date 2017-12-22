@@ -7,10 +7,12 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
@@ -18,6 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeOcean;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -25,15 +28,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
 public class TakumiEntityCore {
     
-    /*public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", IMob.class, 100, Material.AIR, false,
-    false);
-    public static final EnumCreatureType WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", IMob.class, 50, Material.WATER, false, false);*/
+    public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", IMob.class, 100, Material.AIR, false, false);
+    public static final EnumCreatureType WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", IMob.class, 50, Material.WATER, false, false);
     private static final List <Class <? extends ITakumiEntity>> CLASS_LIST = new ArrayList <>();
     public static List <Biome> biomes = new ArrayList <>();
     private static List <ITakumiEntity> entityList = new ArrayList <>();
@@ -71,13 +72,7 @@ public class TakumiEntityCore {
     public static void register() {
         //CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", EntityTakumiAbstractCreeper.class, 100, Material.AIR, false, true);
         //WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", EntityTakumiAbstractCreeper.class, 25, Material.WATER, false, false);
-        for (Field fileld : Biomes.class.getDeclaredFields()) {
-            try {
-                biomes.add((Biome) fileld.get(null));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
+        Biome.REGISTRY.iterator().forEachRemaining(biome -> biomes.add(biome));
         biomes.remove(Biomes.HELL);
         biomes.remove(Biomes.VOID);
         
@@ -123,7 +118,7 @@ public class TakumiEntityCore {
             } else if (entity.takumiRank().getSpawnWeight() != 0) {
                 Biome.REGISTRY.iterator().forEachRemaining(biome -> {
                     if (!(biome instanceof BiomeOcean)) {
-                        EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 5, 20, EnumCreatureType.MONSTER, biome);
+                        EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 5, 25, EnumCreatureType.MONSTER, biome);
                     }
                 });
             }

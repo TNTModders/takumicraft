@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderRabbitCreeper;
+import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarrot;
@@ -27,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDesert;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -159,9 +161,8 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
             }
             
             return this.moveHelper.getSpeed() <= 0.6D ? 0.2F : 0.3F;
-        } else {
-            return 0.5F;
         }
+        return 0.5F;
     }
     
     @Override
@@ -245,11 +246,11 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         int lvt_2_1_ = this.rand.nextInt(100);
         if (lvt_1_1_.isSnowyBiome()) {
             return lvt_2_1_ < 80 ? 1 : 3;
-        } else if (lvt_1_1_ instanceof BiomeDesert) {
-            return 4;
-        } else {
-            return lvt_2_1_ < 50 ? 0 : lvt_2_1_ < 90 ? 5 : 2;
         }
+        if (lvt_1_1_ instanceof BiomeDesert) {
+            return 4;
+        }
+        return lvt_2_1_ < 50 ? 0 : lvt_2_1_ < 90 ? 5 : 2;
     }
     
     public boolean isBreedingItem(ItemStack p_isBreedingItem_1_) {
@@ -374,11 +375,11 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         ((RabbitJumpHelper) this.jumpHelper).setCanJump(false);
     }
     
-/*    @Override
+  @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
                 .biomes.toArray(new Biome[0]));
-    }*/
+    }
     
     @Override
     public int getPrimaryColor() {

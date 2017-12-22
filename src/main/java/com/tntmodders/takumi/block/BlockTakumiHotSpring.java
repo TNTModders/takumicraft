@@ -2,6 +2,7 @@ package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.material.TakumiMaterial;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiFluidCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -24,8 +25,28 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
         super(TakumiFluidCore.HOT_SPRING, TakumiMaterial.HOT_SPRING);
         this.setRegistryName(TakumiCraftCore.MODID, "takumihotspring");
         this.setUnlocalizedName("takumihotspring");
-        this.setLightLevel(1f);
         this.setResistance(10000000f);
+    }
+    
+    @Override
+    protected void flowIntoBlock(World world, BlockPos pos, int meta) {
+        if (!world.getBlockState(pos).getMaterial().isLiquid() || world.getBlockState(pos).getBlock() == TakumiBlockCore.HOT_SPRING) {
+            super.flowIntoBlock(world, pos, meta);
+        }
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
+        float f12 = 0.0F;
+        if (entity instanceof EntityLivingBase) {
+            EntityLivingBase ent = (EntityLivingBase) entity;
+            f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
+            if (ent.isPotionActive(MobEffects.WATER_BREATHING)) {
+                f12 = f12 * 0.3F + 0.6F;
+            }
+        }
+        return new Vec3d(0.1F + f12, 0.1F + f12, 0.1F + f12);
     }
     
     @Override
@@ -43,19 +64,5 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
             materialIn, boolean testingHead) {
         return materialIn == Material.WATER ? true :
                super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
-        float f12 = 0.0F;
-        if (entity instanceof EntityLivingBase) {
-            EntityLivingBase ent = (EntityLivingBase) entity;
-            f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
-            if (ent.isPotionActive(MobEffects.WATER_BREATHING)) {
-                f12 = f12 * 0.3F + 0.6F;
-            }
-        }
-        return new Vec3d(0.1F + f12, 0.1F + f12, 0.1F + f12);
     }
 }

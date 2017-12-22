@@ -20,10 +20,10 @@ public class TileEntityMonsterBomb extends TileEntity {
     
     @Override
     public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
         if (this.location == null) {
             this.location = new ResourceLocation(compound.getString("monster"));
         }
-        super.readFromNBT(compound);
     }
     
     @Override

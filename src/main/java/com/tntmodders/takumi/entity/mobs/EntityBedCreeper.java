@@ -56,7 +56,7 @@ public class EntityBedCreeper extends EntityTakumiAbstractCreeper {
                 event.getAffectedEntities().forEach(entity -> {
                     if (entity instanceof EntityPlayer) {
                         BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
-                        if (this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world, pos, entity)) {
+                        if (pos != null && this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world, pos, entity)) {
                             TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX(), pos.getY(), pos.getZ(),
                                     this.getPowered() ? 20 : 12, false, true);
                         }
