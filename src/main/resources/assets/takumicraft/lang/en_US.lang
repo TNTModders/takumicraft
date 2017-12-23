@@ -293,6 +293,8 @@ entity.craftsmancreeper.name=Craftsman Creeper
 entity.craftsmancreeper.desc=Everything came into creeper, by creeper.
 entity.llamacreeper.name=Llama Creeper
 entity.llamacreeper.desc=A creeper looks like a llama. Explosive spit.
+entity.polarbearcreeper.name=Polarbear Creeper
+entity.polarbearcreeper.desc=A creeper looks like a polarbear, but not white.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
