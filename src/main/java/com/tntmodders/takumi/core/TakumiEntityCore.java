@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.RenderLlamaCreeperSpit;
 import com.tntmodders.takumi.client.render.RenderTakumiTNTPrimed;
 import com.tntmodders.takumi.core.client.TakumiModelCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
@@ -62,7 +63,7 @@ public class TakumiEntityCore {
                 EntityTreeCreeper.class, EntityUpperCreeper.class, EntityVoidCreeper.class, EntityWaterCreeper.class, EntityWeatherCreeper.class,
                 EntityWitchCreeper.class, EntityWitherSkeletonCreeper.class, EntityWolfCreeper.class, EntityWoodCreeper.class, EntityWrylyCreeper
                         .class, EntityYukariCreeper.class, EntityZombieCreeper.class, EntityZombieVillagerCreeper.class, EntityCraftsmanCreeper
-                        .class));
+                        .class, EntityLlamaCreeper.class));
     }
     
     public static List <ITakumiEntity> getEntityList() {
@@ -202,6 +203,8 @@ public class TakumiEntityCore {
                 903, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumitnt"), EntityTakumiTNTPrimed.class, "takumitnt", 904,
                 TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "llamacreeperspit"), EntityLlamaCreeperSpit.class,
+                "llamacreeperspit", 905, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
     
     @SideOnly(Side.CLIENT)
@@ -217,6 +220,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiExpEgg.class, manager -> new RenderSnowball <>(manager, Items.EGG, Minecraft
                 .getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTNTPrimed.class, RenderTakumiTNTPrimed::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityLlamaCreeperSpit.class, RenderLlamaCreeperSpit::new);
     }
     
     static class EntityComparator implements Comparator <EntityHolder> {

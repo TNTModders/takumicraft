@@ -291,6 +291,8 @@ entity.inversioncreeper.name=狂匠
 entity.inversioncreeper.desc=世界は、逆転する……。
 entity.craftsmancreeper.name=巧匠
 entity.craftsmancreeper.desc=なんということでしょう、匠の力で全てが匠に。
+entity.llamacreeper.name=駱馬匠
+entity.llamacreeper.desc=リャマ型の匠。爆発性の唾を飛ばし、プレイヤーを蹴散らす。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

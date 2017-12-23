@@ -291,6 +291,8 @@ entity.inversioncreeper.name=Inversion Creeper
 entity.inversioncreeper.desc=Revercing world...
 entity.craftsmancreeper.name=Craftsman Creeper
 entity.craftsmancreeper.desc=Everything came into creeper, by creeper.
+entity.llamacreeper.name=Llama Creeper
+entity.llamacreeper.desc=A creeper looks like a llama. Explosive spit.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
