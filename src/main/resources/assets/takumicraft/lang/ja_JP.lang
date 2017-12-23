@@ -295,6 +295,8 @@ entity.llamacreeper.name=駱馬匠
 entity.llamacreeper.desc=リャマ型の匠。爆発性の唾を飛ばし、プレイヤーを蹴散らす。
 entity.polarbearcreeper.name=白熊匠
 entity.polarbearcreeper.desc=白熊型の匠。白くはない。襲いかかる力は大地をも抉る。
+entity.shulkercreeper.name=シュルカー匠
+entity.shulkercreeper.desc=追尾する魔球を落とすこの匠、終の地より出で此処に現る。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

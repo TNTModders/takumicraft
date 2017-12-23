@@ -295,6 +295,8 @@ entity.llamacreeper.name=Llama Creeper
 entity.llamacreeper.desc=A creeper looks like a llama. Explosive spit.
 entity.polarbearcreeper.name=Polarbear Creeper
 entity.polarbearcreeper.desc=A creeper looks like a polarbear, but not white.
+entity.shulkercreeper.name=Shulker Creeper
+entity.shulkercreeper.desc=From The End, to end. This creeper shoots homing bombs.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
