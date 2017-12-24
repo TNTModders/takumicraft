@@ -303,6 +303,8 @@ entity.vindicatorcreeper.name=ヴィンディケーター匠
 entity.vindicatorcreeper.desc=剣士は館で目覚め、歩き始める。闇夜一閃、死を穿つ。
 entity.evokercreeper.name=エヴォーカー匠
 entity.evokercreeper.desc=魔道士は館で目覚め、蠢き始める。闇夜疾風、黒を呼ぶ。
+entity.vexcreeper.name=ヴェックス匠
+entity.vexcreeper.desc=下僕は館で目覚め、羽撃き始める。闇夜風雷、轟く音。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

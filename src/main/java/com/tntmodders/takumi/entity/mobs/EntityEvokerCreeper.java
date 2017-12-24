@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,11 +35,6 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
         super(worldIn);
         this.setSize(0.6F, 1.95F);
         this.experienceValue = 10;
-    }
-    
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderEvokerCreeper <>(manager);
     }
     
     @Override
@@ -138,8 +132,8 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
         if (super.isOnSameTeam(entityIn)) {
             return true;
         }
-        if (entityIn instanceof EntityVex) {
-            return this.isOnSameTeam(((EntityVex) entityIn).getOwner());
+        if (entityIn instanceof EntityVexCreeper) {
+            return this.isOnSameTeam(((EntityVexCreeper) entityIn).getOwner());
         }
         return entityIn instanceof EntityLivingBase && ((EntityLivingBase) entityIn).getCreatureAttribute() == EnumCreatureAttribute.ILLAGER &&
                 this.getTeam() == null && entityIn.getTeam() == null;
@@ -186,6 +180,18 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
     @Override
     public int getRegisterID() {
         return 249;
+    }
+    
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (!(damageSrc.getTrueSource() instanceof EntityVexCreeper)) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+    
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderEvokerCreeper <>(manager);
     }
     
     class AIAttackSpell extends AIUseSpell {
@@ -314,8 +320,8 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
             if (!super.shouldExecute()) {
                 return false;
             }
-            int i = EntityEvokerCreeper.this.world.getEntitiesWithinAABB(EntityVex.class, EntityEvokerCreeper.this.getEntityBoundingBox().grow
-                    (16.0D)).size();
+            int i = EntityEvokerCreeper.this.world.getEntitiesWithinAABB(EntityVexCreeper.class, EntityEvokerCreeper.this.getEntityBoundingBox()
+                    .grow(16.0D)).size();
             return EntityEvokerCreeper.this.rand.nextInt(8) + 1 > i;
         }
         
@@ -334,7 +340,7 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
             for (int i = 0; i < 3; ++i) {
                 BlockPos blockpos = new BlockPos(EntityEvokerCreeper.this).add(-2 + EntityEvokerCreeper.this.rand.nextInt(5), 1, -2 +
                         EntityEvokerCreeper.this.rand.nextInt(5));
-                EntityVex entityvex = new EntityVex(EntityEvokerCreeper.this.world);
+                EntityVexCreeper entityvex = new EntityVexCreeper(EntityEvokerCreeper.this.world);
                 entityvex.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
                 entityvex.onInitialSpawn(EntityEvokerCreeper.this.world.getDifficultyForLocation(blockpos), null);
                 entityvex.setOwner(EntityEvokerCreeper.this);

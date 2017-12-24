@@ -303,6 +303,8 @@ entity.vindicatorcreeper.name=Vindicator Creeper
 entity.vindicatorcreeper.desc=Gradiator of illager, explosive sword and strong shield.
 entity.evokercreeper.name=Evoker Creeper
 entity.evokercreeper.desc=Masician of illager, explosive spell and strong servant.
+entity.vexcreeper.name=Vex Creeper
+entity.vexcreeper.desc=Servant of illager, explosive flies and strong attack.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
