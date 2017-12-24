@@ -154,6 +154,10 @@ public class GuiTakumiBook extends GuiScreen {
             ((EntityVindicatorCreeper) entity).setAggressive(true);
             ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(TakumiItemCore.TAKUMI_SHIELD));
             ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_SWORD));
+        } else if (entity instanceof EntityIllusionerCreeper) {
+            ((EntityIllusionerCreeper) entity).setAggressive(true);
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA));
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_BOW));
         }
         return (EntityLivingBase) entity;
     }

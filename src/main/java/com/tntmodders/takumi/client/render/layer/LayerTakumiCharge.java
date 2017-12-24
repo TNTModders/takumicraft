@@ -2,6 +2,7 @@ package com.tntmodders.takumi.client.render.layer;
 
 import com.tntmodders.takumi.client.render.ITakumiRender;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityIllusionerCreeper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelCreeper;
@@ -33,7 +34,7 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
     @Override
     public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
             ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (entitylivingbaseIn.getPowered() && !entitylivingbaseIn.isInvisible()) {
+        if (entitylivingbaseIn.getPowered() && (!entitylivingbaseIn.isInvisible() || entitylivingbaseIn instanceof EntityIllusionerCreeper)) {
             GlStateManager.pushMatrix();
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);
