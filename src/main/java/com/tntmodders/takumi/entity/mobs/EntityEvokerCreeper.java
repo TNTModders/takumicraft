@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.google.common.base.Predicate;
 import com.tntmodders.takumi.client.render.RenderEvokerCreeper;
 import com.tntmodders.takumi.entity.item.EntityEvokerCreeperFangs;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
@@ -415,6 +416,7 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
                 EntitySheepCreeper sheepCreeper = new EntitySheepCreeper(world);
                 sheepCreeper.copyLocationAndAnglesFrom(entitysheep);
                 sheepCreeper.setRainbow(true);
+                TakumiUtils.takumiSetPowered(sheepCreeper, true);
                 if (world.spawnEntity(sheepCreeper)) {
                     entitysheep.setDead();
                 }

@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -309,10 +310,29 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
         return 0.4F;
     }
     
-  @Override
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+    }
+    
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        if (source.getTrueSource() instanceof EntityPlayerMP && this.getRainbow() && !TakumiUtils.getAdvancementUnlocked(new ResourceLocation
+                (TakumiCraftCore.MODID, "rainbowsheep"))) {
+            TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) source.getTrueSource(), new ResourceLocation(TakumiCraftCore.MODID,
+                    "disarmament"), new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"));
+        }
+    }
+    
+    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
-        .biomes.toArray(new Biome[0]));
+                .biomes.toArray(new Biome[0]));
     }
     
     @Override
@@ -328,14 +348,5 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public ResourceLocation getArmor() {
         return this.getRainbow() ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/big_creeper_armor.png") : super.getArmor();
-    }
-    
-    @Override
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
 }

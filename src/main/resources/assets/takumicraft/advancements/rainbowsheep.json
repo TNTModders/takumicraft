@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:creeperwool"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.rainbowsheep.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.rainbowsheep.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "takumicraft:disarmament",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
