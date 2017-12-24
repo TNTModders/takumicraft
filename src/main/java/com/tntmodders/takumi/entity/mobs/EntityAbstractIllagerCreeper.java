@@ -2,12 +2,16 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAICreeperSwell;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class EntityAbstractIllagerCreeper extends EntityTakumiAbstractCreeper {
     
@@ -21,6 +25,20 @@ public abstract class EntityAbstractIllagerCreeper extends EntityTakumiAbstractC
     @Override
     public boolean isImmuneToExplosions() {
         return true;
+    }
+    
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        AtomicReference <EntityAIBase> base = new AtomicReference <>();
+        this.tasks.taskEntries.forEach(entityAITaskEntry -> {
+            if (entityAITaskEntry.action instanceof EntityAICreeperSwell) {
+                base.set(entityAITaskEntry.action);
+            }
+        });
+        if (base.get() != null) {
+            this.tasks.removeTask(base.get());
+        }
     }
     
     @Override

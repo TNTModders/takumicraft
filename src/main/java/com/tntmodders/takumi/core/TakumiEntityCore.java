@@ -64,7 +64,7 @@ public class TakumiEntityCore {
                 EntityWitchCreeper.class, EntityWitherSkeletonCreeper.class, EntityWolfCreeper.class, EntityWoodCreeper.class, EntityWrylyCreeper
                         .class, EntityYukariCreeper.class, EntityZombieCreeper.class, EntityZombieVillagerCreeper.class, EntityCraftsmanCreeper
                         .class, EntityLlamaCreeper.class, EntityPolarBearCreeper.class, EntityShulkerCreeper.class, EntityConcreteCreeper.class,
-                EntityVindicatorCreeper.class));
+                EntityVindicatorCreeper.class, EntityEvokerCreeper.class));
     }
     
     public static List <ITakumiEntity> getEntityList() {
