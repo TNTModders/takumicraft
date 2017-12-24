@@ -299,6 +299,8 @@ entity.shulkercreeper.name=Shulker Creeper
 entity.shulkercreeper.desc=From The End, to end. This creeper shoots homing bombs.
 entity.concretecreeper.name=Concrete Creeper
 entity.concretecreeper.desc=Explosion sandwich you in concrete, soon only your items rise up.
+entity.vindicatorcreeper.name=Vindicator Creeper
+entity.vindicatorcreeper.desc=Gradiator of illager, explosive sword and strong shield.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

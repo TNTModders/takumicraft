@@ -299,6 +299,8 @@ entity.shulkercreeper.name=シュルカー匠
 entity.shulkercreeper.desc=追尾する魔球を落とすこの匠、終の地より出で此処に現る。
 entity.concretecreeper.name=コンクリート匠
 entity.concretecreeper.desc=コンクリートで埋め立てれば、もう逃れるすべは無い。
+entity.vindicatorcreeper.name=ヴィンディケーター匠
+entity.vindicatorcreeper.desc=剣士は館で目覚め、歩き始める。闇夜一閃、死を穿つ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

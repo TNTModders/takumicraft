@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.crash.CrashReport;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -125,16 +126,17 @@ public class GuiTakumiBook extends GuiScreen {
     
     private EntityLivingBase getEntity(ITakumiEntity entity, boolean flg) {
         if (entity instanceof EntityGiantCreeper) {
-            return new EntityZombieCreeper(((EntityGiantCreeper) entity).world);
+            return new EntityZombieCreeper(((Entity) entity).world);
         }
         if (entity instanceof EntitySilentCreeper && !flg) {
-            return new EntityCreeper(((EntitySilentCreeper) entity).world);
-        } else if (entity instanceof EntitySlimeCreeper) {
+            return new EntityCreeper(((Entity) entity).world);
+        }
+        if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);
         } else if (entity instanceof EntitySkeletonCreeper) {
             if (entity instanceof EntityStrayCreeper) {
                 if (!flg) {
-                    entity = new EntitySkeletonCreeper(((EntityStrayCreeper) entity).world);
+                    entity = new EntitySkeletonCreeper(((Entity) entity).world);
                 }
                 ItemStack stack = new ItemStack(Items.POTIONITEM);
                 PotionUtils.addPotionToItemStack(stack, PotionType.getPotionTypeForName("water"));
@@ -148,6 +150,10 @@ public class GuiTakumiBook extends GuiScreen {
             ((EntitySquidCreeper) entity).squidPitch = 60;
         } else if (entity instanceof EntitySheepCreeper && !flg) {
             ((EntitySheepCreeper) entity).setSheared(true);
+        } else if (entity instanceof EntityVindicatorCreeper) {
+            ((EntityVindicatorCreeper) entity).setAggressive(true);
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(TakumiItemCore.TAKUMI_SHIELD));
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_SWORD));
         }
         return (EntityLivingBase) entity;
     }

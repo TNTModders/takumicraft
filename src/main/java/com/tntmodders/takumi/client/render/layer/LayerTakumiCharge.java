@@ -34,6 +34,7 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
     public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
             ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (entitylivingbaseIn.getPowered() && !entitylivingbaseIn.isInvisible()) {
+            GlStateManager.pushMatrix();
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);
             this.creeperRenderer.bindTexture(entitylivingbaseIn.getArmor());
@@ -56,6 +57,7 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             GlStateManager.depthMask(flag);
+            GlStateManager.popMatrix();
         }
     }
     
