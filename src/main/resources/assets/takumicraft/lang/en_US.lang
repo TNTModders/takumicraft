@@ -305,6 +305,10 @@ entity.evokercreeper.name=Evoker Creeper
 entity.evokercreeper.desc=Masician of illager, explosive spell and strong servant.
 entity.vexcreeper.name=Vex Creeper
 entity.vexcreeper.desc=Servant of illager, explosive flies and strong attack.
+entity.pigmancreeper.name=Zombie Pigman Creeper
+entity.pigmancreeper.desc=Call zombie pigman, the nether becomes hell.
+entity.killercreeper.name=Killer Creeper
+entity.killercreeper.desc=Killer of steve, creates a scaffold of lava.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

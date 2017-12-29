@@ -307,6 +307,10 @@ entity.vexcreeper.name=ヴェックス匠
 entity.vexcreeper.desc=下僕は館で目覚め、羽撃き始める。闇夜風雷、轟く音。
 entity.illusionercreeper.name=イリュージョナー匠
 entity.illusionercreeper.desc=魔術師は館で目覚め、舞い始める。闇夜禁呪、今始まる。
+entity.pigmancreeper.name=腐豚匠
+entity.pigmancreeper.desc=この豚、腐っていやがる!遅すぎたんだ!!
+entity.killercreeper.name=獄匠
+entity.killercreeper.desc=ネザーの地で改築すら忘れスティーブを倒すことのみを目的とする匠。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
