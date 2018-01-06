@@ -77,8 +77,9 @@ public class TakumiEvents {
     
     @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
-        if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered() && ((EntityCreeper) event
-                .getEntityLiving()).world.isThundering()) {
+        if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered() && (((EntityCreeper) event
+                .getEntityLiving()).world.isThundering() || event.getEntity().world.provider.getDimension() == TakumiWorldCore.TAKUMI_WORLD.getId()
+        )) {
             TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), true);
         }
         if (event.getEntityLiving() instanceof EntityParrot) {

@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.core.client.TakumiModelCore;
+import com.tntmodders.takumi.core.client.TakumiClientCore;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -17,7 +17,7 @@ public class TakumiFluidCore {
     public static void register() {
         FluidRegistry.registerFluid(HOT_SPRING);
         if (FMLCommonHandler.instance().getSide().isClient()) {
-            TakumiModelCore.registerFluid(TakumiBlockCore.HOT_SPRING, "hotspring");
+            TakumiClientCore.registerFluid(TakumiBlockCore.HOT_SPRING, "hotspring");
         }
     }
 }

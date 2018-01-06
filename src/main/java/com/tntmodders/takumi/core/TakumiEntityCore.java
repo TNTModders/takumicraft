@@ -3,7 +3,7 @@ package com.tntmodders.takumi.core;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderLlamaCreeperSpit;
 import com.tntmodders.takumi.client.render.RenderTakumiTNTPrimed;
-import com.tntmodders.takumi.core.client.TakumiModelCore;
+import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
@@ -126,7 +126,7 @@ public class TakumiEntityCore {
                 });
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
-                TakumiModelCore.registerEntityRender(clazz, entity);
+                TakumiClientCore.registerEntityRender(clazz, entity);
             }
             entityList.add(entity);
             TakumiCraftCore.LOGGER.info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " + entity

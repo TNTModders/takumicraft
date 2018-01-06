@@ -35,6 +35,7 @@ public class TakumiItemCore {
     public static final Item TAKUMI_MINE_PICKAXE = new ItemTakumiMineSweeperTool(EnumTakumiTool.PICKAXE);
     public static final Item TAKUMI_MINE_SHOVEL = new ItemTakumiMineSweeperTool(EnumTakumiTool.SHOVEL);
     public static final Item TAKUMI_MINE_AXE = new ItemTakumiMineSweeperTool(EnumTakumiTool.AXE);
+    public static final Item TAKUMI_PORTAL_KIT = new ItemTakumiPortalKit();
     
     public static List <Item> itemBlocks = new ArrayList <>();
     

@@ -67,7 +67,7 @@ public class BlockTakumiAltar extends Block {
             if (!worldIn.isRemote) {
                 worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
                 if (worldIn.spawnEntity(entity)) {
-                    flg = true;
+                    return true;
                 }
             }
         }

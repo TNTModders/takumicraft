@@ -2,7 +2,7 @@ package com.tntmodders.takumi;
 
 import com.tntmodders.takumi.client.gui.TakumiGuiHandler;
 import com.tntmodders.takumi.core.*;
-import com.tntmodders.takumi.core.client.TakumiModelCore;
+import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.event.TakumiClientEvents;
 import com.tntmodders.takumi.event.TakumiEvents;
 import com.tntmodders.takumi.utils.TakumiRecipeHolder;
@@ -41,7 +41,7 @@ public class TakumiCraftCore {
     
     //初期設定
     public static final String MODID = "takumicraft";
-    public static final String VERSION = "2.0.0-β.1.0";
+    public static final String VERSION = "2.0.0-β.1.1";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
@@ -66,7 +66,7 @@ public class TakumiCraftCore {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
-        TakumiModelCore.register();
+        TakumiClientCore.register();
     }
     
     @SubscribeEvent
@@ -101,6 +101,7 @@ public class TakumiCraftCore {
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        TakumiWorldCore.register();
         TakumiConfigCore.loadConfig(event);
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 15);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());

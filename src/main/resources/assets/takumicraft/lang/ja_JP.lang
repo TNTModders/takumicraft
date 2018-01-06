@@ -71,6 +71,8 @@ tile.takumitnt.name=匠式高性能TNT
 tile.monsterbomb.name=式高性能爆弾
 tile.takumiblock.name=匠式超硬質ブロック
 tile.takumicreepered.name=匠化ブロック
+tile.takumiportalframe.name=匠ポータルフレーム
+tile.takumiportal.name=匠ポータル
 
 #item
 item.takumibook.name=匠の書
@@ -88,6 +90,7 @@ item.takumiminetool_pickaxe.name=対地雷ピッケル
 item.takumiminetool_shovel.name=対地雷ショベル
 item.takumiminetool_axe.name=対地雷斧
 item.takumishield.name=匠式防盾
+item.portalkit.name=匠ポータルキット
 
 #entity
 ＃descは36文字まで。

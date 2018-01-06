@@ -16,6 +16,10 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("blockHardness", "field_149782_v");
         FIELD_MAP.put("advancementToProgress", "field_192803_d");
         FIELD_MAP.put("fuseTime", "field_82225_f");
+        FIELD_MAP.put("lastPortalPos", "field_181016_an");
+        FIELD_MAP.put("lastPortalVec", "field_181017_ao");
+        FIELD_MAP.put("teleportDirection", "field_181018_ap");
+        FIELD_MAP.put("inPortal", "field_71087_bX");
         
         METHOD_MAP.put("onUpdate", "func_70071_h_");
         METHOD_MAP.put("explode", "func_146077_cc");

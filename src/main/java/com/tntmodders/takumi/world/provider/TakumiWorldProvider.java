@@ -1,0 +1,98 @@
+package com.tntmodders.takumi.world.provider;
+
+import com.tntmodders.takumi.core.TakumiWorldCore;
+import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.gen.IChunkGenerator;
+
+public class TakumiWorldProvider extends WorldProvider {
+    
+    private final Vec3d fogColor = new Vec3d(0, 0.75, 0);
+    private IChunkGenerator chunkGenerator;
+    
+    @Override
+    protected void generateLightBrightnessTable() {
+        float f = 0.0F;
+        
+        for (int i = 0; i <= 15; ++i) {
+            float f1 = 1.0F - (float) i / 15.0F;
+            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F * 0.25f;
+        }
+    }
+    
+    @Override
+    protected void init() {
+        super.init();
+        this.doesWaterVaporize = false;
+        this.chunkGenerator = new TakumiWorldChunkGenerator(this.world, this.getSeed(), true, this.world.getWorldInfo().getGeneratorOptions());
+        this.biomeProvider = new TakumiBiomeProvider(this.world.getWorldInfo());
+    }
+    
+    @Override
+    public IChunkGenerator createChunkGenerator() {
+        return this.chunkGenerator;
+    }
+    
+    @Override
+    public float calculateCelestialAngle(long worldTime, float partialTicks) {
+        return 0.625f;
+    }
+    
+    @Override
+    public int getMoonPhase(long worldTime) {
+        return 0;
+    }
+    
+    @Override
+    public Vec3d getFogColor(float p_76562_1_, float p_76562_2_) {
+        return this.fogColor;
+    }
+    
+    @Override
+    public boolean canRespawnHere() {
+        return false;
+    }
+    
+    @Override
+    public BiomeProvider getBiomeProvider() {
+        return this.biomeProvider;
+    }
+    
+    @Override
+    public double getMovementFactor() {
+        return 10;
+    }
+    
+    @Override
+    public boolean shouldMapSpin(String entity, double x, double z, double rotation) {
+        return true;
+    }
+    
+    @Override
+    public boolean isDaytime() {
+        return false;
+    }
+    
+    @Override
+    public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
+        return this.fogColor;
+    }
+    
+    @Override
+    public DimensionType getDimensionType() {
+        return TakumiWorldCore.TAKUMI_WORLD;
+    }
+    
+    @Override
+    public void onWorldUpdateEntities() {
+        super.onWorldUpdateEntities();
+        this.world.getWorldInfo().setRaining(true);
+        this.world.getWorldInfo().setRainTime(10000);
+        this.world.getWorldInfo().setThundering(true);
+        this.world.getWorldInfo().setThunderTime(10000);
+    }
+}

@@ -71,6 +71,8 @@ tile.takumitnt.name=Creeper TNT
 tile.monsterbomb.name=Bomb
 tile.takumiblock.name=Creeper Super Block
 tile.takumicreepered.name=Creepered Block
+tile.takumiportalframe.name=Creeper World Portal
+tile.takumiportal.name=Creeper World Portal
 
 #item
 item.takumibook.name=Creeper Book
@@ -88,6 +90,7 @@ item.takumiminetool_pickaxe.name=Minesweeper Pickaxe
 item.takumiminetool_shovel.name=Minesweeper Shovel
 item.takumiminetool_axe.name=Minesweeper Axe
 item.takumishield.name=Creeper Shield
+item.portalkit.name=Creeper Portal Kit
 
 #entity
 #desc max: 72 chars
