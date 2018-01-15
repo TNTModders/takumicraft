@@ -1,5 +1,8 @@
 package com.tntmodders.takumi.world.chunk;
 
+import com.tntmodders.takumi.core.TakumiBiomeCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -39,6 +42,9 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
     public static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
     public static final IBlockState ICE = Blocks.ICE.getDefaultState();
     public static final IBlockState SNOW_LAYER = Blocks.SNOW_LAYER.getDefaultState();
+    public static final IBlockState GRASS = Blocks.GRASS.getDefaultState();
+    public static final IBlockState DIRT = Blocks.DIRT.getDefaultState();
+    public static final IBlockState MAGMA = Blocks.MAGMA.getDefaultState();
     
     private final Random rand;
     private final World world;
@@ -77,7 +83,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
         }
         this.world = worldIn;
         this.mapFeaturesEnabled = mapFeaturesEnabledIn;
-        this.rand = new Random(seed);
+        this.rand = new Random(seed + 334);
         this.minLimitPerlinNoise = new NoiseGeneratorOctaves(this.rand, 16);
         this.maxLimitPerlinNoise = new NoiseGeneratorOctaves(this.rand, 16);
         this.mainPerlinNoise = new NoiseGeneratorOctaves(this.rand, 8);
@@ -118,19 +124,15 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
      */
     @Override
     public Chunk generateChunk(int x, int z) {
-        this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+        this.rand.setSeed((long) x * 341873128334L + (long) z * 132897987334L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.setTakumiWorldChunkGeneratorInChunk(x, z, chunkprimer);
         this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.replaceBiomeTakumiWorldChunkGenerator(x, z, chunkprimer, this.biomesForGeneration);
         
-        if (this.settings.useCaves) {
-            this.caveGenerator.generate(this.world, x, z, chunkprimer);
-        }
+        this.caveGenerator.generate(this.world, x, z, chunkprimer);
         
-        if (this.settings.useRavines) {
-            this.ravineGenerator.generate(this.world, x, z, chunkprimer);
-        }
+        this.ravineGenerator.generate(this.world, x, z, chunkprimer);
         
         if (this.mapFeaturesEnabled) {
             if (this.settings.useMineShafts) {
@@ -230,11 +232,11 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
     
     private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_) {
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double) this.settings
-                .depthNoiseScaleX * 1.25, (double) this.settings.depthNoiseScaleZ * 1.25, (double) this.settings.depthNoiseScaleExponent * 1.25);
-        float f = this.settings.coordinateScale * 1.5f;
-        float f1 = this.settings.heightScale * 2f;
+                .depthNoiseScaleX * 2, (double) this.settings.depthNoiseScaleZ * 2, (double) this.settings.depthNoiseScaleExponent);
+        float f = this.settings.coordinateScale * 2.5f;
+        float f1 = this.settings.heightScale * 2.5f;
         this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5,
-                (double) (f / this.settings.mainNoiseScaleX), (double) (f1 / this.settings.mainNoiseScaleY), (double) (f / this.settings
+                (double) (f / this.settings.mainNoiseScaleX), (double) (f1 / this.settings.mainNoiseScaleY + 250), (double) (f / this.settings
                         .mainNoiseScaleZ));
         this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5,
                 (double) f, (double) f1, (double) f);
@@ -254,18 +256,18 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 for (int j1 = -2; j1 <= 2; ++j1) {
                     for (int k1 = -2; k1 <= 2; ++k1) {
                         Biome biome1 = this.biomesForGeneration[k + j1 + 2 + (l + k1 + 2) * 10];
-                        float f5 = this.settings.biomeDepthOffSet + biome1.getBaseHeight() * this.settings.biomeDepthWeight;
-                        float f6 = this.settings.biomeScaleOffset + biome1.getHeightVariation() * this.settings.biomeScaleWeight;
+                        float f5 = this.settings.biomeDepthOffSet + biome1.getBaseHeight() * this.settings.biomeDepthWeight * 1.25f;
+                        float f6 = this.settings.biomeScaleOffset + biome1.getHeightVariation() * this.settings.biomeScaleWeight * 1.25f;
                         
-                        if (/*this.terrainType == WorldType.AMPLIFIED && */f5 > 0.0F) {
-                            f5 = 1.0F + f5 * 2.0F;
-                            f6 = 1.0F + f6 * 4.0F;
+                        if (f5 > 0.0F) {
+                            f5 = 1.0F + f5 * 2.5f;
+                            f6 = 1.0F + f6 * 2.5f;
                         }
                         
                         float f7 = this.biomeWeights[j1 + 2 + (k1 + 2) * 5] / (f5 + 2.0F);
                         
                         if (biome1.getBaseHeight() > biome.getBaseHeight()) {
-                            f7 /= 2.0F;
+                            f7 /= 2F;
                         }
                         
                         f2 += f6 * f7;
@@ -332,6 +334,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 }
             }
         }
+        
     }
     
     /**
@@ -367,8 +370,16 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
             }
         }
         
-        if (biome != Biomes.DESERT && biome != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings
-                .waterLakeChance) == 0) {
+        if (biome == TakumiBiomeCore.TAKUMI_HOTSPRING_MOUNTAINS || biome == TakumiBiomeCore.TAKUMI_LAVA_MOUNTAINS) {
+            Block block = biome == TakumiBiomeCore.TAKUMI_HOTSPRING_MOUNTAINS ? TakumiBlockCore.HOT_SPRING : LAVA.getBlock();
+            if (TerrainGen.populate(this, this.world, this.rand, x, z, flag, EventType.LAKE)) {
+                int i1 = this.rand.nextInt(16) + 8;
+                int j1 = this.rand.nextInt(256);
+                int k1 = this.rand.nextInt(16) + 8;
+                new WorldGenLakes(block).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
+            }
+        } else if (biome != Biomes.DESERT && biome != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this
+                .settings.waterLakeChance) == 0) {
             if (TerrainGen.populate(this, this.world, this.rand, x, z, flag, EventType.LAKE)) {
                 int i1 = this.rand.nextInt(16) + 8;
                 int j1 = this.rand.nextInt(256);

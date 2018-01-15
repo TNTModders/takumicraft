@@ -13,6 +13,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -97,6 +98,11 @@ public class TakumiCraftCore {
     @SubscribeEvent
     public void registerPotionType(Register <PotionType> event) {
         TakumiPotionCore.registerPotionType(event.getRegistry());
+    }
+    
+    @SubscribeEvent
+    public void registerBiome(Register <Biome> event) {
+        TakumiBiomeCore.register(event.getRegistry());
     }
     
     @EventHandler

@@ -1,6 +1,6 @@
 package com.tntmodders.takumi.world.gen.layer;
 
-import net.minecraft.init.Biomes;
+import com.tntmodders.takumi.core.TakumiBiomeCore;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
@@ -16,8 +16,13 @@ public class GenLayerTakumiBiome extends GenLayerTakumiWorld {
     
     public GenLayerTakumiBiome(long seed, GenLayer parentGenLayer) {
         super(seed);
-        this.biomesToGenerate.add(new BiomeEntry(Biomes.MUSHROOM_ISLAND, 1));
-        this.biomesToGenerate.add(new BiomeEntry(Biomes.DESERT, 2));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_PLAINS, 2));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_FOREST, 2));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_MOUNTAINS, 2));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_HOTSPRING_MOUNTAINS, 1));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_LAVA_MOUNTAINS, 1));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_OCEAN, 1));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_OBJET, 1));
         this.totalWeight = this.biomesToGenerate.getTotalWeight();
         this.parent = parentGenLayer;
     }
@@ -37,7 +42,7 @@ public class GenLayerTakumiBiome extends GenLayerTakumiWorld {
         return ints;
     }
     
-    public class WeightedList <T extends BiomeEntry> extends ArrayList <T> {
+    private class WeightedList <T extends BiomeEntry> extends ArrayList <T> {
         
         private int totalWeight;
         

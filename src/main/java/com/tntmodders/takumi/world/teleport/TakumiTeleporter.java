@@ -127,11 +127,13 @@ public class TakumiTeleporter extends Teleporter {
             }
             
             if (blockpattern$patternhelper.getForwards().getAxis() == Axis.X) {
-                d7 = d2 + 4 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double)
+                d7 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double)
                         blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+                d5 += this.world.rand.nextBoolean() ? 1.25 : -1.25;
             } else {
-                d5 = d2 + 4 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double)
+                d5 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double)
                         blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+                d7 += this.world.rand.nextBoolean() ? 1.25 : -1.25;
             }
             
             float f = 0.0F;
