@@ -1,4 +1,4 @@
-package com.tntmodders.takumi.network;
+package com.tntmodders.takumi.network.old;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

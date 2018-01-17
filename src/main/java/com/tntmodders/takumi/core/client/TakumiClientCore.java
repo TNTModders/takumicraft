@@ -6,6 +6,7 @@ import com.tntmodders.takumi.client.render.tileentity.RenderMonsterBomb;
 import com.tntmodders.takumi.client.render.tileentity.RenderTakumiBlock;
 import com.tntmodders.takumi.client.render.tileentity.RenderTakumiCreepered;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.TileEntityAcidBlock;
@@ -19,6 +20,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.*;
 import net.minecraft.util.NonNullList;
@@ -28,11 +30,20 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 
 import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class TakumiClientCore {
+    
+    public static KeyBinding keyBindingTakumiBook;
+    
+    public static void registerKey() {
+        keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.getKeyIndex(TakumiConfigCore.takumibookKey), TakumiCraftCore
+                .MODID);
+        ClientRegistry.registerKeyBinding(keyBindingTakumiBook);
+    }
     
     public static void register() {
         Class clazz = TakumiItemCore.class;

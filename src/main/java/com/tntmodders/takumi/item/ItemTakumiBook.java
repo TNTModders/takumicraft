@@ -17,7 +17,7 @@ public class ItemTakumiBook extends Item {
     
     public ItemTakumiBook() {
         this.setRegistryName(TakumiCraftCore.MODID, "takumibook");
-        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        //this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumibook");
     }
     

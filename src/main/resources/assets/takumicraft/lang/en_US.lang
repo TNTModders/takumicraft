@@ -381,3 +381,7 @@ takumicraft.newyear.item.name=New Year Present
 config.takumicraft.category.general=TakumiCraft Config
 config.takumicraft.cerulean.prop=Transparency of CeruleanCreeper
 config.takumicraft.cerulean.desc=Change false if the graphic of CeruleanCreeper doesn't work.
+config.takumicraft.category.keyconf=TakumiCraft KeyConfig
+config.takumicraft.takumibook.prop=Key of TakumiBook
+config.takumicraft.takumibook.desc=Change this if the key confricts.
+takumicraft.takumibook.key=Show TakumiBook

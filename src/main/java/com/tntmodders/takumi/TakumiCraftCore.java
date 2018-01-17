@@ -57,9 +57,6 @@ public class TakumiCraftCore {
         TakumiModInfoCore.load(metadata);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new TakumiEvents());
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            MinecraftForge.EVENT_BUS.register(new TakumiClientEvents());
-        }
         TakumiFluidCore.register();
         TakumiTileEntityCore.register();
     }
@@ -109,6 +106,10 @@ public class TakumiCraftCore {
     public void preInit(FMLPreInitializationEvent event) {
         TakumiWorldCore.register();
         TakumiConfigCore.loadConfig(event);
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            MinecraftForge.EVENT_BUS.register(new TakumiClientEvents());
+            TakumiClientCore.registerKey();
+        }
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 15);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
     }

@@ -1,4 +1,4 @@
-package com.tntmodders.takumi.network;
+package com.tntmodders.takumi.network.old;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraftforge.fml.common.network.NetworkRegistry;

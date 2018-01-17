@@ -8,9 +8,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class TakumiConfigCore {
     
     public static final String GENERAL = "General";
+    private static final String KEYCONF = GENERAL + ".KeyConfig";
     private static final String HOGE = GENERAL + ".hoge";
     public static Configuration cfg;
-    public static boolean isTransparentCeruleanCreeper = true;
+    public static boolean isTransparentCeruleanCreeper;
+    public static String takumibookKey;
     public static byte amountSmelting = 1;
     
     public static void loadConfig(FMLPreInitializationEvent event) {
@@ -28,8 +30,12 @@ public class TakumiConfigCore {
     private static void initConfig() {
         // カテゴリのコメントなどを設定する。
         // General
-        cfg.addCustomCategoryComment(GENERAL, "A settings of Takumicraft.");
+        cfg.addCustomCategoryComment(GENERAL, "A settings of TakumiCraft.");
         cfg.setCategoryLanguageKey(GENERAL, "config.takumicraft.category.general");
+        //KeyConfig
+        cfg.addCustomCategoryComment(KEYCONF, "A setting of Keys for TakumiCraft.");
+        cfg.setCategoryLanguageKey(KEYCONF, "config.takumicraft.category.keyconf");
+        cfg.getCategory(KEYCONF).setRequiresMcRestart(true);
         // Difficulty
         //cfg.addCustomCategoryComment(HOGE, "The settings of hoge.");
         //cfg.setCategoryLanguageKey(HOGE, "config.takumicraft.category.hoge");
@@ -42,8 +48,11 @@ public class TakumiConfigCore {
     public static void syncConfig() {
         // 各項目の設定値を反映させる。
         // General
-        isTransparentCeruleanCreeper = cfg.getBoolean("isTransparentCeruleanCreeper", GENERAL, isTransparentCeruleanCreeper, TakumiUtils
+        isTransparentCeruleanCreeper = cfg.getBoolean("isTransparentCeruleanCreeper", GENERAL,true, TakumiUtils
                 .takumiTranslate("config.takumicraft.cerulean.desc"), "config.takumicraft.cerulean.prop");
+        //KeyConfig
+        takumibookKey = cfg.getString("takumibookKey", KEYCONF, "I", TakumiUtils.takumiTranslate("config.takumicraft.takumibook.desc"),
+                "config.takumicraft.takumibook.prop");
         // Difficulty
         //amountSmelting = (byte) cfg.getInt("amountSmelting", HOGE, amountSmelting, 1, Byte.MAX_VALUE, "Smelting amount of Aluminium Ingot from
         // Aluminium Ore.", "config.aluminium.prop.amountSmelting");
