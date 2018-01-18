@@ -6,7 +6,6 @@ import com.tntmodders.takumi.client.render.tileentity.RenderMonsterBomb;
 import com.tntmodders.takumi.client.render.tileentity.RenderTakumiBlock;
 import com.tntmodders.takumi.client.render.tileentity.RenderTakumiCreepered;
 import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.TileEntityAcidBlock;
@@ -40,8 +39,7 @@ public class TakumiClientCore {
     public static KeyBinding keyBindingTakumiBook;
     
     public static void registerKey() {
-        keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.getKeyIndex(TakumiConfigCore.takumibookKey), TakumiCraftCore
-                .MODID);
+        keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.KEY_I, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingTakumiBook);
     }
     
