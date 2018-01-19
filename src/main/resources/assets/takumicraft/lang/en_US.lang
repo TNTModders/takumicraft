@@ -312,6 +312,8 @@ entity.pigmancreeper.name=Zombie Pigman Creeper
 entity.pigmancreeper.desc=Call zombie pigman, the nether becomes hell.
 entity.killercreeper.name=Killer Creeper
 entity.killercreeper.desc=Killer of steve, creates a scaffold of lava.
+entity.expcreeper.name=XP Creeper
+entity.expcreeper.desc=Experience is power, power is explosion.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
