@@ -316,6 +316,8 @@ entity.killercreeper.name=獄匠
 entity.killercreeper.desc=ネザーの地で改築すら忘れスティーブを倒すことのみを目的とする匠。
 entity.expcreeper.name=経験値匠
 entity.expcreeper.desc=知は、力なり。力は、爆発なり。その匠、知と力を以て制す者なり。
+entity.sinobicreeper.name=忍匠
+entity.sinobicreeper.desc=風のように、影のように、その忍は消え去らん。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
