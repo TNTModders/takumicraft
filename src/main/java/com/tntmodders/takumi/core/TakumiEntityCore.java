@@ -34,8 +34,7 @@ import java.util.*;
 
 public class TakumiEntityCore {
     
-    public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", IMob.class, 20, Material.AIR, false,
-            false);
+    public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper.addCreatureType("creature_takumi", IMob.class, 20, Material.AIR, false, false);
     public static final EnumCreatureType WATER_TAKUMI = EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);
     private static final List <Class <? extends ITakumiEntity>> CLASS_LIST = new ArrayList <>();
     public static List <Biome> biomes = new ArrayList <>();
@@ -66,7 +65,8 @@ public class TakumiEntityCore {
                         .class, EntityYukariCreeper.class, EntityZombieCreeper.class, EntityZombieVillagerCreeper.class, EntityCraftsmanCreeper
                         .class, EntityLlamaCreeper.class, EntityPolarBearCreeper.class, EntityShulkerCreeper.class, EntityConcreteCreeper.class,
                 EntityVindicatorCreeper.class, EntityEvokerCreeper.class, EntityVexCreeper.class, EntityIllusionerCreeper.class,
-                EntityPigmanCreeper.class, EntityKillerCreeper.class, EntityExperienceCreeper.class,EntitySinobiCreeper.class));
+                EntityPigmanCreeper.class, EntityKillerCreeper.class, EntityExperienceCreeper.class, EntitySinobiCreeper.class,
+                EntityStraightCreeper.class, EntityCrossCreeper.class));
     }
     
     public static List <ITakumiEntity> getEntityList() {

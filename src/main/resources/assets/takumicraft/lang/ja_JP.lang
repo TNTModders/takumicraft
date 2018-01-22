@@ -318,6 +318,10 @@ entity.expcreeper.name=経験値匠
 entity.expcreeper.desc=知は、力なり。力は、爆発なり。その匠、知と力を以て制す者なり。
 entity.sinobicreeper.name=忍匠
 entity.sinobicreeper.desc=風のように、影のように、その忍は消え去らん。
+entity.straightcreeper.name=一文字匠
+entity.straightcreeper.desc=炎のように、日輪のように、激しく一文字に切り裂かん。
+entity.crosscreeper.name=十文字匠
+entity.crosscreeper.desc=氷のように、月光のように、静かに十文字に切り裂かん。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

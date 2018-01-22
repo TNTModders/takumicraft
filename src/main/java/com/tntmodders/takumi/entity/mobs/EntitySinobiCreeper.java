@@ -67,7 +67,7 @@ public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public int getExplosionPower() {
-        return 3;
+        return 4;
     }
     
     @Override
@@ -99,7 +99,7 @@ public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (FMLCommonHandler.instance().getSide().isClient()) {
-            for (int i = 0; i < 25; i++) {
+            for (int i = 0; i < 30; i++) {
                 event.getAffectedBlocks().forEach(pos -> Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleSmokeSinobi(this.world, pos
                         .getX() + (this.rand.nextDouble() - 0.5D), pos.getY() + this.rand.nextDouble(), pos.getZ() + (this.rand.nextDouble() -
                         0.5D), 0.0D, 0.0D, 0.0D, 1.0f)));
