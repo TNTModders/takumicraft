@@ -322,6 +322,8 @@ entity.straightcreeper.name=一文字匠
 entity.straightcreeper.desc=炎のように、日輪のように、激しく一文字に切り裂かん。
 entity.crosscreeper.name=十文字匠
 entity.crosscreeper.desc=氷のように、月光のように、静かに十文字に切り裂かん。
+entity.transcreeper.name=輪匠
+entity.transcreeper.desc=世界は廻る、大地も廻る。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

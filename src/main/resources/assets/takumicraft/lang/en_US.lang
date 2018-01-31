@@ -320,6 +320,8 @@ entity.straightcreeper.name=Straight Creeper
 entity.straightcreeper.desc=Like fire, like the sun, this creeper slashes straightly.
 entity.crosscreeper.name=Cross Creeper
 entity.crosscreeper.desc=Like ice, like the moon, this creeper slashes silently.
+entity.transcreeper.name=Trans Creeper
+entity.transcreeper.desc=The world cycles, the ground also do.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
