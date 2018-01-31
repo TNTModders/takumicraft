@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
@@ -135,7 +134,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     public boolean getCanSpawnHere() {
         boolean flg;
         BlockPos blockpos = this.getPosition();
-        TakumiCraftCore.LOGGER.info(this.getClass().getName());
         if (this.isAnimal()) {
             return (this.world.getBlockState(blockpos.down()).getBlock() == Blocks.DIRT || this.world.getBlockState(blockpos.down()).getBlock() ==
                     Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiWorldChunkGenerator.DIRT || this.world
