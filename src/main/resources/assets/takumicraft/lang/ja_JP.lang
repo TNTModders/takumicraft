@@ -390,9 +390,12 @@ takumicraft.newyear.item.name=新春匠式魔除け
 
 #config
 config.takumicraft.category.general=匠Craft設定
+config.takumicraft.category.spawn=スポーン設定
 config.takumicraft.cerulean.prop=セルリアン匠 描画
 config.takumicraft.cerulean.desc=セルリアン匠が正しく描画されない時にfalseにして下さい。
 config.takumicraft.category.keyconf=キー設定
 config.takumicraft.takumibook.prop=匠図鑑 キー設定
 config.takumicraft.takumibook.desc=匠図鑑のキーが他MODと競合する際に変更して下さい。
+config.takumicraft.weightanimal.prop=匠動物のスポーン率
+config.takumicraft.weightanimal.desc=動物が異常に多く湧く際に変更して下さい。
 takumicraft.takumibook.key=匠図鑑 表示

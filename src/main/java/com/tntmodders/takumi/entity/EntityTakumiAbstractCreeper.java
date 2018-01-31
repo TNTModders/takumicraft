@@ -1,12 +1,16 @@
 package com.tntmodders.takumi.entity;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
+import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -103,6 +107,11 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     }
     
     @Override
+    public boolean isAnimal() {
+        return false;
+    }
+    
+    @Override
     public int getPrimaryColor() {
         return 39168;
     }
@@ -120,5 +129,19 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     
     public double getSizeAmp() {
         return 1;
+    }
+    
+    @Override
+    public boolean getCanSpawnHere() {
+        boolean flg;
+        BlockPos blockpos = this.getPosition();
+        TakumiCraftCore.LOGGER.info(this.getClass().getName());
+        if (this.isAnimal()) {
+            return (this.world.getBlockState(blockpos.down()).getBlock() == Blocks.DIRT || this.world.getBlockState(blockpos.down()).getBlock() ==
+                    Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiWorldChunkGenerator.DIRT || this.world
+                    .getBlockState(blockpos.down()).getBlock() == TakumiWorldChunkGenerator.GRASS) && this.world.getLight(blockpos) > 8 && this
+                    .rand.nextInt(10) == 0 && super.getCanSpawnHere();
+        }
+        return super.getCanSpawnHere();
     }
 }

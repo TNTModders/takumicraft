@@ -65,6 +65,26 @@ public class EntityVindicatorCreeper extends EntityAbstractIllagerCreeper {
     }
     
     @Override
+    protected void entityInit() {
+        super.entityInit();
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IllagerArmPose getArmPose() {
+        return this.isAggressive() ? IllagerArmPose.ATTACKING : IllagerArmPose.CROSSED;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public boolean isAggressive() {
+        return this.isAggressive(1);
+    }
+    
+    public void setAggressive(boolean p_190636_1_) {
+        this.setAggressive(1, p_190636_1_);
+    }
+    
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3499999940395355D);
@@ -118,26 +138,6 @@ public class EntityVindicatorCreeper extends EntityAbstractIllagerCreeper {
     @Override
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_VINDICATION_ILLAGER;
-    }
-    
-    @Override
-    protected void entityInit() {
-        super.entityInit();
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IllagerArmPose getArmPose() {
-        return this.isAggressive() ? IllagerArmPose.ATTACKING : IllagerArmPose.CROSSED;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public boolean isAggressive() {
-        return this.isAggressive(1);
-    }
-    
-    public void setAggressive(boolean p_190636_1_) {
-        this.setAggressive(1, p_190636_1_);
     }
     
     /**

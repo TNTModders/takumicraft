@@ -129,8 +129,18 @@ public class EntityCowCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    protected boolean isValidLightLevel() {
+    public boolean isAnimal() {
         return true;
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x001100;
+    }
+    
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderCowCreeper(manager);
     }
     
     @Override
@@ -143,12 +153,7 @@ public class EntityCowCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public int getPrimaryColor() {
-        return 0x001100;
-    }
-    
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderCowCreeper(manager);
+    protected boolean isValidLightLevel() {
+        return true;
     }
 }

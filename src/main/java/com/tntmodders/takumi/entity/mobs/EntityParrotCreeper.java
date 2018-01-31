@@ -53,13 +53,13 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     public float oFlap;
     public float flapping = 1.0F;
     private int rideCooldownCounter;
-    
+
     public EntityParrotCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.5F, 0.9F);
         this.moveHelper = new EntityFlyHelper(this);
     }
-    
+
     public boolean isFlying() {
         return !this.onGround;
     }
@@ -107,13 +107,13 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-        
+
         if (this.getOwnerId() == null) {
             compound.setString("OwnerUUID", "");
         } else {
             compound.setString("OwnerUUID", this.getOwnerId().toString());
         }
-        
+
         compound.setBoolean("Sitting", this.isSitting());
     }
     
@@ -124,14 +124,14 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         String s;
-        
+
         if (compound.hasKey("OwnerUUID", 8)) {
             s = compound.getString("OwnerUUID");
         } else {
             String s1 = compound.getString("Owner");
             s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
         }
-        
+
         this.setSitting(compound.getBoolean("Sitting"));
     }
     
@@ -168,7 +168,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     
     public void setSitting(boolean sitting) {
         byte b0 = this.dataManager.get(TAMED);
-        
+
         if (sitting) {
             this.dataManager.set(TAMED, (byte) (b0 | 1));
         } else {
@@ -184,7 +184,7 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         NBTTagCompound nbttagcompound = new NBTTagCompound();
         nbttagcompound.setString("id", this.getEntityString());
         this.writeToNBT(nbttagcompound);
-        
+
         if (p_191994_1_.addShoulderEntity(nbttagcompound)) {
             this.world.removeEntity(this);
             return true;
@@ -264,32 +264,23 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.oFlapSpeed = this.flapSpeed;
         this.flapSpeed = (float) ((double) this.flapSpeed + (double) (this.onGround ? -1 : 4) * 0.3D);
         this.flapSpeed = MathHelper.clamp(this.flapSpeed, 0.0F, 1.0F);
-        
+
         if (!this.onGround && this.flapping < 1.0F) {
             this.flapping = 1.0F;
         }
-        
+
         this.flapping = (float) ((double) this.flapping * 0.9D);
-        
+
         if (!this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
-        
+
         this.flap += this.flapping * 2.0F;
     }
     
     @Override
     protected boolean isValidLightLevel() {
         return true;
-    }
-    
-    @Override
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     /**
@@ -335,11 +326,11 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
      */
     protected void playTameEffect(boolean play) {
         EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
-        
+
         if (!play) {
             enumparticletypes = EnumParticleTypes.SMOKE_NORMAL;
         }
-        
+
         for (int i = 0; i < 7; ++i) {
             double d0 = this.rand.nextGaussian() * 0.02D;
             double d1 = this.rand.nextGaussian() * 0.02D;
@@ -432,15 +423,28 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     }
     
     @Override
-        public void customSpawn() {
-            EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI,
-            TakumiEntityCore
-                    .biomes.toArray(new Biome[0]));
-        }
-       
+    public void customSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
+                .biomes.toArray(new Biome[0]));
+    }
+    
+    @Override
+    public boolean isAnimal() {
+        return true;
+    }
+    
     @Override
     @SideOnly(Side.CLIENT)
     public Object getRender(RenderManager manager) {
         return new RenderParrotCreeper(manager);
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
 }

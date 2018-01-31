@@ -188,7 +188,7 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
      */
     public void setSheared(boolean sheared) {
         byte b0 = this.dataManager.get(DYE_COLOR);
-        
+
         if (sheared) {
             this.dataManager.set(DYE_COLOR, (byte) (b0 | 16));
         } else {
@@ -244,12 +244,12 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     public List <ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         this.setSheared(true);
         int i = 1 + this.rand.nextInt(3);
-        
+
         List <ItemStack> ret = new ArrayList <>();
         for (int j = 0; j < i; ++j) {
             ret.add(new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_WOOL), 1, this.getFleeceColor().getMetadata()));
         }
-        
+
         this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
         return ret;
     }
@@ -311,15 +311,6 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     }
     
     @Override
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
-    }
-    
-    @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
         if (source.getTrueSource() instanceof EntityPlayerMP && this.getRainbow() && !TakumiUtils.getAdvancementUnlocked(new ResourceLocation
@@ -336,6 +327,11 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     }
     
     @Override
+    public boolean isAnimal() {
+        return true;
+    }
+    
+    @Override
     public int getPrimaryColor() {
         return 0xeeffee;
     }
@@ -348,5 +344,14 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public ResourceLocation getArmor() {
         return this.getRainbow() ? new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/big_creeper_armor.png") : super.getArmor();
+    }
+    
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
 }

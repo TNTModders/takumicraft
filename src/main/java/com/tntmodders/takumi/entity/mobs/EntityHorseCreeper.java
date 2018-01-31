@@ -107,6 +107,11 @@ public class EntityHorseCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public boolean isAnimal() {
+        return true;
+    }
+    
+    @Override
     public int getPrimaryColor() {
         return 0x559900;
     }
@@ -117,17 +122,17 @@ public class EntityHorseCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-    
-    @Override
     public boolean getCanSpawnHere() {
         int i = MathHelper.floor(this.posX);
         int j = MathHelper.floor(this.getEntityBoundingBox().minY);
         int k = MathHelper.floor(this.posZ);
         BlockPos blockpos = new BlockPos(i, j, k);
         return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+    }
+    
+    @Override
+    protected boolean isValidLightLevel() {
+        return true;
     }
     
     @Override

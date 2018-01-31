@@ -228,15 +228,6 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         return true;
     }
     
-    @Override
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
-    }
-    
     protected SoundEvent getJumpSound() {
         return SoundEvents.ENTITY_RABBIT_JUMP;
     }
@@ -375,10 +366,15 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
         ((RabbitJumpHelper) this.jumpHelper).setCanJump(false);
     }
     
-  @Override
+    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
                 .biomes.toArray(new Biome[0]));
+    }
+    
+    @Override
+    public boolean isAnimal() {
+        return true;
     }
     
     @Override
@@ -389,6 +385,15 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderRabbitCreeper <>(manager);
+    }
+    
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     static class AIEvilAttack extends EntityAIAttackMelee {

@@ -181,14 +181,6 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
         return true;
     }
     
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel();
-    }
-    
     public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn) {
         this.randomMotionVecX = randomMotionVecXIn;
         this.randomMotionVecY = randomMotionVecYIn;
@@ -227,11 +219,11 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     public void onEntityUpdate() {
         int i = this.getAir();
         super.onEntityUpdate();
-        
+
         if (this.isEntityAlive() && !this.isInWater()) {
             --i;
             this.setAir(i);
-            
+
             if (this.getAir() == -20) {
                 this.setAir(0);
                 this.attackEntityFrom(DamageSource.DROWN, 2.0F);
@@ -316,6 +308,14 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     @SideOnly(Side.CLIENT)
     public Object getRender(RenderManager manager) {
         return new RenderSquidCreeper(manager);
+    }
+    
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel();
     }
     
     static class AIMoveRandom extends EntityAIBase {

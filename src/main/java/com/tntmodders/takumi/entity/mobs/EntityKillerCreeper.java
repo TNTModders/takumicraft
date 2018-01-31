@@ -15,8 +15,7 @@ public class EntityKillerCreeper extends EntityTakumiAbstractCreeper {
     
     static final IBlockState STONE = Blocks.STONEBRICK.getStateFromMeta(BlockStoneBrick.MOSSY_META);
     static final IBlockState IRON = Blocks.IRON_BARS.getDefaultState().withProperty(BlockPane.EAST, true).withProperty(BlockPane.NORTH, false)
-            .withProperty
-            (BlockPane.SOUTH, false).withProperty(BlockPane.WEST, true);
+            .withProperty(BlockPane.SOUTH, false).withProperty(BlockPane.WEST, true);
     static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
     static final IBlockState web = Blocks.WEB.getDefaultState();
     

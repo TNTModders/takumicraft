@@ -30,13 +30,13 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     }
     
     @Override
-    public boolean getCanSpawnHere() {
-        return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
+    public int getPrimaryColor() {
+        return 11184895;
     }
     
     @Override
-    public int getPrimaryColor() {
-        return 11184895;
+    public boolean getCanSpawnHere() {
+        return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
     }
     
     @Override

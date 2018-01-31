@@ -183,6 +183,11 @@ public class EntityLlamaCreeper extends EntityTakumiAbstractCreeper implements I
     }
     
     @Override
+    public boolean isAnimal() {
+        return true;
+    }
+    
+    @Override
     public int getPrimaryColor() {
         return 0x88ff88;
     }

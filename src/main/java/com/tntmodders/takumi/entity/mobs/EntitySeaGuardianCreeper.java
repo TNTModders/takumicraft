@@ -80,6 +80,14 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         return new RenderSeaGuardianCreeper(manager);
     }
     
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        return (this.rand.nextInt(20) == 0 || !this.world.canBlockSeeSky(new BlockPos(this))) && super.getCanSpawnHere();
+    }
+    
     @Override
     protected void initEntityAI() {
         EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
@@ -357,14 +365,6 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected boolean isValidLightLevel() {
         return true;
-    }
-    
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return (this.rand.nextInt(20) == 0 || !this.world.canBlockSeeSky(new BlockPos(this))) && super.getCanSpawnHere();
     }
     
     @SideOnly(Side.CLIENT)

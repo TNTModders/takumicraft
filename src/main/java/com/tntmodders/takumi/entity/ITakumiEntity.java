@@ -20,6 +20,8 @@ public interface ITakumiEntity {
     
     void customSpawn();
     
+    boolean isAnimal();
+    
     int getExplosionPower();
     
     int getPrimaryColor();

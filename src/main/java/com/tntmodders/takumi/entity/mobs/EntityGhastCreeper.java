@@ -228,14 +228,6 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         }
     }
     
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(20) == 0 && super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
-    }
-    
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_GHAST_AMBIENT;
@@ -307,6 +299,14 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @SideOnly(Side.CLIENT)
     public Object getRender(RenderManager manager) {
         return new RenderGhastCreeper(manager);
+    }
+    
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(20) == 0 && super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
     }
     
     static class AIFireballAttack extends EntityAIBase {

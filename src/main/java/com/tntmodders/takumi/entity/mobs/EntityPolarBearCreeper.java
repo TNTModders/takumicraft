@@ -72,17 +72,17 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        
+
         if (this.world.isRemote) {
             this.clientSideStandAnimation0 = this.clientSideStandAnimation;
-            
+
             if (this.isStanding()) {
                 this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation + 1.0F, 0.0F, 6.0F);
             } else {
                 this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation - 1.0F, 0.0F, 6.0F);
             }
         }
-        
+
         if (this.warningSoundTicks > 0) {
             --this.warningSoundTicks;
         }
@@ -108,7 +108,7 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
         if (flag) {
             this.applyEnchantments(this, entityIn);
         }
-        
+
         return flag;
     }
     
@@ -198,6 +198,11 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
         biomeList.removeIf(biome -> biome.getTempCategory() != TempCategory.COLD);
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, biomeList
                 .toArray(new Biome[0]));
+    }
+    
+    @Override
+    public boolean isAnimal() {
+        return true;
     }
     
     @Override

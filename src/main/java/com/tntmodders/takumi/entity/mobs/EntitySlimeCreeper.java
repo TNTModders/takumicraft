@@ -306,6 +306,34 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     }
     
     /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        BlockPos blockpos = new BlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
+        Chunk chunk = this.world.getChunkFromBlockCoords(blockpos);
+        
+        if (this.world.getWorldInfo().getTerrainType().handleSlimeSpawnReduction(rand, world)) {
+            return false;
+        } else {
+            if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
+                Biome biome = this.world.getBiome(blockpos);
+                
+                if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() <
+                        this.world.getCurrentMoonPhaseFactor() && this.world.getLightFromNeighbors(new BlockPos(this)) <= this.rand.nextInt(8)) {
+                    return super.getCanSpawnHere();
+                }
+                
+                if (this.rand.nextInt(10) == 0 && chunk.getRandomWithSeed(987234911L).nextInt(10) == 0 && this.posY < 40.0D) {
+                    return super.getCanSpawnHere();
+                }
+            }
+            
+            return false;
+        }
+    }
+    
+    /**
      * Called by a player entity when they collide with an entity
      */
     @Override
@@ -386,34 +414,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         int j = 1 << i;
         this.setSlimeSize(j, true);
         return super.onInitialSpawn(difficulty, livingdata);
-    }
-    
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        BlockPos blockpos = new BlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
-        Chunk chunk = this.world.getChunkFromBlockCoords(blockpos);
-        
-        if (this.world.getWorldInfo().getTerrainType().handleSlimeSpawnReduction(rand, world)) {
-            return false;
-        } else {
-            if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
-                Biome biome = this.world.getBiome(blockpos);
-                
-                if (biome == Biomes.SWAMPLAND && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() <
-                        this.world.getCurrentMoonPhaseFactor() && this.world.getLightFromNeighbors(new BlockPos(this)) <= this.rand.nextInt(8)) {
-                    return super.getCanSpawnHere();
-                }
-                
-                if (this.rand.nextInt(10) == 0 && chunk.getRandomWithSeed(987234911L).nextInt(10) == 0 && this.posY < 40.0D) {
-                    return super.getCanSpawnHere();
-                }
-            }
-            
-            return false;
-        }
     }
     
     /**

@@ -65,6 +65,34 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
         return item;
     }
     
+    public static void spawn(EntityTakumiAbstractCreeper entity) {
+        for (int x = (int) entity.posX - 4; x <= (int) entity.posX + 4; x++) {
+            for (int z = (int) entity.posZ - 4; z <= (int) entity.posZ + 4; z++) {
+                for (int y = (int) entity.posY + 2; y >= (int) entity.posY + 1; y--) {
+                    for (int i = 0; i < (entity.getPowered() ? 4 : 2); i++) {
+                        entity.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
+                        if (entity.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && entity.world.getBlockState(new BlockPos
+                                (x, y + 1, z)).getBlock() == Blocks.AIR && entity.world.rand.nextInt(15) == 0) {
+                            Class <? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(entity.world.rand.nextInt(TakumiEntityCore
+                                    .getEntityList().size())).getClass();
+                            try {
+                                Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(entity.world);
+                                if (((ITakumiEntity) creeper).takumiRank() == EnumTakumiRank.LOW || ((ITakumiEntity) creeper).takumiRank() ==
+                                        EnumTakumiRank.MID) {
+                                    creeper.world = entity.world;
+                                    creeper.setPosition(x, y, z);
+                                    entity.world.spawnEntity(creeper);
+                                }
+                            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     public static void createTree(Entity entity, BlockPos pos) {
         for (int y = 0; y < 7; y++) {
             switch (y) {
@@ -127,34 +155,6 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
             }
             if (y != 6) {
                 entity.world.setBlockState(pos.up(y), Blocks.LOG.getDefaultState());
-            }
-        }
-    }
-    
-    public static void spawn(EntityTakumiAbstractCreeper entity) {
-        for (int x = (int) entity.posX - 4; x <= (int) entity.posX + 4; x++) {
-            for (int z = (int) entity.posZ - 4; z <= (int) entity.posZ + 4; z++) {
-                for (int y = (int) entity.posY + 2; y >= (int) entity.posY + 1; y--) {
-                    for (int i = 0; i < (entity.getPowered() ? 4 : 2); i++) {
-                        entity.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
-                        if (entity.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR && entity.world.getBlockState(new BlockPos
-                                (x, y + 1, z)).getBlock() == Blocks.AIR && entity.world.rand.nextInt(15) == 0) {
-                            Class <? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(entity.world.rand.nextInt(TakumiEntityCore
-                                    .getEntityList().size())).getClass();
-                            try {
-                                Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(entity.world);
-                                if (((ITakumiEntity) creeper).takumiRank() == EnumTakumiRank.LOW || ((ITakumiEntity) creeper).takumiRank() ==
-                                        EnumTakumiRank.MID) {
-                                    creeper.world = entity.world;
-                                    creeper.setPosition(x, y, z);
-                                    entity.world.spawnEntity(creeper);
-                                }
-                            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
             }
         }
     }

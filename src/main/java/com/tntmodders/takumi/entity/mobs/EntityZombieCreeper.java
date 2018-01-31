@@ -569,7 +569,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
                             this.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement caller "
                                     + "charge", -0.05000000074505806D, 0));
                             entityzombie.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement " +
-                                    "" + "" + "" + "" + "callee charge", -0.05000000074505806D, 0));
+                                    "" + "" + "" + "" + "" + "callee charge", -0.05000000074505806D, 0));
                             break;
                         }
                     }

@@ -169,11 +169,15 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
         return true;
     }
     
-    
     @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20, TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore
                 .biomes.toArray(new Biome[0]));
+    }
+    
+    @Override
+    public boolean isAnimal() {
+        return true;
     }
     
     @Override
@@ -184,6 +188,15 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderWolfCreeper <>(manager);
+    }
+    
+    @Override
+    public boolean getCanSpawnHere() {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     @Override
@@ -283,15 +296,6 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected boolean isValidLightLevel() {
         return true;
-    }
-    
-    @Override
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
     }
     
     @Override
