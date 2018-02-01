@@ -21,6 +21,7 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("teleportDirection", "field_181018_ap");
         FIELD_MAP.put("inPortal", "field_71087_bX");
         FIELD_MAP.put("closestPlayer","field_80001_f");
+        FIELD_MAP.put("timeSinceIgnited","field_70833_d");
         
         METHOD_MAP.put("onUpdate", "func_70071_h_");
         METHOD_MAP.put("explode", "func_146077_cc");

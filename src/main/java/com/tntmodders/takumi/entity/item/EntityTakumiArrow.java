@@ -35,9 +35,8 @@ public class EntityTakumiArrow extends EntityArrow {
         if (raytraceResultIn.typeOfHit == Type.ENTITY) {
             if (raytraceResultIn.entityHit == this.shootingEntity) {
                 return;
-            } else {
-                raytraceResultIn.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("explosion.player", this.shootingEntity, this), 15.0f);
             }
+            raytraceResultIn.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("explosion.player", this.shootingEntity, this), 15.0f);
         }
         TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power, false, false);
         pierce--;

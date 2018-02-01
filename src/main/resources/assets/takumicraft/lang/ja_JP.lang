@@ -91,6 +91,7 @@ item.takumiminetool_shovel.name=対地雷ショベル
 item.takumiminetool_axe.name=対地雷斧
 item.takumishield.name=匠式防盾
 item.portalkit.name=匠ポータルキット
+item.takumichoco.name=匠式チョコボール
 
 #entity
 ＃descは36文字まで。
@@ -329,6 +330,7 @@ entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 entity.explosionpotion.name=爆裂ポーション
 entity.takumitnt.name=匠式高性能TNT
+entity.takumichocolateball.name=匠式チョコボール
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

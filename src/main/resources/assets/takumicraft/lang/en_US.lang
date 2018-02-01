@@ -91,6 +91,7 @@ item.takumiminetool_shovel.name=Minesweeper Shovel
 item.takumiminetool_axe.name=Minesweeper Axe
 item.takumishield.name=Creeper Shield
 item.portalkit.name=Creeper Portal Kit
+item.takumichoco.name=Chocolate Ball
 
 #entity
 #desc max: 72 chars
@@ -327,6 +328,7 @@ entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
 entity.takumipotion.name=Explosive Potion
 entity.takumitnt.name=Creeper TNT
+entity.takumichocolateball.name=Chocolate Ball
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
