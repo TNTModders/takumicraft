@@ -328,6 +328,8 @@ entity.transcreeper.desc=世界は廻る、大地も廻る。
 entity.shootingcreeper.name=射匠
 entity.shootingcreeper.desc=アイテムをキミにあげよう!勿論ギブアンドテイクでね……
 entity.shootingcreeper.desc.choco=チョコレートをキミに、たくさんたくさんあげるのだ……
+entity.shadowcreeper.name=影匠
+entity.shadowcreeper.desc=クラス:Keter この匠にはNK-クラスシナリオの危険性があります。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
