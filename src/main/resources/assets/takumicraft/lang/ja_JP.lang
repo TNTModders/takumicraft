@@ -325,6 +325,9 @@ entity.crosscreeper.name=十文字匠
 entity.crosscreeper.desc=氷のように、月光のように、静かに十文字に切り裂かん。
 entity.transcreeper.name=輪匠
 entity.transcreeper.desc=世界は廻る、大地も廻る。
+entity.shootingcreeper.name=射匠
+entity.shootingcreeper.desc=アイテムをキミにあげよう!勿論ギブアンドテイクでね……
+entity.shootingcreeper.desc.choco=チョコレートをキミに、たくさんたくさんあげるのだ……
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

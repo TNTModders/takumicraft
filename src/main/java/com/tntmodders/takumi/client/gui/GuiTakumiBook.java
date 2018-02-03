@@ -101,6 +101,11 @@ public class GuiTakumiBook extends GuiScreen {
             if (flg && this.currPage >= 0 && this.currPage < TakumiEntityCore.getEntityList().size()) {
                 s5 = TakumiUtils.takumiTranslate("entity." + TakumiEntityCore.getEntityList().get(this.currPage).getRegisterName() + ".name");
                 s6 = TakumiUtils.takumiTranslate("entity." + TakumiEntityCore.getEntityList().get(this.currPage).getRegisterName() + ".desc");
+                if (TakumiEntityCore.getEntityList().get(this.currPage) instanceof EntityShootingCreeper && EntityShootingCreeper.useChoco
+                        (Minecraft.getMinecraft().world)) {
+                    s6 = TakumiUtils.takumiTranslate("entity." + TakumiEntityCore.getEntityList().get(this.currPage).getRegisterName() + ".desc" +
+                            ".choco");
+                }
             }
             
             int j1 = this.fontRenderer.getStringWidth(s4);

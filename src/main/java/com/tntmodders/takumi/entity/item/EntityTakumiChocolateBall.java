@@ -1,10 +1,14 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.core.TakumiItemCore;
+import com.tntmodders.takumi.entity.mobs.EntityShootingCreeper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -44,7 +48,7 @@ public class EntityTakumiChocolateBall extends EntityThrowable {
      */
     @Override
     protected void onImpact(RayTraceResult result) {
-        if (result.entityHit != null) {
+        if (result.entityHit != null && !(result.entityHit instanceof EntityShootingCreeper)) {
             if (result.entityHit instanceof EntityLivingBase) {
                 EntityLivingBase entityLivingBase = (EntityLivingBase) result.entityHit;
                 if (result.entityHit instanceof EntityLiving) {
@@ -65,6 +69,10 @@ public class EntityTakumiChocolateBall extends EntityThrowable {
                         d1 = (Math.random() - Math.random()) * 0.01D;
                     }
                     entityLivingBase.knockBack(this, 2f, d1, d0);
+                } else if (this.thrower instanceof EntityShootingCreeper && !this.world.isRemote) {
+                    EntityItem item = new EntityItem(this.world, entityLivingBase.posX, entityLivingBase.posY, entityLivingBase.posZ, new ItemStack
+                            (TakumiItemCore.TAKUMI_CHOCO_BALL, 1));
+                    this.world.spawnEntity(item);
                 }
                 entityLivingBase.heal(1f);
             }

@@ -323,6 +323,9 @@ entity.crosscreeper.name=Cross Creeper
 entity.crosscreeper.desc=Like ice, like the moon, this creeper slashes silently.
 entity.transcreeper.name=Trans Creeper
 entity.transcreeper.desc=The world cycles, the ground also do.
+entity.shootingcreeper.name=Shooting  Creeper
+entity.shootingcreeper.desc=Give you a lot of items, and take...
+entity.shootingcreeper.desc.choco=Give you cocolate, and take...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
