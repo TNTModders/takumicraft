@@ -73,6 +73,7 @@ tile.takumiblock.name=匠式超硬質ブロック
 tile.takumicreepered.name=匠化ブロック
 tile.takumiportalframe.name=匠ポータルフレーム
 tile.takumiportal.name=匠ポータル
+tile.fallingbomb.name=阿闍梨匠の爆弾
 
 #item
 item.takumibook.name=匠の書
@@ -330,12 +331,17 @@ entity.shootingcreeper.desc=アイテムをキミにあげよう!勿論ギブア
 entity.shootingcreeper.desc.choco=チョコレートをキミに、たくさんたくさんあげるのだ……
 entity.shadowcreeper.name=影匠
 entity.shadowcreeper.desc=クラス:Keter この匠にはNK-クラスシナリオの危険性があります。
+entity.fallingbombcreeper.name=阿闍梨匠
+entity.fallingbombcreeper.desc=阿闍梨の修行は落ち来る災厄、大地を埋めよ、全てを崩せ。
+entity.fallingslimecreeper.name=阿修羅匠
+entity.fallingslimecreeper.desc=阿修羅の修行は落ち来る脅威、虚空を埋めよ、全てを壊せ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
 entity.explosionpotion.name=爆裂ポーション
 entity.takumitnt.name=匠式高性能TNT
 entity.takumichocolateball.name=匠式チョコボール
+entity.fallingbomb.name=阿闍梨匠の爆弾
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

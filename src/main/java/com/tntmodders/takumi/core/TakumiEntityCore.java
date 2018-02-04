@@ -68,7 +68,7 @@ public class TakumiEntityCore {
                 EntityVindicatorCreeper.class, EntityEvokerCreeper.class, EntityVexCreeper.class, EntityIllusionerCreeper.class,
                 EntityPigmanCreeper.class, EntityKillerCreeper.class, EntityExperienceCreeper.class, EntitySinobiCreeper.class,
                 EntityStraightCreeper.class, EntityCrossCreeper.class, EntityTransCreeper.class, EntityShootingCreeper.class, EntityShadowCreeper
-                        .class));
+                        .class, EntityFallingBombCreeper.class));
     }
     
     public static List <ITakumiEntity> getEntityList() {
@@ -212,6 +212,8 @@ public class TakumiEntityCore {
                 "llamacreeperspit", 905, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumichocolateball"), EntityTakumiChocolateBall.class,
                 "takumichocolateball", 906, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "fallingbomb"), EntityFallingBomb.class, "fallingbomb", 907,
+                TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
     
     @SideOnly(Side.CLIENT)
