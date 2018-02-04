@@ -331,6 +331,8 @@ entity.shadowcreeper.name=Shadow Creeper
 entity.shadowcreeper.desc=This object have the potencial for NK-class end-of-the-world scenario.
 entity.fallingbombcreeper.name=Falling Bomb Creeper
 entity.fallingbombcreeper.desc=Not a gravel, but tons of falling bomb.
+entity.fallingslimecreeper.name=Falling Slime Creeper
+entity.fallingslimecreeper.desc=Not a few, but lots of falling slime.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
