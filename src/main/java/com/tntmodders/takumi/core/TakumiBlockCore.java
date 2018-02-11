@@ -52,6 +52,9 @@ public class TakumiBlockCore {
     public static final Block TAKUMI_PORTAL_FRAME = new BlockTakumiPortalFrame();
     public static final BlockTakumiPortal TAKUMI_PORTAL = new BlockTakumiPortal();
     public static final Block FALLING_BOMB = new BlockFallingBomb();
+    public static final Block TAKUMI_STONE = new BlockTakumiStone();
+    public static final Block TAKUMI_DIRT = new BlockTakumiDirt();
+    public static final Block TAKUMI_GRASS = new BlockTakumiGrass();
     
     public static final Map <Class <? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap <>();
     

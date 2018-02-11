@@ -59,7 +59,6 @@ public class TakumiEvents {
     
     @SubscribeEvent
     public void onPickupItem(EntityItemPickupEvent event) {
-        TakumiUtils.takumiUnlockRecipes(event.getItem().getItem(), event.getEntityPlayer());
     }
     
     @SubscribeEvent
@@ -70,9 +69,6 @@ public class TakumiEvents {
     
     @SubscribeEvent
     public void onCloseContainer(Close event) {
-        for (ItemStack itemStack : event.getEntityPlayer().inventoryContainer.getInventory()) {
-            TakumiUtils.takumiUnlockRecipes(itemStack, event.getEntityPlayer());
-        }
     }
     
     @SubscribeEvent

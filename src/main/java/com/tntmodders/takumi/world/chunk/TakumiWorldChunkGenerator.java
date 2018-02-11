@@ -38,13 +38,13 @@ import java.util.Random;
 public class TakumiWorldChunkGenerator implements IChunkGenerator {
     
     public static final IBlockState WATER = Blocks.WATER.getDefaultState();
-    public static final IBlockState STONE = Blocks.STONE.getDefaultState();
     public static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
     public static final IBlockState ICE = Blocks.ICE.getDefaultState();
     public static final IBlockState SNOW_LAYER = Blocks.SNOW_LAYER.getDefaultState();
-    public static final IBlockState GRASS = Blocks.GRASS.getDefaultState();
-    public static final IBlockState DIRT = Blocks.DIRT.getDefaultState();
     public static final IBlockState MAGMA = Blocks.MAGMA.getDefaultState();
+    public static final IBlockState STONE = TakumiBlockCore.TAKUMI_STONE.getDefaultState();
+    public static final IBlockState DIRT = TakumiBlockCore.TAKUMI_DIRT.getDefaultState();
+    public static final IBlockState GRASS = TakumiBlockCore.TAKUMI_GRASS.getDefaultState();
     
     private final Random rand;
     private final World world;
@@ -435,7 +435,15 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
         }//Forge: End ICE
         
         ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, flag);
-        
+/*        for (int y = 0; y < 256; y++) {
+            for (int dx = 0; dx < 16; dx++) {
+                for (int dz = 0; dz < 16; dz++) {
+                    BlockPos pos = new BlockPos(i + dx, y, j + dz);
+                    Block block = this.world.getBlockState(pos).getBlock();
+                    this.replace(pos, block);
+                }
+            }
+        }*/
         BlockFalling.fallInstantly = false;
     }
     
@@ -511,5 +519,13 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
             return this.mineshaftGenerator.isInsideStructure(pos);
         }
         return "Temple".equals(structureName) && this.scatteredFeatureGenerator != null && this.scatteredFeatureGenerator.isInsideStructure(pos);
+    }
+    
+    private void replace(BlockPos pos, Block block) {
+        if (block == Blocks.DIRT) {
+            this.world.setBlockState(pos, TakumiBlockCore.TAKUMI_DIRT.getDefaultState(), 2);
+        } else if (block == Blocks.GRASS) {
+            this.world.setBlockState(pos, TakumiBlockCore.TAKUMI_GRASS.getDefaultState(), 2);
+        }
     }
 }

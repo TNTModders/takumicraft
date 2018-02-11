@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    " F ",
+    "Q  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_ingot"
+    },
+    "F": {
+      "item": "minecraft:emerald"
+    },
+    "Q":{
+      "item":"takumicraft:kingcore"
+    }
+  },
+  "result": {
+    "item": "takumicraft:portalkit",
+    "count": 1
+  }
+}

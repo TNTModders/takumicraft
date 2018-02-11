@@ -11,7 +11,7 @@
     },
     "frame": "goal"
   },
-  "parent": "takumicraft:creeperbomb",
+  "parent": "takumicraft:root",
   "rewards": {
     "experience": 10000
   },

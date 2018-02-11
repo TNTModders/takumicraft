@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "snowy=false": [
+            { "model": "takumicraft:takumigrass_normal" },
+            { "model": "takumicraft:takumigrass_normal", "y": 90 },
+            { "model": "takumicraft:takumigrass_normal", "y": 180 },
+            { "model": "takumicraft:takumigrass_normal", "y": 270 }
+        ],
+        "snowy=true":  { "model": "takumicraft:takumigrass_snowed" }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "takumicraft:takumidirt" },
+            { "model": "takumicraft:takumidirt", "y": 90 },
+            { "model": "takumicraft:takumidirt", "y": 180 },
+            { "model": "takumicraft:takumidirt", "y": 270 }
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:skull",
+      "data": 4
+    },
+    "title": {
+      "translate": "advancements.takumicraft.root.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.root.desc"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

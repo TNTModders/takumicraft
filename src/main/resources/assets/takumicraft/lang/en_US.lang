@@ -74,6 +74,9 @@ tile.takumicreepered.name=Creepered Block
 tile.takumiportalframe.name=Creeper World Portal
 tile.takumiportal.name=Creeper World Portal
 tile.fallingbomb.name=Falling Bomb
+tile.takumistone.name=Takumi Stone
+tile.takumidirt.name=Takumi DIrt
+tile.takumigrass.name=Takumi Grass
 
 #item
 item.takumibook.name=Creeper Book
@@ -93,6 +96,7 @@ item.takumiminetool_axe.name=Minesweeper Axe
 item.takumishield.name=Creeper Shield
 item.portalkit.name=Creeper Portal Kit
 item.takumichoco.name=Chocolate Ball
+item.kingcore.name=King Core
 
 #entity
 #desc max: 72 chars
@@ -360,6 +364,8 @@ advancements.takumicraft.takumiblock.title=Harden the world
 advancements.takumicraft.takumiblock.desc=Got a Creeper Super Block.
 advancements.takumicraft.rainbowsheep.title=Rainbow Sheep
 advancements.takumicraft.rainbowsheep.desc=Slay rainbow Sheep Creeper.
+advancements.takumicraft.kingslayer.title=King Slayer
+advancements.takumicraft.kingslayer.desc=Slay King Creeper.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 

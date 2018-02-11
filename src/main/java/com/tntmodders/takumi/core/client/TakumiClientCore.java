@@ -101,6 +101,16 @@ public class TakumiClientCore {
                 TakumiCraftCore.LOGGER.info("Registered block model: " + s);
             }
         }
+        registerStatesModel();
+    }
+    
+    private static void registerStatesModel() {
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.TAKUMI_DIRT, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "takumidirt"), "normal");
+            }
+        });
     }
     
     public static void registerEntityRender(Class <Entity> clazz, ITakumiEntity entity) {

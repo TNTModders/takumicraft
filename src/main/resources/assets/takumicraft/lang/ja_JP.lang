@@ -74,6 +74,9 @@ tile.takumicreepered.name=匠化ブロック
 tile.takumiportalframe.name=匠ポータルフレーム
 tile.takumiportal.name=匠ポータル
 tile.fallingbomb.name=阿闍梨匠の爆弾
+tile.takumistone.name=匠石
+tile.takumidirt.name=匠土
+tile.takumigrass.name=匠草土
 
 #item
 item.takumibook.name=匠の書
@@ -93,6 +96,7 @@ item.takumiminetool_axe.name=対地雷斧
 item.takumishield.name=匠式防盾
 item.portalkit.name=匠ポータルキット
 item.takumichoco.name=匠式チョコボール
+item.kingcore.name=王匠の証
 
 #entity
 ＃descは36文字まで。
@@ -362,6 +366,8 @@ advancements.takumicraft.takumiblock.title=超硬質化
 advancements.takumicraft.takumiblock.desc=匠式超硬質ブロックの入手 絶対無敵、模様も完全。
 advancements.takumicraft.rainbowsheep.title=幻の虹色
 advancements.takumicraft.rainbowsheep.desc=虹の羊匠を倒す 見つけたら幸せになれるかも?
+advancements.takumicraft.kingslayer.title=キング=スレイヤー
+advancements.takumicraft.kingslayer.desc=王匠を倒す 物語は、ほんの始まり。 次の世界へ向かおう。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 

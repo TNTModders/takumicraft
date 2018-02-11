@@ -37,6 +37,8 @@ public class TakumiItemCore {
     public static final Item TAKUMI_MINE_AXE = new ItemTakumiMineSweeperTool(EnumTakumiTool.AXE);
     public static final Item TAKUMI_PORTAL_KIT = new ItemTakumiPortalKit();
     public static final Item TAKUMI_CHOCO_BALL = new ItemTakumiChocolateBall();
+    public static final Item KING_CORE = new ItemKingCore();
+    
     public static List <Item> itemBlocks = new ArrayList <>();
     
     public static void register(IForgeRegistry <Item> registry) {

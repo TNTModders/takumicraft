@@ -2,11 +2,9 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.ITakumiItemBlock;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -14,11 +12,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -70,7 +65,7 @@ public class TakumiUtils {
         return false;
     }
     
-    public static void takumiUnlockRecipes(ItemStack stack, EntityPlayer player) {
+   /* public static void takumiUnlockRecipes(ItemStack stack, EntityPlayer player) {
         if (FMLCommonHandler.instance().getSide().isClient()) {
             //レシピはjsonをスキャンして結果からリストでif判定できるように!
             Item item = stack.getItem();
@@ -92,7 +87,7 @@ public class TakumiUtils {
                 player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
             }
         }
-    }
+    }*/
     
     public static World getDummyWorld() {
         return FMLCommonHandler.instance().getSide().isClient() ? getClientWorld() : getServerWorld();
@@ -111,9 +106,10 @@ public class TakumiUtils {
     public static float takumiGetBlockResistance(Entity entity, IBlockState state, BlockPos pos) {
         float f = entity.getExplosionResistance(null, entity.world, pos, state);
         if (f >= 1200) {
-            f = -1;
-        } else if (f < 0) {
-            f = 0;
+            return -1;
+        }
+        if (f < 0) {
+            return 0;
         }
         return f;
     }
@@ -135,7 +131,7 @@ public class TakumiUtils {
         List <File> files = new ArrayList <>();
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
         URL url = loader.getResource(path);
-        if (url.getProtocol().equals("jar")) {
+        if (Objects.equals(url.getProtocol(), "jar")) {
             // TakumiCraftCore.LOGGER.info("urlpath : " + url.getPath());
 /*            String[] strings = url.getPath().split(":/");
             String leadPath = strings[strings.length - 2] + ":/" + strings[strings.length - 1].split("!")[0];*/
@@ -164,7 +160,7 @@ public class TakumiUtils {
         } else {
             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
             File newFile = new File(packFile.toURI().getPath() + path);
-            files = Arrays.asList(newFile.listFiles());
+            return Arrays.asList(newFile.listFiles());
         }
         return files;
     }

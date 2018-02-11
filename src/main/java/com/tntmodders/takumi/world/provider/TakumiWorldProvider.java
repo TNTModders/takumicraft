@@ -1,8 +1,10 @@
 package com.tntmodders.takumi.world.provider;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -35,6 +37,13 @@ public class TakumiWorldProvider extends WorldProvider {
     @Override
     public IChunkGenerator createChunkGenerator() {
         return this.chunkGenerator;
+    }
+    
+    @Override
+    public boolean canCoordinateBeSpawn(int x, int z) {
+        BlockPos blockpos = new BlockPos(x, 0, z);
+        return this.world.getBiome(blockpos).ignorePlayerSpawnSuitability() || this.world.getGroundAboveSeaLevel(blockpos).getBlock() ==
+                TakumiBlockCore.TAKUMI_GRASS;
     }
     
     @Override

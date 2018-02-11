@@ -24,7 +24,7 @@ public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
         this.isLava = isLava;
         if (isLava) {
             this.topBlock = TakumiWorldChunkGenerator.MAGMA;
-            this.fillerBlock = TakumiWorldChunkGenerator.STONE;
+            this.fillerBlock = Blocks.DIRT.getDefaultState();
         }
     }
     

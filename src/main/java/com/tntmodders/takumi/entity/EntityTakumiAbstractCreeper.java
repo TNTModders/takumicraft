@@ -1,8 +1,8 @@
 package com.tntmodders.takumi.entity;
 
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
-import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -136,8 +136,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         BlockPos blockpos = this.getPosition();
         if (this.isAnimal()) {
             return (this.world.getBlockState(blockpos.down()).getBlock() == Blocks.DIRT || this.world.getBlockState(blockpos.down()).getBlock() ==
-                    Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiWorldChunkGenerator.DIRT || this.world
-                    .getBlockState(blockpos.down()).getBlock() == TakumiWorldChunkGenerator.GRASS) && this.world.getLight(blockpos) > 8 && this
+                    Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_DIRT || this.world
+                    .getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_GRASS) && this.world.getLight(blockpos) > 8 && this
                     .rand.nextInt(10) == 0 && super.getCanSpawnHere();
         }
         return super.getCanSpawnHere();
