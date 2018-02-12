@@ -1,0 +1,53 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "level=0": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=1": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=2": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=3": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=4": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=5": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=6": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    },
+    "level=7": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "takumiwater"
+      }
+    }
+  }
+}

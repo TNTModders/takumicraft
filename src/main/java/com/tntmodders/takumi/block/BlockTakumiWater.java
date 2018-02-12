@@ -18,12 +18,12 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTakumiHotSpring extends BlockFluidClassic {
+public class BlockTakumiWater extends BlockFluidClassic {
     
-    public BlockTakumiHotSpring() {
-        super(TakumiFluidCore.HOT_SPRING, TakumiMaterial.HOT_SPRING);
-        this.setRegistryName(TakumiCraftCore.MODID, "takumihotspring");
-        this.setUnlocalizedName("takumihotspring");
+    public BlockTakumiWater() {
+        super(TakumiFluidCore.TAKUMI_WATER, TakumiMaterial.TAKUMI_WATER);
+        this.setRegistryName(TakumiCraftCore.MODID, "takumiwater");
+        this.setUnlocalizedName("takumiwater");
         this.setResistance(10000000f);
     }
     

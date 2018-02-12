@@ -89,11 +89,13 @@ tile.takumiore_quartz.name=Takumi Quartz Ore
 tile.takumiore_ender_pearl.name=Takumi Pearl Ore
 tile.takumiore_glowstone_dust.name=Takumi GlowStone Ore
 tile.takumiore_magicstone.name=Takumi MagicStone Ore
+tile.takumiwater.name=Takumi Water
 
 #item
 item.takumibook.name=Creeper Book
 item.takumibucket_air.name=Emerald Bucket
 item.takumibucket_takumihotspring.name=Emerald Hot Spring Bucket
+item.takumibucket_takumiwater.name=Emerald Takumi Water Bucket
 item.takumibow.name=Creeper Bow
 item.takumiarrow_ha.name=Creeper Blast Arrow
 item.takumisword.name=Creeper Sword

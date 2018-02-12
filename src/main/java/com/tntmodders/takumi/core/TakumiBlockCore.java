@@ -20,6 +20,7 @@ public class TakumiBlockCore {
     public static final Block CREEPER_BOMB = new BlockTakumiCreeperBomb();
     public static final Block GUNORE = new BlockTakumiGunOre();
     public static final Block HOT_SPRING = new BlockTakumiHotSpring();
+    public static final Block TAKUMI_WATER = new BlockTakumiWater();
     public static final Block CREEPER_BRICK = new BlockTakumiAntiExplosion(Material.SAND, "creeperbrick", 2.5f, "pickaxe");
     public static final Block CREEPER_IRON = new BlockTakumiAntiExplosion(Material.IRON, "creeperiron", 5f, "pickaxe");
     public static final Block DUMMY_GUNORE = new BlockTakumiDummyGunOre();

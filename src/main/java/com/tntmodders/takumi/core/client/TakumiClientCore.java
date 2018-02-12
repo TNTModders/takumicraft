@@ -12,7 +12,6 @@ import com.tntmodders.takumi.tileentity.TileEntityAcidBlock;
 import com.tntmodders.takumi.tileentity.TileEntityMonsterBomb;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiCreepered;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -118,15 +117,6 @@ public class TakumiClientCore {
             @Override
             public Render createRenderFor(RenderManager manager) {
                 return (Render) entity.getRender(manager);
-            }
-        });
-    }
-    
-    public static void registerFluid(Block block, String name) {
-        ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
-            @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState p_178132_1_) {
-                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, name), "fluid");
             }
         });
     }
