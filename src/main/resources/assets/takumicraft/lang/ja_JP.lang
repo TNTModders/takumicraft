@@ -77,6 +77,18 @@ tile.fallingbomb.name=阿闍梨匠の爆弾
 tile.takumistone.name=匠石
 tile.takumidirt.name=匠土
 tile.takumigrass.name=匠草土
+tile.takumiore_diamond.name=匠金剛石
+tile.takumiore_gunpowder.name=匠火薬石
+tile.takumiore_emerald.name=匠緑玉石
+tile.takumiore_coal.name=匠石炭石
+tile.takumiore_iron_ingot.name=匠鉄鉱石
+tile.takumiore_gold_ingot.name=匠金鉱石
+tile.takumiore_redstone.name=匠赤鉱石
+tile.takumiore_dye.name=匠瑠璃石
+tile.takumiore_quartz.name=匠水晶石
+tile.takumiore_ender_pearl.name=匠真珠石
+tile.takumiore_glowstone_dust.name=匠輝鉱石
+tile.takumiore_magicstone.name=匠魔鉱石
 
 #item
 item.takumibook.name=匠の書
@@ -97,6 +109,7 @@ item.takumishield.name=匠式防盾
 item.portalkit.name=匠ポータルキット
 item.takumichoco.name=匠式チョコボール
 item.kingcore.name=王匠の証
+item.magicstone.name=匠魔石
 
 #entity
 ＃descは36文字まで。

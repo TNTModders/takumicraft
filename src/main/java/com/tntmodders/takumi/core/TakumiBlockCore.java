@@ -6,6 +6,7 @@ import com.tntmodders.takumi.entity.mobs.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.init.Items;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Field;
@@ -55,6 +56,18 @@ public class TakumiBlockCore {
     public static final Block TAKUMI_STONE = new BlockTakumiStone();
     public static final Block TAKUMI_DIRT = new BlockTakumiDirt();
     public static final Block TAKUMI_GRASS = new BlockTakumiGrass();
+    public static final Block TAKUMI_ORE_DIAMOND = new BlockTakumiOres(Items.DIAMOND);
+    public static final Block TAKUMI_ORE_GUNPOWDER = new BlockTakumiOres(Items.GUNPOWDER);
+    public static final Block TAKUMI_ORE_EMERALD = new BlockTakumiOres(Items.EMERALD);
+    public static final Block TAKUMI_ORE_COAL = new BlockTakumiOres(Items.COAL);
+    public static final Block TAKUMI_ORE_IRON = new BlockTakumiOres(Items.IRON_INGOT);
+    public static final Block TAKUMI_ORE_GOLD = new BlockTakumiOres(Items.GOLD_INGOT);
+    public static final Block TAKUMI_ORE_REDSTONE = new BlockTakumiOres(Items.REDSTONE);
+    public static final Block TAKUMI_ORE_LAPIS = new BlockTakumiOres(Items.DYE);
+    public static final Block TAKUMI_ORE_QUARTZ = new BlockTakumiOres(Items.QUARTZ);
+    public static final Block TAKUMI_ORE_PEARL = new BlockTakumiOres(Items.ENDER_PEARL);
+    public static final Block TAKUMI_ORE_GLOW = new BlockTakumiOres(Items.GLOWSTONE_DUST);
+    public static final Block TAKUMI_ORE_MAGIC = new BlockTakumiOres(TakumiItemCore.MAGIC_STONE);
     
     public static final Map <Class <? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap <>();
     

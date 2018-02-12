@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "takumicraft:blocks/takumiore_ender_pearl"
+    },
+    "model": "takumicraft:takumiore_ender_pearl",
+    "uvlock": false
+  },
+  "variants": {
+    "normal": [{
+
+    }],
+    "inventory": [{
+
+    }]
+  }
+}

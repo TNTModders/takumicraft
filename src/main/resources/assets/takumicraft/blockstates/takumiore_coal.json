@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "takumicraft:blocks/takumiore_coal"
+    },
+    "model": "takumicraft:takumiore_coal",
+    "uvlock": false
+  },
+  "variants": {
+    "normal": [{
+
+    }],
+    "inventory": [{
+
+    }]
+  }
+}

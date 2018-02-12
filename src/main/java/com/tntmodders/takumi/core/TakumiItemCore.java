@@ -38,6 +38,7 @@ public class TakumiItemCore {
     public static final Item TAKUMI_PORTAL_KIT = new ItemTakumiPortalKit();
     public static final Item TAKUMI_CHOCO_BALL = new ItemTakumiChocolateBall();
     public static final Item KING_CORE = new ItemKingCore();
+    public static final Item MAGIC_STONE = new ItemTakumiMagicStone();
     
     public static List <Item> itemBlocks = new ArrayList <>();
     

@@ -77,6 +77,18 @@ tile.fallingbomb.name=Falling Bomb
 tile.takumistone.name=Takumi Stone
 tile.takumidirt.name=Takumi DIrt
 tile.takumigrass.name=Takumi Grass
+tile.takumiore_diamond.name=Takumi Diamond Ore
+tile.takumiore_gunpowder.name=Takumi GunOre
+tile.takumiore_emerald.name=Takumi Emerald Ore
+tile.takumiore_coal.name=Takumi Coal Ore
+tile.takumiore_iron_ingot.name=Takumi Iron Ore
+tile.takumiore_gold_ingot.name=Takumi Gold Ore
+tile.takumiore_redstone.name=Takumi RedStone Ore
+tile.takumiore_dye.name=Takumi Lapis Ore
+tile.takumiore_quartz.name=Takumi Quartz Ore
+tile.takumiore_ender_pearl.name=Takumi Pearl Ore
+tile.takumiore_glowstone_dust.name=Takumi GlowStone Ore
+tile.takumiore_magicstone.name=Takumi MagicStone Ore
 
 #item
 item.takumibook.name=Creeper Book
@@ -97,6 +109,7 @@ item.takumishield.name=Creeper Shield
 item.portalkit.name=Creeper Portal Kit
 item.takumichoco.name=Chocolate Ball
 item.kingcore.name=King Core
+item.magicstone.name=MagicStone
 
 #entity
 #desc max: 72 chars

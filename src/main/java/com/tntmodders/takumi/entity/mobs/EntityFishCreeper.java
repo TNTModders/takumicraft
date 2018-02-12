@@ -83,6 +83,11 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
+    
+    @Override
     public float getBlockPathWeight(BlockPos pos) {
         return this.world.getBlockState(pos.down()).getBlock() == Blocks.STONE ? 10.0F : super.getBlockPathWeight(pos);
     }

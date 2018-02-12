@@ -19,6 +19,11 @@ public class BlockTakumiGunOre extends BlockAbstractTakumiBomb {
         this.setHarvestLevel("pickaxe", 1);
     }
     
+    public BlockTakumiGunOre(String s){
+        super(s,5f,Material.ROCK,MapColor.STONE);
+        this.setHarvestLevel("pickaxe", 1);
+    }
+    
     @Override
     float getPower() {
         return 1.5f;
@@ -26,7 +31,7 @@ public class BlockTakumiGunOre extends BlockAbstractTakumiBomb {
     
     @Override
     public int quantityDropped(Random random) {
-        return random.nextInt(1) * random.nextInt(5);
+        return random.nextInt() * random.nextInt(5);
     }
     
     @Override
@@ -50,9 +55,8 @@ public class BlockTakumiGunOre extends BlockAbstractTakumiBomb {
                 j = 0;
             }
             return this.quantityDropped(random) * (j + 1);
-        } else {
-            return this.quantityDropped(random);
         }
+        return this.quantityDropped(random);
     }
     
     @Override
