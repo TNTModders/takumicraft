@@ -70,7 +70,7 @@ public class TakumiRecipeHolder {
                                                 ("assets/takumicraft/recipes/", "").replaceAll("" + ".json", ""));
                                         try {
                                             stream = new FileInputStream(recipe);
-                                            h_s = h_s.replaceAll("minecraft:sulfur", this.getItem(stream, recipe.getName().replaceAll
+                                            h_s = h_s.replaceAll("minecraft:gunpowder", this.getItem(stream, recipe.getName().replaceAll
                                                     ("assets/takumicraft/recipes/", "").replaceAll("" + ".json", "")));
                                             stream.close();
                                         } catch (Exception e) {
