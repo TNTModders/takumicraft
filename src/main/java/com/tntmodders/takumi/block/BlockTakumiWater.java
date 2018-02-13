@@ -7,7 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -40,14 +39,12 @@ public class BlockTakumiWater extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
         float f12 = 0.0F;
-    
-        if (entity instanceof EntityLivingBase)
-        {
-            EntityLivingBase ent = (EntityLivingBase)entity;
-            f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
         
-            if (ent.isPotionActive(MobEffects.WATER_BREATHING))
-            {
+        if (entity instanceof EntityLivingBase) {
+            EntityLivingBase ent = (EntityLivingBase) entity;
+            f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
+            
+            if (ent.isPotionActive(MobEffects.WATER_BREATHING)) {
                 f12 = f12 * 0.3F + 0.6F;
             }
         }
@@ -56,12 +53,9 @@ public class BlockTakumiWater extends BlockFluidClassic {
     
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 20 == 0) {
-            ((EntityLivingBase) entityIn).heal(0.25f);
-            if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
-                ((EntityPlayer) entityIn).getFoodStats().addStats(1, 0);
-            }
-        }
+        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+        entityIn.motionX *= 1.125;
+        entityIn.motionZ *= 1.125;
     }
     
     @Override
