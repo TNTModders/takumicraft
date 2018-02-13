@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.client.render.RenderSquidCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -219,11 +220,11 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     public void onEntityUpdate() {
         int i = this.getAir();
         super.onEntityUpdate();
-
+        
         if (this.isEntityAlive() && !this.isInWater()) {
             --i;
             this.setAir(i);
-
+            
             if (this.getAir() == -20) {
                 this.setAir(0);
                 this.attackEntityFrom(DamageSource.DROWN, 2.0F);
@@ -302,6 +303,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
+        EntitySpawnPlacementRegistry.setPlacementType(EntitySquidCreeper.class, SpawnPlacementType.IN_WATER);
     }
     
     @Override
@@ -315,7 +317,8 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel();
+        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel() && this.rand.nextInt(5) == 0 && this.world.getEntities
+                (EntitySquidCreeper.class, input -> true).size() < 10;
     }
     
     static class AIMoveRandom extends EntityAIBase {

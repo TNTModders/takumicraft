@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "takumicraft:blocks/takumiwater"
+    "layer0": "takumicraft:blocks/water_flow"
   }
 }

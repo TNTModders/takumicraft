@@ -2,6 +2,10 @@ package com.tntmodders.takumi.world.biome;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiEntityCore;
+import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
+import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
+import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import com.tntmodders.takumi.world.gen.TakumiWorldGenBigTree;
 import com.tntmodders.takumi.world.gen.TakumiWorldGenTrees;
@@ -9,6 +13,7 @@ import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSand.EnumType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
@@ -16,6 +21,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public abstract class AbstractBiomeTakumiWorld extends Biome {
@@ -30,6 +37,18 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
         this.setRegistryName(TakumiCraftCore.MODID, name);
         this.topBlock = TakumiWorldChunkGenerator.GRASS;
         this.fillerBlock = TakumiWorldChunkGenerator.DIRT;
+        List <SpawnListEntry> entryList = new ArrayList <>();
+        entryList.add(new SpawnListEntry(EntitySquidCreeper.class, 2, 1, 1));
+        entryList.add(new SpawnListEntry(EntitySeaGuardianCreeper.class, 1, 1, 1));
+        this.modSpawnableLists.put(TakumiEntityCore.WATER_TAKUMI, entryList);
+        entryList.clear();
+        TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
+            if (!(iTakumiEntity instanceof EntitySquidCreeper || iTakumiEntity instanceof EntitySeaGuardianCreeper) && (iTakumiEntity.takumiRank()
+                    == EnumTakumiRank.LOW || iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
+                entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 1, 5, 30));
+            }
+        });
+        this.spawnableMonsterList.addAll(entryList);
     }
     
     protected static BiomeProperties getBaseProperty(String name) {

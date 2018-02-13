@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
@@ -18,6 +19,8 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class BlockTakumiHotSpring extends BlockFluidClassic {
     
     public BlockTakumiHotSpring() {
@@ -25,6 +28,32 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
         this.setRegistryName(TakumiCraftCore.MODID, "takumihotspring");
         this.setUnlocalizedName("takumihotspring");
         this.setResistance(10000000f);
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+        if (world.isRemote && rand.nextBoolean()) {
+            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + (rand.nextDouble() - 0.5D), pos.getY() + 0.375 + rand.nextDouble()
+                    , pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
+        }
+    }
+    
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 20 == 0) {
+            ((EntityLivingBase) entityIn).heal(0.25f);
+            if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
+                ((EntityPlayer) entityIn).getFoodStats().addStats(1, 0);
+            }
+        }
+    }
+    
+    @Override
+    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity, double yToTest, Material
+            materialIn, boolean testingHead) {
+        return materialIn == Material.WATER ? true :
+               super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
     
     @Override
@@ -49,22 +78,5 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
             }
         }
         return new Vec3d(0.1F + f12, 0.1F + f12, 0.1F + f12);
-    }
-    
-    @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 20 == 0) {
-            ((EntityLivingBase) entityIn).heal(0.25f);
-            if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
-                ((EntityPlayer) entityIn).getFoodStats().addStats(1, 0);
-            }
-        }
-    }
-    
-    @Override
-    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity, double yToTest, Material
-            materialIn, boolean testingHead) {
-        return materialIn == Material.WATER ? true :
-               super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
 }

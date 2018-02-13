@@ -153,6 +153,11 @@ public class TakumiEvents {
     
     @SubscribeEvent
     public void checkSpawn(CheckSpawn e) {
+        if (e.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD) {
+            if (!(e.getEntityLiving() instanceof ITakumiEntity)) {
+                e.setResult(Result.DENY);
+            }
+        }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {
             ((EntityLiving) e.getEntityLiving()).tasks.addTask(0, new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
         }

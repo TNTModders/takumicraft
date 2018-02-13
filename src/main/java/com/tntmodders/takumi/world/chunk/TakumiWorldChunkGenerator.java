@@ -2,6 +2,7 @@ package com.tntmodders.takumi.world.chunk;
 
 import com.tntmodders.takumi.core.TakumiBiomeCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.world.gen.TakumiMapGenCaves;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -37,7 +38,7 @@ import java.util.Random;
 
 public class TakumiWorldChunkGenerator implements IChunkGenerator {
     
-    public static final IBlockState WATER = Blocks.WATER.getDefaultState();
+    public static final IBlockState WATER = TakumiBlockCore.TAKUMI_WATER.getDefaultState();
     public static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
     public static final IBlockState ICE = Blocks.ICE.getDefaultState();
     public static final IBlockState SNOW_LAYER = Blocks.SNOW_LAYER.getDefaultState();
@@ -65,7 +66,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
     private ChunkGeneratorSettings settings;
     private IBlockState oceanBlock = WATER;
     private double[] depthBuffer = new double[256];
-    private MapGenBase caveGenerator = new MapGenCaves();
+    private MapGenBase caveGenerator = new TakumiMapGenCaves();
     private MapGenVillage villageGenerator = new MapGenVillage();
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
     private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();

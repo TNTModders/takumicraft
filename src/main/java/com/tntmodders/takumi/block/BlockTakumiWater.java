@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.material.TakumiMaterial;
 import com.tntmodders.takumi.core.TakumiFluidCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockTakumiWater extends BlockFluidClassic {
     
     public BlockTakumiWater() {
-        super(TakumiFluidCore.TAKUMI_WATER, TakumiMaterial.TAKUMI_WATER);
+        super(TakumiFluidCore.TAKUMI_WATER, Material.WATER);
         this.setRegistryName(TakumiCraftCore.MODID, "takumiwater");
         this.setUnlocalizedName("takumiwater");
         this.setResistance(10000000f);
@@ -41,14 +40,18 @@ public class BlockTakumiWater extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
         float f12 = 0.0F;
-        if (entity instanceof EntityLivingBase) {
-            EntityLivingBase ent = (EntityLivingBase) entity;
+    
+        if (entity instanceof EntityLivingBase)
+        {
+            EntityLivingBase ent = (EntityLivingBase)entity;
             f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
-            if (ent.isPotionActive(MobEffects.WATER_BREATHING)) {
+        
+            if (ent.isPotionActive(MobEffects.WATER_BREATHING))
+            {
                 f12 = f12 * 0.3F + 0.6F;
             }
         }
-        return new Vec3d(0.1F + f12, 0.1F + f12, 0.1F + f12);
+        return new Vec3d(0.02F + f12, 0.2F + f12, 0.02F + f12);
     }
     
     @Override
