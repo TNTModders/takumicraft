@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
@@ -56,6 +57,64 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
+        }
+        super.onDeath(source);
+    }
+    
+    @Override
+    public void setDead() {
+        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+            if (!this.world.isRemote) {
+                EntityKingCreeper kingCreeper = new EntityKingCreeper(this.world);
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                this.writeEntityToNBT(tagCompound);
+                tagCompound.setBoolean("ignited", false);
+                kingCreeper.readEntityFromNBT(tagCompound);
+                kingCreeper.setHealth(this.getHealth());
+                kingCreeper.copyLocationAndAnglesFrom(this);
+                if (this.getPowered()) {
+                    TakumiUtils.takumiSetPowered(kingCreeper, true);
+                }
+                kingCreeper.setCreeperState(-1);
+                kingCreeper.setAttackTarget(null);
+                kingCreeper.setAttackID(this.getAttackID());
+                this.world.spawnEntity(kingCreeper);
+            }
+        }
+        super.setDead();
+    }
+    
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
+            this.lastSource = damageSrc;
+            if (damageSrc.isProjectile() && damageAmount > 2.5f) {
+                damageAmount = 2.5f;
+            } else if (damageAmount > 20) {
+                damageAmount = 20 + (damageAmount - 20) / 10;
+            }
+            if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
+                this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
+            }
+            this.ignite();
+            super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0x00ff00;
+    }
+    
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
     }
     
     @Override
@@ -374,56 +433,6 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
-    }
-    
-    @Override
-    public void setDead() {
-        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
-            if (!this.world.isRemote) {
-                EntityKingCreeper kingCreeper = new EntityKingCreeper(this.world);
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                this.writeEntityToNBT(tagCompound);
-                tagCompound.setBoolean("ignited", false);
-                kingCreeper.readEntityFromNBT(tagCompound);
-                kingCreeper.setHealth(this.getHealth());
-                kingCreeper.copyLocationAndAnglesFrom(this);
-                if (this.getPowered()) {
-                    TakumiUtils.takumiSetPowered(kingCreeper, true);
-                }
-                kingCreeper.setCreeperState(-1);
-                kingCreeper.setAttackTarget(null);
-                kingCreeper.setAttackID(this.getAttackID());
-                this.world.spawnEntity(kingCreeper);
-            }
-        }
-        super.setDead();
-    }
-    
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
-            this.lastSource = damageSrc;
-            if (damageSrc.isProjectile() && damageAmount > 2.5f) {
-                damageAmount = 2.5f;
-            } else if (damageAmount > 20) {
-                damageAmount = 20 + (damageAmount - 20) / 10;
-            }
-            if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
-                this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
-            }
-            this.ignite();
-            super.damageEntity(damageSrc, damageAmount);
-        }
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0x00ff00;
-    }
-    
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
     }
     
     @Override
