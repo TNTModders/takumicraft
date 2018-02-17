@@ -4,6 +4,6 @@ public class BiomeTakumiForest extends AbstractBiomeTakumiWorld {
     
     public BiomeTakumiForest() {
         super("takumiforest", AbstractBiomeTakumiWorld.getBaseProperty("takumiforest"));
-        this.decorator.treesPerChunk = 8;
+        this.decorator.treesPerChunk = 3;
     }
 }
