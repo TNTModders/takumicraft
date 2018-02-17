@@ -32,6 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
+import java.util.Random;
 
 public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements ITileEntityProvider, ITakumiItemBlock {
     
@@ -39,6 +40,11 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     private final Class <? extends EntityCreeper> entityClass;
     private final String name;
     private final String locName;
+    
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
     
     public BlockTakumiMonsterBomb(Class <? extends EntityCreeper> entityClass, String name) {
         super("monsterbomb_" + name, 0.1f, Material.TNT, MapColor.GREEN);
