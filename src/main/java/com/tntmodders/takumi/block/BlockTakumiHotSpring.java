@@ -2,6 +2,7 @@ package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.material.TakumiMaterial;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiFluidCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -63,6 +64,9 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     
     @Override
     public boolean displaceIfPossible(World world, BlockPos pos) {
+        if (world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this) {
+            world.setBlockState(pos, TakumiBlockCore.TAKUMI_STONE.getDefaultState());
+        }
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.displaceIfPossible(world, pos);
     }
     

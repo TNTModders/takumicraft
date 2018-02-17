@@ -3,6 +3,7 @@ package com.tntmodders.takumi.world.chunk;
 import com.tntmodders.takumi.core.TakumiBiomeCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.world.gen.TakumiMapGenCaves;
+import com.tntmodders.takumi.world.gen.TakumiWorldGenLakes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +22,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.ChunkGeneratorSettings.Factory;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -377,7 +377,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 int i1 = this.rand.nextInt(16) + 8;
                 int j1 = this.rand.nextInt(256);
                 int k1 = this.rand.nextInt(16) + 8;
-                new WorldGenLakes(block).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
+                new TakumiWorldGenLakes(block).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
             }
         } else if (biome != Biomes.DESERT && biome != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this
                 .settings.waterLakeChance) == 0) {
@@ -385,7 +385,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 int i1 = this.rand.nextInt(16) + 8;
                 int j1 = this.rand.nextInt(256);
                 int k1 = this.rand.nextInt(16) + 8;
-                new WorldGenLakes(WATER.getBlock()).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
+                new TakumiWorldGenLakes(WATER.getBlock()).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
             }
         }
         
@@ -396,7 +396,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 int k3 = this.rand.nextInt(16) + 8;
                 
                 if (l2 < this.world.getSeaLevel() || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0) {
-                    new WorldGenLakes(LAVA.getBlock()).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
+                    new TakumiWorldGenLakes(LAVA.getBlock()).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
                 }
             }
         }

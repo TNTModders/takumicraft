@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiFluidCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +26,8 @@ public class BlockTakumiWater extends BlockFluidClassic {
         this.setResistance(10000000f);
     }
     
+    
+    
     @Override
     public boolean canDisplace(IBlockAccess world, BlockPos pos) {
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.canDisplace(world, pos);
@@ -32,6 +35,9 @@ public class BlockTakumiWater extends BlockFluidClassic {
     
     @Override
     public boolean displaceIfPossible(World world, BlockPos pos) {
+        if (world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this) {
+            world.setBlockState(pos, TakumiBlockCore.TAKUMI_STONE.getDefaultState());
+        }
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.displaceIfPossible(world, pos);
     }
     
@@ -54,8 +60,10 @@ public class BlockTakumiWater extends BlockFluidClassic {
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-        entityIn.motionX *= 1.125;
-        entityIn.motionZ *= 1.125;
+        if (entityIn.motionX < 0.5 || entityIn.motionZ < 0.5) {
+            entityIn.motionX *= 1.025;
+            entityIn.motionZ *= 1.025;
+        }
     }
     
     @Override
