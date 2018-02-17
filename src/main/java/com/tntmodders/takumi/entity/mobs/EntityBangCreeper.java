@@ -1,29 +1,19 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
-import javax.annotation.Nullable;
-
 public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityBangCreeper(World worldIn) {
         super(worldIn);
-    }
-    
-    @Nullable
-    @Override
-    protected Item getDropItem() {
-        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB);
     }
     
     @Override

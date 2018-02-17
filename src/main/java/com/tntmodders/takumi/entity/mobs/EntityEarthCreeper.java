@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderEarthCreeper;
-import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -25,12 +23,6 @@ public class EntityEarthCreeper extends EntityTakumiAbstractCreeper {
     public EntityEarthCreeper(World worldIn) {
         super(worldIn);
         this.setSize(1.4F, 2.7F);
-    }
-    
-    @Nullable
-    @Override
-    protected Item getDropItem() {
-        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB);
     }
     
     @Override

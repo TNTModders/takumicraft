@@ -59,6 +59,7 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
         this.attackSpeed = -3.0f;
     }
     
+    
     @Override
     public float getStrVsBlock(ItemStack stack, IBlockState state) {
         switch (this.enumTakumiTool) {
@@ -83,24 +84,22 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             
             if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
                 return EnumActionResult.FAIL;
-            } else {
-                IBlockState iblockstate = worldIn.getBlockState(pos);
-                Block block = iblockstate.getBlock();
-                
-                if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS) {
-                    IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
-                    worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    
-                    if (!worldIn.isRemote) {
-                        worldIn.setBlockState(pos, iblockstate1, 11);
-                        itemstack.damageItem(1, player);
-                    }
-                    
-                    return EnumActionResult.SUCCESS;
-                } else {
-                    return EnumActionResult.PASS;
-                }
             }
+            IBlockState iblockstate = worldIn.getBlockState(pos);
+            Block block = iblockstate.getBlock();
+            
+            if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS) {
+                IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
+                worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                
+                if (!worldIn.isRemote) {
+                    worldIn.setBlockState(pos, iblockstate1, 11);
+                    itemstack.damageItem(1, player);
+                }
+                
+                return EnumActionResult.SUCCESS;
+            }
+            return EnumActionResult.PASS;
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
@@ -149,6 +148,10 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
     
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (stack.getItemDamage() >= stack.getMaxDamage() && !worldIn.isRemote) {
+            worldIn.createExplosion(null, entityIn.posX, entityIn.posY, entityIn.posZ, 5f, true);
+            stack.shrink(1);
+        }
         if (!stack.isItemEnchanted()) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.MINESWEEPER, 1);

@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +30,9 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(this.getDropItem(), this.rand.nextInt(3));
+            if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(5) == 0) {
+                this.dropItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), 1);
+            }
         }
         super.onDeath(source);
     }
@@ -136,9 +140,9 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         BlockPos blockpos = this.getPosition();
         if (this.isAnimal()) {
             return (this.world.getBlockState(blockpos.down()).getBlock() == Blocks.DIRT || this.world.getBlockState(blockpos.down()).getBlock() ==
-                    Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_DIRT || this.world
-                    .getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_GRASS) && this.world.getLight(blockpos) > 8 && this
-                    .rand.nextInt(10) == 0 && super.getCanSpawnHere();
+                    Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_DIRT || this.world.getBlockState
+                    (blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_GRASS) && this.world.getLight(blockpos) > 8 && this.rand.nextInt(10) ==
+                    0 && super.getCanSpawnHere();
         }
         return super.getCanSpawnHere();
     }

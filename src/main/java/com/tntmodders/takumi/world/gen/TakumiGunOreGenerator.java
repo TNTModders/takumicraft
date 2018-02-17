@@ -45,7 +45,7 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
     private void generateOreTakumi(World world, Random random, int x, int z) {
         //1チャンクで生成したい回数だけ繰り返す。
         if (world.provider instanceof TakumiWorldProvider) {
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < 30; i++) {
                 int genX = x + random.nextInt(16);
                 int genY = 1 + random.nextInt(255);
                 int genZ = z + random.nextInt(16);
