@@ -49,6 +49,8 @@ public class TakumiBlockCore {
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_CALL = new BlockTakumiMonsterBomb(EntityCallCreeper.class, "callcreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_COLOR = new BlockTakumiMonsterBomb(EntityColorCreeper.class, "colorcreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_PIERCE = new BlockTakumiMonsterBomb(EntityPierceCreeper.class, "piercecreeper");
+    public static final BlockTakumiMonsterBomb TAKUMI_BOMB_WEATHER = new BlockTakumiMonsterBomb(EntityWeatherCreeper.class, "weathercreeper");
+    
     public static final Block TAKUMI_BLOCK = new BlockTakumiBlock();
     public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();
     public static final Block TAKUMI_PORTAL_FRAME = new BlockTakumiPortalFrame();
