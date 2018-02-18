@@ -23,6 +23,7 @@ public class GenLayerTakumiBiome extends GenLayerTakumiWorld {
         this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_LAVA_MOUNTAINS, 1));
         this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_OCEAN, 1));
         this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_OBJET, 1));
+        this.biomesToGenerate.add(new BiomeEntry(TakumiBiomeCore.TAKUMI_MESA, 1));
         this.totalWeight = this.biomesToGenerate.getTotalWeight();
         this.parent = parentGenLayer;
     }

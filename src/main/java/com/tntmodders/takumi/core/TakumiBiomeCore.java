@@ -18,6 +18,7 @@ public class TakumiBiomeCore {
     public static final Biome TAKUMI_HOTSPRING_MOUNTAINS = new BiomeTakumiHotSpringMountains();
     public static final Biome TAKUMI_FOREST = new BiomeTakumiForest();
     public static final Biome TAKUMI_OBJET = new BiomeTakumiObjet();
+    public static final Biome TAKUMI_MESA = new BiomeTakumiMesa();
     
     public static void register(IForgeRegistry <Biome> registry) {
         Class clazz = TakumiBiomeCore.class;

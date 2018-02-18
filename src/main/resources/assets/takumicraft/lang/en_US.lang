@@ -90,6 +90,22 @@ tile.takumiore_ender_pearl.name=Takumi Pearl Ore
 tile.takumiore_glowstone_dust.name=Takumi GlowStone Ore
 tile.takumiore_magicstone.name=Takumi MagicStone Ore
 tile.takumiwater.name=Takumi Water
+tile.creeperclay.white.name=Creeper White Clay
+tile.creeperclay.orange.name=Creeper Orange Clay
+tile.creeperclay.magenta.name=Creeper Magenta Clay
+tile.creeperclay.light_blue.name=Creeper Light Blue Clay
+tile.creeperclay.yellow.name=Creeper Yellow Clay
+tile.creeperclay.lime.name=Creeper Lime Clay
+tile.creeperclay.pink.name=Creeper Pink Clay
+tile.creeperclay.gray.name=Creeper Glay Clay
+tile.creeperclay.silver.name=Creeper Silver Clay
+tile.creeperclay.cyan.name=Creeper Cyan Clay
+tile.creeperclay.purple.name=Creeper Purple Clay
+tile.creeperclay.blue.name=Creeper Blue Clay
+tile.creeperclay.brown.name=Creeper Brown Clay
+tile.creeperclay.green.name=Creeper Green Clay
+tile.creeperclay.red.name=Creeper Red Clay
+tile.creeperclay.black.name=Creeper Black Clay
 
 #item
 item.takumibook.name=Creeper Book

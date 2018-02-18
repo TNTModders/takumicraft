@@ -90,6 +90,22 @@ tile.takumiore_ender_pearl.name=匠真珠石
 tile.takumiore_glowstone_dust.name=匠輝鉱石
 tile.takumiore_magicstone.name=匠魔鉱石
 tile.takumiwater.name=匠水
+tile.creeperclay.white.name=匠式白色硬質粘土
+tile.creeperclay.orange.name=匠式橙色硬質粘土
+tile.creeperclay.magenta.name=匠式桃色硬質粘土
+tile.creeperclay.lightBlue.name=匠式空色硬質粘土
+tile.creeperclay.yellow.name=匠式黄色硬質粘土
+tile.creeperclay.lime.name=匠式黄緑硬質粘土
+tile.creeperclay.pink.name=匠式桜色硬質粘土
+tile.creeperclay.gray.name=匠式灰色硬質粘土
+tile.creeperclay.silver.name=匠式灰白硬質粘土
+tile.creeperclay.cyan.name=匠式青緑硬質粘土
+tile.creeperclay.purple.name=匠式紫色硬質粘土
+tile.creeperclay.blue.name=匠式青色硬質粘土
+tile.creeperclay.brown.name=匠式茶色硬質粘土
+tile.creeperclay.green.name=匠式緑色硬質粘土
+tile.creeperclay.red.name=匠式赤色硬質粘土
+tile.creeperclay.black.name=匠式黒色硬質粘土
 
 #item
 item.takumibook.name=匠の書

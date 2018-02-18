@@ -71,6 +71,7 @@ public class TakumiBlockCore {
     public static final Block TAKUMI_ORE_PEARL = new BlockTakumiOres(Items.ENDER_PEARL);
     public static final Block TAKUMI_ORE_GLOW = new BlockTakumiOres(Items.GLOWSTONE_DUST);
     public static final Block TAKUMI_ORE_MAGIC = new BlockTakumiOres(TakumiItemCore.MAGIC_STONE);
+    public static final Block TAKUMI_CLAY = new BlockTakumiClay();
     
     public static final Map <Class <? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap <>();
     
