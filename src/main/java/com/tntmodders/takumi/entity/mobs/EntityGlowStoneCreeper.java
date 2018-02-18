@@ -20,14 +20,8 @@ public class EntityGlowStoneCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender() {
-        return 15728880;
-    }
-    
-    @Override
-    public float getBrightness() {
-        return 1.0F;
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override
@@ -49,6 +43,17 @@ public class EntityGlowStoneCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getPrimaryColor() {
         return 16776960;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender() {
+        return 15728880;
+    }
+    
+    @Override
+    public float getBrightness() {
+        return 1.0F;
     }
     
     @Override

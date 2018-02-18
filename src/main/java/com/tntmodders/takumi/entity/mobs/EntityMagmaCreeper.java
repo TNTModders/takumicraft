@@ -2,12 +2,15 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntityMagmaCreeper extends EntityTakumiAbstractCreeper {
     
@@ -25,6 +28,11 @@ public class EntityMagmaCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.onLivingUpdate();
+    }
+    
+    @Override
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override

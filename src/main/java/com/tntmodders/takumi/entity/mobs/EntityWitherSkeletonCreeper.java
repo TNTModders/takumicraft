@@ -32,7 +32,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER, Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override
@@ -56,6 +56,16 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
         return LootTableList.ENTITIES_WITHER_SKELETON;
     }
     
+    @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        for (Entity entity : event.getAffectedEntities()) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+            }
+        }
+        return true;
+    }
+    
     /**
      * Called when the mob's health reaches 0.
      */
@@ -71,16 +81,6 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
                 this.entityDropItem(new ItemStack(Items.SKULL, 1, 1), 0.0F);
             }
         }
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
-            }
-        }
-        return true;
     }
     
     @Override

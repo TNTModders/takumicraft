@@ -3,13 +3,16 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import javax.annotation.Nullable;
 
@@ -79,6 +82,24 @@ public class EntityRushCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0xaa0000;
+    }
+    
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && !damageSrc.isMagicDamage() && damageSrc != DamageSource.FALL && damageSrc !=
+                DamageSource.IN_WALL && damageSrc != DamageSource.DROWN) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+    
+    @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f :
                super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) / 10;
@@ -93,18 +114,5 @@ public class EntityRushCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.onLivingUpdate();
-    }
-    
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && !damageSrc.isMagicDamage() && damageSrc != DamageSource.FALL && damageSrc !=
-                DamageSource.IN_WALL && damageSrc != DamageSource.DROWN) {
-            super.damageEntity(damageSrc, damageAmount);
-        }
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0xaa0000;
     }
 }

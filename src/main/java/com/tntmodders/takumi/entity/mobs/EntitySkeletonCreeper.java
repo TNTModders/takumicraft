@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -32,6 +33,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -139,16 +141,8 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     }
     
     @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (!this.world.isRemote) {
-            if (this.rand.nextInt(5) == 0) {
-                this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
-            }
-            if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
-                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
-            }
-        }
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override
@@ -160,6 +154,19 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderSkeletonCreeper <>(manager);
+    }
+    
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
+        if (!this.world.isRemote) {
+            if (this.rand.nextInt(5) == 0) {
+                this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
+            }
+            if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
+                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
+            }
+        }
     }
     
     @Override

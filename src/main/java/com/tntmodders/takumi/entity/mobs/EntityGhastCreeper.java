@@ -4,10 +4,7 @@ import com.tntmodders.takumi.client.render.RenderGhastCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
@@ -287,7 +284,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
+        EntitySpawnPlacementRegistry.setPlacementType(EntityGhastCreeper.class, SpawnPlacementType.IN_AIR);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override

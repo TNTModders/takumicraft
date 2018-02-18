@@ -123,10 +123,11 @@ public class TakumiEntityCore {
                 }
             } else if (entity.takumiRank().getSpawnWeight() != 0) {
                 Biome.REGISTRY.iterator().forEachRemaining(biome -> {
-                    if (!(biome instanceof BiomeOcean)) {
+                    if (!(biome instanceof BiomeOcean) && biome != Biomes.HELL && biome != Biomes.VOID && biome != Biomes.SKY) {
                         EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 10, 30, EnumCreatureType.MONSTER, biome);
                     }
                 });
+                entity.additionalSpawn();
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiClientCore.registerEntityRender(clazz, entity);

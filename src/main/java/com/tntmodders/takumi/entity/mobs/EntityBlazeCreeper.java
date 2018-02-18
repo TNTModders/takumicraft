@@ -223,7 +223,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 4, 1, 20, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override

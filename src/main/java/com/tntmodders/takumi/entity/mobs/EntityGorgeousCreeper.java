@@ -1,14 +1,17 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.util.Random;
 
@@ -96,6 +99,11 @@ public class EntityGorgeousCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 233;
+    }
+    
+    @Override
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override

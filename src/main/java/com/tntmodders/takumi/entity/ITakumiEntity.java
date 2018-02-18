@@ -8,6 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ITakumiEntity {
     
+    void additionalSpawn();
+    
     boolean canRegister();
     
     void takumiExplode();

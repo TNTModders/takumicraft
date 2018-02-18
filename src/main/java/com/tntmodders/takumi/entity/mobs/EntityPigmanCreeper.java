@@ -67,16 +67,8 @@ public class EntityPigmanCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK), 1);
-        }
-        super.onDeath(source);
-    }
-    
-    @Override
     public void customSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 3, 10, EnumCreatureType.MONSTER, Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 4, 3, 10, EnumCreatureType.MONSTER, Biomes.HELL);
     }
     
     @Override
@@ -87,5 +79,13 @@ public class EntityPigmanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderPigmanCreeper <>(manager);
+    }
+    
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK), 1);
+        }
+        super.onDeath(source);
     }
 }

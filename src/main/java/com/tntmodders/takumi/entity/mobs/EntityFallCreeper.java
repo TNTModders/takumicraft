@@ -2,14 +2,27 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntityFallCreeper extends EntityTakumiAbstractCreeper {
     
     public EntityFallCreeper(World worldIn) {
         super(worldIn);
+    }
+    
+    @Override
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight()*2, 1, 5, EnumCreatureType.MONSTER, Biomes.HELL);
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 0xffdddd;
     }
     
     @Override
@@ -72,10 +85,5 @@ public class EntityFallCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 33;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 0xffdddd;
     }
 }

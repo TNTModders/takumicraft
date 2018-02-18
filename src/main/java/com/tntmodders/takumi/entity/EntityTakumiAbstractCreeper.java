@@ -27,6 +27,45 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     }
     
     @Override
+    public void additionalSpawn() {
+    }
+    
+    @Override
+    public boolean canRegister() {
+        return true;
+    }
+    
+    @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        return true;
+    }
+    
+    @Override
+    public void customSpawn() {
+    }
+    
+    @Override
+    public boolean isAnimal() {
+        return false;
+    }
+    
+    @Override
+    public int getPrimaryColor() {
+        return 39168;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderTakumiCreeper <>(manager);
+    }
+    
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+    
+    @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(this.getDropItem(), this.rand.nextInt(3));
@@ -93,41 +132,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             return;
         }*/
         super.damageEntity(damageSrc, damageAmount);
-    }
-    
-    @Override
-    public boolean canRegister() {
-        return true;
-    }
-    
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        return true;
-    }
-    
-    @Override
-    public void customSpawn() {
-    }
-    
-    @Override
-    public boolean isAnimal() {
-        return false;
-    }
-    
-    @Override
-    public int getPrimaryColor() {
-        return 39168;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderTakumiCreeper <>(manager);
-    }
-    
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
     
     public double getSizeAmp() {
