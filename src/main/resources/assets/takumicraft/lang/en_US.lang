@@ -368,6 +368,8 @@ entity.fallingbombcreeper.name=Falling Bomb Creeper
 entity.fallingbombcreeper.desc=Not a gravel, but tons of falling bomb.
 entity.fallingslimecreeper.name=Falling Slime Creeper
 entity.fallingslimecreeper.desc=Not a few, but lots of falling slime.
+entity.terracottacreeper.name=Terracotta Creeper
+entity.terracottacreeper.desc=What happened, terracotta?
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
