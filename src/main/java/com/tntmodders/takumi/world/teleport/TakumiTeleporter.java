@@ -1,17 +1,14 @@
 package com.tntmodders.takumi.world.teleport;
 
 import com.tntmodders.asm.TakumiASMNameMap;
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
-import net.minecraft.block.BlockPortal;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern.PatternHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -60,6 +57,15 @@ public class TakumiTeleporter extends Teleporter {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+    
+    @Override
+    public void placeInPortal(Entity entityIn, float rotationYaw) {
+        if (!this.placeInExistingPortal(entityIn, rotationYaw)) {
+            this.makePortal(entityIn);
+            //this.placeInExistingPortal(entityIn, rotationYaw);
+            TakumiCraftCore.LOGGER.info("placeInPortal:" + entityIn.getPosition().toString());
         }
     }
     
@@ -178,7 +184,19 @@ public class TakumiTeleporter extends Teleporter {
     
     @Override
     public boolean makePortal(Entity entityIn) {
-        int i = 16;
+        BlockPos pos = entityIn.getPosition().north();
+        for (int x = -2; x <= 2; x++) {
+            for (int y = -1; y <= 3; y++) {
+                for (int z = -3; z <= 3; z++) {
+                    if (x == -2 || x == 2 || y == -1 || y == 3 || z == -3 || z == 3) {
+                        this.world.setBlockState(pos.add(x, y, z), TakumiBlockCore.TAKUMI_PORTAL_FRAME.getDefaultState());
+                    } else {
+                        this.world.setBlockToAir(pos.add(x, y, z));
+                    }
+                }
+            }
+        }
+        /*int i = 16;
         double d0 = -1.0D;
         int j = MathHelper.floor(entityIn.posX);
         int k = MathHelper.floor(entityIn.posY);
@@ -304,10 +322,10 @@ public class TakumiTeleporter extends Teleporter {
             i3 = -i3;
         }
         
-        if (d0 < 0.0D) {
+        *//* if (d0 < 0.0D)*//*
+        {
             j1 = MathHelper.clamp(j1, 70, this.world.getActualHeight() - 10);
             k2 = j1;
-            
             for (int j7 = -1; j7 <= 1; ++j7) {
                 for (int l7 = 1; l7 < 3; ++l7) {
                     for (int k8 = -1; k8 < 3; ++k8) {
@@ -323,7 +341,7 @@ public class TakumiTeleporter extends Teleporter {
         }
         
         IBlockState iblockstate = TakumiBlockCore.TAKUMI_PORTAL.getDefaultState().withProperty(BlockPortal.AXIS, l6 == 0 ? Axis.Z : Axis.X);
-        
+        BlockPos blockPos = null;
         for (int i8 = 0; i8 < 4; ++i8) {
             for (int l8 = 0; l8 < 4; ++l8) {
                 for (int l9 = -1; l9 < 4; ++l9) {
@@ -333,6 +351,9 @@ public class TakumiTeleporter extends Teleporter {
                     boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
                     this.world.setBlockState(new BlockPos(l10, l11, k12),
                             flag1 ? TakumiBlockCore.TAKUMI_PORTAL_FRAME.getDefaultState() : iblockstate, 2);
+                    if (blockPos == null) {
+                        blockPos = new BlockPos(l10, l11, k12);
+                    }
                 }
             }
             
@@ -346,7 +367,8 @@ public class TakumiTeleporter extends Teleporter {
                 }
             }
         }
-        
+        TakumiCraftCore.LOGGER.info("makePortal" + blockPos.toString());
+        entityIn.setPosition(blockPos.getX() + (l6 == 0 ? 0 : 1), blockPos.getY() + 100, blockPos.getZ() + (l6 == 0 ? 1 : 0));*/
         return true;
     }
 }

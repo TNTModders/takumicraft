@@ -21,7 +21,9 @@ public class BlockTakumiPortalFrame extends Block {
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumiportalframe");
         this.setLightLevel(1f);
-        this.setHardness(10000000f);
+        this.setHardness(5f);
+        this.setResistance(10000000f);
+        this.setHarvestLevel("pickaxe", 3);
     }
     
     private boolean changeDim(EntityPlayer playerIn) {

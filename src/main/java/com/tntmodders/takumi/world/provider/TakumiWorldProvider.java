@@ -73,7 +73,7 @@ public class TakumiWorldProvider extends WorldProvider {
     
     @Override
     public double getMovementFactor() {
-        return 10;
+        return 1;
     }
     
     @Override
