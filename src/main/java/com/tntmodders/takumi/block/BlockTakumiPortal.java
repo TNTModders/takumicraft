@@ -278,6 +278,7 @@ public class BlockTakumiPortal extends BlockBreakable {
                         DimensionType.OVERWORLD.getId();
                 TakumiTeleporter teleporter = new TakumiTeleporter(server.getWorld(i));
                 teleporter.setTakumiPortal(entityIn, pos);
+                entityIn.timeUntilPortal = entityIn.getPortalCooldown() * 2;
                 if (entityIn instanceof EntityPlayerMP) {
                     playerList.transferPlayerToDimension((EntityPlayerMP) entityIn, i, teleporter);
                 } else {

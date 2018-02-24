@@ -2,6 +2,7 @@ package com.tntmodders.takumi.world.teleport;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiPortal;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.block.state.pattern.BlockPattern.PatternHelper;
 import net.minecraft.entity.Entity;
@@ -196,6 +197,14 @@ public class TakumiTeleporter extends Teleporter {
                 }
             }
         }
+        
+        for (int x = -1; x <= 1; x++) {
+            for (int y = 0; y <= 2; y++) {
+                this.world.setBlockState(pos.add(x, y, 0), TakumiBlockCore.TAKUMI_PORTAL.getDefaultState().withProperty(BlockTakumiPortal.AXIS,
+                        Axis.X), 0);
+            }
+        }
+        
         /*int i = 16;
         double d0 = -1.0D;
         int j = MathHelper.floor(entityIn.posX);
