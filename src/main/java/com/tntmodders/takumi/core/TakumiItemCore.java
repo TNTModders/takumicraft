@@ -40,6 +40,8 @@ public class TakumiItemCore {
     public static final Item TAKUMI_CHOCO_BALL = new ItemTakumiChocolateBall();
     public static final Item KING_CORE = new ItemKingCore();
     public static final Item MAGIC_STONE = new ItemTakumiMagicStone();
+    public static final Item TAKUMI_OFALEN = new ItemTakumiOfalen();
+    public static final Item CREEPER_CORE = new ItemCreeperCore();
     
     public static List <Item> itemBlocks = new ArrayList <>();
     
