@@ -134,6 +134,7 @@ item.magicarmor_head.name=魔式装甲[頭]
 item.magicarmor_chest.name=魔式装甲[胴]
 item.magicarmor_legs.name=魔式装甲[腰]
 item.magicarmor_feet.name=魔式装甲[足]
+item.magicbow.name=匠式魔弓
 
 #entity
 ＃descは36文字まで。

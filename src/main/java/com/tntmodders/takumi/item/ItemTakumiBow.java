@@ -26,10 +26,9 @@ public class ItemTakumiBow extends ItemBow {
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (entityIn == null) {
                     return 0.0F;
-                } else {
-                    return entityIn.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_BOW ? 0.0F :
-                           (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
                 }
+                return entityIn.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_BOW ? 0.0F :
+                       (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
             }
         });
     }

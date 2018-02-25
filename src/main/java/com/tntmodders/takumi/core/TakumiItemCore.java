@@ -46,6 +46,7 @@ public class TakumiItemCore {
     public static final Item MAGIC_CREEPER_CHEST = new ItemMagicArmor(EntityEquipmentSlot.CHEST);
     public static final Item MAGIC_CREEPER_LEGS = new ItemMagicArmor(EntityEquipmentSlot.LEGS);
     public static final Item MAGIC_CREEPER_BOOTS = new ItemMagicArmor(EntityEquipmentSlot.FEET);
+    public static final Item MAGIC_BOW = new ItemMagicBow();
     
     public static List <Item> itemBlocks = new ArrayList <>();
     
