@@ -34,6 +34,7 @@ public class ItemTakumiArmor extends ItemArmor {
         if (!itemStack.isItemEnchanted()) {
             itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
             itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
+            itemStack.addEnchantment(Enchantments.MENDING,10);
             switch (this.armorType) {
                 case HEAD:
                     itemStack.addEnchantment(Enchantments.THORNS, 10);
@@ -58,6 +59,7 @@ public class ItemTakumiArmor extends ItemArmor {
         if (!itemStack.isItemEnchanted()) {
             itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
             itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
+            itemStack.addEnchantment(Enchantments.MENDING,10);
             switch (this.armorType) {
                 case HEAD:
                     itemStack.addEnchantment(Enchantments.THORNS, 10);
@@ -122,6 +124,7 @@ public class ItemTakumiArmor extends ItemArmor {
         if (!itemStack.isItemEnchanted()) {
             itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
             itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
+            itemStack.addEnchantment(Enchantments.MENDING,10);
             switch (this.armorType) {
                 case HEAD:
                     itemStack.addEnchantment(Enchantments.THORNS, 10);

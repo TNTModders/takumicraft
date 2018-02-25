@@ -130,6 +130,10 @@ item.kingcore.name=King Core
 item.magicstone.name=MagicStone
 item.takumiofalen.name=Creeper Ofalen
 item.creepercore.name=Creeper Core
+item.magicarmor_head.name=Magic Armor Head
+item.magicarmor_chest.name=Magic Armor Chest
+item.magicarmor_legs.name=Magic Armor Leggings
+item.magicarmor_feet.name=Magic Armor Feet
 
 #entity
 #desc max: 72 chars

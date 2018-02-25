@@ -130,6 +130,10 @@ item.kingcore.name=王匠の証
 item.magicstone.name=匠魔石
 item.takumiofalen.name=匠オファレン
 item.creepercore.name=匠結晶
+item.magicarmor_head.name=魔式装甲[頭]
+item.magicarmor_chest.name=魔式装甲[胴]
+item.magicarmor_legs.name=魔式装甲[腰]
+item.magicarmor_feet.name=魔式装甲[足]
 
 #entity
 ＃descは36文字まで。
