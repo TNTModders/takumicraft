@@ -26,8 +26,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
@@ -251,7 +249,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 break;
             //爆破突進
             case 5:
-                int l = 25;
+/*                int l = 25;
                 Vec3d vec3d = this.getLookVec().scale(l);
                 BlockPos pos = this.getPosition().add(new Vec3i(vec3d.x, vec3d.y, vec3d.z));
                 for (double d = 0; d < l; d += 0.5) {
@@ -261,7 +259,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
                 this.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                break;
+                break;*/
             //巨匠召喚
             case 6:
                 if (!this.world.isRemote) {

@@ -2,8 +2,11 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -18,7 +21,13 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
     public EntityYukariCreeper(World worldIn) {
         super(worldIn);
     }
-    
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BOMB_YUKARI), 1);
+        }
+        super.onDeath(source);
+    }
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         List <BlockPos> posList = new ArrayList <>();
