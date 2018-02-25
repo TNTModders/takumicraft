@@ -1,0 +1,64 @@
+{
+    "display": {
+        "icon": {
+            "item": "takumicraft:takumiarmor_chest"
+        },
+        "title": {
+            "translate": "advancements.takumicraft.armor.title"
+        },
+        "description": {
+            "translate": "advancements.takumicraft.armor.desc"
+        }
+    },
+    "parent": "takumicraft:takumishield",
+    "criteria": {
+        "takumi_helmet": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "takumicraft:takumiarmor_head"
+                    }
+                ]
+            }
+        },
+        "takumi_chestplate": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "takumicraft:takumiarmor_chest"
+                    }
+                ]
+            }
+        },
+        "takumi_leggings": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "takumicraft:takumiarmor_legs"
+                    }
+                ]
+            }
+        },
+        "takumi_boots": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "takumicraft:takumiarmor_feet"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "takumi_helmet",
+            "takumi_chestplate",
+            "takumi_leggings",
+            "takumi_boots"
+        ]
+    ]
+}

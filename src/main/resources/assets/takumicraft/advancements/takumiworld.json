@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumiportalframe"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.takumiworld.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.takumiworld.desc"
+    }
+  },
+  "parent": "takumicraft:kingslayer",
+  "criteria": {
+    "entered_takumi": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "takumiworld"
+      }
+    }
+  }
+}

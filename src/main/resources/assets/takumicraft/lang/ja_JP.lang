@@ -128,6 +128,8 @@ item.portalkit.name=匠ポータルキット
 item.takumichoco.name=匠式チョコボール
 item.kingcore.name=王匠の証
 item.magicstone.name=匠魔石
+item.takumiofalen.name=匠オファレン
+item.creepercore.name=匠結晶
 
 #entity
 ＃descは36文字まで。
@@ -401,6 +403,10 @@ advancements.takumicraft.rainbowsheep.title=幻の虹色
 advancements.takumicraft.rainbowsheep.desc=虹の羊匠を倒す 見つけたら幸せになれるかも?
 advancements.takumicraft.kingslayer.title=キング=スレイヤー
 advancements.takumicraft.kingslayer.desc=王匠を倒す 物語は、ほんの始まり。 次の世界へ向かおう。
+advancements.takumicraft.armor.title=コスプレイヤー
+advancements.takumicraft.armor.desc=匠式装甲を手に入れる 一式、クリーパー。
+advancements.takumicraft.takumiworld.title=匠の世界へ
+advancements.takumicraft.takumiworld.desc=匠ワールドへ行く 新たなる、険しき世界。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 

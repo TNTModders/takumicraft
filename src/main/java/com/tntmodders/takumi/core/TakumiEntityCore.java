@@ -138,7 +138,7 @@ public class TakumiEntityCore {
             
             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
             File oldFile = null;
-            String assetS = "assets/takumicraft/advancements/";
+            String assetS = "assets/takumicraft/advancements/slay";
             for (File f : TakumiUtils.getListFile(assetS)) {
                 if (f.getName().contains("slay_.json")) {
                     oldFile = f;

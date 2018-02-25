@@ -1,5 +1,5 @@
 {
-  "parent": "takumicraft:recipes/root",
+  "parent": "takumicraft:recipes/recipe_root",
   "rewards": {
     "recipes": [
       "takumicraft:skull"

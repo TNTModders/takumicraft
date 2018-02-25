@@ -128,6 +128,8 @@ item.portalkit.name=Creeper Portal Kit
 item.takumichoco.name=Chocolate Ball
 item.kingcore.name=King Core
 item.magicstone.name=MagicStone
+item.takumiofalen.name=Creeper Ofalen
+item.creepercore.name=Creeper Core
 
 #entity
 #desc max: 72 chars
@@ -399,6 +401,10 @@ advancements.takumicraft.rainbowsheep.title=Rainbow Sheep
 advancements.takumicraft.rainbowsheep.desc=Slay rainbow Sheep Creeper.
 advancements.takumicraft.kingslayer.title=King Slayer
 advancements.takumicraft.kingslayer.desc=Slay King Creeper.
+advancements.takumicraft.armor.title=Creeper Armored
+advancements.takumicraft.armor.desc=Get Creeper Armor.
+advancements.takumicraft.takumiworld.title=A Whole New World
+advancements.takumicraft.takumiworld.desc=Go to Takumi World.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 

@@ -11,7 +11,7 @@
     },
     "frame": "challenge"
   },
-  "parent": "takumicraft:disarmament",
+  "parent": "takumicraft:creeperbomb",
   "criteria": {
     "kingcore": {
       "trigger": "minecraft:inventory_changed",

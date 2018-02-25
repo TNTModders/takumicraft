@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q Q",
+    "QQQ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creepercore"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiarmor_chest"
+  }
+}

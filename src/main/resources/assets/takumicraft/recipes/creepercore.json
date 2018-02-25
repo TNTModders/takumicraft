@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Y ",
+    "BQO",
+    " M "
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:kingcore"
+    },
+    "B": {
+      "item": "takumicraft:boltstone"
+    },
+    "O": {
+      "item": "takumicraft:takumiofalen"
+    },
+    "M": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "Y": {
+      "item": "takumicraft:monsterbomb_yukaricreeper"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creepercore"
+  }
+}
