@@ -2,6 +2,9 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.item.EntityTakumiTNTPrimed;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -31,7 +34,7 @@ public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
     
     @Override
     public int getExplosionPower() {
-        return 6;
+        return 4;
     }
     
     @Override
@@ -55,22 +58,17 @@ public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
     }
     
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.getItemFromBlock(TakumiBlockCore.TAKUMI_TNT), this.rand.nextInt(5));
-        }
-        super.onDeath(source);
-    }
-    
-    @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             for (BlockPos pos : event.getAffectedBlocks()) {
                 this.world.setBlockState(pos, this.getPowered() ? TakumiBlockCore.TAKUMI_TNT.getDefaultState() : Blocks.TNT.getDefaultState());
-                if (!event.getAffectedBlocks().contains(pos.up())) {
-                    this.world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
+                if (this.rand.nextInt(5) == 0) {
+                    Entity entity = this.getPowered() ? new EntityTakumiTNTPrimed(this.world) : new EntityTNTPrimed(this.world);
+                    entity.setPosition(pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
+                    this.world.spawnEntity(entity);
                 }
             }
+            
         }
         event.getAffectedBlocks().clear();
         return true;
@@ -79,5 +77,13 @@ public class EntityTNTCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getPrimaryColor() {
         return 0xff0000;
+    }
+    
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(TakumiBlockCore.TAKUMI_TNT), this.rand.nextInt(5));
+        }
+        super.onDeath(source);
     }
 }
