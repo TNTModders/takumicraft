@@ -39,7 +39,7 @@ public class TakumiEntityCore {
                     false);
     public static final EnumCreatureType WATER_TAKUMI =
             EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);
-    private static final List<Class<? extends ITakumiEntity>> CLASS_LIST = new ArrayList<>();
+    public static final List<Class<? extends ITakumiEntity>> CLASS_LIST = new ArrayList<>();
     public static List<Biome> biomes = new ArrayList<>();
     private static List<ITakumiEntity> entityList = new ArrayList<>();
 
@@ -132,7 +132,7 @@ public class TakumiEntityCore {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (entity.takumiRank().getSpawnWeight() != 0) {
+            } else if (entity.takumiRank().getSpawnWeight() != 0 && !entity.isAnimal()) {
                 Biome.REGISTRY.iterator().forEachRemaining(biome -> {
                     if (!(biome instanceof BiomeOcean) && biome != Biomes.HELL && biome != Biomes.VOID &&
                             biome != Biomes.SKY) {

@@ -42,7 +42,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -166,10 +166,12 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
-    public void checkSpawn(CheckSpawn e) {
+    public void checkSpawn(LivingSpawnEvent.CheckSpawn e) {
         if (e.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD) {
             if (!(e.getEntityLiving() instanceof ITakumiEntity)) {
                 e.setResult(Result.DENY);
+            } else {
+                TakumiCraftCore.LOGGER.info(e.getEntityLiving());
             }
         }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {

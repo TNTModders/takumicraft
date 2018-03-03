@@ -442,13 +442,4 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     public Object getRender(RenderManager manager) {
         return new RenderParrotCreeper(manager);
     }
-
-    @Override
-    public boolean getCanSpawnHere() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        return this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
-    }
 }

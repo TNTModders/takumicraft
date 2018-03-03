@@ -3,6 +3,7 @@ package com.tntmodders.takumi.world.biome;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
+import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
 import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
@@ -14,6 +15,7 @@ import net.minecraft.block.BlockSand.EnumType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
@@ -44,14 +46,22 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
         entryList.add(new SpawnListEntry(EntitySeaGuardianCreeper.class, 1, 1, 1));
         this.modSpawnableLists.put(TakumiEntityCore.WATER_TAKUMI, entryList);
         entryList.clear();
-        TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
-            if (!(iTakumiEntity instanceof EntitySquidCreeper || iTakumiEntity instanceof EntitySeaGuardianCreeper) &&
-                    (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
-                            iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
-                entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 1, 5, 30));
+        TakumiEntityCore.CLASS_LIST.forEach(clazz -> {
+            try {
+                ITakumiEntity iTakumiEntity = clazz.getConstructor(World.class).newInstance((World) null);
+                if (!(iTakumiEntity instanceof EntitySquidCreeper ||
+                        iTakumiEntity instanceof EntitySeaGuardianCreeper) &&
+                        (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
+                                iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
+                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 100, 30, 70));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
+        this.spawnableMonsterList.clear();
         this.spawnableMonsterList.addAll(entryList);
+        this.modSpawnableLists.put(EnumCreatureType.MONSTER, entryList);
     }
 
     protected static BiomeProperties getBaseProperty(String name) {

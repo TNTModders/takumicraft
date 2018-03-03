@@ -321,7 +321,7 @@ public class EntitySquidCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel() && this.rand.nextInt(5) == 0 &&
+        return this.posY < (double) this.world.getSeaLevel() && this.rand.nextInt(5) == 0 &&
                 this.world.getEntities(EntitySquidCreeper.class, input -> true).size() < 10;
     }
 
