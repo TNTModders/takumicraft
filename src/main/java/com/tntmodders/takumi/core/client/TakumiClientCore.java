@@ -34,14 +34,14 @@ import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class TakumiClientCore {
-    
+
     public static KeyBinding keyBindingTakumiBook;
-    
+
     public static void registerKey() {
         keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.KEY_I, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingTakumiBook);
     }
-    
+
     public static void register() {
         Class clazz = TakumiItemCore.class;
         for (Field field : clazz.getFields()) {
@@ -50,16 +50,18 @@ public class TakumiClientCore {
                     Item item = (Item) field.get(TakumiItemCore.INSTANCE);
                     String s = item.getUnlocalizedName().substring(5);
                     if (item.getHasSubtypes()) {
-                        NonNullList <ItemStack> stacks = NonNullList.create();
+                        NonNullList<ItemStack> stacks = NonNullList.create();
                         item.getSubItems(TakumiCraftCore.TAB_CREEPER, stacks);
                         for (int i = 0; i < stacks.size(); i++) {
-                            ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore
-                                    .MODID, s + "_" + i), "inventory"));
-                            TakumiCraftCore.LOGGER.info("Registered item model with metadata" + i + " : " + s + "_" + i);
+                            ModelLoader.setCustomModelResourceLocation(item, i,
+                                    new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i),
+                                            "inventory"));
+                            TakumiCraftCore.LOGGER
+                                    .info("Registered item model with metadata" + i + " : " + s + "_" + i);
                         }
                     } else {
-                        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID,
-                                s), "inventory"));
+                        ModelLoader.setCustomModelResourceLocation(item, 0,
+                                new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
                         TakumiCraftCore.LOGGER.info("Registered item model: " + s);
                     }
                 }
@@ -67,11 +69,11 @@ public class TakumiClientCore {
                 e.printStackTrace();
             }
         }
-        
+
         for (Item item : TakumiItemCore.itemBlocks) {
             String s = item.getUnlocalizedName().substring(5);
             if (item.getHasSubtypes()) {
-                NonNullList <ItemStack> stacks = NonNullList.create();
+                NonNullList<ItemStack> stacks = NonNullList.create();
                 item.getSubItems(TakumiCraftCore.TAB_CREEPER, stacks);
                 for (int i = 0; i < stacks.size(); i++) {
                     if (item instanceof ItemCloth) {
@@ -79,30 +81,34 @@ public class TakumiClientCore {
                             ModelLoader.setCustomStateMapper(((ItemBlock) item).getBlock(), new StateMapperBase() {
                                 @Override
                                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                                    return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperstainedglasspane_" + state
-                                            .getValue(BlockStainedGlassPane.COLOR).getName()), "normal");
+                                    return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID,
+                                            "creeperstainedglasspane_" +
+                                                    state.getValue(BlockStainedGlassPane.COLOR).getName()), "normal");
                                 }
                             });
                         }
-                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID,
-                                EnumDyeColor.byMetadata(i).getName() + "_" + s), "inventory"));
-                        TakumiCraftCore.LOGGER.info("Registered block model with color " + EnumDyeColor.byMetadata(i).getName() + " : " +
-                                EnumDyeColor.byMetadata(i).getName() + "_" + s);
+                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(
+                                new ResourceLocation(TakumiCraftCore.MODID,
+                                        EnumDyeColor.byMetadata(i).getName() + "_" + s), "inventory"));
+                        TakumiCraftCore.LOGGER
+                                .info("Registered block model with color " + EnumDyeColor.byMetadata(i).getName() +
+                                        " : " + EnumDyeColor.byMetadata(i).getName() + "_" + s);
                     } else {
-                        ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s
-                                + "_" + i), "inventory"));
+                        ModelLoader.setCustomModelResourceLocation(item, i,
+                                new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i),
+                                        "inventory"));
                         TakumiCraftCore.LOGGER.info("Registered block model with metadata " + i + " : " + s + "_" + i);
                     }
                 }
             } else {
-                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s),
-                        "inventory"));
+                ModelLoader.setCustomModelResourceLocation(item, 0,
+                        new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
                 TakumiCraftCore.LOGGER.info("Registered block model: " + s);
             }
         }
         registerStatesModel();
     }
-    
+
     private static void registerStatesModel() {
         ModelLoader.setCustomStateMapper(TakumiBlockCore.TAKUMI_DIRT, new StateMapperBase() {
             @Override
@@ -111,8 +117,8 @@ public class TakumiClientCore {
             }
         });
     }
-    
-    public static void registerEntityRender(Class <Entity> clazz, ITakumiEntity entity) {
+
+    public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {
         RenderingRegistry.registerEntityRenderingHandler(clazz, new TakumiRenderFactory() {
             @Override
             public Render createRenderFor(RenderManager manager) {
@@ -120,12 +126,15 @@ public class TakumiClientCore {
             }
         });
     }
-    
+
     public static void registerTileRender() {
-        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock", new RenderAcidBlock <>());
-        ClientRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb", new RenderMonsterBomb <>());
-        ClientRegistry.registerTileEntity(TileEntityTakumiBlock.class, TakumiCraftCore.MODID + ":takumiblock", new RenderTakumiBlock <>());
-        ClientRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered", new RenderTakumiCreepered <>
-                ());
+        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock",
+                new RenderAcidBlock<>());
+        ClientRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb",
+                new RenderMonsterBomb<>());
+        ClientRegistry.registerTileEntity(TileEntityTakumiBlock.class, TakumiCraftCore.MODID + ":takumiblock",
+                new RenderTakumiBlock<>());
+        ClientRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered",
+                new RenderTakumiCreepered<>());
     }
 }

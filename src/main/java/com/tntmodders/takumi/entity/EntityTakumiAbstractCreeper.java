@@ -19,52 +19,52 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
-    
+
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
         this.tasks.addTask(0, new EntityAIFollowCatCreeper(this));
     }
-    
+
     @Override
     public void additionalSpawn() {
     }
-    
+
     @Override
     public boolean canRegister() {
         return true;
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         return true;
     }
-    
+
     @Override
     public void customSpawn() {
     }
-    
+
     @Override
     public boolean isAnimal() {
         return false;
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 39168;
     }
-    
+
     @SideOnly(Side.CLIENT)
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderTakumiCreeper <>(manager);
+        return new RenderTakumiCreeper<>(manager);
     }
-    
+
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     }
-    
+
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
@@ -75,13 +75,14 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         }
         super.onDeath(source);
     }
-    
+
     @Override
     protected void despawnEntity() {
         Result result;
         if (this.isNoDespawnRequired()) {
             this.idleTime = 0;
-        } else if ((this.idleTime & 0x1F) == 0x1F && (result = ForgeEventFactory.canEntityDespawn(this)) != Result.DEFAULT) {
+        } else if ((this.idleTime & 0x1F) == 0x1F &&
+                (result = ForgeEventFactory.canEntityDespawn(this)) != Result.DEFAULT) {
             if (result == Result.DENY) {
                 this.idleTime = 0;
             } else {
@@ -90,18 +91,18 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             }
         } else {
             Entity entity = this.world.getClosestPlayerToEntity(this, -1.0D);
-            
+
             if (entity != null) {
                 double d0 = entity.posX - this.posX;
                 double d1 = entity.posY - this.posY;
                 double d2 = entity.posZ - this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                
+
                 if (this.canDespawn() && d3 > 16384.0D) {
                     this.setHealth(0);
                     this.setDead();
                 }
-                
+
                 if (this.idleTime > 600 && this.rand.nextInt(800) == 0 && d3 > 1024.0D && this.canDespawn()) {
                     this.setHealth(0);
                     this.setDead();
@@ -111,12 +112,12 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             }
         }
     }
-    
+
     @Override
     public void setDead() {
         super.setDead();
     }
-    
+
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
@@ -133,20 +134,21 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         }*/
         super.damageEntity(damageSrc, damageAmount);
     }
-    
+
     public double getSizeAmp() {
         return 1;
     }
-    
+
     @Override
     public boolean getCanSpawnHere() {
         boolean flg;
         BlockPos blockpos = this.getPosition();
         if (this.isAnimal()) {
-            return (this.world.getBlockState(blockpos.down()).getBlock() == Blocks.DIRT || this.world.getBlockState(blockpos.down()).getBlock() ==
-                    Blocks.GRASS || this.world.getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_DIRT || this.world.getBlockState
-                    (blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_GRASS) && this.world.getLight(blockpos) > 8 && this.rand.nextInt(10) ==
-                    0 && super.getCanSpawnHere();
+            return (this.world.getBlockState(blockpos.down()).getBlock() == Blocks.DIRT ||
+                    this.world.getBlockState(blockpos.down()).getBlock() == Blocks.GRASS ||
+                    this.world.getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_DIRT ||
+                    this.world.getBlockState(blockpos.down()).getBlock() == TakumiBlockCore.TAKUMI_GRASS) &&
+                    this.world.getLight(blockpos) > 8 && this.rand.nextInt(10) == 0 && super.getCanSpawnHere();
         }
         return super.getCanSpawnHere();
     }

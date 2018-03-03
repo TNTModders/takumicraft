@@ -12,32 +12,35 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class BlockTakumiTNT extends BlockTNT {
-    
+
     public BlockTakumiTNT() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "takumitnt");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumitnt");
     }
-    
+
     @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
-            EntityTakumiTNTPrimed entitytntprimed = new EntityTakumiTNTPrimed(worldIn, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F,
-                    explosionIn.getExplosivePlacedBy());
-            entitytntprimed.setFuse((short) (worldIn.rand.nextInt(entitytntprimed.getFuse() / 4) + entitytntprimed.getFuse() / 8));
+            EntityTakumiTNTPrimed entitytntprimed =
+                    new EntityTakumiTNTPrimed(worldIn, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F,
+                            explosionIn.getExplosivePlacedBy());
+            entitytntprimed.setFuse(
+                    (short) (worldIn.rand.nextInt(entitytntprimed.getFuse() / 4) + entitytntprimed.getFuse() / 8));
             worldIn.spawnEntity(entitytntprimed);
         }
     }
-    
+
     @Override
     public void explode(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase igniter) {
         if (!worldIn.isRemote) {
             if (state.getValue(EXPLODE)) {
-                EntityTakumiTNTPrimed entitytntprimed = new EntityTakumiTNTPrimed(worldIn, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, igniter);
+                EntityTakumiTNTPrimed entitytntprimed =
+                        new EntityTakumiTNTPrimed(worldIn, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, igniter);
                 worldIn.spawnEntity(entitytntprimed);
-                worldIn.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED,
-                        SoundCategory.BLOCKS, 1.0F, 1.0F);
+                worldIn.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ,
+                        SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
         }
     }

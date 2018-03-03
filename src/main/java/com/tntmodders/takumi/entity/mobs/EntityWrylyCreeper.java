@@ -7,11 +7,11 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityWrylyCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -26,52 +26,52 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
         }
         super.setDead();
     }
-    
+
     @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
     }
-    
+
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return !source.isExplosion() && super.attackEntityFrom(source, amount);
     }
-    
+
     @Override
     public void takumiExplode() {
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.WIND;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 3;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 8913151;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "wrylycreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 209;

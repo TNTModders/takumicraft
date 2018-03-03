@@ -8,20 +8,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCreeperCore extends Item {
-    
+
     public ItemCreeperCore() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "creepercore");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creepercore");
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return true;
     }
-    
+
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;

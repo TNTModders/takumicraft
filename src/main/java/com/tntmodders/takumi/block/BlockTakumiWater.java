@@ -18,21 +18,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTakumiWater extends BlockFluidClassic {
-    
+
     public BlockTakumiWater() {
         super(TakumiFluidCore.TAKUMI_WATER, Material.WATER);
         this.setRegistryName(TakumiCraftCore.MODID, "takumiwater");
         this.setUnlocalizedName("takumiwater");
         this.setResistance(10000000f);
     }
-    
-    
-    
+
+
     @Override
     public boolean canDisplace(IBlockAccess world, BlockPos pos) {
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.canDisplace(world, pos);
     }
-    
+
     @Override
     public boolean displaceIfPossible(World world, BlockPos pos) {
         if (world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this) {
@@ -40,23 +39,24 @@ public class BlockTakumiWater extends BlockFluidClassic {
         }
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.displaceIfPossible(world, pos);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
+    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor,
+            float partialTicks) {
         float f12 = 0.0F;
-        
+
         if (entity instanceof EntityLivingBase) {
             EntityLivingBase ent = (EntityLivingBase) entity;
             f12 = (float) EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
-            
+
             if (ent.isPotionActive(MobEffects.WATER_BREATHING)) {
                 f12 = f12 * 0.3F + 0.6F;
             }
         }
         return new Vec3d(0.02F + f12, 0.2F + f12, 0.02F + f12);
     }
-    
+
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
@@ -65,11 +65,11 @@ public class BlockTakumiWater extends BlockFluidClassic {
             entityIn.motionZ *= 1.025;
         }
     }
-    
+
     @Override
-    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity, double yToTest, Material
-            materialIn, boolean testingHead) {
+    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,
+            double yToTest, Material materialIn, boolean testingHead) {
         return materialIn == Material.WATER ? true :
-               super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
+                super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
 }

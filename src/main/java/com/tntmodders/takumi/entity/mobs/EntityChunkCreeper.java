@@ -6,23 +6,24 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityChunkCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityChunkCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedBlocks().clear();
         if (this.getPowered()) {
             for (int i = 0; i < 4 + this.rand.nextInt(5); i++) {
-                this.clearChunk((this.rand.nextInt(5) - 2) * 16, (this.rand.nextInt(5) - 2) * 16, (this.rand.nextInt(5) - 2) * 16);
+                this.clearChunk((this.rand.nextInt(5) - 2) * 16, (this.rand.nextInt(5) - 2) * 16,
+                        (this.rand.nextInt(5) - 2) * 16);
             }
         }
         this.clearChunk(0, 0, 0);
         return true;
     }
-    
+
     private void clearChunk(int offX, int offY, int offZ) {
         for (int x = -8 + offX; x < 8 + offX; x++) {
             for (int y = -8 + offY; y < 8 + offY; y++) {
@@ -35,41 +36,41 @@ public class EntityChunkCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-    
+
     @Override
     public void takumiExplode() {
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.WIND;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 3;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xaaaaaa;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "chunkcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 224;

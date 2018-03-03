@@ -19,11 +19,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.nio.FloatBuffer;
 
 @SideOnly(Side.CLIENT)
-public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends TileEntitySpecialRenderer <T> {
-    
+public class RenderTakumiCreepered<T extends TileEntityTakumiCreepered> extends TileEntitySpecialRenderer<T> {
+
     private static final DynamicTexture TEXTURE_BRIGHTNESS = new DynamicTexture(16, 16);
     private FloatBuffer brightnessBuffer = GLAllocation.createDirectFloatBuffer(4);
-    
+
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
@@ -47,7 +47,7 @@ public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends
         this.unsetBrightness();
         GlStateManager.popMatrix();
     }
-    
+
     private void setBrightness(T tile, float partialTicks) {
         float f = 1;
         int i = this.getColorMultiplier(tile, f, partialTicks);
@@ -78,7 +78,7 @@ public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends
             GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_SOURCE0_ALPHA, OpenGlHelper.GL_PREVIOUS);
             GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_OPERAND0_ALPHA, 770);
             this.brightnessBuffer.position(0);
-            
+
             float f1 = (i >> 24 & 255) / 255.0F;
             float f2 = (i >> 16 & 255) / 255.0F;
             float f3 = (i >> 8 & 255) / 255.0F;
@@ -87,8 +87,8 @@ public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends
             this.brightnessBuffer.put(f3);
             this.brightnessBuffer.put(f4);
             this.brightnessBuffer.put(1.0F - f1);
-            
-            
+
+
             this.brightnessBuffer.flip();
             GlStateManager.glTexEnv(8960, 8705, this.brightnessBuffer);
             GlStateManager.setActiveTexture(OpenGlHelper.GL_TEXTURE2);
@@ -106,13 +106,14 @@ public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends
             GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
         }
     }
-    
-    private void draw(T te, double x, double y, double z, IBlockState state, BlockPos pos, BufferBuilder buffer, Tessellator tessellator) {
+
+    private void draw(T te, double x, double y, double z, IBlockState state, BlockPos pos, BufferBuilder buffer,
+            Tessellator tessellator) {
         RenderHelper.disableStandardItemLighting();
         GlStateManager.blendFunc(770, 771);
         GlStateManager.enableBlend();
         GlStateManager.disableCull();
-        
+
         if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(7425);
         } else {
@@ -123,11 +124,12 @@ public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends
         World world = this.getWorld();
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
         state = state.getBlock().getExtendedState(state, world, pos);
-        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(world, model, state, pos, buffer, true);
+        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer()
+                 .renderModel(world, model, state, pos, buffer, true);
         buffer.setTranslation(0.0D, 0.0D, 0.0D);
         tessellator.draw();
     }
-    
+
     protected void unsetBrightness() {
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
         GlStateManager.enableTexture2D();
@@ -167,10 +169,10 @@ public class RenderTakumiCreepered <T extends TileEntityTakumiCreepered> extends
         GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_SOURCE0_ALPHA, 5890);
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
-    
+
     protected int getColorMultiplier(T tile, float lightBrightness, float partialTickTime) {
         float f = tile.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         }

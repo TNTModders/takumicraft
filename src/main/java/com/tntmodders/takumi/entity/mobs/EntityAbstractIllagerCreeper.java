@@ -14,23 +14,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class EntityAbstractIllagerCreeper extends EntityTakumiAbstractCreeper {
-    
-    protected static final DataParameter <Boolean> AGGRESSIVE = EntityDataManager.createKey(EntityAbstractIllagerCreeper.class, DataSerializers
-            .BOOLEAN);
-    
+
+    protected static final DataParameter<Boolean> AGGRESSIVE =
+            EntityDataManager.createKey(EntityAbstractIllagerCreeper.class, DataSerializers.BOOLEAN);
+
     public EntityAbstractIllagerCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public boolean isImmuneToExplosions() {
         return true;
     }
-    
+
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        AtomicReference <EntityAIBase> base = new AtomicReference <>();
+        AtomicReference<EntityAIBase> base = new AtomicReference<>();
         this.tasks.taskEntries.forEach(entityAITaskEntry -> {
             if (entityAITaskEntry.action instanceof EntityAICreeperSwell) {
                 base.set(entityAITaskEntry.action);
@@ -40,21 +40,21 @@ public abstract class EntityAbstractIllagerCreeper extends EntityTakumiAbstractC
             this.tasks.removeTask(base.get());
         }
     }
-    
+
     @Override
     protected void entityInit() {
         super.entityInit();
         //this.dataManager.register(AGGRESSIVE, (byte) 0);
         this.dataManager.register(AGGRESSIVE, false);
     }
-    
+
     @SideOnly(Side.CLIENT)
     protected boolean isAggressive(int p_193078_1_) {
 /*        int i = this.dataManager.get(AGGRESSIVE);
         return (i & p_193078_1_) != 0;*/
         return this.dataManager.get(AGGRESSIVE);
     }
-    
+
     protected void setAggressive(int p_193079_1_, boolean p_193079_2_) {
         /*int i = this.dataManager.get(AGGRESSIVE);
         
@@ -67,7 +67,7 @@ public abstract class EntityAbstractIllagerCreeper extends EntityTakumiAbstractC
         this.dataManager.set(AGGRESSIVE, (byte) (i & 255));*/
         this.dataManager.set(AGGRESSIVE, p_193079_2_);
     }
-    
+
     /**
      * Get this Entity's EnumCreatureAttribute
      */
@@ -75,22 +75,22 @@ public abstract class EntityAbstractIllagerCreeper extends EntityTakumiAbstractC
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ILLAGER;
     }
-    
+
     @SideOnly(Side.CLIENT)
     public IllagerArmPose getArmPose() {
         return IllagerArmPose.CROSSED;
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL_M;
     }
-    
+
     @SideOnly(Side.CLIENT)
     public enum IllagerArmPose {
         CROSSED, ATTACKING, SPELLCASTING, BOW_AND_ARROW

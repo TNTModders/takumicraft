@@ -4,7 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraftforge.fml.common.ModMetadata;
 
 public class TakumiModInfoCore {
-    
+
     public static void load(ModMetadata meta) {
         meta.modId = TakumiCraftCore.MODID;
         meta.name = "匠Craft[Takumi Craft]";

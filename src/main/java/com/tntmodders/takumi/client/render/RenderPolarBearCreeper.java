@@ -13,20 +13,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderPolarBearCreeper <T extends EntityPolarBearCreeper> extends RenderLiving <T> implements ITakumiRender {
-    
+public class RenderPolarBearCreeper<T extends EntityPolarBearCreeper> extends RenderLiving<T> implements ITakumiRender {
+
     public RenderPolarBearCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelPolarBearCreeper(), 0.5f);
         this.addLayer(new LayerTakumiCharge(this));
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         }
@@ -34,7 +34,7 @@ public class RenderPolarBearCreeper <T extends EntityPolarBearCreeper> extends R
         i = MathHelper.clamp(i, 0, 255);
         return i << 24 | 822083583;
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -49,19 +49,19 @@ public class RenderPolarBearCreeper <T extends EntityPolarBearCreeper> extends R
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelPolarBearCreeper();
     }
-    
+
     static class ModelPolarBearCreeper extends ModelQuadruped {
-        
+
         public ModelPolarBearCreeper() {
             super(12, 0.0F);
             this.textureWidth = 128;
@@ -101,16 +101,16 @@ public class RenderPolarBearCreeper <T extends EntityPolarBearCreeper> extends R
             --this.leg4.rotationPointZ;
             this.childZOffset += 2.0F;
         }
-        
+
         /**
          * Sets the models various rotation angles then renders the model.
          */
-        
+
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
-                scale) {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+                float headPitch, float scale) {
             this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-            
+
             if (this.isChild) {
                 float f = 2.0F;
                 this.childYOffset = 16.0F;
@@ -138,11 +138,12 @@ public class RenderPolarBearCreeper <T extends EntityPolarBearCreeper> extends R
                 this.leg4.render(scale);
             }
         }
-        
+
         @Override
-        public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
-                scaleFactor, Entity entityIn) {
-            super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+        public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+                float headPitch, float scaleFactor, Entity entityIn) {
+            super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor,
+                    entityIn);
             float f = ageInTicks - (float) entityIn.ticksExisted;
             float f1 = ((EntityPolarBearCreeper) entityIn).getStandingAnimationScale(f);
             f1 = f1 * f1;

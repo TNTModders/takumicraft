@@ -14,12 +14,13 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 
 
-public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCreeper> {
-    
-    private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCreeper> {
+
+    private static final ResourceLocation LIGHTNING_TEXTURE =
+            new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     private final RenderLiving creeperRenderer;
     private final ModelBase creeperModel;
-    
+
     public LayerTakumiCharge(RenderLiving creeperRendererIn) {
         this.creeperRenderer = creeperRendererIn;
         if (creeperRenderer.getMainModel() instanceof ModelCreeper) {
@@ -30,11 +31,12 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
             this.creeperModel = creeperRenderer.getMainModel();
         }
     }
-    
+
     @Override
-    public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
-            ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (entitylivingbaseIn.getPowered() && (!entitylivingbaseIn.isInvisible() || entitylivingbaseIn instanceof EntityIllusionerCreeper)) {
+    public void doRenderLayer(EntityTakumiAbstractCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+            float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        if (entitylivingbaseIn.getPowered() &&
+                (!entitylivingbaseIn.isInvisible() || entitylivingbaseIn instanceof EntityIllusionerCreeper)) {
             GlStateManager.pushMatrix();
             boolean flag = entitylivingbaseIn.isInvisible();
             GlStateManager.depthMask(!flag);
@@ -50,7 +52,8 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
             GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
             this.creeperModel.setModelAttributes(this.creeperRenderer.getMainModel());
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-            this.creeperModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            this.creeperModel
+                    .render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
@@ -61,7 +64,7 @@ public class LayerTakumiCharge implements LayerRenderer <EntityTakumiAbstractCre
             GlStateManager.popMatrix();
         }
     }
-    
+
     @Override
     public boolean shouldCombineTextures() {
         return false;

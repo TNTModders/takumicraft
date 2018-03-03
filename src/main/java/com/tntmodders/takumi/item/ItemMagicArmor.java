@@ -13,14 +13,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMagicArmor extends ItemArmor {
-    
+
     public ItemMagicArmor(EntityEquipmentSlot equipmentSlotIn) {
         super(TakumiArmorMaterial.MAGIC, 5, equipmentSlotIn);
         this.setRegistryName(TakumiCraftCore.MODID, "magicarmor_" + equipmentSlotIn.getName());
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("magicarmor_" + equipmentSlotIn.getName());
     }
-    
+
     @Override
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, boolean isHeld) {
         if (!itemStack.isItemEnchanted()) {
@@ -30,7 +30,7 @@ public class ItemMagicArmor extends ItemArmor {
             itemStack.addEnchantment(Enchantments.BINDING_CURSE, 10);
         }
     }
-    
+
     @Override
     public void onCreated(ItemStack itemStack, World p_77622_2_, EntityPlayer p_77622_3_) {
         if (!itemStack.isItemEnchanted()) {
@@ -40,13 +40,13 @@ public class ItemMagicArmor extends ItemArmor {
             itemStack.addEnchantment(Enchantments.BINDING_CURSE, 10);
         }
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack) {
         return true;
     }
-    
+
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if (!itemStack.isItemEnchanted()) {

@@ -1,9 +1,9 @@
 {
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "particle": "takumicraft:blocks/takumidirt",
-        "bottom": "takumicraft:blocks/takumidirt",
-        "top": "takumicraft:blocks/takumigrass_top",
-        "side": "takumicraft:blocks/takumigrass_side_snowed"
-    }
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "takumicraft:blocks/takumidirt",
+    "bottom": "takumicraft:blocks/takumidirt",
+    "top": "takumicraft:blocks/takumigrass_top",
+    "side": "takumicraft:blocks/takumigrass_side_snowed"
+  }
 }

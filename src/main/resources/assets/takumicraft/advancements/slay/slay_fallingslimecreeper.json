@@ -1,1 +1,24 @@
-{  "display": {    "icon": {      "item": "takumicraft:takumibook"    },    "title": {      "translate": "entity.fallingslimecreeper.name"    },    "description": {      "translate": "advancements.takumicraft.slay.desc"    }  },  "parent": "takumicraft:slay/slay_root",  "criteria": {    "fallingslimecreeper": {      "trigger": "minecraft:player_killed_entity",      "conditions": {        "entity": {          "type": "takumicraft:fallingslimecreeper"        }      }    }  }}
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:takumibook"
+    },
+    "title": {
+      "translate": "entity.fallingslimecreeper.name"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.slay.desc"
+    }
+  },
+  "parent": "takumicraft:slay/slay_root",
+  "criteria": {
+    "fallingslimecreeper": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "takumicraft:fallingslimecreeper"
+        }
+      }
+    }
+  }
+}

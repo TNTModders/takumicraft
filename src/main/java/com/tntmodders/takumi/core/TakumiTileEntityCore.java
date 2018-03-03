@@ -10,11 +10,11 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TakumiTileEntityCore {
-    
+
     public static void register() {
         GameRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock");
         GameRegistry.registerTileEntity(TileEntityTakumiBlock.class, TakumiCraftCore.MODID + ":takumiblock");
-        GameRegistry.registerTileEntity(TileEntityMonsterBomb.class,TakumiCraftCore.MODID+":monsterbomb");
+        GameRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb");
         GameRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered");
         if (FMLCommonHandler.instance().getSide().isClient()) {
             TakumiClientCore.registerTileRender();

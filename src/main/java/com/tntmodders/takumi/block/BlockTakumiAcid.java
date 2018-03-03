@@ -21,9 +21,9 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockTakumiAcid extends BlockContainer {
-    
+
     public static final PropertyInteger META = PropertyInteger.create("acidmeta", 0, 15);
-    
+
     public BlockTakumiAcid() {
         super(Material.TNT);
         this.setDefaultState(this.blockState.getBaseState().withProperty(META, 0));
@@ -34,44 +34,44 @@ public class BlockTakumiAcid extends BlockContainer {
         this.setHardness(0.5f);
         this.setLightLevel(1f);
     }
-    
+
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(META, meta);
     }
-    
+
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(META);
     }
-    
+
     @Override
     public int quantityDropped(Random random) {
         return 0;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
-    
+
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, META);
     }
-    
+
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
-    
+
     @Override
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
         worldIn.playSound(null, pos, SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.AMBIENT, 1.0f, 0.5f);
         return true;
     }
-    
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {

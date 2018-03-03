@@ -10,15 +10,15 @@ import java.util.Comparator;
 import java.util.List;
 
 public class EntityLeadCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityLeadCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            List <Entity> entities = this.world.loadedEntityList;
+            List<Entity> entities = this.world.loadedEntityList;
             entities.sort(Comparator.comparingDouble(o -> o.getDistanceSqToEntity(EntityLeadCreeper.this)));
             int i = 0;
             for (Entity entity : entities) {
@@ -32,42 +32,42 @@ public class EntityLeadCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL_M;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 5;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xff8000;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "leadcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 226;
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedEntities().clear();

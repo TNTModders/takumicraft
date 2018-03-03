@@ -19,16 +19,17 @@ import java.util.List;
 import java.util.Random;
 
 public class TakumiGunOreGenerator implements IWorldGenerator {
-    
+
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
+            IChunkProvider chunkProvider) {
         if (world.provider instanceof WorldProviderSurface) {
             this.generateOre(world, random, chunkX << 4, chunkZ << 4);
         } else if (world.provider instanceof TakumiWorldProvider) {
             this.generateOreTakumi(world, random, chunkX << 4, chunkZ << 4);
         }
     }
-    
+
     private void generateOre(World world, Random random, int x, int z) {
         //1チャンクで生成したい回数だけ繰り返す。
         if (world.provider instanceof WorldProviderSurface) {
@@ -37,11 +38,12 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
                 int genY = 1 + random.nextInt(64);
                 int genZ = z + random.nextInt(16);
                 new WorldGenMinable(random.nextInt(50) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
-                                    TakumiBlockCore.GUNORE.getDefaultState(), 25).generate(world, random, new BlockPos(genX, genY, genZ));
+                        TakumiBlockCore.GUNORE.getDefaultState(), 25)
+                        .generate(world, random, new BlockPos(genX, genY, genZ));
             }
         }
     }
-    
+
     private void generateOreTakumi(World world, Random random, int x, int z) {
         //1チャンクで生成したい回数だけ繰り返す。
         if (world.provider instanceof TakumiWorldProvider) {
@@ -50,16 +52,18 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
                 int genY = 1 + random.nextInt(255);
                 int genZ = z + random.nextInt(16);
                 IBlockState iBlockState = TakumiBlockCore.TAKUMI_ORE_COAL.getDefaultState();
-                List <BlockTakumiOres> blockTakumiOres = new ArrayList <>();
+                List<BlockTakumiOres> blockTakumiOres = new ArrayList<>();
                 Block.REGISTRY.forEach(block -> {
                     if (block instanceof BlockTakumiOres) {
-                        if (genY < 24 && block == TakumiBlockCore.TAKUMI_ORE_MAGIC || block != TakumiBlockCore.TAKUMI_ORE_MAGIC) {
+                        if (genY < 24 && block == TakumiBlockCore.TAKUMI_ORE_MAGIC ||
+                                block != TakumiBlockCore.TAKUMI_ORE_MAGIC) {
                             blockTakumiOres.add((BlockTakumiOres) block);
                         }
                     }
                 });
                 iBlockState = blockTakumiOres.get(random.nextInt(blockTakumiOres.size())).getDefaultState();
-                new WorldGenMinable(iBlockState, 25, input -> input != null && input.getBlock() == TakumiWorldChunkGenerator.STONE.getBlock())
+                new WorldGenMinable(iBlockState, 25,
+                        input -> input != null && input.getBlock() == TakumiWorldChunkGenerator.STONE.getBlock())
                         .generate(world, random, new BlockPos(genX, genY, genZ));
             }
         }

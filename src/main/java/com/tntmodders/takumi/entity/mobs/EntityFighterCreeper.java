@@ -13,11 +13,11 @@ import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import javax.annotation.Nullable;
 
 public class EntityFighterCreeper extends EntityZombieCreeper {
-    
+
     public EntityFighterCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedEntities().removeIf(entity -> entity instanceof EntityHorseCreeper);
@@ -37,15 +37,17 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
         }
         return true;
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 0x000077;
     }
-    
+
     @Nullable
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
+            @Nullable
+                    IEntityLivingData livingdata) {
         this.addRandomArmor();
         EntityHorseCreeper horseCreeper = new EntityHorseCreeper(this.world);
         horseCreeper.copyLocationAndAnglesFrom(this);
@@ -53,17 +55,17 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
         this.startRiding(horseCreeper, true);
         return super.onInitialSpawn(difficulty, livingdata);
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL_D;
     }
-    
+
     @Override
     public int getExplosionPower() {
         ItemStack stack = this.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
@@ -72,17 +74,17 @@ public class EntityFighterCreeper extends EntityZombieCreeper {
         }
         return super.getExplosionPower();
     }
-    
+
     @Override
     public String getRegisterName() {
         return "fightercreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 225;
     }
-    
+
     private void addRandomArmor() {
         int r = this.rand.nextInt(11);
         if (r < 4) {

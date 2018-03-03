@@ -4,11 +4,11 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.world.World;
 
 public class EntityStraightCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityStraightCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public void takumiExplode() {
         if (this.getAttackTarget() != null) {
@@ -29,42 +29,42 @@ public class EntityStraightCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 0;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xff0000;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "straightcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 49;
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 0x222222;

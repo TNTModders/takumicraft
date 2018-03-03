@@ -24,31 +24,31 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityStrayCreeper extends EntitySkeletonCreeper {
-    
+
     public EntityStrayCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 11184895;
     }
-    
+
     @Override
     public boolean getCanSpawnHere() {
         return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
     }
-    
+
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_STRAY_HURT;
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_STRAY_DEATH;
     }
-    
+
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
@@ -56,12 +56,13 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
             this.entityDropItem(this.getHeldItem(EnumHand.OFF_HAND), 0);
         }
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
-            PotionEffect effect = new PotionEffect(PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion
-                    (), 400);
+            PotionEffect effect = new PotionEffect(
+                    PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion(),
+                    400);
             for (Entity entity : event.getAffectedEntities()) {
                 if (entity instanceof EntityLivingBase) {
                     ((EntityLivingBase) entity).addPotionEffect(effect);
@@ -70,34 +71,35 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
         }
         return true;
     }
-    
+
     @SideOnly(Side.CLIENT)
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderSkeletonCreeper <>(manager);
+        return new RenderSkeletonCreeper<>(manager);
     }
-    
+
     @Override
     protected SoundEvent getStepSound() {
         return SoundEvents.ENTITY_STRAY_STEP;
     }
-    
+
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
         super.attackEntityWithRangedAttack(target, distanceFactor);
         this.setEquipmentBasedOnDifficulty(this.world.getDifficultyForLocation(new BlockPos(this)));
     }
-    
+
     @Override
     protected EntityArrow getArrow(float v) {
-        return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
+        return TakumiItemCore.TAKUMI_ARROW_HA
+                .createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
     }
-    
+
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_STRAY_AMBIENT;
     }
-    
+
     @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
@@ -109,41 +111,41 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
         PotionUtils.addPotionToItemStack(stack, type);
         this.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, stack);
     }
-    
+
     @Override
     public void takumiExplode() {
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL_M;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 3;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 7846775;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "straycreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 204;

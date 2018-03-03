@@ -35,18 +35,18 @@ import java.util.Objects;
 import java.util.Random;
 
 public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements ITileEntityProvider, ITakumiItemBlock {
-    
+
     public final TileEntityMonsterBomb tileEntityMonsterBomb;
-    private final Class <? extends EntityCreeper> entityClass;
+    private final Class<? extends EntityCreeper> entityClass;
     private final String name;
     private final String locName;
-    
+
     @Override
     public int quantityDropped(Random random) {
         return 0;
     }
-    
-    public BlockTakumiMonsterBomb(Class <? extends EntityCreeper> entityClass, String name) {
+
+    public BlockTakumiMonsterBomb(Class<? extends EntityCreeper> entityClass, String name) {
         super("monsterbomb_" + name, 0.1f, Material.TNT, MapColor.GREEN);
         this.setLightLevel(1f);
         this.entityClass = entityClass;
@@ -63,65 +63,68 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
         this.isBlockContainer = true;
         this.setUnlocalizedName("monsterbomb");
     }
-    
-    public Class <? extends EntityCreeper> getEntityClass() {
+
+    public Class<? extends EntityCreeper> getEntityClass() {
         return entityClass;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
-    
+
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.INVISIBLE;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+            EnumFacing side) {
         return true;
     }
-    
+
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
-    
+
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         super.breakBlock(worldIn, pos, state);
         worldIn.removeTileEntity(pos);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
-    
+
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
+            @Nullable
+                    TileEntity te, ItemStack stack) {
         if (te instanceof IWorldNameable && ((IWorldNameable) te).hasCustomName()) {
             player.addStat(StatList.getBlockStats(this));
             player.addExhaustion(0.005F);
-            
+
             if (worldIn.isRemote) {
                 return;
             }
-            
+
             int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
             Item item = this.getItemDropped(state, worldIn.rand, i);
-            
+
             if (item == Items.AIR) {
                 return;
             }
-            
+
             ItemStack itemstack = new ItemStack(item, this.quantityDropped(worldIn.rand));
             itemstack.setStackDisplayName(((IWorldNameable) te).getName());
             spawnAsEntity(worldIn, pos, itemstack);
@@ -129,20 +132,20 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
             super.harvestBlock(worldIn, player, pos, state, null, stack);
         }
     }
-    
+
     @Override
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
         super.eventReceived(state, worldIn, pos, id, param);
         TileEntity tileentity = worldIn.getTileEntity(pos);
         return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
         return true;
     }
-    
+
     @Override
     public void explode(World world, int x, int y, int z) {
         try {
@@ -165,18 +168,18 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
             e.printStackTrace();
         }
     }
-    
+
     @Override
     float getPower() {
         return 0;
     }
-    
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityMonsterBomb(this.locName);
     }
-    
+
     @Override
     public ItemBlock getItem() {
         return new ItemTakumiMonsterBomb(this);

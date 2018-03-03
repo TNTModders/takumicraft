@@ -24,17 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockTakumiAltar extends Block {
-    
+
     public BlockTakumiAltar() {
         super(Material.TNT, MapColor.GREEN);
         this.setRegistryName(TakumiCraftCore.MODID, "takumialtar");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumialtar");
     }
-    
+
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float
-            hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         boolean flg = super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
         Entity entity = null;
         if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
@@ -42,7 +42,7 @@ public class BlockTakumiAltar extends Block {
         } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
             entity = new EntityAnnivCreeper(worldIn);
         } else {
-            List <ITakumiEntity> entities = new ArrayList <>();
+            List<ITakumiEntity> entities = new ArrayList<>();
             TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
                 if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
                     entities.add(iTakumiEntity);
@@ -51,13 +51,14 @@ public class BlockTakumiAltar extends Block {
             if (!entities.isEmpty()) {
                 entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
                 try {
-                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(worldIn);
+                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass()
+                                              .getConstructor(World.class).newInstance(worldIn);
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
             }
         }
-        
+
         if (entity != null) {
             entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
             worldIn.setBlockToAir(pos);

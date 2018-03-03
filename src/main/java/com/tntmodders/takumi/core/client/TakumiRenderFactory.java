@@ -8,14 +8,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public abstract class TakumiRenderFactory implements IRenderFactory <Entity> {
-    
+public abstract class TakumiRenderFactory implements IRenderFactory<Entity> {
+
     public TakumiRenderFactory() {
     }
-    
+
     @Override
     public Render createRenderFor(RenderManager manager) {
         return null;
     }
-    
+
 }

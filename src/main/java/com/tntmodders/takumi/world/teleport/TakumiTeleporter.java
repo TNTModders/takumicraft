@@ -20,11 +20,11 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class TakumiTeleporter extends Teleporter {
-    
+
     public TakumiTeleporter(WorldServer worldIn) {
         super(worldIn);
     }
-    
+
     public void setTakumiPortal(Entity entity, BlockPos pos) {
         if (entity.timeUntilPortal > 0) {
             entity.timeUntilPortal = entity.getPortalCooldown();
@@ -34,17 +34,21 @@ public class TakumiTeleporter extends Teleporter {
                 posField.setAccessible(true);
                 if (!entity.world.isRemote && !Objects.equals(pos, posField.get(entity))) {
                     posField.set(entity, new BlockPos(pos));
-                    PatternHelper blockpattern$patternhelper = TakumiBlockCore.TAKUMI_PORTAL.createPatternHelper(entity.world, (BlockPos) posField
-                            .get(entity));
+                    PatternHelper blockpattern$patternhelper = TakumiBlockCore.TAKUMI_PORTAL
+                            .createPatternHelper(entity.world, (BlockPos) posField.get(entity));
                     double d0 = blockpattern$patternhelper.getForwards().getAxis() == Axis.X ?
-                                (double) blockpattern$patternhelper.getFrontTopLeft().getZ() :
-                                (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-                    double d1 = blockpattern$patternhelper.getForwards().getAxis() == Axis.X ? entity.posZ : entity.posX;
+                            (double) blockpattern$patternhelper.getFrontTopLeft().getZ() :
+                            (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+                    double d1 =
+                            blockpattern$patternhelper.getForwards().getAxis() == Axis.X ? entity.posZ : entity.posX;
                     d1 = Math.abs(MathHelper.pct(d1 - (double) (
-                            blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == AxisDirection.NEGATIVE ? 1 :
-                            0), d0, d0 - (double) blockpattern$patternhelper.getWidth()));
-                    double d2 = MathHelper.pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(), (double)
-                            (blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
+                                    blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() ==
+                                            AxisDirection.NEGATIVE ? 1 : 0), d0,
+                            d0 - (double) blockpattern$patternhelper.getWidth()));
+                    double d2 = MathHelper
+                            .pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(),
+                                    (double) (blockpattern$patternhelper.getFrontTopLeft().getY() -
+                                            blockpattern$patternhelper.getHeight()));
                     Field vecField = TakumiASMNameMap.getField(Entity.class, "lastPortalVec");
                     vecField.setAccessible(true);
                     vecField.set(entity, new Vec3d(d1, d2, 0.0D));
@@ -60,7 +64,7 @@ public class TakumiTeleporter extends Teleporter {
             }
         }
     }
-    
+
     @Override
     public void placeInPortal(Entity entityIn, float rotationYaw) {
         if (!this.placeInExistingPortal(entityIn, rotationYaw)) {
@@ -69,7 +73,7 @@ public class TakumiTeleporter extends Teleporter {
             TakumiCraftCore.LOGGER.info("placeInPortal:" + entityIn.getPosition().toString());
         }
     }
-    
+
     @Override
     public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) {
         int i = 128;
@@ -79,7 +83,7 @@ public class TakumiTeleporter extends Teleporter {
         boolean flag = true;
         BlockPos blockpos = BlockPos.ORIGIN;
         long l = ChunkPos.asLong(j, k);
-        
+
         if (this.destinationCoordinateCache.containsKey(l)) {
             PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(l);
             d0 = 0.0D;
@@ -88,23 +92,25 @@ public class TakumiTeleporter extends Teleporter {
             flag = false;
         } else {
             BlockPos blockpos3 = new BlockPos(entityIn);
-            
+
             for (int i1 = -128; i1 <= 128; ++i1) {
                 BlockPos blockpos2;
-                
+
                 for (int j1 = -128; j1 <= 128; ++j1) {
-                    for (BlockPos blockpos1 = blockpos3.add(i1, this.world.getActualHeight() - 1 - blockpos3.getY(), j1); blockpos1.getY() >= 0;
-                         blockpos1 = blockpos2) {
+                    for (BlockPos blockpos1 =
+                         blockpos3.add(i1, this.world.getActualHeight() - 1 - blockpos3.getY(), j1);
+                         blockpos1.getY() >= 0; blockpos1 = blockpos2) {
                         blockpos2 = blockpos1.down();
-                        
+
                         if (this.world.getBlockState(blockpos1).getBlock() == TakumiBlockCore.TAKUMI_PORTAL) {
-                            for (blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == TakumiBlockCore.TAKUMI_PORTAL;
+                            for (blockpos2 = blockpos1.down();
+                                 this.world.getBlockState(blockpos2).getBlock() == TakumiBlockCore.TAKUMI_PORTAL;
                                  blockpos2 = blockpos2.down()) {
                                 blockpos1 = blockpos2;
                             }
-                            
+
                             double d1 = blockpos1.distanceSq(blockpos3);
-                            
+
                             if (d0 < 0.0D || d1 < d0) {
                                 d0 = d1;
                                 blockpos = blockpos1;
@@ -114,75 +120,82 @@ public class TakumiTeleporter extends Teleporter {
                 }
             }
         }
-        
+
         if (d0 >= 0.0D) {
             if (flag) {
                 this.destinationCoordinateCache.put(l, new PortalPosition(blockpos, this.world.getTotalWorldTime()));
             }
-            
+
             double d5 = (double) blockpos.getX() + 0.5D;
             double d7 = (double) blockpos.getZ() + 0.5D;
-            PatternHelper blockpattern$patternhelper = TakumiBlockCore.TAKUMI_PORTAL.createPatternHelper(this.world, blockpos);
-            boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == AxisDirection.NEGATIVE;
-            double d2 = blockpattern$patternhelper.getForwards().getAxis() == Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() :
-                        (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-            double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().y * (double)
-                    blockpattern$patternhelper.getHeight();
-            
+            PatternHelper blockpattern$patternhelper =
+                    TakumiBlockCore.TAKUMI_PORTAL.createPatternHelper(this.world, blockpos);
+            boolean flag1 =
+                    blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == AxisDirection.NEGATIVE;
+            double d2 = blockpattern$patternhelper.getForwards().getAxis() == Axis.X ?
+                    (double) blockpattern$patternhelper.getFrontTopLeft().getZ() :
+                    (double) blockpattern$patternhelper.getFrontTopLeft().getX();
+            double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) -
+                    entityIn.getLastPortalVec().y * (double) blockpattern$patternhelper.getHeight();
+
             if (flag1) {
                 ++d2;
             }
-            
+
             if (blockpattern$patternhelper.getForwards().getAxis() == Axis.X) {
-                d7 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double)
-                        blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+                d7 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() *
+                        (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
                 d5 += this.world.rand.nextBoolean() ? 1.25 : -1.25;
             } else {
-                d5 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double)
-                        blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+                d5 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() *
+                        (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
                 d7 += this.world.rand.nextBoolean() ? 1.25 : -1.25;
             }
-            
+
             float f = 0.0F;
             float f1 = 0.0F;
             float f2 = 0.0F;
             float f3 = 0.0F;
-            
+
             if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
                 f = 1.0F;
                 f1 = 1.0F;
-            } else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
+            } else if (blockpattern$patternhelper.getForwards().getOpposite() ==
+                    entityIn.getTeleportDirection().getOpposite()) {
                 f = -1.0F;
                 f1 = -1.0F;
-            } else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
+            } else if (blockpattern$patternhelper.getForwards().getOpposite() ==
+                    entityIn.getTeleportDirection().rotateY()) {
                 f2 = 1.0F;
                 f3 = -1.0F;
             } else {
                 f2 = -1.0F;
                 f3 = 1.0F;
             }
-            
+
             double d3 = entityIn.motionX;
             double d4 = entityIn.motionZ;
             entityIn.motionX = d3 * (double) f + d4 * (double) f3;
             entityIn.motionZ = d3 * (double) f2 + d4 * (double) f1;
-            entityIn.rotationYaw = rotationYaw - (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float)
-                    (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
-            
+            entityIn.rotationYaw =
+                    rotationYaw - (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) +
+                            (float) (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
+
             if (entityIn instanceof EntityPlayerMP) {
                 BlockPos pos = new BlockPos(d5, d6, d7);
                 world.setBlockToAir(pos);
                 world.setBlockToAir(pos.up());
-                ((EntityPlayerMP) entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
+                ((EntityPlayerMP) entityIn).connection
+                        .setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
             } else {
                 entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
             }
-            
+
             return true;
         }
         return false;
     }
-    
+
     @Override
     public boolean makePortal(Entity entityIn) {
         BlockPos pos = entityIn.getPosition().north();
@@ -190,18 +203,20 @@ public class TakumiTeleporter extends Teleporter {
             for (int y = -1; y <= 3; y++) {
                 for (int z = -3; z <= 3; z++) {
                     if (x == -2 || x == 2 || y == -1 || y == 3 || z == -3 || z == 3) {
-                        this.world.setBlockState(pos.add(x, y, z), TakumiBlockCore.TAKUMI_PORTAL_FRAME.getDefaultState());
+                        this.world
+                                .setBlockState(pos.add(x, y, z), TakumiBlockCore.TAKUMI_PORTAL_FRAME.getDefaultState());
                     } else {
                         this.world.setBlockToAir(pos.add(x, y, z));
                     }
                 }
             }
         }
-        
+
         for (int x = -1; x <= 1; x++) {
             for (int y = 0; y <= 2; y++) {
-                this.world.setBlockState(pos.add(x, y, 0), TakumiBlockCore.TAKUMI_PORTAL.getDefaultState().withProperty(BlockTakumiPortal.AXIS,
-                        Axis.X), 0);
+                this.world.setBlockState(pos.add(x, y, 0),
+                        TakumiBlockCore.TAKUMI_PORTAL.getDefaultState().withProperty(BlockTakumiPortal.AXIS, Axis.X),
+                        0);
             }
         }
         

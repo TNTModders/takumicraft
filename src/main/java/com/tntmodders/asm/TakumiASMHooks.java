@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import java.lang.reflect.Field;
 
 public class TakumiASMHooks {
-    
+
     public static void TakumiExplodeHook(EntityCreeper creeper) {
         try {
             if (creeper instanceof EntityTakumiAbstractCreeper) {
@@ -31,13 +31,14 @@ public class TakumiASMHooks {
             e.printStackTrace();
         }
     }
-    
+
     public static void TakumiRenderByItemHook(ItemStack itemStack) {
-        if (itemStack.getItem() instanceof ItemBlock && Block.getBlockFromItem(itemStack.getItem()) instanceof BlockTakumiMonsterBomb) {
+        if (itemStack.getItem() instanceof ItemBlock &&
+                Block.getBlockFromItem(itemStack.getItem()) instanceof BlockTakumiMonsterBomb) {
             GlStateManager.pushMatrix();
             GlStateManager.disableCull();
-            TileEntityRendererDispatcher.instance.render(((BlockTakumiMonsterBomb) Block.getBlockFromItem(itemStack.getItem()))
-                    .tileEntityMonsterBomb, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+            TileEntityRendererDispatcher.instance.render(((BlockTakumiMonsterBomb) Block
+                    .getBlockFromItem(itemStack.getItem())).tileEntityMonsterBomb, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
             GlStateManager.enableCull();
             GlStateManager.popMatrix();
         } else if (itemStack.getItem() == TakumiItemCore.TAKUMI_SHIELD) {

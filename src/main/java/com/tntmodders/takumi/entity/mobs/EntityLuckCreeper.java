@@ -14,60 +14,62 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityLuckCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityLuckCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public void takumiExplode() {
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GRASS_M;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 5;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xff8888;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "luckcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 234;
     }
-    
+
     @Override
     public void onDeath(DamageSource cause) {
-        if (cause.getTrueSource() != null && cause.getTrueSource() instanceof EntityLivingBase && !(cause.getTrueSource() instanceof EntityPlayer
-                && ((EntityPlayer) cause.getTrueSource()).isCreative())) {
-            cause.getTrueSource().attackEntityFrom(new EntityDamageSource("takumicraft.luck", this).setDamageIsAbsolute(), ((EntityLivingBase)
-                    cause.getTrueSource()).getMaxHealth() + 1);
+        if (cause.getTrueSource() != null && cause.getTrueSource() instanceof EntityLivingBase &&
+                !(cause.getTrueSource() instanceof EntityPlayer &&
+                        ((EntityPlayer) cause.getTrueSource()).isCreative())) {
+            cause.getTrueSource()
+                 .attackEntityFrom(new EntityDamageSource("takumicraft.luck", this).setDamageIsAbsolute(),
+                         ((EntityLivingBase) cause.getTrueSource()).getMaxHealth() + 1);
         }
         super.onDeath(cause);
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {

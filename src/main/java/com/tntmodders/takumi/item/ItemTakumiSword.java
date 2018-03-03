@@ -15,14 +15,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTakumiSword extends ItemSword {
-    
+
     public ItemTakumiSword() {
         super(TakumiToolMaterial.TAKUMI_MATERIAL);
         this.setRegistryName(TakumiCraftCore.MODID, "takumisword");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumisword");
     }
-    
+
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.isItemEnchanted()) {
@@ -33,7 +33,7 @@ public class ItemTakumiSword extends ItemSword {
             }
         }
     }
-    
+
     @Override
     public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
         if (!stack.isItemEnchanted()) {
@@ -44,21 +44,21 @@ public class ItemTakumiSword extends ItemSword {
             }
         }
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return true;
     }
-    
+
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(CreativeTabs tab, NonNullList <ItemStack> items) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
             ItemStack itemStack = new ItemStack(this, 1);
             itemStack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);

@@ -35,11 +35,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.2]", name = "匠Craft [ Takumi Craft ]",
-     guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory",
-     updateJSON = "https://raw.githubusercontent.com/TNTModders/takumicraft/master/version/version.json")
+@Mod(modid = TakumiCraftCore.MODID, version = TakumiCraftCore.VERSION, acceptedMinecraftVersions = "[1.12.2]", name = "匠Craft [ Takumi Craft ]", guiFactory = "com.tntmodders.takumi.core.client.TakumiGuiFactory", updateJSON = "https://raw.githubusercontent.com/TNTModders/takumicraft/master/version/version.json")
 public class TakumiCraftCore {
-    
+
     //初期設定
     public static final String MODID = "takumicraft";
     public static final String VERSION = "2.0.0-β.1.2.2";
@@ -51,7 +49,7 @@ public class TakumiCraftCore {
     public static TakumiCraftCore TakumiInstance;
     @Metadata(MODID)
     public static ModMetadata metadata;
-    
+
     @EventHandler
     public void construct(FMLConstructionEvent event) {
         TakumiModInfoCore.load(metadata);
@@ -60,48 +58,48 @@ public class TakumiCraftCore {
         TakumiFluidCore.register();
         TakumiTileEntityCore.register();
     }
-    
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
         TakumiClientCore.register();
     }
-    
+
     @SubscribeEvent
-    public void registerBlocks(Register <Block> event) {
+    public void registerBlocks(Register<Block> event) {
         TakumiBlockCore.register(event.getRegistry());
     }
-    
+
     @SubscribeEvent
-    public void registerItems(Register <Item> event) {
+    public void registerItems(Register<Item> event) {
         TakumiItemCore.register(event.getRegistry());
     }
-    
+
     @SubscribeEvent
-    public void registerEntities(Register <EntityEntry> event) {
+    public void registerEntities(Register<EntityEntry> event) {
         TakumiEntityCore.register();
     }
-    
+
     @SubscribeEvent
-    public void registerEnchantments(Register <Enchantment> event) {
+    public void registerEnchantments(Register<Enchantment> event) {
         TakumiEnchantmentCore.register(event.getRegistry());
     }
-    
+
     @SubscribeEvent
-    public void registerPotions(Register <Potion> event) {
+    public void registerPotions(Register<Potion> event) {
         TakumiPotionCore.register(event.getRegistry());
     }
-    
+
     @SubscribeEvent
-    public void registerPotionType(Register <PotionType> event) {
+    public void registerPotionType(Register<PotionType> event) {
         TakumiPotionCore.registerPotionType(event.getRegistry());
     }
-    
+
     @SubscribeEvent
-    public void registerBiome(Register <Biome> event) {
+    public void registerBiome(Register<Biome> event) {
         TakumiBiomeCore.register(event.getRegistry());
     }
-    
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         TakumiWorldCore.register();
@@ -113,7 +111,7 @@ public class TakumiCraftCore {
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 15);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
     }
-    
+
     @EventHandler
     public void init(FMLInitializationEvent event) {
         HOLDER.register();

@@ -34,28 +34,34 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TakumiUtils {
-    
+
     public static String takumiTranslate(String s) {
         return I18n.translateToLocal(s);
     }
-    
-    public static void giveAdvancementImpossible(EntityPlayerMP playerMP, ResourceLocation parent, ResourceLocation child) {
+
+    public static void giveAdvancementImpossible(EntityPlayerMP playerMP, ResourceLocation parent,
+            ResourceLocation child) {
         try {
-            if (playerMP.getAdvancements().getProgress(playerMP.getServer().getAdvancementManager().getAdvancement(parent)).hasProgress()) {
-                playerMP.getAdvancements().grantCriterion(playerMP.getServer().getAdvancementManager().getAdvancement(child), "impossible");
+            if (playerMP.getAdvancements()
+                        .getProgress(playerMP.getServer().getAdvancementManager().getAdvancement(parent))
+                        .hasProgress()) {
+                playerMP.getAdvancements()
+                        .grantCriterion(playerMP.getServer().getAdvancementManager().getAdvancement(child),
+                                "impossible");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     public static boolean getAdvancementUnlocked(ResourceLocation location) {
         ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
         try {
             Field field = TakumiASMNameMap.getField(ClientAdvancementManager.class, "advancementToProgress");
             field.setAccessible(true);
-            Map <Advancement, AdvancementProgress> advancementToProgress = (Map <Advancement, AdvancementProgress>) field.get(manager);
+            Map<Advancement, AdvancementProgress> advancementToProgress =
+                    (Map<Advancement, AdvancementProgress>) field.get(manager);
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
@@ -88,21 +94,21 @@ public class TakumiUtils {
             }
         }
     }*/
-    
+
     public static World getDummyWorld() {
         return FMLCommonHandler.instance().getSide().isClient() ? getClientWorld() : getServerWorld();
     }
-    
+
     @SideOnly(Side.CLIENT)
     private static World getClientWorld() {
         return Minecraft.getMinecraft().world;
     }
-    
+
     @SideOnly(Side.SERVER)
     private static World getServerWorld() {
         return FMLServerHandler.instance().getServer().getWorld(0);
     }
-    
+
     public static float takumiGetBlockResistance(Entity entity, IBlockState state, BlockPos pos) {
         float f = entity.getExplosionResistance(null, entity.world, pos, state);
         if (f >= 1200) {
@@ -113,22 +119,22 @@ public class TakumiUtils {
         }
         return f;
     }
-    
+
     public static void takumiSetPowered(EntityCreeper entity, boolean flg) {
         if (entity.getPowered() != flg) {
             try {
                 Field field = TakumiASMNameMap.getField(EntityCreeper.class, "POWERED");
                 field.setAccessible(true);
-                DataParameter <Boolean> parameter = (DataParameter <Boolean>) field.get(entity);
+                DataParameter<Boolean> parameter = (DataParameter<Boolean>) field.get(entity);
                 entity.getDataManager().set(parameter, flg);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
-    public static List <File> getListFile(String path) {
-        List <File> files = new ArrayList <>();
+
+    public static List<File> getListFile(String path) {
+        List<File> files = new ArrayList<>();
         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
         URL url = loader.getResource(path);
         if (Objects.equals(url.getProtocol(), "jar")) {
@@ -146,7 +152,7 @@ public class TakumiUtils {
             JarFile jarFile;
             try {
                 jarFile = new JarFile(f);
-                Enumeration <JarEntry> enumeration = jarFile.entries();
+                Enumeration<JarEntry> enumeration = jarFile.entries();
                 while (enumeration.hasMoreElements()) {
                     JarEntry entry = enumeration.nextElement();
                     String s = entry.getName();
@@ -164,7 +170,7 @@ public class TakumiUtils {
         }
         return files;
     }
-    
+
     /* public static List<Class> getListClass(String path) {
          List<Class> files = new ArrayList<>();
          ClassLoader loader = TakumiCraftCore.class.getClassLoader();
@@ -207,12 +213,13 @@ public class TakumiUtils {
          }
          return files;
      }*/
-    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy) {
+    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
+            boolean fire, boolean destroy) {
         takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, 1);
     }
-    
-    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, boolean destroy,
-            double amp) {
+
+    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
+            boolean fire, boolean destroy, double amp) {
         boolean flg = world instanceof WorldServer;
         TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp);
         if (ForgeEventFactory.onExplosionStart(world, explosion)) {
@@ -224,11 +231,12 @@ public class TakumiUtils {
             if (!fire) {
                 explosion.clearAffectedBlockPositions();
             }
-            
+
             for (EntityPlayer entityplayer : world.playerEntities) {
                 if (entityplayer.getDistanceSq(x, y, z) < 4096.0D) {
-                    ((EntityPlayerMP) entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z, power, explosion.getAffectedBlockPositions
-                            (), explosion.getPlayerKnockbackMap().get(entityplayer)));
+                    ((EntityPlayerMP) entityplayer).connection.sendPacket(
+                            new SPacketExplosion(x, y, z, power, explosion.getAffectedBlockPositions(),
+                                    explosion.getPlayerKnockbackMap().get(entityplayer)));
                 }
             }
         }

@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "takumicraft:blocks/takumidirt"
-    }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "takumicraft:blocks/takumidirt"
+  }
 }

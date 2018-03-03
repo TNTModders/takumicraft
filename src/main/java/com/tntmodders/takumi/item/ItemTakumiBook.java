@@ -14,27 +14,28 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTakumiBook extends Item {
-    
+
     public ItemTakumiBook() {
         this.setRegistryName(TakumiCraftCore.MODID, "takumibook");
         //this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumibook");
     }
-    
+
     @Override
-    public ActionResult <ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        playerIn.openGui(TakumiCraftCore.TakumiInstance, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+        playerIn.openGui(TakumiCraftCore.TakumiInstance, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY,
+                (int) playerIn.posZ);
         playerIn.addStat(StatList.getObjectUseStats(this));
-        return new ActionResult <>(EnumActionResult.SUCCESS, itemstack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return true;
     }
-    
+
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;

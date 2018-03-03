@@ -14,36 +14,39 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderVindicatorCreeper <T extends EntityVindicatorCreeper> extends RenderLiving <T> implements ITakumiRender {
-    
+public class RenderVindicatorCreeper<T extends EntityVindicatorCreeper> extends RenderLiving<T>
+        implements ITakumiRender {
+
     private static final ModelIllagerCreeper MODEL_ILLAGER_CREEPER = new ModelIllagerCreeper(0.0F, 0.0F, 64, 64);
-    
+
     public RenderVindicatorCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelIllagerCreeper(0.0F, 0.0F, 64, 64), 0.5f);
         this.addLayer(new LayerTakumiCharge(this));
         this.addLayer(new LayerHeldItem(this) {
             @Override
-            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
-                    ageInTicks, float netHeadYaw, float headPitch, float scale) {
+            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+                    float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
                 if (((EntityVindicatorCreeper) entitylivingbaseIn).isAggressive()) {
-                    super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+                    super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks,
+                            netHeadYaw, headPitch, scale);
                 }
             }
-            
+
             @Override
             protected void translateToHand(EnumHandSide p_191361_1_) {
-                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_).postRender(0.0625F);
+                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_)
+                                                                                .postRender(0.0625F);
             }
         });
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         }
@@ -51,7 +54,7 @@ public class RenderVindicatorCreeper <T extends EntityVindicatorCreeper> extends
         i = MathHelper.clamp(i, 0, 255);
         return i << 24 | 822083583;
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -67,17 +70,17 @@ public class RenderVindicatorCreeper <T extends EntityVindicatorCreeper> extends
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-    
+
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelIllagerCreeper(2.0F, 0.0F, 64, 64);

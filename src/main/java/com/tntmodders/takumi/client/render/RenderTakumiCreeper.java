@@ -17,25 +17,25 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.Calendar;
 
-public class RenderTakumiCreeper <T extends EntityTakumiAbstractCreeper> extends RenderLiving <T> {
-    
+public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends RenderLiving<T> {
+
     public RenderTakumiCreeper(RenderManager renderManagerIn) {
         this(renderManagerIn, new ModelCreeper());
     }
-    
+
     public RenderTakumiCreeper(RenderManager renderManagerIn, ModelBase model) {
         super(renderManagerIn, model, 0.5F);
         this.addLayer(new LayerTakumiCharge(this));
-        this.addLayer(new LayerSeasonCreepers <>(this));
+        this.addLayer(new LayerSeasonCreepers<>(this));
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         }
@@ -43,7 +43,7 @@ public class RenderTakumiCreeper <T extends EntityTakumiAbstractCreeper> extends
         i = MathHelper.clamp(i, 0, 255);
         return i << 24 | 822083583;
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -62,7 +62,7 @@ public class RenderTakumiCreeper <T extends EntityTakumiAbstractCreeper> extends
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
@@ -70,40 +70,48 @@ public class RenderTakumiCreeper <T extends EntityTakumiAbstractCreeper> extends
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-    
-    private class LayerSeasonCreepers <E extends EntityTakumiAbstractCreeper> implements LayerRenderer <E> {
-        
+
+    private class LayerSeasonCreepers<E extends EntityTakumiAbstractCreeper> implements LayerRenderer<E> {
+
         final RenderTakumiCreeper renderTakumiCreeper;
-        final ResourceLocation location_newyear = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/newyear.png");
-        final ResourceLocation location_newyear_yukari = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/newyear_yukari.png");
-        final ResourceLocation location_newyear_king = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/newyear_king.png");
-        final ResourceLocation location_xmas = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/xmas_yukari.png");
-        
-        
+        final ResourceLocation location_newyear =
+                new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/newyear.png");
+        final ResourceLocation location_newyear_yukari =
+                new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/newyear_yukari.png");
+        final ResourceLocation location_newyear_king =
+                new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/newyear_king.png");
+        final ResourceLocation location_xmas =
+                new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/seasons/xmas_yukari.png");
+
+
         public LayerSeasonCreepers(RenderTakumiCreeper creeper) {
             this.renderTakumiCreeper = creeper;
         }
-        
+
         @Override
-        public void doRenderLayer(E entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float
-                netHeadYaw, float headPitch, float scale) {
+        public void doRenderLayer(E entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
+                float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             Calendar calendar = entitylivingbaseIn.world.getCurrentDate();
             int month = calendar.get(Calendar.MONTH) + 1;
             int date = calendar.get(Calendar.DATE);
             if (month == 12 && (date == 24 || date == 25) && entitylivingbaseIn instanceof EntityYukariCreeper) {
                 this.renderTakumiCreeper.bindTexture(location_xmas);
                 Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                        scale);
                 Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
             } else if (month == 1 && date < 8) {
-                this.renderTakumiCreeper.bindTexture(entitylivingbaseIn instanceof EntityYukariCreeper ? location_newyear_yukari :
-                                                     entitylivingbaseIn instanceof EntityKingCreeper ? location_newyear_king : location_newyear);
+                this.renderTakumiCreeper.bindTexture(
+                        entitylivingbaseIn instanceof EntityYukariCreeper ? location_newyear_yukari :
+                                entitylivingbaseIn instanceof EntityKingCreeper ? location_newyear_king :
+                                        location_newyear);
                 Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                        scale);
                 Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
             }
         }
-        
+
         @Override
         public boolean shouldCombineTextures() {
             return false;

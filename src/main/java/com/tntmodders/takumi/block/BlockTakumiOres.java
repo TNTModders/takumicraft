@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockTakumiOres extends BlockTakumiGunOre {
-    
+
     private final Item item;
-    
+
     public BlockTakumiOres(Item item) {
         super("takumiore_" + item.getRegistryName().getResourcePath());
         this.item = item;
@@ -26,33 +26,33 @@ public class BlockTakumiOres extends BlockTakumiGunOre {
             this.setLightLevel(0.25f);
         }
     }
-    
+
     @Override
     float getPower() {
         return 2.5f;
     }
-    
+
     @Override
     public int quantityDropped(Random random) {
         return (random.nextInt(3) + 1) * random.nextInt(5);
     }
-    
+
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return item;
     }
-    
+
     @Override
     public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
         Random rand = new Random();
         return 2 * (rand.nextInt(5) + 3);
     }
-    
+
     @Override
     public int quantityDropped(IBlockState state, int fortune, Random random) {
         return this.quantityDropped(random);
     }
-    
+
     @Override
     public int damageDropped(IBlockState state) {
         if (this.item == Items.DYE) {
@@ -60,7 +60,7 @@ public class BlockTakumiOres extends BlockTakumiGunOre {
         }
         return 0;
     }
-    
+
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         super.onBlockHarvested(worldIn, pos, state, player);

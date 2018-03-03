@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelParrotCreeper extends ModelBase {
-    
+
     ModelRenderer body;
     ModelRenderer tail;
     ModelRenderer wingLeft;
@@ -24,7 +24,7 @@ public class ModelParrotCreeper extends ModelBase {
     ModelRenderer legLeft;
     ModelRenderer legRight;
     private State state = State.STANDING;
-    
+
     public ModelParrotCreeper() {
         this.textureWidth = 32;
         this.textureHeight = 32;
@@ -66,12 +66,13 @@ public class ModelParrotCreeper extends ModelBase {
         this.legRight.addBox(-0.5F, 0.0F, -0.5F, 1, 2, 1);
         this.legRight.setRotationPoint(-1.0F, 22.0F, -1.05F);
     }
-    
+
     /**
      * Sets the models various rotation angles then renders the model.
      */
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scale) {
         this.body.render(scale);
         this.wingLeft.render(scale);
         this.wingRight.render(scale);
@@ -80,15 +81,15 @@ public class ModelParrotCreeper extends ModelBase {
         this.legLeft.render(scale);
         this.legRight.render(scale);
     }
-    
+
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-            Entity entityIn) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scaleFactor, Entity entityIn) {
         float f = ageInTicks * 0.3F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -98,12 +99,12 @@ public class ModelParrotCreeper extends ModelBase {
         this.tail.rotationPointX = 0.0F;
         this.wingRight.rotationPointX = -1.5F;
         this.wingLeft.rotationPointX = 1.5F;
-        
+
         if (this.state != State.FLYING) {
             if (this.state == State.SITTING) {
                 return;
             }
-            
+
             if (this.state == State.PARTY) {
                 float f1 = MathHelper.cos((float) entityIn.ticksExisted);
                 float f2 = MathHelper.sin((float) entityIn.ticksExisted);
@@ -124,11 +125,12 @@ public class ModelParrotCreeper extends ModelBase {
                 this.tail.rotationPointY = 21.07F + f2;
                 return;
             }
-            
+
             this.legLeft.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-            this.legRight.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+            this.legRight.rotateAngleX +=
+                    MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         }
-        
+
         this.head.rotationPointY = 15.69F + f;
         this.tail.rotateAngleX = 1.015F + MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
         this.tail.rotationPointY = 21.07F + f;
@@ -140,13 +142,14 @@ public class ModelParrotCreeper extends ModelBase {
         this.legLeft.rotationPointY = 22.0F + f;
         this.legRight.rotationPointY = 22.0F + f;
     }
-    
+
     /**
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+            float partialTickTime) {
         this.feather.rotateAngleX = -0.2214F;
         this.body.rotateAngleX = 0.4937F;
         this.wingLeft.rotateAngleX = -((float) Math.PI * 2F / 9F);
@@ -157,7 +160,7 @@ public class ModelParrotCreeper extends ModelBase {
         this.legRight.rotateAngleX = -0.0299F;
         this.legLeft.rotationPointY = 22.0F;
         this.legRight.rotationPointY = 22.0F;
-        
+
         if (entitylivingbaseIn instanceof EntityParrotCreeper) {
             EntityParrotCreeper entityparrot = (EntityParrotCreeper) entitylivingbaseIn;
             if (entityparrot.getCreeperState() > 0) {
@@ -188,12 +191,12 @@ public class ModelParrotCreeper extends ModelBase {
             } else {
                 this.state = State.STANDING;
             }
-            
+
             this.legLeft.rotateAngleZ = 0.0F;
             this.legRight.rotateAngleZ = 0.0F;
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     enum State {
         FLYING, STANDING, SITTING, PARTY

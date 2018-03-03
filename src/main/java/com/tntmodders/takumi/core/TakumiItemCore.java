@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TakumiItemCore {
-    
+
     public static final TakumiItemCore INSTANCE = new TakumiItemCore();
     public static final Item TAKUMI_SHIELD = new ItemTakumiShield();
     public static final Item TAKUMI_BOOK = new ItemTakumiBook();
@@ -47,11 +47,11 @@ public class TakumiItemCore {
     public static final Item MAGIC_CREEPER_LEGS = new ItemMagicArmor(EntityEquipmentSlot.LEGS);
     public static final Item MAGIC_CREEPER_BOOTS = new ItemMagicArmor(EntityEquipmentSlot.FEET);
     public static final Item MAGIC_BOW = new ItemMagicBow();
-    
-    public static List <Item> itemBlocks = new ArrayList <>();
-    
-    public static void register(IForgeRegistry <Item> registry) {
-        Class <TakumiItemCore> clazz = TakumiItemCore.class;
+
+    public static List<Item> itemBlocks = new ArrayList<>();
+
+    public static void register(IForgeRegistry<Item> registry) {
+        Class<TakumiItemCore> clazz = TakumiItemCore.class;
         for (Field field : clazz.getFields()) {
             try {
                 if (field.get(INSTANCE) instanceof Item) {
@@ -64,8 +64,8 @@ public class TakumiItemCore {
                 e.printStackTrace();
             }
         }
-        
-        Class <TakumiBlockCore> clazz2 = TakumiBlockCore.class;
+
+        Class<TakumiBlockCore> clazz2 = TakumiBlockCore.class;
         for (Field field : clazz2.getFields()) {
             try {
                 if (field.get(INSTANCE) instanceof Block) {

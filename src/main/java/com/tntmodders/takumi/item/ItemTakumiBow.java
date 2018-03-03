@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 public class ItemTakumiBow extends ItemBow {
-    
+
     public ItemTakumiBow() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "takumibow");
@@ -23,12 +23,16 @@ public class ItemTakumiBow extends ItemBow {
         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
             @Override
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(ItemStack stack,
+                    @Nullable
+                            World worldIn,
+                    @Nullable
+                            EntityLivingBase entityIn) {
                 if (entityIn == null) {
                     return 0.0F;
                 }
                 return entityIn.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_BOW ? 0.0F :
-                       (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
+                        (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
             }
         });
     }

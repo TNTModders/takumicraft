@@ -1,1 +1,32 @@
-{  "parent": "takumicraft:recipes/recipe_root",  "rewards": {    "recipes": [      "takumicraft:creeperclay_black"    ]  },  "criteria": {    "has_ingredient": {      "trigger": "minecraft:inventory_changed",      "conditions": {        "items": [          {            "item": "takumicraft:creeperbomb"          }        ]      }    },    "has_the_recipe": {      "trigger": "minecraft:recipe_unlocked",      "conditions": {        "recipe": "takumicraft:creeperclay_black"      }    }  },  "requirements": [    [      "has_ingredient",      "has_the_recipe"    ]  ]}
+{
+  "parent": "takumicraft:recipes/recipe_root",
+  "rewards": {
+    "recipes": [
+      "takumicraft:creeperclay_black"
+    ]
+  },
+  "criteria": {
+    "has_ingredient": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperbomb"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "takumicraft:creeperclay_black"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingredient",
+      "has_the_recipe"
+    ]
+  ]
+}

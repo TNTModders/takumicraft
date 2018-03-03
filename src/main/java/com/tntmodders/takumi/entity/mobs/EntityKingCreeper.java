@@ -39,12 +39,14 @@ import java.lang.reflect.Field;
 import java.util.Random;
 
 public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
-    
-    private static final DataParameter <Integer> ATTACK_ID = EntityDataManager.createKey(EntityKingCreeper.class, DataSerializers.VARINT);
-    private final BossInfoServer bossInfo = (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.kingcreeper.name"), Color
-            .GREEN, Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
+
+    private static final DataParameter<Integer> ATTACK_ID =
+            EntityDataManager.createKey(EntityKingCreeper.class, DataSerializers.VARINT);
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.kingcreeper.name"), Color.GREEN,
+                    Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
     private DamageSource lastSource;
-    
+
     public EntityKingCreeper(World worldIn) {
         super(worldIn);
         this.isImmuneToFire = true;
@@ -56,7 +58,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
@@ -64,7 +66,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         }
         super.onDeath(source);
     }
-    
+
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -87,7 +89,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         }
         super.setDead();
     }
-    
+
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
@@ -104,17 +106,17 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             super.damageEntity(damageSrc, damageAmount);
         }
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 0x00ff00;
     }
-    
+
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
     }
-    
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -122,19 +124,19 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }
-    
+
     @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(ATTACK_ID, 0);
     }
-    
+
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("attackid", this.getAttackID());
     }
-    
+
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
@@ -143,7 +145,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             this.bossInfo.setName(this.getDisplayName());
         }
     }
-    
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -155,7 +157,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             this.heal(0.01f);
         }
     }
-    
+
     @Override
     public void takumiExplode() {
         if (this.lastSource != null && this.lastSource.isProjectile() && this.lastSource.getTrueSource() != null) {
@@ -178,7 +180,9 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 if (!this.world.isRemote) {
                     for (int i = 0; i < (this.getPowered() ? 20 : 10); i++) {
                         BlockPos pos = this.createRandomPos(this.getPosition(), 2.5);
-                        this.world.createExplosion(this, pos.getX() + 0.5, pos.getY() - 0.5, pos.getZ() + 0.5, power / 2, true);
+                        this.world
+                                .createExplosion(this, pos.getX() + 0.5, pos.getY() - 0.5, pos.getZ() + 0.5, power / 2,
+                                        true);
                     }
                 }
                 break;
@@ -216,11 +220,14 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             case 3:
                 for (int i = 0; i < 10 * (this.getPowered() ? 3 : 1); i++) {
                     BlockPos pos = this.createRandomPos(this.getPosition(), 1.5);
-                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
+                    EntityLightningBolt bolt =
+                            new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
                     this.world.addWeatherEffect(bolt);
                     this.world.spawnEntity(bolt);
                     if (!this.world.isRemote) {
-                        this.world.newExplosion(this, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, power / 2.5f, true, true);
+                        this.world
+                                .newExplosion(this, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, power / 2.5f, true,
+                                        true);
                     }
                 }
                 break;
@@ -235,15 +242,17 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         int PpX = (int) (entity.posX + MathHelper.getInt(this.rand, 2, 5));
                         int PpY = (int) entity.posY;
                         int PpZ = (int) (entity.posZ + MathHelper.getInt(this.rand, 2, 5));
-                        IBlockState state = this.rand.nextInt(10) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
-                                            TakumiBlockCore.GUNORE.getDefaultState();
+                        IBlockState state =
+                                this.rand.nextInt(10) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
+                                        TakumiBlockCore.GUNORE.getDefaultState();
                         this.world.setBlockState(new BlockPos(MpX, MpY, MpZ), state);
                         this.world.setBlockState(new BlockPos(PpX, PpY, PpZ), state);
                         this.world.createExplosion(this, MpX, MpY, MpZ, 0, false);
                         this.world.createExplosion(this, PpX, PpY, PpZ, 0, false);
                     } else if (!this.world.isRemote) {
-                        this.world.createExplosion(this, this.posX + MathHelper.getInt(this.rand, -4, 4), this.posY + MathHelper.getInt(this.rand,
-                                -4, 4), this.posZ + MathHelper.getInt(this.rand, -4, 4), power, true);
+                        this.world.createExplosion(this, this.posX + MathHelper.getInt(this.rand, -4, 4),
+                                this.posY + MathHelper.getInt(this.rand, -4, 4),
+                                this.posZ + MathHelper.getInt(this.rand, -4, 4), power, true);
                     }
                 }
                 break;
@@ -260,7 +269,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 }
                 this.setPosition(pos.getX(), pos.getY(), pos.getZ());
                 break;*/
-            //巨匠召喚
+                //巨匠召喚
             case 6:
                 if (!this.world.isRemote) {
                     for (int i = 0; i < power / 2 + 1; i++) {
@@ -288,7 +297,9 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     int x = rand.nextInt(11) - 5;
                     int y = rand.nextInt(11) - 5;
                     int z = rand.nextInt(11) - 5;
-                    if (!this.world.isRemote) { this.world.createExplosion(this, this.posX + x, this.posY + y, this.posZ + z, power / 3, true); }
+                    if (!this.world.isRemote) {
+                        this.world.createExplosion(this, this.posX + x, this.posY + y, this.posZ + z, power / 3, true);
+                    }
                 }
                 break;
             //火薬岩の塔
@@ -301,11 +312,13 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         int v = MathHelper.getInt(this.rand, -4, 4);
                         int w = MathHelper.getInt(this.rand, -4, 4);
                         for (int ty = 0; ty < 6; ty++) {
-                            if (this.world.getBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty), (int) (this.posZ + w)))
-                                    .getBlock() == Blocks.AIR) {
-                                this.world.setBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty), (int) (this.posZ + w)),
+                            if (this.world.getBlockState(
+                                    new BlockPos((int) (this.posX + v), (int) (this.posY + ty), (int) (this.posZ + w)))
+                                          .getBlock() == Blocks.AIR) {
+                                this.world.setBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
+                                                (int) (this.posZ + w)),
                                         this.rand.nextInt(20) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
-                                        TakumiBlockCore.GUNORE.getDefaultState());
+                                                TakumiBlockCore.GUNORE.getDefaultState());
                             }
                         }
                     }
@@ -313,7 +326,9 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 break;
             //回復爆発
             case 10:
-                if (!world.isRemote) { this.world.createExplosion(this, this.posX, this.posY, this.posZ, power, true); }
+                if (!world.isRemote) {
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, power, true);
+                }
                 this.heal(25);
                 break;
             //多重爆発
@@ -329,17 +344,19 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 Entity var1 = this.getAttackTarget();
                 if (var1 != null) {
                     for (int t = -18; t < 18; t++) {
-                        
+
                         float f1 = MathHelper.sqrt(this.getDistanceToEntity(var1)) * 0.5F;
                         double d0 = var1.posX - this.posX;
-                        double d1 = var1.getEntityBoundingBox().minY + var1.height / 2.0F - (this.posY + this.height / 2.0F);
+                        double d1 = var1.getEntityBoundingBox().minY + var1.height / 2.0F -
+                                (this.posY + this.height / 2.0F);
                         double d2 = var1.posZ - this.posZ;
-                        EntityLargeFireball entityLargefireball = new EntityLargeFireball(this.world, this, d0 + this.rand.nextGaussian() * f1, d1,
-                                d2 + this.rand.nextGaussian() * f1);
+                        EntityLargeFireball entityLargefireball =
+                                new EntityLargeFireball(this.world, this, d0 + this.rand.nextGaussian() * f1, d1,
+                                        d2 + this.rand.nextGaussian() * f1);
                         entityLargefireball.rotationYaw += t * 10;
                         entityLargefireball.posY = this.posY + this.height / 2.0F + 0.5D;
                         entityLargefireball.explosionPower = 2;
-                        
+
                         this.world.spawnEntity(entityLargefireball);
                     }
                 } else if (!this.world.isRemote) {
@@ -360,111 +377,112 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             TakumiUtils.takumiSetPowered(this, false);
         }
     }
-    
+
     private void projectileCounter() {
         for (int i = 0; i < 10 * (this.getPowered() ? 3 : 1); i++) {
             BlockPos pos = this.createRandomPos(this.lastSource.getTrueSource().getPosition(), 2);
-            EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
+            EntityLightningBolt bolt =
+                    new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
             this.world.addWeatherEffect(bolt);
             this.world.spawnEntity(bolt);
         }
         if (!this.world.isRemote) {
-            this.world.createExplosion(this, this.lastSource.getTrueSource().posX, this.lastSource.getTrueSource().posY - 0.25, this.lastSource
-                    .getTrueSource().posZ, 3f, true);
+            this.world.createExplosion(this, this.lastSource.getTrueSource().posX,
+                    this.lastSource.getTrueSource().posY - 0.25, this.lastSource.getTrueSource().posZ, 3f, true);
         }
         this.onStruckByLightning(null);
     }
-    
+
     public int getAttackID() {
         return this.dataManager.get(ATTACK_ID);
     }
-    
+
     private BlockPos createRandomPos(BlockPos point, double range) {
-        return point.add(MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1), range * (this.getPowered() ? 2 :
-                                                                                                             1)), MathHelper.nextDouble(this.rand,
-                -1 * range * (
-                this.getPowered() ? 2 : 1), range * (this.getPowered() ? 2 : 1)), MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ?
-                                                                                                                                 2 : 1), range * (
-                this.getPowered() ? 2 : 1)));
+        return point.add(MathHelper
+                        .nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1), range * (this.getPowered() ? 2 : 1)),
+                MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
+                        range * (this.getPowered() ? 2 : 1)), MathHelper
+                        .nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
+                                range * (this.getPowered() ? 2 : 1)));
     }
-    
+
     public void setAttackID(int id) {
         this.dataManager.set(ATTACK_ID, id);
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.BOSS;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL_MD;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 0;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0x88ff00;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "kingcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 501;
     }
-    
+
     @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
     }
-    
+
     @Override
     protected boolean canDespawn() {
         return false;
     }
-    
+
     @Override
     public boolean isNonBoss() {
         return false;
     }
-    
+
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
-    
+
     @Override
     public void setCustomNameTag(String name) {
         super.setCustomNameTag(name);
         this.bossInfo.setName(this.getDisplayName());
     }
-    
+
     @Override
     public boolean isImmuneToExplosions() {
         return true;
     }
-    
+
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         this.bossInfo.addPlayer(player);
     }
-    
+
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);

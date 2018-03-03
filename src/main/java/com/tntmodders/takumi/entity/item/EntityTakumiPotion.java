@@ -8,15 +8,15 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityTakumiPotion extends EntityPotion {
-    
+
     public EntityTakumiPotion(World worldIn) {
         super(worldIn);
     }
-    
+
     public EntityTakumiPotion(World worldIn, EntityLivingBase throwerIn, ItemStack potionDamageIn) {
         super(worldIn, throwerIn, potionDamageIn);
     }
-    
+
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {

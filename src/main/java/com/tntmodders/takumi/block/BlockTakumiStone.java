@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockTakumiStone extends Block {
-    
+
     public BlockTakumiStone() {
         super(Material.ROCK);
         this.setRegistryName(TakumiCraftCore.MODID, "takumistone");
@@ -23,12 +23,12 @@ public class BlockTakumiStone extends Block {
         this.setResistance(10000000f);
         this.setHarvestLevel("pickaxe", 2);
     }
-    
+
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(Blocks.COBBLESTONE);
     }
-    
+
     @Override
     public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return true;

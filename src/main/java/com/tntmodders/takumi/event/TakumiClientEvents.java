@@ -18,17 +18,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
-    
+
     @SideOnly(Side.CLIENT)
     public static final ModelShield MODEL_SHIELD = new ModelShield();
-    
+
     @SubscribeEvent
     public void renderWorld(CameraSetup event) {
-        if (FMLCommonHandler.instance().getSide().isClient() && Minecraft.getMinecraft().player.isPotionActive(TakumiPotionCore.INVERSION)) {
+        if (FMLCommonHandler.instance().getSide().isClient() &&
+                Minecraft.getMinecraft().player.isPotionActive(TakumiPotionCore.INVERSION)) {
             GlStateManager.rotate(180, 0, 0, 1);
         }
     }
-    
+
     @SubscribeEvent
     public void renderPlayer(Pre event) {
         if (event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
@@ -37,7 +38,7 @@ public class TakumiClientEvents {
             GlStateManager.translate(0, -1.9, 0);
         }
     }
-    
+
     @SubscribeEvent
     public void renderPlayer(Post event) {
         if (event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
@@ -46,12 +47,13 @@ public class TakumiClientEvents {
             GlStateManager.pushMatrix();
         }
     }
-    
+
     @SubscribeEvent
     public void onKeyPressed(KeyInputEvent event) {
         if (TakumiClientCore.keyBindingTakumiBook.isPressed()) {
             EntityPlayer playerIn = Minecraft.getMinecraft().player;
-            playerIn.openGui(TakumiCraftCore.TakumiInstance, 0, playerIn.world, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+            playerIn.openGui(TakumiCraftCore.TakumiInstance, 0, playerIn.world, (int) playerIn.posX,
+                    (int) playerIn.posY, (int) playerIn.posZ);
         }
     }
 }

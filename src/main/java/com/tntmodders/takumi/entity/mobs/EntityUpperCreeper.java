@@ -5,7 +5,7 @@ import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.world.World;
 
 public class EntityUpperCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityUpperCreeper(World worldIn) {
         super(worldIn);
     }
@@ -67,50 +67,51 @@ public class EntityUpperCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedEntities().clear();
         return true;
     }*/
-    
+
     @Override
     public int getPrimaryColor() {
         return 0x002200;
     }
-    
+
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ,
-                    this.getPowered() ? 8 : 4, false, false, this.getPowered() ? 15 : 5);
+            TakumiUtils
+                    .takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, this.getPowered() ? 8 : 4,
+                            false, false, this.getPowered() ? 15 : 5);
         }
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.WIND;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 0;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xddffdd;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "uppercreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 232;

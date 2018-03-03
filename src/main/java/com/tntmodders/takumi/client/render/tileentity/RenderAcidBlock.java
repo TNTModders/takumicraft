@@ -18,13 +18,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.nio.FloatBuffer;
 
 @SideOnly(Side.CLIENT)
-public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntitySpecialRenderer <T> {
-    
-    private static final ResourceLocation LOCATION = new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/acidblock.png");
+public class RenderAcidBlock<T extends TileEntityAcidBlock> extends TileEntitySpecialRenderer<T> {
+
+    private static final ResourceLocation LOCATION =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/acidblock.png");
     private static final DynamicTexture TEXTURE_BRIGHTNESS = new DynamicTexture(16, 16);
     private final ModelAcidBlock modelBase = new ModelAcidBlock();
     private FloatBuffer brightnessBuffer = GLAllocation.createDirectFloatBuffer(4);
-    
+
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
@@ -44,7 +45,7 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
         this.unsetBrightness();
         GlStateManager.popMatrix();
     }
-    
+
     private void setBrightness(T tile, float partialTicks) {
         float f = 1;
         int i = this.getColorMultiplier(tile, f, partialTicks);
@@ -75,7 +76,7 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
             GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_SOURCE0_ALPHA, OpenGlHelper.GL_PREVIOUS);
             GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_OPERAND0_ALPHA, 770);
             this.brightnessBuffer.position(0);
-            
+
             float f1 = (i >> 24 & 255) / 255.0F;
             float f2 = (i >> 16 & 255) / 255.0F;
             float f3 = (i >> 8 & 255) / 255.0F;
@@ -84,8 +85,8 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
             this.brightnessBuffer.put(f3);
             this.brightnessBuffer.put(f4);
             this.brightnessBuffer.put(1.0F - f1);
-            
-            
+
+
             this.brightnessBuffer.flip();
             GlStateManager.glTexEnv(8960, 8705, this.brightnessBuffer);
             GlStateManager.setActiveTexture(OpenGlHelper.GL_TEXTURE2);
@@ -103,7 +104,7 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
             GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
         }
     }
-    
+
     protected void unsetBrightness() {
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
         GlStateManager.enableTexture2D();
@@ -143,10 +144,10 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
         GlStateManager.glTexEnvi(8960, OpenGlHelper.GL_SOURCE0_ALPHA, 5890);
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
-    
+
     protected int getColorMultiplier(T tile, float lightBrightness, float partialTickTime) {
         float f = tile.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -155,24 +156,24 @@ public class RenderAcidBlock <T extends TileEntityAcidBlock> extends TileEntityS
             return i << 24 | 822083583;
         }
     }
-    
+
     private class ModelAcidBlock extends ModelBase {
-        
+
         private final ModelRenderer box;
-        
+
         public ModelAcidBlock() {
             this.box = new ModelRenderer(this, 0, 0);
             this.box.setTextureSize(16, 16);
             this.box.addBox(0, 0, 0, 16, 16, 16);
         }
-        
+
         public void render() {
             this.box.render(0.0625F);
         }
-        
+
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
-                scale) {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+                float headPitch, float scale) {
         }
     }
 }

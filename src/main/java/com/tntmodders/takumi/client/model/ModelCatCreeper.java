@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelCatCreeper extends ModelBase {
-    
+
     /**
      * The back left leg model for the Ocelot.
      */
@@ -45,7 +45,7 @@ public class ModelCatCreeper extends ModelBase {
      */
     private final ModelRenderer ocelotBody;
     private int state = 1;
-    
+
     public ModelCatCreeper() {
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
@@ -80,14 +80,15 @@ public class ModelCatCreeper extends ModelBase {
         this.ocelotFrontRightLeg.addBox(-1.0F, 0.0F, 0.0F, 2, 10, 2);
         this.ocelotFrontRightLeg.setRotationPoint(-1.2F, 13.8F, -5.0F);
     }
-    
+
     /**
      * Sets the models various rotation angles then renders the model.
      */
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-        
+
         if (this.isChild) {
             float f = 2.0F;
             GlStateManager.pushMatrix();
@@ -117,48 +118,56 @@ public class ModelCatCreeper extends ModelBase {
             this.ocelotFrontRightLeg.render(scale);
         }
     }
-    
+
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-            Entity entityIn) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scaleFactor, Entity entityIn) {
         this.ocelotHead.rotateAngleX = headPitch * 0.017453292F;
         this.ocelotHead.rotateAngleY = netHeadYaw * 0.017453292F;
-        
+
         if (this.state != 3) {
             this.ocelotBody.rotateAngleX = (float) Math.PI / 2F;
-            
+
             if (this.state == 2) {
                 this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
                 this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 0.3F) * limbSwingAmount;
-                this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI + 0.3F) * limbSwingAmount;
-                this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
-                this.ocelotTail2.rotateAngleX = 1.7278761F + (float) Math.PI / 10F * MathHelper.cos(limbSwing) * limbSwingAmount;
+                this.ocelotFrontLeftLeg.rotateAngleX =
+                        MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI + 0.3F) * limbSwingAmount;
+                this.ocelotFrontRightLeg.rotateAngleX =
+                        MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
+                this.ocelotTail2.rotateAngleX =
+                        1.7278761F + (float) Math.PI / 10F * MathHelper.cos(limbSwing) * limbSwingAmount;
             } else {
                 this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
-                this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
-                this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
+                this.ocelotBackRightLeg.rotateAngleX =
+                        MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
+                this.ocelotFrontLeftLeg.rotateAngleX =
+                        MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
                 this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
-                
+
                 if (this.state == 1) {
-                    this.ocelotTail2.rotateAngleX = 1.7278761F + (float) Math.PI / 4F * MathHelper.cos(limbSwing) * limbSwingAmount;
+                    this.ocelotTail2.rotateAngleX =
+                            1.7278761F + (float) Math.PI / 4F * MathHelper.cos(limbSwing) * limbSwingAmount;
                 } else {
-                    this.ocelotTail2.rotateAngleX = 1.7278761F + 0.47123894F * MathHelper.cos(limbSwing) * limbSwingAmount;
+                    this.ocelotTail2.rotateAngleX =
+                            1.7278761F + 0.47123894F * MathHelper.cos(limbSwing) * limbSwingAmount;
                 }
             }
         }
     }
-    
+
     /**
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+            float partialTickTime) {
         this.ocelotBody.rotationPointY = 12.0F;
         this.ocelotBody.rotationPointZ = -10.0F;
         this.ocelotHead.rotationPointY = 15.0F;
@@ -176,7 +185,7 @@ public class ModelCatCreeper extends ModelBase {
         this.ocelotBackRightLeg.rotationPointY = 18.0F;
         this.ocelotBackRightLeg.rotationPointZ = 5.0F;
         this.ocelotTail.rotateAngleX = 0.9F;
-        
+
         if (entitylivingbaseIn.isSneaking()) {
             ++this.ocelotBody.rotationPointY;
             this.ocelotHead.rotationPointY += 2.0F;

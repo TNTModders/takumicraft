@@ -15,28 +15,28 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTakumiPortalKit extends Item {
-    
+
     public ItemTakumiPortalKit() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "portalkit");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("portalkit");
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return true;
     }
-    
+
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
     }
-    
+
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY,
-            float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+            EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getBlockState(pos).getBlock() == TakumiBlockCore.TAKUMI_PORTAL_FRAME) {
             TakumiCraftCore.LOGGER.info(pos.offset(facing));
             TakumiBlockCore.TAKUMI_PORTAL.trySpawnPortal(worldIn, pos.offset(facing));

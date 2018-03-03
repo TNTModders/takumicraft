@@ -31,11 +31,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
-    
-    private final BossInfoServer bossInfo = (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.transcreeper.name"), Color
-            .GREEN, Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
+
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.transcreeper.name"), Color.GREEN,
+                    Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
     private EnumAttackFlg flg;
-    
+
     public EntityTransCreeper(World worldIn) {
         super(worldIn);
         this.isImmuneToFire = true;
@@ -47,7 +48,7 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -55,19 +56,19 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }
-    
+
     @Override
     public void onUpdate() {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
-    
+
     @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
     }
-    
+
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -90,7 +91,7 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
         }
         super.setDead();
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (!(event.getExplosion() instanceof TakumiExplosion)) {
@@ -104,50 +105,50 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
         }
         return true;
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 0x001100;
     }
-    
+
     @Override
     public Object getRender(RenderManager manager) {
-        return new RenderTransCreeper <>(manager);
+        return new RenderTransCreeper<>(manager);
     }
-    
+
     @Override
     public boolean isNonBoss() {
         return false;
     }
-    
+
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
-    
+
     @Override
     public void setCustomNameTag(String name) {
         super.setCustomNameTag(name);
         this.bossInfo.setName(this.getDisplayName());
     }
-    
+
     @Override
     public boolean isImmuneToExplosions() {
         return true;
     }
-    
+
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         this.bossInfo.addPlayer(player);
     }
-    
+
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
         this.bossInfo.removePlayer(player);
     }
-    
+
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source == DamageSource.IN_WALL) {
@@ -157,7 +158,7 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
         }
         return source != DamageSource.FALL && !source.isExplosion() && super.attackEntityFrom(source, amount);
     }
-    
+
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -167,13 +168,15 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
             switch (this.flg) {
                 case EXPLODE: {
                     int i = this.getPowered() ? 20 : 10;
-                    Map <BlockPos, IBlockState> stateMap = new HashMap <>();
+                    Map<BlockPos, IBlockState> stateMap = new HashMap<>();
                     for (int x = -i; x < i; x++) {
                         for (int y = -i; y < i; y++) {
                             for (int z = -i; z < i; z++) {
-                                if (x * x + y * y + z * z <= i * i && this.world.getBlockState(this.getPosition().add(x, y, z)).getBlockHardness
-                                        (this.world, this.getPosition().add(x, y, z)) >= 0) {
-                                    stateMap.put(this.getPosition().add(x, 10 - y, z), this.world.getBlockState(this.getPosition().add(x, y, z)));
+                                if (x * x + y * y + z * z <= i * i &&
+                                        this.world.getBlockState(this.getPosition().add(x, y, z))
+                                                  .getBlockHardness(this.world, this.getPosition().add(x, y, z)) >= 0) {
+                                    stateMap.put(this.getPosition().add(x, 10 - y, z),
+                                            this.world.getBlockState(this.getPosition().add(x, y, z)));
                                     this.world.setBlockToAir(this.getPosition().add(x, y, z));
                                 }
                             }
@@ -203,42 +206,42 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.BOSS;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL_M;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 0;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0x00ff00;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "transcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 502;
     }
-    
+
     private enum EnumAttackFlg {
         EXPLODE, HOMING, LASER, FLOAT, DOWN
     }

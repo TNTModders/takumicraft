@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 
 
 public class LayerVillagerCreeperArmor extends LayerBipedArmor {
-    
-    public LayerVillagerCreeperArmor(RenderLivingBase <?> rendererIn) {
+
+    public LayerVillagerCreeperArmor(RenderLivingBase<?> rendererIn) {
         super(rendererIn);
     }
-    
+
     @Override
     protected void initArmor() {
         this.modelLeggings = new ModelZombieVillagerCreeper(0.5F, 0.0F, true);

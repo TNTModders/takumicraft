@@ -10,17 +10,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EggCreativeTab extends CreativeTabs {
-    
+
     public EggCreativeTab() {
         super("eggs");
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public String getTranslatedTabLabel() {
         return TakumiUtils.takumiTranslate("takumicraft.egg.name");
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public ItemStack getTabIconItem() {

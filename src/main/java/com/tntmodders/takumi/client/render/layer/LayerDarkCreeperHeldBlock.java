@@ -11,19 +11,19 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.texture.TextureMap;
 
 
-public class LayerDarkCreeperHeldBlock implements LayerRenderer <EntityDarkCreeper> {
-    
+public class LayerDarkCreeperHeldBlock implements LayerRenderer<EntityDarkCreeper> {
+
     private final RenderDarkCreeper endermanRenderer;
-    
+
     public LayerDarkCreeperHeldBlock(RenderDarkCreeper endermanRendererIn) {
         this.endermanRenderer = endermanRendererIn;
     }
-    
+
     @Override
-    public void doRenderLayer(EntityDarkCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-            float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(EntityDarkCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+            float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         IBlockState iblockstate = entitylivingbaseIn.getHeldBlockState();
-        
+
         if (iblockstate != null) {
             BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
             GlStateManager.enableRescaleNormal();
@@ -45,7 +45,7 @@ public class LayerDarkCreeperHeldBlock implements LayerRenderer <EntityDarkCreep
             GlStateManager.disableRescaleNormal();
         }
     }
-    
+
     @Override
     public boolean shouldCombineTextures() {
         return false;

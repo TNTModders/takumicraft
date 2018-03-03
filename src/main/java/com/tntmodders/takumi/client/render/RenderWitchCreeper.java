@@ -13,28 +13,28 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 
-public class RenderWitchCreeper <T extends EntityWitchCreeper> extends RenderLiving <T> implements ITakumiRender {
-    
+public class RenderWitchCreeper<T extends EntityWitchCreeper> extends RenderLiving<T> implements ITakumiRender {
+
     public RenderWitchCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelWitch(0.0f), 0.5F);
         this.addLayer(new LayerTakumiCharge(this));
         this.addLayer(new LayerHeldItemWitchCreeper(this));
     }
-    
+
     @Override
     public ModelWitch getMainModel() {
         return (ModelWitch) this.mainModel;
     }
-    
+
     @Override
     public void transformHeldFull3DItemLayer() {
         GlStateManager.translate(0.0F, 0.1875F, 0.0F);
     }
-    
+
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -43,7 +43,7 @@ public class RenderWitchCreeper <T extends EntityWitchCreeper> extends RenderLiv
             return i << 24 | 822083583;
         }
     }
-    
+
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         GlStateManager.scale(0.9375F, 0.9375F, 0.9375F);
@@ -56,18 +56,18 @@ public class RenderWitchCreeper <T extends EntityWitchCreeper> extends RenderLiv
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         ((ModelWitch) this.mainModel).holdingItem = !entity.getHeldItemMainhand().isEmpty();
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelWitch(2.0f);

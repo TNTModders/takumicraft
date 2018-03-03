@@ -13,17 +13,17 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class EntityAnnivCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityAnnivCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Nullable
     @Override
     protected Item getDropItem() {
         return Item.getItemFromBlock(Blocks.CAKE);
     }
-    
+
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -45,47 +45,47 @@ public class EntityAnnivCreeper extends EntityTakumiAbstractCreeper {
             }
         }
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.HIGH;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.NORMAL;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 5;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xff0000;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return true;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "annivcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 408;
     }
-    
+
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 2.5f;
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         for (BlockPos pos : event.getAffectedBlocks()) {
@@ -99,7 +99,7 @@ public class EntityAnnivCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedEntities().clear();
         return true;
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 0xffffff;

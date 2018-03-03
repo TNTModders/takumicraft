@@ -10,24 +10,24 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderInversionCreeper <T extends EntityTakumiAbstractCreeper> extends RenderLiving <T> {
-    
+public class RenderInversionCreeper<T extends EntityTakumiAbstractCreeper> extends RenderLiving<T> {
+
     public RenderInversionCreeper(RenderManager renderManagerIn) {
         this(renderManagerIn, new ModelCreeper());
     }
-    
+
     public RenderInversionCreeper(RenderManager renderManagerIn, ModelBase model) {
         super(renderManagerIn, model, 0.5F);
         this.addLayer(new LayerTakumiCharge(this));
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -36,7 +36,7 @@ public class RenderInversionCreeper <T extends EntityTakumiAbstractCreeper> exte
             return i << 24 | 822083583;
         }
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -57,7 +57,7 @@ public class RenderInversionCreeper <T extends EntityTakumiAbstractCreeper> exte
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */

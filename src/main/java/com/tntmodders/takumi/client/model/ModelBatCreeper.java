@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelBatCreeper extends ModelBase {
-    
+
     private final ModelRenderer BatCreeperHead;
     /**
      * The body box of the BatCreeper model.
@@ -32,7 +32,7 @@ public class ModelBatCreeper extends ModelBase {
      * The outer left wing box of the BatCreeper model.
      */
     private final ModelRenderer BatCreeperOuterLeftWing;
-    
+
     public ModelBatCreeper() {
         this.textureWidth = 64;
         this.textureHeight = 64;
@@ -65,25 +65,26 @@ public class ModelBatCreeper extends ModelBase {
         this.BatCreeperRightWing.addChild(this.BatCreeperOuterRightWing);
         this.BatCreeperLeftWing.addChild(this.BatCreeperOuterLeftWing);
     }
-    
+
     /**
      * Sets the models various rotation angles then renders the model.
      */
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
         this.BatCreeperHead.render(scale);
         this.BatCreeperBody.render(scale);
     }
-    
+
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-            Entity entityIn) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scaleFactor, Entity entityIn) {
         if (((EntityBatCreeper) entityIn).getIsBatHanging()) {
             this.BatCreeperHead.rotateAngleX = headPitch * 0.017453292F;
             this.BatCreeperHead.rotateAngleY = (float) Math.PI - netHeadYaw * 0.017453292F;

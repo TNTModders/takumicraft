@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockTakumiDirt extends BlockDirt {
-    
+
     public BlockTakumiDirt() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "takumidirt");
@@ -20,17 +20,17 @@ public class BlockTakumiDirt extends BlockDirt {
         this.setHardness(1f);
         this.setResistance(10000000f);
     }
-    
+
     @Override
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList <ItemStack> items) {
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         items.add(new ItemStack(this, 1, DirtType.DIRT.getMetadata()));
     }
-    
+
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(this, 1);
     }
-    
+
     @Override
     public int damageDropped(IBlockState state) {
         return 0;

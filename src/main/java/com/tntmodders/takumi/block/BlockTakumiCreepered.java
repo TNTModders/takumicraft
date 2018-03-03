@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockTakumiCreepered extends BlockContainer {
-    
+
     public BlockTakumiCreepered() {
         super(Material.BARRIER);
         this.setRegistryName(TakumiCraftCore.MODID, "takumicreepered");
@@ -29,33 +29,34 @@ public class BlockTakumiCreepered extends BlockContainer {
         this.setLightOpacity(255);
         this.setHardness(5f);
     }
-    
+
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+            EnumFacing side) {
         return true;
     }
-    
+
     @Override
     public int quantityDropped(Random random) {
         return 0;
     }
-    
+
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
-    
+
     @Override
     public boolean canDropFromExplosion(Explosion explosionIn) {
         return false;
     }
-    
+
     @Override
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
         worldIn.playSound(null, pos, SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.AMBIENT, 1.0f, 0.5f);
         return true;
     }
-    
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {

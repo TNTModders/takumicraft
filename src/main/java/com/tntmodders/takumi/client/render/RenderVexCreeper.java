@@ -16,38 +16,39 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RenderVexCreeper <T extends EntityVexCreeper> extends RenderLiving <T> implements ITakumiRender {
-    
-    private static final ResourceLocation VEX_TEXTURE = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/vexcreeper.png");
-    private static final ResourceLocation VEX_CHARGING_TEXTURE = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/vexcreeper_charging"
-            + ".png");
+public class RenderVexCreeper<T extends EntityVexCreeper> extends RenderLiving<T> implements ITakumiRender {
+
+    private static final ResourceLocation VEX_TEXTURE =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/vexcreeper.png");
+    private static final ResourceLocation VEX_CHARGING_TEXTURE =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/vexcreeper_charging" + ".png");
     private int modelVersion;
-    
+
     public RenderVexCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelVexCreeper(), 0.3f);
         this.addLayer(new LayerTakumiCharge(this));
         this.modelVersion = ((ModelVexCreeper) this.mainModel).getModelVersion();
     }
-    
+
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         int i = ((ModelVexCreeper) this.mainModel).getModelVersion();
-        
+
         if (i != this.modelVersion) {
             this.mainModel = new ModelVexCreeper();
             this.modelVersion = i;
         }
-        
+
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         }
@@ -55,7 +56,7 @@ public class RenderVexCreeper <T extends EntityVexCreeper> extends RenderLiving 
         i = MathHelper.clamp(i, 0, 255);
         return i << 24 | 822083583;
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -71,27 +72,27 @@ public class RenderVexCreeper <T extends EntityVexCreeper> extends RenderLiving 
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelVexCreeper();
     }
-    
+
     @SideOnly(Side.CLIENT)
     public static class ModelVexCreeper extends ModelBiped {
-        
+
         protected ModelRenderer leftWing;
         protected ModelRenderer rightWing;
-        
+
         public ModelVexCreeper() {
             this(0.0F);
         }
-        
+
         public ModelVexCreeper(float p_i47224_1_) {
             super(p_i47224_1_, 0.0F, 64, 64);
             this.bipedLeftLeg.showModel = false;
@@ -105,29 +106,30 @@ public class RenderVexCreeper <T extends EntityVexCreeper> extends RenderLiving 
             this.leftWing.mirror = true;
             this.leftWing.addBox(0.0F, 0.0F, 0.0F, 20, 12, 1);
         }
-        
+
         /**
          * Sets the models various rotation angles then renders the model.
          */
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
-                scale) {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+                float headPitch, float scale) {
             super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             this.rightWing.render(scale);
             this.leftWing.render(scale);
         }
-        
+
         /**
          * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
          * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
          * "far" arms and legs can swing at most.
          */
         @Override
-        public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
-                scaleFactor, Entity entityIn) {
-            super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+        public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+                float headPitch, float scaleFactor, Entity entityIn) {
+            super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor,
+                    entityIn);
             EntityVexCreeper entityvex = (EntityVexCreeper) entityIn;
-            
+
             if (entityvex.isCharging()) {
                 if (entityvex.getPrimaryHand() == EnumHandSide.RIGHT) {
                     this.bipedRightArm.rotateAngleX = 3.7699115F;
@@ -135,7 +137,7 @@ public class RenderVexCreeper <T extends EntityVexCreeper> extends RenderLiving 
                     this.bipedLeftArm.rotateAngleX = 3.7699115F;
                 }
             }
-            
+
             this.bipedRightLeg.rotateAngleX += (float) Math.PI / 5F;
             this.rightWing.rotationPointZ = 2.0F;
             this.leftWing.rotationPointZ = 2.0F;
@@ -148,7 +150,7 @@ public class RenderVexCreeper <T extends EntityVexCreeper> extends RenderLiving 
             this.rightWing.rotateAngleX = 0.47123894F;
             this.rightWing.rotateAngleZ = 0.47123894F;
         }
-        
+
         public int getModelVersion() {
             return 23;
         }

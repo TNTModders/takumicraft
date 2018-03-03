@@ -11,24 +11,25 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderGhastCreeper <T extends EntityGhastCreeper> extends RenderLiving <T> implements ITakumiRender {
-    
-    private static final ResourceLocation GHAST_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/ghastcreeper.png");
-    private static final ResourceLocation GHAST_SHOOTING_TEXTURES = new ResourceLocation(TakumiCraftCore.MODID,
-            "textures/entity/ghastcreeper_shooting.png");
-    
+public class RenderGhastCreeper<T extends EntityGhastCreeper> extends RenderLiving<T> implements ITakumiRender {
+
+    private static final ResourceLocation GHAST_TEXTURES =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/ghastcreeper.png");
+    private static final ResourceLocation GHAST_SHOOTING_TEXTURES =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/ghastcreeper_shooting.png");
+
     public RenderGhastCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelGhast(), 0.5f);
         this.addLayer(new LayerTakumiCharge(this));
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -37,7 +38,7 @@ public class RenderGhastCreeper <T extends EntityGhastCreeper> extends RenderLiv
             return i << 24 | 822083583;
         }
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -45,7 +46,7 @@ public class RenderGhastCreeper <T extends EntityGhastCreeper> extends RenderLiv
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         GlStateManager.scale(4.5F, 4.5F, 4.5F);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        
+
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
@@ -55,12 +56,12 @@ public class RenderGhastCreeper <T extends EntityGhastCreeper> extends RenderLiv
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return entity.isAttacking() ? GHAST_SHOOTING_TEXTURES : GHAST_TEXTURES;
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelGhast();

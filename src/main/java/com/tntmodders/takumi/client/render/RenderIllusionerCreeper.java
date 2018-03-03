@@ -16,57 +16,61 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-public class RenderIllusionerCreeper <T extends EntityIllusionerCreeper> extends RenderLiving <T> implements ITakumiRender {
-    
+public class RenderIllusionerCreeper<T extends EntityIllusionerCreeper> extends RenderLiving<T>
+        implements ITakumiRender {
+
     public RenderIllusionerCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelIllagerCreeper(0.0F, 0.0F, 64, 64), 0.5f);
         this.addLayer(new LayerTakumiCharge(this));
         this.addLayer(new LayerHeldItem(this) {
             @Override
-            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float
-                    ageInTicks, float netHeadYaw, float headPitch, float scale) {
-                if (((EntityAbstractSpellCreeper) entitylivingbaseIn).isSpellcasting() || ((EntityIllusionerCreeper) entitylivingbaseIn)
-                        .isAggressive()) {
-                    super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+            public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+                    float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                if (((EntityAbstractSpellCreeper) entitylivingbaseIn).isSpellcasting() ||
+                        ((EntityIllusionerCreeper) entitylivingbaseIn).isAggressive()) {
+                    super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks,
+                            netHeadYaw, headPitch, scale);
                 }
             }
-            
+
             @Override
             protected void translateToHand(EnumHandSide p_191361_1_) {
-                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_).postRender(0.0625F);
+                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_)
+                                                                                .postRender(0.0625F);
             }
         });
         ((ModelIllagerCreeper) this.getMainModel()).hat.showModel = true;
     }
-    
+
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         if (entity.isInvisible()) {
             Vec3d[] avec3d = entity.getRenderLocations(partialTicks);
             float f = this.handleRotationFloat(entity, partialTicks);
-            
+
             for (int i = 0; i < avec3d.length; ++i) {
-                super.doRender(entity, x + avec3d[i].x + (double) MathHelper.cos((float) i + f * 0.5F) * 0.025D, y + avec3d[i].y + (double)
-                        MathHelper.cos((float) i + f * 0.75F) * 0.0125D, z + avec3d[i].z + (double) MathHelper.cos((float) i + f * 0.7F) * 0.025D,
-                        entityYaw, partialTicks);
+                super.doRender(entity, x + avec3d[i].x + (double) MathHelper.cos((float) i + f * 0.5F) * 0.025D,
+                        y + avec3d[i].y + (double) MathHelper.cos((float) i + f * 0.75F) * 0.0125D,
+                        z + avec3d[i].z + (double) MathHelper.cos((float) i + f * 0.7F) * 0.025D, entityYaw,
+                        partialTicks);
             }
         } else {
             super.doRender(entity, x, y, z, entityYaw, partialTicks);
         }
     }
-    
+
     @Override
     protected boolean isVisible(T p_193115_1_) {
         return true;
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         }
@@ -74,7 +78,7 @@ public class RenderIllusionerCreeper <T extends EntityIllusionerCreeper> extends
         i = MathHelper.clamp(i, 0, 255);
         return i << 24 | 822083583;
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -90,12 +94,12 @@ public class RenderIllusionerCreeper <T extends EntityIllusionerCreeper> extends
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/" + entity.getRegisterName() + ".png");
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelIllagerCreeper(2.0F, 0.0F, 64, 64);

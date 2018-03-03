@@ -8,56 +8,57 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityMusicCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public void takumiExplode() {
         this.world.playRecord(this.getPosition(), SoundEvents.RECORD_13);
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.WIND_M;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 3;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0xffaa00;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "musiccreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 42;
     }
-    
+
     @Override
     public void onUpdate() {
         if (this.isEntityAlive() && this.rand.nextInt(10) == 0) {
-            this.world.spawnParticle(EnumParticleTypes.NOTE, this.posX + rand.nextFloat() - 0.5, this.posY + rand.nextFloat(), this.posZ + rand
-                    .nextFloat() - 0.5, -this.motionX, -this.motionY, -this.motionZ);
+            this.world.spawnParticle(EnumParticleTypes.NOTE, this.posX + rand.nextFloat() - 0.5,
+                    this.posY + rand.nextFloat(), this.posZ + rand.nextFloat() - 0.5, -this.motionX, -this.motionY,
+                    -this.motionZ);
         }
         /*try {
             Field field = EntityCreeper.class.getDeclaredField("timeSinceIgnited");
@@ -71,7 +72,7 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
         }*/
         super.onUpdate();
     }
-    
+
     @Override
     public void onDeath(DamageSource cause) {
         if (!this.world.isRemote) {

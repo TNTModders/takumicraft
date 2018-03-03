@@ -10,12 +10,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.lang.reflect.Field;
 
 public class TakumiEnchantmentCore {
-    
+
     public static final Enchantment ANTI_POWERED = new EnchantmentTakumiAntiPowered();
     public static final Enchantment EXPLOSION_PROTECTION = new EnchantmentTakumiExplosionProtection();
     public static final Enchantment MINESWEEPER = new EnchantmentTakumiMineSweeper();
-    
-    public static void register(IForgeRegistry <Enchantment> registry) {
+
+    public static void register(IForgeRegistry<Enchantment> registry) {
         Class clazz = TakumiEnchantmentCore.class;
         for (Field field : clazz.getFields()) {
             try {

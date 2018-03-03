@@ -27,17 +27,18 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 
 @SideOnly(Side.CLIENT)
-public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEntitySpecialRenderer <T> {
-    
-    private static final ResourceLocation TEXTURE_ARMOR = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
-    private final ArrayList <ModelTakumiBlock> takumiBlocks = new ArrayList <>();
-    
+public class RenderTakumiBlock<T extends TileEntityTakumiBlock> extends TileEntitySpecialRenderer<T> {
+
+    private static final ResourceLocation TEXTURE_ARMOR =
+            new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    private final ArrayList<ModelTakumiBlock> takumiBlocks = new ArrayList<>();
+
     public RenderTakumiBlock() {
         for (int i = 0; i < 64; i++) {
             takumiBlocks.add(new ModelTakumiBlock(i));
         }
     }
-    
+
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (te.getBlock() != null && te.getBlock() != Blocks.AIR) {
@@ -50,9 +51,10 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
             this.draw(te, x, y, z, state, pos, buffer, tessellator);
             GlStateManager.popMatrix();
         }
-        if (te.getBlock() == null || Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(TakumiBlockCore
-                .TAKUMI_BLOCK) || Minecraft.getMinecraft().player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(TakumiBlockCore
-                .TAKUMI_BLOCK)) {
+        if (te.getBlock() == null || Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() ==
+                Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK) ||
+                Minecraft.getMinecraft().player.getHeldItemOffhand().getItem() ==
+                        Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK)) {
             GlStateManager.pushMatrix();
             GlStateManager.depthMask(true);
             this.bindTexture(TEXTURE_ARMOR);
@@ -69,7 +71,7 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
             GlStateManager.matrixMode(GL11.GL_TEXTURE);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(GL11.GL_MODELVIEW);
-            
+
             GlStateManager.translate((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
             Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE_ARMOR);
             takumiBlocks.get(Minecraft.getMinecraft().player.ticksExisted % 64).render();
@@ -78,13 +80,14 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
             GlStateManager.popMatrix();
         }
     }
-    
-    private void draw(T te, double x, double y, double z, IBlockState state, BlockPos pos, BufferBuilder buffer, Tessellator tessellator) {
+
+    private void draw(T te, double x, double y, double z, IBlockState state, BlockPos pos, BufferBuilder buffer,
+            Tessellator tessellator) {
         RenderHelper.disableStandardItemLighting();
         GlStateManager.blendFunc(770, 771);
         GlStateManager.enableBlend();
         GlStateManager.disableCull();
-        
+
         if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(7425);
         } else {
@@ -95,27 +98,28 @@ public class RenderTakumiBlock <T extends TileEntityTakumiBlock> extends TileEnt
         World world = this.getWorld();
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
         state = state.getBlock().getExtendedState(state, world, pos);
-        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(world, model, state, pos, buffer, true);
+        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer()
+                 .renderModel(world, model, state, pos, buffer, true);
         buffer.setTranslation(0.0D, 0.0D, 0.0D);
         tessellator.draw();
     }
-    
+
     private class ModelTakumiBlock extends ModelBase {
-        
+
         private final ModelRenderer box;
-        
+
         public ModelTakumiBlock(int i) {
             this.box = new ModelRenderer(this, i, i);
             this.box.addBox(-8, -8, -8, 16, 16, 16);
         }
-        
+
         public void render() {
             this.box.render(0.0625F);
         }
-        
+
         @Override
-        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float
-                scale) {
+        public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+                float headPitch, float scale) {
         }
     }
 }

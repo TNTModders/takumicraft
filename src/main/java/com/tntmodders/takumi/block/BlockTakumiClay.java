@@ -8,7 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemCloth;
 
 public class BlockTakumiClay extends BlockColored implements ITakumiItemBlock {
-    
+
     public BlockTakumiClay() {
         super(Material.CLOTH);
         this.setRegistryName(TakumiCraftCore.MODID, "creeperclay");
@@ -19,7 +19,7 @@ public class BlockTakumiClay extends BlockColored implements ITakumiItemBlock {
         this.setResistance(10000000f);
         this.setSoundType(SoundType.GROUND);
     }
-    
+
     @Override
     public ItemBlock getItem() {
         return new ItemCloth(this);

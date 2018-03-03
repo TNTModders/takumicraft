@@ -12,12 +12,13 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post;
 import java.util.Random;
 
 public class BiomeTakumiHotSpringMountains extends AbstractBiomeTakumiWorld {
-    
+
     public BiomeTakumiHotSpringMountains() {
-        super("takumihotspringmountains", AbstractBiomeTakumiWorld.getBaseProperty("takumihotspringmountains").setHeightVariation(0.4f)
-                .setTemperature(0f).setSnowEnabled());
+        super("takumihotspringmountains",
+                AbstractBiomeTakumiWorld.getBaseProperty("takumihotspringmountains").setHeightVariation(0.4f)
+                                        .setTemperature(0f).setSnowEnabled());
     }
-    
+
     @Override
     public BiomeDecorator createBiomeDecorator() {
         return getModdedBiomeDecorator(new BiomeDecorator() {
@@ -29,7 +30,7 @@ public class BiomeTakumiHotSpringMountains extends AbstractBiomeTakumiWorld {
                         int i10 = random.nextInt(16) + 8;
                         int l13 = random.nextInt(16) + 8;
                         int i17 = random.nextInt(248) + 8;
-                        
+
                         if (i17 > 0) {
                             int k19 = random.nextInt(i17);
                             BlockPos blockpos6 = this.chunkPos.add(i10, k19, l13);
@@ -41,7 +42,7 @@ public class BiomeTakumiHotSpringMountains extends AbstractBiomeTakumiWorld {
             }
         });
     }
-    
+
     @Override
     public TempCategory getTempCategory() {
         return TempCategory.COLD;

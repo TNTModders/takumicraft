@@ -12,15 +12,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 
-public class RenderParrotCreeper extends RenderLiving <EntityParrotCreeper> implements ITakumiRender {
-    
-    public static final ResourceLocation TEXTURE = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/parrotcreeper.png");
-    
+public class RenderParrotCreeper extends RenderLiving<EntityParrotCreeper> implements ITakumiRender {
+
+    public static final ResourceLocation TEXTURE =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/parrotcreeper.png");
+
     public RenderParrotCreeper(RenderManager p_i47375_1_) {
         super(p_i47375_1_, new ModelParrotCreeper(), 0.3F);
         this.addLayer(new LayerTakumiCharge(this));
     }
-    
+
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
@@ -28,7 +29,7 @@ public class RenderParrotCreeper extends RenderLiving <EntityParrotCreeper> impl
     protected ResourceLocation getEntityTexture(EntityParrotCreeper entity) {
         return TEXTURE;
     }
-    
+
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
@@ -36,14 +37,15 @@ public class RenderParrotCreeper extends RenderLiving <EntityParrotCreeper> impl
     public float handleRotationFloat(EntityParrotCreeper livingBase, float partialTicks) {
         return this.getCustomBob(livingBase, partialTicks);
     }
-    
+
     /**
      * Gets an RGBA int color multiplier to apply.
      */
     @Override
-    protected int getColorMultiplier(EntityParrotCreeper entitylivingbaseIn, float lightBrightness, float partialTickTime) {
+    protected int getColorMultiplier(EntityParrotCreeper entitylivingbaseIn, float lightBrightness,
+            float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
-        
+
         if ((int) (f * 10.0F) % 2 == 0) {
             return 0;
         } else {
@@ -52,7 +54,7 @@ public class RenderParrotCreeper extends RenderLiving <EntityParrotCreeper> impl
             return i << 24 | 822083583;
         }
     }
-    
+
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
@@ -67,13 +69,13 @@ public class RenderParrotCreeper extends RenderLiving <EntityParrotCreeper> impl
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
     }
-    
+
     private float getCustomBob(EntityParrotCreeper parrot, float p_192861_2_) {
         float f = parrot.oFlap + (parrot.flap - parrot.oFlap) * p_192861_2_;
         float f1 = parrot.oFlapSpeed + (parrot.flapSpeed - parrot.oFlapSpeed) * p_192861_2_;
         return (MathHelper.sin(f) + 1.0F) * f1;
     }
-    
+
     @Override
     public ModelBase getPoweredModel() {
         return new ModelParrotCreeper();

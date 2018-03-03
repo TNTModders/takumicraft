@@ -23,23 +23,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockTakumiHotSpring extends BlockFluidClassic {
-    
+
     public BlockTakumiHotSpring() {
         super(TakumiFluidCore.HOT_SPRING, TakumiMaterial.HOT_SPRING);
         this.setRegistryName(TakumiCraftCore.MODID, "takumihotspring");
         this.setUnlocalizedName("takumihotspring");
         this.setResistance(10000000f);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
         if (world.isRemote && rand.nextBoolean()) {
-            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + (rand.nextDouble() - 0.5D), pos.getY() + 0.375 + rand.nextDouble()
-                    , pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + (rand.nextDouble() - 0.5D),
+                    pos.getY() + 0.375 + rand.nextDouble(), pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
         }
     }
-    
+
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 20 == 0) {
@@ -49,19 +49,19 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
             }
         }
     }
-    
+
     @Override
-    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity, double yToTest, Material
-            materialIn, boolean testingHead) {
+    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,
+            double yToTest, Material materialIn, boolean testingHead) {
         return materialIn == Material.WATER ? true :
-               super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
+                super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
-    
+
     @Override
     public boolean canDisplace(IBlockAccess world, BlockPos pos) {
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.canDisplace(world, pos);
     }
-    
+
     @Override
     public boolean displaceIfPossible(World world, BlockPos pos) {
         if (world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this) {
@@ -69,10 +69,11 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
         }
         return !world.getBlockState(pos).getMaterial().isLiquid() && super.displaceIfPossible(world, pos);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
+    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor,
+            float partialTicks) {
         float f12 = 0.0F;
         if (entity instanceof EntityLivingBase) {
             EntityLivingBase ent = (EntityLivingBase) entity;

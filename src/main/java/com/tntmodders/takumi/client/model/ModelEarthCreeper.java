@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelEarthCreeper extends ModelBase {
-    
+
     /**
      * The head model for the iron golem.
      */
@@ -34,11 +34,11 @@ public class ModelEarthCreeper extends ModelBase {
      * The right leg model for the Iron Golem.
      */
     public ModelRenderer ironGolemRightLeg;
-    
+
     public ModelEarthCreeper(float p_i1161_1_) {
         this(p_i1161_1_, -7.0F);
     }
-    
+
     public ModelEarthCreeper(float p_i46362_1_, float p_i46362_2_) {
         int i = 128;
         int j = 128;
@@ -64,12 +64,13 @@ public class ModelEarthCreeper extends ModelBase {
         this.ironGolemRightLeg.setTextureOffset(60, 0).setRotationPoint(5.0F, 18.0F + p_i46362_2_, 0.0F);
         this.ironGolemRightLeg.addBox(-3.5F, -3.0F, -3.0F, 6, 16, 5, p_i46362_1_);
     }
-    
+
     /**
      * Sets the models various rotation angles then renders the model.
      */
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
         this.ironGolemHead.render(scale);
         this.ironGolemBody.render(scale);
@@ -78,15 +79,15 @@ public class ModelEarthCreeper extends ModelBase {
         this.ironGolemRightArm.render(scale);
         this.ironGolemLeftArm.render(scale);
     }
-    
+
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-            Entity entityIn) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+            float headPitch, float scaleFactor, Entity entityIn) {
         this.ironGolemHead.rotateAngleY = netHeadYaw * 0.017453292F;
         this.ironGolemHead.rotateAngleX = headPitch * 0.017453292F;
         this.ironGolemLeftLeg.rotateAngleX = -1.5F * this.triangleWave(limbSwing) * limbSwingAmount;
@@ -94,17 +95,18 @@ public class ModelEarthCreeper extends ModelBase {
         this.ironGolemLeftLeg.rotateAngleY = 0.0F;
         this.ironGolemRightLeg.rotateAngleY = 0.0F;
     }
-    
+
     /**
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
     @Override
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+            float partialTickTime) {
         this.ironGolemRightArm.rotateAngleX = (-0.2F + 1.5F * this.triangleWave(limbSwing)) * limbSwingAmount;
         this.ironGolemLeftArm.rotateAngleX = (-0.2F - 1.5F * this.triangleWave(limbSwing)) * limbSwingAmount;
     }
-    
+
     private float triangleWave(float p_78172_1_) {
         return (Math.abs(p_78172_1_ % 13.0F - 13.0F * 0.5F) - 13.0F * 0.25F) / (13.0F * 0.25F);
     }

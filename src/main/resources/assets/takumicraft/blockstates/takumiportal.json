@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "axis=z": { "model": "takumicraft:portal_ew" },
-        "axis=x": { "model": "takumicraft:portal_ns" }
+  "variants": {
+    "axis=z": {
+      "model": "takumicraft:portal_ew"
+    },
+    "axis=x": {
+      "model": "takumicraft:portal_ns"
     }
+  }
 }

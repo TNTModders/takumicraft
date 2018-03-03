@@ -1,10 +1,10 @@
 {
-    "parent": "takumicraft:block/takumigrass",
-    "textures": {
-        "particle": "takumicraft:blocks/takumidirt",
-        "bottom": "takumicraft:blocks/takumidirt",
-        "top": "takumicraft:blocks/takumigrass_top",
-        "side": "takumicraft:blocks/takumigrass_side",
-        "overlay": "takumicraft:blocks/takumigrass_side_overlay"
-    }
+  "parent": "takumicraft:block/takumigrass",
+  "textures": {
+    "particle": "takumicraft:blocks/takumidirt",
+    "bottom": "takumicraft:blocks/takumidirt",
+    "top": "takumicraft:blocks/takumigrass_top",
+    "side": "takumicraft:blocks/takumigrass_side",
+    "overlay": "takumicraft:blocks/takumigrass_side_overlay"
+  }
 }

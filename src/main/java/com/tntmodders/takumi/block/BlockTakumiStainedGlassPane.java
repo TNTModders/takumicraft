@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemCloth;
 
 public class BlockTakumiStainedGlassPane extends BlockStainedGlassPane implements ITakumiItemBlock {
-    
+
     public BlockTakumiStainedGlassPane() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "creeperstainedglasspane");
@@ -18,7 +18,7 @@ public class BlockTakumiStainedGlassPane extends BlockStainedGlassPane implement
         this.setSoundType(SoundType.GLASS);
         this.setLightLevel(0.4f);
     }
-    
+
     @Override
     public ItemBlock getItem() {
         return new ItemCloth(this);

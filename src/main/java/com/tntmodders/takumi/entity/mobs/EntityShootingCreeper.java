@@ -28,12 +28,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
-    
+
     //true→アイテム投射 false→アイテム数に応じて爆破ダメージ増加&爆破終了後アイテム抽選
-    private static final DataParameter <Boolean> TYPE = EntityDataManager.createKey(EntityShootingCreeper.class, DataSerializers.BOOLEAN);
-    
-    private static final DataParameter <ItemStack> ITEM = EntityDataManager.createKey(EntityShootingCreeper.class, DataSerializers.ITEM_STACK);
-    
+    private static final DataParameter<Boolean> TYPE =
+            EntityDataManager.createKey(EntityShootingCreeper.class, DataSerializers.BOOLEAN);
+
+    private static final DataParameter<ItemStack> ITEM =
+            EntityDataManager.createKey(EntityShootingCreeper.class, DataSerializers.ITEM_STACK);
+
     public EntityShootingCreeper(World worldIn) {
         super(worldIn);
         try {
@@ -44,7 +46,7 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
@@ -53,61 +55,62 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
                 if (useChoco(this.world)) {
                     this.dataManager.set(ITEM, new ItemStack(TakumiItemCore.TAKUMI_CHOCO_BALL, 1));
                 } else {
-                    List <IRecipe> list = Lists.newArrayList(CraftingManager.REGISTRY.iterator());
+                    List<IRecipe> list = Lists.newArrayList(CraftingManager.REGISTRY.iterator());
                     IRecipe iRecipe = list.get(this.rand.nextInt(list.size()));
                     this.dataManager.set(ITEM, iRecipe.getRecipeOutput());
                 }
             }
         }
     }
-    
+
     public static boolean useChoco(World world) {
         Calendar calendar = world.getCurrentDate();
-        return (calendar.get(Calendar.MONTH) + 1 == 2 || calendar.get(Calendar.MONTH) + 1 == 3) && calendar.get(Calendar.DATE) == 14;
+        return (calendar.get(Calendar.MONTH) + 1 == 2 || calendar.get(Calendar.MONTH) + 1 == 3) &&
+                calendar.get(Calendar.DATE) == 14;
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GRASS;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 0;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0x884444;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "shootingcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 255;
     }
-    
+
     @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(TYPE, false);
         this.dataManager.register(ITEM, new ItemStack(Blocks.TNT, 1));
     }
-    
+
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
@@ -115,14 +118,15 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
         compound.setInteger("item", Item.getIdFromItem(this.dataManager.get(ITEM).getItem()));
         compound.setInteger("meta", this.dataManager.get(ITEM).getMetadata());
     }
-    
+
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.dataManager.set(TYPE, compound.getBoolean("type"));
-        this.dataManager.set(ITEM, new ItemStack(Item.getItemById(compound.getInteger("item")), 1, compound.getInteger("meta")));
+        this.dataManager.set(ITEM,
+                new ItemStack(Item.getItemById(compound.getInteger("item")), 1, compound.getInteger("meta")));
     }
-    
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -132,20 +136,22 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
         if (this.getAttackTarget() != null) {
             this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 1f, 1f);
         }
-        if (this.dataManager.get(TYPE) && !this.world.isRemote && this.ticksExisted > 1 && (this.getAttackTarget() != null || this.world
-                .getClosestPlayerToEntity(this, 25) != null)) {
+        if (this.dataManager.get(TYPE) && !this.world.isRemote && this.ticksExisted > 1 &&
+                (this.getAttackTarget() != null || this.world.getClosestPlayerToEntity(this, 25) != null)) {
             if (this.dataManager.get(ITEM).getItem() == TakumiItemCore.TAKUMI_CHOCO_BALL) {
                 EntityTakumiChocolateBall chocolateBall = new EntityTakumiChocolateBall(this.world, this);
-                chocolateBall.setPosition(this.posX + this.rand.nextDouble() - this.rand.nextDouble(), this.posY + this.rand.nextDouble() + this
-                        .rand.nextDouble(), this.posZ + this.rand.nextDouble() - this.rand.nextDouble());
+                chocolateBall.setPosition(this.posX + this.rand.nextDouble() - this.rand.nextDouble(),
+                        this.posY + this.rand.nextDouble() + this.rand.nextDouble(),
+                        this.posZ + this.rand.nextDouble() - this.rand.nextDouble());
                 chocolateBall.setHeadingFromThrower(this, this.rotationPitch, this.rotationYawHead, 0.0F, 1.5F, 1.0F);
                 this.world.spawnEntity(chocolateBall);
             } else {
-                this.entityDropItem(new ItemStack(this.dataManager.get(ITEM).getItem(), 1, this.dataManager.get(ITEM).getMetadata()), 2);
+                this.entityDropItem(new ItemStack(this.dataManager.get(ITEM).getItem(), 1,
+                        this.dataManager.get(ITEM).getMetadata()), 2);
             }
         }
     }
-    
+
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -169,7 +175,7 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
         }
         super.setDead();
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (!this.dataManager.get(TYPE) && !(event.getExplosion() instanceof TakumiExplosion)) {
@@ -177,13 +183,15 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
                 if (entity instanceof EntityPlayer) {
                     int i = 0;
                     for (ItemStack itemStack : ((EntityPlayer) entity).inventoryContainer.inventoryItemStacks) {
-                        if (itemStack.getItem() == this.dataManager.get(ITEM).getItem() && itemStack.getMetadata() == this.dataManager.get(ITEM)
-                                .getMetadata()) {
+                        if (itemStack.getItem() == this.dataManager.get(ITEM).getItem() &&
+                                itemStack.getMetadata() == this.dataManager.get(ITEM).getMetadata()) {
                             i += itemStack.getCount();
                         }
                     }
                     if (i > 0) {
-                        TakumiUtils.takumiCreateExplosion(this.world, this, entity.posX, entity.posY, entity.posZ, i / 2, false, true);
+                        TakumiUtils
+                                .takumiCreateExplosion(this.world, this, entity.posX, entity.posY, entity.posZ, i / 2,
+                                        false, true);
                     }
                 }
             });
@@ -191,13 +199,13 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedEntities().clear();
         return true;
     }
-    
+
     @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
     }
-    
+
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return !source.isExplosion() && super.attackEntityFrom(source, amount);

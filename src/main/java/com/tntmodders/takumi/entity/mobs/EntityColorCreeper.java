@@ -14,26 +14,27 @@ import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import java.util.ArrayList;
 
 public class EntityColorCreeper extends EntityTakumiAbstractCreeper {
-    
+
     public EntityColorCreeper(World worldIn) {
         super(worldIn);
     }
-    
+
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         for (BlockPos pos : event.getAffectedBlocks()) {
             IBlockState state = this.world.getBlockState(pos);
-            ArrayList <IProperty> list = Lists.newArrayList(state.getPropertyKeys());
+            ArrayList<IProperty> list = Lists.newArrayList(state.getPropertyKeys());
             if (!list.isEmpty()) {
                 for (IProperty property : list) {
                     if (property instanceof PropertyBool) {
                         state = state.withProperty(property, this.rand.nextBoolean());
                     } else if (property instanceof PropertyInteger) {
-                        state = state.withProperty(property, (int) property.getAllowedValues().toArray(new Integer[0])[this.rand.nextInt(property
-                                .getAllowedValues().size())]);
+                        state = state.withProperty(property,
+                                (int) property.getAllowedValues().toArray(new Integer[0])[this.rand
+                                        .nextInt(property.getAllowedValues().size())]);
                     } else if (property instanceof PropertyEnum) {
-                        state = state.withProperty(property, (Enum) property.getAllowedValues().toArray()[this.rand.nextInt(property
-                                .getAllowedValues().size())]);
+                        state = state.withProperty(property, (Enum) property.getAllowedValues().toArray()[this.rand
+                                .nextInt(property.getAllowedValues().size())]);
                     }
                 }
             }
@@ -42,46 +43,46 @@ public class EntityColorCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
         return true;
     }
-    
+
     @Override
     public int getPrimaryColor() {
         return 0xff8888;
     }
-    
+
     @Override
     public void takumiExplode() {
     }
-    
+
     @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
-    
+
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GROUND_M;
     }
-    
+
     @Override
     public int getExplosionPower() {
         return 3;
     }
-    
+
     @Override
     public int getSecondaryColor() {
         return 0x66ff66;
     }
-    
+
     @Override
     public boolean isCustomSpawn() {
         return false;
     }
-    
+
     @Override
     public String getRegisterName() {
         return "colorcreeper";
     }
-    
+
     @Override
     public int getRegisterID() {
         return 37;

@@ -14,32 +14,32 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
-    
+
     public BlockTakumiDummyGunOre() {
         super("dummy_gunore", 10f, Material.ROCK, MapColor.STONE);
         this.setHarvestLevel("pickaxe", 1);
     }
-    
+
     @Override
     public int quantityDropped(Random random) {
         return 0;
     }
-    
+
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.GUNPOWDER;
     }
-    
+
     @Override
     public int quantityDroppedWithBonus(int level, Random random) {
         return 0;
     }
-    
+
     @Override
     public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
         return 0;
     }
-    
+
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!worldIn.isRemote) {
@@ -48,7 +48,7 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
             worldIn.spawnEntity(creeper);
         }
     }
-    
+
     @Override
     float getPower() {
         return 5f;

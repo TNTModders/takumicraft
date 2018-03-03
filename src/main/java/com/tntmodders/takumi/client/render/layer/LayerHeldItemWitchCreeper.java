@@ -13,36 +13,37 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
 
 
-public class LayerHeldItemWitchCreeper implements LayerRenderer <EntityWitchCreeper> {
-    
+public class LayerHeldItemWitchCreeper implements LayerRenderer<EntityWitchCreeper> {
+
     private final RenderWitchCreeper witchRenderer;
-    
+
     public LayerHeldItemWitchCreeper(RenderWitchCreeper witchRendererIn) {
         this.witchRenderer = witchRendererIn;
     }
-    
+
     @Override
-    public void doRenderLayer(EntityWitchCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-            float netHeadYaw, float headPitch, float scale) {
+    public void doRenderLayer(EntityWitchCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount,
+            float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         ItemStack itemstack = entitylivingbaseIn.getHeldItemMainhand();
-        
+
         if (!itemstack.isEmpty()) {
             GlStateManager.color(1.0F, 1.0F, 1.0F);
             GlStateManager.pushMatrix();
-            
+
             if (this.witchRenderer.getMainModel().isChild) {
                 GlStateManager.translate(0.0F, 0.625F, 0.0F);
                 GlStateManager.rotate(-20.0F, -1.0F, 0.0F, 0.0F);
                 float f = 0.5F;
                 GlStateManager.scale(0.5F, 0.5F, 0.5F);
             }
-            
+
             this.witchRenderer.getMainModel().villagerNose.postRender(0.0625F);
             GlStateManager.translate(-0.0625F, 0.53125F, 0.21875F);
             Item item = itemstack.getItem();
             Minecraft minecraft = Minecraft.getMinecraft();
-            
-            if (Block.getBlockFromItem(item).getDefaultState().getRenderType() == EnumBlockRenderType.ENTITYBLOCK_ANIMATED) {
+
+            if (Block.getBlockFromItem(item).getDefaultState().getRenderType() ==
+                    EnumBlockRenderType.ENTITYBLOCK_ANIMATED) {
                 GlStateManager.translate(0.0F, 0.0625F, -0.25F);
                 GlStateManager.rotate(30.0F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.rotate(-5.0F, 0.0F, 1.0F, 0.0F);
@@ -60,7 +61,7 @@ public class LayerHeldItemWitchCreeper implements LayerRenderer <EntityWitchCree
                     GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
                     GlStateManager.translate(0.0F, -0.0625F, 0.0F);
                 }
-                
+
                 this.witchRenderer.transformHeldFull3DItemLayer();
                 GlStateManager.translate(0.0625F, -0.125F, 0.0F);
                 float f3 = 0.625F;
@@ -75,14 +76,15 @@ public class LayerHeldItemWitchCreeper implements LayerRenderer <EntityWitchCree
                 GlStateManager.rotate(-60.0F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.rotate(-30.0F, 0.0F, 0.0F, 1.0F);
             }
-            
+
             GlStateManager.rotate(-15.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(40.0F, 0.0F, 0.0F, 1.0F);
-            minecraft.getItemRenderer().renderItem(entitylivingbaseIn, itemstack, TransformType.THIRD_PERSON_RIGHT_HAND);
+            minecraft.getItemRenderer()
+                     .renderItem(entitylivingbaseIn, itemstack, TransformType.THIRD_PERSON_RIGHT_HAND);
             GlStateManager.popMatrix();
         }
     }
-    
+
     @Override
     public boolean shouldCombineTextures() {
         return false;

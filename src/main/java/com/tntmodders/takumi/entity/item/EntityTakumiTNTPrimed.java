@@ -14,15 +14,16 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class EntityTakumiTNTPrimed extends Entity {
-    
-    private static final DataParameter <Integer> FUSE = EntityDataManager.createKey(EntityTNTPrimed.class, DataSerializers.VARINT);
+
+    private static final DataParameter<Integer> FUSE =
+            EntityDataManager.createKey(EntityTNTPrimed.class, DataSerializers.VARINT);
     @Nullable
     private EntityLivingBase tntPlacedBy;
     /**
      * How long the fuse is
      */
     private int fuse;
-    
+
     public EntityTakumiTNTPrimed(World worldIn, double x, double y, double z, EntityLivingBase igniter) {
         this(worldIn);
         this.setPosition(x, y, z);
@@ -36,7 +37,7 @@ public class EntityTakumiTNTPrimed extends Entity {
         this.prevPosZ = z;
         this.tntPlacedBy = igniter;
     }
-    
+
     public EntityTakumiTNTPrimed(World worldIn) {
         super(worldIn);
         this.fuse = 80;
@@ -44,12 +45,12 @@ public class EntityTakumiTNTPrimed extends Entity {
         this.isImmuneToFire = true;
         this.setSize(0.98F, 0.98F);
     }
-    
+
     @Override
     protected void entityInit() {
         this.dataManager.register(FUSE, 80);
     }
-    
+
     /**
      * Called to update the entity's position/logic.
      */
@@ -58,36 +59,37 @@ public class EntityTakumiTNTPrimed extends Entity {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
-        
+
         if (!this.hasNoGravity()) {
             this.motionY -= 0.03999999910593033D;
         }
-        
+
         this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.9800000190734863D;
         this.motionY *= 0.9800000190734863D;
         this.motionZ *= 0.9800000190734863D;
-        
+
         if (this.onGround) {
             this.motionX *= 0.699999988079071D;
             this.motionZ *= 0.699999988079071D;
             this.motionY *= -0.5D;
         }
-        
+
         --this.fuse;
-        
+
         if (this.fuse <= 0) {
             this.setDead();
-            
+
             if (!this.world.isRemote) {
                 this.explode();
             }
         } else {
             this.handleWaterMovement();
-            this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+            this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D,
+                    0.0D);
         }
     }
-    
+
     /**
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
@@ -96,7 +98,7 @@ public class EntityTakumiTNTPrimed extends Entity {
     protected boolean canTriggerWalking() {
         return false;
     }
-    
+
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
@@ -104,7 +106,7 @@ public class EntityTakumiTNTPrimed extends Entity {
     public boolean canBeCollidedWith() {
         return !this.isDead;
     }
-    
+
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
@@ -112,7 +114,7 @@ public class EntityTakumiTNTPrimed extends Entity {
     protected void readEntityFromNBT(NBTTagCompound compound) {
         this.setFuse(compound.getShort("Fuse"));
     }
-    
+
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
@@ -120,40 +122,40 @@ public class EntityTakumiTNTPrimed extends Entity {
     protected void writeEntityToNBT(NBTTagCompound compound) {
         compound.setShort("Fuse", (short) this.getFuse());
     }
-    
+
     @Override
-    public void notifyDataManagerChange(DataParameter <?> key) {
+    public void notifyDataManagerChange(DataParameter<?> key) {
         if (FUSE == key) {
             this.fuse = this.getFuseDataManager();
         }
     }
-    
+
     @Override
     public float getEyeHeight() {
         return 0.0F;
     }
-    
+
     /**
      * Gets the fuse from the data manager
      */
     public int getFuseDataManager() {
         return this.dataManager.get(FUSE);
     }
-    
+
     public int getFuse() {
         return this.fuse;
     }
-    
+
     public void setFuse(int fuseIn) {
         this.dataManager.set(FUSE, fuseIn);
         this.fuse = fuseIn;
     }
-    
+
     private void explode() {
         float f = 4.0F;
         this.world.createExplosion(this, this.posX, this.posY + this.height / 16.0F, this.posZ, 7.0F, true);
     }
-    
+
     /**
      * returns null or the entityliving it was placed or ignited by
      */

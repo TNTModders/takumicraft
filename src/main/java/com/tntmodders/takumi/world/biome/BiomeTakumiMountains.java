@@ -16,9 +16,9 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import java.util.Random;
 
 public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
-    
+
     private boolean isLava;
-    
+
     public BiomeTakumiMountains(boolean isLava) {
         this("takumi" + (isLava ? "lavamountains" : "mountains"));
         this.isLava = isLava;
@@ -27,15 +27,16 @@ public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
             this.fillerBlock = TakumiWorldChunkGenerator.DIRT;
         }
     }
-    
+
     private BiomeTakumiMountains(String name) {
-        super(name, AbstractBiomeTakumiWorld.getBaseProperty(name).setRainfall(0f).setHeightVariation(0.4f).setTemperature(2f));
+        super(name, AbstractBiomeTakumiWorld.getBaseProperty(name).setRainfall(0f).setHeightVariation(0.4f)
+                                            .setTemperature(2f));
     }
-    
+
     public BiomeTakumiMountains() {
         this("takumimountains");
     }
-    
+
     @Override
     public BiomeDecorator createBiomeDecorator() {
         return getModdedBiomeDecorator(new BiomeDecorator() {
@@ -48,15 +49,16 @@ public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
                             int i10 = random.nextInt(16) + 8;
                             int l13 = random.nextInt(16) + 8;
                             int i17 = random.nextInt(248) + 8;
-                            
+
                             if (i17 > 0) {
                                 int k19 = random.nextInt(i17);
                                 BlockPos blockpos6 = this.chunkPos.add(i10, k19, l13);
-                                new TakumiWorldGenLiquids(TakumiBlockCore.HOT_SPRING).generate(worldIn, random, blockpos6);
+                                new TakumiWorldGenLiquids(TakumiBlockCore.HOT_SPRING)
+                                        .generate(worldIn, random, blockpos6);
                             }
                         }
                     }
-                    
+
                     if (TerrainGen.decorate(worldIn, random, chunkPos, EventType.LAKE_LAVA) || isLava) {
                         for (int l5 = 0; l5 < 100; ++l5) {
                             int j10 = random.nextInt(16) + 8;
@@ -71,7 +73,7 @@ public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
             }
         });
     }
-    
+
     @Override
     public TempCategory getTempCategory() {
         return TempCategory.WARM;

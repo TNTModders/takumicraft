@@ -14,32 +14,32 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.Random;
 
-public class RenderShadowCreeper <T extends EntityShadowCreeper> extends RenderTakumiCreeper <T> {
-    
+public class RenderShadowCreeper<T extends EntityShadowCreeper> extends RenderTakumiCreeper<T> {
+
     public RenderShadowCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelCreeper());
         this.addLayer(new LayerShadow(this));
     }
-    
+
     @Override
     public ResourceLocation getEntityTexture(T entity) {
         return super.getEntityTexture(entity);
     }
-    
-    private static class LayerShadow <T extends EntityShadowCreeper> implements LayerRenderer <T> {
-        
+
+    private static class LayerShadow<T extends EntityShadowCreeper> implements LayerRenderer<T> {
+
         private final RenderShadowCreeper creeperRenderer;
         private final ModelBase creeperModel;
         private final Random random = new Random();
-        
+
         public LayerShadow(RenderShadowCreeper creeperRendererIn) {
             this.creeperRenderer = creeperRendererIn;
             this.creeperModel = new ModelCreeper();
         }
-        
+
         @Override
-        public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float
-                netHeadYaw, float headPitch, float scale) {
+        public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
+                float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             if (!entitylivingbaseIn.isInvisible() && entitylivingbaseIn.getTimeSinceIgnited() > 0) {
                 int t = entitylivingbaseIn.getTimeSinceIgnited();
                 for (Vec3d vec3d : entitylivingbaseIn.shadowList) {
@@ -57,7 +57,9 @@ public class RenderShadowCreeper <T extends EntityShadowCreeper> extends RenderT
                     GlStateManager.blendFunc(SourceFactor.ONE, DestFactor.ONE);
                     this.creeperModel.setModelAttributes(this.creeperRenderer.getMainModel());
                     Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                    this.creeperModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                    this.creeperModel
+                            .render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                                    scale);
                     Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
                     GlStateManager.matrixMode(5890);
                     GlStateManager.loadIdentity();
@@ -69,7 +71,7 @@ public class RenderShadowCreeper <T extends EntityShadowCreeper> extends RenderT
                 }
             }
         }
-        
+
         @Override
         public boolean shouldCombineTextures() {
             return false;
