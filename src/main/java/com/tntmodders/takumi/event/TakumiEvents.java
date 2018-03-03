@@ -56,54 +56,65 @@ import java.util.List;
 import java.util.Objects;
 
 public class TakumiEvents {
-    
+
     @SubscribeEvent
     public void onPickupItem(EntityItemPickupEvent event) {
     }
-    
+
     @SubscribeEvent
     public void onConfigChanged(OnConfigChangedEvent event) {
         // コンフィグが変更された時に呼ばれる。
-        if (Objects.equals(event.getModID(), TakumiCraftCore.MODID)) { TakumiConfigCore.syncConfig(); }
+        if (Objects.equals(event.getModID(), TakumiCraftCore.MODID)) {
+            TakumiConfigCore.syncConfig();
+        }
     }
-    
+
     @SubscribeEvent
     public void onCloseContainer(Close event) {
     }
-    
+
     @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
-        if (event.getEntityLiving() instanceof EntityCreeper && !((EntityCreeper) event.getEntityLiving()).getPowered() && (((EntityCreeper) event
-                .getEntityLiving()).world.isThundering() || event.getEntity().world.provider.getDimension() == TakumiWorldCore.TAKUMI_WORLD.getId()
-        )) {
+        if (event.getEntityLiving() instanceof EntityCreeper &&
+                !((EntityCreeper) event.getEntityLiving()).getPowered() &&
+                (((EntityCreeper) event.getEntityLiving()).world.isThundering() ||
+                        event.getEntity().world.provider.getDimension() == TakumiWorldCore.TAKUMI_WORLD.getId())) {
             TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), true);
         }
         if (event.getEntityLiving() instanceof EntityParrot) {
-            if (event.getEntityLiving().getEntityData().hasKey("creeper") && event.getEntityLiving().getEntityData().getBoolean("creeper")) {
-                ((EntityParrot) event.getEntityLiving()).world.createExplosion(event.getEntityLiving(), ((EntityParrot) event.getEntityLiving())
-                        .posX, ((EntityParrot) event.getEntityLiving()).posY, ((EntityParrot) event.getEntityLiving()).posZ, 4f, true);
+            if (event.getEntityLiving().getEntityData().hasKey("creeper") &&
+                    event.getEntityLiving().getEntityData().getBoolean("creeper")) {
+                ((EntityParrot) event.getEntityLiving()).world
+                        .createExplosion(event.getEntityLiving(), ((EntityParrot) event.getEntityLiving()).posX,
+                                ((EntityParrot) event.getEntityLiving()).posY,
+                                ((EntityParrot) event.getEntityLiving()).posZ, 4f, true);
                 event.getEntityLiving().setDead();
             }
         }
     }
-    
+
     @SubscribeEvent
     public void onExplosion(Detonate event) {
         if (!event.getWorld().isRemote) {
-            event.getAffectedEntities().removeIf(entity -> entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getActiveItemStack()
-                    .getItem() == TakumiItemCore.TAKUMI_SHIELD);
-            if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() == TakumiBlockCore.ACID_BLOCK) {
+            event.getAffectedEntities().removeIf(entity -> entity instanceof EntityLivingBase &&
+                    ((EntityLivingBase) entity).getActiveItemStack().getItem() == TakumiItemCore.TAKUMI_SHIELD);
+            if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() ==
+                    TakumiBlockCore.ACID_BLOCK) {
                 IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
                 int i = state.getValue(BlockTakumiAcid.META) + 1;
                 event.getAffectedBlocks().forEach(pos -> {
                     if (i < 16) {
                         for (EnumFacing facing : EnumFacing.values()) {
                             BlockPos blockPos = pos.offset(facing);
-                            if (!event.getAffectedBlocks().contains(blockPos) && !event.getWorld().isAirBlock(blockPos) && event.getWorld()
-                                    .getBlockState(blockPos).getBlockHardness(event.getWorld(), blockPos) != -1 && event.getWorld().getBlockState
-                                    (blockPos).getBlock() != TakumiBlockCore.ACID_BLOCK) {
-                                event.getWorld().setBlockState(blockPos, TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid
-                                        .META, i));
+                            if (!event.getAffectedBlocks().contains(blockPos) &&
+                                    !event.getWorld().isAirBlock(blockPos) && event.getWorld().getBlockState(blockPos)
+                                                                                   .getBlockHardness(event.getWorld(),
+                                                                                           blockPos) != -1 &&
+                                    event.getWorld().getBlockState(blockPos).getBlock() != TakumiBlockCore.ACID_BLOCK) {
+                                event.getWorld().setBlockState(blockPos, TakumiBlockCore.ACID_BLOCK.getDefaultState()
+                                                                                                   .withProperty(
+                                                                                                           BlockTakumiAcid.META,
+                                                                                                           i));
                             }
                         }
                     }
@@ -114,15 +125,18 @@ public class TakumiEvents {
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
-                AbstractEntityTakumiGrenade grenade = (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();
+                AbstractEntityTakumiGrenade grenade =
+                        (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();
                 if (grenade.getThrower() != null) {
                     event.getAffectedEntities().remove(grenade.getThrower());
                 }
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
-                EntityTakumiArrow takumiArrow = (EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder();
+                EntityTakumiArrow takumiArrow =
+                        (EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder();
                 if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
-                    PotionType type = PotionUtils.getPotionFromItem(((EntityLivingBase) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
+                    PotionType type = PotionUtils.getPotionFromItem(
+                            ((EntityLivingBase) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
                     for (Entity entity : event.getAffectedEntities()) {
                         if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
                             PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
@@ -134,8 +148,8 @@ public class TakumiEvents {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiPotion) {
                 for (Entity entity : event.getAffectedEntities()) {
                     if (entity instanceof EntityLivingBase) {
-                        List <PotionEffect> effects = PotionUtils.getEffectsFromStack(((EntityPotion) ((TakumiExplosion) event.getExplosion())
-                                .getExploder()).getPotion());
+                        List<PotionEffect> effects = PotionUtils.getEffectsFromStack(
+                                ((EntityPotion) ((TakumiExplosion) event.getExplosion()).getExploder()).getPotion());
                         for (PotionEffect effect : effects) {
                             ((EntityLivingBase) entity).addPotionEffect(effect);
                         }
@@ -150,7 +164,7 @@ public class TakumiEvents {
             }
         }
     }
-    
+
     @SubscribeEvent
     public void checkSpawn(CheckSpawn e) {
         if (e.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD) {
@@ -159,13 +173,15 @@ public class TakumiEvents {
             }
         }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {
-            ((EntityLiving) e.getEntityLiving()).tasks.addTask(0, new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
+            ((EntityLiving) e.getEntityLiving()).tasks
+                    .addTask(0, new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
         }
         if (!e.getWorld().isRemote) {
             if (e.getEntityLiving().getRNG().nextInt(5) == 0 && e.getEntityLiving() instanceof EntitySlime) {
                 EntitySlimeCreeper slimeCreeper = new EntitySlimeCreeper(e.getWorld());
                 slimeCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
-                slimeCreeper.setSlimeSize(e.getEntityLiving().getRNG().nextBoolean() ? 1 : e.getEntityLiving().getRNG().nextBoolean() ? 2 : 4, false);
+                slimeCreeper.setSlimeSize(e.getEntityLiving().getRNG().nextBoolean() ? 1 :
+                        e.getEntityLiving().getRNG().nextBoolean() ? 2 : 4, false);
                 if (slimeCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(slimeCreeper);
                     e.setResult(Result.DENY);
@@ -185,22 +201,25 @@ public class TakumiEvents {
                     e.getWorld().spawnEntity(squidCreeper);
                     e.setResult(Result.DENY);
                 }
-            } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class || e.getEntityLiving().getClass() ==
-                    EntityZombieVillagerCreeper.class) && (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT || e.getWorld
-                    ().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT_HILLS || e.getWorld().getBiome(e.getEntityLiving().getPosition
-                    ()) == Biomes.MUTATED_DESERT)) {
+            } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class ||
+                    e.getEntityLiving().getClass() == EntityZombieVillagerCreeper.class) &&
+                    (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT_HILLS ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.MUTATED_DESERT)) {
                 EntityHuskCreeper huskCreeper = new EntityHuskCreeper(e.getWorld());
                 huskCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (huskCreeper.getCanSpawnHere()) {
                     e.getWorld().spawnEntity(huskCreeper);
                     e.setResult(Result.DENY);
                 }
-            } else if (e.getEntityLiving().getClass() == EntitySkeletonCreeper.class && (e.getWorld().getBiome(e.getEntityLiving().getPosition())
-                    == Biomes.ICE_MOUNTAINS || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_PLAINS || e.getWorld()
-                    .getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_BEACH || e.getWorld().getBiome(e.getEntityLiving().getPosition())
-                    == Biomes.COLD_TAIGA || e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_TAIGA_HILLS || e.getWorld()
-                    .getBiome(e.getEntityLiving().getPosition()) == Biomes.FROZEN_OCEAN || e.getWorld().getBiome(e.getEntityLiving().getPosition())
-                    == Biomes.FROZEN_RIVER)) {
+            } else if (e.getEntityLiving().getClass() == EntitySkeletonCreeper.class &&
+                    (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_MOUNTAINS ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.ICE_PLAINS ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_BEACH ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_TAIGA ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.COLD_TAIGA_HILLS ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.FROZEN_OCEAN ||
+                            e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.FROZEN_RIVER)) {
                 EntityStrayCreeper strayCreeper = new EntityStrayCreeper(e.getWorld());
                 strayCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                 if (strayCreeper.getCanSpawnHere()) {
@@ -217,48 +236,55 @@ public class TakumiEvents {
             }
         }
     }
-    
+
     @SubscribeEvent
     public void hurt(LivingHurtEvent event) {
-        if (event.getSource().getTrueSource() instanceof EntityTakumiArrow && event.getSource().isExplosion() && event.getSource()
-                .getImmediateSource() == event.getEntity()) {
+        if (event.getSource().getTrueSource() instanceof EntityTakumiArrow && event.getSource().isExplosion() &&
+                event.getSource().getImmediateSource() == event.getEntity()) {
             event.setCanceled(true);
         }
     }
-    
+
     @SubscribeEvent
     public void damage(LivingAttackEvent event) {
 /*        if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow &&
                 event.getSource().getImmediateSource() == event.getEntity()) {
             event.setCanceled(true);
         } else*/
-        if (!event.getSource().isMagicDamage() && event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof
-                EntityLivingBase) {
+        if (!event.getSource().isMagicDamage() && event.getSource().getTrueSource() != null &&
+                event.getSource().getTrueSource() instanceof EntityLivingBase) {
             ItemStack stack = ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand();
-            if (!EnchantmentHelper.getEnchantments(stack).isEmpty() && EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore
-                    .ANTI_POWERED) && event.getEntityLiving() instanceof EntityCreeper && ((EntityCreeper) event.getEntityLiving()).getPowered()) {
-                event.getEntityLiving().attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) event.getSource().getTrueSource())
-                        .setMagicDamage(), 20f);
+            if (!EnchantmentHelper.getEnchantments(stack).isEmpty() &&
+                    EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED) &&
+                    event.getEntityLiving() instanceof EntityCreeper &&
+                    ((EntityCreeper) event.getEntityLiving()).getPowered()) {
+                event.getEntityLiving().attackEntityFrom(
+                        DamageSource.causeMobDamage((EntityLivingBase) event.getSource().getTrueSource())
+                                    .setMagicDamage(), 20f);
                 TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), false);
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-                    TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(), new ResourceLocation(TakumiCraftCore
-                            .MODID, "creeperbomb"), new ResourceLocation(TakumiCraftCore.MODID, "disarmament"));
+                    TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
+                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                            new ResourceLocation(TakumiCraftCore.MODID, "disarmament"));
                 }
             }
         }
-        if (event.getSource().isExplosion() && event.getSource() != DamageSource.GENERIC && event.getEntityLiving().getActiveItemStack().getItem()
-                instanceof ItemShield) {
+        if (event.getSource().isExplosion() && event.getSource() != DamageSource.GENERIC &&
+                event.getEntityLiving().getActiveItemStack().getItem() instanceof ItemShield) {
             if (event.getEntityLiving().getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_SHIELD) {
-                event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setExplosion().setDamageIsAbsolute(), event.getAmount());
+                event.getEntityLiving()
+                     .attackEntityFrom(DamageSource.GENERIC.setExplosion().setDamageIsAbsolute(), event.getAmount());
             }
         }
     }
-    
+
     @SubscribeEvent
     public void onKillEntity(LivingDeathEvent event) {
-        if (!event.getEntityLiving().world.isRemote && event.getSource().getTrueSource() instanceof EntityPlayer && TakumiBlockCore.BOMB_MAP
-                .containsKey(event.getEntityLiving().getClass()) && event.getEntityLiving().getRNG().nextInt(10) == 0) {
-            event.getEntityLiving().dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
+        if (!event.getEntityLiving().world.isRemote && event.getSource().getTrueSource() instanceof EntityPlayer &&
+                TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) &&
+                event.getEntityLiving().getRNG().nextInt(10) == 0) {
+            event.getEntityLiving()
+                 .dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
         }
         if (!event.getEntityLiving().world.isRemote) {
             Calendar calendar = event.getEntityLiving().world.getCurrentDate();
@@ -267,23 +293,26 @@ public class TakumiEvents {
             if (month == 12 && (date == 24 || date == 25)) {
                 event.getEntityLiving().dropItem(Item.getItemFromBlock(Blocks.CHEST), 1);
             } else if (month == 1 && date < 8) {
-                event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4).setStackDisplayName(TakumiUtils.takumiTranslate
-                        ("takumicraft.newyear.item.name")), 0.1f);
+                event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4)
+                        .setStackDisplayName(TakumiUtils.takumiTranslate("takumicraft.newyear.item.name")), 0.1f);
             }
         }
-        if (FMLCommonHandler.instance().getSide().isClient() && (event.getEntityLiving() instanceof ITakumiEntity || event.getEntityLiving()
-                instanceof EntityCreeper) && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
+        if (FMLCommonHandler.instance().getSide().isClient() && (event.getEntityLiving() instanceof ITakumiEntity ||
+                event.getEntityLiving() instanceof EntityCreeper) &&
+                event.getSource().getTrueSource() instanceof EntityPlayerMP) {
             boolean isOK = true;
             for (ITakumiEntity takumiEntity : TakumiEntityCore.getEntityList()) {
-                if (!TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "slay_" + takumiEntity.getRegisterName())) &&
+                if (!TakumiUtils.getAdvancementUnlocked(
+                        new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + takumiEntity.getRegisterName())) &&
                         takumiEntity.getClass() != event.getEntityLiving().getClass()) {
                     isOK = false;
                     break;
                 }
             }
             if (isOK && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-                TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(), new ResourceLocation(TakumiCraftCore
-                        .MODID, "creeperbomb"), new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
+                TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
+                        new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                        new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
             }
         }
     }

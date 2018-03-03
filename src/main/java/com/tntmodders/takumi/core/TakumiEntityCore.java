@@ -151,7 +151,7 @@ public class TakumiEntityCore {
                 if (!Objects.equals(url.getProtocol(), "jar")) {
                     String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
                             oldFile.getAbsolutePath().split("out")[0] + "src" + oldFile.getAbsolutePath().split("out")[1].replaceAll("production",
-                                    "main").replaceAll("forge1.12", "resources").replaceAll(".json", "")};
+                                    "main").replaceAll("minecraft", "resources").replaceAll(".json", "")};
                     for (String sPath : strings) {
                         String sResource = sPath + entity.getRegisterName() + ".json";
                         File file = new File(sResource);

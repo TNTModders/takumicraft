@@ -10,7 +10,7 @@
       "translate": "advancements.takumicraft.slay.desc"
     }
   },
-  "parent": "takumicraft:slay_root",
+  "parent": "takumicraft:slay/slay_root",
   "criteria": {
     "creeper_hoge": {
       "trigger": "minecraft:player_killed_entity",
