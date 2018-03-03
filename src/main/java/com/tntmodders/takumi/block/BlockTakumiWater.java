@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -60,7 +61,7 @@ public class BlockTakumiWater extends BlockFluidClassic {
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-        if (entityIn.motionX < 0.5 || entityIn.motionZ < 0.5) {
+        if (entityIn instanceof EntityPlayer && entityIn.motionX < 0.5 || entityIn.motionZ < 0.5) {
             entityIn.motionX *= 1.025;
             entityIn.motionZ *= 1.025;
         }
