@@ -67,7 +67,7 @@ public class GuiTakumiBook extends GuiScreen {
             ITakumiEntity takumiEntity = TakumiEntityCore.getEntityList().get(this.currPage);
             boolean flg = false;
             if (TakumiUtils.getAdvancementUnlocked(
-                    new ResourceLocation(TakumiCraftCore.MODID, "slay_" + takumiEntity.getRegisterName()))) {
+                    new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + takumiEntity.getRegisterName()))) {
                 flg = true;
             }
             EntityLivingBase base = this.getEntity(takumiEntity, flg);
