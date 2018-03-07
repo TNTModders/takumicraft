@@ -57,6 +57,7 @@ public class TakumiCraftCore {
         MinecraftForge.EVENT_BUS.register(new TakumiEvents());
         TakumiFluidCore.register();
         TakumiTileEntityCore.register();
+        TakumiWorldCore.registerMapGen();
     }
 
     @SubscribeEvent

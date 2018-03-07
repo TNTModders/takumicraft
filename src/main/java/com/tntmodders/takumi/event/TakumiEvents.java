@@ -38,6 +38,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -45,6 +46,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -316,6 +318,18 @@ public class TakumiEvents {
                         new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                         new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onChunckPopulate(PopulateChunkEvent.Post event) {
+        if (event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
+            /*TakumiMapGenDarkShrine mapGenDarkShrine =
+                    new TakumiMapGenDarkShrine();
+            mapGenDarkShrine.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
+            mapGenDarkShrine.generateStructure(event.getWorld(), event.getRand(),
+                    new ChunkPos(event.getChunkX(), event.getChunkZ()));*/
+
         }
     }
 }
