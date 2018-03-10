@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.item.material.TakumiToolMaterial;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -25,7 +26,7 @@ public class ItemTakumiSword extends ItemSword {
 
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!stack.isItemEnchanted()) {
+        if (!EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED)) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
             } catch (Exception e) {
@@ -36,7 +37,7 @@ public class ItemTakumiSword extends ItemSword {
 
     @Override
     public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-        if (!stack.isItemEnchanted()) {
+        if (!EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED)) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
             } catch (Exception e) {

@@ -3,6 +3,12 @@ package com.tntmodders.takumi.world.gen.structure;
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiLootTableCore;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityCallCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityRushCreeper;
+import com.tntmodders.takumi.entity.mobs.EntitySkeletonCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityIllusionIllager;
@@ -10,7 +16,10 @@ import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -21,6 +30,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -1628,6 +1638,27 @@ public class StructureTakumiDarkShrinePieces {
         public Start() {
         }
 
+        protected void generateSpawner(World worldIn, StructureBoundingBox sbb, Random rand, int x, int y, int z) {
+            BlockPos blockpos =
+                    new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+
+            if (sbb.isVecInside(blockpos) && worldIn.getBlockState(blockpos).getBlock() != Blocks.MOB_SPAWNER) {
+                this.setBlockState(worldIn, Blocks.MOB_SPAWNER.getDefaultState(), x, y, z, sbb);
+                TileEntity tileentity = worldIn.getTileEntity(blockpos);
+
+                if (tileentity instanceof TileEntityMobSpawner) {
+                    List<EntityTakumiAbstractCreeper> list = new ArrayList<>();
+                    list.add(new EntityRushCreeper(worldIn));
+                    list.add(new EntityZombieCreeper(worldIn));
+                    list.add(new EntitySkeletonCreeper(worldIn));
+                    list.add(new EntityCallCreeper(worldIn));
+                    String name = list.get(rand.nextInt(list.size())).getRegisterName();
+                    ((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic()
+                                                       .setEntityId(new ResourceLocation(TakumiCraftCore.MODID, name));
+                }
+            }
+        }
+
         @Override
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
             structureBoundingBoxIn.minX -= 10;
@@ -1669,6 +1700,18 @@ public class StructureTakumiDarkShrinePieces {
             this.fillWithAir(worldIn, structureBoundingBoxIn, -1, 9, -6, 1, 11, 6);
             this.fillWithAir(worldIn, structureBoundingBoxIn, -7, 9, 0, 7, 10, 0);
             this.fillWithAir(worldIn, structureBoundingBoxIn, 0, 9, -7, 0, 10, 7);
+            this.generateChest(worldIn, structureBoundingBoxIn, randomIn, -6, 9, -6,
+                    TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 9, -6,
+                    TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.generateChest(worldIn, structureBoundingBoxIn, randomIn, -6, 9, 6,
+                    TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 9, 6,
+                    TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, -3, 9, -3);
+            this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, 3, 9, -3);
+            this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, -3, 9, 3);
+            this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, 3, 9, 3);
             this.fillWithAir(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 7, 1);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 1, 1, brick, brick, false);
             this.setBlockState(worldIn, Blocks.LAVA.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
