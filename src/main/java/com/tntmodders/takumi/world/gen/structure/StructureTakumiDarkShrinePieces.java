@@ -2,14 +2,13 @@ package com.tntmodders.takumi.world.gen.structure;
 
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityIllusionIllager;
 import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +19,6 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTableList;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -273,7 +271,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 12 - 1, 0);
             }
 
-            IBlockState iblockstate = Blocks.OBSIDIAN.getDefaultState();
+            /*IBlockState iblockstate = Blocks.OBSIDIAN.getDefaultState();
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -354,7 +352,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);*/
             return true;
         }
 
@@ -478,7 +476,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 4 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+            /*IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 12, 4, 8, Blocks.AIR.getDefaultState(),
                     Blocks.AIR.getDefaultState(), false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.FARMLAND.getDefaultState(),
@@ -532,7 +530,7 @@ public class StructureTakumiDarkShrinePieces {
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.OBSIDIAN.getDefaultState(), k2, -1, j2,
                             structureBoundingBoxIn);
                 }
-            }
+            }*/
 
             return true;
         }
@@ -622,7 +620,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 4 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+          /*  IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 6, 4, 8, Blocks.AIR.getDefaultState(),
                     Blocks.AIR.getDefaultState(), false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.FARMLAND.getDefaultState(),
@@ -657,7 +655,7 @@ public class StructureTakumiDarkShrinePieces {
                     this.replaceAirAndLiquidDownwards(worldIn, Blocks.OBSIDIAN.getDefaultState(), k1, -1, j1,
                             structureBoundingBoxIn);
                 }
-            }
+            }*/
 
             return true;
         }
@@ -701,7 +699,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 7 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+            /*IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -790,7 +788,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 4, 1, 2, 2);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 4, 1, 2, 2);*/
             return true;
         }
 
@@ -838,7 +836,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 9 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+            /*IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -924,7 +922,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);*/
             return true;
         }
 
@@ -992,7 +990,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 6 - 1, 0);
             }
 
-            IBlockState iblockstate = Blocks.OBSIDIAN.getDefaultState();
+            /*IBlockState iblockstate = Blocks.OBSIDIAN.getDefaultState();
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -1066,7 +1064,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 7, 1, 1, 1);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 7, 1, 1, 1);*/
             return true;
         }
 
@@ -1114,7 +1112,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 7 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+            /*IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -1238,7 +1236,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 4, 1, 2, 2);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 4, 1, 2, 2);*/
             return true;
         }
     }
@@ -1301,7 +1299,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 6 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+           /* IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -1386,7 +1384,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);*/
             return true;
         }
     }
@@ -1536,10 +1534,8 @@ public class StructureTakumiDarkShrinePieces {
          */
         @Override
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.GRASS_PATH.getDefaultState());
-            IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
-            IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
-            IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.STONEBRICK.getDefaultState().withProperty(
+                    BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
 
             for (int i = this.getBoundingBox().minX; i <= this.getBoundingBox().maxX; ++i) {
                 for (int j = this.getBoundingBox().minZ; j <= this.getBoundingBox().maxZ; ++j) {
@@ -1561,14 +1557,14 @@ public class StructureTakumiDarkShrinePieces {
                             }
 
                             if (iblockstate4.getMaterial().isLiquid()) {
-                                worldIn.setBlockState(blockpos, iblockstate1, 2);
+                                worldIn.setBlockState(blockpos, iblockstate, 2);
                                 break;
                             }
 
                             if (iblockstate4.getBlock() == Blocks.SAND || iblockstate4.getBlock() == Blocks.SANDSTONE ||
                                     iblockstate4.getBlock() == Blocks.RED_SANDSTONE) {
-                                worldIn.setBlockState(blockpos, iblockstate2, 2);
-                                worldIn.setBlockState(blockpos.down(), iblockstate3, 2);
+                                worldIn.setBlockState(blockpos, iblockstate, 2);
+                                worldIn.setBlockState(blockpos.down(), iblockstate, 2);
                                 break;
                             }
 
@@ -1634,9 +1630,54 @@ public class StructureTakumiDarkShrinePieces {
 
         @Override
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-            this.setBlockState(worldIn, Blocks.BEDROCK.getDefaultState(), 0,
-                    structureBoundingBoxIn.maxY - structureBoundingBoxIn.minY, 0, structureBoundingBoxIn);
-            return super.addComponentParts(worldIn, randomIn, structureBoundingBoxIn);
+            structureBoundingBoxIn.minX -= 10;
+            structureBoundingBoxIn.minZ -= 10;
+            structureBoundingBoxIn.maxX += 10;
+            structureBoundingBoxIn.maxZ += 10;
+            if (this.averageGroundLvl < 0) {
+                this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
+
+                if (this.averageGroundLvl < 0) {
+                    return true;
+                }
+
+                structureBoundingBoxIn.offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 4 - 1, 0);
+            }
+            IBlockState brick = TakumiBlockCore.DARKBRICK.getDefaultState();
+            IBlockState air = Blocks.AIR.getDefaultState();
+            IBlockState fence = Blocks.IRON_BARS.getDefaultState();
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -10, 13, -10, 10, 16, 10);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -10, 0, -10, 10, 8, 10, brick, air, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -10, 4, -10, 10, 4, 10, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -6, 0, -6, -5, 8, -5, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -6, 0, 5, -5, 8, 6, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, -6, 6, 8, -5, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 5, 6, 8, 6, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -7, 8, -7, 7, 12, 7, brick, air, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -2, 5, -2, 2, 7, 2, fence, fence, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -10, 4, 0, 10, 8, 0, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, -10, 0, 8, 10, brick, brick, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -7, 8, -7, -2, 12, -2, brick, air, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -7, 8, 2, -2, 12, 7, brick, air, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 8, -7, 7, 12, -2, brick, air, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 8, 2, 7, 12, 7, brick, air, false);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -4, 9, -6, -4, 10, 6);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, 4, 9, -6, 4, 10, 6);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -6, 9, -4, 6, 10, -4);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -6, 9, 4, 6, 10, 4);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -6, 9, -1, 6, 11, 1);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -1, 9, -6, 1, 11, 6);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -7, 9, 0, 7, 10, 0);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, 0, 9, -7, 0, 10, 7);
+            this.fillWithAir(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 7, 1);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 1, 1, brick, brick, false);
+            this.setBlockState(worldIn, Blocks.LAVA.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 2, -1, 1, 2, 1, Blocks.FIRE.getDefaultState(),
+                    Blocks.FIRE.getDefaultState(), false);
+            TakumiCraftCore.LOGGER
+                    .info(new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(10), this.getZWithOffset(0, 0)));
+            // tp 1378 85 2914
+            return true;
         }
 
         public Start(BiomeProvider chunkManagerIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_,
@@ -1645,7 +1686,6 @@ public class StructureTakumiDarkShrinePieces {
             this.worldChunkMngr = chunkManagerIn;
             this.structureTakumiDarkShrineWeightedPieceList = p_i2104_6_;
             this.terrainType = p_i2104_7_;
-            TakumiCraftCore.LOGGER.info(new BlockPos(p_i2104_4_, 0, p_i2104_5_));
             Biome biome = chunkManagerIn.getBiome(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.DEFAULT);
             this.biome = biome;
             this.startPiece = this;
@@ -1699,7 +1739,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 4 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+         /*   IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 3, 1, Blocks.AIR.getDefaultState(),
                     Blocks.AIR.getDefaultState(), false);
             this.setBlockState(worldIn, iblockstate, 1, 0, 0, structureBoundingBoxIn);
@@ -1710,7 +1750,7 @@ public class StructureTakumiDarkShrinePieces {
             this.placeTorch(worldIn, EnumFacing.EAST, 2, 3, 0, structureBoundingBoxIn);
             this.placeTorch(worldIn, EnumFacing.NORTH, 1, 3, 1, structureBoundingBoxIn);
             this.placeTorch(worldIn, EnumFacing.WEST, 0, 3, 0, structureBoundingBoxIn);
-            this.placeTorch(worldIn, EnumFacing.SOUTH, 1, 3, -1, structureBoundingBoxIn);
+            this.placeTorch(worldIn, EnumFacing.SOUTH, 1, 3, -1, structureBoundingBoxIn);*/
             return true;
         }
     }
@@ -2016,6 +2056,7 @@ public class StructureTakumiDarkShrinePieces {
 
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 3, 0);
             }
+/*
 
             IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -2043,6 +2084,7 @@ public class StructureTakumiDarkShrinePieces {
                     }
                 }
             }
+*/
 
             return true;
         }
@@ -2111,7 +2153,7 @@ public class StructureTakumiDarkShrinePieces {
                 this.getBoundingBox().offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 6 - 1, 0);
             }
 
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
+       /*     IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate1 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate2 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
             IBlockState iblockstate3 = this.getBiomeSpecificBlockState(Blocks.OBSIDIAN.getDefaultState());
@@ -2177,7 +2219,7 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);
+            this.spawnVillagers(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);*/
             return true;
         }
     }

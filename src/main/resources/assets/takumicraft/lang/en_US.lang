@@ -106,6 +106,7 @@ tile.creeperclay.brown.name=Creeper Brown Clay
 tile.creeperclay.green.name=Creeper Green Clay
 tile.creeperclay.red.name=Creeper Red Clay
 tile.creeperclay.black.name=Creeper Black Clay
+tile.darkbrick.name=Creeper Dark Brick
 
 #item
 item.takumibook.name=Creeper Book

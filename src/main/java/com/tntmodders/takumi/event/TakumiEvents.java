@@ -11,6 +11,7 @@ import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
+import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -38,6 +39,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -322,13 +324,13 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
-    public void onChunckPopulate(PopulateChunkEvent.Post event) {
+    public void onChunckPopulate(PopulateChunkEvent.Pre event) {
         if (event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
-            /*TakumiMapGenDarkShrine mapGenDarkShrine =
-                    new TakumiMapGenDarkShrine();
+            TakumiMapGenDarkShrine mapGenDarkShrine;
+            mapGenDarkShrine = new TakumiMapGenDarkShrine();
             mapGenDarkShrine.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
             mapGenDarkShrine.generateStructure(event.getWorld(), event.getRand(),
-                    new ChunkPos(event.getChunkX(), event.getChunkZ()));*/
+                    new ChunkPos(event.getChunkX(), event.getChunkZ()));
 
         }
     }
