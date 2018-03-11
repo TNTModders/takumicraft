@@ -1676,7 +1676,9 @@ public class StructureTakumiDarkShrinePieces {
             }
             IBlockState brick = TakumiBlockCore.DARKBRICK.getDefaultState();
             IBlockState air = Blocks.AIR.getDefaultState();
-            IBlockState fence = Blocks.IRON_BARS.getDefaultState();
+            IBlockState fence = TakumiBlockCore.DARKIRON_BARS.getDefaultState();
+            IBlockState board = TakumiBlockCore.DARKBOARD.getDefaultState();
+
             this.fillWithAir(worldIn, structureBoundingBoxIn, -10, 13, -10, 10, 16, 10);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -10, 0, -10, 10, 8, 10, brick, air, false);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -10, 4, -10, 10, 4, 10, brick, brick, false);
@@ -1702,17 +1704,49 @@ public class StructureTakumiDarkShrinePieces {
             this.fillWithAir(worldIn, structureBoundingBoxIn, 0, 9, -7, 0, 10, 7);
             this.generateChest(worldIn, structureBoundingBoxIn, randomIn, -6, 9, -6,
                     TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.setBlockState(worldIn, air, -6, 8, -5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, -6, 8, -4, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, -6, 8, -3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, -6, 5, -3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, -6, 7, -5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, -6, 6, -4, structureBoundingBoxIn);
             this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 9, -6,
                     TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.setBlockState(worldIn, air, 6, 8, -5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, 6, 8, -4, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, 6, 8, -3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, 6, 5, -3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, 6, 7, -5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, 6, 6, -4, structureBoundingBoxIn);
             this.generateChest(worldIn, structureBoundingBoxIn, randomIn, -6, 9, 6,
                     TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.setBlockState(worldIn, air, -6, 8, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, -6, 8, 4, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, -6, 8, 3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, -6, 5, 3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, -6, 7, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, -6, 6, 4, structureBoundingBoxIn);
             this.generateChest(worldIn, structureBoundingBoxIn, randomIn, 6, 9, 6,
                     TakumiLootTableCore.TAKUMI_DARK_CHEST);
+            this.setBlockState(worldIn, air, 6, 8, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, 6, 8, 4, structureBoundingBoxIn);
+            this.setBlockState(worldIn, air, 6, 8, 3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, 6, 5, 3, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, 6, 7, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, brick, 6, 6, 4, structureBoundingBoxIn);
             this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, -3, 9, -3);
             this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, 3, 9, -3);
             this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, -3, 9, 3);
             this.generateSpawner(worldIn, structureBoundingBoxIn, randomIn, 3, 9, 3);
             this.fillWithAir(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 7, 1);
+            this.setBlockState(worldIn, board, -5, 6, -5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, 5, 6, -5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, -5, 6, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, 5, 6, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, -6, 6, -6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, 6, 6, -6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, -6, 6, 6, structureBoundingBoxIn);
+            this.setBlockState(worldIn, board, 6, 6, 6, structureBoundingBoxIn);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 1, 1, brick, brick, false);
             this.setBlockState(worldIn, Blocks.LAVA.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 2, -1, 1, 2, 1, Blocks.FIRE.getDefaultState(),

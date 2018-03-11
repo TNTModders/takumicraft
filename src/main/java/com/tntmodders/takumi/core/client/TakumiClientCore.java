@@ -1,17 +1,11 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.client.render.tileentity.RenderAcidBlock;
-import com.tntmodders.takumi.client.render.tileentity.RenderMonsterBomb;
-import com.tntmodders.takumi.client.render.tileentity.RenderTakumiBlock;
-import com.tntmodders.takumi.client.render.tileentity.RenderTakumiCreepered;
+import com.tntmodders.takumi.client.render.tileentity.*;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.tileentity.TileEntityAcidBlock;
-import com.tntmodders.takumi.tileentity.TileEntityMonsterBomb;
-import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
-import com.tntmodders.takumi.tileentity.TileEntityTakumiCreepered;
+import com.tntmodders.takumi.tileentity.*;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -136,5 +130,7 @@ public class TakumiClientCore {
                 new RenderTakumiBlock<>());
         ClientRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered",
                 new RenderTakumiCreepered<>());
+        ClientRegistry.registerTileEntity(TileEntityDarkBoard.class, TakumiCraftCore.MODID + ":takumidarkboard",
+                new RenderDarkBoard<>());
     }
 }
