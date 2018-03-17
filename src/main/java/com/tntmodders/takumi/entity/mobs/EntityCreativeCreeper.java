@@ -77,17 +77,29 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
-                            this.world.setBlockState(new BlockPos(x, y, z),
-                                    TakumiBlockCore.CREEPER_GLASS.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                this.world.setBlockState(new BlockPos(x, y, z),
+                                        TakumiBlockCore.CREEPER_GLASS.getDefaultState());
+                            }
                         }
                     }
                 }
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 1, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 1, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
+                }
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 2, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 2, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                }
                 for (int x = ox - 3; x <= ox + 3; x++) {
                     for (int z = oz - 3; z <= oz + 3; z++) {
                         for (int y = oy + 1; y <= oy + 4; y++) {
-                            this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
+                            }
                         }
                     }
                 }
@@ -98,19 +110,31 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
-                            this.world.setBlockState(new BlockPos(x, y, z), Blocks.PLANKS.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.PLANKS.getDefaultState());
+                            }
                         }
                     }
                 }
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 1, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 1, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
+                }
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 2, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 2, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                }
                 for (int x = ox - 3; x <= ox + 3; x++) {
                     for (int z = oz - 3; z <= oz + 3; z++) {
                         for (int y = oy + 1; y <= oy + 4; y++) {
-                            if (y >= oy + 4) {
-                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.FIRE.getDefaultState());
-                            } else {
-                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.TNT.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                if (y >= oy + 4) {
+                                    this.world.setBlockState(new BlockPos(x, y, z), Blocks.FIRE.getDefaultState());
+                                } else {
+                                    this.world.setBlockState(new BlockPos(x, y, z), Blocks.TNT.getDefaultState());
+                                }
                             }
                         }
                     }
@@ -122,22 +146,34 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
-                            this.world.setBlockState(new BlockPos(x, y, z),
-                                    TakumiBlockCore.CREEPER_BOMB.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                this.world.setBlockState(new BlockPos(x, y, z),
+                                        TakumiBlockCore.CREEPER_BOMB.getDefaultState());
+                            }
                         }
                     }
                 }
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 1, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 1, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
+                }
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 2, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 2, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                }
                 for (int x = ox - 3; x <= ox + 3; x++) {
                     for (int z = oz - 3; z <= oz + 3; z++) {
                         for (int y = oy + 1; y <= oy + 4; y++) {
-                            if (y >= oy + 4) {
-                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
-                                EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, x, y, z, this);
-                                this.world.spawnEntity(tnt);
-                            } else {
-                                this.world.setBlockState(new BlockPos(x, y, z), Blocks.TNT.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                if (y >= oy + 4) {
+                                    this.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
+                                    EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, x, y, z, this);
+                                    this.world.spawnEntity(tnt);
+                                } else {
+                                    this.world.setBlockState(new BlockPos(x, y, z), Blocks.TNT.getDefaultState());
+                                }
                             }
                         }
                     }
@@ -149,13 +185,22 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                 for (int x = ox - 4; x <= ox + 4; x++) {
                     for (int z = oz - 4; z <= oz + 4; z++) {
                         for (int y = oy; y <= oy + 5; y++) {
-                            this.world.setBlockState(new BlockPos(x, y, z),
-                                    TakumiBlockCore.CREEPER_BRICK.getDefaultState());
+                            if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(this.world,
+                                    new BlockPos(x, y, z)) > 0) {
+                                this.world.setBlockState(new BlockPos(x, y, z),
+                                        TakumiBlockCore.CREEPER_BRICK.getDefaultState());
+                            }
                         }
                     }
                 }
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
-                this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 1, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 1, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 1, oz - 3), Blocks.AIR.getDefaultState());
+                }
+                if (this.world.getBlockState(new BlockPos(ox + 4, oy + 2, oz - 3)).getBlockHardness(this.world,
+                        new BlockPos(ox + 4, oy + 2, oz - 3)) > 0) {
+                    this.world.setBlockState(new BlockPos(ox + 4, oy + 2, oz - 3), Blocks.AIR.getDefaultState());
+                }
                 for (int x = ox - 2; x <= ox + 2; x++) {
                     for (int z = oz - 2; z <= oz + 2; z++) {
                         for (int y = oy + 2; y >= oy + 1; y--) {
@@ -164,12 +209,8 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                                 if (this.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR &&
                                         this.world.getBlockState(new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR &&
                                         this.rand.nextInt(5) == 0) {
-                                    Class<? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList()
-                                                                                           .get(this.rand.nextInt(
-                                                                                                   TakumiEntityCore
-                                                                                                           .getEntityList()
-                                                                                                           .size()))
-                                                                                           .getClass();
+                                    Class<? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(
+                                            this.rand.nextInt(TakumiEntityCore.getEntityList().size())).getClass();
                                     try {
                                         Entity creeper =
                                                 (Entity) clazz.getConstructor(World.class).newInstance(this.world);

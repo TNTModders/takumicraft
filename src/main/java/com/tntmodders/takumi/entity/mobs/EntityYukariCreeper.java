@@ -34,11 +34,12 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         List<BlockPos> posList = new ArrayList<>();
         for (BlockPos pos : event.getAffectedBlocks()) {
-            if (pos.getY() > this.posY) {
+            if (pos.getY() > this.posY && this.world.getBlockState(pos).getBlockHardness(this.world, pos) > 0) {
                 this.world.setBlockToAir(pos);
             } else if (this.world.isAirBlock(pos) || this.world.getBlockState(pos).getMaterial().isLiquid()) {
                 IBlockState state = this.world.getBlockState(this.getPosition().down());
-                if (!(state.getBlock() instanceof BlockTakumiMonsterBomb)) {
+                if (!(state.getBlock() instanceof BlockTakumiMonsterBomb) &&
+                        state.getBlockHardness(this.world, this.getPosition().down()) > 0) {
                     this.world.setBlockState(pos, state);
                 }
             }
