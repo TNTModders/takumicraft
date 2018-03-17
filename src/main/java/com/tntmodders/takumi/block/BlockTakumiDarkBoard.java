@@ -7,7 +7,9 @@ import com.tntmodders.takumi.tileentity.TileEntityDarkBoard;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 public class BlockTakumiDarkBoard extends BlockContainer {
@@ -42,9 +45,38 @@ public class BlockTakumiDarkBoard extends BlockContainer {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
             EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityDarkBoard) {
-            TakumiCraftCore.LOGGER.info(((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name);
+            if (playerIn.getHeldItem(hand).getItem() instanceof ItemBlock &&
+                    ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock() instanceof BlockTakumiMonsterBomb &&
+                    ((BlockTakumiMonsterBomb) ((ItemBlock) playerIn.getHeldItem(
+                            hand).getItem()).getBlock()).getName().contains(
+                            ((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
+                worldIn.setBlockState(pos, TakumiBlockCore.DARKBOARD_ON.getDefaultState());
+                worldIn.createExplosion(playerIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
+            } else {
+                worldIn.addBlockEvent(pos, state.getBlock(), 0, 0);
+            }
         }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+        return true;
+    }
+
+    @Override
+    public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
+        TakumiBlockCore.BOMB_MAP.values().forEach(blockTakumiMonsterBomb -> {
+            if (blockTakumiMonsterBomb.getName().contains(((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
+                try {
+                    EntityCreeper creeper =
+                            blockTakumiMonsterBomb.getEntityClass().getConstructor(World.class).newInstance(worldIn);
+                    creeper.setPosition(pos.getX() + 2.5, pos.getY() + 0.5, pos.getZ() + 2.5);
+                    if (!worldIn.isRemote) {
+                        worldIn.spawnEntity(creeper);
+                        creeper.ignite();
+                    }
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return super.eventReceived(state, worldIn, pos, id, param);
     }
 
     @Override
@@ -55,8 +87,8 @@ public class BlockTakumiDarkBoard extends BlockContainer {
             random.setSeed(System.currentTimeMillis() + pos.getX() + pos.getZ());
             if (((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name == null ||
                     ((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name.isEmpty()) {
-                Class clazz = ((Class) TakumiBlockCore.BOMB_MAP.keySet().toArray()[random
-                        .nextInt(TakumiBlockCore.BOMB_MAP.size())]);
+                Class clazz = ((Class) TakumiBlockCore.BOMB_MAP.keySet().toArray()[random.nextInt(
+                        TakumiBlockCore.BOMB_MAP.size())]);
                 try {
                     EntityTakumiAbstractCreeper creeper =
                             (EntityTakumiAbstractCreeper) clazz.getConstructor(World.class).newInstance(worldIn);

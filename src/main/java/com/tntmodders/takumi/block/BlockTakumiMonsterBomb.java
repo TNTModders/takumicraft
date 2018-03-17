@@ -41,11 +41,6 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     private final String name;
     private final String locName;
 
-    @Override
-    public int quantityDropped(Random random) {
-        return 0;
-    }
-
     public BlockTakumiMonsterBomb(Class<? extends EntityCreeper> entityClass, String name) {
         super("monsterbomb_" + name, 0.1f, Material.TNT, MapColor.GREEN);
         this.setLightLevel(1f);
@@ -70,6 +65,11 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
     }
 
     @Override

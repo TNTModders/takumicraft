@@ -103,41 +103,41 @@ public class StructureTakumiDarkShrinePieces {
         StructureTakumiDarkShrinePieces.TakumiDarkShrine structurevillagepieces$village = null;
 
         if (oclass == StructureTakumiDarkShrinePieces.House4Garden.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.House4Garden
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.House4Garden.createPiece(start, structureComponents, rand,
+                            structureMinX, structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.Church.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.Church
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.Church.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.House1.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.House1
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.House1.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.WoodHut.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.WoodHut
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.WoodHut.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.Hall.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.Hall
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.Hall.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.Field1.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.Field1
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.Field1.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.Field2.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.Field2
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.Field2.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.House2.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.House2
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.House2.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         } else if (oclass == StructureTakumiDarkShrinePieces.House3.class) {
-            structurevillagepieces$village = StructureTakumiDarkShrinePieces.House3
-                    .createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                            componentType);
+            structurevillagepieces$village =
+                    StructureTakumiDarkShrinePieces.House3.createPiece(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing, componentType);
         }
 
         return structurevillagepieces$village;
@@ -161,8 +161,8 @@ public class StructureTakumiDarkShrinePieces {
                     k -= structurevillagepieces$pieceweight.villagePieceWeight;
 
                     if (k < 0) {
-                        if (!structurevillagepieces$pieceweight
-                                .canSpawnMoreTakumiDarkShrinePiecesOfType(componentType) ||
+                        if (!structurevillagepieces$pieceweight.canSpawnMoreTakumiDarkShrinePiecesOfType(
+                                componentType) ||
                                 structurevillagepieces$pieceweight == start.structTakumiDarkShrinePieceWeight &&
                                         start.structureTakumiDarkShrineWeightedPieceList.size() > 1) {
                             break;
@@ -178,8 +178,8 @@ public class StructureTakumiDarkShrinePieces {
                             start.structTakumiDarkShrinePieceWeight = structurevillagepieces$pieceweight;
 
                             if (!structurevillagepieces$pieceweight.canSpawnMoreTakumiDarkShrinePieces()) {
-                                start.structureTakumiDarkShrineWeightedPieceList
-                                        .remove(structurevillagepieces$pieceweight);
+                                start.structureTakumiDarkShrineWeightedPieceList.remove(
+                                        structurevillagepieces$pieceweight);
                             }
 
                             return structurevillagepieces$village;
@@ -188,9 +188,9 @@ public class StructureTakumiDarkShrinePieces {
                 }
             }
 
-            StructureBoundingBox structureboundingbox = StructureTakumiDarkShrinePieces.Torch
-                    .findPieceBox(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ,
-                            facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureTakumiDarkShrinePieces.Torch.findPieceBox(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing);
 
             if (structureboundingbox != null) {
                 return new StructureTakumiDarkShrinePieces.Torch(start, componentType, rand, structureboundingbox,
@@ -229,8 +229,9 @@ public class StructureTakumiDarkShrinePieces {
         if (p_176069_7_ > 3 + start.terrainType) {
         } else if (Math.abs(p_176069_3_ - start.getBoundingBox().minX) <= 112 &&
                 Math.abs(p_176069_5_ - start.getBoundingBox().minZ) <= 112) {
-            StructureBoundingBox structureboundingbox = StructureTakumiDarkShrinePieces.Path
-                    .findPieceBox(start, p_176069_1_, rand, p_176069_3_, p_176069_4_, p_176069_5_, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureTakumiDarkShrinePieces.Path.findPieceBox(start, p_176069_1_, rand, p_176069_3_,
+                            p_176069_4_, p_176069_5_, facing);
 
             if (structureboundingbox != null && structureboundingbox.minY > 10) {
                 StructureComponent structurecomponent =
@@ -257,8 +258,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.Church createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175854_1_, Random rand, int p_175854_3_, int p_175854_4_, int p_175854_5_,
                 EnumFacing facing, int p_175854_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175854_3_, p_175854_4_, p_175854_5_, 0, 0, 0, 5, 12, 9, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175854_3_, p_175854_4_, p_175854_5_, 0, 0, 0, 5,
+                            12, 9, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175854_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.Church(start, p_175854_7_, rand, structureboundingbox, facing) :
@@ -462,8 +464,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.Field1 createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175851_1_, Random rand, int p_175851_3_, int p_175851_4_, int p_175851_5_,
                 EnumFacing facing, int p_175851_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175851_3_, p_175851_4_, p_175851_5_, 0, 0, 0, 13, 4, 9, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175851_3_, p_175851_4_, p_175851_5_, 0, 0, 0,
+                            13, 4, 9, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175851_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.Field1(start, p_175851_7_, rand, structureboundingbox, facing) :
@@ -606,8 +609,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.Field2 createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175852_1_, Random rand, int p_175852_3_, int p_175852_4_, int p_175852_5_,
                 EnumFacing facing, int p_175852_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175852_3_, p_175852_4_, p_175852_5_, 0, 0, 0, 7, 4, 9, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175852_3_, p_175852_4_, p_175852_5_, 0, 0, 0, 7,
+                            4, 9, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175852_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.Field2(start, p_175852_7_, rand, structureboundingbox, facing) :
@@ -685,8 +689,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.Hall createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175857_1_, Random rand, int p_175857_3_, int p_175857_4_, int p_175857_5_,
                 EnumFacing facing, int p_175857_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175857_3_, p_175857_4_, p_175857_5_, 0, 0, 0, 9, 7, 11, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175857_3_, p_175857_4_, p_175857_5_, 0, 0, 0, 9,
+                            7, 11, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175857_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.Hall(start, p_175857_7_, rand, structureboundingbox, facing) :
@@ -822,8 +827,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.House1 createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175850_1_, Random rand, int p_175850_3_, int p_175850_4_, int p_175850_5_,
                 EnumFacing facing, int p_175850_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175850_3_, p_175850_4_, p_175850_5_, 0, 0, 0, 9, 9, 6, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175850_3_, p_175850_4_, p_175850_5_, 0, 0, 0, 9,
+                            9, 6, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175850_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.House1(start, p_175850_7_, rand, structureboundingbox, facing) :
@@ -958,8 +964,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.House2 createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175855_1_, Random rand, int p_175855_3_, int p_175855_4_, int p_175855_5_,
                 EnumFacing facing, int p_175855_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175855_3_, p_175855_4_, p_175855_5_, 0, 0, 0, 10, 6, 7, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175855_3_, p_175855_4_, p_175855_5_, 0, 0, 0,
+                            10, 6, 7, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175855_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.House2(start, p_175855_7_, rand, structureboundingbox, facing) :
@@ -1098,8 +1105,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.House3 createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175849_1_, Random rand, int p_175849_3_, int p_175849_4_, int p_175849_5_,
                 EnumFacing facing, int p_175849_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175849_3_, p_175849_4_, p_175849_5_, 0, 0, 0, 9, 7, 12, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175849_3_, p_175849_4_, p_175849_5_, 0, 0, 0, 9,
+                            7, 12, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175849_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.House3(start, p_175849_7_, rand, structureboundingbox, facing) :
@@ -1286,8 +1294,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.House4Garden createPiece(
                 StructureTakumiDarkShrinePieces.Start start, List<StructureComponent> p_175858_1_, Random rand,
                 int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 5, 6, 5, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 5,
+                            6, 5, facing);
             return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null :
                     new StructureTakumiDarkShrinePieces.House4Garden(start, p_175858_7_, rand, structureboundingbox,
                             facing);
@@ -1468,28 +1477,28 @@ public class StructureTakumiDarkShrinePieces {
                 switch (enumfacing) {
                     case NORTH:
                     default:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().minX - 1, this.getBoundingBox().minY,
-                                        this.getBoundingBox().minZ, EnumFacing.WEST, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().minX - 1, this.getBoundingBox().minY, this.getBoundingBox().minZ,
+                                EnumFacing.WEST, this.getComponentType());
                         break;
                     case SOUTH:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().minX - 1, this.getBoundingBox().minY,
-                                        this.getBoundingBox().maxZ - 2, EnumFacing.WEST, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().minX - 1, this.getBoundingBox().minY,
+                                this.getBoundingBox().maxZ - 2, EnumFacing.WEST, this.getComponentType());
                         break;
                     case WEST:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().minX, this.getBoundingBox().minY,
-                                        this.getBoundingBox().minZ - 1, EnumFacing.NORTH, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().minX, this.getBoundingBox().minY, this.getBoundingBox().minZ - 1,
+                                EnumFacing.NORTH, this.getComponentType());
                         break;
                     case EAST:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().maxX - 2, this.getBoundingBox().minY,
-                                        this.getBoundingBox().minZ - 1, EnumFacing.NORTH, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().maxX - 2, this.getBoundingBox().minY,
+                                this.getBoundingBox().minZ - 1, EnumFacing.NORTH, this.getComponentType());
                 }
             }
 
@@ -1497,28 +1506,28 @@ public class StructureTakumiDarkShrinePieces {
                 switch (enumfacing) {
                     case NORTH:
                     default:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().maxX + 1, this.getBoundingBox().minY,
-                                        this.getBoundingBox().minZ, EnumFacing.EAST, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().maxX + 1, this.getBoundingBox().minY, this.getBoundingBox().minZ,
+                                EnumFacing.EAST, this.getComponentType());
                         break;
                     case SOUTH:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().maxX + 1, this.getBoundingBox().minY,
-                                        this.getBoundingBox().maxZ - 2, EnumFacing.EAST, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().maxX + 1, this.getBoundingBox().minY,
+                                this.getBoundingBox().maxZ - 2, EnumFacing.EAST, this.getComponentType());
                         break;
                     case WEST:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().minX, this.getBoundingBox().minY,
-                                        this.getBoundingBox().maxZ + 1, EnumFacing.SOUTH, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().minX, this.getBoundingBox().minY, this.getBoundingBox().maxZ + 1,
+                                EnumFacing.SOUTH, this.getComponentType());
                         break;
                     case EAST:
-                        StructureTakumiDarkShrinePieces
-                                .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn,
-                                        rand, this.getBoundingBox().maxX - 2, this.getBoundingBox().minY,
-                                        this.getBoundingBox().maxZ + 1, EnumFacing.SOUTH, this.getComponentType());
+                        StructureTakumiDarkShrinePieces.generateAndAddRoadPiece(
+                                (StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
+                                this.getBoundingBox().maxX - 2, this.getBoundingBox().minY,
+                                this.getBoundingBox().maxZ + 1, EnumFacing.SOUTH, this.getComponentType());
                 }
             }
         }
@@ -1527,8 +1536,9 @@ public class StructureTakumiDarkShrinePieces {
                 List<StructureComponent> p_175848_1_, Random rand, int p_175848_3_, int p_175848_4_, int p_175848_5_,
                 EnumFacing facing) {
             for (int i = 7 * MathHelper.getInt(rand, 3, 5); i >= 7; i -= 7) {
-                StructureBoundingBox structureboundingbox = StructureBoundingBox
-                        .getComponentToAddBoundingBox(p_175848_3_, p_175848_4_, p_175848_5_, 0, 0, 0, 3, 3, i, facing);
+                StructureBoundingBox structureboundingbox =
+                        StructureBoundingBox.getComponentToAddBoundingBox(p_175848_3_, p_175848_4_, p_175848_5_, 0, 0,
+                                0, 3, 3, i, facing);
 
                 if (StructureComponent.findIntersecting(p_175848_1_, structureboundingbox) == null) {
                     return structureboundingbox;
@@ -1544,8 +1554,9 @@ public class StructureTakumiDarkShrinePieces {
          */
         @Override
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn) {
-            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.STONEBRICK.getDefaultState().withProperty(
-                    BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY));
+            IBlockState iblockstate = this.getBiomeSpecificBlockState(
+                    Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT,
+                            BlockStoneBrick.EnumType.MOSSY));
 
             for (int i = this.getBoundingBox().minX; i <= this.getBoundingBox().maxX; ++i) {
                 for (int j = this.getBoundingBox().minZ; j <= this.getBoundingBox().maxZ; ++j) {
@@ -1653,8 +1664,8 @@ public class StructureTakumiDarkShrinePieces {
                     list.add(new EntitySkeletonCreeper(worldIn));
                     list.add(new EntityCallCreeper(worldIn));
                     String name = list.get(rand.nextInt(list.size())).getRegisterName();
-                    ((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic()
-                                                       .setEntityId(new ResourceLocation(TakumiCraftCore.MODID, name));
+                    ((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setEntityId(
+                            new ResourceLocation(TakumiCraftCore.MODID, name));
                 }
             }
         }
@@ -1749,10 +1760,11 @@ public class StructureTakumiDarkShrinePieces {
             this.setBlockState(worldIn, board, 6, 6, 6, structureBoundingBoxIn);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 1, -1, 1, 1, 1, brick, brick, false);
             this.setBlockState(worldIn, Blocks.LAVA.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
+            this.setBlockState(worldIn, TakumiBlockCore.DARKCORE.getDefaultState(), 0, 0, 0, structureBoundingBoxIn);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 2, -1, 1, 2, 1, Blocks.FIRE.getDefaultState(),
                     Blocks.FIRE.getDefaultState(), false);
-            TakumiCraftCore.LOGGER
-                    .info(new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(10), this.getZWithOffset(0, 0)));
+            TakumiCraftCore.LOGGER.info(
+                    new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(10), this.getZWithOffset(0, 0)));
             // tp 1378 85 2914
             return true;
         }
@@ -1794,8 +1806,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureBoundingBox findPieceBox(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175856_1_, Random rand, int p_175856_3_, int p_175856_4_, int p_175856_5_,
                 EnumFacing facing) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 3, 4, 2, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175856_3_, p_175856_4_, p_175856_5_, 0, 0, 0, 3,
+                            4, 2, facing);
             return StructureComponent.findIntersecting(p_175856_1_, structureboundingbox) != null ? null :
                     structureboundingbox;
         }
@@ -1999,17 +2012,16 @@ public class StructureTakumiDarkShrinePieces {
 
                     if (this.isZombieInfested) {
                         EntityZombieVillager entityzombievillager = new EntityZombieVillager(worldIn);
-                        entityzombievillager
-                                .setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F, 0.0F);
-                        entityzombievillager
-                                .onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityzombievillager)),
-                                        null);
+                        entityzombievillager.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D,
+                                0.0F, 0.0F);
+                        entityzombievillager.onInitialSpawn(
+                                worldIn.getDifficultyForLocation(new BlockPos(entityzombievillager)), null);
                         entityzombievillager.enablePersistence();
                         worldIn.spawnEntity(entityzombievillager);
                     } else {
                         EntityIllusionIllager entityvillager = new EntityIllusionIllager(worldIn);
-                        entityvillager
-                                .setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F, 0.0F);
+                        entityvillager.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F,
+                                0.0F);
 /*                        entityvillager
                                 .setProfession(this.chooseForgeProfession(i, entityvillager.getProfessionForge()));
                         entityvillager
@@ -2100,22 +2112,18 @@ public class StructureTakumiDarkShrinePieces {
          */
         @Override
         public void buildComponent(StructureComponent componentIn, List<StructureComponent> listIn, Random rand) {
-            StructureTakumiDarkShrinePieces
-                    .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
-                            this.getBoundingBox().minX - 1, this.getBoundingBox().maxY - 4,
-                            this.getBoundingBox().minZ + 1, EnumFacing.WEST, this.getComponentType());
-            StructureTakumiDarkShrinePieces
-                    .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
-                            this.getBoundingBox().maxX + 1, this.getBoundingBox().maxY - 4,
-                            this.getBoundingBox().minZ + 1, EnumFacing.EAST, this.getComponentType());
-            StructureTakumiDarkShrinePieces
-                    .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
-                            this.getBoundingBox().minX + 1, this.getBoundingBox().maxY - 4,
-                            this.getBoundingBox().minZ - 1, EnumFacing.NORTH, this.getComponentType());
-            StructureTakumiDarkShrinePieces
-                    .generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn, listIn, rand,
-                            this.getBoundingBox().minX + 1, this.getBoundingBox().maxY - 4,
-                            this.getBoundingBox().maxZ + 1, EnumFacing.SOUTH, this.getComponentType());
+            StructureTakumiDarkShrinePieces.generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn,
+                    listIn, rand, this.getBoundingBox().minX - 1, this.getBoundingBox().maxY - 4,
+                    this.getBoundingBox().minZ + 1, EnumFacing.WEST, this.getComponentType());
+            StructureTakumiDarkShrinePieces.generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn,
+                    listIn, rand, this.getBoundingBox().maxX + 1, this.getBoundingBox().maxY - 4,
+                    this.getBoundingBox().minZ + 1, EnumFacing.EAST, this.getComponentType());
+            StructureTakumiDarkShrinePieces.generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn,
+                    listIn, rand, this.getBoundingBox().minX + 1, this.getBoundingBox().maxY - 4,
+                    this.getBoundingBox().minZ - 1, EnumFacing.NORTH, this.getComponentType());
+            StructureTakumiDarkShrinePieces.generateAndAddRoadPiece((StructureTakumiDarkShrinePieces.Start) componentIn,
+                    listIn, rand, this.getBoundingBox().minX + 1, this.getBoundingBox().maxY - 4,
+                    this.getBoundingBox().maxZ + 1, EnumFacing.SOUTH, this.getComponentType());
         }
 
         /**
@@ -2206,8 +2214,9 @@ public class StructureTakumiDarkShrinePieces {
         public static StructureTakumiDarkShrinePieces.WoodHut createPiece(StructureTakumiDarkShrinePieces.Start start,
                 List<StructureComponent> p_175853_1_, Random rand, int p_175853_3_, int p_175853_4_, int p_175853_5_,
                 EnumFacing facing, int p_175853_7_) {
-            StructureBoundingBox structureboundingbox = StructureBoundingBox
-                    .getComponentToAddBoundingBox(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, 4, 6, 5, facing);
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, 4,
+                            6, 5, facing);
             return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
                     StructureComponent.findIntersecting(p_175853_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.WoodHut(start, p_175853_7_, rand, structureboundingbox,

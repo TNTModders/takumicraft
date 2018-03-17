@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.client.render.tileentity;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.tileentity.TileEntityDarkBoard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -12,7 +13,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderDarkBoard<T extends TileEntityDarkBoard> extends TileEntitySpecialRenderer<T> {
     static final ResourceLocation LOCATION =
-            new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/darkboard" + ".png");
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/darkboard.png");
+    static final ResourceLocation LOCATION_ON =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/darkboard_on.png");
     final ModelBoard modelBase = new ModelBoard();
 
     @Override
@@ -27,7 +30,7 @@ public class RenderDarkBoard<T extends TileEntityDarkBoard> extends TileEntitySp
         GlStateManager.translate(-0.375, 0.125 + Math.sin(tick / Math.PI) * 0.1, -0.375);
         GlStateManager.scale(0.2, 0.2, 0.2);
         GlStateManager.enableAlpha();
-        this.bindTexture(LOCATION);
+        this.bindTexture(te.getBlockType() == TakumiBlockCore.DARKBOARD_ON ? LOCATION_ON : LOCATION);
         this.modelBase.render();
         GlStateManager.popMatrix();
     }

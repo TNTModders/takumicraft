@@ -89,7 +89,9 @@ public class TakumiBlockCore {
     public static final Block TAKUMI_CLAY = new BlockTakumiClay();
     public static final Block DARKBRICK = new BlockTakumiDarkBrick();
     public static final Block DARKBOARD = new BlockTakumiDarkBoard();
+    public static final Block DARKBOARD_ON = new BlockTakumiDarkBoard_On();
     public static final Block DARKIRON_BARS = new BlockTakumiDarkIronBars();
+    public static final Block DARKCORE = new BlockTakumiDarkCore();
 
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 

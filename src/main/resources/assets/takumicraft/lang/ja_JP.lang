@@ -108,7 +108,9 @@ tile.creeperclay.red.name=匠式赤色硬質粘土
 tile.creeperclay.black.name=匠式黒色硬質粘土
 tile.darkbrick.name=深淵の煉瓦
 tile.darkboard.name=深淵の石版
+tile.darkboard_on.name=深淵の石版
 tile.darkironbars.name=深淵の鉄格子
+tile.darkcore.name=深淵の要石
 
 #item
 item.takumibook.name=匠の書

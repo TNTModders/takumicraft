@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "takumicraft:blocks/darkboard_on"
+    },
+    "model": "takumicraft:darkboard_on",
+    "uvlock": false
+  },
+  "variants": {
+    "normal": [
+      {
+      }
+    ],
+    "inventory": [
+      {
+      }
+    ]
+  }
+}
