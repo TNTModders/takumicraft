@@ -111,6 +111,7 @@ tile.darkboard.name=Creeper Dark Board
 tile.darkboard_on.name=Creeper Dark Board
 tile.darkironbars.name=Creeper Dark Iron Bars
 tile.darkcore.name=Creeper Dark Core Brick
+tile.darkcore.name=Creeper Dark Activated Brick
 
 #item
 item.takumibook.name=Creeper Book

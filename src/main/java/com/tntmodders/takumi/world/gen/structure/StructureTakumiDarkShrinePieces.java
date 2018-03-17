@@ -23,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -1683,7 +1684,9 @@ public class StructureTakumiDarkShrinePieces {
                     return true;
                 }
 
-                structureBoundingBoxIn.offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 4 - 1, 0);
+                if (worldIn.getWorldType() != WorldType.FLAT) {
+                    structureBoundingBoxIn.offset(0, this.averageGroundLvl - this.getBoundingBox().maxY + 4 - 1, 0);
+                }
             }
             IBlockState brick = TakumiBlockCore.DARKBRICK.getDefaultState();
             IBlockState air = Blocks.AIR.getDefaultState();

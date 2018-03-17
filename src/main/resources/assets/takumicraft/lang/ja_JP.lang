@@ -111,6 +111,7 @@ tile.darkboard.name=深淵の石版
 tile.darkboard_on.name=深淵の石版
 tile.darkironbars.name=深淵の鉄格子
 tile.darkcore.name=深淵の要石
+tile.darkcore_on.name=深淵の邪石
 
 #item
 item.takumibook.name=匠の書
