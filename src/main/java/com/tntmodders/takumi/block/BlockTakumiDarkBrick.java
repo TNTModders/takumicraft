@@ -16,6 +16,7 @@ public class BlockTakumiDarkBrick extends Block {
         this.setResistance(10000000f);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setLightLevel(0.2f);
+        this.setLightOpacity(0);
     }
 
     @Override
