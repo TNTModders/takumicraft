@@ -6,7 +6,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -109,7 +111,15 @@ public class EntityRushCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    protected float getWaterSlowDown() {
+        return 1f;
+    }
+
+    @Override
     public void onLivingUpdate() {
+        if (this.getPowered() && !this.isPotionActive(MobEffects.SPEED)) {
+            this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 3, true, false));
+        }
         if (this.world.isRemote) {
             for (int i = 0; i < 5; ++i) {
                 this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
