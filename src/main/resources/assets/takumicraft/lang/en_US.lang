@@ -383,6 +383,8 @@ entity.fallingslimecreeper.name=Falling Slime Creeper
 entity.fallingslimecreeper.desc=Not a few, but lots of falling slime.
 entity.terracottacreeper.name=Terracotta Creeper
 entity.terracottacreeper.desc=What happened, terracotta?
+entity.wearcreeper.name=Wear Creeper
+entity.wearcreeper.desc=Do you know the "Curse Armor"?
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

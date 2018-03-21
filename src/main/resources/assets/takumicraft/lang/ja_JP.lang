@@ -375,7 +375,7 @@ entity.crosscreeper.desc=氷のように、月光のように、静かに十文�
 entity.transcreeper.name=輪匠
 entity.transcreeper.desc=世界は廻る、大地も廻る。
 entity.shootingcreeper.name=射匠
-entity.shootingcreeper.desc=アイテムをキミにあげよう!勿論ギブアンドテイクでね……
+entity.shootingcreeper.desc=アイテムをキミにあげよう!勿論,ギブアンドテイクでね……
 entity.shootingcreeper.desc.choco=チョコレートをキミに、たくさんたくさんあげるのだ……
 entity.shadowcreeper.name=影匠
 entity.shadowcreeper.desc=クラス:Keter この匠にはNK-クラスシナリオの危険性があります。
@@ -385,6 +385,8 @@ entity.fallingslimecreeper.name=阿修羅匠
 entity.fallingslimecreeper.desc=阿修羅の修行は落ち来る脅威、虚空を埋めよ、全てを壊せ。
 entity.terracottacreeper.name=テラコッタ匠
 entity.terracottacreeper.desc=なんてこった、テラコッタ。
+entity.wearcreeper.name=衣匠
+entity.wearcreeper.desc=呪われた装備は外せない……
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
