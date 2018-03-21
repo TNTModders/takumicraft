@@ -1,12 +1,14 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.RenderDarkVillager;
 import com.tntmodders.takumi.client.render.RenderLlamaCreeperSpit;
 import com.tntmodders.takumi.client.render.RenderTakumiTNTPrimed;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -34,9 +36,9 @@ import java.util.*;
 
 public class TakumiEntityCore {
 
-    public static final EnumCreatureType CREATURE_TAKUMI = EnumHelper
-            .addCreatureType("creature_takumi", IMob.class, TakumiConfigCore.spawnWeightAnimal, Material.AIR, false,
-                    false);
+    public static final EnumCreatureType CREATURE_TAKUMI =
+            EnumHelper.addCreatureType("creature_takumi", IMob.class, TakumiConfigCore.spawnWeightAnimal, Material.AIR,
+                    false, false);
     public static final EnumCreatureType WATER_TAKUMI =
             EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);
     public static final List<Class<? extends ITakumiEntity>> CLASS_LIST = new ArrayList<>();
@@ -136,9 +138,8 @@ public class TakumiEntityCore {
                 Biome.REGISTRY.iterator().forEachRemaining(biome -> {
                     if (!(biome instanceof BiomeOcean) && biome != Biomes.HELL && biome != Biomes.VOID &&
                             biome != Biomes.SKY) {
-                        EntityRegistry
-                                .addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 10, 30, EnumCreatureType.MONSTER,
-                                        biome);
+                        EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 10, 30,
+                                EnumCreatureType.MONSTER, biome);
                     }
                 });
                 entity.additionalSpawn();
@@ -147,9 +148,9 @@ public class TakumiEntityCore {
                 TakumiClientCore.registerEntityRender(clazz, entity);
             }
             entityList.add(entity);
-            TakumiCraftCore.LOGGER
-                    .info("Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() +
-                            " , " + entity.takumiRank().name() + " and " + entity.takumiType().name());
+            TakumiCraftCore.LOGGER.info(
+                    "Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " +
+                            entity.takumiRank().name() + " and " + entity.takumiType().name());
 
             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
             File oldFile = null;
@@ -166,9 +167,8 @@ public class TakumiEntityCore {
                 if (!Objects.equals(url.getProtocol(), "jar")) {
                     String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
                             oldFile.getAbsolutePath().split("out")[0] + "src" +
-                                    oldFile.getAbsolutePath().split("out")[1].replaceAll("production", "main")
-                                                                             .replaceAll("minecraft", "resources")
-                                                                             .replaceAll(".json", "")};
+                                    oldFile.getAbsolutePath().split("out")[1].replaceAll("production",
+                                            "main").replaceAll("minecraft", "resources").replaceAll(".json", "")};
                     for (String sPath : strings) {
                         String sResource = sPath + entity.getRegisterName() + ".json";
                         File file = new File(sResource);
@@ -216,9 +216,8 @@ public class TakumiEntityCore {
     }
 
     private static void itemRegister() {
-        EntityRegistry
-                .registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"), EntityTakumiArrow.class,
-                        "takumiarrow", 900, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiarrow"),
+                EntityTakumiArrow.class, "takumiarrow", 900, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumisnowball"),
                 EntityTakumiSnowBall.class, "takumiasnowball", 901, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumipotion"),
@@ -232,9 +231,10 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumichocolateball"),
                 EntityTakumiChocolateBall.class, "takumichocolateball", 906, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
-        EntityRegistry
-                .registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "fallingbomb"), EntityFallingBomb.class,
-                        "fallingbomb", 907, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "fallingbomb"),
+                EntityFallingBomb.class, "fallingbomb", 907, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "darkvillager"),
+                EntityDarkVillager.class, "darkvillager", 908, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -255,6 +255,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiChocolateBall.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.TAKUMI_CHOCO_BALL,
                         Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

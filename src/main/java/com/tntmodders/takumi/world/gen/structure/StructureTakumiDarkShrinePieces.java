@@ -9,6 +9,7 @@ import com.tntmodders.takumi.entity.mobs.EntityCallCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityRushCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySkeletonCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityIllusionIllager;
@@ -1768,8 +1769,28 @@ public class StructureTakumiDarkShrinePieces {
                     Blocks.FIRE.getDefaultState(), false);
             TakumiCraftCore.LOGGER.info(
                     new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(10), this.getZWithOffset(0, 0)));
+            this.setDarkVillager(worldIn, -3, 5, -3, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, 3, 5, -3, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, -3, 5, 3, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, 3, 5, 3, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, -8, 5, -8, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, 8, 5, -8, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, -8, 5, 8, structureBoundingBoxIn);
+            this.setDarkVillager(worldIn, 8, 5, 8, structureBoundingBoxIn);
             // tp 1378 85 2914
             return true;
+        }
+
+        protected void setDarkVillager(World worldIn, int x, int y, int z, StructureBoundingBox boundingboxIn) {
+            double dx = this.getXWithOffset(x, z);
+            double dy = this.getYWithOffset(y);
+            double dz = this.getZWithOffset(x, z);
+
+            if (!worldIn.isRemote && boundingboxIn.isVecInside(new BlockPos(dx, dy, dz))) {
+                EntityDarkVillager darkVillager = new EntityDarkVillager(worldIn);
+                darkVillager.setPosition(dx + 0.5, dy, dz + 0.5);
+                worldIn.spawnEntity(darkVillager);
+            }
         }
 
         public Start(BiomeProvider chunkManagerIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_,

@@ -390,6 +390,7 @@ entity.takumipotion.name=Explosive Potion
 entity.takumitnt.name=Creeper TNT
 entity.takumichocolateball.name=Chocolate Ball
 entity.fallingbomb,name=Falling Bomb
+entity.darkvillager.name=Dark VIllager
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

@@ -392,6 +392,7 @@ entity.explosionpotion.name=爆裂ポーション
 entity.takumitnt.name=匠式高性能TNT
 entity.takumichocolateball.name=匠式チョコボール
 entity.fallingbomb.name=阿闍梨匠の爆弾
+entity.darkvillager.name=深淵の狂信者
 
 #advancements
 advancements.takumicraft.root.title=匠Craft
