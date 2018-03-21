@@ -385,6 +385,8 @@ entity.terracottacreeper.name=Terracotta Creeper
 entity.terracottacreeper.desc=What happened, terracotta?
 entity.wearcreeper.name=Wear Creeper
 entity.wearcreeper.desc=Do you know the "Curse Armor"?
+entity.blackcreeper.name=Black Creeper
+entity.blackcreeper.desc=█████
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

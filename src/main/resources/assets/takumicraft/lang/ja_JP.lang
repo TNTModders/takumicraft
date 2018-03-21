@@ -387,6 +387,8 @@ entity.terracottacreeper.name=テラコッタ匠
 entity.terracottacreeper.desc=なんてこった、テラコッタ。
 entity.wearcreeper.name=衣匠
 entity.wearcreeper.desc=呪われた装備は外せない……
+entity.blackcreeper.name=黒匠
+entity.blackcreeper.desc=█████
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
