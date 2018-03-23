@@ -129,8 +129,8 @@ public class GuiTakumiBook extends GuiScreen {
         } else {
             this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES_SP);
             GL11.glPushMatrix();
-            GL11.glScaled(1.85, 1, 1);
-            this.drawTexturedModalRect(2, 2, 0, 0, this.mc.displayWidth, this.bookImage);
+            GL11.glScaled(1.9, 1, 1);
+            this.drawTexturedModalRect(2, 2, 0, 0, 256, 256);
             GL11.glPopMatrix();
             super.drawScreen(mouseX, mouseY, partialTicks);
         }
@@ -164,16 +164,16 @@ public class GuiTakumiBook extends GuiScreen {
             ((EntitySheepCreeper) entity).setSheared(true);
         } else if (entity instanceof EntityVindicatorCreeper) {
             ((EntityVindicatorCreeper) entity).setAggressive(true);
-            ((Entity) entity)
-                    .setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(TakumiItemCore.TAKUMI_SHIELD));
-            ((Entity) entity)
-                    .setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_SWORD));
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.OFFHAND,
+                    new ItemStack(TakumiItemCore.TAKUMI_SHIELD));
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
+                    new ItemStack(TakumiItemCore.TAKUMI_SWORD));
         } else if (entity instanceof EntityIllusionerCreeper) {
             ((EntityIllusionerCreeper) entity).setAggressive(true);
-            ((Entity) entity)
-                    .setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA));
-            ((Entity) entity)
-                    .setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TakumiItemCore.TAKUMI_BOW));
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.OFFHAND,
+                    new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA));
+            ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
+                    new ItemStack(TakumiItemCore.TAKUMI_BOW));
         }
         return (EntityLivingBase) entity;
     }
@@ -340,8 +340,7 @@ public class GuiTakumiBook extends GuiScreen {
         SearchButton searchButton = this.addButton(new SearchButton(903, i + 71, 146));
 
         for (int t = 0; t < TakumiEntityCore.getEntityList().size(); t++) {
-            this.addButton(new CreeperButton(t, (this.width - 11 * 40) / 2 + 11 * (t % 40),
-                    j + 15 + 25 * (int) Math.floor(t / 40)));
+            this.addButton(new CreeperButton(t, 11 * (t % 40 + 2), j + 15 + 25 * (int) Math.floor(t / 40)));
         }
         this.updateButtons();
     }
