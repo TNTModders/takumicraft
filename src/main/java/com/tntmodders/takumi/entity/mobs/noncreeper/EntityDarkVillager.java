@@ -70,7 +70,7 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
 
     @Override
     public void setDead() {
-        if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getHealth() <= 0) {
+        if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getHealth() <= 1) {
             super.setDead();
         }
     }

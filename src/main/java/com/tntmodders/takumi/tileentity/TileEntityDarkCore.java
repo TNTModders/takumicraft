@@ -1,6 +1,8 @@
 package com.tntmodders.takumi.tileentity;
 
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.entity.mobs.EntityTransCreeper;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -83,17 +85,33 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
                     }
                 }
             }
-            if (tick >= 100 && FMLCommonHandler.instance().getSide().isClient()) {
+            if (tick >= 100) {
                 double d = (tick - 100) / 60 > 6 ? 6 : (tick - 100) / 60;
-                for (double x = -6; x <= d; x += 0.1) {
-                    for (double z = -6; z <= d; z += 0.1) {
-                        if ((x * x + z * z >= 35.75 && x * x + z * z <= 36.25) ||
-                                (Math.abs(x) >= 3.975 && Math.abs(x) <= 4.025 && this.world.rand.nextInt(4) == 0) ||
-                                (Math.abs(z) >= 3.975 && Math.abs(z) <= 4.025 && this.world.rand.nextInt(4) == 0) ||
-                                (Math.abs(x / z) >= 0.95 && Math.abs(x / z) <= 1.05) &&
-                                        this.world.rand.nextInt(12) == 0) {
-                            this.world.spawnParticle(EnumParticleTypes.FLAME, this.getPos().getX() + x + 0.5,
-                                    this.getPos().getY() + 2.5, this.getPos().getZ() + z + 0.5, 0, 0.025, 0);
+                if (d >= 6) {
+                    this.world.loadedEntityList.forEach(entity -> {
+                        if (entity instanceof EntityDarkVillager) {
+                            ((EntityDarkVillager) entity).setHealth(0);
+                            entity.setDead();
+                        }
+                    });
+                    if (!this.world.isRemote) {
+                        EntityTransCreeper transCreeper = new EntityTransCreeper(this.world);
+                        transCreeper.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() + 1,
+                                this.getPos().getZ() + 0.5);
+                        this.world.spawnEntity(transCreeper);
+                    }
+                    this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKBRICK.getDefaultState());
+                } else if (FMLCommonHandler.instance().getSide().isClient()) {
+                    for (double x = -6; x <= d; x += 0.1) {
+                        for (double z = -6; z <= d; z += 0.1) {
+                            if ((x * x + z * z >= 35.75 && x * x + z * z <= 36.25) ||
+                                    (Math.abs(x) >= 3.975 && Math.abs(x) <= 4.025 && this.world.rand.nextInt(4) == 0) ||
+                                    (Math.abs(z) >= 3.975 && Math.abs(z) <= 4.025 && this.world.rand.nextInt(4) == 0) ||
+                                    (Math.abs(x / z) >= 0.95 && Math.abs(x / z) <= 1.05) &&
+                                            this.world.rand.nextInt(12) == 0) {
+                                this.world.spawnParticle(EnumParticleTypes.FLAME, this.getPos().getX() + x + 0.5,
+                                        this.getPos().getY() + 2.5, this.getPos().getZ() + z + 0.5, 0, 0.025, 0);
+                            }
                         }
                     }
                 }
