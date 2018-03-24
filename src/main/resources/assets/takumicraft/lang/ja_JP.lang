@@ -423,6 +423,8 @@ advancements.takumicraft.armor.title=コスプレイヤー
 advancements.takumicraft.armor.desc=匠式装甲を手に入れる 一式、クリーパー。
 advancements.takumicraft.takumiworld.title=匠の世界へ
 advancements.takumicraft.takumiworld.desc=匠ワールドへ行く 新たなる、険しき世界。
+advancements.takumicraft.darkshrine.title=深淵への門
+advancements.takumicraft.darkshrine.desc=深淵の寺院で石版を起動する ████████
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 

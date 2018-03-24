@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:darkboard_on"
+    },
+    "hidden":true,
+    "title": {
+      "translate": "advancements.takumicraft.darkshrine.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.darkshrine.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

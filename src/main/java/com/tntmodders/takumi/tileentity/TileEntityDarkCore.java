@@ -4,14 +4,20 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.mobs.EntityTransCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TileEntityDarkCore extends TileEntity implements ITickable {
     private int tick;
@@ -94,13 +100,37 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
                             entity.setDead();
                         }
                     });
+                    this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKBRICK.getDefaultState());
                     if (!this.world.isRemote) {
                         EntityTransCreeper transCreeper = new EntityTransCreeper(this.world);
                         transCreeper.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() + 1,
                                 this.getPos().getZ() + 0.5);
                         this.world.spawnEntity(transCreeper);
+                        this.world.createExplosion(transCreeper, transCreeper.posX, transCreeper.posY,
+                                transCreeper.posZ, 0f, false);
+                        Map<BlockPos, IBlockState> stateMap = new HashMap<>();
+                        int i = 15;
+                        for (int x = -i; x < i; x++) {
+                            for (int y = -i; y < i; y++) {
+                                for (int z = -i; z < i; z++) {
+                                    if (x * x + y * y + z * z <= i * i &&
+                                            this.world.getBlockState(this.getPos().add(x, y, z)).getBlock() !=
+                                                    Blocks.BEDROCK) {
+                                        if (this.world.getTileEntity(this.getPos().add(x, y, z)) == null ||
+                                                this.world.getTileEntity(
+                                                        this.getPos().add(x, y, z)) instanceof TileEntityDarkCore ||
+                                                this.world.getTileEntity(
+                                                        this.getPos().add(x, y, z)) instanceof TileEntityDarkBoard) {
+                                            stateMap.put(this.getPos().add(x, 10 - y, z),
+                                                    this.world.getBlockState(this.getPos().add(x, y, z)));
+                                        }
+                                        this.world.setBlockToAir(this.getPos().add(x, y, z));
+                                    }
+                                }
+                            }
+                        }
+                        stateMap.forEach((key, value) -> this.world.setBlockState(key, value));
                     }
-                    this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKBRICK.getDefaultState());
                 } else if (FMLCommonHandler.instance().getSide().isClient()) {
                     for (double x = -6; x <= d; x += 0.1) {
                         for (double z = -6; z <= d; z += 0.1) {

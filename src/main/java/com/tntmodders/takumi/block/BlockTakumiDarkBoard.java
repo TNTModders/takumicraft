@@ -4,16 +4,19 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.tileentity.TileEntityDarkBoard;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -51,6 +54,11 @@ public class BlockTakumiDarkBoard extends BlockContainer {
                             hand).getItem()).getBlock()).getName().contains(
                             ((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
                 worldIn.setBlockState(pos, TakumiBlockCore.DARKBOARD_ON.getDefaultState());
+                if(playerIn instanceof EntityPlayerMP){
+                    TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) playerIn,
+                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                            new ResourceLocation(TakumiCraftCore.MODID, "darkshrine"));
+                }
                 worldIn.createExplosion(playerIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
             } else {
                 worldIn.addBlockEvent(pos, state.getBlock(), 0, 0);
