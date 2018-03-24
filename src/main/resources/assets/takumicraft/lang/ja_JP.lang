@@ -389,6 +389,8 @@ entity.wearcreeper.name=衣匠
 entity.wearcreeper.desc=呪われた装備は外せない……
 entity.blackcreeper.name=黒匠
 entity.blackcreeper.desc=█████
+entity.angrycreeper.name=怒匠
+entity.angrycreeper.desc=怒髪地を震わす。怒れる匠は暴れ砕く。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
