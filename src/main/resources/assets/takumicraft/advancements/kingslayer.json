@@ -3,6 +3,7 @@
     "icon": {
       "item": "takumicraft:kingcore"
     },
+    "hidden":true,
     "title": {
       "translate": "advancements.takumicraft.kingslayer.title"
     },

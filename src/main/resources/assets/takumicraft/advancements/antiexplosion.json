@@ -3,6 +3,7 @@
     "icon": {
       "item": "takumicraft:creeperiron"
     },
+    "hidden":true,
     "title": {
       "translate": "advancements.takumicraft.antiexplosion.title"
     },

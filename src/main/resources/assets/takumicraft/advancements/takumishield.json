@@ -3,6 +3,7 @@
     "icon": {
       "item": "takumicraft:takumishield"
     },
+    "hidden":true,
     "title": {
       "translate": "advancements.takumicraft.takumishield.title"
     },
