@@ -37,7 +37,7 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderPlayer(Pre event) {
-        if (TakumiUtils.isApril() &&
+        if (TakumiUtils.isApril(Minecraft.getMinecraft().world) &&
                 (event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
                 event.getEntity() instanceof AbstractClientPlayer) {
             event.setCanceled(true);
@@ -54,7 +54,7 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderHand(RenderHandEvent event) {
-        if (TakumiUtils.isApril()) {
+        if (TakumiUtils.isApril(Minecraft.getMinecraft().world)) {
             event.setCanceled(true);
         }
     }

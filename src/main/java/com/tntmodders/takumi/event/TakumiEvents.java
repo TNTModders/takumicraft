@@ -27,20 +27,14 @@ import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.init.Biomes;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.init.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.DimensionType;
@@ -82,8 +76,31 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
-        if(event.getEntityLiving() instanceof EntityMob){
-
+        if (TakumiUtils.isApril(event.getEntity().world)) {
+            if (event.getEntityLiving() instanceof EntityMob) {
+                ((EntityMob) event.getEntityLiving()).setAttackTarget(null);
+                if (event.getEntityLiving() instanceof EntityCreeper) {
+                    if (((EntityCreeper) event.getEntityLiving()).getCreeperState() > 0 &&
+                            event.getEntityLiving().world.isRemote) {
+                        for (int i = 0; i < 5; i++) {
+                            event.getEntityLiving().world.spawnParticle(EnumParticleTypes.HEART,
+                                    event.getEntityLiving().posX + event.getEntityLiving().getRNG().nextDouble(),
+                                    event.getEntityLiving().posY + event.getEntityLiving().getRNG().nextDouble(),
+                                    event.getEntityLiving().posZ + event.getEntityLiving().getRNG().nextDouble(), 0, 0,
+                                    0);
+                        }
+                    }
+                    ((EntityCreeper) event.getEntityLiving()).setCreeperState(-1);
+                }
+            } else if (event.getEntityLiving() instanceof EntityPlayer &&
+                    event.getEntityLiving().getActivePotionEffect(MobEffects.SLOWNESS) != null &&
+                    event.getEntityLiving().getActivePotionEffect(MobEffects.SLOWNESS).getAmplifier() == 100 &&
+                    event.getEntityLiving().getActivePotionEffect(MobEffects.SLOWNESS).getDuration() <= 1) {
+                event.getEntityLiving().world.createExplosion(event.getEntityLiving(), event.getEntityLiving().posX,
+                        event.getEntityLiving().posY, event.getEntityLiving().posZ, 3f, true);
+                event.getEntityLiving().attackEntityFrom(
+                        DamageSource.causeMobDamage(event.getEntityLiving()).setExplosion(), 20f);
+            }
         }
         if (event.getEntityLiving() instanceof EntityCreeper &&
                 !((EntityCreeper) event.getEntityLiving()).getPowered() &&
@@ -260,6 +277,10 @@ public class TakumiEvents {
         if (event.getSource().getTrueSource() instanceof EntityTakumiArrow && event.getSource().isExplosion() &&
                 event.getSource().getImmediateSource() == event.getEntity()) {
             event.setCanceled(true);
+        }
+        if (TakumiUtils.isApril(event.getEntityLiving().world) && event.getEntityLiving() instanceof EntityPlayer) {
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, 100));
+            event.getEntityLiving().playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
         }
     }
 

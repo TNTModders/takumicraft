@@ -35,10 +35,10 @@ import java.util.jar.JarFile;
 
 public class TakumiUtils {
 
-    public static boolean isApril() {
-        return Minecraft.getMinecraft().world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 &&
-                Minecraft.getMinecraft().world.getCurrentDate().get(Calendar.DATE) == 1;
-        //return true;
+    public static boolean isApril(World world) {
+        /*return world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 &&
+                world.getCurrentDate().get(Calendar.DATE) == 1;*/
+        return true;
     }
 
     public static String takumiTranslate(String s) {

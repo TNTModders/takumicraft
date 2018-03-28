@@ -6,6 +6,8 @@ import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
@@ -17,6 +19,43 @@ public class RenderPlayerSP extends RenderLivingBase<AbstractClientPlayer> {
     public RenderPlayerSP(RenderManager renderManager) {
         super(renderManager, new ModelPlayerSP(), 1F);
         this.layerRenderers.clear();
+    }
+
+    public float getCreeperFlashIntensity(EntityPlayer player, float partialTicks) {
+        if (player.getActivePotionEffect(MobEffects.SLOWNESS) == null ||
+                player.getActivePotionEffect(MobEffects.SLOWNESS).getAmplifier() != 100 ||
+                player.getActivePotionEffect(MobEffects.SLOWNESS).getDuration() > 30) {
+            return 0;
+        }
+        return (30 - (float) player.getActivePotionEffect(MobEffects.SLOWNESS).getDuration() + partialTicks) / 28f;
+    }
+
+    @Override
+    protected int getColorMultiplier(AbstractClientPlayer entitylivingbaseIn, float lightBrightness,
+            float partialTickTime) {
+        float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
+
+        if ((int) (f * 10.0F) % 2 == 0) {
+            return 0;
+        } else {
+            int i = (int) (f * 0.2F * 255.0F);
+            i = MathHelper.clamp(i, 0, 255);
+            return i << 24 | 822083583;
+        }
+    }
+
+    @Override
+    protected void preRenderCallback(AbstractClientPlayer entitylivingbaseIn, float partialTickTime) {
+        float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
+        if (f > 0) {
+            float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
+            f = MathHelper.clamp(f, 0.0F, 1.0F);
+            f = f * f;
+            f = f * f;
+            float f2 = (1.0F + f * 0.4F) * f1;
+            float f3 = (1.0F + f * 0.1F) / f1;
+            GlStateManager.scale(f2, f3, f2);
+        }
     }
 
     @Override
