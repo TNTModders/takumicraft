@@ -37,10 +37,15 @@ public class EntityTakumiChocolateBall extends EntityThrowable {
 
     @Override
     public void onUpdate() {
+        this.spawnParticle();
+        super.onUpdate();
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void spawnParticle() {
         for (int i = 0; i < 4; ++i) {
             this.world.spawnParticle(EnumParticleTypes.HEART, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
         }
-        super.onUpdate();
     }
 
     /**
@@ -54,8 +59,8 @@ public class EntityTakumiChocolateBall extends EntityThrowable {
                 if (result.entityHit instanceof EntityLiving) {
                     if (result.entityHit instanceof EntityCreeper && !this.world.isRemote) {
                         EntityCreeper entityCreeper =
-                                (EntityCreeper) EntityRegistry.getEntry(result.entityHit.getClass())
-                                                              .newInstance(this.world);
+                                (EntityCreeper) EntityRegistry.getEntry(result.entityHit.getClass()).newInstance(
+                                        this.world);
                         entityCreeper.copyLocationAndAnglesFrom(result.entityHit);
                         result.entityHit.setDead();
                         this.world.spawnEntity(entityCreeper);

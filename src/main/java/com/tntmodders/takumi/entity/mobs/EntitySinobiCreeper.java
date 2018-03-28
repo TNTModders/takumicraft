@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
 
@@ -99,14 +101,19 @@ public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (FMLCommonHandler.instance().getSide().isClient()) {
-            for (int i = 0; i < 30; i++) {
-                event.getAffectedBlocks().forEach(pos -> Minecraft.getMinecraft().effectRenderer.addEffect(
-                        new ParticleSmokeSinobi(this.world, pos.getX() + (this.rand.nextDouble() - 0.5D),
-                                pos.getY() + this.rand.nextDouble(), pos.getZ() + (this.rand.nextDouble() - 0.5D), 0.0D,
-                                0.0D, 0.0D, 1.0f)));
-            }
+            this.spawnParticle(event);
         }
         return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void spawnParticle(Detonate event) {
+        for (int i = 0; i < 30; i++) {
+            event.getAffectedBlocks().forEach(pos -> Minecraft.getMinecraft().effectRenderer.addEffect(
+                    new ParticleSmokeSinobi(this.world, pos.getX() + (this.rand.nextDouble() - 0.5D),
+                            pos.getY() + this.rand.nextDouble(), pos.getZ() + (this.rand.nextDouble() - 0.5D), 0.0D,
+                            0.0D, 0.0D, 1.0f)));
+        }
     }
 
     @Override

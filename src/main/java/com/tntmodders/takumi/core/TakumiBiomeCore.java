@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.core;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.world.biome.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -27,7 +26,7 @@ public class TakumiBiomeCore {
                 if (field.get(INSTANCE) instanceof Biome) {
                     Biome biome = (Biome) field.get(INSTANCE);
                     registry.register(biome);
-                    TakumiCraftCore.LOGGER.info("Registered Biome : " + biome.getBiomeName());
+                    //TakumiCraftCore.LOGGER.info("Registered Biome : " + biome.getBiomeName());
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
