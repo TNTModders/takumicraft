@@ -1,4 +1,4 @@
-package com.tntmodders.takumi.entity.mobs;
+package com.tntmodders.takumi.entity.mobs.boss;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
@@ -91,19 +91,19 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+    public void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
-            this.lastSource = damageSrc;
-            if (damageSrc.isProjectile() && damageAmount > 2.5f) {
-                damageAmount = 2.5f;
-            } else if (damageAmount > 20) {
-                damageAmount = 20 + (damageAmount - 20) / 10;
-            }
-            if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
-                this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
+            if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && !damageSrc.isProjectile() &&
+                    damageSrc != DamageSource.DROWN && damageSrc != DamageSource.IN_WALL) {
+                if (damageAmount > 8) {
+                    damageAmount = 8;
+                }
+                if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
+                    this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
+                }
+                super.damageEntity(damageSrc, damageAmount);
             }
             this.ignite();
-            super.damageEntity(damageSrc, damageAmount);
         }
     }
 
@@ -180,9 +180,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 if (!this.world.isRemote) {
                     for (int i = 0; i < (this.getPowered() ? 20 : 10); i++) {
                         BlockPos pos = this.createRandomPos(this.getPosition(), 2.5);
-                        this.world
-                                .createExplosion(this, pos.getX() + 0.5, pos.getY() - 0.5, pos.getZ() + 0.5, power / 2,
-                                        true);
+                        this.world.createExplosion(this, pos.getX() + 0.5, pos.getY() - 0.5, pos.getZ() + 0.5,
+                                power / 2, true);
                     }
                 }
                 break;
@@ -225,9 +224,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     this.world.addWeatherEffect(bolt);
                     this.world.spawnEntity(bolt);
                     if (!this.world.isRemote) {
-                        this.world
-                                .newExplosion(this, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, power / 2.5f, true,
-                                        true);
+                        this.world.newExplosion(this, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, power / 2.5f,
+                                true, true);
                     }
                 }
                 break;
@@ -312,9 +310,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         int v = MathHelper.getInt(this.rand, -4, 4);
                         int w = MathHelper.getInt(this.rand, -4, 4);
                         for (int ty = 0; ty < 6; ty++) {
-                            if (this.world.getBlockState(
-                                    new BlockPos((int) (this.posX + v), (int) (this.posY + ty), (int) (this.posZ + w)))
-                                          .getBlock() == Blocks.AIR) {
+                            if (this.world.getBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
+                                    (int) (this.posZ + w))).getBlock() == Blocks.AIR) {
                                 this.world.setBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
                                                 (int) (this.posZ + w)),
                                         this.rand.nextInt(20) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
@@ -398,12 +395,12 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     private BlockPos createRandomPos(BlockPos point, double range) {
-        return point.add(MathHelper
-                        .nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1), range * (this.getPowered() ? 2 : 1)),
+        return point.add(MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
+                range * (this.getPowered() ? 2 : 1)),
                 MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
-                        range * (this.getPowered() ? 2 : 1)), MathHelper
-                        .nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
-                                range * (this.getPowered() ? 2 : 1)));
+                        range * (this.getPowered() ? 2 : 1)),
+                MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
+                        range * (this.getPowered() ? 2 : 1)));
     }
 
     public void setAttackID(int id) {

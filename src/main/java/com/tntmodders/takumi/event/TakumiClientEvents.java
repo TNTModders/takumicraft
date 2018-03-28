@@ -1,13 +1,18 @@
 package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent.Post;
 import net.minecraftforge.client.event.RenderLivingEvent.Pre;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -32,10 +37,25 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderPlayer(Pre event) {
+        if (TakumiUtils.isApril() &&
+                (event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
+                event.getEntity() instanceof AbstractClientPlayer) {
+            event.setCanceled(true);
+            RenderPlayerSP sp = new RenderPlayerSP(event.getRenderer().getRenderManager());
+            sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
+                    ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
+        }
         if (event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
             GlStateManager.popMatrix();
             GlStateManager.rotate(180, 1, 0, 0);
             GlStateManager.translate(0, -1.9, 0);
+        }
+    }
+
+    @SubscribeEvent
+    public void renderHand(RenderHandEvent event) {
+        if (TakumiUtils.isApril()) {
+            event.setCanceled(true);
         }
     }
 

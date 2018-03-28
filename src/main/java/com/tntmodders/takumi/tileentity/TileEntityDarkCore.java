@@ -1,13 +1,17 @@
 package com.tntmodders.takumi.tileentity;
 
 import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.entity.mobs.EntityTransCreeper;
+import com.tntmodders.takumi.core.TakumiPotionCore;
+import com.tntmodders.takumi.entity.mobs.boss.EntityTransCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -98,9 +102,14 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
                         if (entity instanceof EntityDarkVillager) {
                             ((EntityDarkVillager) entity).setHealth(0);
                             entity.setDead();
+                        } else if (entity instanceof EntityLivingBase &&
+                                entity.getDistanceSq(this.getPos()) < 15 * 15) {
+                            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 600));
+                            ((EntityLivingBase) entity).addPotionEffect(
+                                    new PotionEffect(TakumiPotionCore.INVERSION, 600));
                         }
                     });
-                    this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKBRICK.getDefaultState());
+                    this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKCORE_SP.getDefaultState());
                     if (!this.world.isRemote) {
                         EntityTransCreeper transCreeper = new EntityTransCreeper(this.world);
                         transCreeper.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() + 1,
@@ -109,7 +118,7 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
                         this.world.createExplosion(transCreeper, transCreeper.posX, transCreeper.posY,
                                 transCreeper.posZ, 0f, false);
                         Map<BlockPos, IBlockState> stateMap = new HashMap<>();
-                        int i = 15;
+                        int i = 16;
                         for (int x = -i; x < i; x++) {
                             for (int y = -i; y < i; y++) {
                                 for (int z = -i; z < i; z++) {

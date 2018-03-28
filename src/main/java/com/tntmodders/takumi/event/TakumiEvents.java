@@ -8,6 +8,7 @@ import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.AbstractEntityTakumiGrenade;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
+import com.tntmodders.takumi.entity.item.EntityTransHomingBomb;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
@@ -18,6 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityParrot;
@@ -28,6 +30,7 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
@@ -79,6 +82,9 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
+        if(event.getEntityLiving() instanceof EntityMob){
+
+        }
         if (event.getEntityLiving() instanceof EntityCreeper &&
                 !((EntityCreeper) event.getEntityLiving()).getPowered() &&
                 (((EntityCreeper) event.getEntityLiving()).world.isThundering() ||
@@ -88,10 +94,9 @@ public class TakumiEvents {
         if (event.getEntityLiving() instanceof EntityParrot) {
             if (event.getEntityLiving().getEntityData().hasKey("creeper") &&
                     event.getEntityLiving().getEntityData().getBoolean("creeper")) {
-                ((EntityParrot) event.getEntityLiving()).world
-                        .createExplosion(event.getEntityLiving(), ((EntityParrot) event.getEntityLiving()).posX,
-                                ((EntityParrot) event.getEntityLiving()).posY,
-                                ((EntityParrot) event.getEntityLiving()).posZ, 4f, true);
+                ((EntityParrot) event.getEntityLiving()).world.createExplosion(event.getEntityLiving(),
+                        ((EntityParrot) event.getEntityLiving()).posX, ((EntityParrot) event.getEntityLiving()).posY,
+                        ((EntityParrot) event.getEntityLiving()).posZ, 4f, true);
                 event.getEntityLiving().setDead();
             }
         }
@@ -111,14 +116,13 @@ public class TakumiEvents {
                         for (EnumFacing facing : EnumFacing.values()) {
                             BlockPos blockPos = pos.offset(facing);
                             if (!event.getAffectedBlocks().contains(blockPos) &&
-                                    !event.getWorld().isAirBlock(blockPos) && event.getWorld().getBlockState(blockPos)
-                                                                                   .getBlockHardness(event.getWorld(),
-                                                                                           blockPos) != -1 &&
+                                    !event.getWorld().isAirBlock(blockPos) &&
+                                    event.getWorld().getBlockState(blockPos).getBlockHardness(event.getWorld(),
+                                            blockPos) != -1 &&
                                     event.getWorld().getBlockState(blockPos).getBlock() != TakumiBlockCore.ACID_BLOCK) {
-                                event.getWorld().setBlockState(blockPos, TakumiBlockCore.ACID_BLOCK.getDefaultState()
-                                                                                                   .withProperty(
-                                                                                                           BlockTakumiAcid.META,
-                                                                                                           i));
+                                event.getWorld().setBlockState(blockPos,
+                                        TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META,
+                                                i));
                             }
                         }
                     }
@@ -160,6 +164,14 @@ public class TakumiEvents {
                     }
                 }
             }
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTransHomingBomb) {
+                event.getAffectedEntities().forEach(entity -> {
+                    if (entity instanceof EntityPlayer) {
+                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 150));
+                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 150));
+                    }
+                });
+            }
         }
         if (event.getExplosion().getExplosivePlacedBy() instanceof ITakumiEntity) {
             boolean flg = ((ITakumiEntity) event.getExplosion().getExplosivePlacedBy()).takumiExplodeEvent(event);
@@ -179,8 +191,8 @@ public class TakumiEvents {
             }
         }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {
-            ((EntityLiving) e.getEntityLiving()).tasks
-                    .addTask(0, new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
+            ((EntityLiving) e.getEntityLiving()).tasks.addTask(0,
+                    new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));
         }
         if (!e.getWorld().isRemote) {
             if (e.getEntityLiving().getRNG().nextInt(5) == 0 && e.getEntityLiving() instanceof EntitySlime) {
@@ -264,9 +276,8 @@ public class TakumiEvents {
                     EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED) &&
                     event.getEntityLiving() instanceof EntityCreeper &&
                     ((EntityCreeper) event.getEntityLiving()).getPowered()) {
-                event.getEntityLiving().attackEntityFrom(
-                        DamageSource.causeMobDamage((EntityLivingBase) event.getSource().getTrueSource())
-                                    .setMagicDamage(), 20f);
+                event.getEntityLiving().attackEntityFrom(DamageSource.causeMobDamage(
+                        (EntityLivingBase) event.getSource().getTrueSource()).setMagicDamage(), 20f);
                 TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), false);
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
                     TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
@@ -278,8 +289,8 @@ public class TakumiEvents {
         if (event.getSource().isExplosion() && event.getSource() != DamageSource.GENERIC &&
                 event.getEntityLiving().getActiveItemStack().getItem() instanceof ItemShield) {
             if (event.getEntityLiving().getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_SHIELD) {
-                event.getEntityLiving()
-                     .attackEntityFrom(DamageSource.GENERIC.setExplosion().setDamageIsAbsolute(), event.getAmount());
+                event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setExplosion().setDamageIsAbsolute(),
+                        event.getAmount());
             }
         }
     }
@@ -289,8 +300,8 @@ public class TakumiEvents {
         if (!event.getEntityLiving().world.isRemote && event.getSource().getTrueSource() instanceof EntityPlayer &&
                 TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) &&
                 event.getEntityLiving().getRNG().nextInt(10) == 0) {
-            event.getEntityLiving()
-                 .dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
+            event.getEntityLiving().dropItem(
+                    Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
         }
         if (!event.getEntityLiving().world.isRemote) {
             Calendar calendar = event.getEntityLiving().world.getCurrentDate();
@@ -299,8 +310,8 @@ public class TakumiEvents {
             if (month == 12 && (date == 24 || date == 25)) {
                 event.getEntityLiving().dropItem(Item.getItemFromBlock(Blocks.CHEST), 1);
             } else if (month == 1 && date < 8) {
-                event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4)
-                        .setStackDisplayName(TakumiUtils.takumiTranslate("takumicraft.newyear.item.name")), 0.1f);
+                event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4).setStackDisplayName(
+                        TakumiUtils.takumiTranslate("takumicraft.newyear.item.name")), 0.1f);
             }
         }
         if (FMLCommonHandler.instance().getSide().isClient() && (event.getEntityLiving() instanceof ITakumiEntity ||

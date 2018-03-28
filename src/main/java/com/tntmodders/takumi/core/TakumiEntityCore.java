@@ -8,15 +8,19 @@ import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityTransCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderArrow;
+import net.minecraft.client.renderer.entity.RenderShulkerBullet;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityShulkerBullet;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
@@ -82,7 +86,7 @@ public class TakumiEntityCore {
                 EntityStraightCreeper.class, EntityCrossCreeper.class, EntityTransCreeper.class,
                 EntityShootingCreeper.class, EntityShadowCreeper.class, EntityFallingBombCreeper.class,
                 EntityFallingSlimeCreeper.class, EntityTerracottaCreeper.class, EntityWearCreeper.class,
-                EntityBlackCreeper.class,EntityAngryCreeper.class));
+                EntityBlackCreeper.class, EntityAngryCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -236,6 +240,8 @@ public class TakumiEntityCore {
                 EntityFallingBomb.class, "fallingbomb", 907, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "darkvillager"),
                 EntityDarkVillager.class, "darkvillager", 908, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "transhomingbomb"),
+                EntityTransHomingBomb.class, "transhomingbomb", 909, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -257,6 +263,13 @@ public class TakumiEntityCore {
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.TAKUMI_CHOCO_BALL,
                         Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTransHomingBomb.class,
+                manager -> new RenderShulkerBullet(manager) {
+                    @Override
+                    public void doRender(EntityShulkerBullet entity, double x, double y, double z, float entityYaw,
+                            float partialTicks) {
+                    }
+                });
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

@@ -6,7 +6,7 @@ import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
 import com.tntmodders.takumi.entity.mobs.EntityAnnivCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityKingCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
