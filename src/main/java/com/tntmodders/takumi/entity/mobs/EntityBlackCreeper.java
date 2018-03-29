@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
@@ -18,6 +19,7 @@ public class EntityBlackCreeper extends EntityTakumiAbstractCreeper {
     public void takumiExplode() {
         if (!this.world.isRemote) {
             List<EntityBlackCreeper> blackCreepers = new ArrayList<>();
+            List<EntityCreeper> creepers = new ArrayList<>();
             this.world.loadedEntityList.forEach(entity -> {
                 if (entity instanceof EntityCreeper && !(entity instanceof EntityBlackCreeper) &&
                         this.getDistanceSqToEntity(entity) < (this.getPowered() ? 2500 : 900)) {
@@ -27,10 +29,11 @@ public class EntityBlackCreeper extends EntityTakumiAbstractCreeper {
                         blackCreeper.setAttackTarget(this.getAttackTarget());
                     }
                     blackCreepers.add(blackCreeper);
-                    entity.setDead();
+                    creepers.add(((EntityCreeper) entity));
                 }
             });
             blackCreepers.forEach(entityBlackCreeper -> this.world.spawnEntity(entityBlackCreeper));
+            creepers.forEach(Entity :: setDead);
         }
     }
 
