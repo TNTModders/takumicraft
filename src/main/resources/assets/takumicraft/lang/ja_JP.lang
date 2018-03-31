@@ -441,6 +441,14 @@ takumisubsidence=潜行
 potion.effect.takumisubsidence=潜行のポーション
 splash_potion.effect.takumisubsidence=潜行のスプラッシュポーション
 lingering_potion.effect.takumisubsidence=潜行の残留ポーション
+inversion=狂化
+potion.effect.inversion=狂化のポーション
+splash_potion.effect.inversion=狂化のスプラッシュポーション
+lingering_potion.effect.inversion=狂化の残留ポーション
+creepered=匠化
+potion.effect.creepered=匠化のポーション
+splash_potion.effect.creepered=匠化のスプラッシュポーション
+lingering_potion.effect.creepered=匠化の残留ポーション
 #Vanilla
 item.skull.creeper.name=匠の頭
 item.fireworksCharge.type.3=匠形

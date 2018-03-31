@@ -439,6 +439,14 @@ takumisubsidence=Subsidence
 potion.effect.takumisubsidence=Potion of Subsidence
 splash_potion.effect.takumisubsidence=Splash Potion of Subsidence
 lingering_potion.effect.takumisubsidence=Lingering Potion of Subsidence
+inversion=inversion
+potion.effect.inversion=Potion of inversion
+splash_potion.effect.inversion=Splash Potion of Inversion
+lingering_potion.effect.inversion=Lingering Potion of Inversion
+creepered=Creepered
+potion.effect.creepered=Potion of Creepered
+splash_potion.effect.creepered=Splash Potion of Creepered
+lingering_potion.effect.creepered=Lingering Potion of Creepered
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

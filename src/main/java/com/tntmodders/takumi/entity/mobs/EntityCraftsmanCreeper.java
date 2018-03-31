@@ -1,10 +1,13 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiCreepered;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
@@ -61,14 +64,19 @@ public class EntityCraftsmanCreeper extends EntityTakumiAbstractCreeper {
                 IBlockState state = event.getWorld().getBlockState(pos);
                 event.getWorld().setBlockState(pos, TakumiBlockCore.TAKUMI_CREEPERED.getDefaultState());
                 if (event.getWorld().getTileEntity(pos) instanceof TileEntityTakumiCreepered) {
-                    ((TileEntityTakumiBlock) event.getWorld().getTileEntity(pos))
-                            .setPath(state.getBlock().getRegistryName().toString());
-                    ((TileEntityTakumiBlock) event.getWorld().getTileEntity(pos))
-                            .setMeta(state.getBlock().getMetaFromState(state));
+                    ((TileEntityTakumiBlock) event.getWorld().getTileEntity(pos)).setPath(
+                            state.getBlock().getRegistryName().toString());
+                    ((TileEntityTakumiBlock) event.getWorld().getTileEntity(pos)).setMeta(
+                            state.getBlock().getMetaFromState(state));
                 }
             }
         });
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
+        event.getAffectedEntities().forEach(entity -> {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.CREEPERED, 30));
+            }
+        });
         return true;
     }
 
