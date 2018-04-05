@@ -392,6 +392,8 @@ entity.blackcreeper.name=黒匠
 entity.blackcreeper.desc=█████
 entity.angrycreeper.name=怒匠
 entity.angrycreeper.desc=怒髪地を震わす。怒れる匠は暴れ砕く。
+entity.jumpcreeper.name=跳匠
+entity.jumpcreeper.desc=常に飛び跳ねる匠。オートジャンプもあることですし、あなたも一回いかが?
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -449,6 +451,10 @@ creepered=匠化
 potion.effect.creepered=匠化のポーション
 splash_potion.effect.creepered=匠化のスプラッシュポーション
 lingering_potion.effect.creepered=匠化の残留ポーション
+explosionjump=爆破跳躍
+potion.effect.explosionjump=爆破跳躍のポーション
+splash_potion.effect.explosionjump=爆破跳躍のスプラッシュポーション
+lingering_potion.effect.explosionjump=爆破跳躍の残留ポーション
 #Vanilla
 item.skull.creeper.name=匠の頭
 item.fireworksCharge.type.3=匠形

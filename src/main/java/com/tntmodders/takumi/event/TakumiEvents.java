@@ -37,6 +37,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -126,6 +127,36 @@ public class TakumiEvents {
                 event.getEntityLiving().setDead();
             }
         }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.EXP_JUMP) != null &&
+                event.getEntityLiving().onGround) {
+            this.jump(event.getEntityLiving());
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().world.createExplosion(event.getEntityLiving(), event.getEntityLiving().posX,
+                        event.getEntityLiving().posY - 0.5, event.getEntityLiving().posZ, 0f, false);
+            } else {
+                event.getEntityLiving().world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE,
+                        event.getEntityLiving().posX, event.getEntityLiving().posY - 0.5, event.getEntityLiving().posZ,
+                        0, 0, 0);
+            }
+        }
+    }
+
+    protected void jump(EntityLivingBase entity) {
+        entity.motionY = 1f;
+
+        if (entity.isPotionActive(MobEffects.JUMP_BOOST)) {
+            entity.motionY +=
+                    (double) ((float) (entity.getActivePotionEffect(MobEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
+        }
+
+        if (entity.isSprinting()) {
+            float f = entity.rotationYaw * 0.017453292F;
+            entity.motionX -= (double) (MathHelper.sin(f) * 0.2F);
+            entity.motionZ += (double) (MathHelper.cos(f) * 0.2F);
+        }
+
+        entity.isAirBorne = true;
+        net.minecraftforge.common.ForgeHooks.onLivingJump(entity);
     }
 
     @SubscribeEvent
@@ -290,6 +321,10 @@ public class TakumiEvents {
         if (TakumiUtils.isApril(event.getEntityLiving().world) && event.getEntityLiving() instanceof EntityPlayer) {
             event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, 100));
             event.getEntityLiving().playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+        }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.EXP_JUMP) != null &&
+                event.getSource() == DamageSource.FALL) {
+            event.setCanceled(true);
         }
     }
 

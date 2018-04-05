@@ -86,7 +86,7 @@ public class TakumiEntityCore {
                 EntityStraightCreeper.class, EntityCrossCreeper.class, EntityTransCreeper.class,
                 EntityShootingCreeper.class, EntityShadowCreeper.class, EntityFallingBombCreeper.class,
                 EntityFallingSlimeCreeper.class, EntityTerracottaCreeper.class, EntityWearCreeper.class,
-                EntityBlackCreeper.class, EntityAngryCreeper.class));
+                EntityBlackCreeper.class, EntityAngryCreeper.class, EntityJumpCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -257,12 +257,12 @@ public class TakumiEntityCore {
                 manager -> new RenderSnowball<>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiExpEgg.class,
                 manager -> new RenderSnowball<>(manager, Items.EGG, Minecraft.getMinecraft().getRenderItem()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTNTPrimed.class, RenderTakumiTNTPrimed::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityLlamaCreeperSpit.class, RenderLlamaCreeperSpit::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTNTPrimed.class, RenderTakumiTNTPrimed ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityLlamaCreeperSpit.class, RenderLlamaCreeperSpit ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiChocolateBall.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.TAKUMI_CHOCO_BALL,
                         Minecraft.getMinecraft().getRenderItem()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTransHomingBomb.class,
                 manager -> new RenderShulkerBullet(manager) {
                     @Override

@@ -390,6 +390,8 @@ entity.blackcreeper.name=Black Creeper
 entity.blackcreeper.desc=█████
 entity.angrycreeper.name=Angry Creeper
 entity.angrycreeper.desc=Anger shakes ground.
+entity.jumpcreeper.name=Jump Creeper
+entity.jumpcreeper.desc=A creeper always jumping. Hop, step, jump and up!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -447,6 +449,10 @@ creepered=Creepered
 potion.effect.creepered=Potion of Creepered
 splash_potion.effect.creepered=Splash Potion of Creepered
 lingering_potion.effect.creepered=Lingering Potion of Creepered
+explosionjump=Explosion Jump
+potion.effect.explosionjump=Potion of Explosion Jump
+splash_potion.effect.explosionjump=Splash Potion of Explosion Jump
+lingering_potion.effect.explosionjump=Lingering Potion of Explosion Jump
 
 #Vanilla
 item.skull.creeper.name=Creeper Head
