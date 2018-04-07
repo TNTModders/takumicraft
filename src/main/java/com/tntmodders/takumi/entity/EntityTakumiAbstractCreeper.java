@@ -3,8 +3,11 @@ package com.tntmodders.takumi.entity;
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
+import com.tntmodders.takumi.entity.ai.EntityAIMoveToAttackBlock;
+import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -18,10 +21,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
 
+    private int stoppingCounter;
+
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
-        this.tasks.addTask(0, new EntityAIFollowCatCreeper(this));
+        this.tasks.addTask(3, new EntityAIFollowCatCreeper(this));
+        this.tasks.addTask(3, new EntityAIMoveToAttackBlock(this, 1.1, false));
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityAttackBlock.class, false) {
+            @Override
+            protected double getTargetDistance() {
+                return 256;
+            }
+        });
     }
 
     @Override
@@ -135,5 +147,19 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     public double getSizeAmp() {
         return 1;
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.getAttackTarget() instanceof EntityAttackBlock) {
+            this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY,
+                    this.getAttackTarget().posZ, 1.0);
+            double x = this.posX - this.getAttackTarget().posX;
+            double z = this.posZ - this.getAttackTarget().posZ;
+            if (x * x + z * z <= 9) {
+                this.ignite();
+            }
+        }
+        super.onUpdate();
     }
 }

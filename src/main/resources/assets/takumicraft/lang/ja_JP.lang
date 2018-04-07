@@ -142,6 +142,7 @@ item.magicarmor_chest.name=魔式装甲[胴]
 item.magicarmor_legs.name=魔式装甲[腰]
 item.magicarmor_feet.name=魔式装甲[足]
 item.magicbow.name=匠式魔弓
+item.attackblock.name=匠進撃ブロック
 
 #entity
 ＃descは36文字まで。
@@ -402,6 +403,9 @@ entity.takumitnt.name=匠式高性能TNT
 entity.takumichocolateball.name=匠式チョコボール
 entity.fallingbomb.name=阿闍梨匠の爆弾
 entity.darkvillager.name=深淵の狂信者
+entity.attackblock.name=匠進撃ブロック
+entity.attackblock.lose=進撃ブロックが破壊された。
+entity.attackblock.win=進撃ブロックの防衛に成功した。
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

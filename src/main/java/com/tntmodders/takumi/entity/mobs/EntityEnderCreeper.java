@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
+import java.lang.reflect.Method;
 import java.util.Random;
 
 public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
@@ -104,8 +105,15 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
                     --yInt;
                 }
             }
-
-            if (foundGround) {
+            boolean flg = true;
+            try {
+                Method method = EntityLivingBase.class.getDeclaredMethod("isMovementBlocked");
+                method.setAccessible(true);
+                flg = (Boolean) method.invoke(entity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (foundGround && flg) {
                 entity.setPosition(entity.posX, entity.posY, entity.posZ);
                 if (entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() &&
                         !entity.world.containsAnyLiquid(entity.getEntityBoundingBox())) {

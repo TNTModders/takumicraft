@@ -5,10 +5,7 @@ import com.tntmodders.takumi.block.BlockTakumiAcid;
 import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
-import com.tntmodders.takumi.entity.item.AbstractEntityTakumiGrenade;
-import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
-import com.tntmodders.takumi.entity.item.EntityTakumiPotion;
-import com.tntmodders.takumi.entity.item.EntityTransHomingBomb;
+import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
@@ -38,6 +35,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -243,8 +241,6 @@ public class TakumiEvents {
         if (e.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD) {
             if (!(e.getEntityLiving() instanceof ITakumiEntity)) {
                 e.setResult(Result.DENY);
-            } else {
-                TakumiCraftCore.LOGGER.info(e.getEntityLiving());
             }
         }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {
@@ -395,6 +391,16 @@ public class TakumiEvents {
                 TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
                         new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                         new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
+            }
+        }
+        if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityLiving &&
+                ((EntityLiving) event.getEntityLiving()).getAttackTarget() instanceof EntityAttackBlock &&
+                event.getSource().getTrueSource() instanceof EntityPlayer) {
+            EntityAttackBlock entity = ((EntityAttackBlock) ((EntityLiving) event.getEntityLiving()).getAttackTarget());
+            entity.setHealth(entity.getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
+            if (entity.getHealth() <= 0) {
+                event.getEntityLiving().world.playerEntities.forEach(
+                        player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
             }
         }
     }

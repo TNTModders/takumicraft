@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.RenderAttackBlock;
 import com.tntmodders.takumi.client.render.RenderDarkVillager;
 import com.tntmodders.takumi.client.render.RenderLlamaCreeperSpit;
 import com.tntmodders.takumi.client.render.RenderTakumiTNTPrimed;
@@ -242,6 +243,8 @@ public class TakumiEntityCore {
                 EntityDarkVillager.class, "darkvillager", 908, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "transhomingbomb"),
                 EntityTransHomingBomb.class, "transhomingbomb", 909, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "attackblock"),
+                EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -270,6 +273,7 @@ public class TakumiEntityCore {
                             float partialTicks) {
                     }
                 });
+        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock ::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

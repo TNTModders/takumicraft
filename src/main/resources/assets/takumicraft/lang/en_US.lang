@@ -142,6 +142,7 @@ item.magicarmor_chest.name=Magic Armor Chest
 item.magicarmor_legs.name=Magic Armor Leggings
 item.magicarmor_feet.name=Magic Armor Feet
 item.magicbow.name=Magic Bow
+item.attackblock.name=Takumi Attack Block
 
 #entity
 #desc max: 72 chars
@@ -400,6 +401,9 @@ entity.takumitnt.name=Creeper TNT
 entity.takumichocolateball.name=Chocolate Ball
 entity.fallingbomb,name=Falling Bomb
 entity.darkvillager.name=Dark VIllager
+entity.attackblock.name=Takumi Attack Block
+entity.attackblock.lose=Attack Block was destroyed.
+entity.attackblock.win=You compleatly protected Attack Block!
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
