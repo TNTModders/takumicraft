@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
+import com.tntmodders.takumi.entity.item.EntityYMS;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -126,6 +127,10 @@ public class TakumiClientEvents {
             EntityPlayer playerIn = Minecraft.getMinecraft().player;
             playerIn.openGui(TakumiCraftCore.TakumiInstance, 0, playerIn.world, (int) playerIn.posX,
                     (int) playerIn.posY, (int) playerIn.posZ);
+        } else if (TakumiClientCore.keyBindingYMS.isPressed() &&
+                Minecraft.getMinecraft().player.getRidingEntity() instanceof EntityYMS) {
+            boolean flg = ((EntityYMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode;
+            ((EntityYMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode = !flg;
         }
     }
 }

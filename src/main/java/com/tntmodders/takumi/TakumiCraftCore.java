@@ -112,6 +112,7 @@ public class TakumiCraftCore {
         }
         GameRegistry.registerWorldGenerator(new TakumiGunOreGenerator(), 15);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new TakumiGuiHandler());
+        TakumiPacketCore.register();
     }
 
     @EventHandler

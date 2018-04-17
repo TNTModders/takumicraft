@@ -30,10 +30,13 @@ import java.lang.reflect.Field;
 public class TakumiClientCore {
 
     public static KeyBinding keyBindingTakumiBook;
+    public static KeyBinding keyBindingYMS;
 
     public static void registerKey() {
         keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.KEY_I, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingTakumiBook);
+        keyBindingYMS = new KeyBinding("takumicraft.yms.key", Keyboard.KEY_G, TakumiCraftCore.MODID);
+        ClientRegistry.registerKeyBinding(keyBindingYMS);
     }
 
     public static void register() {
@@ -50,8 +53,8 @@ public class TakumiClientCore {
                             ModelLoader.setCustomModelResourceLocation(item, i,
                                     new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i),
                                             "inventory"));
-                            TakumiCraftCore.LOGGER
-                                    .info("Registered item model with metadata" + i + " : " + s + "_" + i);
+                            TakumiCraftCore.LOGGER.info(
+                                    "Registered item model with metadata" + i + " : " + s + "_" + i);
                         }
                     } else {
                         ModelLoader.setCustomModelResourceLocation(item, 0,
@@ -84,9 +87,9 @@ public class TakumiClientCore {
                         ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(
                                 new ResourceLocation(TakumiCraftCore.MODID,
                                         EnumDyeColor.byMetadata(i).getName() + "_" + s), "inventory"));
-                        TakumiCraftCore.LOGGER
-                                .info("Registered block model with color " + EnumDyeColor.byMetadata(i).getName() +
-                                        " : " + EnumDyeColor.byMetadata(i).getName() + "_" + s);
+                        TakumiCraftCore.LOGGER.info(
+                                "Registered block model with color " + EnumDyeColor.byMetadata(i).getName() + " : " +
+                                        EnumDyeColor.byMetadata(i).getName() + "_" + s);
                     } else {
                         ModelLoader.setCustomModelResourceLocation(item, i,
                                 new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s + "_" + i),
