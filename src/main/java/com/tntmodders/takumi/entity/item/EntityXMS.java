@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.core.TakumiPacketCore;
-import com.tntmodders.takumi.network.MessageYMSMove;
+import com.tntmodders.takumi.network.MessageMSMove;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
@@ -10,12 +10,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityYMS extends EntityFlying {
+public class EntityXMS extends EntityFlying {
 
     public int attackModeTick;
     public boolean isAttackMode;
 
-    public EntityYMS(World worldIn) {
+    public EntityXMS(World worldIn) {
         super(worldIn);
         this.setSize(10, 2);
     }
@@ -42,7 +42,7 @@ public class EntityYMS extends EntityFlying {
         if (this.getControllingPassenger() instanceof EntityPlayer) {
             if (this.getControllingPassenger() instanceof EntityPlayerSP) {
                 if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
-                    TakumiPacketCore.INSTANCE.sendToServer(new MessageYMSMove((byte) 1));
+                    TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 1));
                 }
 
                 if (this.isAttackMode && this.attackModeTick < 20) {

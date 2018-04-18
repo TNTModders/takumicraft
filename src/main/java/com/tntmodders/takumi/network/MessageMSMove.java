@@ -3,14 +3,14 @@ package com.tntmodders.takumi.network;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class MessageYMSMove implements IMessage {
+public class MessageMSMove implements IMessage {
     //0:none 1:forward
     public byte key;
 
-    public MessageYMSMove() {
+    public MessageMSMove() {
     }
 
-    public MessageYMSMove(byte keyPressed) {
+    public MessageMSMove(byte keyPressed) {
         this.key = keyPressed;
     }
 

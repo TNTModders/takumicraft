@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.entity.item.EntityYMS;
+import com.tntmodders.takumi.entity.item.EntityXMS;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -35,7 +35,7 @@ public class ItemKingCore extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if(!worldIn.isRemote){
-            EntityYMS ghastSP = new EntityYMS(worldIn);
+            EntityXMS ghastSP = new EntityXMS(worldIn);
             ghastSP.setPosition(playerIn.posX,playerIn.posY,playerIn.posZ);
             worldIn.spawnEntity(ghastSP);
             playerIn.startRiding(ghastSP,true);
