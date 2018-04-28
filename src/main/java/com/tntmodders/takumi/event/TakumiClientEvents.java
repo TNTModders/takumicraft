@@ -16,8 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderLivingEvent.Post;
-import net.minecraftforge.client.event.RenderLivingEvent.Pre;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
@@ -39,7 +38,7 @@ public class TakumiClientEvents {
     }
 
     @SubscribeEvent
-    public void renderPlayer(Pre event) {
+    public void renderPlayer(RenderLivingEvent.Pre event) {
         if (TakumiUtils.isApril(Minecraft.getMinecraft().world) &&
                 (event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
                 event.getEntity() instanceof AbstractClientPlayer) {
@@ -48,7 +47,7 @@ public class TakumiClientEvents {
             sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
                     ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
         }
-        if (event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
+        if (event.getEntity() instanceof EntityPlayer && event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
             GlStateManager.popMatrix();
             GlStateManager.rotate(180, 1, 0, 0);
             GlStateManager.translate(0, -1.9, 0);
@@ -99,8 +98,8 @@ public class TakumiClientEvents {
     }
 
     @SubscribeEvent
-    public void renderPlayer(Post event) {
-        if (event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
+    public void renderPlayer(RenderLivingEvent.Post event) {
+        if (event.getEntity() instanceof EntityPlayer && event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
             GlStateManager.translate(0, 1.9, 0);
             GlStateManager.rotate(-180, 1, 0, 0);
             GlStateManager.pushMatrix();
