@@ -14,12 +14,22 @@ public class MessageMSMoveHandler implements IMessageHandler<MessageMSMove, IMes
         EntityPlayer entityPlayer = ctx.getServerHandler().player;
         if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
             switch (message.key) {
+                case 0: {
+                    if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                        entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x * 2,
+                                entityPlayer.getLookVec().y / 1.5f, entityPlayer.getLookVec().z * 2);
+                    }
+                    break;
+                }
                 case 1: {
-                    entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x,
-                            entityPlayer.getLookVec().y, entityPlayer.getLookVec().z);
+                    if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                        entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x,
+                                entityPlayer.getLookVec().y, entityPlayer.getLookVec().z);
+                    }
                     break;
                 }
             }
-        } return null;
+        }
+        return null;
     }
 }

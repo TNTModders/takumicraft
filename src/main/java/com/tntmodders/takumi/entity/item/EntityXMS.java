@@ -28,7 +28,7 @@ public class EntityXMS extends EntityFlying {
 
     @Override
     public double getMountedYOffset() {
-        return this.height * 0.25;
+        return this.height * 0.2;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EntityXMS extends EntityFlying {
         if (this.getControllingPassenger() instanceof EntityPlayer) {
             if (this.getControllingPassenger() instanceof EntityPlayerSP) {
                 if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
-                    TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 1));
+                    TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) (this.isAttackMode ? 0 : 1)));
                 }
 
                 if (this.isAttackMode && this.attackModeTick < 20) {
