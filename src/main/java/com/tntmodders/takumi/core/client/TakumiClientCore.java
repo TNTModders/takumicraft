@@ -35,7 +35,7 @@ public class TakumiClientCore {
     public static void registerKey() {
         keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.KEY_I, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingTakumiBook);
-        keyBindingYMS = new KeyBinding("takumicraft.yms.key", Keyboard.KEY_G, TakumiCraftCore.MODID);
+        keyBindingYMS = new KeyBinding("takumicraft.xms.key", Keyboard.KEY_G, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingYMS);
     }
 

@@ -28,6 +28,12 @@ public class MessageMSMoveHandler implements IMessageHandler<MessageMSMove, IMes
                     }
                     break;
                 }
+                case 2: {
+                    if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                        ((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode =
+                                !((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode;
+                    }
+                }
             }
         }
         return null;

@@ -97,6 +97,7 @@ public class TakumiEntityCore {
         Biome.REGISTRY.iterator().forEachRemaining(biome -> biomes.add(biome));
         biomes.remove(Biomes.HELL);
         biomes.remove(Biomes.VOID);
+        biomes.remove(Biomes.SKY);
 
         /*List<Class> files = TakumiUtils.getListClass("com/tntmodders/takumi/entity/mobs/");*/
         ArrayList<EntityHolder> entityHolders = new ArrayList<>();
@@ -244,6 +245,8 @@ public class TakumiEntityCore {
                 EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiXMS"), EntityXMS.class,
                 "takumiXMS", 911, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "msrazer"), EntityMSRazer.class,
+                "msrazer", 912, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -274,6 +277,7 @@ public class TakumiEntityCore {
                 });
         RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer ::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

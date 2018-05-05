@@ -2,9 +2,11 @@ package com.tntmodders.takumi.event;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
+import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.item.EntityXMS;
+import com.tntmodders.takumi.network.MessageMSMove;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -65,7 +67,7 @@ public class TakumiClientEvents {
                 GlStateManager.scale(f2, f3, f2);
             }
         }
-        if(event.getEntity().getRidingEntity() instanceof EntityXMS){
+        if (event.getEntity().getRidingEntity() instanceof EntityXMS) {
             event.setCanceled(true);
         }
     }
@@ -132,6 +134,7 @@ public class TakumiClientEvents {
                 Minecraft.getMinecraft().player.getRidingEntity() instanceof EntityXMS) {
             boolean flg = ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode;
             ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode = !flg;
+            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 2));
         }
     }
 }

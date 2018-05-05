@@ -143,6 +143,7 @@ item.magicarmor_legs.name=Magic Armor Leggings
 item.magicarmor_feet.name=Magic Armor Feet
 item.magicbow.name=Magic Bow
 item.attackblock.name=Takumi Attack Block
+item.xms.name=X-MS
 
 #entity
 #desc max: 72 chars
@@ -404,6 +405,7 @@ entity.darkvillager.name=Dark VIllager
 entity.attackblock.name=Takumi Attack Block
 entity.attackblock.lose=Attack Block was destroyed.
 entity.attackblock.win=You compleatly protected Attack Block!
+entity.xms.name=X-MS
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
@@ -495,3 +497,4 @@ config.takumicraft.takumibook.desc=Change this if the key confricts.
 config.takumicraft.weightanimal.prop=Weight of TakumiAnimals
 config.takumicraft.weightanimal.desc=Change this if TakumiAnimals spawn too much.
 takumicraft.takumibook.key=Show TakumiBook
+takumicraft.xms.key=X-MS S-foil

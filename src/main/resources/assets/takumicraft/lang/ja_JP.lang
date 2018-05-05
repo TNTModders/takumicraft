@@ -143,6 +143,7 @@ item.magicarmor_legs.name=魔式装甲[腰]
 item.magicarmor_feet.name=魔式装甲[足]
 item.magicbow.name=匠式魔弓
 item.attackblock.name=匠進撃ブロック
+item.xms.name=X-MS 匠式防衛戦闘機
 
 #entity
 ＃descは36文字まで。
@@ -406,6 +407,7 @@ entity.darkvillager.name=深淵の狂信者
 entity.attackblock.name=匠進撃ブロック
 entity.attackblock.lose=進撃ブロックが破壊された。
 entity.attackblock.win=進撃ブロックの防衛に成功した。
+entity.xms.name=X-MS
 
 #advancements
 advancements.takumicraft.root.title=匠Craft
@@ -496,3 +498,4 @@ config.takumicraft.takumibook.desc=匠図鑑のキーが他MODと競合する際
 config.takumicraft.weightanimal.prop=匠動物のスポーン率
 config.takumicraft.weightanimal.desc=動物が異常に多く湧く際に変更して下さい。
 takumicraft.takumibook.key=匠図鑑 表示
+takumicraft.xms.key=X-MS Sフォイル展開
