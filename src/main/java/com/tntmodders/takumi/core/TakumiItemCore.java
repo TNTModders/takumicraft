@@ -49,6 +49,7 @@ public class TakumiItemCore {
     public static final Item MAGIC_BOW = new ItemMagicBow();
     public static final Item ATTACK_BLOCK = new ItemAttackBlock();
     public static final Item TAKUMI_XMS = new ItemXMS();
+    public static final Item TAKUMI_YMS = new ItemYMS();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

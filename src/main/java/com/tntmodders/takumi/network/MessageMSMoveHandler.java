@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.network;
 
 import com.tntmodders.takumi.entity.item.EntityXMS;
+import com.tntmodders.takumi.entity.item.EntityYMS;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -12,27 +13,26 @@ public class MessageMSMoveHandler implements IMessageHandler<MessageMSMove, IMes
     @Override
     public IMessage onMessage(MessageMSMove message, MessageContext ctx) {
         EntityPlayer entityPlayer = ctx.getServerHandler().player;
-        if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
-            switch (message.key) {
-                case 0: {
-                    if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
-                        entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x * 2,
-                                entityPlayer.getLookVec().y / 1.5f, entityPlayer.getLookVec().z * 2);
-                    }
-                    break;
+        switch (message.key) {
+            case 0: {
+                if (entityPlayer.getRidingEntity() instanceof EntityXMS ||
+                        entityPlayer.getRidingEntity() instanceof EntityYMS) {
+                    entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x * 2,
+                            entityPlayer.getLookVec().y / 1.5f, entityPlayer.getLookVec().z * 2);
                 }
-                case 1: {
-                    if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
-                        entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x,
-                                entityPlayer.getLookVec().y, entityPlayer.getLookVec().z);
-                    }
-                    break;
+                break;
+            }
+            case 1: {
+                if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                    entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x,
+                            entityPlayer.getLookVec().y, entityPlayer.getLookVec().z);
                 }
-                case 2: {
-                    if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
-                        ((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode =
-                                !((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode;
-                    }
+                break;
+            }
+            case 2: {
+                if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                    ((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode =
+                            !((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode;
                 }
             }
         }

@@ -244,9 +244,11 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "attackblock"),
                 EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiXMS"), EntityXMS.class,
-                "takumiXMS", 911, TakumiCraftCore.TakumiInstance, 64, 2, true);
+                "takumiXMS", 911, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "msrazer"), EntityMSRazer.class,
                 "msrazer", 912, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiYMS"), EntityYMS.class,
+                "takumiYMS", 913, TakumiCraftCore.TakumiInstance, 64, 1, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -278,6 +280,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityYMS.class, RenderYMS ::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

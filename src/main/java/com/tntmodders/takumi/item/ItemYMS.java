@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.entity.item.EntityXMS;
+import com.tntmodders.takumi.entity.item.EntityYMS;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,20 +9,20 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemXMS extends Item {
-    public ItemXMS() {
+public class ItemYMS extends Item {
+    public ItemYMS() {
         super();
-        this.setRegistryName(TakumiCraftCore.MODID, "xms");
+        this.setRegistryName(TakumiCraftCore.MODID, "yms");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("xms");
+        this.setUnlocalizedName("yms");
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (!worldIn.isRemote) {
-            EntityXMS xms = new EntityXMS(worldIn);
-            xms.setPosition(playerIn.posX, playerIn.posY, playerIn.posZ);
-            boolean flg = worldIn.spawnEntity(xms);
+            EntityYMS yms = new EntityYMS(worldIn);
+            yms.setPosition(playerIn.posX, playerIn.posY, playerIn.posZ);
+            boolean flg = worldIn.spawnEntity(yms);
             if (flg && !playerIn.isCreative()) {
                 playerIn.getHeldItem(handIn).shrink(1);
             }

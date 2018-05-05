@@ -19,16 +19,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class EntityXMS extends EntityFlying {
+public class EntityYMS extends EntityFlying {
 
-    public int attackModeTick;
-    public boolean isAttackMode;
-
-    public boolean serverAttackMode;
-
-    public EntityXMS(World worldIn) {
+    public EntityYMS(World worldIn) {
         super(worldIn);
-        this.setSize(10, 2);
+        this.setSize(8F, 6F);
     }
 
     @Override
@@ -90,7 +85,7 @@ public class EntityXMS extends EntityFlying {
                 !source.isExplosion()) {
             if (!this.world.isRemote) {
                 EntityItem item = new EntityItem(this.world, this.posX, this.posY, this.posZ,
-                        new ItemStack(TakumiItemCore.TAKUMI_XMS, 1));
+                        new ItemStack(TakumiItemCore.TAKUMI_YMS, 1));
                 this.world.spawnEntity(item);
             }
             this.setDead();
@@ -103,7 +98,7 @@ public class EntityXMS extends EntityFlying {
     @SideOnly(Side.CLIENT)
     private void clientUpdate() {
         if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
-            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) (this.isAttackMode ? 0 : 1)));
+            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 0));
         }
     }
 
@@ -140,11 +135,6 @@ public class EntityXMS extends EntityFlying {
         if (this.getControllingPassenger() instanceof EntityPlayer) {
             if (this.getControllingPassenger() instanceof EntityPlayerSP) {
                 this.clientUpdate();
-                if (this.isAttackMode && this.attackModeTick < 20) {
-                    this.attackModeTick++;
-                } else if (this.attackModeTick > 0) {
-                    this.attackModeTick--;
-                }
             }
             this.rotationYaw = this.rotationYawHead = ((EntityPlayer) this.getControllingPassenger()).rotationYawHead;
             this.rotationPitch = this.getControllingPassenger().rotationPitch;
@@ -167,26 +157,8 @@ public class EntityXMS extends EntityFlying {
 
     @Override
     protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
-        if (this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer)) {
-            if (this.serverAttackMode) {
-                EntityMSRazer razer =
-                        new EntityMSRazer(entityPlayer.world, ((EntityXMS) entityPlayer.getRidingEntity()));
-                razer.setHeadingFromThrower(entityPlayer.getRidingEntity(),
-                        entityPlayer.getRidingEntity().rotationPitch / 2.5f,
-                        entityPlayer.getRidingEntity().rotationYaw + 5, 0, 10f, 0f);
-                entityPlayer.world.spawnEntity(razer);
-                entityPlayer.world.updateEntities();
-                razer = new EntityMSRazer(entityPlayer.world, ((EntityXMS) entityPlayer.getRidingEntity()));
-                razer.setHeadingFromThrower(entityPlayer.getRidingEntity(),
-                        entityPlayer.getRidingEntity().rotationPitch / 2.5f,
-                        entityPlayer.getRidingEntity().rotationYaw - 5, 0, 10f, 0f);
-                entityPlayer.world.spawnEntity(razer);
-                entityPlayer.world.updateEntities();
-            }
-        } else {
-            if (!this.world.isRemote) {
-                entityPlayer.startRiding(this, true);
-            }
+        if (this.getControllingPassenger() == null && !this.world.isRemote) {
+            entityPlayer.startRiding(this, true);
         }
         return true;
     }
