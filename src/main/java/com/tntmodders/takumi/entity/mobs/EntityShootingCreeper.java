@@ -137,7 +137,7 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
             this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 1f, 1f);
         }
         if (this.dataManager.get(TYPE) && !this.world.isRemote && this.ticksExisted > 1 &&
-                (this.getAttackTarget() != null || this.world.getClosestPlayerToEntity(this, 25) != null)) {
+                (this.getAttackTarget() != null || this.world.getClosestPlayerToEntity(this, 5) != null)) {
             if (this.dataManager.get(ITEM).getItem() == TakumiItemCore.TAKUMI_CHOCO_BALL) {
                 EntityTakumiChocolateBall chocolateBall = new EntityTakumiChocolateBall(this.world, this);
                 chocolateBall.setPosition(this.posX + this.rand.nextDouble() - this.rand.nextDouble(),
@@ -156,21 +156,25 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
             if (!this.world.isRemote) {
-                EntityShootingCreeper shootingCreeper = new EntityShootingCreeper(this.world);
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                this.writeEntityToNBT(tagCompound);
-                tagCompound.setBoolean("ignited", false);
-                shootingCreeper.readEntityFromNBT(tagCompound);
-                shootingCreeper.setHealth(this.getHealth());
-                shootingCreeper.copyLocationAndAnglesFrom(this);
-                shootingCreeper.dataManager.set(TYPE, !this.dataManager.get(TYPE));
-                shootingCreeper.dataManager.set(ITEM, this.dataManager.get(ITEM));
-                if (this.getPowered()) {
-                    TakumiUtils.takumiSetPowered(shootingCreeper, true);
+                if (this.rand.nextBoolean()) {
+                    EntityShootingCreeper shootingCreeper = new EntityShootingCreeper(this.world);
+                    NBTTagCompound tagCompound = new NBTTagCompound();
+                    this.writeEntityToNBT(tagCompound);
+                    tagCompound.setBoolean("ignited", false);
+                    shootingCreeper.readEntityFromNBT(tagCompound);
+                    shootingCreeper.setHealth(this.getHealth());
+                    shootingCreeper.copyLocationAndAnglesFrom(this);
+                    shootingCreeper.dataManager.set(TYPE, !this.dataManager.get(TYPE));
+                    shootingCreeper.dataManager.set(ITEM, this.dataManager.get(ITEM));
+                    if (this.getPowered()) {
+                        TakumiUtils.takumiSetPowered(shootingCreeper, true);
+                    }
+                    shootingCreeper.setCreeperState(-1);
+                    shootingCreeper.setAttackTarget(null);
+                    this.world.spawnEntity(shootingCreeper);
+                } else {
+                    super.setDead();
                 }
-                shootingCreeper.setCreeperState(-1);
-                shootingCreeper.setAttackTarget(null);
-                this.world.spawnEntity(shootingCreeper);
             }
         }
         super.setDead();
@@ -189,9 +193,8 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
                         }
                     }
                     if (i > 0) {
-                        TakumiUtils
-                                .takumiCreateExplosion(this.world, this, entity.posX, entity.posY, entity.posZ, i / 2,
-                                        false, true);
+                        TakumiUtils.takumiCreateExplosion(this.world, this, entity.posX, entity.posY, entity.posZ,
+                                i / 2, false, true);
                     }
                 }
             });
