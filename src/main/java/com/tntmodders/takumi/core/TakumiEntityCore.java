@@ -6,6 +6,7 @@ import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityTransCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
@@ -84,7 +85,7 @@ public class TakumiEntityCore {
                 EntityStraightCreeper.class, EntityCrossCreeper.class, EntityTransCreeper.class,
                 EntityShootingCreeper.class, EntityShadowCreeper.class, EntityFallingBombCreeper.class,
                 EntityFallingSlimeCreeper.class, EntityTerracottaCreeper.class, EntityWearCreeper.class,
-                EntityBlackCreeper.class, EntityAngryCreeper.class, EntityJumpCreeper.class));
+                EntityBlackCreeper.class, EntityAngryCreeper.class, EntityJumpCreeper.class,EntityBigCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
