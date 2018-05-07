@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -35,6 +36,17 @@ public class EntityBigFishCreeper extends EntityFishCreeper {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80D);
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
+            if (!(this.getAttackTarget() instanceof EntityPlayer &&
+                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
+                this.ignite();
+            }
+        }
+        super.onUpdate();
     }
 
     @Override

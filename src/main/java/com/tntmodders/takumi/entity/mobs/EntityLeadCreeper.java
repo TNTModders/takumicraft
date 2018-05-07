@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.world.World;
@@ -22,7 +23,7 @@ public class EntityLeadCreeper extends EntityTakumiAbstractCreeper {
             entities.sort(Comparator.comparingDouble(o -> o.getDistanceSqToEntity(EntityLeadCreeper.this)));
             int i = 0;
             for (Entity entity : entities) {
-                if (entity instanceof EntityMob) {
+                if (entity instanceof EntityMob && !(entity instanceof EntityDarkVillager)) {
                     entity.setPositionAndUpdate(this.posX, this.posY, this.posZ);
                     i++;
                     if (i > (this.getPowered() ? 40 : 20)) {
