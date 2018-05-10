@@ -5,6 +5,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
@@ -13,6 +14,17 @@ public class EntityTakumiExpOrb extends EntityXPOrb {
 
     public EntityTakumiExpOrb(World worldIn, double x, double y, double z, int expValue) {
         super(worldIn, x, y, z, expValue);
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        this.setDead();
+        return true;
+    }
+
+    @Override
+    public boolean canBeAttackedWithItem() {
+        return true;
     }
 
     public EntityTakumiExpOrb(World worldIn) {
@@ -39,7 +51,7 @@ public class EntityTakumiExpOrb extends EntityXPOrb {
                 if (this.xpValue > 0) {
                     entityIn.addExperience(this.xpValue);
                 }
-                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 3f, true);
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 1f, true);
                 this.setDead();
             }
         }
