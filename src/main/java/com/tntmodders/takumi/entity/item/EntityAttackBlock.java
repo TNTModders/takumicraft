@@ -4,12 +4,14 @@ import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -123,6 +125,10 @@ public class EntityAttackBlock extends EntityLiving {
         if (source == DamageSource.OUT_OF_WORLD) {
             return super.attackEntityFrom(source, amount);
         }
+        if (source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) source.getTrueSource()).isCreative()) {
+            this.setHealth(-10);
+            return true;
+        }
         if (source.isExplosion() && amount > 2) {
             this.setDead();
             this.world.loadedEntityList.forEach(entity -> {
@@ -140,6 +146,21 @@ public class EntityAttackBlock extends EntityLiving {
             });
         }
         return false;
+    }
+
+    @Override
+    protected void onDeathUpdate() {
+        super.onDeathUpdate();
+        if (this.getHealth() <= 0 && !this.world.isRemote) {
+            this.world.playerEntities.forEach(player -> {
+                player.sendMessage(new TextComponentTranslation("entity.attackblock.win"));
+                player.addExperience(100);
+            });
+            EntityBigCreeper bigCreeper = new EntityBigCreeper(this.world);
+            bigCreeper.setPosition(this.posX, this.posY, this.posZ);
+            this.world.spawnEntity(bigCreeper);
+            this.setDead();
+        }
     }
 
     @Override
@@ -212,54 +233,54 @@ public class EntityAttackBlock extends EntityLiving {
                         }
                     }
                 }
-               if(this.world.getDifficulty() != EnumDifficulty.PEACEFUL){
-                   if (this.rand.nextInt(10) == 0) {
-                       try {
-                           EntityCreeper igniteTarget = ((EntityCreeper) this.world.loadedEntityList.stream().filter(
-                                   entity -> entity instanceof EntityCreeper).sorted((o1, o2) -> {
-                               if (o1.getDistanceSqToEntity(EntityAttackBlock.this) ==
-                                       o2.getDistanceSqToEntity(EntityAttackBlock.this)) {
-                                   return 0;
-                               }
-                               return (o1.getDistanceSqToEntity(EntityAttackBlock.this) >
-                                       o2.getDistanceSqToEntity(EntityAttackBlock.this)) ? 1 : -1;
-                           }).toArray()[0]);
-                           if (igniteTarget.getDistanceSqToEntity(this) < 100) {
-                               igniteTarget.ignite();
-                           }
-                       } catch (Exception e) {
-                           e.printStackTrace();
-                       }
-                   }
-                   if (r > 10) {
-                       Entity entity = null;
-                       if (!entities.isEmpty()) {
-                           try {
-                               entity =
-                                       (Entity) entities.get(this.rand.nextInt(entities.size())).getClass().getConstructor(
-                                               World.class).newInstance(this.world);
-                           } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-                               e.printStackTrace();
-                           }
-                       }
-                       if (entity != null) {
-                           int rx = MathHelper.getInt(this.rand, -r, r);
-                           int rz = MathHelper.getInt(this.rand, -r, r);
+                if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
+                    if (this.rand.nextInt(10) == 0) {
+                        try {
+                            EntityCreeper igniteTarget = ((EntityCreeper) this.world.loadedEntityList.stream().filter(
+                                    entity -> entity instanceof EntityCreeper).sorted((o1, o2) -> {
+                                if (o1.getDistanceSqToEntity(EntityAttackBlock.this) ==
+                                        o2.getDistanceSqToEntity(EntityAttackBlock.this)) {
+                                    return 0;
+                                }
+                                return (o1.getDistanceSqToEntity(EntityAttackBlock.this) >
+                                        o2.getDistanceSqToEntity(EntityAttackBlock.this)) ? 1 : -1;
+                            }).toArray()[0]);
+                            if (igniteTarget.getDistanceSqToEntity(this) < 100) {
+                                igniteTarget.ignite();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (r > 10) {
+                        Entity entity = null;
+                        if (!entities.isEmpty()) {
+                            try {
+                                entity = (Entity) entities.get(
+                                        this.rand.nextInt(entities.size())).getClass().getConstructor(
+                                        World.class).newInstance(this.world);
+                            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (entity != null) {
+                            int rx = MathHelper.getInt(this.rand, -r, r);
+                            int rz = MathHelper.getInt(this.rand, -r, r);
 
-                           if ((Math.abs(rx) > 5 && Math.abs(rz) > 5) || this.rand.nextInt(20) == 0) {
-                               entity.setPosition(this.posX + rx, this.posY, this.posZ + rz);
-                           }
-                           if (entity instanceof EntityLiving) {
-                               ((EntityLiving) entity).onInitialSpawn(
-                                       this.world.getDifficultyForLocation(this.getPosition().add(rx, 0, rz)), null);
-                               ((EntityLiving) entity).addPotionEffect(
-                                       new PotionEffect(this.potions[this.rand.nextInt(this.potions.length)], 10 * 60 * 20,
-                                               0));
-                           }
-                           this.world.spawnEntity(entity);
-                       }
-                   }
-               }
+                            if ((Math.abs(rx) > 5 && Math.abs(rz) > 5) || this.rand.nextInt(20) == 0) {
+                                entity.setPosition(this.posX + rx, this.posY, this.posZ + rz);
+                            }
+                            if (entity instanceof EntityLiving) {
+                                ((EntityLiving) entity).onInitialSpawn(
+                                        this.world.getDifficultyForLocation(this.getPosition().add(rx, 0, rz)), null);
+                                ((EntityLiving) entity).addPotionEffect(
+                                        new PotionEffect(this.potions[this.rand.nextInt(this.potions.length)],
+                                                10 * 60 * 20, 0));
+                            }
+                            this.world.spawnEntity(entity);
+                        }
+                    }
+                }
             }
         }
     }

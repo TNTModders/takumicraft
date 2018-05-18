@@ -72,6 +72,18 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public boolean isInRangeToRenderDist(double distance) {
+        double d0 = this.getEntityBoundingBox().getAverageEdgeLength();
+
+        if (Double.isNaN(d0)) {
+            d0 = 1.0D;
+        }
+
+        d0 = d0 * 64.0D * 10;
+        return distance < d0 * d0;
+    }
+
+    @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
             if (!this.world.isRemote) {
