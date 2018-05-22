@@ -100,10 +100,13 @@ public class GuiTakumiBook extends GuiScreen {
             String s4 = I18n.format("book.pageIndicator", this.currPage + 1, this.bookTotalPages);
             String s5 = "???";
             String s6 = "???";
+            String s7 = "";
 
             if (flg && this.currPage >= 0 && this.currPage < TakumiEntityCore.getEntityList().size()) {
                 s5 = TakumiUtils.takumiTranslate(
                         "entity." + TakumiEntityCore.getEntityList().get(this.currPage).getRegisterName() + ".name");
+                s7 = TakumiUtils.takumiTranslate(
+                        "entity." + TakumiEntityCore.getEntityList().get(this.currPage).getRegisterName() + ".read");
                 s6 = TakumiUtils.takumiTranslate(
                         "entity." + TakumiEntityCore.getEntityList().get(this.currPage).getRegisterName() + ".desc");
                 if (TakumiEntityCore.getEntityList().get(this.currPage) instanceof EntityShootingCreeper &&
@@ -117,6 +120,9 @@ public class GuiTakumiBook extends GuiScreen {
             int j1 = this.fontRenderer.getStringWidth(s4);
             this.fontRenderer.drawString(s4, i - j1 + 192 - 44, 18, 0);
             this.fontRenderer.drawSplitString(s5, i + 80, 34, 70, 0);
+            if (!s7.isEmpty() && !s7.endsWith(".read")) {
+                this.fontRenderer.drawSplitString(s7, i + 70, 25, 100, 0x111111);
+            }
             this.fontRenderer.drawSplitString(s6, i + 40, 100, 116, 0);
             super.drawScreen(mouseX, mouseY, partialTicks);
             int k = (this.width - this.bookImage) / 2;
