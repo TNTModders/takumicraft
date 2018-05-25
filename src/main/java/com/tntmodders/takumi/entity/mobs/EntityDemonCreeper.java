@@ -75,11 +75,12 @@ public class EntityDemonCreeper extends EntityTakumiAbstractCreeper {
             double x = this.posX + this.rand.nextInt(i * 2) - i;
             double y = this.posY + this.rand.nextInt(i) - i / 2;
             double z = this.posZ + this.rand.nextInt(i * 2) - i;
-
-            EntityLargeFireball fireball = new EntityLargeFireball(this.world, x, y, z, 0, -0.5, 0);
+            EntityLargeFireball fireball = new EntityLargeFireball(this.world);
+            fireball.setPosition(x, y, z);
             fireball.motionX = 0;
             fireball.motionY = -1;
             fireball.motionZ = 0;
+            fireball.accelerationY = -1;
             fireball.explosionPower = this.getPowered() ? 5 : 3;
             if (!this.world.isRemote) {
                 this.world.spawnEntity(fireball);

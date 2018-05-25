@@ -395,6 +395,14 @@ entity.angrycreeper.name=Angry Creeper
 entity.angrycreeper.desc=Anger shakes ground.
 entity.jumpcreeper.name=Jump Creeper
 entity.jumpcreeper.desc=A creeper always jumping. Hop, step, jump and up!
+entity.robocreeper.name=Robot Creeper
+entity.robocreeper.desc=A creeper-robot comes here!
+entity.dancecreeper.name=Dance Creeper
+entity.dancecreeper.desc=Hip and hop and dance and bang.
+entity.farmcreeper.name=Farm Creeper
+entity.farmcreeper.desc=Now you'll be into the farm...
+entity.gatecreeper.name=Gate Creeper
+entity.gatecreeper.desc=Too much TNT by Gate of Takumin.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

@@ -49,7 +49,7 @@ public class EntityTransHomingBomb extends EntityShulkerBullet {
 
     @Override
     protected void bulletHit(RayTraceResult result) {
-        if (!(result.entityHit != null && result.entityHit instanceof EntityTransCreeper)) {
+        if (!(result.entityHit instanceof EntityTransCreeper)) {
             if (!this.world.isRemote) {
                 TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, true);
             }

@@ -54,6 +54,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.StreamSupport;
 
 public class TakumiEvents {
 
@@ -161,7 +162,11 @@ public class TakumiEvents {
     public void onExplosion(Detonate event) {
         if (!event.getWorld().isRemote) {
             event.getAffectedEntities().removeIf(entity -> entity instanceof EntityLivingBase &&
-                    ((EntityLivingBase) entity).getActiveItemStack().getItem() == TakumiItemCore.TAKUMI_SHIELD);
+                    (((EntityLivingBase) entity).getActiveItemStack().getItem() == TakumiItemCore.TAKUMI_SHIELD ||
+                            StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
+                                    itemStack -> !EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
+                                            EnchantmentHelper.getEnchantments(itemStack).containsKey(
+                                                    TakumiEnchantmentCore.EXPLOSION_PROTECTION))));
             if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() ==
                     TakumiBlockCore.ACID_BLOCK) {
                 IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
@@ -330,6 +335,9 @@ public class TakumiEvents {
                 event.getSource().getImmediateSource() == event.getEntity()) {
             event.setCanceled(true);
         } else*/
+        if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityRoboCreeper) {
+            event.setCanceled(true);
+        }
         if (!event.getSource().isMagicDamage() && event.getSource().getTrueSource() != null &&
                 event.getSource().getTrueSource() instanceof EntityLivingBase) {
             ItemStack stack = ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand();
