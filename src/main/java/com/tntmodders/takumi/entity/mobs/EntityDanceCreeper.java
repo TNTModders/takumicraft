@@ -322,7 +322,7 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         super.onUpdate();
         if (this.getAttackTarget() != null) {
             if (this.getCreeperState() > 0) {
-                if (this.teleportCounter < 10) {
+                if (this.teleportCounter < 20) {
                     if (this.teleportRandomly()) {
                         this.teleportCounter++;
                     } else if (this.teleportToEntity(this.getAttackTarget())) {
