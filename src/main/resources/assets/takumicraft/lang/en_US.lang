@@ -403,6 +403,8 @@ entity.farmcreeper.name=Farm Creeper
 entity.farmcreeper.desc=Now you'll be into the farm...
 entity.gatecreeper.name=Gate Creeper
 entity.gatecreeper.desc=Too much TNT by Gate of Takumin.
+entity.noobcreeper.name=Noob Creeper
+entity.noobcreeper.desc=DISGUSTING
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

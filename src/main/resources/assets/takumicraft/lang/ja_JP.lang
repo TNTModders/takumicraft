@@ -433,6 +433,9 @@ entity.farmcreeper.name=牧場匠
 entity.farmcreeper.desc=今度は君たちが美味しくいただかれる番だ。 MOB募集:まりもさん
 entity.gatecreeper.name=火薬庫ノ匠
 entity.gatecreeper.desc=ゲート・オブ・タクミンによる圧倒的な物量攻撃でいとも容易く葬り去られることだろう… MOB募集:せーじぽんさん
+entity.noobcreeper.name=煽匠
+entity.noobcreeper.read=あおりーぱー
+entity.noobcreeper.desc=むかつく MOB募集:しゃおさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
