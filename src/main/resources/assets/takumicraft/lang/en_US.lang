@@ -405,6 +405,8 @@ entity.gatecreeper.name=Gate Creeper
 entity.gatecreeper.desc=Too much TNT by Gate of Takumin.
 entity.noobcreeper.name=Noob Creeper
 entity.noobcreeper.desc=DISGUSTING
+entity.dashcreeper.name=Dash Creeper
+entity.dashcreeper.desc=Dash! Faster than lightning!!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

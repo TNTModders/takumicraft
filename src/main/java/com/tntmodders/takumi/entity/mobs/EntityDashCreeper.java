@@ -20,6 +20,8 @@ import javax.annotation.Nullable;
 
 public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
 
+    private int ticksSprint;
+
     public EntityDashCreeper(World worldIn) {
         super(worldIn);
     }
@@ -51,7 +53,7 @@ public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.FIRE_D;
+        return EnumTakumiType.WATER_D;
     }
 
     @Override
@@ -136,6 +138,16 @@ public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
             int i = 5;
             this.moveHelper.setMoveTo(this.posX + this.getLookVec().x * i, this.posY + this.getLookVec().y * i,
                     this.posZ + this.getLookVec().z * i, 1.5);
+            if (!this.world.isRemote) {
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, (this.getPowered() ? 4f : 2f), true);
+            }
+            this.ticksSprint++;
+        }
+        if (this.ticksSprint > 30) {
+            if (!this.world.isRemote) {
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5f, true);
+            }
+            this.setDead();
         }
     }
 }

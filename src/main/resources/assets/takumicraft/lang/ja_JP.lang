@@ -436,6 +436,8 @@ entity.gatecreeper.desc=ゲート・オブ・タクミンによる圧倒的な�
 entity.noobcreeper.name=煽匠
 entity.noobcreeper.read=あおりーぱー
 entity.noobcreeper.desc=むかつく MOB募集:しゃおさん
+entity.dashcreeper.name=走匠
+entity.dashcreeper.desc=その匠、最速につき。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
