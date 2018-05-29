@@ -407,6 +407,8 @@ entity.noobcreeper.name=Noob Creeper
 entity.noobcreeper.desc=DISGUSTING
 entity.dashcreeper.name=Dash Creeper
 entity.dashcreeper.desc=Dash! Faster than lightning!!
+entity.hoecreeper.name=Hoe Creeper
+entity.hoecreeper.desc=Hey, hoe! Everything with you become hoe.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
