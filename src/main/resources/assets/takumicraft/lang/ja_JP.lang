@@ -440,6 +440,8 @@ entity.dashcreeper.name=走匠
 entity.dashcreeper.desc=その匠、最速につき。
 entity.hoecreeper.name=くわ匠
 entity.hoecreeper.desc=持ってるものをダイヤの鍬に変えてしまう匠。鍬が必要な時だけ近づこう MOB募集:愛めぐさん
+entity.launchcreeper.name=飛翔匠
+entity.launchcreeper.desc=起爆されし時、天にひとつの煌めきを見つけることだろう。 MOB募集:澤口シグレさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

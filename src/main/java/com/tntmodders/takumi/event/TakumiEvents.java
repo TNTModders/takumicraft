@@ -192,6 +192,9 @@ public class TakumiEvents {
             }
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiLauncher) {
+                event.getAffectedEntities().clear();
+            }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
                 AbstractEntityTakumiGrenade grenade =
                         (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();

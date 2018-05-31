@@ -13,6 +13,7 @@ import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderShulkerBullet;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -33,6 +34,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -87,7 +89,7 @@ public class TakumiEntityCore {
                 EntityFallingSlimeCreeper.class, EntityTerracottaCreeper.class, EntityWearCreeper.class,
                 EntityBlackCreeper.class, EntityAngryCreeper.class, EntityJumpCreeper.class, EntityBigCreeper.class,
                 EntityRoboCreeper.class, EntityDanceCreeper.class, EntityFarmCreeper.class, EntityGateCreeper.class,
-                EntityDashCreeper.class, EntityNoobCreeper.class,EntityHoeCreeper.class));
+                EntityDashCreeper.class, EntityNoobCreeper.class, EntityHoeCreeper.class, EntityLaunchCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -252,6 +254,8 @@ public class TakumiEntityCore {
                 "msrazer", 912, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiYMS"), EntityYMS.class,
                 "takumiYMS", 913, TakumiCraftCore.TakumiInstance, 64, 1, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumilauncher"),
+                EntityTakumiLauncher.class, "takumilauncher", 914, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -284,6 +288,14 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityYMS.class, RenderYMS ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLauncher.class,
+                manager -> new Render<EntityTakumiLauncher>(manager) {
+                    @Nullable
+                    @Override
+                    protected ResourceLocation getEntityTexture(EntityTakumiLauncher entity) {
+                        return null;
+                    }
+                });
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
