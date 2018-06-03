@@ -445,6 +445,8 @@ entity.launchcreeper.desc=起爆されし時、天にひとつの煌めきを見
 entity.stingycreeper.name=減匠
 entity.stingycreeper.read=げんしょう
 entity.stingycreeper.desc=痛くはないよ。でも、金リンゴはあるといいね。 MOB募集:みかんあめさん
+entity.invisiblecreeper.name=透明匠
+entity.invisiblecreeper.desc=何も見えない恐怖。 MOB募集:ちきちーさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

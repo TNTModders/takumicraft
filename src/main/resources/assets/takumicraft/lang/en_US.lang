@@ -413,6 +413,8 @@ entity.launchcreeper.name=Launch Creeper
 entity.launchcreeper.desc=3,2,1...Launch Creepers are go!
 entity.stingycreeper.name=Stingy Creeper
 entity.stingycreeper.desc=Stingy, too stingy!
+entity.invisiblecreeper.name=Invisible Creeper
+entity.invisiblecreeper.desc=
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
