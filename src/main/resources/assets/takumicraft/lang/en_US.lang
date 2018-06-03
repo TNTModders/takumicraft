@@ -415,6 +415,8 @@ entity.stingycreeper.name=Stingy Creeper
 entity.stingycreeper.desc=Stingy, too stingy!
 entity.invisiblecreeper.name=Invisible Creeper
 entity.invisiblecreeper.desc=
+entity.returncreeper.name=Return Creeper
+entity.returncreeper.desc=This is the turn when you return your town.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
