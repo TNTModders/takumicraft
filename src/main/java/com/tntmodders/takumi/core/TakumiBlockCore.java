@@ -94,6 +94,7 @@ public class TakumiBlockCore {
     public static final Block DARKCORE = new BlockTakumiDarkCore();
     public static final Block DARKCORE_ON = new BlockTakumiDarkCore_On();
     public static final Block DARKCORE_SP = new BlockTakumiDarkCore_SP();
+    public static final Block ANVIL_CREEPER = new BlockAnvilCreeper();
 
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 

@@ -417,6 +417,17 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
+    public void onItemPickUp(EntityItemPickupEvent event) {
+        if (event.getItem().getItem().getItem() == Item.getItemFromBlock(TakumiBlockCore.ANVIL_CREEPER)) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().world.createExplosion(null, event.getItem().posX, event.getItem().posY,
+                        event.getItem().posZ, 2, true);
+            }
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
     public void onChunckPopulate(PopulateChunkEvent.Pre event) {
         if (event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
             TakumiMapGenDarkShrine mapGenDarkShrine;

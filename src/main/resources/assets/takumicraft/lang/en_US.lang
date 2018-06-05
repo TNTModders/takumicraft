@@ -417,6 +417,8 @@ entity.invisiblecreeper.name=Invisible Creeper
 entity.invisiblecreeper.desc=
 entity.returncreeper.name=Return Creeper
 entity.returncreeper.desc=This is the turn when you return your town.
+entity.anvilcreeper.name=Anvil Creeper
+entity.anvilcreeper.desc=Falling anvil, feeling ennui.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
