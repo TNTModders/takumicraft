@@ -451,6 +451,8 @@ entity.returncreeper.name=帰匠
 entity.returncreeper.desc=害悪な匠。ベッドを持って行く先々で眠れば地獄を見ずに済む。とにかく面倒くさい。 MOB募集:319pazudoraさん
 entity.anvilcreeper.name=金床匠
 entity.anvilcreeper.desc=爆発とともに大量の金床をまき散らし、雨の代わりに金床の雨を降らす。 MOB募集:さとしきさん
+entity.randcreeper.name=籤匠
+entity.randcreeper.desc=全てはあなたの運次第。 MOB募集:燈凪さん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
