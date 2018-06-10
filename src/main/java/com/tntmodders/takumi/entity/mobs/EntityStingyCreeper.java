@@ -63,7 +63,8 @@ public class EntityStingyCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 1200, -4));
+                ((EntityLivingBase) entity).addPotionEffect(
+                        new PotionEffect(MobEffects.HEALTH_BOOST, 1200, -4, true, false));
                 entity.attackEntityFrom(DamageSource.causeExplosionDamage(this).setDamageIsAbsolute(), 1);
             }
         }

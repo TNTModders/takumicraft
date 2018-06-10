@@ -117,11 +117,15 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
                     if ((l1 == 0 && i2 == 0 || f1 * f1 + f2 * f2 <= f * f) &&
                             (l1 != -k1 && l1 != k1 && i2 != -k1 && i2 != k1 || this.rand.nextFloat() <= 0.75F)) {
                         IBlockState blockState = world.getBlockState(new BlockPos(x + l1, y + j1, z + i2));
-                        this.world.setBlockState(new BlockPos(x + l1, y + j1, z + i2),
-                                Blocks.PACKED_ICE.getDefaultState());
-                        if (j1 != 0 && k1 > 1) {
-                            this.world.setBlockState(new BlockPos(x + l1, y - j1, z + i2),
+                        if (blockState.getBlockHardness(this.world, new BlockPos(x + l1, y + j1, z + i2)) >= 0) {
+                            this.world.setBlockState(new BlockPos(x + l1, y + j1, z + i2),
                                     Blocks.PACKED_ICE.getDefaultState());
+                            if (j1 != 0 && k1 > 1 &&
+                                    blockState.getBlockHardness(this.world, new BlockPos(x + l1, y - j1, z + i2)) >=
+                                            0) {
+                                this.world.setBlockState(new BlockPos(x + l1, y - j1, z + i2),
+                                        Blocks.PACKED_ICE.getDefaultState());
+                            }
                         }
                     }
                 }

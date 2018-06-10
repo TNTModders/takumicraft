@@ -89,7 +89,8 @@ public class EntityAnnivCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         for (BlockPos pos : event.getAffectedBlocks()) {
-            if (!this.world.isAirBlock(pos)) {
+            if (!this.world.isAirBlock(pos) && this.world.getBlockState(pos).getBlockHardness(this.world, pos) >= 0 &&
+                    this.world.getBlockState(pos.down()).getBlockHardness(this.world, pos) >= 0) {
                 event.getWorld().setBlockToAir(pos);
                 event.getWorld().setBlockState(pos.down(), Blocks.CAKE.getDefaultState());
             }
