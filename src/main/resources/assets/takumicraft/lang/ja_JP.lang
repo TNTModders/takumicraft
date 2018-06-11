@@ -145,6 +145,12 @@ item.magicbow.name=匠式魔弓
 item.attackblock.name=匠進撃ブロック
 item.xms.name=X-MS 匠式防衛戦闘機
 item.yms.name=Y-MS 匠式防衛爆撃機
+item.typecore.fire.name=匠素結晶[炎]
+item.typecore.grass.name=匠素結晶[草]
+item.typecore.water.name=匠素結晶[水]
+item.typecore.wind.name=匠素結晶[風]
+item.typecore.ground.name=匠素結晶[地]
+item.typecore.normal.name=匠素結晶
 
 #entity
 ＃descは36文字まで。

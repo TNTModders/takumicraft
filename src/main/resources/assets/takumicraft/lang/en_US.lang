@@ -145,6 +145,12 @@ item.magicbow.name=Magic Bow
 item.attackblock.name=Takumi Attack Block
 item.xms.name=X-MS
 item.yms.name=Y-MS
+item.typecore.fire.name=Element Core[Fire]
+item.typecore.grass.name=Element Core[Grass]
+item.typecore.water.name=Element Core[Water]
+item.typecore.wind.name=Element Core[Wind]
+item.typecore.ground.name=Element Core[Ground]
+item.typecore.normal.name=Element Core
 
 #entity
 #desc max: 72 chars

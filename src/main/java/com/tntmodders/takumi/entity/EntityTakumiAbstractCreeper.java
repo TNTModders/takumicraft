@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity;
 
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIMoveToAttackBlock;
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
@@ -11,6 +12,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -113,6 +115,12 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             this.dropItem(this.getDropItem(), this.rand.nextInt(3));
             if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(5) == 0) {
                 this.dropItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), 1);
+            }
+            int drop = this.rand.nextInt(2);
+            int i = this.takumiType().getId();
+            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 15 : 10) == 0 && drop > 0 && i > 0 &&
+                    i < 7) {
+                this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, drop, i - 1), 0f);
             }
         }
         super.onDeath(source);
