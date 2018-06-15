@@ -2,6 +2,7 @@ package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.ITakumiItemBlock;
+import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiType;
 import com.tntmodders.takumi.item.*;
 import com.tntmodders.takumi.item.ItemTakumiMineSweeperTool.EnumTakumiTool;
 import net.minecraft.block.Block;
@@ -51,6 +52,9 @@ public class TakumiItemCore {
     public static final Item TAKUMI_XMS = new ItemXMS();
     public static final Item TAKUMI_YMS = new ItemYMS();
     public static final Item TAKUMI_TYPE_CORE = new ItemTypeCore();
+    public static final Item TAKUMI_TYPE_SWORD_FIRE = new ItemTypeSword(EnumTakumiType.FIRE);
+    public static final Item TAKUMI_TYPE_SWORD_GRASS = new ItemTypeSword(EnumTakumiType.GRASS);
+    public static final Item TAKUMI_TYPE_SWORD_WATER = new ItemTypeSword(EnumTakumiType.WATER);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

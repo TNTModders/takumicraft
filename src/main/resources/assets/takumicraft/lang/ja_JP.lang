@@ -151,6 +151,12 @@ item.typecore.water.name=匠素結晶[水]
 item.typecore.wind.name=匠素結晶[風]
 item.typecore.ground.name=匠素結晶[地]
 item.typecore.normal.name=匠素結晶
+item.typesword_fire.name=匠式炎斬刀
+item.typesword_water.name=匠式水剣斧
+item.typesword_grass.name=匠式草匕首
+item.typesword_wind.name=匠式風突槍
+item.typesword_ground.name=匠式地大槌
+item.typesword_normal.name=匠式極光剣
 
 #entity
 ＃descは36文字まで。
@@ -472,6 +478,7 @@ entity.attackblock.lose=進撃ブロックが破壊された。
 entity.attackblock.win=進撃ブロックの防衛に成功した。
 entity.takumiXMS.name=X-MS
 entity.takumiYMS.name=Y-MS
+entity.watertypeforce.name=匠式水斧
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

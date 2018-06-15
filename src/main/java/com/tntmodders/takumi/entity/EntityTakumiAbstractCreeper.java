@@ -49,10 +49,10 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             f *= 0.8;
         }
         if (attacker.getId() == EnumTakumiType.GROUND.getId() || damaged.getId() == EnumTakumiType.GROUND.getId()) {
-            f *= 1.25;
+            f *= 1.15;
         }
         if (attacker.getId() == EnumTakumiType.WIND.getId() || damaged.getId() == EnumTakumiType.WIND.getId()) {
-            f *= 0.75;
+            f *= 0.85;
         }
         if ((attacker.getId() == EnumTakumiType.GRASS.getId() && damaged.getId() == EnumTakumiType.WATER.getId()) ||
                 attacker.getId() == EnumTakumiType.WATER.getId() && damaged.getId() == EnumTakumiType.FIRE.getId() ||

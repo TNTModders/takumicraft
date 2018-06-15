@@ -37,11 +37,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -364,6 +361,14 @@ public class TakumiEvents {
                 event.getEntityLiving().attackEntityFrom(DamageSource.GENERIC.setExplosion().setDamageIsAbsolute(),
                         event.getAmount());
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void knockbackEvent(LivingKnockBackEvent event){
+        if(event.getAttacker() instanceof EntityLivingBase && ((EntityLivingBase) event.getAttacker())
+                .getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_WATER){
+            event.setCanceled(true);
         }
     }
 

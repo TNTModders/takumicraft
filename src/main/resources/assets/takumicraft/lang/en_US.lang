@@ -151,6 +151,9 @@ item.typecore.water.name=Element Core[Water]
 item.typecore.wind.name=Element Core[Wind]
 item.typecore.ground.name=Element Core[Ground]
 item.typecore.normal.name=Element Core
+item.typesword_fire.name=Creeper Fire Katana
+item.typesword_water.name=Creeper Water Axe
+item.typesword_grass.name=Creeper Grass Dagger
 
 #entity
 #desc max: 72 chars
@@ -440,6 +443,7 @@ entity.attackblock.lose=Attack Block was destroyed.
 entity.attackblock.win=You compleatly protected Attack Block!
 entity.takumiXMS.name=X-MS
 entity.takumiYMS.name=Y-MS
+entity.watertypeforce.name=Creeper Water Axe
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

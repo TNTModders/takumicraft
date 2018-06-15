@@ -90,8 +90,8 @@ public class TakumiEntityCore {
                 EntityBlackCreeper.class, EntityAngryCreeper.class, EntityJumpCreeper.class, EntityBigCreeper.class,
                 EntityRoboCreeper.class, EntityDanceCreeper.class, EntityFarmCreeper.class, EntityGateCreeper.class,
                 EntityDashCreeper.class, EntityNoobCreeper.class, EntityHoeCreeper.class, EntityLaunchCreeper.class,
-                EntityStingyCreeper.class, EntityInvisibleCreeper.class,EntityReturnCreeper.class,
-                EntityAnvilCreeper.class,EntityRandCreeper.class));
+                EntityStingyCreeper.class, EntityInvisibleCreeper.class, EntityReturnCreeper.class,
+                EntityAnvilCreeper.class, EntityRandCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -258,6 +258,8 @@ public class TakumiEntityCore {
                 "takumiYMS", 913, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumilauncher"),
                 EntityTakumiLauncher.class, "takumilauncher", 914, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "waterforce"),
+                EntityWaterTypeForce.class, "waterforce", 915, TakumiCraftCore.TakumiInstance, 64, 1, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -295,6 +297,14 @@ public class TakumiEntityCore {
                     @Nullable
                     @Override
                     protected ResourceLocation getEntityTexture(EntityTakumiLauncher entity) {
+                        return null;
+                    }
+                });
+        RenderingRegistry.registerEntityRenderingHandler(EntityWaterTypeForce.class,
+                manager -> new Render<EntityWaterTypeForce>(manager) {
+                    @Nullable
+                    @Override
+                    protected ResourceLocation getEntityTexture(EntityWaterTypeForce entity) {
                         return null;
                     }
                 });

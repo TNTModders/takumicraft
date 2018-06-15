@@ -1,0 +1,102 @@
+package com.tntmodders.takumi.item;
+
+import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.item.EntityWaterTypeForce;
+import com.tntmodders.takumi.item.material.TakumiToolMaterial;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class ItemTypeSword extends ItemSword {
+    private final ITakumiEntity.EnumTakumiType type;
+
+    public ItemTypeSword(ITakumiEntity.EnumTakumiType type) {
+        super(TakumiToolMaterial.TAKUMI_MATERIAL);
+        this.type = type;
+        this.setRegistryName(TakumiCraftCore.MODID, "typesword_" + type.getName());
+        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        this.setUnlocalizedName("typesword_" + type.getName());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.RARE;
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        boolean flg = this.performEffect(target, attacker);
+        if (flg && target instanceof EntityTakumiAbstractCreeper) {
+            ITakumiEntity.EnumTakumiType targetType = ((EntityTakumiAbstractCreeper) target).takumiType();
+            float f = EntityTakumiAbstractCreeper.getTypeMatchFactor(this.type, targetType);
+            f = f * f * f * f * f * f * f * f;
+            f *= 4;
+            target.attackEntityFrom(DamageSource.causeMobDamage(attacker), f);
+        }
+        return flg && super.hitEntity(stack, target, attacker);
+    }
+
+    public boolean performEffect(EntityLivingBase target, EntityLivingBase attacker) {
+        switch (this.type) {
+            case FIRE: {
+                target.setFire(100);
+                if (!attacker.world.isRemote) {
+                    Vec3d vec3d = attacker.getLookVec().normalize();
+                    for (double i = 1.5; i < 7; i += 1d) {
+                        attacker.world.newExplosion(attacker, attacker.posX + vec3d.x * i * 2,
+                                attacker.posY + vec3d.y * i * 2, attacker.posZ + vec3d.z * i * 2, 2f, true, true);
+                    }
+                }
+                break;
+            }
+            case WATER: {
+                if (!attacker.world.isRemote) {
+                    EntityWaterTypeForce force = new EntityWaterTypeForce(attacker.world);
+                    force.setPosition(target.posX, target.posY + 0.5, target.posZ);
+                    attacker.world.spawnEntity(force);
+                    target.setPosition(force.posX, force.posY, force.posZ);
+                    target.startRiding(force, true);
+                    target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 10, true, false));
+                }
+                return true;
+            }
+            case GRASS: {
+                if (!attacker.world.isRemote) {
+                    for (int t = 0; t < 4; t++) {
+                        double x = target.posX + MathHelper.getInt(target.getRNG(), -3, 3);
+                        double y = target.posY + 1;
+                        double z = target.posZ + MathHelper.getInt(target.getRNG(), -3, 3);
+                        attacker.world.createExplosion(attacker, x, y, z, 2f, true);
+                    }
+                    int i = 20;
+                    while (i > 0) {
+                        int j = EntityXPOrb.getXPSplit(i);
+                        i -= j;
+                        target.world.spawnEntity(
+                                new EntityXPOrb(target.world, target.posX, target.posY, target.posZ, j));
+                    }
+
+                    attacker.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1, 0));
+                }
+            }
+        }
+        return true;
+    }
+}
