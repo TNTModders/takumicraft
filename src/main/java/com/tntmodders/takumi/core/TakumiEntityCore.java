@@ -310,6 +310,14 @@ public class TakumiEntityCore {
                         return null;
                     }
                 });
+        RenderingRegistry.registerEntityRenderingHandler(EntityWindLance.class,
+                manager -> new Render<EntityWindLance>(manager) {
+                    @Nullable
+                    @Override
+                    protected ResourceLocation getEntityTexture(EntityWindLance entity) {
+                        return null;
+                    }
+                });
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
