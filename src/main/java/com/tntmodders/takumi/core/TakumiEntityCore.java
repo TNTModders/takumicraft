@@ -260,6 +260,8 @@ public class TakumiEntityCore {
                 EntityTakumiLauncher.class, "takumilauncher", 914, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "waterforce"),
                 EntityWaterTypeForce.class, "waterforce", 915, TakumiCraftCore.TakumiInstance, 64, 1, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "windlance"),
+                EntityWindLance.class, "windlance", 916, TakumiCraftCore.TakumiInstance, 64, 1, true);
     }
 
     @SideOnly(Side.CLIENT)

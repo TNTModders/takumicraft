@@ -4,9 +4,12 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityWaterTypeForce;
+import com.tntmodders.takumi.entity.item.EntityWindLance;
 import com.tntmodders.takumi.item.material.TakumiToolMaterial;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -53,6 +56,17 @@ public class ItemTypeSword extends ItemSword {
         return flg && super.hitEntity(stack, target, attacker);
     }
 
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        if (this.type == ITakumiEntity.EnumTakumiType.WIND && entityLiving.onGround) {
+            performEffect(null, entityLiving);
+            if (!(entityLiving instanceof EntityPlayer) || !((EntityPlayer) entityLiving).isCreative()) {
+                stack.damageItem(1, entityLiving);
+            }
+        }
+        return super.onEntitySwing(entityLiving, stack);
+    }
+
     public boolean performEffect(EntityLivingBase target, EntityLivingBase attacker) {
         switch (this.type) {
             case FIRE: {
@@ -92,8 +106,18 @@ public class ItemTypeSword extends ItemSword {
                         target.world.spawnEntity(
                                 new EntityXPOrb(target.world, target.posX, target.posY, target.posZ, j));
                     }
-
                     attacker.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1, 0));
+                }
+                break;
+            }
+            case WIND: {
+                if (!attacker.world.isRemote) {
+                    EntityWindLance lance = new EntityWindLance(attacker.world, attacker);
+                    lance.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                    lance.setAim(attacker, -5, attacker.rotationYaw, 0.0F, 3.0F, 1.0F);
+                    attacker.world.spawnEntity(lance);
+                    attacker.setPosition(lance.posX, lance.posY, lance.posZ);
+                    attacker.startRiding(lance, true);
                 }
             }
         }

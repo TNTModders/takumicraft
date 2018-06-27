@@ -55,6 +55,7 @@ public class TakumiItemCore {
     public static final Item TAKUMI_TYPE_SWORD_FIRE = new ItemTypeSword(EnumTakumiType.FIRE);
     public static final Item TAKUMI_TYPE_SWORD_GRASS = new ItemTypeSword(EnumTakumiType.GRASS);
     public static final Item TAKUMI_TYPE_SWORD_WATER = new ItemTypeSword(EnumTakumiType.WATER);
+    public static final Item TAKUMI_TYPE_SWORD_WIND = new ItemTypeSword(EnumTakumiType.WIND);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 
