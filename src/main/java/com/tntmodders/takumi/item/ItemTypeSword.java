@@ -1,11 +1,15 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityWaterTypeForce;
 import com.tntmodders.takumi.entity.item.EntityWindLance;
 import com.tntmodders.takumi.item.material.TakumiToolMaterial;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +20,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,7 +31,8 @@ public class ItemTypeSword extends ItemSword {
     private final ITakumiEntity.EnumTakumiType type;
 
     public ItemTypeSword(ITakumiEntity.EnumTakumiType type) {
-        super(TakumiToolMaterial.TAKUMI_MATERIAL);
+        super(type == ITakumiEntity.EnumTakumiType.NORMAL ? TakumiToolMaterial.LIGHTSABER_MATERIAL :
+                TakumiToolMaterial.TAKUMI_MATERIAL);
         this.type = type;
         this.setRegistryName(TakumiCraftCore.MODID, "typesword_" + type.getName());
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
@@ -40,7 +47,7 @@ public class ItemTypeSword extends ItemSword {
 
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+        return this.type == ITakumiEntity.EnumTakumiType.NORMAL ? EnumRarity.EPIC : EnumRarity.RARE;
     }
 
     @Override
@@ -133,5 +140,41 @@ public class ItemTypeSword extends ItemSword {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (this.type == ITakumiEntity.EnumTakumiType.NORMAL &&
+                !EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED)) {
+            try {
+                stack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+        if (this.type == ITakumiEntity.EnumTakumiType.NORMAL &&
+                !EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED)) {
+            try {
+                stack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (this.type == ITakumiEntity.EnumTakumiType.NORMAL && this.isInCreativeTab(tab)) {
+            ItemStack itemStack = new ItemStack(this, 1);
+            itemStack.addEnchantment(TakumiEnchantmentCore.ANTI_POWERED, 1);
+            items.add(itemStack);
+        } else {
+            super.getSubItems(tab, items);
+        }
     }
 }

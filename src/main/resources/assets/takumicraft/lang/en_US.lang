@@ -154,6 +154,9 @@ item.typecore.normal.name=Element Core
 item.typesword_fire.name=Creeper Fire Katana
 item.typesword_water.name=Creeper Water Axe
 item.typesword_grass.name=Creeper Grass Dagger
+item.typesword_wind.name=Creeper WInd Lance
+item.typesword_ground.name=Creeper Ground Hummer
+item.typesword_normal.name=Creeper Light Sword
 
 #entity
 #desc max: 72 chars
@@ -472,6 +475,10 @@ advancements.takumicraft.takumiworld.title=A Whole New World
 advancements.takumicraft.takumiworld.desc=Go to Takumi World.
 advancements.takumicraft.darkshrine.title=Dark Shrine
 advancements.takumicraft.darkshrine.desc=Activate DarkBoard.
+advancements.takumicraft.typewepon.title=Five Elements
+advancements.takumicraft.typewepon.desc=Get all element wepon.
+advancements.takumicraft.forcemaster.title=Force Master
+advancements.takumicraft.forcemaster.desc=Get Creeper Light Sword.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 

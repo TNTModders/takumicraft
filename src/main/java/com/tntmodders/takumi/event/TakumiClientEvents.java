@@ -10,11 +10,14 @@ import com.tntmodders.takumi.network.MessageMSMove;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderHandEvent;
@@ -30,6 +33,9 @@ public class TakumiClientEvents {
 
     @SideOnly(Side.CLIENT)
     public static final ModelShield MODEL_SHIELD = new ModelShield();
+
+    @SideOnly(Side.CLIENT)
+    public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
 
     @SubscribeEvent
     public void renderWorld(CameraSetup event) {
@@ -136,5 +142,33 @@ public class TakumiClientEvents {
             ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode = !flg;
             TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 2));
         }
+    }
+
+    public static class ModelSaber extends ModelBase {
+        public ModelRenderer handle;
+        public ModelRenderer saber;
+
+        public static final ResourceLocation HANDLE_TEXTURE =
+                new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/creeperiron.png");
+        public static final ResourceLocation SABER_TEXTURE =
+                new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+
+        public ModelSaber() {
+            this.handle = new ModelRenderer(this, 0, 0);
+            this.handle.addBox(-1.0F, -3.0F, 1F, 3, 6, 3, 0.0F);
+            this.saber = new ModelRenderer(this, 0, 0);
+            this.saber.addBox(-1F, -36.0F, 3F, 4, 30, 4, 0.0F);
+        }
+
+        public void renderHandle() {
+            //this.plate.render(0.0625F);
+            this.handle.render(0.0625F);
+        }
+
+        public void renderSaber() {
+            //this.plate.render(0.0625F);
+            this.saber.render(0.0625F);
+        }
+
     }
 }

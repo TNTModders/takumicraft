@@ -507,6 +507,10 @@ advancements.takumicraft.takumiworld.title=匠の世界へ
 advancements.takumicraft.takumiworld.desc=匠ワールドへ行く 新たなる、険しき世界。
 advancements.takumicraft.darkshrine.title=深淵への門
 advancements.takumicraft.darkshrine.desc=深淵の寺院で石版を起動する ████████
+advancements.takumicraft.typewepon.title=五元素の使い手
+advancements.takumicraft.typewepon.desc=匠素結晶の武器をすべて集める 属性を使い分けよ、その力は武器になる。
+advancements.takumicraft.forcemaster.title=フォース=マスター
+advancements.takumicraft.forcemaster.desc=匠式極光剣を入手する 爆発と共に、あらんことを。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 

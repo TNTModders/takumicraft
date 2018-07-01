@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:typesword_normal"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.takumicraft.forcemaster.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.forcemaster.desc"
+    },
+    "frame": "goal"
+  },
+  "parent": "takumicraft:typewepon",
+  "criteria": {
+    "takumishield": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typesword_normal"
+          }
+        ]
+      }
+    }
+  }
+}

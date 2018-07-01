@@ -1,0 +1,67 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:typesword_ground"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.takumicraft.typewepon.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.typewepon.desc"
+    }
+  },
+  "parent": "takumicraft:takumishield",
+  "criteria": {
+    "fire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typesword_grass"
+          }
+        ]
+      }
+    },
+    "water": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typesword_water"
+          }
+        ]
+      }
+    },
+    "grass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typesword_ground"
+          }
+        ]
+      }
+    },
+    "wind": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typesword_wind"
+          }
+        ]
+      }
+    },
+    "ground": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typesword_ground"
+          }
+        ]
+      }
+    }
+  }
+}

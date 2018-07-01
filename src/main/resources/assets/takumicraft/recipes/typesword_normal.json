@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FWG",
+    "NQN",
+    "RNI"
+  ],
+  "key": {
+    "F": {
+      "item": "takumicraft:typesword_fire"
+    },
+    "W": {
+      "item": "takumicraft:typesword_water"
+    },
+    "G": {
+      "item": "takumicraft:typesword_grass"
+    },
+    "R": {
+      "item": "takumicraft:typesword_ground"
+    },
+    "I": {
+      "item": "takumicraft:typesword_wind"
+    },
+    "N":{
+      "item":"takumicraft:typecore",
+      "data":5
+    },
+    "Q": {
+      "item": "takumicraft:creepercore"
+    }
+  },
+  "result": {
+    "item": "takumicraft:typesword_normal"
+  }
+}
