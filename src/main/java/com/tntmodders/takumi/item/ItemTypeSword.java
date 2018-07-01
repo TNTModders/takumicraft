@@ -119,6 +119,17 @@ public class ItemTypeSword extends ItemSword {
                     attacker.setPosition(lance.posX, lance.posY, lance.posZ);
                     attacker.startRiding(lance, true);
                 }
+                break;
+            }
+            case GROUND: {
+                if (!attacker.world.isRemote) {
+                    for (int i = 0; i < 9; i++) {
+                        double x = attacker.posX + Math.cos(Math.PI * i * 2 / 9) * 4;
+                        double z = attacker.posZ + Math.sin(Math.PI * i * 2 / 9) * 4;
+                        attacker.world.createExplosion(attacker, x, attacker.posY, z, 2, true);
+                    }
+                }
+                break;
             }
         }
         return true;
