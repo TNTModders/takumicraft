@@ -58,6 +58,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(5888);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             GlStateManager.depthMask(flag);

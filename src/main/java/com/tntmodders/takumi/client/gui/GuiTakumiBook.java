@@ -64,6 +64,8 @@ public class GuiTakumiBook extends GuiScreen {
         this.drawDefaultBackground();
         if (this.currPage != Integer.MAX_VALUE) {
             GL11.glPushMatrix();
+            GlStateManager.disableBlend();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
             ITakumiEntity takumiEntity = TakumiEntityCore.getEntityList().get(this.currPage);
             boolean flg = false;
             if (TakumiUtils.getAdvancementUnlocked(
@@ -137,6 +139,8 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glPushMatrix();
             GL11.glScaled(1.9, 1, 1);
             this.drawTexturedModalRect(2, 2, 0, 0, 256, 256);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.enableBlend();
             GL11.glPopMatrix();
             super.drawScreen(mouseX, mouseY, partialTicks);
         }
