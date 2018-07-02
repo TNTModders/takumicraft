@@ -152,6 +152,23 @@ public class ItemTypeSword extends ItemSword {
                 e.printStackTrace();
             }
         }
+
+        if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_DEST)) {
+            worldIn.getEntities(EntityLivingBase.class, input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(
+                    entityLivingBase -> {
+                        if (entityLivingBase != entityIn) {
+                            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 5, 0));
+                        }
+                    });
+        }
+        if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_MAGIC)) {
+            worldIn.getEntities(EntityLivingBase.class, input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(
+                    entityLivingBase -> {
+                        if (entityLivingBase != entityIn) {
+                            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2));
+                        }
+                    });
+        }
     }
 
     @Override

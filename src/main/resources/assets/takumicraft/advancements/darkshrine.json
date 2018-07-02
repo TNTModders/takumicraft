@@ -3,7 +3,6 @@
     "icon": {
       "item": "takumicraft:darkboard_on"
     },
-    "hidden":true,
     "title": {
       "translate": "advancements.takumicraft.darkshrine.title"
     },

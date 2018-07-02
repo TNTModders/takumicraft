@@ -3,7 +3,6 @@
     "icon": {
       "item": "takumicraft:boltstone"
     },
-    "hidden":true,
     "title": {
       "translate": "advancements.takumicraft.boltstone.title"
     },

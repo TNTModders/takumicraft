@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -92,6 +93,11 @@ public class ItemTakumiArmor extends ItemArmor {
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack) {
         return true;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.EPIC;
     }
 
     @Override

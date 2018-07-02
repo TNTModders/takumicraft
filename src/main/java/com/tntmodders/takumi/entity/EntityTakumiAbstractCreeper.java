@@ -122,6 +122,14 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                     i < 7) {
                 this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, drop, i - 1), 0f);
             }
+            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 10 : 5) == 0 && drop > 0) {
+                if (this.takumiType().isMagic() && this.rand.nextBoolean()) {
+                    this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_MAGIC, drop), 0f);
+                }
+                if (this.takumiType().isDest() && this.rand.nextBoolean()) {
+                    this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_DEST, drop), 0f);
+                }
+            }
         }
         super.onDeath(source);
     }

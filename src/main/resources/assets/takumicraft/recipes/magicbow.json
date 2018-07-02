@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " QX",
+    "Q X",
+    " QX"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:magicstone"
+    },
+    "X": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "takumicraft:magicbow"
+  }
+}

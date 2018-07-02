@@ -3,7 +3,7 @@
     "icon": {
       "item": "takumicraft:takumiarmor_chest"
     },
-    "hidden":true,
+
     "title": {
       "translate": "advancements.takumicraft.armor.title"
     },

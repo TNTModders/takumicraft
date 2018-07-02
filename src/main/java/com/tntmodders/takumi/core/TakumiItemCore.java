@@ -58,6 +58,8 @@ public class TakumiItemCore {
     public static final Item TAKUMI_TYPE_SWORD_WIND = new ItemTypeSword(EnumTakumiType.WIND);
     public static final Item TAKUMI_TYPE_SWORD_GROUND = new ItemTypeSword(EnumTakumiType.GROUND);
     public static final Item TAKUMI_TYPE_SWORD_NORMAL = new ItemTypeSword(EnumTakumiType.NORMAL);
+    public static final Item TAKUMI_TYPE_CORE_DEST = new ItemTypeCoreSP(false);
+    public static final Item TAKUMI_TYPE_CORE_MAGIC = new ItemTypeCoreSP(true);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

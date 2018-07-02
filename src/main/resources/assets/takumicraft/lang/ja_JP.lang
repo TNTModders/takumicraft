@@ -150,6 +150,8 @@ item.typecore.grass.name=匠素結晶[草]
 item.typecore.water.name=匠素結晶[水]
 item.typecore.wind.name=匠素結晶[風]
 item.typecore.ground.name=匠素結晶[地]
+item.typecoresp_dest.name=匠素結晶[壊]
+item.typecoresp_magic.name=匠素結晶[魔]
 item.typecore.normal.name=匠素結晶
 item.typesword_fire.name=匠式炎斬刀
 item.typesword_water.name=匠式水剣斧
@@ -506,9 +508,9 @@ advancements.takumicraft.armor.desc=匠式装甲を手に入れる 一式、ク�
 advancements.takumicraft.takumiworld.title=匠の世界へ
 advancements.takumicraft.takumiworld.desc=匠ワールドへ行く 新たなる、険しき世界。
 advancements.takumicraft.darkshrine.title=深淵への門
-advancements.takumicraft.darkshrine.desc=深淵の寺院で石版を起動する ████████
+advancements.takumicraft.darkshrine.desc=深淵の寺院で対応する爆弾を用いて石版を起動する ████████
 advancements.takumicraft.typewepon.title=五元素の使い手
-advancements.takumicraft.typewepon.desc=匠素結晶の武器をすべて集める 属性を使い分けよ、その力は武器になる。
+advancements.takumicraft.typewepon.desc=匠素結晶の武器をすべて集める 属性の力は武器になる。 金床で壊と魔の力を付けよ。
 advancements.takumicraft.forcemaster.title=フォース=マスター
 advancements.takumicraft.forcemaster.desc=匠式極光剣を入手する 爆発と共に、あらんことを。
 entity.creeper_hoge.name=匠
@@ -518,6 +520,8 @@ advancements.takumicraft.slay.desc=が匠の書に追加された
 enchantment.takumi_anti_powered=巨匠特攻
 enchantment.takumi_explosion_protection=爆発無効
 enchantment.takumi_minesweeper=地雷除去
+enchantment.takumi_type_magic=魔式守護法
+enchantment.takumi_type_dest=壊式殲滅術
 
 #potion
 takumisubsidence=潜行
@@ -536,6 +540,7 @@ explosionjump=爆破跳躍
 potion.effect.explosionjump=爆破跳躍のポーション
 splash_potion.effect.explosionjump=爆破跳躍のスプラッシュポーション
 lingering_potion.effect.explosionjump=爆破跳躍の残留ポーション
+
 #Vanilla
 item.skull.creeper.name=匠の頭
 item.fireworksCharge.type.3=匠形

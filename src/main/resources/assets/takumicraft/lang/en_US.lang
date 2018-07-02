@@ -150,6 +150,8 @@ item.typecore.grass.name=Element Core[Grass]
 item.typecore.water.name=Element Core[Water]
 item.typecore.wind.name=Element Core[Wind]
 item.typecore.ground.name=Element Core[Ground]
+item.typecoresp_dest.name=Element Core[Destruction]
+item.typecoresp_magic.name=Element Core[Magic]
 item.typecore.normal.name=Element Core
 item.typesword_fire.name=Creeper Fire Katana
 item.typesword_water.name=Creeper Water Axe
@@ -486,6 +488,8 @@ advancements.takumicraft.slay.desc=is registerd to Creeper Book.
 enchantment.takumi_anti_powered=Anti-powered
 enchantment.takumi_explosion_protection=Explosion Protection
 enchantment.takumi_minesweeper=Minesweeper
+enchantment.takumi_type_magic=Magic-powered
+enchantment.takumi_type_dest=Destruction-powered
 
 #potion
 takumisubsidence=Subsidence

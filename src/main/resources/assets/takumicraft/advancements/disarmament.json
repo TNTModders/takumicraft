@@ -3,7 +3,7 @@
     "icon": {
       "item": "takumicraft:takumisword"
     },
-    "hidden":true,
+
     "title": {
       "translate": "advancements.takumicraft.disarmament.title"
     },

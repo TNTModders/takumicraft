@@ -7,10 +7,13 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.item.ItemTypeCoreSP;
+import com.tntmodders.takumi.item.ItemTypeSword;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -28,6 +31,7 @@ import net.minecraft.init.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
@@ -37,6 +41,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -48,15 +53,36 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.StreamSupport;
 
 public class TakumiEvents {
 
     @SubscribeEvent
-    public void onPickupItem(EntityItemPickupEvent event) {
+    public void onAnvilUpdate(AnvilUpdateEvent event) {
+        if (event.getLeft().getItem() instanceof ItemTypeSword &&
+                event.getRight().getItem() instanceof ItemTypeCoreSP) {
+            event.setCost(10);
+            event.setMaterialCost(1);
+            event.setOutput(new ItemStack(event.getLeft().getItem(), 1));
+            if (event.getLeft().isItemEnchanted()) {
+                for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                        event.getLeft()).entrySet()) {
+                    event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                }
+            }
+            if (event.getRight().getItem() == TakumiItemCore.TAKUMI_TYPE_CORE_DEST &&
+                    !EnchantmentHelper.getEnchantments(event.getOutput()).containsKey(
+                            TakumiEnchantmentCore.TYPE_DEST)) {
+                event.getOutput().addEnchantment(TakumiEnchantmentCore.TYPE_DEST, 1);
+            }
+            if (event.getRight().getItem() == TakumiItemCore.TAKUMI_TYPE_CORE_MAGIC &&
+                    !EnchantmentHelper.getEnchantments(event.getOutput()).containsKey(
+                            TakumiEnchantmentCore.TYPE_MAGIC)) {
+                event.getOutput().addEnchantment(TakumiEnchantmentCore.TYPE_MAGIC, 1);
+            }
+
+        }
     }
 
     @SubscribeEvent
@@ -133,6 +159,43 @@ public class TakumiEvents {
                 event.getEntityLiving().world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE,
                         event.getEntityLiving().posX, event.getEntityLiving().posY - 0.5, event.getEntityLiving().posZ,
                         0, 0, 0);
+            }
+        }
+
+        if (EnchantmentHelper.getEnchantments(event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND)).containsKey(
+                TakumiEnchantmentCore.TYPE_MAGIC)) {
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 5, 4, true, false));
+            List<Potion> potions = new ArrayList<>();
+            event.getEntityLiving().getActivePotionEffects().forEach(potionEffect -> {
+                if (potionEffect.getPotion().isBadEffect()) {
+                    potions.add(potionEffect.getPotion());
+                }
+            });
+            potions.forEach(potion -> event.getEntityLiving().removePotionEffect(potion));
+            if (event.getEntityLiving().world.isRemote) {
+                for (int i = 0; i < 5; i++) {
+                    event.getEntityLiving().world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE,
+                            event.getEntityLiving().posX + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
+                                    event.getEntityLiving().width * 6, event.getEntityLiving().posY +
+                                    event.getEntityLiving().getRNG().nextDouble() * event.getEntityLiving().height * 2,
+                            event.getEntityLiving().posZ + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
+                                    event.getEntityLiving().width * 6, 0.0D, 0.0D, 0.0D);
+                }
+            }
+        }
+        if (EnchantmentHelper.getEnchantments(event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND)).containsKey(
+                TakumiEnchantmentCore.TYPE_DEST)) {
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 5, 4, true, false));
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SATURATION, 5, 0, true, false));
+            if (event.getEntityLiving().world.isRemote) {
+                for (int i = 0; i < 20; ++i) {
+                    event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                            event.getEntityLiving().posX + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
+                                    event.getEntityLiving().width * 6, event.getEntityLiving().posY +
+                                    event.getEntityLiving().getRNG().nextDouble() * event.getEntityLiving().height * 2,
+                            event.getEntityLiving().posZ + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
+                                    event.getEntityLiving().width * 6, 0.0D, 0.0D, 0.0D);
+                }
             }
         }
     }
@@ -365,9 +428,10 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
-    public void knockbackEvent(LivingKnockBackEvent event){
-        if(event.getAttacker() instanceof EntityLivingBase && ((EntityLivingBase) event.getAttacker())
-                .getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_WATER){
+    public void knockbackEvent(LivingKnockBackEvent event) {
+        if (event.getAttacker() instanceof EntityLivingBase &&
+                ((EntityLivingBase) event.getAttacker()).getHeldItemMainhand().getItem() ==
+                        TakumiItemCore.TAKUMI_TYPE_SWORD_WATER) {
             event.setCanceled(true);
         }
     }
