@@ -71,8 +71,8 @@ tile.takumitnt.name=Creeper TNT
 tile.monsterbomb.name=Bomb
 tile.takumiblock.name=Creeper Super Block
 tile.takumicreepered.name=Creepered Block
-tile.takumiportalframe.name=Creeper World Portal
-tile.takumiportal.name=Creeper World Portal
+tile.takumiportalframe.name=Takumi World Portal
+tile.takumiportal.name=Takumi World Portal
 tile.fallingbomb.name=Falling Bomb
 tile.takumistone.name=Takumi Stone
 tile.takumidirt.name=Takumi DIrt
@@ -142,7 +142,7 @@ item.magicarmor_chest.name=Magic Armor Chest
 item.magicarmor_legs.name=Magic Armor Leggings
 item.magicarmor_feet.name=Magic Armor Feet
 item.magicbow.name=Magic Bow
-item.attackblock.name=Takumi Attack Block
+item.attackblock.name=Creeper Attack Block
 item.xms.name=X-MS
 item.yms.name=Y-MS
 item.typecore.fire.name=Element Core[Fire]
@@ -159,6 +159,7 @@ item.typesword_grass.name=Creeper Grass Dagger
 item.typesword_wind.name=Creeper WInd Lance
 item.typesword_ground.name=Creeper Ground Hummer
 item.typesword_normal.name=Creeper Light Sword
+item.takumibowgun.name=Creeper BowGun
 
 #entity
 #desc max: 72 chars

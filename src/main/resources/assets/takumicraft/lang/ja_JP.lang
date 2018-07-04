@@ -159,6 +159,7 @@ item.typesword_grass.name=匠式草匕首
 item.typesword_wind.name=匠式風突槍
 item.typesword_ground.name=匠式地大槌
 item.typesword_normal.name=匠式極光剣
+item.takumibowgun.name= 匠式弩砲
 
 #entity
 ＃descは36文字まで。
