@@ -163,6 +163,9 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
                 creeper.ignite();
                 world.spawnEntity(creeper);
                 creeper.onUpdate();
+                if (creeper instanceof EntityBoltCreeper) {
+                    creeper.setDead();
+                }
             }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
