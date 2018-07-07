@@ -12,7 +12,7 @@
     },
     "frame": "challenge"
   },
-  "parent": "takumicraft:creeperbomb",
+  "parent": "takumicraft:takumialtar",
   "criteria": {
     "kingcore": {
       "trigger": "minecraft:inventory_changed",

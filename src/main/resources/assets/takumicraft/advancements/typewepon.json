@@ -3,7 +3,6 @@
     "icon": {
       "item": "takumicraft:typesword_ground"
     },
-    "hidden": true,
     "title": {
       "translate": "advancements.takumicraft.typewepon.title"
     },
@@ -11,7 +10,7 @@
       "translate": "advancements.takumicraft.typewepon.desc"
     }
   },
-  "parent": "takumicraft:takumishield",
+  "parent": "takumicraft:root",
   "criteria": {
     "fire": {
       "trigger": "minecraft:inventory_changed",

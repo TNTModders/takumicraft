@@ -3,7 +3,6 @@
     "icon": {
       "item": "takumicraft:typesword_normal"
     },
-    "hidden": true,
     "title": {
       "translate": "advancements.takumicraft.forcemaster.title"
     },

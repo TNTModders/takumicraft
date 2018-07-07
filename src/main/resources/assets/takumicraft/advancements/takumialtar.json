@@ -1,24 +1,24 @@
 {
   "display": {
     "icon": {
-      "item": "takumicraft:takumishield"
+      "item": "takumicraft:takumialtar"
     },
-
     "title": {
-      "translate": "advancements.takumicraft.takumishield.title"
+      "translate": "advancements.takumicraft.takumialtar.title"
     },
     "description": {
-      "translate": "advancements.takumicraft.takumishield.desc"
-    }
+      "translate": "advancements.takumicraft.takumialtar.desc"
+    },
+    "frame": "challenge"
   },
   "parent": "takumicraft:root",
   "criteria": {
-    "takumishield": {
+    "creeperbomb": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "takumicraft:takumishield"
+            "item": "takumicraft:takumialtar"
           }
         ]
       }

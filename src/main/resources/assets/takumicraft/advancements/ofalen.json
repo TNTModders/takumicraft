@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "takumicraft:boltstone"
+      "item": "takumicraft:takumiofalen"
     },
     "title": {
-      "translate": "advancements.takumicraft.boltstone.title"
+      "translate": "advancements.takumicraft.ofalen.title"
     },
     "description": {
-      "translate": "advancements.takumicraft.boltstone.desc"
+      "translate": "advancements.takumicraft.ofalen.desc"
     }
   },
   "parent": "takumicraft:takumialtar",
@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "item": "takumicraft:boltstone"
+            "item": "takumicraft:takumiofalen"
           }
         ]
       }

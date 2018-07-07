@@ -12,7 +12,7 @@
     },
     "frame": "challenge"
   },
-  "parent": "takumicraft:root",
+  "parent": "takumicraft:typewepon",
   "criteria": {
     "impossible": {
       "trigger": "minecraft:impossible"

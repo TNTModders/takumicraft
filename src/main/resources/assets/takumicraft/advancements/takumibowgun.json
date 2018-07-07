@@ -1,24 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "takumicraft:takumishield"
+      "item": "takumicraft:takumibowgun"
     },
-
     "title": {
-      "translate": "advancements.takumicraft.takumishield.title"
+      "translate": "advancements.takumicraft.takumibowgun.title"
     },
     "description": {
-      "translate": "advancements.takumicraft.takumishield.desc"
+      "translate": "advancements.takumicraft.takumibowgun.desc"
     }
   },
-  "parent": "takumicraft:root",
+  "parent": "takumicraft:typewepon",
   "criteria": {
     "takumishield": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "takumicraft:takumishield"
+            "item": "takumicraft:takumibowgun"
           }
         ]
       }

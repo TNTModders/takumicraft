@@ -121,6 +121,10 @@ item.takumibucket_takumihotspring.name=匠温泉入り エメラルドバケツ
 item.takumibucket_takumiwater.name=匠水入り エメラルドバケツ
 item.takumibow.name=匠式強弓
 item.takumiarrow_ha.name=匠式弾[破]
+item.takumiarrow_retsu.name=匠式弾[裂]
+item.takumiarrow_sai.name=匠式弾[砕]
+item.takumiarrow_san.name=匠式弾[散]
+item.takumiarrow_kan.name=匠式弾[貫]
 item.takumisword.name=匠式宝剣
 item.boltstone.name=かみなりのいし
 item.takumiarmor_head.name=匠式装甲[頭]
@@ -514,6 +518,12 @@ advancements.takumicraft.typewepon.title=五元素の使い手
 advancements.takumicraft.typewepon.desc=匠素結晶の武器をすべて集める 属性の力は武器になる。 金床で壊と魔の力を付けよ。
 advancements.takumicraft.forcemaster.title=フォース=マスター
 advancements.takumicraft.forcemaster.desc=匠式極光剣を入手する 爆発と共に、あらんことを。
+advancements.takumicraft.takumibowgun.title=撃ち方、始め!
+advancements.takumicraft.takumibowgun.desc=匠式弩砲を入手する 全部吹き飛ばしちまいな!
+advancements.takumicraft.takumialtar.title=祭壇と篝火
+advancements.takumicraft.takumialtar.desc=王匠の祭壇を入手する 強者を召喚せよ。
+advancements.takumicraft.ofalen.title=不思議な鉱石
+advancements.takumicraft.ofalen.desc=匠オファレンを入手する 科学と魔術はときに同義である。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 
