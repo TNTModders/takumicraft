@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "Q",
+    "B"
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:skull",
+      "data":4
+    },
+    "Q": {
+      "item": "takumicraft:takumiarrow_ha"
+    },
+    "B": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiarrow_sai"
+  }
+}

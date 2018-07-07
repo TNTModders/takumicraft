@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TQT",
+    "TTT"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:takumiarrow_retsu"
+    },
+    "T": {
+      "item": "takumicraft:creeperbomb"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiarrow_san"
+  }
+}

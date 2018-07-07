@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TQT",
+    "TTT"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:takumiarrow_sai"
+    },
+    "T": {
+      "item": "takumicraft:takumitnt"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiarrow_kan"
+  }
+}

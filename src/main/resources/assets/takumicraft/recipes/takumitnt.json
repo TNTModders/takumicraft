@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Q ",
+    "QTQ",
+    " Q "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumitnt",
+    "count": 4
+  }
+}

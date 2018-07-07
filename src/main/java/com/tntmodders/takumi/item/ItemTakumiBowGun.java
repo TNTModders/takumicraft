@@ -45,8 +45,8 @@ public class ItemTakumiBowGun extends Item {
             ItemStack arrow = entityLiving.getHeldItemOffhand();
             boolean flg = false;
             EntityArrow takumiArrow = null;
-            if (arrow.getItem() == TakumiItemCore.TAKUMI_ARROW_HA) {
-                takumiArrow = TakumiItemCore.TAKUMI_ARROW_HA.createArrow(worldIn, arrow, entityLiving);
+            if (arrow.getItem() instanceof ItemArrow) {
+                takumiArrow = ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, entityLiving);
                 takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5 * 3.0F,
                         1.0F);
                 takumiArrow.setIsCritical(true);
@@ -73,6 +73,10 @@ public class ItemTakumiBowGun extends Item {
                 flg = worldIn.spawnEntity(takumiArrow);
             }
             if (flg && takumiArrow != null) {
+                if (!worldIn.isRemote) {
+                    worldIn.createExplosion(entityLiving, entityLiving.posX, entityLiving.posY, entityLiving.posZ, 0f,
+                            false);
+                }
                 entityLiving.knockBack(entityLiving, 1, takumiArrow.motionX, takumiArrow.motionZ);
                 if (!(entityLiving instanceof EntityPlayer && ((EntityPlayer) entityLiving).isCreative())) {
                     arrow.shrink(1);
@@ -85,6 +89,16 @@ public class ItemTakumiBowGun extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (handIn != EnumHand.MAIN_HAND) {
+            return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        }
+        ItemStack stack = playerIn.getHeldItemOffhand();
+        if (!(stack.getItem() instanceof ItemArrow ||
+                stack.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB) ||
+                (stack.getItem() instanceof ItemBlock &&
+                        ((ItemBlock) stack.getItem()).getBlock() instanceof BlockTakumiMonsterBomb))) {
+            return new ActionResult<>(EnumActionResult.PASS, stack);
+        }
         playerIn.setActiveHand(handIn);
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
@@ -97,5 +111,10 @@ public class ItemTakumiBowGun extends Item {
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.BOW;
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
     }
 }

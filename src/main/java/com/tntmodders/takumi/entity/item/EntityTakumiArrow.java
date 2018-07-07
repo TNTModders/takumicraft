@@ -3,20 +3,23 @@ package com.tntmodders.takumi.entity.item;
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
 import com.tntmodders.takumi.item.ItemTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityTakumiArrow extends EntityArrow {
 
     private ItemStack stack;
-    private int pierce;
     private int power;
     private boolean destroy;
     private Class<? extends EntityCreeper> container;
@@ -30,7 +33,6 @@ public class EntityTakumiArrow extends EntityArrow {
     public EntityTakumiArrow(World worldIn, ItemStack itemStack, EntityLivingBase base) {
         super(worldIn, base);
         this.stack = itemStack;
-        this.pierce = ((ItemTakumiArrow) stack.getItem()).pierce;
         this.power = ((ItemTakumiArrow) stack.getItem()).power;
         this.destroy = ((ItemTakumiArrow) stack.getItem()).destroy;
         this.container = null;
@@ -53,7 +55,6 @@ public class EntityTakumiArrow extends EntityArrow {
             Class<EntityCreeper> container, EnumArrowType type) {
         super(worldIn, base);
         this.stack = null;
-        this.pierce = pierce;
         this.power = power;
         this.destroy = destroy;
         this.container = null;
@@ -64,7 +65,8 @@ public class EntityTakumiArrow extends EntityArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.typeOfHit == Type.ENTITY) {
-            if (raytraceResultIn.entityHit == this.shootingEntity) {
+            if (raytraceResultIn.entityHit == this.shootingEntity ||
+                    raytraceResultIn.entityHit instanceof EntityPlayer) {
                 return;
             }
             raytraceResultIn.entityHit.attackEntityFrom(
@@ -73,44 +75,60 @@ public class EntityTakumiArrow extends EntityArrow {
         if (this.type == null) {
             this.type = EnumArrowType.NORMAL;
         }
-        switch (this.type) {
-            case NORMAL: {
-                TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power, false, destroy);
+        if (!this.world.isRemote) {
+            switch (this.type) {
+                case NORMAL: {
+                    TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power, false,
+                            destroy);
+                    break;
+                }
+                case SHOT: {
+                    for (int i = 0; i < 5; i++) {
+                        TakumiUtils.takumiCreateExplosion(world, this, this.posX + rand.nextInt(7) - 3,
+                                this.posY + rand.nextInt(3), this.posZ + rand.nextInt(7) - 3, power, false, destroy);
+                    }
+                    break;
+                }
+                case PIERCE: {
+                    for (int i = 0; i < 5; i++) {
+                        TakumiUtils.takumiCreateExplosion(world, this, this.posX + this.motionX / 4 * i,
+                                this.posY + this.motionY / 4 * i, this.posZ + this.motionZ / 4 * i, power, false,
+                                destroy);
+
+                    }
+                    break;
+                }
+                case MONSTER: {
+                    try {
+                        EntityCreeper creeper = this.container.getConstructor(World.class).newInstance(world);
+                        creeper.setPosition(this.posX, this.posY, this.posZ);
+                        NBTTagCompound compound = new NBTTagCompound();
+                        creeper.writeEntityToNBT(compound);
+                        compound.setShort("Fuse", (short) 1);
+                        creeper.readEntityFromNBT(compound);
+                        if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
+                            creeper.onStruckByLightning(null);
+                        }
+                        creeper.setInvisible(true);
+                        creeper.ignite();
+                        world.spawnEntity(creeper);
+                        creeper.onUpdate();
+                        if (creeper instanceof EntityBoltCreeper) {
+                            creeper.setDead();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             }
-            case MONSTER: {
-                try {
-                    EntityCreeper creeper = this.container.getConstructor(World.class).newInstance(world);
-                    creeper.setPosition(this.posX, this.posY, this.posZ);
-                    NBTTagCompound compound = new NBTTagCompound();
-                    creeper.writeEntityToNBT(compound);
-                    compound.setShort("Fuse", (short) 1);
-                    creeper.readEntityFromNBT(compound);
-                    if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
-                        creeper.onStruckByLightning(null);
-                    }
-                    creeper.setInvisible(true);
-                    creeper.ignite();
-                    world.spawnEntity(creeper);
-                    creeper.onUpdate();
-                    if (creeper instanceof EntityBoltCreeper) {
-                        creeper.setDead();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
-        pierce--;
-        if (pierce <= 0) {
-            this.setDead();
-        }
+        this.setDead();
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setInteger("power", this.power);
-        compound.setInteger("pierce", this.pierce);
         compound.setBoolean("destroy", this.destroy);
         if (this.container != null) {
             compound.setString("container", this.container.getName());
@@ -121,7 +139,6 @@ public class EntityTakumiArrow extends EntityArrow {
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         this.power = compound.getInteger("power");
-        this.pierce = compound.getInteger("pierce");
         this.destroy = compound.getBoolean("destroy");
         try {
             this.container = (Class<? extends EntityCreeper>) Class.forName(compound.getString("container"));
@@ -141,7 +158,18 @@ public class EntityTakumiArrow extends EntityArrow {
         return stack;
     }
 
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
+
+    @Override
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f :
+                super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) / 3;
+    }
+
     public enum EnumArrowType {
-        NORMAL, PIERCE, MONSTER, SHOT, LASER
+        NORMAL, MONSTER, SHOT, PIERCE, LASER
     }
 }

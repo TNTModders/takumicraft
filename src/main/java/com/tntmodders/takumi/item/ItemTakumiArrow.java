@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -29,6 +30,12 @@ public class ItemTakumiArrow extends ItemArrow {
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
         if (shooter.getActiveItemStack().getItem() == Items.BOW) {
             return ((ItemArrow) Items.ARROW).createArrow(worldIn, stack, shooter);
+        }
+        if (stack.getItem() == TakumiItemCore.TAKUMI_ARROW_SAN) {
+            return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter, EntityTakumiArrow.EnumArrowType.SHOT);
+        }
+        if (stack.getItem() == TakumiItemCore.TAKUMI_ARROW_KAN) {
+            return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter, EntityTakumiArrow.EnumArrowType.PIERCE);
         }
         return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter);
     }
