@@ -45,10 +45,17 @@ public class ItemTakumiBowGun extends Item {
             ItemStack arrow = entityLiving.getHeldItemOffhand();
             boolean flg = false;
             EntityArrow takumiArrow = null;
-            if (arrow.getItem() instanceof ItemArrow) {
+            if (arrow.getItem() == TakumiItemCore.TAKUMI_ARROW_BAKU) {
                 takumiArrow = ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, entityLiving);
-                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5 * 3.0F,
-                        1.0F);
+                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 1f * 3.0F,
+                        0f);
+                takumiArrow.setIsCritical(true);
+                takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                flg = worldIn.spawnEntity(takumiArrow);
+            } else if (arrow.getItem() instanceof ItemArrow) {
+                takumiArrow = ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, entityLiving);
+                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5f * 3.0F,
+                        0f);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
                 flg = worldIn.spawnEntity(takumiArrow);
@@ -58,15 +65,15 @@ public class ItemTakumiBowGun extends Item {
                 takumiArrow =
                         new EntityTakumiArrow(worldIn, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), entityLiving,
                                 bomb.getEntityClass());
-                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5 * 3.0F,
-                        1.0F);
+                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5f * 3.0F,
+                        0f);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
                 flg = worldIn.spawnEntity(takumiArrow);
             } else if (arrow.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB)) {
                 takumiArrow = new EntityTakumiArrow(worldIn, entityLiving, 1, 5, true, null,
                         EntityTakumiArrow.EnumArrowType.NORMAL);
-                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5 * 3.0F,
+                takumiArrow.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 5f * 3.0F,
                         1.0F);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;

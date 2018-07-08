@@ -32,6 +32,7 @@ public class TakumiItemCore {
     public static final ItemTakumiArrow TAKUMI_ARROW_SAI = new ItemTakumiArrow("sai", 3, 1, true);
     public static final ItemTakumiArrow TAKUMI_ARROW_SAN = new ItemTakumiArrow("san", 4, 1, false);
     public static final ItemTakumiArrow TAKUMI_ARROW_KAN = new ItemTakumiArrow("kan", 4, 5, true);
+    public static final ItemTakumiArrow TAKUMI_ARROW_BAKU = new ItemTakumiArrow("baku", 10, 5, true);
     public static final Item TAKUMI_SWORD = new ItemTakumiSword();
     public static final Item TAKUMI_BOLT_STONE = new ItemTakumiBoltStone();
     public static final Item TAKUMI_CREEPER_HELMET = new ItemTakumiArmor(EntityEquipmentSlot.HEAD);

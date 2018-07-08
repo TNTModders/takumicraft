@@ -6,9 +6,12 @@ import com.tntmodders.takumi.entity.item.EntityTakumiArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTakumiArrow extends ItemArrow {
 
@@ -27,6 +30,17 @@ public class ItemTakumiArrow extends ItemArrow {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return stack.getItem() == TakumiItemCore.TAKUMI_ARROW_BAKU || super.hasEffect(stack);
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return stack.getItem() == TakumiItemCore.TAKUMI_ARROW_BAKU ? EnumRarity.EPIC : super.getRarity(stack);
+    }
+
+    @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
         if (shooter.getActiveItemStack().getItem() == Items.BOW) {
             return ((ItemArrow) Items.ARROW).createArrow(worldIn, stack, shooter);
@@ -36,6 +50,9 @@ public class ItemTakumiArrow extends ItemArrow {
         }
         if (stack.getItem() == TakumiItemCore.TAKUMI_ARROW_KAN) {
             return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter, EntityTakumiArrow.EnumArrowType.PIERCE);
+        }
+        if (stack.getItem() == TakumiItemCore.TAKUMI_ARROW_BAKU) {
+            return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter, EntityTakumiArrow.EnumArrowType.LASER);
         }
         return new EntityTakumiArrow(worldIn, new ItemStack(this), shooter);
     }

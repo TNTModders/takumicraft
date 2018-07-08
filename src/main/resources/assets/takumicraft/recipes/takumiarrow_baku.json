@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "QQQ",
+    "KKK"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creepercore"
+    },
+    "S": {
+      "item": "takumicraft:takumiarrow_san"
+    },
+    "K": {
+      "item": "takumicraft:takumiarrow_kan"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiarrow_baku"
+  }
+}

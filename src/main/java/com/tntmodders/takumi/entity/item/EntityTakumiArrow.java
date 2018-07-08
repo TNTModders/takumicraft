@@ -11,6 +11,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -61,6 +62,27 @@ public class EntityTakumiArrow extends EntityArrow {
         this.type = type;
     }
 
+    @Override
+    public void onUpdate() {
+        if (this.type == EnumArrowType.LASER) {
+            this.setNoGravity(true);
+            if (this.world.isRemote) {
+                for (int i = 0; i <= 1000; i++) {
+                    this.world.spawnAlwaysVisibleParticle(EnumParticleTypes.END_ROD.getParticleID(),
+                            this.posX + this.rand.nextDouble() * 6 - 3, this.posY + this.rand.nextDouble() * 6 - 3,
+                            this.posZ + this.rand.nextDouble() * 6 - 3, this.motionX / 3, this.motionY / 3,
+                            this.motionZ / 3);
+                }
+            } else {
+                TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power / 2, false,
+                        destroy);
+            }
+            if (this.ticksExisted > 1200 || this.isInWater()) {
+                this.setDead();
+            }
+        }
+        super.onUpdate();
+    }
 
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
@@ -119,8 +141,15 @@ public class EntityTakumiArrow extends EntityArrow {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    break;
                 }
-                break;
+                case LASER: {
+                    for (int i = 0; i < 10; i++) {
+                        TakumiUtils.takumiCreateExplosion(world, this, this.posX + this.motionX * i,
+                                this.posY + this.motionY * i, this.posZ + this.motionZ * i, power, false, destroy);
+                    }
+                    break;
+                }
             }
         }
         this.setDead();
@@ -142,8 +171,7 @@ public class EntityTakumiArrow extends EntityArrow {
         this.destroy = compound.getBoolean("destroy");
         try {
             this.container = (Class<? extends EntityCreeper>) Class.forName(compound.getString("container"));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         try {
             this.type = EnumArrowType.valueOf(compound.getString("type"));
