@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.event.TakumiClientEvents;
+import com.tntmodders.takumi.item.ItemBattleShield;
 import com.tntmodders.takumi.item.ItemTakumiShield;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -50,6 +51,12 @@ public class TakumiASMHooks {
             GlStateManager.scale(1.0F, -1.0F, -1.0F);
             TakumiClientEvents.MODEL_SHIELD.render();
             GlStateManager.popMatrix();
+        } else if (itemStack.getItem() == TakumiItemCore.BATTLE_SHIELD) {
+            Minecraft.getMinecraft().getTextureManager().bindTexture(ItemBattleShield.SHIELD_TEXTURE);
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(1.0F, -1.0F, -1.0F);
+            TakumiClientEvents.MODEL_SHIELD.render();
+            GlStateManager.popMatrix();
         } else if (itemStack.getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_NORMAL) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TakumiClientEvents.ModelSaber.HANDLE_TEXTURE);
             GlStateManager.pushMatrix();
@@ -79,7 +86,8 @@ public class TakumiASMHooks {
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(5888);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             //GlStateManager.depthMask(false);

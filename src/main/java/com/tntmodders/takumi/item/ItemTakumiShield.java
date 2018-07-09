@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class ItemTakumiShield extends ItemShield {
+public class ItemTakumiShield extends ItemShield implements IItemAntiExplosion {
 
     public static final ResourceLocation SHIELD_TEXTURE =
             new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/shield_base.png");

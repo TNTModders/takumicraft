@@ -7,6 +7,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.item.IItemAntiExplosion;
 import com.tntmodders.takumi.item.ItemTypeCoreSP;
 import com.tntmodders.takumi.item.ItemTypeSword;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -221,12 +222,19 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onExplosion(Detonate event) {
         if (!event.getWorld().isRemote) {
-            event.getAffectedEntities().removeIf(entity -> entity instanceof EntityLivingBase &&
-                    (((EntityLivingBase) entity).getActiveItemStack().getItem() == TakumiItemCore.TAKUMI_SHIELD ||
-                            StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
-                                    itemStack -> !EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
-                                            EnchantmentHelper.getEnchantments(itemStack).containsKey(
-                                                    TakumiEnchantmentCore.EXPLOSION_PROTECTION))));
+            event.getAffectedEntities().removeIf(entity -> {
+                if (entity instanceof EntityLivingBase) {
+                    if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
+                        ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));
+                        return true;
+                    }
+                    return StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
+                            itemStack -> !EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
+                                    EnchantmentHelper.getEnchantments(itemStack).containsKey(
+                                            TakumiEnchantmentCore.EXPLOSION_PROTECTION));
+                }
+                return false;
+            });
             if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() ==
                     TakumiBlockCore.ACID_BLOCK) {
                 IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
