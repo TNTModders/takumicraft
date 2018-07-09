@@ -473,6 +473,8 @@ entity.anvilcreeper.name=金床匠
 entity.anvilcreeper.desc=爆発とともに大量の金床をまき散らし、雨の代わりに金床の雨を降らす。 MOB募集:さとしきさん
 entity.randcreeper.name=籤匠
 entity.randcreeper.desc=全てはあなたの運次第。 MOB募集:燈凪さん
+entity.bigcreeper.name=大匠
+entity.bigcreeper.desc=それは最後の兵器、巨大にて強大なる匠。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -487,6 +489,8 @@ entity.attackblock.win=進撃ブロックの防衛に成功した。
 entity.takumiXMS.name=X-MS
 entity.takumiYMS.name=Y-MS
 entity.watertypeforce.name=匠式水斧
+entity.transhomingbomb.name=輪匠
+entity.bighomingbomb.name=大匠
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

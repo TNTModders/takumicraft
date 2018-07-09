@@ -262,6 +262,8 @@ public class TakumiEntityCore {
                 EntityWaterTypeForce.class, "waterforce", 915, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "windlance"),
                 EntityWindLance.class, "windlance", 916, TakumiCraftCore.TakumiInstance, 64, 1, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "bighomingbomb"),
+                EntityBigHomingBomb.class, "bighomingbomb", 917, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -284,6 +286,13 @@ public class TakumiEntityCore {
                         Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager ::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTransHomingBomb.class,
+                manager -> new RenderShulkerBullet(manager) {
+                    @Override
+                    public void doRender(EntityShulkerBullet entity, double x, double y, double z, float entityYaw,
+                            float partialTicks) {
+                    }
+                });
+        RenderingRegistry.registerEntityRenderingHandler(EntityBigHomingBomb.class,
                 manager -> new RenderShulkerBullet(manager) {
                     @Override
                     public void doRender(EntityShulkerBullet entity, double x, double y, double z, float entityYaw,

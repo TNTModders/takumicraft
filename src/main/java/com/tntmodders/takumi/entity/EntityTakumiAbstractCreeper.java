@@ -204,7 +204,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
             return;
         }
-        if (damageSrc == DamageSource.IN_WALL && this.takumiRank().getLevel() >= 3) {
+        if ((damageSrc == DamageSource.IN_WALL || damageSrc == DamageSource.FALL) &&
+                this.takumiRank().getLevel() >= 3) {
             return;
         }
         super.damageEntity(damageSrc, damageAmount);

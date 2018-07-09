@@ -441,6 +441,8 @@ entity.anvilcreeper.name=Anvil Creeper
 entity.anvilcreeper.desc=Falling anvil, feeling ennui.
 entity.randcreeper.name=Random Creeper
 entity.randcreeper.desc=All you need is luck.
+entity.bigcreeper.name=Big Creeper
+entity.bigcreeper.desc=BIIIIIIIIIIIIIIIIIIIIIIIIIG!!!!!!!!!!!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -455,6 +457,8 @@ entity.attackblock.win=You compleatly protected Attack Block!
 entity.takumiXMS.name=X-MS
 entity.takumiYMS.name=Y-MS
 entity.watertypeforce.name=Creeper Water Axe
+entity.transhomingbomb.name=Trans Creeper
+entity.bighomingbomb.name=Big Creeper
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
