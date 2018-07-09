@@ -1,11 +1,13 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
@@ -78,6 +80,14 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
                 this.dead) {
             super.setDead();
         }
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 0 : this.rand.nextInt());
+        }
+        super.onDeath(source);
     }
 
     @Override
