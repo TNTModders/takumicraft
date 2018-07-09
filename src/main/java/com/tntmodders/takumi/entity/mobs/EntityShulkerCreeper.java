@@ -42,7 +42,7 @@ public class EntityShulkerCreeper extends EntityTakumiAbstractCreeper {
         this.isAirBorne = true;
         ForgeHooks.onLivingJump(this);
 
-        for (int t = 0; t < 100 * (this.getPowered() ? 2 : 1); t++) {
+        for (int t = 0; t < 20 * (this.getPowered() ? 2 : 1); t++) {
             Random rand = new Random();
             double x = this.posX + this.rand.nextInt(20) - 10;
             double y = this.posY + this.rand.nextInt(20) - 10;
