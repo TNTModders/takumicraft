@@ -77,7 +77,8 @@ public class EntityTakumiArrow extends EntityArrow {
                 TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power / 2, false,
                         destroy);
             }
-            if (this.ticksExisted > 1200 || this.isInWater()) {
+            if (this.ticksExisted > 200 || this.isInWater() || this.isInLava() || this.isEntityInsideOpaqueBlock() ||
+                    (this.posX == this.prevPosX && this.posY == this.prevPosY && this.posZ == this.prevPosZ)) {
                 this.setDead();
             }
         }
