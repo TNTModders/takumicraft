@@ -1,11 +1,13 @@
 package com.tntmodders.takumi.event;
 
+import com.google.common.collect.Lists;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.item.EntityXMS;
+import com.tntmodders.takumi.item.ItemBattleArmor;
 import com.tntmodders.takumi.network.MessageMSMove;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
@@ -14,6 +16,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +30,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
@@ -42,6 +46,45 @@ public class TakumiClientEvents {
         if (FMLCommonHandler.instance().getSide().isClient() &&
                 Minecraft.getMinecraft().player.isPotionActive(TakumiPotionCore.INVERSION)) {
             GlStateManager.rotate(180, 0, 0, 1);
+        }
+    }
+
+    @SubscribeEvent
+    public void renderPlayerPost(RenderLivingEvent.Post event) {
+        if (Lists.newArrayList(event.getEntity().getArmorInventoryList()).stream().allMatch(
+                itemStack -> itemStack.getItem() instanceof ItemBattleArmor &&
+                        ((ItemBattleArmor) itemStack.getItem()).isPowered)) {
+            Minecraft.getMinecraft().getTextureManager().bindTexture(TakumiClientEvents.ModelSaber.SABER_TEXTURE);
+            GlStateManager.pushMatrix();
+            GlStateManager.depthMask(true);
+            GlStateManager.scale(1.0F, -1.0F, -1.0F);
+            GlStateManager.matrixMode(5890);
+            GlStateManager.loadIdentity();
+            float f = Minecraft.getMinecraft().player.ticksExisted * 2;
+            GL11.glTranslated(f * 0.01F, f * 0.01F, 0.0F);
+            GlStateManager.matrixMode(5888);
+            GlStateManager.enableBlend();
+            GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
+            GlStateManager.disableLighting();
+            int i = 15728880;
+            int j = i % 65536;
+            int k = i / 65536;
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+            GlStateManager.translate(0, -1.5, 0);
+            GlStateManager.scale(1.1, 1.1, 1.1);
+            event.getRenderer().getMainModel().render(event.getEntity(), event.getEntity().limbSwing,
+                    event.getEntity().limbSwingAmount, event.getPartialRenderTick(), event.getEntity().rotationYaw,
+                    event.getEntity().rotationPitch, 0.0625f);
+            GlStateManager.matrixMode(5890);
+            GlStateManager.loadIdentity();
+            GlStateManager.matrixMode(5888);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.enableLighting();
+            GlStateManager.disableBlend();
+            GlStateManager.depthMask(false);
+            GlStateManager.popMatrix();
         }
     }
 

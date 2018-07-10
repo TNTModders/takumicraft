@@ -165,8 +165,16 @@ item.typesword_wind.name=Creeper WInd Lance
 item.typesword_ground.name=Creeper Ground Hummer
 item.typesword_normal.name=Creeper Light Sword
 item.takumibowgun.name=Creeper BowGun
-item.battleshield.name=Creeper Battle Shield
-item.battleshield_powered.name=Creeper Battle Powered Shield
+item.battleshield.name=Battle Shield
+item.battleshield_powered.name=Powered Shield
+item.battlearmor_head.name=Battle Armor Head
+item.battlearmor_chest.name=Battle Armor Chest
+item.battlearmor_legs.name=Battle Armor Leggings
+item.battlearmor_feet.name=Battle Armor Feet
+item.battlearmor_powered_head.name=Powered Armor Head
+item.battlearmor_powered_chest.name=Powered Armor Chest
+item.battlearmor_powered_legs.name=Powered Armor Leggings
+item.battlearmor_powered_feet.name=Powered Armor Feet
 
 #entity
 #desc max: 72 chars

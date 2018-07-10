@@ -167,6 +167,14 @@ item.typesword_normal.name=匠式極光剣
 item.takumibowgun.name= 匠式弩砲
 item.battleshield.name=匠式爆盾
 item.battleshield_powered.name=匠式戦盾
+item.battlearmor_head.name=匠式爆甲[頭]
+item.battlearmor_chest.name=匠式爆甲[胴]
+item.battlearmor_legs.name=匠式爆甲[腰]
+item.battlearmor_feet.name=匠式爆甲[足]
+item.battlearmor_powered_head.name=匠式戦甲[頭]
+item.battlearmor_powered_chest.name=匠式戦甲[胴]
+item.battlearmor_powered_legs.name=匠式戦甲[腰]
+item.battlearmor_powered_feet.name=匠式戦甲[足]
 
 #entity
 ＃descは36文字まで。

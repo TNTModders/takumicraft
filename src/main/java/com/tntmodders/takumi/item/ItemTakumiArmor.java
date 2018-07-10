@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.item.material.TakumiArmorMaterial;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
@@ -14,6 +15,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -149,6 +151,36 @@ public class ItemTakumiArmor extends ItemArmor {
                 case FEET:
                     itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
             }
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (this.isInCreativeTab(tab)) {
+            ItemStack itemStack = new ItemStack(this, 1);
+            if (!itemStack.isItemEnchanted()) {
+                itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
+                itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
+                itemStack.addEnchantment(Enchantments.MENDING, 10);
+                switch (this.armorType) {
+                    case HEAD:
+                        itemStack.addEnchantment(Enchantments.THORNS, 10);
+                        break;
+
+                    case CHEST:
+                        itemStack.addEnchantment(Enchantments.PROJECTILE_PROTECTION, 10);
+                        break;
+
+                    case LEGS:
+                        itemStack.addEnchantment(Enchantments.FIRE_PROTECTION, 10);
+                        break;
+
+                    case FEET:
+                        itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
+                }
+            }
+            items.add(itemStack);
         }
     }
 }

@@ -68,6 +68,14 @@ public class TakumiItemCore {
     public static final Item TAKUMI_BOWGUN = new ItemTakumiBowGun();
     public static final Item BATTLE_SHIELD = new ItemBattleShield(false);
     public static final Item BATTLE_SHIELD_POWERED = new ItemBattleShield(true);
+    public static final Item BATTLE_CREEPER_HELMET = new ItemBattleArmor(false, EntityEquipmentSlot.HEAD);
+    public static final Item BATTLE_CREEPER_CHEST = new ItemBattleArmor(false, EntityEquipmentSlot.CHEST);
+    public static final Item BATTLE_CREEPER_LEGS = new ItemBattleArmor(false, EntityEquipmentSlot.LEGS);
+    public static final Item BATTLE_CREEPER_BOOTS = new ItemBattleArmor(false, EntityEquipmentSlot.FEET);
+    public static final Item BATTLE_CREEPER_HELMET_POWERED = new ItemBattleArmor(true, EntityEquipmentSlot.HEAD);
+    public static final Item BATTLE_CREEPER_CHEST_POWERED = new ItemBattleArmor(true, EntityEquipmentSlot.CHEST);
+    public static final Item BATTLE_CREEPER_LEGS_POWERED = new ItemBattleArmor(true, EntityEquipmentSlot.LEGS);
+    public static final Item BATTLE_CREEPER_BOOTS_POWERED = new ItemBattleArmor(true, EntityEquipmentSlot.FEET);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 
