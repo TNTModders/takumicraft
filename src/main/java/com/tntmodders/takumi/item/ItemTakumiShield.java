@@ -1,8 +1,11 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -31,5 +34,14 @@ public class ItemTakumiShield extends ItemShield implements IItemAntiExplosion {
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
         return TakumiUtils.takumiTranslate(this.getUnlocalizedName() + ".name");
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        if (repair.getItem() == Item.getItemFromBlock(Blocks.PLANKS)) {
+            return false;
+        }
+        return repair.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_IRON) ||
+                super.getIsRepairable(toRepair, repair);
     }
 }

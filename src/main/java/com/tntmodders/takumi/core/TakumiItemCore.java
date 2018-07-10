@@ -67,6 +67,7 @@ public class TakumiItemCore {
     public static final Item TAKUMI_TYPE_CORE_MAGIC = new ItemTypeCoreSP(true);
     public static final Item TAKUMI_BOWGUN = new ItemTakumiBowGun();
     public static final Item BATTLE_SHIELD = new ItemBattleShield(false);
+    public static final Item BATTLE_SHIELD_POWERED = new ItemBattleShield(true);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

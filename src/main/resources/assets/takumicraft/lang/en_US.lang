@@ -166,6 +166,7 @@ item.typesword_ground.name=Creeper Ground Hummer
 item.typesword_normal.name=Creeper Light Sword
 item.takumibowgun.name=Creeper BowGun
 item.battleshield.name=Creeper Battle Shield
+item.battleshield_powered.name=Creeper Battle Powered Shield
 
 #entity
 #desc max: 72 chars

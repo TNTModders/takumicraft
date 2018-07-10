@@ -51,6 +51,40 @@ public class TakumiASMHooks {
             GlStateManager.scale(1.0F, -1.0F, -1.0F);
             TakumiClientEvents.MODEL_SHIELD.render();
             GlStateManager.popMatrix();
+        } else if (itemStack.getItem() == TakumiItemCore.BATTLE_SHIELD_POWERED) {
+            Minecraft.getMinecraft().getTextureManager().bindTexture(ItemBattleShield.SHIELD_TEXTURE);
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(1.0F, -1.0F, -1.0F);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+            TakumiClientEvents.MODEL_SHIELD.render();
+            GlStateManager.popMatrix();
+
+            Minecraft.getMinecraft().getTextureManager().bindTexture(TakumiClientEvents.ModelSaber.SABER_TEXTURE);
+            GlStateManager.pushMatrix();
+            GlStateManager.matrixMode(5890);
+            GlStateManager.loadIdentity();
+            float f = Minecraft.getMinecraft().player.ticksExisted * 2;
+            GL11.glTranslated(f * 0.01F, f * 0.01F, 0.0F);
+            GlStateManager.matrixMode(5888);
+            GlStateManager.enableBlend();
+            GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
+            GlStateManager.disableLighting();
+            int i = 15728880;
+            int j = i % 65536;
+            int k = i / 65536;
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+            GlStateManager.scale(1.0F, -1.0F, -1.0F);
+            GlStateManager.scale(1.2,1.2,1.2);
+            TakumiClientEvents.MODEL_SHIELD.render();
+            GlStateManager.matrixMode(5890);
+            GlStateManager.loadIdentity();
+            GlStateManager.matrixMode(5888);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.enableLighting();
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
         } else if (itemStack.getItem() == TakumiItemCore.BATTLE_SHIELD) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(ItemBattleShield.SHIELD_TEXTURE);
             GlStateManager.pushMatrix();
