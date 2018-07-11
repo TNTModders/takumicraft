@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "QQQ",
-    "QQQ",
-    "QQQ"
+    "BBB",
+    "BQB",
+    "BBB"
   ],
   "key": {
-    "Q": {
+    "B": {
       "item": "takumicraft:creeperbomb"
+    },
+    "Q":{
+      "item":"takumicraft:takumiofalen"
     }
   },
   "result": {

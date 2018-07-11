@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MQM",
+    "MMM"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:energycore",
+      "data": 0
+    },
+    "M":{
+      "item":"minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "takumicraft:energycore",
+    "data": 1
+  }
+}

@@ -175,6 +175,10 @@ item.battlearmor_powered_head.name=Powered Armor Head
 item.battlearmor_powered_chest.name=Powered Armor Chest
 item.battlearmor_powered_legs.name=Powered Armor Leggings
 item.battlearmor_powered_feet.name=Powered Armor Feet
+item.energycore_normal.name=Energy Core
+item.energycore_red.name=Energy Core[Attack]
+item.energycore_blue.name=Energy Core[Defence]
+item.energycore_yellow.name=Energy Core[Support]
 
 #entity
 #desc max: 72 chars

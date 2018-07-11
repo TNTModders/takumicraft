@@ -175,6 +175,10 @@ item.battlearmor_powered_head.name=匠式戦甲[頭]
 item.battlearmor_powered_chest.name=匠式戦甲[胴]
 item.battlearmor_powered_legs.name=匠式戦甲[腰]
 item.battlearmor_powered_feet.name=匠式戦甲[足]
+item.energycore.normal.name=匠エネルギーコア
+item.energycore.red.name=匠エネルギーコア[攻]
+item.energycore.blue.name=匠エネルギーコア[守]
+item.energycore.yellow.name=匠エネルギーコア[援]
 
 #entity
 ＃descは36文字まで。

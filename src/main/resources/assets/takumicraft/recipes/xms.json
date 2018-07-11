@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    "QYQ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:energycore",
+      "data": 3
+    },
+    "Y": {
+      "item": "takumicraft:yms"
+    }
+  },
+  "result": {
+    "item": "takumicraft:xms"
+  }
+}

@@ -484,6 +484,9 @@ public class TakumiEvents {
         if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityLiving &&
                 ((EntityLiving) event.getEntityLiving()).getAttackTarget() instanceof EntityAttackBlock &&
                 event.getSource().getTrueSource() instanceof EntityPlayer) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().entityDropItem(new ItemStack(TakumiItemCore.ENERGY_CORE, 1), 0);
+            }
             EntityAttackBlock entity = ((EntityAttackBlock) ((EntityLiving) event.getEntityLiving()).getAttackTarget());
             entity.setHealth(entity.getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
             if (entity.getHealth() <= 0) {

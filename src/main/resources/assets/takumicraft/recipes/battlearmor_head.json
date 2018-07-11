@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    "Q Q"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:energycore",
+      "data":2
+    }
+  },
+  "result": {
+    "item": "takumicraft:battlearmor_head"
+  }
+}

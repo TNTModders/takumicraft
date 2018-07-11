@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EQE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "takumicraft:energycore",
+      "data":2
+    },
+    "Q":{
+      "item":"takumicraft:battlearmor_legs"
+    }
+  },
+  "result": {
+    "item": "takumicraft:battlearmor_powered_legs"
+  }
+}
