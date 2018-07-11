@@ -22,4 +22,4 @@ eclipse
 run
 *.psd
 old
-.xlsx
+*.xlsx
