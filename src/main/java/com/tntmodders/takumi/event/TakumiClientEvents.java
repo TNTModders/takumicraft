@@ -71,11 +71,12 @@ public class TakumiClientEvents {
             int k = i / 65536;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
             GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-            GlStateManager.translate(0, -1.5, 0);
-            GlStateManager.scale(1.1, 1.1, 1.1);
+            GlStateManager.translate(0, -1.45, 0);
+            GlStateManager.scale(1.175, 1.175, 1.175);
+            GlStateManager.rotate(event.getEntity().rotationYaw, 0, 1, 0);
             event.getRenderer().getMainModel().render(event.getEntity(), event.getEntity().limbSwing,
-                    event.getEntity().limbSwingAmount, event.getPartialRenderTick(), event.getEntity().rotationYaw,
-                    event.getEntity().rotationPitch, 0.0625f);
+                    event.getEntity().limbSwingAmount, event.getPartialRenderTick(), 0, event.getEntity().rotationPitch,
+                    0.0625f);
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
             GlStateManager.matrixMode(5888);
