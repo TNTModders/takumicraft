@@ -458,6 +458,8 @@ entity.randcreeper.name=Random Creeper
 entity.randcreeper.desc=All you need is luck.
 entity.bigcreeper.name=Big Creeper
 entity.bigcreeper.desc=BIIIIIIIIIIIIIIIIIIIIIIIIIG!!!!!!!!!!!
+entity.epcreeper.name=Particle Creeper
+entity.epcreeper.desc=Explosion Particle, it will burst you, in several seconds...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
