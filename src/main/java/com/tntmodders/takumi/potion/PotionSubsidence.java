@@ -8,9 +8,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TakumiPotionSubsidence extends Potion {
+public class PotionSubsidence extends Potion {
 
-    public TakumiPotionSubsidence() {
+    public PotionSubsidence() {
         super(true, 551559);
         this.setRegistryName(TakumiCraftCore.MODID, "takumisubsidence");
         this.setPotionName("takumisubsidence");

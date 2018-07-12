@@ -113,6 +113,7 @@ tile.darkironbars.name=深淵の鉄格子
 tile.darkcore.name=深淵の要石
 tile.darkcore_on.name=深淵の邪石
 tile.darkcore_sp.name=深淵の門石
+tile.takumistone_ep.name=匠爆塵石
 
 #item
 item.takumibook.name=匠の書
@@ -570,6 +571,7 @@ explosionjump=爆破跳躍
 potion.effect.explosionjump=爆破跳躍のポーション
 splash_potion.effect.explosionjump=爆破跳躍のスプラッシュポーション
 lingering_potion.effect.explosionjump=爆破跳躍の残留ポーション
+ep=爆塵
 
 #Vanilla
 item.skull.creeper.name=匠の頭

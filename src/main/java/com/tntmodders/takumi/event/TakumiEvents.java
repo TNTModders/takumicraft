@@ -135,6 +135,15 @@ public class TakumiEvents {
                                 event.getEntityLiving().posZ, 3f, true)), 20f);
             }
         }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.EP) != null &&
+                event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.EP).getDuration() <= 1) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().attackEntityFrom(DamageSource.causeExplosionDamage(
+                        event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
+                                event.getEntityLiving().posX, event.getEntityLiving().posY,
+                                event.getEntityLiving().posZ, 3f, true)), 20f);
+            }
+        }
         if (event.getEntityLiving() instanceof EntityCreeper &&
                 !((EntityCreeper) event.getEntityLiving()).getPowered() &&
                 (((EntityCreeper) event.getEntityLiving()).world.isThundering() ||
