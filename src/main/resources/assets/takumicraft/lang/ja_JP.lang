@@ -496,6 +496,8 @@ entity.viruscreeper.name=ウィルス匠
 entity.viruscreeper.desc=※ウィルス感染注意!
 entity.cannoncreeper.name=大砲匠
 entity.cannoncreeper.desc=撃ち方、始め!その一撃で進撃を穿つ。
+entity.cactuscreeper.name=サボテン匠
+entity.cactuscreeper.desc=触れるな危険、痛い目を見るぞ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
