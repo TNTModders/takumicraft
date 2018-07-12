@@ -462,6 +462,8 @@ entity.epcreeper.name=Particle Creeper
 entity.epcreeper.desc=Explosion Particle, it will burst you, in several seconds...
 entity.viruscreeper.name=Virus Creeper
 entity.viruscreeper.desc=Be careful for influence of Creeper Virus.
+entity.cannoncreeper.name=Cannon Creeper
+entity.cannoncreeper.desc=One shot, one kill.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

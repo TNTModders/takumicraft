@@ -494,6 +494,8 @@ entity.epcreeper.name=爆塵匠
 entity.epcreeper.desc=爆塵は、付いたら最後、いつか爆発する……。
 entity.viruscreeper.name=ウィルス匠
 entity.viruscreeper.desc=※ウィルス感染注意!
+entity.cannoncreeper.name=大砲匠
+entity.cannoncreeper.desc=撃ち方、始め!その一撃で進撃を穿つ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
