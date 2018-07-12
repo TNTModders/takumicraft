@@ -466,6 +466,8 @@ entity.cannoncreeper.name=Cannon Creeper
 entity.cannoncreeper.desc=One shot, one kill.
 entity.cactuscreeper.name=Cactus Creeper
 entity.cactuscreeper.desc=Grass? Cactus? No, this is Cactus-Man!
+entity.grasscreeper.name=Grass Creeper
+entity.grasscreeper.desc=wwwwwwwwwwwwwwwwwwwwwwww
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

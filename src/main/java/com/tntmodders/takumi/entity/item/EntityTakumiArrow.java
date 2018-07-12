@@ -74,8 +74,8 @@ public class EntityTakumiArrow extends EntityArrow {
                             this.motionZ / 3);
                 }
             } else {
-                TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power / 2, false,
-                        destroy);
+                TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
+                        this.posX, this.posY, this.posZ, power / 2, false, destroy);
             }
             if (this.ticksExisted > 200 || this.isInWater() || this.isInLava() || this.isEntityInsideOpaqueBlock() ||
                     (this.posX == this.prevPosX && this.posY == this.prevPosY && this.posZ == this.prevPosZ)) {
@@ -101,22 +101,25 @@ public class EntityTakumiArrow extends EntityArrow {
         if (!this.world.isRemote) {
             switch (this.type) {
                 case NORMAL: {
-                    TakumiUtils.takumiCreateExplosion(world, this, this.posX, this.posY, this.posZ, power, false,
-                            destroy);
+                    TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
+                            this.posX, this.posY, this.posZ, power, false, destroy);
                     break;
                 }
                 case SHOT: {
                     for (int i = 0; i < 5; i++) {
-                        TakumiUtils.takumiCreateExplosion(world, this, this.posX + rand.nextInt(7) - 3,
-                                this.posY + rand.nextInt(3), this.posZ + rand.nextInt(7) - 3, power, false, destroy);
+                        TakumiUtils.takumiCreateExplosion(world,
+                                this.shootingEntity != null ? this.shootingEntity : this,
+                                this.posX + rand.nextInt(7) - 3, this.posY + rand.nextInt(3),
+                                this.posZ + rand.nextInt(7) - 3, power, false, destroy);
                     }
                     break;
                 }
                 case PIERCE: {
                     for (int i = 0; i < 5; i++) {
-                        TakumiUtils.takumiCreateExplosion(world, this, this.posX + this.motionX / 4 * i,
-                                this.posY + this.motionY / 4 * i, this.posZ + this.motionZ / 4 * i, power, false,
-                                destroy);
+                        TakumiUtils.takumiCreateExplosion(world,
+                                this.shootingEntity != null ? this.shootingEntity : this,
+                                this.posX + this.motionX / 4 * i, this.posY + this.motionY / 4 * i,
+                                this.posZ + this.motionZ / 4 * i, power, false, destroy);
 
                     }
                     break;
@@ -146,7 +149,8 @@ public class EntityTakumiArrow extends EntityArrow {
                 }
                 case LASER: {
                     for (int i = 0; i < 10; i++) {
-                        TakumiUtils.takumiCreateExplosion(world, this, this.posX + this.motionX * i,
+                        TakumiUtils.takumiCreateExplosion(world,
+                                this.shootingEntity != null ? this.shootingEntity : this, this.posX + this.motionX * i,
                                 this.posY + this.motionY * i, this.posZ + this.motionZ * i, power, false, destroy);
                     }
                     break;
