@@ -460,6 +460,8 @@ entity.bigcreeper.name=Big Creeper
 entity.bigcreeper.desc=BIIIIIIIIIIIIIIIIIIIIIIIIIG!!!!!!!!!!!
 entity.epcreeper.name=Particle Creeper
 entity.epcreeper.desc=Explosion Particle, it will burst you, in several seconds...
+entity.viruscreeper.name=Virus Creeper
+entity.viruscreeper.desc=Be careful for influence of Creeper Virus.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -542,6 +544,7 @@ potion.effect.explosionjump=Potion of Explosion Jump
 splash_potion.effect.explosionjump=Splash Potion of Explosion Jump
 lingering_potion.effect.explosionjump=Lingering Potion of Explosion Jump
 ep=Explosion Particle
+creepervirus=Creeper Virus
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

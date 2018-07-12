@@ -12,12 +12,15 @@ public class TakumiPotionCore {
     public static final Potion CREEPERED = new PotionCreepered();
     public static final Potion EXP_JUMP = new PotionExplosionJump();
     public static final Potion EP = new PotionEP();
+    public static final Potion VIRUS = new PotionVirus();
 
     public static void register(IForgeRegistry<Potion> event) {
         event.register(SUBSIDENCE);
         event.register(INVERSION);
         event.register(CREEPERED);
         event.register(EXP_JUMP);
+        event.register(EP);
+        event.register(VIRUS);
     }
 
     public static void registerPotionType(IForgeRegistry<PotionType> event) {

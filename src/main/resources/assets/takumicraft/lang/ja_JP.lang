@@ -492,6 +492,8 @@ entity.bigcreeper.name=大匠
 entity.bigcreeper.desc=それは最後の兵器、巨大にて強大なる匠。
 entity.epcreeper.name=爆塵匠
 entity.epcreeper.desc=爆塵は、付いたら最後、いつか爆発する……。
+entity.viruscreeper.name=ウィルス匠
+entity.viruscreeper.desc=※ウィルス感染注意!
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -574,6 +576,7 @@ potion.effect.explosionjump=爆破跳躍のポーション
 splash_potion.effect.explosionjump=爆破跳躍のスプラッシュポーション
 lingering_potion.effect.explosionjump=爆破跳躍の残留ポーション
 ep=爆塵
+creepervirus=匠ウィルス
 
 #Vanilla
 item.skull.creeper.name=匠の頭

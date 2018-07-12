@@ -144,6 +144,15 @@ public class TakumiEvents {
                                 event.getEntityLiving().posZ, 3f, true)), 20f);
             }
         }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.VIRUS) != null &&
+                event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.VIRUS).getDuration() <= 1) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().attackEntityFrom(DamageSource.causeExplosionDamage(
+                        event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
+                                event.getEntityLiving().posX, event.getEntityLiving().posY,
+                                event.getEntityLiving().posZ, 3f, true)), 20f);
+            }
+        }
         if (event.getEntityLiving() instanceof EntityCreeper &&
                 !((EntityCreeper) event.getEntityLiving()).getPowered() &&
                 (((EntityCreeper) event.getEntityLiving()).world.isThundering() ||
@@ -244,6 +253,14 @@ public class TakumiEvents {
                 }
                 return false;
             });
+            if (event.getExplosion().getExplosivePlacedBy() != null &&
+                    event.getExplosion().getExplosivePlacedBy().isPotionActive(TakumiPotionCore.VIRUS)) {
+                event.getAffectedEntities().forEach(entity -> {
+                    if (entity instanceof EntityLivingBase && entity != event.getExplosion().getExplosivePlacedBy()) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.VIRUS,100));
+                    }
+                });
+            }
             if (event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition())).getBlock() ==
                     TakumiBlockCore.ACID_BLOCK) {
                 IBlockState state = event.getWorld().getBlockState(new BlockPos(event.getExplosion().getPosition()));
