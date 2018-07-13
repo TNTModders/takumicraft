@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
+import com.tntmodders.takumi.entity.item.EntityAlterDummy;
 import com.tntmodders.takumi.entity.mobs.EntityAnnivCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
 import net.minecraft.block.Block;
@@ -51,8 +52,8 @@ public class BlockTakumiAltar extends Block {
             if (!entities.isEmpty()) {
                 entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
                 try {
-                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass()
-                                              .getConstructor(World.class).newInstance(worldIn);
+                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(
+                            World.class).newInstance(worldIn);
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
@@ -66,7 +67,9 @@ public class BlockTakumiAltar extends Block {
                 worldIn.setBlockToAir(pos.down());
             }
             if (!worldIn.isRemote) {
-                worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
+                worldIn.createExplosion(new EntityAlterDummy(worldIn), pos.getX() + 0.5, pos.getY() + 0.5,
+                        pos.getZ() + 0.5, 3f, true);
+                worldIn.loadedEntityList.removeIf(entity1 -> entity1 instanceof EntityAlterDummy);
                 if (worldIn.spawnEntity(entity)) {
                     return true;
                 }

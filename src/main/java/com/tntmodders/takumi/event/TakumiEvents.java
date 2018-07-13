@@ -257,7 +257,7 @@ public class TakumiEvents {
                     event.getExplosion().getExplosivePlacedBy().isPotionActive(TakumiPotionCore.VIRUS)) {
                 event.getAffectedEntities().forEach(entity -> {
                     if (entity instanceof EntityLivingBase && entity != event.getExplosion().getExplosivePlacedBy()) {
-                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.VIRUS,100));
+                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.VIRUS, 100));
                     }
                 });
             }
@@ -329,6 +329,10 @@ public class TakumiEvents {
                     }
                 });
             }
+        }
+        if (event.getExplosion().getExplosivePlacedBy() instanceof EntityAlterDummy) {
+            event.getAffectedBlocks().removeIf(pos -> pos.getY() < event.getExplosion().getPosition().y-1);
+            event.getAffectedEntities().clear();
         }
         if (event.getExplosion().getExplosivePlacedBy() instanceof ITakumiEntity) {
             boolean flg = ((ITakumiEntity) event.getExplosion().getExplosivePlacedBy()).takumiExplodeEvent(event);
