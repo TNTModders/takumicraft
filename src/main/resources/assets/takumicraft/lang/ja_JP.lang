@@ -500,6 +500,8 @@ entity.cactuscreeper.name=サボテン匠
 entity.cactuscreeper.desc=触れるな危険、痛い目を見るぞ。
 entity.grasscreeper.name=草匠
 entity.grasscreeper.desc=ｗｗｗｗｗｗｗｗｗｗｗｗ
+entity.boxcreeper.name=箱匠
+entity.boxcreeper.desc=箱でできた世界の破壊者、収納箱に注意せよ。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

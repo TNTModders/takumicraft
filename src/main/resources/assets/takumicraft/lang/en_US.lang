@@ -468,6 +468,8 @@ entity.cactuscreeper.name=Cactus Creeper
 entity.cactuscreeper.desc=Grass? Cactus? No, this is Cactus-Man!
 entity.grasscreeper.name=Grass Creeper
 entity.grasscreeper.desc=wwwwwwwwwwwwwwwwwwwwwwww
+entity.boxcreeper.name=Box Creeper
+entity.boxcreeper.desc=This world is made with box...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
