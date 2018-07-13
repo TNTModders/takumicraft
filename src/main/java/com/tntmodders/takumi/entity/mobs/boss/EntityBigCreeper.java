@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
+public class EntityBigCreeper extends EntityTakumiAbstractCreeper implements ITakumiBoss{
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigcreeper.name"),
                     BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
@@ -74,7 +74,6 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
             super.damageEntity(damageSrc, damageAmount);
         }
     }
-
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
@@ -100,6 +99,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
+
 
     @Override
     public boolean isInRangeToRenderDist(double distance) {

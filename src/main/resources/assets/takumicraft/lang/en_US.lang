@@ -470,6 +470,8 @@ entity.grasscreeper.name=Grass Creeper
 entity.grasscreeper.desc=wwwwwwwwwwwwwwwwwwwwwwww
 entity.boxcreeper.name=Box Creeper
 entity.boxcreeper.desc=This world is made with box...
+entity.unlimitedcreeper.name=Unlimited Creeper
+entity.unlimitedcreeper.desc=I am the bone of my explode, Unlimited Blast Works.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

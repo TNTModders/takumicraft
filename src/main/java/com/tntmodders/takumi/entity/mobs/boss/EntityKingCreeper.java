@@ -38,7 +38,7 @@ import net.minecraftforge.common.ForgeHooks;
 import java.lang.reflect.Field;
 import java.util.Random;
 
-public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
+public class EntityKingCreeper extends EntityTakumiAbstractCreeper implements ITakumiBoss {
 
     private static final DataParameter<Integer> ATTACK_ID =
             EntityDataManager.createKey(EntityKingCreeper.class, DataSerializers.VARINT);
