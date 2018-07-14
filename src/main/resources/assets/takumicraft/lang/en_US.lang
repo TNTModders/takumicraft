@@ -474,6 +474,8 @@ entity.poweredcreeper.name=Powered Creeper
 entity.poweredcreeper.desc=Don't miss the Vanilla Creeper!
 entity.unlimitedcreeper.name=Unlimited Creeper
 entity.unlimitedcreeper.desc=I am the bone of my explode, Unlimited Blast Works.
+entity.bigspidercreeper.name=Big Spider Creeper
+entity.bigspidercreeper.desc=You cannot escape from this spider.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

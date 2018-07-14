@@ -17,10 +17,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
-public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper implements ITakumiBoss {
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.unlimitedcreeper.name"),
-                    BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
+public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     public EntityUnlimitedCreeper(World worldIn) {
         super(worldIn);
@@ -31,6 +28,10 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper implemen
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
     }
+
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.unlimitedcreeper.name"),
+                    BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
 
     @Override
     public void onLivingUpdate() {
@@ -113,6 +114,21 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper implemen
     }
 
     @Override
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x889988;
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
+
+    @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
             for (int i = 0; i < (this.getPowered() ? 100 : 50); i++) {
@@ -164,21 +180,6 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper implemen
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedEntities().clear();
-        return true;
-    }
-
-    @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x889988;
-    }
-
-    @Override
-    public boolean isImmuneToExplosions() {
         return true;
     }
 }

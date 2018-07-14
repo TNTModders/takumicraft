@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
 import com.tntmodders.takumi.entity.mobs.EntityMiniSpiderCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySpiderCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityBigSpiderCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSpider;
 import net.minecraft.client.renderer.GlStateManager;
@@ -47,6 +48,8 @@ public class RenderSpiderCreeper<T extends EntitySpiderCreeper> extends RenderLi
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
         if (entitylivingbaseIn instanceof EntityMiniSpiderCreeper) {
             GlStateManager.scale(0.25, 0.25, 0.25);
+        } else if (entitylivingbaseIn instanceof EntityBigSpiderCreeper) {
+            GlStateManager.scale(2, 2, 2);
         }
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;

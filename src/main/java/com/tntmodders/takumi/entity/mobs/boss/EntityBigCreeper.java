@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EntityBigCreeper extends EntityTakumiAbstractCreeper implements ITakumiBoss{
+public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigcreeper.name"),
                     BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);

@@ -507,6 +507,8 @@ entity.poweredcreeper.read=じょうしょう
 entity.poweredcreeper.desc=ただの匠と侮るなかれ。
 entity.unlimitedcreeper.name=無量ノ匠
 entity.unlimitedcreeper.desc=───その体は、きっと爆弾で出来ていた。
+entity.bigspidercreeper.name=土蜘蛛ノ匠
+entity.bigspidercreeper.desc=蜘蛛の首魁は糸の果てに。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

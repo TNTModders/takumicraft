@@ -6,6 +6,7 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.boss.EntityBigSpiderCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -139,7 +140,8 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glPushMatrix();
             GL11.glScaled(1.9, 1, 1);
             this.drawTexturedModalRect(2, 2, 0, 0, 256, 256);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableBlend();
             GL11.glPopMatrix();
             super.drawScreen(mouseX, mouseY, partialTicks);
@@ -237,6 +239,9 @@ public class GuiTakumiBook extends GuiScreen {
         if (entity instanceof EntityTakumiAbstractCreeper && ((EntityTakumiAbstractCreeper) entity).getSizeAmp() != 1) {
             double d = ((EntityTakumiAbstractCreeper) entity).getSizeAmp();
             GL11.glScaled(1 / d, 1 / d, 1 / d);
+        }
+        if (entity instanceof EntityBigSpiderCreeper) {
+            GL11.glScaled(0.55, 0.55, 0.55);
         }
         if (entity instanceof EntitySquidCreeper) {
             GL11.glScaled(0.65, 0.65, 0.65);

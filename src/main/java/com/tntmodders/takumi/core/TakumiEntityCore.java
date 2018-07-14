@@ -6,10 +6,7 @@ import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
-import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
-import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
-import com.tntmodders.takumi.entity.mobs.boss.EntityTransCreeper;
-import com.tntmodders.takumi.entity.mobs.boss.EntityUnlimitedCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.*;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
@@ -94,7 +91,7 @@ public class TakumiEntityCore {
                 EntityStingyCreeper.class, EntityInvisibleCreeper.class, EntityReturnCreeper.class,
                 EntityAnvilCreeper.class, EntityRandCreeper.class, EntityEPCreeper.class, EntityVirusCreeper.class,
                 EntityCannonCreeper.class, EntityCactusCreeper.class, EntityGrassCreeper.class, EntityBoxCreeper.class,
-                EntityPoweredCreeper.class, EntityUnlimitedCreeper.class));
+                EntityPoweredCreeper.class, EntityUnlimitedCreeper.class,EntityBigSpiderCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {

@@ -30,7 +30,7 @@ import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import java.lang.reflect.Field;
 
-public class EntityTransCreeper extends EntityTakumiAbstractCreeper  implements ITakumiBoss{
+public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
 
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.transcreeper.name"), Color.GREEN,
