@@ -513,6 +513,8 @@ entity.minecreeper.name=地雷ノ匠
 entity.minecreeper.desc=足の踏み場もない地雷原にようこそ。
 entity.ballooncreeper.name=風船ノ匠
 entity.ballooncreeper.desc=空に浮かぶ姿は空中砲台、地上に現る地獄の脅威。
+entity.oceancreeper.name=海洋ノ匠
+entity.oceancreeper.desc=広き海に沈め、荒波を抱くこの匠によって。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

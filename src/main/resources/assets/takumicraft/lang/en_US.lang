@@ -480,6 +480,8 @@ entity.minecreeper.name=Mine Creeper
 entity.minecreeper.desc=Mine craft, mine creeper.
 entity.ballooncreeper.name=Balloon Creeper
 entity.ballooncreeper.desc=Floating Cannon, the terror of ghast has come on overworld.
+entity.oceancreeper.name=Ocean Creeper
+entity.oceancreeper.desc=Large, Huge, waterfall.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
