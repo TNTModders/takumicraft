@@ -6,6 +6,7 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.boss.EntityBalloonCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityBigSpiderCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
@@ -248,6 +249,8 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glTranslated(-1, -1, 0);
         } else if (entity instanceof EntityGhastCreeper) {
             GL11.glScaled(0.2, 0.2, 0.2);
+        } else if (entity instanceof EntityBalloonCreeper) {
+            GL11.glScaled(0.3, 0.3, 0.3);
         } else if (entity instanceof EntityDarkCreeper) {
             GL11.glScaled(0.7, 0.7, 0.7);
         }

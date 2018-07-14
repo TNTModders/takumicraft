@@ -511,6 +511,8 @@ entity.bigspidercreeper.name=土蜘蛛ノ匠
 entity.bigspidercreeper.desc=蜘蛛の首魁は糸の果てに。
 entity.minecreeper.name=地雷ノ匠
 entity.minecreeper.desc=足の踏み場もない地雷原にようこそ。
+entity.ballooncreeper.name=風船ノ匠
+entity.ballooncreeper.desc=空に浮かぶ姿は空中砲台、地上に現る地獄の脅威。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

@@ -478,6 +478,8 @@ entity.bigspidercreeper.name=Big Spider Creeper
 entity.bigspidercreeper.desc=You cannot escape from this spider.
 entity.minecreeper.name=Mine Creeper
 entity.minecreeper.desc=Mine craft, mine creeper.
+entity.ballooncreeper.name=Balloon Creeper
+entity.ballooncreeper.desc=Floating Cannon, the terror of ghast has come on overworld.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
