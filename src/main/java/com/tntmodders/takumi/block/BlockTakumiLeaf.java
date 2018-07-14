@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -24,6 +25,13 @@ public class BlockTakumiLeaf extends BlockAbstractTakumiBomb {
     @Override
     public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return true;
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
+        if(worldIn.rand.nextBoolean()){
+            super.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
+        }
     }
 
     @Override

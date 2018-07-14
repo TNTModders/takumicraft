@@ -482,6 +482,8 @@ entity.ballooncreeper.name=Balloon Creeper
 entity.ballooncreeper.desc=Floating Cannon, the terror of ghast has come on overworld.
 entity.oceancreeper.name=Ocean Creeper
 entity.oceancreeper.desc=Large, Huge, waterfall.
+entity.forestcreeper.name=Forest Creeper
+entity.forestcreeper.desc=A walking tree, it would change you to wood.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
