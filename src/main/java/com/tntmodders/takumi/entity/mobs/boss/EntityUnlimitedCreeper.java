@@ -158,7 +158,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper implemen
 
     @Override
     public int getRegisterID() {
-        return 269;
+        return 270;
     }
 
     @Override

@@ -502,6 +502,9 @@ entity.grasscreeper.name=草匠
 entity.grasscreeper.desc=ｗｗｗｗｗｗｗｗｗｗｗｗ
 entity.boxcreeper.name=箱匠
 entity.boxcreeper.desc=箱でできた世界の破壊者、収納箱に注意せよ。
+entity.poweredcreeper.name=上匠
+entity.poweredcreeper.read=じょうしょう
+entity.poweredcreeper.desc=ただの匠と侮るなかれ。
 entity.unlimitedcreeper.name=無量ノ匠
 entity.unlimitedcreeper.desc=───その体は、きっと爆弾で出来ていた。
 
