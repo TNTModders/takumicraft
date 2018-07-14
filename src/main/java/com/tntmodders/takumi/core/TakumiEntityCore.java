@@ -8,6 +8,7 @@ import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.*;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -93,7 +94,7 @@ public class TakumiEntityCore {
                 EntityCannonCreeper.class, EntityCactusCreeper.class, EntityGrassCreeper.class, EntityBoxCreeper.class,
                 EntityPoweredCreeper.class, EntityUnlimitedCreeper.class, EntityBigSpiderCreeper.class,
                 EntityMineCreeper.class, EntityBalloonCreeper.class, EntityOceanCreeper.class,
-                EntityForestCreeper.class));
+                EntityForestCreeper.class, EntityOddCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -266,6 +267,8 @@ public class TakumiEntityCore {
                 EntityWindLance.class, "windlance", 916, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "bighomingbomb"),
                 EntityBigHomingBomb.class, "bighomingbomb", 917, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "odddummyghast"),
+                EntityOddDummyGhast.class, "odddummyghast", 918, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -326,6 +329,14 @@ public class TakumiEntityCore {
                     @Nullable
                     @Override
                     protected ResourceLocation getEntityTexture(EntityWindLance entity) {
+                        return null;
+                    }
+                });
+        RenderingRegistry.registerEntityRenderingHandler(EntityOddDummyGhast.class,
+                manager -> new Render<EntityOddDummyGhast>(manager) {
+                    @Nullable
+                    @Override
+                    protected ResourceLocation getEntityTexture(EntityOddDummyGhast entity) {
                         return null;
                     }
                 });

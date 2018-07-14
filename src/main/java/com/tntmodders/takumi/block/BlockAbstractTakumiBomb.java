@@ -26,6 +26,7 @@ public abstract class BlockAbstractTakumiBomb extends Block {
 
     @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
+        worldIn.setBlockToAir(pos);
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

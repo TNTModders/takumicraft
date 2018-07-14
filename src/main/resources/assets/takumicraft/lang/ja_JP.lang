@@ -517,6 +517,9 @@ entity.oceancreeper.name=海洋ノ匠
 entity.oceancreeper.desc=広き海に沈め、荒波を抱くこの匠によって。
 entity.forestcreeper.name=樹林ノ匠
 entity.forestcreeper.desc=恐怖!歩く匠の木!!
+entity.oddcreeper.name=奇匠
+entity.oddcreeper.read=きしょう
+entity.oddcreeper.desc=念動出づる戦場にて、この匠は現れる。遮れ、破壊と神秘の追尋より。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -533,6 +536,7 @@ entity.takumiYMS.name=Y-MS
 entity.watertypeforce.name=匠式水斧
 entity.transhomingbomb.name=輪匠
 entity.bighomingbomb.name=大匠
+entity.odddummyghast.name=奇匠
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

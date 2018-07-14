@@ -484,6 +484,8 @@ entity.oceancreeper.name=Ocean Creeper
 entity.oceancreeper.desc=Large, Huge, waterfall.
 entity.forestcreeper.name=Forest Creeper
 entity.forestcreeper.desc=A walking tree, it would change you to wood.
+entity.oddcreeper.name=Odd Creeper
+entity.oddcreeper.desc=Grass will-powered! Psychokinesis and explode, at all.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -500,6 +502,7 @@ entity.takumiYMS.name=Y-MS
 entity.watertypeforce.name=Creeper Water Axe
 entity.transhomingbomb.name=Trans Creeper
 entity.bighomingbomb.name=Big Creeper
+entity.odddummyghast.name=Odd Creeper
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
