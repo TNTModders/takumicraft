@@ -537,6 +537,7 @@ entity.watertypeforce.name=匠式水斧
 entity.transhomingbomb.name=輪匠
 entity.bighomingbomb.name=大匠
 entity.odddummyghast.name=奇匠
+entity.dummyking.name=王匠
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

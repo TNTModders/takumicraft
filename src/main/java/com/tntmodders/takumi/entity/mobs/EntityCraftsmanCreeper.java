@@ -7,6 +7,7 @@ import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiCreepered;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -73,7 +74,7 @@ public class EntityCraftsmanCreeper extends EntityTakumiAbstractCreeper {
         });
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
         event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase) {
+            if (entity instanceof EntityLivingBase && !(entity instanceof EntityCreeper)) {
                 ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.CREEPERED, 30));
             }
         });

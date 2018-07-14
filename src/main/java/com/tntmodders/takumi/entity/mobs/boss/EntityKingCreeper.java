@@ -5,12 +5,13 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.item.EntityBigHomingBomb;
+import com.tntmodders.takumi.entity.item.EntityKingDummy;
+import com.tntmodders.takumi.entity.mobs.EntityCraftsmanCreeper;
+import com.tntmodders.takumi.entity.mobs.EntitySinobiCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,10 +23,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
@@ -53,7 +58,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
             field.setAccessible(true);
-            field.set(this, 90);
+            field.set(this, 50);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,15 +165,23 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-        if (this.lastSource != null && this.lastSource.isProjectile() && this.lastSource.getTrueSource() != null) {
-            this.projectileCounter();
+        if (this.lastSource != null && this.lastSource.getTrueSource() != null) {
+            if (this.lastSource.isProjectile()) {
+                this.projectileCounter();
+            }
+            if (this.lastSource.getTrueSource() instanceof EntityLivingBase) {
+                ((EntityLivingBase) this.lastSource.getTrueSource()).getHeldItemMainhand().damageItem(
+                        this.rand.nextInt(50), ((EntityLivingBase) this.lastSource.getTrueSource()));
+                ((EntityLivingBase) this.lastSource.getTrueSource()).getHeldItemOffhand().damageItem(
+                        this.rand.nextInt(50), ((EntityLivingBase) this.lastSource.getTrueSource()));
+            }
         }
-        int maxID = 14;
+        int maxID = 17;
         int always = 0;
-        float power = this.getPowered() ? 10 : 6;
+        float power = this.getPowered() ? 12 : 7;
         if (!this.world.isRemote) {
             this.setAttackID(this.rand.nextInt(maxID + 1));
-            TakumiCraftCore.LOGGER.info(this.getAttackID());
+            //TakumiCraftCore.LOGGER.info(this.getAttackID());
             //debug only
             if (always != 0) {
                 this.setAttackID(always);
@@ -256,18 +269,17 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 break;
             //爆破突進
             case 5:
-/*                int l = 25;
+                int l = 25;
                 Vec3d vec3d = this.getLookVec().scale(l);
                 BlockPos pos = this.getPosition().add(new Vec3i(vec3d.x, vec3d.y, vec3d.z));
                 for (double d = 0; d < l; d += 0.5) {
                     if (!this.world.isRemote) {
-                        this.world.createExplosion(this, this.posX + vec3d.x / (l - d), this.posY + vec3d.y / (l - d), this.posZ + vec3d.z / (l -
-                                d), power / 1.5f, true);
+                        this.world.createExplosion(this, this.posX + vec3d.x / (l - d), this.posY + vec3d.y / (l - d),
+                                this.posZ + vec3d.z / (l - d), power / 1.5f, true);
                     }
                 }
-                this.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                break;*/
-                //巨匠召喚
+                break;
+            //巨匠召喚
             case 6:
                 if (!this.world.isRemote) {
                     for (int i = 0; i < power / 2 + 1; i++) {
@@ -361,9 +373,84 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 }
                 break;
             //匠化爆発
-            case 13:
-                //煙幕
-            case 14:
+            case 13: {
+                if (!this.world.isRemote) {
+                    EntityCreeper creeper = new EntityCraftsmanCreeper(this.world);
+                    creeper.copyLocationAndAnglesFrom(this);
+                    NBTTagCompound compound = new NBTTagCompound();
+                    creeper.writeEntityToNBT(compound);
+                    compound.setShort("Fuse", (short) 1);
+                    creeper.readEntityFromNBT(compound);
+                    creeper.setInvisible(true);
+                    creeper.ignite();
+                    world.spawnEntity(creeper);
+                    creeper.onUpdate();
+                    creeper.setDead();
+                }
+                break;
+            }
+            //煙幕
+            case 14: {
+                if (!this.world.isRemote) {
+                    EntityCreeper creeper = new EntitySinobiCreeper(this.world);
+                    creeper.copyLocationAndAnglesFrom(this);
+                    NBTTagCompound compound = new NBTTagCompound();
+                    creeper.writeEntityToNBT(compound);
+                    compound.setShort("Fuse", (short) 1);
+                    creeper.readEntityFromNBT(compound);
+                    creeper.setInvisible(true);
+                    creeper.ignite();
+                    world.spawnEntity(creeper);
+                    creeper.onUpdate();
+                    creeper.setDead();
+                }
+                break;
+            }
+            //盾貫通爆発
+            case 15: {
+                if (!this.world.isRemote) {
+                    for (int i = 0; i < 5; i++) {
+                        EntityKingDummy dummy = new EntityKingDummy(this.world);
+                        dummy.id = 0;
+                        dummy.setPosition(this.posX + this.rand.nextInt(5) - 2, this.posY + this.rand.nextInt(5) - 2,
+                                this.posZ + this.rand.nextInt(5) - 2);
+                        this.world.spawnEntity(dummy);
+                    }
+                }
+                break;
+            }
+            //ダメージエリア
+            case 16: {
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, power / 2, true);
+                for (double y = 0; y <= 5; y += 0.1) {
+                    EntityAreaEffectCloud cloud = new EntityAreaEffectCloud(this.world);
+                    cloud.setColor(0);
+                    cloud.addEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 1, 1));
+                    cloud.setRadius(((int) ((5 - y) / 4)));
+                    cloud.setDuration(200);
+                    cloud.setRadiusOnUse(0);
+                    cloud.setRadiusPerTick(0.05f);
+                    cloud.setOwner(this);
+                    cloud.setPosition(this.posX, this.posY + y, this.posZ);
+                    this.world.spawnEntity(cloud);
+                }
+                break;
+            }
+            case 17: {
+                for (int t = 0; t < 7 * (this.getPowered() ? 2 : 1); t++) {
+                    Random rand = new Random();
+                    double x = this.posX + this.rand.nextInt(10) - 5;
+                    double y = this.posY + this.rand.nextInt(10) + 15;
+                    double z = this.posZ + this.rand.nextInt(10) - 5;
+                    EntityBigHomingBomb homingBomb =
+                            new EntityBigHomingBomb(this.world, this, this.getAttackTarget(), EnumFacing.Axis.Y);
+                    homingBomb.setPosition(x, y, z);
+                    if (!this.world.isRemote) {
+                        this.world.spawnEntity(homingBomb);
+
+                    }
+                }
+            }
             default:
                 if (!this.world.isRemote) {
                     this.world.createExplosion(this, this.posX, this.posY, this.posZ, power, true);

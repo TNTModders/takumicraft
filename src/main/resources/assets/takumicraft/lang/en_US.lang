@@ -503,6 +503,7 @@ entity.watertypeforce.name=Creeper Water Axe
 entity.transhomingbomb.name=Trans Creeper
 entity.bighomingbomb.name=Big Creeper
 entity.odddummyghast.name=Odd Creeper
+entity.dummyking.name=King Creeper
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

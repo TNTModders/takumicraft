@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,7 +46,7 @@ public class EntityBigHomingBomb extends EntityShulkerBullet {
 
     @Override
     protected void bulletHit(RayTraceResult result) {
-        if (!(result.entityHit instanceof EntityBigCreeper)) {
+        if (!(result.entityHit instanceof EntityBigCreeper) && !(result.entityHit instanceof EntityKingCreeper)) {
             if (!this.world.isRemote) {
                 TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 7f, true, true);
             }

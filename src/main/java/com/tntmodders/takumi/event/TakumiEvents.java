@@ -239,6 +239,23 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(Detonate event) {
+        if (event.getExplosion().getExplosivePlacedBy() instanceof EntityKingDummy) {
+            switch (((EntityKingDummy) event.getExplosion().getExplosivePlacedBy()).id) {
+                default: {
+                    event.getAffectedEntities().forEach(entity -> {
+                        if (entity instanceof EntityLivingBase) {
+                            entity.getEquipmentAndArmor().forEach(itemStack -> {
+                                if (itemStack != ItemStack.EMPTY && entity.world.rand.nextInt(10) == 0) {
+                                    itemStack.shrink(1);
+                                }
+                            });
+                            entity.attackEntityFrom(DamageSource.causeMobDamage(
+                                    event.getExplosion().getExplosivePlacedBy()).setMagicDamage(), 10);
+                        }
+                    });
+                }
+            }
+        }
         if (!event.getWorld().isRemote) {
             event.getAffectedEntities().removeIf(entity -> {
                 if (entity instanceof EntityLivingBase) {
@@ -331,7 +348,7 @@ public class TakumiEvents {
             }
         }
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityAlterDummy) {
-            event.getAffectedBlocks().removeIf(pos -> pos.getY() < event.getExplosion().getPosition().y-1);
+            event.getAffectedBlocks().removeIf(pos -> pos.getY() < event.getExplosion().getPosition().y - 1);
             event.getAffectedEntities().clear();
         }
         if (event.getExplosion().getExplosivePlacedBy() instanceof ITakumiEntity) {

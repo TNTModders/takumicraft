@@ -269,6 +269,9 @@ public class TakumiEntityCore {
                 EntityBigHomingBomb.class, "bighomingbomb", 917, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "odddummyghast"),
                 EntityOddDummyGhast.class, "odddummyghast", 918, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "dummyking"),
+                EntityKingDummy.class, "dummyking", 919, TakumiCraftCore.TakumiInstance, 64, 2, true);
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -337,6 +340,14 @@ public class TakumiEntityCore {
                     @Nullable
                     @Override
                     protected ResourceLocation getEntityTexture(EntityOddDummyGhast entity) {
+                        return null;
+                    }
+                });
+        RenderingRegistry.registerEntityRenderingHandler(EntityKingDummy.class,
+                manager -> new Render<EntityKingDummy>(manager) {
+                    @Nullable
+                    @Override
+                    protected ResourceLocation getEntityTexture(EntityKingDummy entity) {
                         return null;
                     }
                 });
