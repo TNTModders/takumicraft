@@ -4,6 +4,7 @@ import com.tntmodders.takumi.entity.mobs.EntityGunoreCreeper;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -47,6 +48,17 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
             creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             worldIn.spawnEntity(creeper);
         }
+    }
+
+    @Override
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+        if (!worldIn.isRemote) {
+            EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
+            creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            worldIn.spawnEntity(creeper);
+            creeper.ignite();
+        }
+        worldIn.setBlockToAir(pos);
     }
 
     @Override

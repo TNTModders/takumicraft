@@ -254,8 +254,8 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     }
 
     private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.unlimitedcreeper.name"),
-                    BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigspidercreeper.name"),
+                    BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS);
 
     @Override
     public void onLivingUpdate() {
