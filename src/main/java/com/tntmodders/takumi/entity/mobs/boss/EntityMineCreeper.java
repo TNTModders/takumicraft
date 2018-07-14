@@ -1,12 +1,13 @@
 package com.tntmodders.takumi.entity.mobs.boss;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -17,9 +18,9 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
-public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
+public class EntityMineCreeper extends EntityTakumiAbstractCreeper {
 
-    public EntityUnlimitedCreeper(World worldIn) {
+    public EntityMineCreeper(World worldIn) {
         super(worldIn);
     }
 
@@ -30,8 +31,8 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
     }
 
     private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.unlimitedcreeper.name"),
-                    BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.minecreeper.name"),
+                    BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 
     @Override
     public void onLivingUpdate() {
@@ -49,7 +50,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 5), 0);
+            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 0), 0);
         }
         super.onDeath(source);
     }
@@ -95,7 +96,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
             if (!this.world.isRemote) {
-                EntityUnlimitedCreeper kingCreeper = new EntityUnlimitedCreeper(this.world);
+                EntityMineCreeper kingCreeper = new EntityMineCreeper(this.world);
                 NBTTagCompound tagCompound = new NBTTagCompound();
                 this.writeEntityToNBT(tagCompound);
                 tagCompound.setBoolean("ignited", false);
@@ -130,16 +131,6 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-        if (!this.world.isRemote) {
-            for (int i = 0; i < (this.getPowered() ? 100 : 50); i++) {
-                EntityCreeper creeper = new EntityCreeper(this.world);
-                creeper.setEntityInvulnerable(true);
-                creeper.setPosition(this.posX + this.rand.nextInt(30) - 15, this.posY,
-                        this.posZ + this.rand.nextInt(30) - 15);
-                creeper.ignite();
-                this.world.spawnEntity(creeper);
-            }
-        }
     }
 
     @Override
@@ -149,7 +140,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL_MD;
+        return EnumTakumiType.FIRE_MD;
     }
 
     @Override
@@ -159,7 +150,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 0xaaff44;
+        return 0xff8800;
     }
 
     @Override
@@ -169,17 +160,25 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public String getRegisterName() {
-        return "unlimitedcreeper";
+        return "minecreeper";
     }
 
     @Override
     public int getRegisterID() {
-        return 270;
+        return 272;
     }
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedEntities().clear();
+        event.getAffectedBlocks().forEach(pos -> {
+            if (pos.getY() < this.posY) {
+                this.world.setBlockState(pos, TakumiBlockCore.DUMMY_GUNORE.getDefaultState());
+            } else if (Blocks.FIRE.canPlaceBlockAt(this.world, pos)) {
+                this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+            }
+        });
+        event.getAffectedBlocks().clear();
         return true;
     }
 }

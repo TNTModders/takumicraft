@@ -52,7 +52,7 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
 
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote && entityIn instanceof EntityPlayer) {
             EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
             creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             worldIn.spawnEntity(creeper);
