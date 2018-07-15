@@ -41,13 +41,15 @@ public class EntityForestCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onLivingUpdate() {
-        if (this.world.isRemote) {
-            /* for (int i = 0; i < 3; i++) */
-            {
+        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+            bossInfo.setVisible(true);
+            if (this.world.isRemote) {
                 this.world.spawnEntity(
                         new EntityLightningBolt(this.world, this.posX + this.rand.nextDouble() * 7 - 3, this.posY,
                                 this.posZ + this.rand.nextDouble() * 7 - 3, true));
             }
+        } else {
+            bossInfo.setVisible(false);
         }
         super.onLivingUpdate();
     }
