@@ -4,6 +4,7 @@ takumicraft.info.name=匠Craft
 takumicraft.description.name=改築にご注意ください。口凸口
 takumicraft.credits.name=「ゆかり匠」のテクスチャは野良牛/バファムート氏に製作して頂きました。
 takumicraft.message.armor=クラフターよ、匠であれ。
+takumicraft.message.bowgun=左手に匠式弾か高性能爆弾をもって使用。
 
 #tile
 tile.creeperbomb.name=匠式高性能爆弾

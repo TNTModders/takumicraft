@@ -85,7 +85,7 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 0 : this.rand.nextInt());
+            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
         }
         super.onDeath(source);
     }

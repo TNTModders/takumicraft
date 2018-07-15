@@ -218,8 +218,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public void onUpdate() {
         if (this.takumiType().getId() == EnumTakumiType.WIND.getId()) {
-            this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 10, 1, true, false));
-        } else if (this.takumiType().getId() == EnumTakumiType.GROUND.getId() && this.ticksExisted % 20 == 0) {
+            this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 10, 0, true, false));
+        } else if (this.takumiType().getId() == EnumTakumiType.GROUND.getId() && this.ticksExisted % 100 == 0) {
             this.heal(1f);
         }
         if (this.getAttackTarget() instanceof EntityAttackBlock) {
