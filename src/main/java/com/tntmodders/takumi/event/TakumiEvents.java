@@ -3,6 +3,7 @@ package com.tntmodders.takumi.event;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiAcid;
 import com.tntmodders.takumi.core.*;
+import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.*;
@@ -19,6 +20,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
@@ -36,6 +38,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.scoreboard.Score;
+import net.minecraft.scoreboard.ScoreCriteria;
+import net.minecraft.scoreboard.ScoreObjective;
+import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -541,6 +547,26 @@ public class TakumiEvents {
                         player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
             }
         }
+        if (TakumiConfigCore.useTP) {
+            ScoreObjective objective = event.getEntityLiving().world.getScoreboard().getObjective("tp");
+            if (objective != null) {
+                if (event.getEntityLiving() instanceof EntityCreeper &&
+                        event.getSource().getTrueSource() instanceof EntityPlayer) {
+                    int point = event.getEntityLiving() instanceof EntityTakumiAbstractCreeper ?
+                            ((EntityTakumiAbstractCreeper) event.getEntityLiving()).takumiRank().getPoint() : 10;
+                    if (event.getEntityLiving().world.isThundering() ||
+                            ((EntityCreeper) event.getEntityLiving()).getPowered()) {
+                        point = ((int) (point * 1.5));
+                    }
+                    event.getEntityLiving().world.getScoreboard().getOrCreateScore(
+                            event.getSource().getTrueSource().getName(), objective).increaseScore(point);
+                }
+                if (event.getEntityLiving() instanceof EntityPlayer) {
+                    event.getEntityLiving().world.getScoreboard().getOrCreateScore(event.getEntityLiving().getName(),
+                            objective).setScorePoints(0);
+                }
+            }
+        }
     }
 
     @SubscribeEvent
@@ -563,6 +589,40 @@ public class TakumiEvents {
             mapGenDarkShrine.generateStructure(event.getWorld(), event.getRand(),
                     new ChunkPos(event.getChunkX(), event.getChunkZ()));
 
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerUpdate(LivingUpdateEvent event) {
+        if (TakumiConfigCore.useTP && event.getEntityLiving() instanceof EntityPlayer) {
+            Scoreboard scoreboard = event.getEntityLiving().world.getScoreboard();
+            ScoreObjective objective = scoreboard.getObjective("tp") == null ?
+                    scoreboard.addScoreObjective("tp", new ScoreCriteria("tp_crit")) : scoreboard.getObjective("tp");
+            Score score = scoreboard.getOrCreateScore(event.getEntityLiving().getName(), objective);
+            scoreboard.setObjectiveInDisplaySlot(1, objective);
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityDrop(LivingDropsEvent event) {
+        if (TakumiConfigCore.useTP && event.getEntityLiving() instanceof EntityCreeper &&
+                event.getSource().getTrueSource() instanceof EntityPlayer) {
+            ScoreObjective objective = event.getEntityLiving().world.getScoreboard().getObjective("tp");
+            if (objective != null) {
+                int point = 0;
+                for (EntityItem entityItem : event.getDrops()) {
+                    ItemStack item = entityItem.getItem();
+                    if (item.getItem() == Items.GUNPOWDER) {
+                        point += 1;
+                    } else if (item.getItem() == Items.SKULL && item.getMetadata() == 4) {
+                        point += 5;
+                    } else if (item.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB)) {
+                        point += 10;
+                    }
+                    event.getEntityLiving().world.getScoreboard().getOrCreateScore(
+                            event.getSource().getTrueSource().getName(), objective).increaseScore(point);
+                }
+            }
         }
     }
 }

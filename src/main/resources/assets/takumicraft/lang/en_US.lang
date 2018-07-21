@@ -609,5 +609,7 @@ config.takumicraft.takumibook.prop=Key of TakumiBook
 config.takumicraft.takumibook.desc=Change this if the key confricts.
 config.takumicraft.weightanimal.prop=Weight of TakumiAnimals
 config.takumicraft.weightanimal.desc=Change this if TakumiAnimals spawn too much.
+config.takumicraft.useTP.prop=Use TP Sidebar
+config.takumicraft.useTP.desc= Change this if you use TP Sidebar.
 takumicraft.takumibook.key=Show TakumiBook
 takumicraft.xms.key=X-MS S-foil

@@ -643,5 +643,7 @@ config.takumicraft.takumibook.prop=匠図鑑 キー設定
 config.takumicraft.takumibook.desc=匠図鑑のキーが他MODと競合する際に変更して下さい。
 config.takumicraft.weightanimal.prop=匠動物のスポーン率
 config.takumicraft.weightanimal.desc=動物が異常に多く湧く際に変更して下さい。
+config.takumicraft.useTP.prop=TPスコアの表示
+config.takumicraft.useTP.desc= TPスコアをサイドバーに表示する際に変更してください。
 takumicraft.takumibook.key=匠図鑑 表示
 takumicraft.xms.key=X-MS Sフォイル展開
