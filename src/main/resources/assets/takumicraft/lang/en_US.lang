@@ -487,6 +487,10 @@ entity.forestcreeper.name=Forest Creeper
 entity.forestcreeper.desc=A walking tree, it would change you to wood.
 entity.oddcreeper.name=Odd Creeper
 entity.oddcreeper.desc=Grass will-powered! Psychokinesis and explode, at all.
+entity.floatcreeper.name=Float Creeper
+entity.floatcreeper.desc=Ground floats, and it will tell you the world-end.
+entity.crystalcreeper.name=Crystal Creeper
+entity.crystalcreeper.desc=Crystalize, and it will tell you the grand battle.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
