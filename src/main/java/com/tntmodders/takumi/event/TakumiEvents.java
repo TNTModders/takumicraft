@@ -561,9 +561,16 @@ public class TakumiEvents {
                     event.getEntityLiving().world.getScoreboard().getOrCreateScore(
                             event.getSource().getTrueSource().getName(), objective).increaseScore(point);
                 }
-                if (event.getEntityLiving() instanceof EntityPlayer) {
-                    event.getEntityLiving().world.getScoreboard().getOrCreateScore(event.getEntityLiving().getName(),
-                            objective).setScorePoints(0);
+                if (event.getEntityLiving() instanceof EntityPlayer &&
+                        !(event.getSource().getTrueSource() instanceof EntityPlayer)) {
+                    if (event.getEntityLiving().world.getScoreboard().getOrCreateScore(
+                            event.getEntityLiving().getName(), objective).getScorePoints() > 1000) {
+                        event.getEntityLiving().world.getScoreboard().getOrCreateScore(
+                                event.getEntityLiving().getName(), objective).decreaseScore(1000);
+                    } else {
+                        event.getEntityLiving().world.getScoreboard().getOrCreateScore(
+                                event.getEntityLiving().getName(), objective).setScorePoints(0);
+                    }
                 }
             }
         }
