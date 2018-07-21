@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -16,6 +17,17 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
     public EntityRareCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.6F * 3, 1.7F * 3);
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
+            if (!(this.getAttackTarget() instanceof EntityPlayer &&
+                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
+                this.ignite();
+            }
+        }
+        super.onUpdate();
     }
 
     @Override

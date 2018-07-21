@@ -11,6 +11,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -69,6 +70,13 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         if (!this.world.isRemote) {
             this.setBesideClimbableBlock(this.isCollidedHorizontally);
+        }
+
+        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
+            if (!(this.getAttackTarget() instanceof EntityPlayer &&
+                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
+                this.ignite();
+            }
         }
     }
 

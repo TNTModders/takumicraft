@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -86,6 +87,12 @@ public class EntityForestCreeper extends EntityTakumiAbstractCreeper {
     public void onUpdate() {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
+            if (!(this.getAttackTarget() instanceof EntityPlayer &&
+                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
+                this.ignite();
+            }
+        }
     }
 
     @Override
