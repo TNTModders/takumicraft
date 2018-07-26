@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderBatCreeper;
+import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
@@ -80,8 +82,9 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
                 this.spawnPosition = null;
             }
 
-            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition
-                    .distanceSq((double) (int) this.posX, (double) (int) this.posY, (double) (int) this.posZ) < 4.0D) {
+            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 ||
+                    this.spawnPosition.distanceSq((double) (int) this.posX, (double) (int) this.posY,
+                            (double) (int) this.posZ) < 4.0D) {
                 this.spawnPosition = new BlockPos((int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7),
                         (int) this.posY + this.rand.nextInt(6) - 2,
                         (int) this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
@@ -294,18 +297,27 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
         return new RenderBatCreeper(manager);
     }
 
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 3;
+    }
+
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
     @Override
     public boolean getCanSpawnHere() {
+        if (this.world.provider.getDimensionType().getId() != DimensionType.OVERWORLD.getId() &&
+                this.world.provider.getDimensionType().getId() != TakumiWorldCore.TAKUMI_WORLD.getId()) {
+            return false;
+        }
         BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
 
         if (blockpos.getY() >= this.world.getSeaLevel()) {
             return false;
         } else {
             int i = this.world.getLightFromNeighbors(blockpos);
-            int j = 4;
+            int j = 2;
 
             if (this.isDateAroundHalloween(this.world.getCurrentDate())) {
                 j = 7;

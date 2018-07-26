@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.block;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
@@ -54,7 +56,7 @@ public class BlockTakumiDarkBoard extends BlockContainer {
                             hand).getItem()).getBlock()).getName().contains(
                             ((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
                 worldIn.setBlockState(pos, TakumiBlockCore.DARKBOARD_ON.getDefaultState());
-                if(playerIn instanceof EntityPlayerMP){
+                if (playerIn instanceof EntityPlayerMP) {
                     TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) playerIn,
                             new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                             new ResourceLocation(TakumiCraftCore.MODID, "darkshrine"));
@@ -74,7 +76,15 @@ public class BlockTakumiDarkBoard extends BlockContainer {
                 try {
                     EntityCreeper creeper =
                             blockTakumiMonsterBomb.getEntityClass().getConstructor(World.class).newInstance(worldIn);
-                    creeper.setPosition(pos.getX() + 2.5, pos.getY() + 0.5, pos.getZ() + 2.5);
+                    creeper.setPosition(pos.getX() + 2.5 + worldIn.rand.nextDouble() - 0.5, pos.getY(),
+                            pos.getZ() + 2.5 + worldIn.rand.nextDouble() - 0.5);
+                    try {
+                        Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
+                        field.setAccessible(true);
+                        field.set(creeper, 50);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     if (!worldIn.isRemote) {
                         worldIn.spawnEntity(creeper);
                         creeper.ignite();

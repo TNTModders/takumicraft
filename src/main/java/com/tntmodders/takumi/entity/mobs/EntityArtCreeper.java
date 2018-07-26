@@ -65,25 +65,31 @@ public class EntityArtCreeper extends EntityTakumiAbstractCreeper {
     @Deprecated
     public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
-            List<IRecipe> list = Lists.newArrayList(CraftingManager.REGISTRY.iterator());
-            for (BlockPos pos : event.getAffectedBlocks()) {
-                IRecipe iRecipe;
-                boolean flg = false;
-                while (!flg) {
-                    iRecipe = list.get(this.rand.nextInt(list.size()));
-                    if (iRecipe.getRecipeOutput().getItem() instanceof ItemBlock) {
-                        IBlockState blockState = ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock()
-                                                                                                  .getStateFromMeta(
-                                                                                                          iRecipe.getRecipeOutput()
-                                                                                                                 .getMetadata());
-                        if (!(blockState.getBlock().hasTileEntity(blockState) &&
-                                blockState.getBlock().createTileEntity(this.world, blockState) instanceof IInventory) &&
-                                blockState.isFullCube() && blockState.getBlockHardness(this.world, pos) > -1) {
-                            this.world.setBlockState(pos, blockState);
-                            flg = true;
+            try {
+                List<IRecipe> list = Lists.newArrayList(CraftingManager.REGISTRY.iterator());
+                for (BlockPos pos : event.getAffectedBlocks()) {
+                    IRecipe iRecipe;
+                    boolean flg = false;
+                    while (!flg) {
+                        iRecipe = list.get(this.rand.nextInt(list.size()));
+                        if (iRecipe.getRecipeOutput().getItem() instanceof ItemBlock) {
+                            try {
+                                IBlockState blockState =
+                                        ((ItemBlock) iRecipe.getRecipeOutput().getItem()).getBlock().getStateFromMeta(
+                                                iRecipe.getRecipeOutput().getMetadata());
+                                if (!(blockState.getBlock().hasTileEntity(blockState) &&
+                                        blockState.getBlock().createTileEntity(this.world,
+                                                blockState) instanceof IInventory) && blockState.isFullCube() &&
+                                        blockState.getBlockHardness(this.world, pos) > -1) {
+                                    this.world.setBlockState(pos, blockState);
+                                    flg = true;
+                                }
+                            } catch (Exception ignore) {
+                            }
                         }
                     }
                 }
+            } catch (Exception ignore) {
             }
             event.getAffectedBlocks().clear();
             event.getAffectedEntities().clear();
