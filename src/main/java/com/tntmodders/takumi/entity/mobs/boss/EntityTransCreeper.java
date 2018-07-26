@@ -54,12 +54,14 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }
 
     @Override
     public void onUpdate() {
         super.onUpdate();
+        if (this.motionY < 0) {
+            this.motionY = this.motionY / (2.5 + Math.sin(this.ticksExisted / 5));
+        }
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         this.world.playerEntities.forEach(player -> {
             if (this.getDistanceSqToEntity(player) < 16) {
@@ -156,9 +158,9 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
     public void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
             if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && damageSrc != DamageSource.DROWN &&
-                    damageSrc != DamageSource.IN_WALL) {
-                if (damageAmount > 8) {
-                    damageAmount = 8;
+                    damageSrc != DamageSource.IN_WALL && damageSrc != DamageSource.MAGIC) {
+                if (damageAmount > 6) {
+                    damageAmount = 6;
                 }
                 if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
                     this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
