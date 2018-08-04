@@ -230,6 +230,11 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public boolean isNonBoss() {
+        return false;
+    }
+
+    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.BOSS;
     }

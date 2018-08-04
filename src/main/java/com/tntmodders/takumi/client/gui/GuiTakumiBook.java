@@ -48,6 +48,8 @@ public class GuiTakumiBook extends GuiScreen {
     private static final ResourceLocation BOOK_GUI_TEXTURES = new ResourceLocation("textures/gui/book.png");
     private static final ResourceLocation BOOK_GUI_TEXTURES_SP =
             new ResourceLocation(TakumiCraftCore.MODID, "textures/book/book.png");
+    private static final ResourceLocation BOOK_GUI_TEXTURES_BOSS =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/book/book_boss.png");
     private final EntityPlayer player;
     private final int bookImage = 192;
     private int time;
@@ -79,7 +81,11 @@ public class GuiTakumiBook extends GuiScreen {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             int i = (this.width - 192) / 2;
             int j = 2;
-            this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
+            if (base.isNonBoss()) {
+                this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
+            } else {
+                this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES_BOSS);
+            }
             this.drawTexturedModalRect(i, 2, 0, 0, this.bookImage, this.bookImage);
 
             ResourceLocation location = flg && takumiEntity.takumiType().getId() < 8 ?
