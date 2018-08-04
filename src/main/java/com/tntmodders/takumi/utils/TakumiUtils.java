@@ -2,6 +2,7 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -35,6 +36,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TakumiUtils {
+
+    public static boolean canSpawnElementBoss(World world) {
+        return world.provider.getDimensionType().getId() == TakumiWorldCore.TAKUMI_WORLD.getId() ||
+                (world.playerEntities.stream().anyMatch(player -> player instanceof EntityPlayerMP &&
+                        ((EntityPlayerMP) player).getAdvancements().getProgress(
+                                player.getServer().getAdvancementManager().getAdvancement(
+                                        new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"))).hasProgress()));
+    }
+
     public static void setBlockStateProtected(World world, BlockPos pos, IBlockState state) {
         if (world.getMinecraftServer() != null) {
             BlockPos blockpos = world.getSpawnPoint();
@@ -87,30 +97,6 @@ public class TakumiUtils {
         }
         return false;
     }
-    
-   /* public static void takumiUnlockRecipes(ItemStack stack, EntityPlayer player) {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            //レシピはjsonをスキャンして結果からリストでif判定できるように!
-            Item item = stack.getItem();
-            int meta = stack.getMetadata();
-            ItemStack itemStack = new ItemStack(item, 1, meta);
-            if (!TakumiRecipeHolder.map.isEmpty() && TakumiRecipeHolder.map.containsKey(itemStack)) {
-                List <ResourceLocation> list = TakumiRecipeHolder.map.get(itemStack);
-                try {
-                    if (Block.getBlockFromItem(item) instanceof ITakumiItemBlock) {
-                        NonNullList <ItemStack> list1 = NonNullList.create();
-                        Block.getBlockFromItem(item).getSubBlocks(null, list1);
-                        for (ItemStack aList1 : list1) {
-                            list.addAll(TakumiRecipeHolder.map.get(aList1));
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                player.unlockRecipes(list.toArray(new ResourceLocation[list.size()]));
-            }
-        }
-    }*/
 
     public static World getDummyWorld() {
         return FMLCommonHandler.instance().getSide().isClient() ? getClientWorld() : getServerWorld();
@@ -188,48 +174,6 @@ public class TakumiUtils {
         return files;
     }
 
-    /* public static List<Class> getListClass(String path) {
-         List<Class> files = new ArrayList<>();
-         ClassLoader loader = TakumiCraftCore.class.getClassLoader();
-         URL url = loader.getResource(path);
-         if (url.getProtocol().equals("jar")) {
-             String[] strings = url.getPath().split(":");
-             String leadPath = strings[strings.length - 1].split("!")[0];
-             File f = new File(leadPath);
-             JarFile jarFile;
-             try {
-                 Set<ClassPath.ClassInfo> set = ClassPath.from(loader).getAllClasses();
-                 List<ClassPath.ClassInfo> list = new ArrayList<>();
-                 TakumiCraftCore.LOGGER.info("takumiclassesoutput");
-                 for (ClassPath.ClassInfo classInfo : set) {
-                     try {
-                         if (classInfo.getName().contains("com.tntmodders")) {
-                             TakumiCraftCore.LOGGER.info(classInfo.getName());
-                             files.add(classInfo.load());
-                         }
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                 }
-             } catch (Exception e) {
-                 e.printStackTrace();
-             }
-         } else {
-             File packFile = FMLCommonHandler.instance().findContainerFor(TakumiCraftCore.TakumiInstance).getSource();
-             File newFile = new File(packFile.toURI().getPath() + path);
-             for (File file : newFile.listFiles()) {
-                 ClassLoader loader0 = TakumiCraftCore.class.getClassLoader();
-                 Class clazz = null;
-                 try {
-                     clazz = loader0.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));
-                 } catch (ClassNotFoundException e) {
-                     e.printStackTrace();
-                 }
-                 files.add(clazz);
-             }
-         }
-         return files;
-     }*/
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
             boolean fire, boolean destroy) {
         takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, 1);
@@ -258,66 +202,4 @@ public class TakumiUtils {
             }
         }
     }
-
-   /* public static boolean canUseTheVersion() {
-        try {
-            String title;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getHttpsInputStream()));
-            StringBuilder lines = new StringBuilder(4096);
-            while (true) {
-                String line = reader.readLine();
-                if (line == null) {
-                    break;
-                }
-                TakumiCraftCore.LOGGER.info(line);
-                if (line.contains("version")) {
-                    line = line.replaceAll("\"", "").replaceAll("version", "")
-                            .replaceAll(":", "").replaceAll(",", "").trim();
-                    if (!line.equalsIgnoreCase(TakumiCraftCore.VERSION)) {
-                        return false;
-                    }
-                } else if (line.contains("can_use")) {
-                    line = line.replaceAll("\"can_use\":", "").trim();
-                    if (!line.equalsIgnoreCase("true")) {
-                        return false;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    private static InputStream getHttpsInputStream() throws Exception {
-        URL url = new URL("https://www.tntmodders.com/takumicraft_json/version.json");
-        // ホスト名の検証を行わない
-        HostnameVerifier hv = (s, ses) -> {
-            TakumiCraftCore.LOGGER.info("[WARN] Hostname is not matched.");
-            return true;
-        };
-        HttpsURLConnection.setDefaultHostnameVerifier(hv);
-        // 証明書の検証を行わない
-        KeyManager[] km = null;
-        TrustManager[] tm = {new X509TrustManager() {
-            @Override
-            public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-            }
-
-            @Override
-            public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-            }
-
-            @Override
-            public X509Certificate[] getAcceptedIssuers() {
-                return null;
-            }
-        }};
-        SSLContext sslcontext = SSLContext.getInstance("SSL");
-        sslcontext.init(km, tm, new SecureRandom());
-        HttpsURLConnection.setDefaultSSLSocketFactory(sslcontext.getSocketFactory());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        TakumiCraftCore.LOGGER.info(conn.getContentEncoding());
-        return conn.getInputStream();
-    }*/
 }

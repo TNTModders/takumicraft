@@ -255,7 +255,7 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean getCanSpawnHere() {
         return this.rand.nextInt(40) == 0 && super.getCanSpawnHere() &&
-                this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
+                this.world.getDifficulty() != EnumDifficulty.PEACEFUL && TakumiUtils.canSpawnElementBoss(this.world);
     }
 
     @Override

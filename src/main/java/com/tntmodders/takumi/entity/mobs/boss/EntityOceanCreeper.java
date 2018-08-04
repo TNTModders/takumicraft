@@ -57,7 +57,7 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean getCanSpawnHere() {
-        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
+        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere() && TakumiUtils.canSpawnElementBoss(this.world);
     }
 
     @Override

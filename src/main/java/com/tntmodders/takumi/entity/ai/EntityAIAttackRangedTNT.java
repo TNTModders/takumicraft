@@ -121,7 +121,7 @@ public class EntityAIAttackRangedTNT<T extends EntityGateCreeper> extends Entity
             } else if (flag) {
                 int i = this.entity.ticksExisted % 60;
 
-                if (i > 40) {
+                if (i > 55) {
                     this.entity.attackEntityWithRangedAttack(entitylivingbase, ItemBow.getArrowVelocity(i));
                     this.attackTime = this.attackCooldown;
                 }
