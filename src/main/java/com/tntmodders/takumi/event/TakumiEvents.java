@@ -245,7 +245,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(Detonate event) {
-        if (event.getWorld().getMinecraftServer() != null) {
+        if (FMLCommonHandler.instance().getSide().isServer() && event.getWorld().getMinecraftServer() != null) {
             List<BlockPos> list = new ArrayList<>();
             event.getAffectedBlocks().forEach(pos -> {
                 BlockPos blockpos = event.getWorld().getSpawnPoint();

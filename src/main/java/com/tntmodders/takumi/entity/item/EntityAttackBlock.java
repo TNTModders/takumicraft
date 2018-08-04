@@ -134,7 +134,7 @@ public class EntityAttackBlock extends EntityLiving {
                 }
             }
         }
-        if (this.ticksExisted % 20 == 0) {
+        if (this.ticksExisted % 40 == 0) {
             if (!this.world.isRemote) {
                 int r = this.spawnTick > 1000 ? 100 : this.spawnTick / 10;
                 for (int i = 0; i < 5; i++) {
@@ -165,7 +165,7 @@ public class EntityAttackBlock extends EntityLiving {
                             e.printStackTrace();
                         }
                     }
-                    if (r > 10) {
+                    if (r > 15) {
                         Entity entity = null;
                         if (!entities.isEmpty()) {
                             try {

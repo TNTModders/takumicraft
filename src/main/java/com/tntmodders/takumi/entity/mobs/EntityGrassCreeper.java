@@ -52,7 +52,7 @@ public class EntityGrassCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 5;
+        return 7;
     }
 
     @Override

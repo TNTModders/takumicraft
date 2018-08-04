@@ -1,8 +1,12 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -15,6 +19,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
+import java.lang.reflect.Field;
+
 public class EntityGiantCreeper extends EntityZombieCreeper {
 
     private static final DataParameter<Boolean> EXPLODED =
@@ -25,6 +31,13 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
         super(worldIn);
         this.setSize(6f, 20f);
         this.isImmuneToFire = true;
+        try {
+            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
+            field.setAccessible(true);
+            field.set(this, 50);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -34,8 +47,10 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
-    }    @Override
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.2f;
+    }
+
+    @Override
     public void onUpdate() {
         if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             this.setDead();
@@ -44,12 +59,12 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
             if (!this.isInvisible()) {
                 this.setInvisible(true);
             }
-            int di = 40;
+            int di = 30;
             for (float f1 = -1; f1 <= 1; f1 += 0.025) {
                 for (float f2 = -1; f2 <= 1; f2 += 0.025) {
                     for (float f3 = -1; f3 <= 1; f3 += 0.025) {
                         if (f1 * f1 + f2 * f2 * 1.5 + f3 * f3 < 1 && f1 * f1 + f2 * f2 * 1.5 + f3 * f3 > 0.81) {
-                            if (this.rand.nextInt(15) == 0) {
+                            if (this.rand.nextInt(10) == 0) {
                                 this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
                                         this.posX + f1 * 1.1 * this.ticksExisted / di,
                                         this.posY + f2 * 1.1 * this.ticksExisted / di,
@@ -59,15 +74,15 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
                             int y = (int) Math.floor(this.posY + f2 * this.ticksExisted / di);
                             int z = (int) Math.floor(this.posZ + f3 * this.ticksExisted / di);
                             BlockPos pos = new BlockPos(x, y, z);
-                            if (!this.world.isAirBlock(pos) &&
+                            if (!this.world.isAirBlock(pos) && !this.world.isRemote &&
                                     this.rand.nextInt((int) Math.sqrt(this.ticksExisted) + 1) == 0) {
-                                this.world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), 2.5f, true);
+                                this.world.createExplosion(this, x, y, z, 2.5f, true);
                             }
                         }
                     }
                 }
             }
-            if (this.ticksExisted > (this.getPowered() ? 75 * di : 60 * di)) {
+            if (this.ticksExisted > (this.getPowered() ? 85 * di : 65 * di)) {
                 this.getDataManager().set(EXPLODED, false);
                 this.dead = true;
                 this.setDead();
@@ -81,7 +96,9 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
-    }    @Override
+    }
+
+    @Override
     public void setDead() {
         if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL || !this.getDataManager().get(EXPLODED) ||
                 this.dead) {
@@ -101,7 +118,9 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
         if (this.dataManager.get(EXPLODED)) {
             compound.setBoolean("exploded", true);
         }
-    }    @Override
+    }
+
+    @Override
     public double getSizeAmp() {
         return 10;
     }
@@ -144,6 +163,10 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     }
 
     @Override
+    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
+    }
+
+    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.HIGH;
     }
@@ -177,10 +200,4 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     public int getRegisterID() {
         return 403;
     }
-
-
-
-
-
-
 }

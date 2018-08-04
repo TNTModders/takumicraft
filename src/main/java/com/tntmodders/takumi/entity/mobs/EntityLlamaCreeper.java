@@ -52,7 +52,7 @@ public class EntityLlamaCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAIAttackRanged(this, 1.25D, 40, 20.0F));
+        this.tasks.addTask(3, new EntityAIAttackRanged(this, 1.25D, 80, 20.0F));
         this.tasks.addTask(3, new EntityAIPanic(this, 1.2D));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.7D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -122,7 +122,7 @@ public class EntityLlamaCreeper extends EntityTakumiAbstractCreeper implements I
         double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - EntityLlamaCreeperspit.posY;
         double d2 = target.posZ - this.posZ;
         float f = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
-        EntityLlamaCreeperspit.setThrowableHeading(d0, d1 + (double) f, d2, 1.5F, 10.0F);
+        EntityLlamaCreeperspit.setThrowableHeading(d0, d1 + (double) f, d2, 1.5F, 50.0F);
         this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_SPIT,
                 this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
         this.world.spawnEntity(EntityLlamaCreeperspit);

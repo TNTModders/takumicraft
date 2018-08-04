@@ -192,14 +192,14 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     @Override
     public void onUpdate() {
-        if (this.takumiType().getId() == EnumTakumiType.WIND.getId()) {
+        if (this.takumiType().getId() == EnumTakumiType.WIND.getId() && this.getAttackTarget() != null) {
             this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 10, 0, true, false));
         } else if (this.takumiType().getId() == EnumTakumiType.GROUND.getId() && this.ticksExisted % 100 == 0) {
             this.heal(1f);
         }
         if (this.getAttackTarget() instanceof EntityAttackBlock) {
             this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY,
-                    this.getAttackTarget().posZ, 1.0);
+                    this.getAttackTarget().posZ, 0.5);
             double x = this.posX - this.getAttackTarget().posX;
             double z = this.posZ - this.getAttackTarget().posZ;
             if (x * x + z * z <= 9) {

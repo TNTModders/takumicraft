@@ -46,12 +46,16 @@ public class TakumiUtils {
     }
 
     public static void setBlockStateProtected(World world, BlockPos pos, IBlockState state) {
-        if (world.getMinecraftServer() != null) {
-            BlockPos blockpos = world.getSpawnPoint();
-            int i = MathHelper.abs(pos.getX() - blockpos.getX());
-            int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
-            int k = Math.max(i, j);
-            if (k > world.getMinecraftServer().getSpawnProtectionSize()) {
+        if (FMLCommonHandler.instance().getSide().isServer() && world.getMinecraftServer() != null) {
+            try {
+                BlockPos blockpos = world.getSpawnPoint();
+                int i = MathHelper.abs(pos.getX() - blockpos.getX());
+                int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
+                int k = Math.max(i, j);
+                if (k > world.getMinecraftServer().getSpawnProtectionSize()) {
+                    world.setBlockState(pos, state);
+                }
+            } catch (Exception e) {
                 world.setBlockState(pos, state);
             }
         } else {
