@@ -315,17 +315,6 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        if (source.getTrueSource() instanceof EntityPlayerMP && this.getRainbow() &&
-                !TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"))) {
-            TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) source.getTrueSource(),
-                    new ResourceLocation(TakumiCraftCore.MODID, "disarmament"),
-                    new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"));
-        }
-    }
-
-    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20,
                 TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore.biomes.toArray(new Biome[0]));
@@ -350,5 +339,16 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     public ResourceLocation getArmor() {
         return this.getRainbow() ?
                 new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/big_creeper_armor.png") : super.getArmor();
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        if (source.getTrueSource() instanceof EntityPlayerMP && this.getRainbow() &&
+                !TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"))) {
+            TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) source.getTrueSource(),
+                    new ResourceLocation(TakumiCraftCore.MODID, "disarmament"),
+                    new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"));
+        }
     }
 }

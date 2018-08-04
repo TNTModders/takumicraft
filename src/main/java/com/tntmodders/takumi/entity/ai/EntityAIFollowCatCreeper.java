@@ -71,8 +71,8 @@ public class EntityAIFollowCatCreeper extends EntityAIBase {
                 this.creeper.getLookHelper().setLookPositionWithEntity(this.catCreeper, 30.0F, 30.0F);
             }
             this.creeper.getNavigator().tryMoveToEntityLiving(this.catCreeper,
-                    this.creeper.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                .getAttributeValue() * 5);
+                    this.creeper.getAttributeMap().getAttributeInstance(
+                            SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 5);
             if (this.creeper.getDistanceSqToEntity(this.catCreeper) < 6.0D) {
                 this.resetTask();
             }

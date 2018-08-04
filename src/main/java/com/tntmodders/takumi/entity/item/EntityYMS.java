@@ -28,15 +28,37 @@ public class EntityYMS extends EntityFlying {
     }
 
     @Override
+    protected void initEntityAI() {
+        this.tasks.taskEntries.clear();
+        this.targetTasks.taskEntries.clear();
+    }
+
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
     }
 
     @Override
-    protected void initEntityAI() {
-        this.tasks.taskEntries.clear();
-        this.targetTasks.taskEntries.clear();
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.getControllingPassenger() instanceof EntityPlayer) {
+            if (this.getControllingPassenger() instanceof EntityPlayerSP) {
+                this.clientUpdate();
+            }
+            this.rotationYaw = this.rotationYawHead = ((EntityPlayer) this.getControllingPassenger()).rotationYawHead;
+            this.rotationPitch = this.getControllingPassenger().rotationPitch;
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        if (this.getControllingPassenger() instanceof EntityPlayer) {
+            compound.setString("crew", this.getControllingPassenger().getName());
+        } else {
+            compound.setString("crew", "");
+        }
     }
 
     @Override
@@ -53,31 +75,29 @@ public class EntityYMS extends EntityFlying {
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        if (this.getControllingPassenger() instanceof EntityPlayer) {
-            compound.setString("crew", this.getControllingPassenger().getName());
-        } else {
-            compound.setString("crew", "");
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    @Override
+    protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
+        if (this.getControllingPassenger() == null && !this.world.isRemote) {
+            entityPlayer.startRiding(this, true);
         }
-    }
-
-    @Override
-    public double getMountedYOffset() {
-        return this.height * 0.2;
-    }
-
-    @Override
-    protected boolean isMovementBlocked() {
+        if (this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer) && !this.world.isRemote) {
+            EntityTNTPrimed primed = new EntityTNTPrimed(this.world);
+            primed.setPosition(this.posX, this.posY, this.posZ);
+            primed.setFuse(30);
+            this.world.spawnEntity(primed);
+        }
         return true;
     }
 
-    @Override
-    public void onDeath(DamageSource cause) {
-        if (!this.world.isRemote) {
-            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 8f, true, true);
+    @SideOnly(Side.CLIENT)
+    private void clientUpdate() {
+        if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
+            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 0));
         }
-        super.onDeath(cause);
     }
 
     @Override
@@ -96,16 +116,22 @@ public class EntityYMS extends EntityFlying {
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    private void clientUpdate() {
-        if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
-            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 0));
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (!this.world.isRemote) {
+            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 8f, true, true);
         }
+        super.onDeath(cause);
     }
 
     @Override
-    public boolean canBePushed() {
-        return false;
+    protected boolean isMovementBlocked() {
+        return true;
+    }
+
+    @Override
+    public void jump() {
+        super.jump();
     }
 
     @Override
@@ -116,7 +142,7 @@ public class EntityYMS extends EntityFlying {
     }
 
     @Override
-    public boolean shouldDismountInWater(Entity rider) {
+    public boolean canBePushed() {
         return false;
     }
 
@@ -126,25 +152,13 @@ public class EntityYMS extends EntityFlying {
     }
 
     @Override
-    protected boolean canDespawn() {
+    public double getMountedYOffset() {
+        return this.height * 0.2;
+    }
+
+    @Override
+    public boolean shouldDismountInWater(Entity rider) {
         return false;
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.getControllingPassenger() instanceof EntityPlayer) {
-            if (this.getControllingPassenger() instanceof EntityPlayerSP) {
-                this.clientUpdate();
-            }
-            this.rotationYaw = this.rotationYawHead = ((EntityPlayer) this.getControllingPassenger()).rotationYawHead;
-            this.rotationPitch = this.getControllingPassenger().rotationPitch;
-        }
-    }
-
-    @Override
-    public void jump() {
-        super.jump();
     }
 
     @Nullable
@@ -154,19 +168,5 @@ public class EntityYMS extends EntityFlying {
             return null;
         }
         return this.getPassengers().get(0);
-    }
-
-    @Override
-    protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
-        if (this.getControllingPassenger() == null && !this.world.isRemote) {
-            entityPlayer.startRiding(this, true);
-        }
-        if (this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer) && !this.world.isRemote) {
-            EntityTNTPrimed primed = new EntityTNTPrimed(this.world);
-            primed.setPosition(this.posX, this.posY, this.posZ);
-            primed.setFuse(30);
-            this.world.spawnEntity(primed);
-        }
-        return true;
     }
 }

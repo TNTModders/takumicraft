@@ -27,9 +27,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 public class ItemBattleShield extends ItemShield implements IItemAntiExplosion {
-    private final boolean isPowered;
     public static final ResourceLocation SHIELD_TEXTURE =
             new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/shield_battle.png");
+    private final boolean isPowered;
 
     public ItemBattleShield(boolean flg) {
         super();
@@ -41,28 +41,26 @@ public class ItemBattleShield extends ItemShield implements IItemAntiExplosion {
     }
 
     @Override
-    public boolean isShield(ItemStack stack,
-            @Nullable
-                    EntityLivingBase entity) {
-        return true;
-    }
-
-    @Override
     public String getItemStackDisplayName(ItemStack stack) {
         return TakumiUtils.takumiTranslate(this.getUnlocalizedName() + ".name");
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
-
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                    new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.isPowered ? 19 : 6, 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-                    new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.5d, 0));
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        if (repair.getItem() == Item.getItemFromBlock(Blocks.PLANKS)) {
+            return false;
         }
-        return multimap;
+        return repair.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_IRON) ||
+                super.getIsRepairable(toRepair, repair);
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        if (!attacker.world.isRemote) {
+            attacker.world.createExplosion(attacker, target.posX, target.posY, target.posZ, 0f, false);
+        }
+        stack.damageItem(1, attacker);
+        return true;
     }
 
     @Override
@@ -113,20 +111,22 @@ public class ItemBattleShield extends ItemShield implements IItemAntiExplosion {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        if (!attacker.world.isRemote) {
-            attacker.world.createExplosion(attacker, target.posX, target.posY, target.posZ, 0f, false);
+    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+
+        if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+                    new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.isPowered ? 19 : 6, 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+                    new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.5d, 0));
         }
-        stack.damageItem(1, attacker);
-        return true;
+        return multimap;
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        if (repair.getItem() == Item.getItemFromBlock(Blocks.PLANKS)) {
-            return false;
-        }
-        return repair.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_IRON) ||
-                super.getIsRepairable(toRepair, repair);
+    public boolean isShield(ItemStack stack,
+            @Nullable
+                    EntityLivingBase entity) {
+        return true;
     }
 }

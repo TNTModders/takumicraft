@@ -95,18 +95,6 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            this.setDead();
-        }
-    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_GHAST_HURT;
@@ -162,8 +150,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
 
             if (this.onGround) {
                 f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX),
-                        MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ)))
-                              .getBlock().slipperiness * 0.91F;
+                        MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
+                        MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
 
             float f1 = 0.16277136F / (f * f * f);
@@ -172,8 +160,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
 
             if (this.onGround) {
                 f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX),
-                        MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ)))
-                              .getBlock().slipperiness * 0.91F;
+                        MathHelper.floor(this.getEntityBoundingBox().minY) - 1,
+                        MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
 
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
@@ -227,6 +215,15 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
         } else {
             return super.attackEntityFrom(source, amount);
         }
+    }
+
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(20) == 0 && super.getCanSpawnHere() &&
+                this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
     }
 
     @Override
@@ -289,9 +286,8 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void customSpawn() {
         EntitySpawnPlacementRegistry.setPlacementType(EntityGhastCreeper.class, SpawnPlacementType.IN_AIR);
-        EntityRegistry
-                .addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 20, EnumCreatureType.MONSTER,
-                        Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 1, 20,
+                EnumCreatureType.MONSTER, Biomes.HELL);
     }
 
     @Override
@@ -306,12 +302,15 @@ public class EntityGhastCreeper extends EntityTakumiAbstractCreeper {
     }
 
     /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
+     * Called to update the entity's position/logic.
      */
     @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(20) == 0 && super.getCanSpawnHere() &&
-                this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+            this.setDead();
+        }
     }
 
     static class AIFireballAttack extends EntityAIBase {

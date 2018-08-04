@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class ItemTypeCore extends Item {
-    public static final String[] NAMES = {"fire","grass", "water", "wind", "ground","normal"};
+    public static final String[] NAMES = {"fire", "grass", "water", "wind", "ground", "normal"};
 
     public ItemTypeCore() {
         super();
@@ -25,16 +25,16 @@ public class ItemTypeCore extends Item {
     }
 
     @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.UNCOMMON;
+    }
+
+    @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
             for (int i = 0; i < 6; ++i) {
                 items.add(new ItemStack(this, 1, i));
             }
         }
-    }
-
-    @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.UNCOMMON;
     }
 }

@@ -59,18 +59,6 @@ public class EntityLuckCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource cause) {
-        if (cause.getTrueSource() != null && cause.getTrueSource() instanceof EntityLivingBase &&
-                !(cause.getTrueSource() instanceof EntityPlayer &&
-                        ((EntityPlayer) cause.getTrueSource()).isCreative())) {
-            cause.getTrueSource()
-                 .attackEntityFrom(new EntityDamageSource("takumicraft.luck", this).setDamageIsAbsolute(),
-                         ((EntityLivingBase) cause.getTrueSource()).getMaxHealth() + 1);
-        }
-        super.onDeath(cause);
-    }
-
-    @Override
     public boolean takumiExplodeEvent(Detonate event) {
         for (Entity entity : event.getAffectedEntities()) {
             if (entity instanceof EntityLivingBase) {
@@ -81,5 +69,17 @@ public class EntityLuckCreeper extends EntityTakumiAbstractCreeper {
         }
         event.getAffectedEntities().clear();
         return true;
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (cause.getTrueSource() != null && cause.getTrueSource() instanceof EntityLivingBase &&
+                !(cause.getTrueSource() instanceof EntityPlayer &&
+                        ((EntityPlayer) cause.getTrueSource()).isCreative())) {
+            cause.getTrueSource().attackEntityFrom(
+                    new EntityDamageSource("takumicraft.luck", this).setDamageIsAbsolute(),
+                    ((EntityLivingBase) cause.getTrueSource()).getMaxHealth() + 1);
+        }
+        super.onDeath(cause);
     }
 }

@@ -13,8 +13,8 @@ public class TakumiWorldCore {
     public static DimensionType TAKUMI_WORLD;
 
     public static void register() {
-        TAKUMI_WORLD = DimensionType
-                .register("takumiworld", "_" + TakumiCraftCore.MODID, DimensionManager.getNextFreeDimId(),
+        TAKUMI_WORLD =
+                DimensionType.register("takumiworld", "_" + TakumiCraftCore.MODID, DimensionManager.getNextFreeDimId(),
                         TakumiWorldProvider.class, true);
         DimensionManager.registerDimension(TAKUMI_WORLD.getId(), TAKUMI_WORLD);
     }

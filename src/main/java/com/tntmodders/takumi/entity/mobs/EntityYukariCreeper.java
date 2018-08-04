@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -23,14 +24,6 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BOMB_YUKARI), 1);
-        }
-        super.onDeath(source);
-    }
-
-    @Override
     public boolean takumiExplodeEvent(Detonate event) {
         List<BlockPos> posList = new ArrayList<>();
         for (BlockPos pos : event.getAffectedBlocks()) {
@@ -41,7 +34,7 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
                 IBlockState state = this.world.getBlockState(this.getPosition().down());
                 if (!(state.getBlock() instanceof BlockTakumiMonsterBomb) &&
                         state.getBlockHardness(this.world, this.getPosition().down()) > 0) {
-                    this.world.setBlockState(pos, state);
+                    TakumiUtils.setBlockStateProtected(this.world, pos, state);
                 }
             }
         }
@@ -52,6 +45,14 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/yukaricreeper_armor.png");
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BOMB_YUKARI), 1);
+        }
+        super.onDeath(source);
     }
 
     @Override

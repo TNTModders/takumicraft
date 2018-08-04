@@ -20,6 +20,25 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        for (BlockPos pos : event.getAffectedBlocks()) {
+            event.getWorld().setBlockState(pos, Blocks.ICE.getDefaultState());
+        }
+        event.getAffectedBlocks().clear();
+        return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x0000ff;
+    }
+
+    @Override
+    public double getSizeAmp() {
+        return 3d;
+    }
+
+    @Override
     public void onUpdate() {
         if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
             if (!(this.getAttackTarget() instanceof EntityPlayer &&
@@ -40,25 +59,6 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
             this.dropItem(Item.getItemFromBlock(Blocks.LAPIS_BLOCK), 10);
         }
         super.onDeath(source);
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        for (BlockPos pos : event.getAffectedBlocks()) {
-            event.getWorld().setBlockState(pos, Blocks.ICE.getDefaultState());
-        }
-        event.getAffectedBlocks().clear();
-        return true;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x0000ff;
-    }
-
-    @Override
-    public double getSizeAmp() {
-        return 3d;
     }
 
     @Override

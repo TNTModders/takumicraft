@@ -57,24 +57,30 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.motionY < 0) {
-            this.motionY = this.motionY / (2.5 + Math.sin(this.ticksExisted / 5));
-        }
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        this.world.playerEntities.forEach(player -> {
-            if (this.getDistanceSqToEntity(player) < 16) {
-                player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
-                player.addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
-            }
-        });
-    }
-
-    @Override
     protected void outOfWorld() {
         this.setHealth(0);
         super.outOfWorld();
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(Detonate event) {
+        event.getAffectedEntities().forEach(entity -> {
+            if (entity instanceof EntityPlayer) {
+                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
+                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x001100;
+    }
+
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderTransCreeper<>(manager);
     }
 
     @Override
@@ -101,24 +107,35 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityPlayer) {
-                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
-                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
+    public void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
+            if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && damageSrc != DamageSource.DROWN &&
+                    damageSrc != DamageSource.IN_WALL && damageSrc != DamageSource.MAGIC) {
+                if (damageAmount > 6) {
+                    damageAmount = 6;
+                }
+                if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
+                    this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
+                }
+                super.damageEntity(damageSrc, damageAmount);
+            }
+            this.ignite();
+        }
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.motionY < 0) {
+            this.motionY = this.motionY / (2.5 + Math.sin(this.ticksExisted / 5));
+        }
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        this.world.playerEntities.forEach(player -> {
+            if (this.getDistanceSqToEntity(player) < 16) {
+                player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
+                player.addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
             }
         });
-        return true;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x001100;
-    }
-
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderTransCreeper<>(manager);
     }
 
     @Override
@@ -152,23 +169,6 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
         this.bossInfo.removePlayer(player);
-    }
-
-    @Override
-    public void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
-            if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && damageSrc != DamageSource.DROWN &&
-                    damageSrc != DamageSource.IN_WALL && damageSrc != DamageSource.MAGIC) {
-                if (damageAmount > 6) {
-                    damageAmount = 6;
-                }
-                if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
-                    this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());
-                }
-                super.damageEntity(damageSrc, damageAmount);
-            }
-            this.ignite();
-        }
     }
 
     @Override

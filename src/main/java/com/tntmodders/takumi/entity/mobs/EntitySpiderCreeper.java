@@ -72,27 +72,6 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
         this.dataManager.register(CLIMBING, (byte) 0);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (!this.world.isRemote) {
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
-            if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getClass() == EntitySpiderCreeper.class) {
-                int i = this.rand.nextInt(5000 / this.world.getDifficulty().getDifficultyId());
-                if (i == 0) {
-                    for (int t = 0; t < 1 + this.world.getDifficulty().getDifficultyId(); t++) {
-                        EntityMiniSpiderCreeper miniSpiderCreeper = new EntityMiniSpiderCreeper(this.world);
-                        miniSpiderCreeper.copyLocationAndAnglesFrom(this);
-                        this.world.spawnEntity(miniSpiderCreeper);
-                    }
-                }
-            }
-        }
-    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_SPIDER_HURT;
@@ -274,6 +253,27 @@ public class EntitySpiderCreeper extends EntityTakumiAbstractCreeper {
     @SideOnly(Side.CLIENT)
     public Object getRender(RenderManager manager) {
         return new RenderSpiderCreeper<>(manager);
+    }
+
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.isCollidedHorizontally);
+            if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getClass() == EntitySpiderCreeper.class) {
+                int i = this.rand.nextInt(5000 / this.world.getDifficulty().getDifficultyId());
+                if (i == 0) {
+                    for (int t = 0; t < 1 + this.world.getDifficulty().getDifficultyId(); t++) {
+                        EntityMiniSpiderCreeper miniSpiderCreeper = new EntityMiniSpiderCreeper(this.world);
+                        miniSpiderCreeper.copyLocationAndAnglesFrom(this);
+                        this.world.spawnEntity(miniSpiderCreeper);
+                    }
+                }
+            }
+        }
     }
 
     static class AISpiderAttack extends EntityAIAttackMelee {

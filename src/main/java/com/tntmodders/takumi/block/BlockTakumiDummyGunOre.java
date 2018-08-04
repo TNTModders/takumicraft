@@ -32,6 +32,17 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
     }
 
     @Override
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+        if (!worldIn.isRemote && entityIn instanceof EntityPlayer) {
+            EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
+            creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            worldIn.spawnEntity(creeper);
+            creeper.ignite();
+        }
+        worldIn.setBlockToAir(pos);
+    }
+
+    @Override
     public int quantityDroppedWithBonus(int level, Random random) {
         return 0;
     }
@@ -48,17 +59,6 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
             creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             worldIn.spawnEntity(creeper);
         }
-    }
-
-    @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        if (!worldIn.isRemote && entityIn instanceof EntityPlayer) {
-            EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
-            creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-            worldIn.spawnEntity(creeper);
-            creeper.ignite();
-        }
-        worldIn.setBlockToAir(pos);
     }
 
     @Override

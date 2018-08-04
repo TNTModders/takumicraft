@@ -32,8 +32,8 @@ public class RenderEvokerCreeper<T extends EntityEvokerCreeper> extends RenderLi
 
             @Override
             protected void translateToHand(EnumHandSide p_191361_1_) {
-                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_)
-                                                                                .postRender(0.0625F);
+                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_).postRender(
+                        0.0625F);
             }
         });
     }

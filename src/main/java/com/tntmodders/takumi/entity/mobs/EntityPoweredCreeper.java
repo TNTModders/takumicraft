@@ -45,12 +45,6 @@ public class EntityPoweredCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().removeIf(entity -> entity instanceof EntityCreeper);
-        return true;
-    }
-
-    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
@@ -71,15 +65,9 @@ public class EntityPoweredCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x00ff00;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return false;
     }
-
 
     @Override
     public String getRegisterName() {
@@ -89,5 +77,16 @@ public class EntityPoweredCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 269;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedEntities().removeIf(entity -> entity instanceof EntityCreeper);
+        return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x00ff00;
     }
 }

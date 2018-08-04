@@ -33,6 +33,9 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     }
 
     @Override
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
+    }    @Override
     public void onUpdate() {
         if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             this.setDead();
@@ -75,35 +78,15 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     }
 
     @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
+    }    @Override
     public void setDead() {
         if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL || !this.getDataManager().get(EXPLODED) ||
                 this.dead) {
             super.setDead();
         }
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
-        }
-        super.onDeath(source);
-    }
-
-    @Override
-    public double getSizeAmp() {
-        return 10;
-    }
-
-    @Override
-    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
-    }
-
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
     }
 
     @Override
@@ -118,12 +101,23 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
         if (this.dataManager.get(EXPLODED)) {
             compound.setBoolean("exploded", true);
         }
+    }    @Override
+    public double getSizeAmp() {
+        return 10;
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.dataManager.set(EXPLODED, compound.getBoolean("exploded"));
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
+        }
+        super.onDeath(source);
     }
 
     @Override
@@ -183,4 +177,10 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     public int getRegisterID() {
         return 403;
     }
+
+
+
+
+
+
 }

@@ -31,14 +31,6 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
-            this.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0));
-        }
-        super.onUpdate();
-    }
-
-    @Override
     public void takumiExplode() {
     }
 
@@ -101,5 +93,13 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+            this.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0));
+        }
+        super.onUpdate();
     }
 }

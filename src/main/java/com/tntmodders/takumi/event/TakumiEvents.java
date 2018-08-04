@@ -245,6 +245,19 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(Detonate event) {
+        if (event.getWorld().getMinecraftServer() != null) {
+            List<BlockPos> list = new ArrayList<>();
+            event.getAffectedBlocks().forEach(pos -> {
+                BlockPos blockpos = event.getWorld().getSpawnPoint();
+                int i = MathHelper.abs(pos.getX() - blockpos.getX());
+                int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
+                int k = Math.max(i, j);
+                if (k <= event.getWorld().getMinecraftServer().getSpawnProtectionSize()) {
+                    list.add(pos);
+                }
+            });
+            event.getAffectedBlocks().removeAll(list);
+        }
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityKingDummy) {
             switch (((EntityKingDummy) event.getExplosion().getExplosivePlacedBy()).id) {
                 default: {
@@ -562,9 +575,10 @@ public class TakumiEvents {
                             event.getSource().getTrueSource().getName(), objective).increaseScore(point);
                 }
                 if (event.getEntityLiving() instanceof EntityPlayer &&
-                        !(event.getSource().getTrueSource() instanceof EntityPlayer)) {
-                        event.getEntityLiving().world.getScoreboard().getOrCreateScore(
-                                event.getEntityLiving().getName(), objective).setScorePoints(0);
+                        !(event.getSource().getTrueSource() instanceof EntityPlayer) &&
+                        !(event.getSource().getTrueSource() instanceof EntityAttackBlock)) {
+                    event.getEntityLiving().world.getScoreboard().getOrCreateScore(event.getEntityLiving().getName(),
+                            objective).setScorePoints(0);
                 }
             }
         }

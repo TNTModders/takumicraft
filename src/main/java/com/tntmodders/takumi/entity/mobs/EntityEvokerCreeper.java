@@ -188,15 +188,15 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
     }
 
     @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderEvokerCreeper<>(manager);
+    }
+
+    @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if (!(damageSrc.getTrueSource() instanceof EntityVexCreeper)) {
             super.damageEntity(damageSrc, damageAmount);
         }
-    }
-
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderEvokerCreeper<>(manager);
     }
 
     class AIAttackSpell extends AIUseSpell {
@@ -307,15 +307,15 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
         @Override
         public void updateTask() {
             if (EntityEvokerCreeper.this.getAttackTarget() != null) {
-                EntityEvokerCreeper.this.getLookHelper()
-                                        .setLookPositionWithEntity(EntityEvokerCreeper.this.getAttackTarget(),
-                                                (float) EntityEvokerCreeper.this.getHorizontalFaceSpeed(),
-                                                (float) EntityEvokerCreeper.this.getVerticalFaceSpeed());
+                EntityEvokerCreeper.this.getLookHelper().setLookPositionWithEntity(
+                        EntityEvokerCreeper.this.getAttackTarget(),
+                        (float) EntityEvokerCreeper.this.getHorizontalFaceSpeed(),
+                        (float) EntityEvokerCreeper.this.getVerticalFaceSpeed());
             } else if (EntityEvokerCreeper.this.getWololoTarget() != null) {
-                EntityEvokerCreeper.this.getLookHelper()
-                                        .setLookPositionWithEntity(EntityEvokerCreeper.this.getWololoTarget(),
-                                                (float) EntityEvokerCreeper.this.getHorizontalFaceSpeed(),
-                                                (float) EntityEvokerCreeper.this.getVerticalFaceSpeed());
+                EntityEvokerCreeper.this.getLookHelper().setLookPositionWithEntity(
+                        EntityEvokerCreeper.this.getWololoTarget(),
+                        (float) EntityEvokerCreeper.this.getHorizontalFaceSpeed(),
+                        (float) EntityEvokerCreeper.this.getVerticalFaceSpeed());
             }
         }
     }
@@ -352,8 +352,8 @@ public class EntityEvokerCreeper extends EntityAbstractSpellCreeper {
         @Override
         protected void castSpell() {
             for (int i = 0; i < 3; ++i) {
-                BlockPos blockpos = new BlockPos(EntityEvokerCreeper.this)
-                        .add(-2 + EntityEvokerCreeper.this.rand.nextInt(5), 1,
+                BlockPos blockpos =
+                        new BlockPos(EntityEvokerCreeper.this).add(-2 + EntityEvokerCreeper.this.rand.nextInt(5), 1,
                                 -2 + EntityEvokerCreeper.this.rand.nextInt(5));
                 EntityVexCreeper entityvex = new EntityVexCreeper(EntityEvokerCreeper.this.world);
                 entityvex.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);

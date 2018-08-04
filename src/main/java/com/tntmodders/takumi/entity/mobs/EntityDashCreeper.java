@@ -89,6 +89,12 @@ public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedEntities().clear();
+        return true;
+    }
+
+    @Override
     public int getPrimaryColor() {
         return 0xaa0000;
     }
@@ -99,6 +105,29 @@ public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
                 damageSrc != DamageSource.FALL && damageSrc != DamageSource.IN_WALL &&
                 damageSrc != DamageSource.DROWN) {
             super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.getCreeperState() > 0) {
+            if (this.getAttackTarget() != null) {
+                this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 1f, 1f);
+            }
+            int i = 5;
+            this.moveHelper.setMoveTo(this.posX + this.getLookVec().x * i, this.posY + this.getLookVec().y * i,
+                    this.posZ + this.getLookVec().z * i, 1.5);
+            if (!this.world.isRemote) {
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, (this.getPowered() ? 4f : 2f), true);
+            }
+            this.ticksSprint++;
+        }
+        if (this.ticksSprint > 30) {
+            if (!this.world.isRemote) {
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5f, true);
+            }
+            this.setDead();
         }
     }
 
@@ -127,34 +156,5 @@ public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.onLivingUpdate();
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.getCreeperState() > 0) {
-            if (this.getAttackTarget() != null) {
-                this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 1f, 1f);
-            }
-            int i = 5;
-            this.moveHelper.setMoveTo(this.posX + this.getLookVec().x * i, this.posY + this.getLookVec().y * i,
-                    this.posZ + this.getLookVec().z * i, 1.5);
-            if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX, this.posY, this.posZ, (this.getPowered() ? 4f : 2f), true);
-            }
-            this.ticksSprint++;
-        }
-        if (this.ticksSprint > 30) {
-            if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5f, true);
-            }
-            this.setDead();
-        }
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().clear();
-        return true;
     }
 }

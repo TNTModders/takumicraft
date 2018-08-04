@@ -37,13 +37,12 @@ import java.util.Random;
 import java.util.UUID;
 
 public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
-    private int teleportCounter;
     private static final UUID ATTACKING_SPEED_BOOST_ID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final AttributeModifier ATTACKING_SPEED_BOOST =
             new AttributeModifier(ATTACKING_SPEED_BOOST_ID, "Attacking speed boost", 0.2D, 0).setSaved(false);
     private static final DataParameter<Boolean> SCREAMING =
             EntityDataManager.createKey(EntityDanceCreeper.class, DataSerializers.BOOLEAN);
-
+    private int teleportCounter;
     private int lastCreepySound;
     private int targetChangeTime;
 
@@ -182,7 +181,9 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         super.onLivingUpdate();
     }
 
-    /**
+    @Override
+    public void takumiExplode() {
+    }    /**
      * Teleport the enderman to a random nearby position
      */
     protected boolean teleportRandomly() {
@@ -192,22 +193,15 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         return this.teleportTo(d0, d1, d2);
     }
 
-    /**
-     * Teleport the enderman to another entity
-     */
-    protected boolean teleportToEntity(Entity p_70816_1_) {
-        Vec3d vec3d = new Vec3d(this.posX - p_70816_1_.posX,
-                this.getEntityBoundingBox().minY + this.height / 2.0F - p_70816_1_.posY + p_70816_1_.getEyeHeight(),
-                this.posZ - p_70816_1_.posZ);
-        vec3d = vec3d.normalize();
-        double d0 = 16.0D;
-        double d1 = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3d.x * 16.0D;
-        double d2 = this.posY + (this.rand.nextInt(16) - 8) - vec3d.y * 16.0D;
-        double d3 = this.posZ + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3d.z * 16.0D;
-        return this.teleportTo(d1, d2, d3);
+    @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.MID;
     }
 
-    /**
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.GROUND_M;
+    }    /**
      * Teleport the enderman
      */
     private boolean teleportTo(double x, double y, double z) {
@@ -227,24 +221,10 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void takumiExplode() {
-    }
-    /*===================================== Forge End ==============================*/
-
-    @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.MID;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.GROUND_M;
-    }
-
-    @Override
     public int getExplosionPower() {
         return this.teleportCounter;
     }
+    /*===================================== Forge End ==============================*/
 
     @Override
     public int getSecondaryColor() {
@@ -264,81 +244,6 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 262;
-    }
-
-    @Override
-    public void setAttackTarget(
-            @Nullable
-                    EntityLivingBase entitylivingbaseIn) {
-        super.setAttackTarget(entitylivingbaseIn);
-        IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-
-        if (entitylivingbaseIn == null) {
-            this.targetChangeTime = 0;
-            this.dataManager.set(SCREAMING, Boolean.FALSE);
-            iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
-        } else {
-            this.targetChangeTime = this.ticksExisted;
-            this.dataManager.set(SCREAMING, Boolean.TRUE);
-
-            if (!iattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
-                iattributeinstance.applyModifier(ATTACKING_SPEED_BOOST);
-            }
-        }
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return this.isScreaming() ? SoundEvents.ENTITY_ENDERMEN_SCREAM : SoundEvents.ENTITY_ENDERMEN_AMBIENT;
-    }
-
-    @Nullable
-    @Override
-    protected Item getDropItem() {
-        return Items.ENDER_PEARL;
-    }
-
-    @Override
-    protected void updateAITasks() {
-        if (this.isWet()) {
-            this.attackEntityFrom(DamageSource.DROWN, 1.0F);
-        }
-
-        if (this.world.isDaytime() && this.ticksExisted >= this.targetChangeTime + 600) {
-            float f = this.getBrightness();
-
-            if (f > 0.5F && this.world.canSeeSky(new BlockPos(this)) &&
-                    this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
-                this.setAttackTarget(null);
-                this.teleportRandomly();
-            }
-        }
-
-        super.updateAITasks();
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.getAttackTarget() != null) {
-            if (this.getCreeperState() > 0) {
-                if (this.teleportCounter < 20) {
-                    if (this.teleportRandomly()) {
-                        this.teleportCounter++;
-                    } else if (this.teleportToEntity(this.getAttackTarget())) {
-                        this.teleportCounter++;
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        if (!this.world.isRemote) {
-            this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.teleportCounter, true);
-        }
     }
 
     protected boolean teleportTo(EntityLivingBase entity) {
@@ -414,6 +319,66 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         return 0x4400ff;
     }
 
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.getAttackTarget() != null) {
+            if (this.getCreeperState() > 0) {
+                if (this.teleportCounter < 20) {
+                    if (this.teleportRandomly()) {
+                        this.teleportCounter++;
+                    } else if (this.teleportToEntity(this.getAttackTarget())) {
+                        this.teleportCounter++;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Teleport the enderman to another entity
+     */
+    protected boolean teleportToEntity(Entity p_70816_1_) {
+        Vec3d vec3d = new Vec3d(this.posX - p_70816_1_.posX,
+                this.getEntityBoundingBox().minY + this.height / 2.0F - p_70816_1_.posY + p_70816_1_.getEyeHeight(),
+                this.posZ - p_70816_1_.posZ);
+        vec3d = vec3d.normalize();
+        double d0 = 16.0D;
+        double d1 = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3d.x * 16.0D;
+        double d2 = this.posY + (this.rand.nextInt(16) - 8) - vec3d.y * 16.0D;
+        double d3 = this.posZ + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3d.z * 16.0D;
+        return this.teleportTo(d1, d2, d3);
+    }    @Override
+    public void setAttackTarget(
+            @Nullable
+                    EntityLivingBase entitylivingbaseIn) {
+        super.setAttackTarget(entitylivingbaseIn);
+        IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+        if (entitylivingbaseIn == null) {
+            this.targetChangeTime = 0;
+            this.dataManager.set(SCREAMING, Boolean.FALSE);
+            iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
+        } else {
+            this.targetChangeTime = this.ticksExisted;
+            this.dataManager.set(SCREAMING, Boolean.TRUE);
+
+            if (!iattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
+                iattributeinstance.applyModifier(ATTACKING_SPEED_BOOST);
+            }
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        if (!this.world.isRemote) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.teleportCounter, true);
+        }
+    }    @Override
+    protected SoundEvent getAmbientSound() {
+        return this.isScreaming() ? SoundEvents.ENTITY_ENDERMEN_SCREAM : SoundEvents.ENTITY_ENDERMEN_AMBIENT;
+    }
 
     static class AIFindPlayer extends EntityAINearestAttackableTarget<EntityPlayer> {
 
@@ -506,5 +471,39 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
                 super.updateTask();
             }
         }
+    }    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.ENDER_PEARL;
     }
+
+    @Override
+    protected void updateAITasks() {
+        if (this.isWet()) {
+            this.attackEntityFrom(DamageSource.DROWN, 1.0F);
+        }
+
+        if (this.world.isDaytime() && this.ticksExisted >= this.targetChangeTime + 600) {
+            float f = this.getBrightness();
+
+            if (f > 0.5F && this.world.canSeeSky(new BlockPos(this)) &&
+                    this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
+                this.setAttackTarget(null);
+                this.teleportRandomly();
+            }
+        }
+
+        super.updateAITasks();
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

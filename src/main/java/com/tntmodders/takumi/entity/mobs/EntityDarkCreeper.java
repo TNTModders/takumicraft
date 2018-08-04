@@ -50,8 +50,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
 
     private static final UUID ATTACKING_SPEED_BOOST_ID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final AttributeModifier ATTACKING_SPEED_BOOST =
-            new AttributeModifier(ATTACKING_SPEED_BOOST_ID, "Attacking speed boost", 0.15000000596046448D, 0)
-                    .setSaved(false);
+            new AttributeModifier(ATTACKING_SPEED_BOOST_ID, "Attacking speed boost", 0.15000000596046448D, 0).setSaved(
+                    false);
     private static final Set<Block> CARRIABLE_BLOCKS = Sets.newIdentityHashSet();
     private static final DataParameter<Optional<IBlockState>> CARRIED_BLOCK =
             EntityDataManager.createKey(EntityDarkCreeper.class, DataSerializers.OPTIONAL_BLOCK_STATE);
@@ -112,7 +112,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(1, new AIFindPlayer(this));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityEndermite.class, 10, true, false,
-                EntityEndermite:: isSpawnedByPlayer));
+                EntityEndermite :: isSpawnedByPlayer));
     }
 
     @Override
@@ -155,11 +155,11 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         IBlockState iblockstate;
 
         if (compound.hasKey("carried", 8)) {
-            iblockstate = Block.getBlockFromName(compound.getString("carried"))
-                               .getStateFromMeta(compound.getShort("carriedData") & 65535);
+            iblockstate = Block.getBlockFromName(compound.getString("carried")).getStateFromMeta(
+                    compound.getShort("carriedData") & 65535);
         } else {
-            iblockstate = Block.getBlockById(compound.getShort("carried"))
-                               .getStateFromMeta(compound.getShort("carriedData") & 65535);
+            iblockstate = Block.getBlockById(compound.getShort("carried")).getStateFromMeta(
+                    compound.getShort("carriedData") & 65535);
         }
 
         if (iblockstate == null || iblockstate.getBlock() == null || iblockstate.getMaterial() == Material.AIR) {
@@ -334,9 +334,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         boolean flag = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ());
 
         if (flag) {
-            this.world
-                    .playSound(null, this.prevPosX, this.prevPosY, this.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT,
-                            this.getSoundCategory(), 1.0F, 1.0F);
+            this.world.playSound(null, this.prevPosX, this.prevPosY, this.prevPosZ,
+                    SoundEvents.ENTITY_ENDERMEN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
             this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         }
 
@@ -485,8 +484,8 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
                 entityareaeffectcloud.setRadiusOnUse(-0.5F);
                 entityareaeffectcloud.setWaitTime(10);
                 entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration());
-                entityareaeffectcloud
-                        .setRadiusPerTick(-entityareaeffectcloud.getRadius() / entityareaeffectcloud.getDuration());
+                entityareaeffectcloud.setRadiusPerTick(
+                        -entityareaeffectcloud.getRadius() / entityareaeffectcloud.getDuration());
                 entityareaeffectcloud.addEffect(new PotionEffect(potion, potion == MobEffects.LEVITATION ? 100 : 1200,
                         this.getPowered() ? 1 : 0));
                 this.world.spawnEntity(entityareaeffectcloud);
@@ -594,10 +593,9 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public boolean shouldExecute() {
             double d0 = this.getTargetDistance();
-            this.player = this.enderman.world
-                    .getNearestAttackablePlayer(this.enderman.posX, this.enderman.posY, this.enderman.posZ, d0, d0,
-                            null, p_apply_1_ -> p_apply_1_ != null &&
-                                    AIFindPlayer.this.enderman.shouldAttackPlayer(p_apply_1_));
+            this.player = this.enderman.world.getNearestAttackablePlayer(this.enderman.posX, this.enderman.posY,
+                    this.enderman.posZ, d0, d0, null,
+                    p_apply_1_ -> p_apply_1_ != null && AIFindPlayer.this.enderman.shouldAttackPlayer(p_apply_1_));
             return this.player != null;
         }
 

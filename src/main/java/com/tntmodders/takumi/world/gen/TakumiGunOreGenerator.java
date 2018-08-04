@@ -38,8 +38,8 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
                 int genY = 1 + random.nextInt(64);
                 int genZ = z + random.nextInt(16);
                 new WorldGenMinable(random.nextInt(50) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
-                        TakumiBlockCore.GUNORE.getDefaultState(), 25)
-                        .generate(world, random, new BlockPos(genX, genY, genZ));
+                        TakumiBlockCore.GUNORE.getDefaultState(), 25).generate(world, random,
+                        new BlockPos(genX, genY, genZ));
             }
         }
     }
@@ -62,9 +62,9 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
                     }
                 });
                 iBlockState = blockTakumiOres.get(random.nextInt(blockTakumiOres.size())).getDefaultState();
-                new WorldGenMinable(iBlockState, 25,
-                        input -> input != null && input.getBlock() == TakumiWorldChunkGenerator.STONE.getBlock())
-                        .generate(world, random, new BlockPos(genX, genY, genZ));
+                new WorldGenMinable(iBlockState, 25, input -> input != null &&
+                        input.getBlock() == TakumiWorldChunkGenerator.STONE.getBlock()).generate(world, random,
+                        new BlockPos(genX, genY, genZ));
             }
         }
     }

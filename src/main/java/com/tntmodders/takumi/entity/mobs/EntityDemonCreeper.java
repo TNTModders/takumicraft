@@ -22,6 +22,16 @@ public class EntityDemonCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0xff0000;
+    }
+
+    @Override
+    public double getSizeAmp() {
+        return 0.3d;
+    }
+
+    @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 10);
@@ -31,16 +41,6 @@ public class EntityDemonCreeper extends EntityTakumiAbstractCreeper {
             this.dropItem(Item.getItemFromBlock(Blocks.LAPIS_BLOCK), 10);
         }
         super.onDeath(source);
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0xff0000;
-    }
-
-    @Override
-    public double getSizeAmp() {
-        return 0.3d;
     }
 
     @Override

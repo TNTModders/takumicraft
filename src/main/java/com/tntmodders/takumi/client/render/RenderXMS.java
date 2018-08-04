@@ -53,6 +53,8 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
     }
 
     private static class ModelXMS extends ModelBase {
+        static final ResourceLocation LOCATION =
+                new ResourceLocation(TakumiCraftCore.MODID, "textures/models/armor/xms_helmet.png");
         ModelRenderer body;
         //下の翼
         ModelRenderer left_wing_one;
@@ -72,9 +74,6 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
         ModelRenderer crew_left_hand;
         ModelRenderer crew_right_hand;
         ModelRenderer crew_head_helmet;
-
-        static final ResourceLocation LOCATION =
-                new ResourceLocation(TakumiCraftCore.MODID, "textures/models/armor/xms_helmet.png");
 
         public ModelXMS() {
             int y = 21;

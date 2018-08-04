@@ -278,8 +278,8 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     }
 
     protected EntityArrow getArrow(float v) {
-        return TakumiItemCore.TAKUMI_ARROW_HA
-                .createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
+        return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA),
+                this);
     }
 
     @SideOnly(Side.CLIENT)

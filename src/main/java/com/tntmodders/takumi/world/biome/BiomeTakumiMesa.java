@@ -270,8 +270,9 @@ public class BiomeTakumiMesa extends AbstractBiomeTakumiWorld {
     }
 
     public IBlockState getBand(int p_180629_1_, int p_180629_2_, int p_180629_3_) {
-        int i = (int) Math.round(this.clayBandsOffsetNoise
-                .getValue((double) p_180629_1_ / 512.0D, (double) p_180629_1_ / 512.0D) * 2.0D);
+        int i = (int) Math.round(
+                this.clayBandsOffsetNoise.getValue((double) p_180629_1_ / 512.0D, (double) p_180629_1_ / 512.0D) *
+                        2.0D);
         return this.clayBands[(p_180629_2_ + i + 64) % 64];
     }
 

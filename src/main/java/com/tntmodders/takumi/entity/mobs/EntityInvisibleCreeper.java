@@ -39,11 +39,6 @@ public class EntityInvisibleCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0xaaffaa;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return false;
     }
@@ -67,5 +62,10 @@ public class EntityInvisibleCreeper extends EntityTakumiAbstractCreeper {
         }
         event.getAffectedEntities().clear();
         return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0xaaffaa;
     }
 }

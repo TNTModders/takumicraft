@@ -16,17 +16,6 @@ public class EntityWearCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            entity.getArmorInventoryList().forEach(itemStack -> {
-                itemStack.addEnchantment(Enchantments.VANISHING_CURSE, 10);
-                itemStack.addEnchantment(Enchantments.BINDING_CURSE, 10);
-            });
-        });
-        return true;
-    }
-
-    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.LOW;
     }
@@ -59,6 +48,17 @@ public class EntityWearCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 53;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedEntities().forEach(entity -> {
+            entity.getArmorInventoryList().forEach(itemStack -> {
+                itemStack.addEnchantment(Enchantments.VANISHING_CURSE, 10);
+                itemStack.addEnchantment(Enchantments.BINDING_CURSE, 10);
+            });
+        });
+        return true;
     }
 }
 

@@ -42,6 +42,9 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
 
     private static final DataParameter<Byte> CLIMBING =
             EntityDataManager.createKey(EntityBigSpiderCreeper.class, DataSerializers.BYTE);
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigspidercreeper.name"),
+                    BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS);
 
     public EntityBigSpiderCreeper(World worldIn) {
         super(worldIn);
@@ -59,25 +62,6 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(CLIMBING, (byte) 0);
-    }
-
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        if (!this.world.isRemote) {
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
-        }
-
-        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
-            if (!(this.getAttackTarget() instanceof EntityPlayer &&
-                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
-                this.ignite();
-            }
-        }
     }
 
     @Override
@@ -221,6 +205,19 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     }
 
     @Override
+    public void takumiExplode() {
+        if (!this.world.isRemote) {
+            int r = this.getPowered() ? 15 : 10;
+            for (int t = 0; t < r * 1.5; t++) {
+                EntitySpiderCreeper spiderCreeper = new EntitySpiderCreeper(this.world);
+                spiderCreeper.setPosition(this.posX, this.posY, this.posZ);
+                spiderCreeper.setAttackTarget(this.getAttackTarget());
+                this.world.spawnEntity(spiderCreeper);
+            }
+        }
+    }
+
+    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
@@ -261,9 +258,24 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
         return new RenderSpiderCreeper<>(manager);
     }
 
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigspidercreeper.name"),
-                    BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS);
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.isCollidedHorizontally);
+        }
+
+        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
+            if (!(this.getAttackTarget() instanceof EntityPlayer &&
+                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
+                this.ignite();
+            }
+        }
+    }
 
     @Override
     public void onLivingUpdate() {
@@ -281,11 +293,30 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 4), 0);
-        }
-        super.onDeath(source);
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
+    }
+
+    @Override
+    protected void outOfWorld() {
+        this.setHealth(0);
+        super.outOfWorld();
+    }
+
+    @Override
+    public boolean isNonBoss() {
+        return false;
+    }
+
+/*    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    }*/
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
     }
 
     @Override
@@ -301,28 +332,17 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (this.hasCustomName()) {
-            this.bossInfo.setName(this.getDisplayName());
-        }
-    }
-
-/*    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-    }*/
-
-    @Override
-    protected void outOfWorld() {
-        this.setHealth(0);
-        super.outOfWorld();
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedEntities().clear();
+        event.getAffectedBlocks().forEach(
+                pos -> TakumiUtils.setBlockStateProtected(this.world, pos, Blocks.WEB.getDefaultState()));
+        event.getAffectedBlocks().clear();
+        return true;
     }
 
     @Override
-    public boolean isNonBoss() {
-        return false;
+    public int getPrimaryColor() {
+        return 0x889988;
     }
 
     @Override
@@ -348,38 +368,18 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x889988;
-    }
-
-    @Override
-    public boolean isImmuneToExplosions() {
-        return true;
-    }
-
-    @Override
-    public void takumiExplode() {
+    public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            int r = this.getPowered() ? 15 : 10;
-            for (int t = 0; t < r * 1.5; t++) {
-                EntitySpiderCreeper spiderCreeper = new EntitySpiderCreeper(this.world);
-                spiderCreeper.setPosition(this.posX, this.posY, this.posZ);
-                spiderCreeper.setAttackTarget(this.getAttackTarget());
-                this.world.spawnEntity(spiderCreeper);
-            }
+            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 4), 0);
         }
+        super.onDeath(source);
     }
 
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().clear();
-        event.getAffectedBlocks().forEach(pos -> this.world.setBlockState(pos, Blocks.WEB.getDefaultState()));
-        event.getAffectedBlocks().clear();
-        return true;
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName()) {
+            this.bossInfo.setName(this.getDisplayName());
+        }
     }
 }

@@ -29,8 +29,9 @@ public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
     }
 
     private BiomeTakumiMountains(String name) {
-        super(name, AbstractBiomeTakumiWorld.getBaseProperty(name).setRainfall(0f).setHeightVariation(0.4f)
-                                            .setTemperature(2f));
+        super(name,
+                AbstractBiomeTakumiWorld.getBaseProperty(name).setRainfall(0f).setHeightVariation(0.4f).setTemperature(
+                        2f));
     }
 
     public BiomeTakumiMountains() {
@@ -53,8 +54,8 @@ public class BiomeTakumiMountains extends AbstractBiomeTakumiWorld {
                             if (i17 > 0) {
                                 int k19 = random.nextInt(i17);
                                 BlockPos blockpos6 = this.chunkPos.add(i10, k19, l13);
-                                new TakumiWorldGenLiquids(TakumiBlockCore.HOT_SPRING)
-                                        .generate(worldIn, random, blockpos6);
+                                new TakumiWorldGenLiquids(TakumiBlockCore.HOT_SPRING).generate(worldIn, random,
+                                        blockpos6);
                             }
                         }
                     }

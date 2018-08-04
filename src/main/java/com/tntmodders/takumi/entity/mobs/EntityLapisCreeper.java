@@ -48,6 +48,18 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x9090a0;
+    }
+
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc != DamageSource.FALL) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+
+    @Override
     public void onUpdate() {
         this.noClip = true;
         super.onUpdate();
@@ -64,18 +76,6 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc != DamageSource.FALL) {
-            super.damageEntity(damageSrc, damageAmount);
-        }
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x9090a0;
-    }
-
-    @Override
     public void move(MoverType type, double x, double y, double z) {
         super.move(type, x, y, z);
         this.doBlockCollisions();
@@ -84,10 +84,12 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void doBlockCollisions() {
         AxisAlignedBB axisalignedbb = this.getEntityBoundingBox();
-        PooledMutableBlockPos blockpos$pooledmutableblockpos = PooledMutableBlockPos
-                .retain(axisalignedbb.minX + 0.001D, axisalignedbb.minY + 0.001D, axisalignedbb.minZ + 0.001D);
-        PooledMutableBlockPos blockpos$pooledmutableblockpos1 = PooledMutableBlockPos
-                .retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D, axisalignedbb.maxZ - 0.001D);
+        PooledMutableBlockPos blockpos$pooledmutableblockpos =
+                PooledMutableBlockPos.retain(axisalignedbb.minX + 0.001D, axisalignedbb.minY + 0.001D,
+                        axisalignedbb.minZ + 0.001D);
+        PooledMutableBlockPos blockpos$pooledmutableblockpos1 =
+                PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D,
+                        axisalignedbb.maxZ - 0.001D);
         PooledMutableBlockPos blockpos$pooledmutableblockpos2 = PooledMutableBlockPos.retain();
 
         if (this.world.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1)) {
@@ -99,17 +101,16 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                         IBlockState iblockstate = this.world.getBlockState(blockpos$pooledmutableblockpos2);
 
                         try {
-                            iblockstate.getBlock()
-                                       .onEntityCollidedWithBlock(this.world, blockpos$pooledmutableblockpos2,
-                                               iblockstate, this);
+                            iblockstate.getBlock().onEntityCollidedWithBlock(this.world,
+                                    blockpos$pooledmutableblockpos2, iblockstate, this);
                             this.onInsideBlock(iblockstate);
                         } catch (Throwable throwable) {
                             CrashReport crashreport =
                                     CrashReport.makeCrashReport(throwable, "Colliding entity with block");
                             CrashReportCategory crashreportcategory =
                                     crashreport.makeCategory("Block being collided with");
-                            CrashReportCategory
-                                    .addBlockInfo(crashreportcategory, blockpos$pooledmutableblockpos2, iblockstate);
+                            CrashReportCategory.addBlockInfo(crashreportcategory, blockpos$pooledmutableblockpos2,
+                                    iblockstate);
                             throw new ReportedException(crashreport);
                         }
                     }
@@ -200,9 +201,9 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                     EntityLapisCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed * 0.5;
 
                     if (EntityLapisCreeper.this.getAttackTarget() == null) {
-                        EntityLapisCreeper.this.rotationYaw = -((float) MathHelper
-                                .atan2(EntityLapisCreeper.this.motionX, EntityLapisCreeper.this.motionZ)) *
-                                (180F / (float) Math.PI);
+                        EntityLapisCreeper.this.rotationYaw =
+                                -((float) MathHelper.atan2(EntityLapisCreeper.this.motionX,
+                                        EntityLapisCreeper.this.motionZ)) * (180F / (float) Math.PI);
                         EntityLapisCreeper.this.renderYawOffset = EntityLapisCreeper.this.rotationYaw;
                     } else {
                         double d4 = EntityLapisCreeper.this.getAttackTarget().posX - EntityLapisCreeper.this.posX;
@@ -250,9 +251,8 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                 BlockPos blockpos1 = blockpos.add(EntityLapisCreeper.this.rand.nextInt(15) - 7,
                         EntityLapisCreeper.this.rand.nextInt(11) - 5, EntityLapisCreeper.this.rand.nextInt(15) - 7);
                 if (EntityLapisCreeper.this.world.isAirBlock(blockpos1)) {
-                    EntityLapisCreeper.this.moveHelper
-                            .setMoveTo((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.5D,
-                                    (double) blockpos1.getZ() + 0.5D, 0.25D);
+                    EntityLapisCreeper.this.moveHelper.setMoveTo((double) blockpos1.getX() + 0.5D,
+                            (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 0.25D);
                     if (EntityLapisCreeper.this.getAttackTarget() == null) {
                         EntityLapisCreeper.this.getLookHelper().setLookPosition((double) blockpos1.getX() + 0.5D,
                                 (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 180.0F, 20.0F);

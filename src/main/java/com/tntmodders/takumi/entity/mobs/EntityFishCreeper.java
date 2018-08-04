@@ -42,12 +42,6 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        this.renderYawOffset = this.rotationYaw;
-        super.onUpdate();
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_SILVERFISH_HURT;
     }
@@ -146,5 +140,11 @@ public class EntityFishCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderFishCreeper(manager);
+    }
+
+    @Override
+    public void onUpdate() {
+        this.renderYawOffset = this.rotationYaw;
+        super.onUpdate();
     }
 }

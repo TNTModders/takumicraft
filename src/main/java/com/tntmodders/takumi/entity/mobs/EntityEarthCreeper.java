@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderEarthCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -64,7 +65,7 @@ public class EntityEarthCreeper extends EntityTakumiAbstractCreeper {
                             (int) Math.sqrt(this.getPowered() ? 100 : 25 - this.getDistanceSqToCenter(pos)) / 1.5;
                          i++) {
                         if (state.getBlock().canPlaceBlockAt(this.world, pos.up(i))) {
-                            this.world.setBlockState(pos.up(i), state);
+                            TakumiUtils.setBlockStateProtected(this.world, pos.up(i), state);
                         }
                     }
                 }

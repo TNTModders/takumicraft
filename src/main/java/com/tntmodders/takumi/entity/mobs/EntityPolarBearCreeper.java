@@ -71,25 +71,6 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (this.world.isRemote) {
-            this.clientSideStandAnimation0 = this.clientSideStandAnimation;
-
-            if (this.isStanding()) {
-                this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation + 1.0F, 0.0F, 6.0F);
-            } else {
-                this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation - 1.0F, 0.0F, 6.0F);
-            }
-        }
-
-        if (this.warningSoundTicks > 0) {
-            --this.warningSoundTicks;
-        }
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_POLAR_BEAR_HURT;
     }
@@ -117,14 +98,6 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_POLAR_BEAR;
-    }
-
-    public boolean isStanding() {
-        return this.dataManager.get(IS_STANDING);
-    }
-
-    public void setStanding(boolean standing) {
-        this.dataManager.set(IS_STANDING, standing);
     }
 
     @Override
@@ -215,6 +188,33 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderPolarBearCreeper<>(manager);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (this.world.isRemote) {
+            this.clientSideStandAnimation0 = this.clientSideStandAnimation;
+
+            if (this.isStanding()) {
+                this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation + 1.0F, 0.0F, 6.0F);
+            } else {
+                this.clientSideStandAnimation = MathHelper.clamp(this.clientSideStandAnimation - 1.0F, 0.0F, 6.0F);
+            }
+        }
+
+        if (this.warningSoundTicks > 0) {
+            --this.warningSoundTicks;
+        }
+    }
+
+    public boolean isStanding() {
+        return this.dataManager.get(IS_STANDING);
+    }
+
+    public void setStanding(boolean standing) {
+        this.dataManager.set(IS_STANDING, standing);
     }
 
     class AIMeleeAttack extends EntityAIAttackMelee {

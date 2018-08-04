@@ -26,13 +26,21 @@ public class EntityBoxCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x00bbbb;
+    }
+
+    @Override
     public Object getRender(RenderManager manager) {
         return new RenderBoxCreeper<>(manager);
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x00bbbb;
+    public void onUpdate() {
+        super.onUpdate();
+        this.rotationYaw = 0;
+        this.rotationPitch = 0;
+        this.rotationYawHead = 0;
     }
 
     @Override
@@ -45,14 +53,6 @@ public class EntityBoxCreeper extends EntityTakumiAbstractCreeper {
         this.tasks.addTask(2, new EntityAICreeperSwell(this));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.rotationYaw = 0;
-        this.rotationPitch = 0;
-        this.rotationYawHead = 0;
     }
 
     @Override

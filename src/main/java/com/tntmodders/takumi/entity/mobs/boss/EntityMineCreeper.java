@@ -20,6 +20,10 @@ import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 public class EntityMineCreeper extends EntityTakumiAbstractCreeper {
 
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.minecreeper.name"),
+                    BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
+
     public EntityMineCreeper(World worldIn) {
         super(worldIn);
     }
@@ -30,9 +34,13 @@ public class EntityMineCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
     }
 
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.minecreeper.name"),
-                    BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName()) {
+            this.bossInfo.setName(this.getDisplayName());
+        }
+    }
 
     @Override
     public void onLivingUpdate() {
@@ -50,37 +58,8 @@ public class EntityMineCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 0), 0);
-        }
-        super.onDeath(source);
-    }
-
-    @Override
-    public void addTrackingPlayer(EntityPlayerMP player) {
-        super.addTrackingPlayer(player);
-        this.bossInfo.addPlayer(player);
-    }
-
-    @Override
-    public void removeTrackingPlayer(EntityPlayerMP player) {
-        super.removeTrackingPlayer(player);
-        this.bossInfo.removePlayer(player);
-    }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (this.hasCustomName()) {
-            this.bossInfo.setName(this.getDisplayName());
-        }
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
     }
 
     @Override
@@ -95,40 +74,20 @@ public class EntityMineCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void setDead() {
-        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
-            if (!this.world.isRemote) {
-                EntityMineCreeper kingCreeper = new EntityMineCreeper(this.world);
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                this.writeEntityToNBT(tagCompound);
-                tagCompound.setBoolean("ignited", false);
-                kingCreeper.readEntityFromNBT(tagCompound);
-                kingCreeper.setHealth(this.getHealth());
-                kingCreeper.copyLocationAndAnglesFrom(this);
-                if (this.getPowered()) {
-                    TakumiUtils.takumiSetPowered(kingCreeper, true);
-                }
-                kingCreeper.setCreeperState(-1);
-                kingCreeper.setAttackTarget(null);
-                this.world.spawnEntity(kingCreeper);
-            }
-        }
-        super.setDead();
-    }
-
-    @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x889988;
-    }
-
-    @Override
     public boolean isImmuneToExplosions() {
         return true;
+    }
+
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
     }
 
     @Override
@@ -175,12 +134,53 @@ public class EntityMineCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedEntities().clear();
         event.getAffectedBlocks().forEach(pos -> {
             if (pos.getY() < this.posY) {
-                this.world.setBlockState(pos, TakumiBlockCore.DUMMY_GUNORE.getDefaultState());
+                TakumiUtils.setBlockStateProtected(this.world, pos, TakumiBlockCore.DUMMY_GUNORE.getDefaultState());
             } else if (Blocks.FIRE.canPlaceBlockAt(this.world, pos)) {
-                this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+                TakumiUtils.setBlockStateProtected(this.world, pos, Blocks.FIRE.getDefaultState());
             }
         });
         event.getAffectedBlocks().clear();
         return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x889988;
+    }
+
+    @Override
+    public void setDead() {
+        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+            if (!this.world.isRemote) {
+                EntityMineCreeper kingCreeper = new EntityMineCreeper(this.world);
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                this.writeEntityToNBT(tagCompound);
+                tagCompound.setBoolean("ignited", false);
+                kingCreeper.readEntityFromNBT(tagCompound);
+                kingCreeper.setHealth(this.getHealth());
+                kingCreeper.copyLocationAndAnglesFrom(this);
+                if (this.getPowered()) {
+                    TakumiUtils.takumiSetPowered(kingCreeper, true);
+                }
+                kingCreeper.setCreeperState(-1);
+                kingCreeper.setAttackTarget(null);
+                this.world.spawnEntity(kingCreeper);
+            }
+        }
+        super.setDead();
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 0), 0);
+        }
+        super.onDeath(source);
     }
 }

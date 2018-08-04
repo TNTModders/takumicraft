@@ -79,8 +79,8 @@ public class LayerHeldItemWitchCreeper implements LayerRenderer<EntityWitchCreep
 
             GlStateManager.rotate(-15.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(40.0F, 0.0F, 0.0F, 1.0F);
-            minecraft.getItemRenderer()
-                     .renderItem(entitylivingbaseIn, itemstack, TransformType.THIRD_PERSON_RIGHT_HAND);
+            minecraft.getItemRenderer().renderItem(entitylivingbaseIn, itemstack,
+                    TransformType.THIRD_PERSON_RIGHT_HAND);
             GlStateManager.popMatrix();
         }
     }

@@ -17,17 +17,9 @@ public class EntityFloatCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        if (!this.getPowered()) {
-            TakumiUtils.takumiSetPowered(this, true);
-        }
-        super.onUpdate();
-    }
-
-    @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         event.getAffectedBlocks().forEach(pos -> {
-            this.world.setBlockState(pos.up(30), this.world.getBlockState(pos));
+            TakumiUtils.setBlockStateProtected(this.world, pos.up(30), this.world.getBlockState(pos));
             this.world.setBlockToAir(pos);
         });
         event.getAffectedBlocks().clear();
@@ -46,6 +38,14 @@ public class EntityFloatCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/big_creeper_armor.png");
+    }
+
+    @Override
+    public void onUpdate() {
+        if (!this.getPowered()) {
+            TakumiUtils.takumiSetPowered(this, true);
+        }
+        super.onUpdate();
     }
 
     @Override

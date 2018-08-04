@@ -18,8 +18,50 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
     }
 
     @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.taskEntries.clear();
+        this.targetTasks.taskEntries.clear();
+    }
+
+    @Override
     protected boolean canDespawn() {
         return false;
+    }
+
+    @Override
+    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
+    }
+
+    @Override
+    protected boolean isMovementBlocked() {
+        return true;
+    }
+
+    @Override
+    public void setDead() {
+        if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getHealth() <= 1) {
+            super.setDead();
+        }
+    }
+
+    @Override
+    public void move(MoverType type, double x, double y, double z) {
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        if (this.world.isRemote && this.world.loadedTileEntityList.stream().anyMatch(
+                tileEntity -> tileEntity.getBlockType() == TakumiBlockCore.DARKCORE_ON)) {
+            for (int i = 0; i < 10; ++i) {
+                this.world.spawnParticle(EnumParticleTypes.FLAME,
+                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
+                        this.posY + this.rand.nextDouble() * this.height,
+                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+            }
+            this.setFire(100);
+        }
+        super.onLivingUpdate();
     }
 
     @Override
@@ -29,25 +71,9 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
     }
 
     @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.taskEntries.clear();
-        this.targetTasks.taskEntries.clear();
+    public IllagerArmPose getArmPose() {
+        return IllagerArmPose.SPELLCASTING;
     }
-
-    @Override
-    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
-    }
-
-    @Override
-    public void move(MoverType type, double x, double y, double z) {
-    }
-
-    @Override
-    protected boolean isMovementBlocked() {
-        return true;
-    }
-
 
     @Override
     public void onUpdate() {
@@ -71,33 +97,6 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
             }
         });
         super.onUpdate();
-    }
-
-    @Override
-    public void setDead() {
-        if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getHealth() <= 1) {
-            super.setDead();
-        }
-    }
-
-    @Override
-    public void onLivingUpdate() {
-        if (this.world.isRemote && this.world.loadedTileEntityList.stream().anyMatch(
-                tileEntity -> tileEntity.getBlockType() == TakumiBlockCore.DARKCORE_ON)) {
-            for (int i = 0; i < 10; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.FLAME,
-                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
-                        this.posY + this.rand.nextDouble() * this.height,
-                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
-            }
-            this.setFire(100);
-        }
-        super.onLivingUpdate();
-    }
-
-    @Override
-    public IllagerArmPose getArmPose() {
-        return IllagerArmPose.SPELLCASTING;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.client.render.RenderSnowCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.item.EntityTakumiSnowBall;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
@@ -97,7 +98,7 @@ public class EntitySnowCreeper extends EntityTakumiAbstractCreeper implements IR
                 if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR &&
                         this.world.getBiome(blockpos).getFloatTemperature(blockpos) < 0.8F &&
                         Blocks.SNOW_LAYER.canPlaceBlockAt(this.world, blockpos)) {
-                    this.world.setBlockState(blockpos, Blocks.SNOW_LAYER.getDefaultState());
+                    TakumiUtils.setBlockStateProtected(this.world, blockpos, Blocks.SNOW_LAYER.getDefaultState());
                 }
             }
         }

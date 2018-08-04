@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -63,11 +64,6 @@ public class EntityFarmCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0xaa4400;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return false;
     }
@@ -96,7 +92,8 @@ public class EntityFarmCreeper extends EntityTakumiAbstractCreeper {
             for (int x = -5; x <= 5; x++) {
                 for (int z = -5; z <= 5; z++) {
                     if (x == -5 || x == 5 || z == -5 || z == 5) {
-                        this.world.setBlockState(this.getPosition().add(x, y, z), Blocks.OAK_FENCE.getDefaultState());
+                        TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, y, z),
+                                Blocks.OAK_FENCE.getDefaultState());
                     } else {
                         this.world.setBlockToAir(this.getPosition().add(x, y, z));
                     }
@@ -105,5 +102,10 @@ public class EntityFarmCreeper extends EntityTakumiAbstractCreeper {
         }
         event.getAffectedEntities().clear();
         return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0xaa4400;
     }
 }

@@ -248,8 +248,8 @@ public class EntityIllusionerCreeper extends EntityAbstractSpellCreeper implemen
     }
 
     protected EntityArrow createArrowEntity(float p_193097_1_) {
-        return TakumiItemCore.TAKUMI_ARROW_HA
-                .createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
+        return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA),
+                this);
     }
 
     @Override
@@ -306,9 +306,9 @@ public class EntityIllusionerCreeper extends EntityAbstractSpellCreeper implemen
         public boolean shouldExecute() {
             return super.shouldExecute() && EntityIllusionerCreeper.this.getAttackTarget() != null &&
                     EntityIllusionerCreeper.this.getAttackTarget().getEntityId() != this.lastTargetId &&
-                    EntityIllusionerCreeper.this.world
-                            .getDifficultyForLocation(new BlockPos(EntityIllusionerCreeper.this))
-                            .isHarderThan((float) EnumDifficulty.NORMAL.ordinal());
+                    EntityIllusionerCreeper.this.world.getDifficultyForLocation(
+                            new BlockPos(EntityIllusionerCreeper.this)).isHarderThan(
+                            (float) EnumDifficulty.NORMAL.ordinal());
         }
 
         /**
@@ -334,9 +334,9 @@ public class EntityIllusionerCreeper extends EntityAbstractSpellCreeper implemen
         protected void castSpell() {
             EntityIllusionerCreeper.this.getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 400));
             if (!EntityIllusionerCreeper.this.world.isRemote) {
-                EntityIllusionerCreeper.this.world
-                        .createExplosion(EntityIllusionerCreeper.this, EntityIllusionerCreeper.this.posX,
-                                EntityIllusionerCreeper.this.posY, EntityIllusionerCreeper.this.posZ, 3f, true);
+                EntityIllusionerCreeper.this.world.createExplosion(EntityIllusionerCreeper.this,
+                        EntityIllusionerCreeper.this.posX, EntityIllusionerCreeper.this.posY,
+                        EntityIllusionerCreeper.this.posZ, 3f, true);
             }
         }
 

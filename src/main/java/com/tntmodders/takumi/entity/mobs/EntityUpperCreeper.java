@@ -76,9 +76,8 @@ public class EntityUpperCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            TakumiUtils
-                    .takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, this.getPowered() ? 8 : 4,
-                            false, false, this.getPowered() ? 15 : 5);
+            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ,
+                    this.getPowered() ? 8 : 4, false, false, this.getPowered() ? 15 : 5);
         }
     }
 

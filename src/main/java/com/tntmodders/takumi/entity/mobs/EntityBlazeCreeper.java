@@ -149,10 +149,9 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
 
         if (this.world.isRemote) {
             if (this.rand.nextInt(24) == 0 && !this.isSilent()) {
-                this.world
-                        .playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_BLAZE_BURN,
-                                this.getSoundCategory(), 1.0F + this.rand.nextFloat(),
-                                this.rand.nextFloat() * 0.7F + 0.3F, false);
+                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D,
+                        SoundEvents.ENTITY_BLAZE_BURN, this.getSoundCategory(), 1.0F + this.rand.nextFloat(),
+                        this.rand.nextFloat() * 0.7F + 0.3F, false);
             }
 
             for (int i = 0; i < 2; ++i) {
@@ -227,9 +226,8 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void customSpawn() {
-        EntityRegistry
-                .addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 4, 1, 20, EnumCreatureType.MONSTER,
-                        Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 4, 1, 20,
+                EnumCreatureType.MONSTER, Biomes.HELL);
     }
 
     @Override
@@ -294,8 +292,8 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
                     this.blaze.attackEntityAsMob(entitylivingbase);
                 }
 
-                this.blaze.getMoveHelper()
-                          .setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
+                this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY,
+                        entitylivingbase.posZ, 1.0D);
             } else if (d0 < this.getFollowDistance() * this.getFollowDistance()) {
                 double d1 = entitylivingbase.posX - this.blaze.posX;
                 double d2 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) -
@@ -335,8 +333,8 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
                 this.blaze.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
             } else {
                 this.blaze.getNavigator().clearPathEntity();
-                this.blaze.getMoveHelper()
-                          .setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
+                this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY,
+                        entitylivingbase.posZ, 1.0D);
             }
 
             super.updateTask();

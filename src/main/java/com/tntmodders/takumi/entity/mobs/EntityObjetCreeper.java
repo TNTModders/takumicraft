@@ -26,10 +26,11 @@ public class EntityObjetCreeper extends EntityTakumiAbstractCreeper {
                         if (TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                             if (y > this.posY + range * 1.5) {
                                 if (this.rand.nextInt(8) == 0) {
-                                    this.world.setBlockState(pos, TakumiBlockCore.CREEPER_BOMB.getDefaultState());
+                                    TakumiUtils.setBlockStateProtected(this.world, pos,
+                                            TakumiBlockCore.CREEPER_BOMB.getDefaultState());
                                 }
                             } else if (this.rand.nextBoolean()) {
-                                this.world.setBlockState(pos, state);
+                                TakumiUtils.setBlockStateProtected(this.world, pos, state);
                             }
                         }
                     }

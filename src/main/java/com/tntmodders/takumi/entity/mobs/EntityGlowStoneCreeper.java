@@ -36,9 +36,8 @@ public class EntityGlowStoneCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void customSpawn() {
-        EntityRegistry
-                .addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 3, 10, EnumCreatureType.MONSTER,
-                        Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 3, 10,
+                EnumCreatureType.MONSTER, Biomes.HELL);
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 1, 3, EnumCreatureType.MONSTER,
                 TakumiEntityCore.biomes.toArray(new Biome[0]));
     }

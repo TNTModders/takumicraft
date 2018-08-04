@@ -38,13 +38,10 @@ public class EntityFrostCreeper extends EntityTakumiAbstractCreeper {
                 BlockPos newPos = pos.offset(EnumFacing.VALUES[i]);
                 if (event.getWorld().getBlockState(newPos).getMaterial() != Material.WATER &&
                         event.getWorld().getBlockState(newPos).getBlockHardness(world, newPos) != -1 &&
-                        (event.getWorld().getBlockState(newPos).getBlock()
-                              .getExplosionResistance(world, newPos, event.getExplosion().getExplosivePlacedBy(),
-                                      event.getExplosion()) < Blocks.OBSIDIAN.getDefaultState().getBlock()
-                                                                             .getExplosionResistance(world, newPos,
-                                                                                     event.getExplosion()
-                                                                                          .getExplosivePlacedBy(),
-                                                                                     event.getExplosion()) ||
+                        (event.getWorld().getBlockState(newPos).getBlock().getExplosionResistance(world, newPos,
+                                event.getExplosion().getExplosivePlacedBy(), event.getExplosion()) <
+                                Blocks.OBSIDIAN.getDefaultState().getBlock().getExplosionResistance(world, newPos,
+                                        event.getExplosion().getExplosivePlacedBy(), event.getExplosion()) ||
                                 event.getWorld().isAirBlock(newPos))) {
                     event.getWorld().setBlockState(newPos, Blocks.PACKED_ICE.getDefaultState());
                 }

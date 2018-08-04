@@ -33,14 +33,29 @@ public class ItemTakumiBowGun extends Item {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
-        return true;
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (handIn != EnumHand.MAIN_HAND) {
+            return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        }
+        ItemStack stack = playerIn.getHeldItemOffhand();
+        if (!(stack.getItem() instanceof ItemArrow ||
+                stack.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB) ||
+                (stack.getItem() instanceof ItemBlock &&
+                        ((ItemBlock) stack.getItem()).getBlock() instanceof BlockTakumiMonsterBomb))) {
+            return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        }
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return EnumAction.BOW;
+    }
+
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return 72000;
     }
 
     @Override
@@ -99,22 +114,6 @@ public class ItemTakumiBowGun extends Item {
         }
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        if (handIn != EnumHand.MAIN_HAND) {
-            return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-        }
-        ItemStack stack = playerIn.getHeldItemOffhand();
-        if (!(stack.getItem() instanceof ItemArrow ||
-                stack.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB) ||
-                (stack.getItem() instanceof ItemBlock &&
-                        ((ItemBlock) stack.getItem()).getBlock() instanceof BlockTakumiMonsterBomb))) {
-            return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-        }
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     @SuppressWarnings("unchecked")
@@ -125,13 +124,14 @@ public class ItemTakumiBowGun extends Item {
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return true;
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BOW;
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.EPIC;
     }
 
     @Override

@@ -54,6 +54,11 @@ public class EntityPierceCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x88ff00;
+    }
+
+    @Override
     public void setDead() {
         this.setInvisible(true);
         if ((this.canDeath() || this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL) &&
@@ -67,11 +72,6 @@ public class EntityPierceCreeper extends EntityTakumiAbstractCreeper {
         if (damageSrc != DamageSource.FALL) {
             super.damageEntity(damageSrc, damageAmount);
         }
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x88ff00;
     }
 
     private boolean canDeath() {

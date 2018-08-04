@@ -145,22 +145,6 @@ public class EntityVexCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        this.noClip = true;
-        super.onUpdate();
-        this.noClip = false;
-        this.setNoGravity(true);
-
-        if (this.limitedLifespan && --this.limitedLifeTicks <= 0) {
-            this.limitedLifeTicks = 20;
-            this.attackEntityFrom(DamageSource.STARVE, 1.0F);
-        }
-    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_VEX_HURT;
@@ -314,6 +298,22 @@ public class EntityVexCreeper extends EntityTakumiAbstractCreeper {
         return new RenderVexCreeper<>(manager);
     }
 
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        this.noClip = true;
+        super.onUpdate();
+        this.noClip = false;
+        this.setNoGravity(true);
+
+        if (this.limitedLifespan && --this.limitedLifeTicks <= 0) {
+            this.limitedLifeTicks = 20;
+            this.attackEntityFrom(DamageSource.STARVE, 1.0F);
+        }
+    }
+
     class AIChargeAttack extends EntityAIBase {
 
         public AIChargeAttack() {
@@ -434,9 +434,8 @@ public class EntityVexCreeper extends EntityTakumiAbstractCreeper {
                     EntityVexCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed;
 
                     if (EntityVexCreeper.this.getAttackTarget() == null) {
-                        EntityVexCreeper.this.rotationYaw = -((float) MathHelper
-                                .atan2(EntityVexCreeper.this.motionX, EntityVexCreeper.this.motionZ)) *
-                                (180F / (float) Math.PI);
+                        EntityVexCreeper.this.rotationYaw = -((float) MathHelper.atan2(EntityVexCreeper.this.motionX,
+                                EntityVexCreeper.this.motionZ)) * (180F / (float) Math.PI);
                         EntityVexCreeper.this.renderYawOffset = EntityVexCreeper.this.rotationYaw;
                     } else {
                         double d4 = EntityVexCreeper.this.getAttackTarget().posX - EntityVexCreeper.this.posX;
@@ -488,9 +487,8 @@ public class EntityVexCreeper extends EntityTakumiAbstractCreeper {
                         EntityVexCreeper.this.rand.nextInt(11) - 5, EntityVexCreeper.this.rand.nextInt(15) - 7);
 
                 if (EntityVexCreeper.this.world.isAirBlock(blockpos1)) {
-                    EntityVexCreeper.this.moveHelper
-                            .setMoveTo((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.5D,
-                                    (double) blockpos1.getZ() + 0.5D, 0.25D);
+                    EntityVexCreeper.this.moveHelper.setMoveTo((double) blockpos1.getX() + 0.5D,
+                            (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 0.25D);
 
                     if (EntityVexCreeper.this.getAttackTarget() == null) {
                         EntityVexCreeper.this.getLookHelper().setLookPosition((double) blockpos1.getX() + 0.5D,

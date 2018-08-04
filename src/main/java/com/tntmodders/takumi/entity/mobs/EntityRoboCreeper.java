@@ -39,69 +39,18 @@ public class EntityRoboCreeper extends EntityTakumiAbstractCreeper {
         this.setSize(1.2F, 3.4F);
     }
 
-    public RayTraceResult rayTrace(double blockReachDistance) {
-        Vec3d vec3d = this.getPositionEyes(0f);
-        Vec3d vec3d1 = this.getLook(0f);
-        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance,
-                vec3d1.z * blockReachDistance);
-        return this.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
-    }
-
     public BlockPos getPos() {
         return pos;
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
-    }
-
-    @Override
-    public void onUpdate() {
-        if (this.world.getNearestAttackablePlayer(this, 32, 32) != null &&
-                this.canEntityBeSeen(this.world.getNearestAttackablePlayer(this, 32, 32))) {
-            this.setAttackTarget(this.world.getNearestAttackablePlayer(this, 32, 32));
-            this.ignite();
-        }
-        if (this.getAttackTarget() != null) {
-            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 0.25f, 0.25f);
-        }
-        if ((this.hasIgnited() || this.getCreeperState() > 0)) {
-            try {
-                RayTraceResult rayTraceResult = this.rayTrace(64);
-                if (rayTraceResult.getBlockPos() != null) {
-                    pos = rayTraceResult.getBlockPos();
-                }
-                if (this.getAttackTarget() != null &&
-                        !this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
-                                this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
-                                        this.getLookVec().z).grow(32)).isEmpty() &&
-                        this.getLookHelper().getIsLooking()) {
-                    Entity entity = this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
-                            this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
-                                    this.getLookVec().z).grow(32)).get(0);
-                    if (pos == null || this.getDistanceSqToEntity(entity) < this.getDistanceSq(pos)) {
-                        pos = entity.getPosition();
-                    }
-                }
-                if (pos != null) {
-                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER,
-                            SoundCategory.WEATHER, 10000.0F, 0.8F + this.rand.nextFloat() * 0.2F);
-                    if (!this.world.isRemote) {
-                        this.world.newExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4f, true,
-                                true);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        super.onUpdate();
-    }
-
-    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return !source.isExplosion() && super.attackEntityFrom(source, amount);
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
     }
 
     @Override
@@ -112,17 +61,6 @@ public class EntityRoboCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean isImmuneToExplosions() {
         return true;
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        if (!this.world.isRemote) {
-            for (int i = 0; i < 5; i++) {
-                this.world.createExplosion(this, this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(),
-                        this.posZ + this.rand.nextDouble(), 0f, false);
-            }
-        }
     }
 
     @Override
@@ -214,6 +152,68 @@ public class EntityRoboCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public double getSizeAmp() {
         return 2.0;
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.world.getNearestAttackablePlayer(this, 32, 32) != null &&
+                this.canEntityBeSeen(this.world.getNearestAttackablePlayer(this, 32, 32))) {
+            this.setAttackTarget(this.world.getNearestAttackablePlayer(this, 32, 32));
+            this.ignite();
+        }
+        if (this.getAttackTarget() != null) {
+            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 0.25f, 0.25f);
+        }
+        if ((this.hasIgnited() || this.getCreeperState() > 0)) {
+            try {
+                RayTraceResult rayTraceResult = this.rayTrace(64);
+                if (rayTraceResult.getBlockPos() != null) {
+                    pos = rayTraceResult.getBlockPos();
+                }
+                if (this.getAttackTarget() != null &&
+                        !this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
+                                this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
+                                        this.getLookVec().z).grow(32)).isEmpty() &&
+                        this.getLookHelper().getIsLooking()) {
+                    Entity entity = this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
+                            this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
+                                    this.getLookVec().z).grow(32)).get(0);
+                    if (pos == null || this.getDistanceSqToEntity(entity) < this.getDistanceSq(pos)) {
+                        pos = entity.getPosition();
+                    }
+                }
+                if (pos != null) {
+                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER,
+                            SoundCategory.WEATHER, 10000.0F, 0.8F + this.rand.nextFloat() * 0.2F);
+                    if (!this.world.isRemote) {
+                        this.world.newExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4f, true,
+                                true);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        super.onUpdate();
+    }
+
+    public RayTraceResult rayTrace(double blockReachDistance) {
+        Vec3d vec3d = this.getPositionEyes(0f);
+        Vec3d vec3d1 = this.getLook(0f);
+        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance,
+                vec3d1.z * blockReachDistance);
+        return this.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        if (!this.world.isRemote) {
+            for (int i = 0; i < 5; i++) {
+                this.world.createExplosion(this, this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(),
+                        this.posZ + this.rand.nextDouble(), 0f, false);
+            }
+        }
     }
 }
 

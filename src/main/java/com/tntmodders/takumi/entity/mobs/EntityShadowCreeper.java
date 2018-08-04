@@ -28,29 +28,6 @@ public class EntityShadowCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        int t = this.getTimeSinceIgnited();
-        if (t > 0 && t % 3 == 0 && this.getCreeperState() > 0) {
-            for (int i = this.shadowList.size(); i < t * t; i++) {
-                this.shadowList.add(new Vec3d(rand.nextInt(t * 2) - rand.nextInt(t * 2),
-                        rand.nextInt(t * 2) / 3 - rand.nextInt(t * 2) / 3, rand.nextInt(t * 2) - rand.nextInt(t * 2)));
-            }
-        }
-    }
-
-    public int getTimeSinceIgnited() {
-        try {
-            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
-            field.setAccessible(true);
-            return (int) field.get(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    @Override
     public void takumiExplode() {
     }
 
@@ -97,5 +74,28 @@ public class EntityShadowCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderShadowCreeper<>(manager);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        int t = this.getTimeSinceIgnited();
+        if (t > 0 && t % 3 == 0 && this.getCreeperState() > 0) {
+            for (int i = this.shadowList.size(); i < t * t; i++) {
+                this.shadowList.add(new Vec3d(rand.nextInt(t * 2) - rand.nextInt(t * 2),
+                        rand.nextInt(t * 2) / 3 - rand.nextInt(t * 2) / 3, rand.nextInt(t * 2) - rand.nextInt(t * 2)));
+            }
+        }
+    }
+
+    public int getTimeSinceIgnited() {
+        try {
+            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
+            field.setAccessible(true);
+            return (int) field.get(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

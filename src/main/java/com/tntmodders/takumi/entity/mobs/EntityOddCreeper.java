@@ -17,6 +17,16 @@ public class EntityOddCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x88ff88;
+    }
+
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderOddCreeper<>(manager);
+    }
+
+    @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 10);
@@ -27,12 +37,6 @@ public class EntityOddCreeper extends EntityTakumiAbstractCreeper {
         }
         super.onDeath(source);
     }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x88ff88;
-    }
-
 
     @Override
     protected void applyEntityAttributes() {
@@ -85,10 +89,5 @@ public class EntityOddCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 409;
-    }
-
-    @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderOddCreeper<>(manager);
     }
 }

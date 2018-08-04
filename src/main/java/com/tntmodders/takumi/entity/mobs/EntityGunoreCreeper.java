@@ -19,14 +19,6 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.rotationYaw = 0;
-        this.rotationPitch = 0;
-        this.rotationYawHead = 0;
-    }
-
-    @Override
     protected void setRotation(float yaw, float pitch) {
     }
 
@@ -134,5 +126,13 @@ public class EntityGunoreCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderGunoreCreeper(manager);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        this.rotationYaw = 0;
+        this.rotationPitch = 0;
+        this.rotationYawHead = 0;
     }
 }

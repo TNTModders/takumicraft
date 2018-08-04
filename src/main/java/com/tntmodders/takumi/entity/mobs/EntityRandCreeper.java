@@ -48,8 +48,7 @@ public class EntityRandCreeper extends EntityTakumiAbstractCreeper {
                 if (creeper != null) {
                     creeper.copyLocationAndAnglesFrom(this);
                     if (creeper instanceof EntityLiving) {
-                        creeper.onInitialSpawn(this.world.getDifficultyForLocation(this.getPosition()),
-                                null);
+                        creeper.onInitialSpawn(this.world.getDifficultyForLocation(this.getPosition()), null);
                     }
                     NBTTagCompound compound = new NBTTagCompound();
                     creeper.writeEntityToNBT(compound);

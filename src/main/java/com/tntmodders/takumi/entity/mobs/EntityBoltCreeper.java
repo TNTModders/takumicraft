@@ -16,14 +16,6 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.TAKUMI_BOLT_STONE, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
-        }
-        super.onDeath(source);
-    }
-
-    @Override
     public void setDead() {
         if (!this.world.isRemote && !this.getPowered() && this.getHealth() > 0) {
             EntityBoltCreeper creeper = new EntityBoltCreeper(this.world);
@@ -47,13 +39,21 @@ public class EntityBoltCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.TAKUMI_BOLT_STONE, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
+        }
+        super.onDeath(source);
+    }
+
+    @Override
     public void takumiExplode() {
         for (int i = 0; i < 10 * (this.getPowered() ? 3 : 1); i++) {
-            BlockPos pos = this.getPosition().add(MathHelper
-                            .nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
+            BlockPos pos = this.getPosition().add(
                     MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
-                    MathHelper
-                            .nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)));
+                    MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
+                    MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1),
+                            5 * (this.getPowered() ? 2 : 1)));
             EntityLightningBolt bolt =
                     new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
             this.world.addWeatherEffect(bolt);

@@ -31,6 +31,13 @@ public class EntityTakumiArrow extends EntityArrow {
         this.type = EnumArrowType.NORMAL;
     }
 
+    public EntityTakumiArrow(World worldIn, ItemStack itemStack, EntityLivingBase base,
+            Class<? extends EntityCreeper> creeper) {
+        this(worldIn, itemStack, base);
+        this.type = EnumArrowType.MONSTER;
+        this.container = creeper;
+    }
+
     public EntityTakumiArrow(World worldIn, ItemStack itemStack, EntityLivingBase base) {
         super(worldIn, base);
         this.stack = itemStack;
@@ -38,13 +45,6 @@ public class EntityTakumiArrow extends EntityArrow {
         this.destroy = ((ItemTakumiArrow) stack.getItem()).destroy;
         this.container = null;
         this.type = EnumArrowType.NORMAL;
-    }
-
-    public EntityTakumiArrow(World worldIn, ItemStack itemStack, EntityLivingBase base,
-            Class<? extends EntityCreeper> creeper) {
-        this(worldIn, itemStack, base);
-        this.type = EnumArrowType.MONSTER;
-        this.container = creeper;
     }
 
     public EntityTakumiArrow(World worldIn, ItemStack itemStack, EntityLivingBase base, EnumArrowType type) {
@@ -192,14 +192,14 @@ public class EntityTakumiArrow extends EntityArrow {
     }
 
     @Override
-    public boolean isImmuneToExplosions() {
-        return true;
-    }
-
-    @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f :
                 super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) / 3;
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
     }
 
     public enum EnumArrowType {

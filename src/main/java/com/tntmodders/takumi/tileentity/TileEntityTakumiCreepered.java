@@ -26,9 +26,8 @@ public class TileEntityTakumiCreepered extends TileEntityTakumiBlock implements 
         this.tick++;
         if (this.tick > this.fuseTime) {
             if (!this.world.isRemote) {
-                this.world
-                        .createExplosion(null, this.getPos().getX(), this.getPos().getY() + 1, this.getPos().getZ(), 6,
-                                true);
+                this.world.createExplosion(null, this.getPos().getX(), this.getPos().getY() + 1, this.getPos().getZ(),
+                        6, true);
             }
             this.world.setBlockToAir(this.pos);
         }

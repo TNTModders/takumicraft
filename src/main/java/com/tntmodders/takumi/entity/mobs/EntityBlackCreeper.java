@@ -58,13 +58,23 @@ public class EntityBlackCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0;
+    public boolean isCustomSpawn() {
+        return false;
     }
 
     @Override
-    public boolean isCustomSpawn() {
-        return false;
+    public String getRegisterName() {
+        return "blackcreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 258;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0;
     }
 
     @Override
@@ -78,15 +88,5 @@ public class EntityBlackCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.onLivingUpdate();
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "blackcreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 258;
     }
 }

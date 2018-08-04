@@ -82,15 +82,6 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         return new RenderSeaGuardianCreeper(manager);
     }
 
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return (this.rand.nextInt(20) == 0 || !this.world.canBlockSeeSky(new BlockPos(this))) &&
-                super.getCanSpawnHere();
-    }
-
     @Override
     protected void initEntityAI() {
         EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
@@ -375,6 +366,15 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
         return true;
     }
 
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        return (this.rand.nextInt(20) == 0 || !this.world.canBlockSeeSky(new BlockPos(this))) &&
+                super.getCanSpawnHere();
+    }
+
     @SideOnly(Side.CLIENT)
     public float getTailAnimation(float p_175471_1_) {
         return this.clientSideTailAnimationO +
@@ -526,11 +526,11 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
                         f += 2.0F;
                     }
 
-                    entitylivingbase
-                            .attackEntityFrom(DamageSource.causeIndirectMagicDamage(this.guardian, this.guardian), f);
+                    entitylivingbase.attackEntityFrom(
+                            DamageSource.causeIndirectMagicDamage(this.guardian, this.guardian), f);
                     entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this.guardian),
-                            (float) this.guardian.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-                                                 .getAttributeValue());
+                            (float) this.guardian.getEntityAttribute(
+                                    SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
                     this.guardian.world.createExplosion(this.guardian, entitylivingbase.posX, entitylivingbase.posY,
                             entitylivingbase.posZ, this.guardian.getPowered() ? 2.5f : 1.25f, true);
                     this.guardian.setAttackTarget(null);
@@ -561,9 +561,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
                 float f = (float) (MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F;
                 this.entityGuardian.rotationYaw = this.limitAngle(this.entityGuardian.rotationYaw, f, 90.0F);
                 this.entityGuardian.renderYawOffset = this.entityGuardian.rotationYaw;
-                float f1 = (float) (this.speed *
-                        this.entityGuardian.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                           .getAttributeValue());
+                float f1 = (float) (this.speed * this.entityGuardian.getEntityAttribute(
+                        SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
                 this.entityGuardian.setAIMoveSpeed(
                         this.entityGuardian.getAIMoveSpeed() + (f1 - this.entityGuardian.getAIMoveSpeed()) * 0.125F);
                 double d4 =
@@ -589,9 +588,8 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
                     d12 = d9;
                 }
 
-                this.entityGuardian.getLookHelper()
-                                   .setLookPosition(d10 + (d7 - d10) * 0.125D, d11 + (d8 - d11) * 0.125D,
-                                           d12 + (d9 - d12) * 0.125D, 10.0F, 40.0F);
+                this.entityGuardian.getLookHelper().setLookPosition(d10 + (d7 - d10) * 0.125D,
+                        d11 + (d8 - d11) * 0.125D, d12 + (d9 - d12) * 0.125D, 10.0F, 40.0F);
                 this.entityGuardian.setMoving(true);
             } else {
                 this.entityGuardian.setAIMoveSpeed(0.0F);

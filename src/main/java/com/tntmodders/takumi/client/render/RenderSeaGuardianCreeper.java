@@ -121,8 +121,8 @@ public class RenderSeaGuardianCreeper<T extends EntitySeaGuardianCreeper> extend
             GlStateManager.depthMask(true);
             float f1 = 240.0F;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-            GlStateManager
-                    .tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE, SourceFactor.ONE, DestFactor.ZERO);
+            GlStateManager.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE, SourceFactor.ONE,
+                    DestFactor.ZERO);
             float f2 = entity.world.getTotalWorldTime() + partialTicks;
             float f3 = f2 * 0.5F % 1.0F;
             float f4 = entity.getEyeHeight();
@@ -297,8 +297,8 @@ public class RenderSeaGuardianCreeper<T extends EntitySeaGuardianCreeper> extend
 
                 Vec3d vec3d2 = entityIn.getLook(0.0F);
                 vec3d2 = new Vec3d(vec3d2.x, 0.0D, vec3d2.z);
-                Vec3d vec3d3 = new Vec3d(vec3d1.x - vec3d.x, 0.0D, vec3d1.z - vec3d.z).normalize()
-                                                                                      .rotateYaw((float) Math.PI / 2F);
+                Vec3d vec3d3 = new Vec3d(vec3d1.x - vec3d.x, 0.0D, vec3d1.z - vec3d.z).normalize().rotateYaw(
+                        (float) Math.PI / 2F);
                 double d1 = vec3d2.dotProduct(vec3d3);
                 this.guardianEye.rotationPointX =
                         MathHelper.sqrt((float) Math.abs(d1)) * 2.0F * (float) Math.signum(d1);

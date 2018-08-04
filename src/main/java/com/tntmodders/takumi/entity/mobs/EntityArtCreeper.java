@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
@@ -81,7 +82,7 @@ public class EntityArtCreeper extends EntityTakumiAbstractCreeper {
                                         blockState.getBlock().createTileEntity(this.world,
                                                 blockState) instanceof IInventory) && blockState.isFullCube() &&
                                         blockState.getBlockHardness(this.world, pos) > -1) {
-                                    this.world.setBlockState(pos, blockState);
+                                    TakumiUtils.setBlockStateProtected(this.world, pos, blockState);
                                     flg = true;
                                 }
                             } catch (Exception ignore) {

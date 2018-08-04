@@ -106,8 +106,8 @@ public class ModelIllagerCreeper extends ModelBase {
 
         if (abstractillager$illagerarmpose == IllagerArmPose.ATTACKING) {
             float f = MathHelper.sin(this.swingProgress * (float) Math.PI);
-            float f1 = MathHelper
-                    .sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
+            float f1 = MathHelper.sin(
+                    (1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
             this.rightArm.rotateAngleZ = 0.0F;
             this.leftArm.rotateAngleZ = 0.0F;
             this.rightArm.rotateAngleY = 0.15707964F;

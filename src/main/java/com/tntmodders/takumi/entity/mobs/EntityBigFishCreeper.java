@@ -39,17 +39,6 @@ public class EntityBigFishCreeper extends EntityFishCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
-            if (!(this.getAttackTarget() instanceof EntityPlayer &&
-                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
-                this.ignite();
-            }
-        }
-        super.onUpdate();
-    }
-
-    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
@@ -72,6 +61,17 @@ public class EntityBigFishCreeper extends EntityFishCreeper {
     @Override
     public int getRegisterID() {
         return 237;
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.getAttackTarget() != null && this.getDistanceSqToEntity(this.getAttackTarget()) < 49f) {
+            if (!(this.getAttackTarget() instanceof EntityPlayer &&
+                    ((EntityPlayer) this.getAttackTarget()).isCreative())) {
+                this.ignite();
+            }
+        }
+        super.onUpdate();
     }
 
     @Override

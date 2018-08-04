@@ -196,13 +196,6 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-    }
-
-    @Override
     public void onUpdate() {
         super.onUpdate();
         this.headRotationCourseOld = this.headRotationCourse;
@@ -235,12 +228,26 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
                 for (int j = 0; j < i; ++j) {
                     float f1 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
                     float f2 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-                    this.world
-                            .spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1, (double) (f + 0.8F),
-                                    this.posZ + (double) f2, this.motionX, this.motionY, this.motionZ);
+                    this.world.spawnParticle(EnumParticleTypes.WATER_SPLASH, this.posX + (double) f1,
+                            (double) (f + 0.8F), this.posZ + (double) f2, this.motionX, this.motionY, this.motionZ);
                 }
             }
         }
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
     }
 
     @Override
@@ -269,14 +276,6 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_WOLF;
-    }
-
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    @Override
-    protected float getSoundVolume() {
-        return 0.4F;
     }
 
     @Override

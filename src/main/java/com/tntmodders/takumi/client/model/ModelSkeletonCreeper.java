@@ -78,8 +78,8 @@ public class ModelSkeletonCreeper extends ModelBiped {
 
         if (skeletonCreeper.isSwingingArms() && (itemstack.isEmpty() || itemstack.getItem() != Items.BOW)) {
             float f = MathHelper.sin(this.swingProgress * (float) Math.PI);
-            float f1 = MathHelper
-                    .sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
+            float f1 = MathHelper.sin(
+                    (1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
             this.bipedRightArm.rotateAngleZ = 0.0F;
             this.bipedLeftArm.rotateAngleZ = 0.0F;
             this.bipedRightArm.rotateAngleY = -(0.1F - f * 0.6F);

@@ -7,10 +7,9 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.lang.reflect.Field;
 
 public class TakumiLootTableCore {
-    private static final TakumiLootTableCore INSTANCE = new TakumiLootTableCore();
-
     public static final ResourceLocation TAKUMI_DARK_CHEST =
             new ResourceLocation(TakumiCraftCore.MODID, "chests/darkchest");
+    private static final TakumiLootTableCore INSTANCE = new TakumiLootTableCore();
 
     public static void register() {
         Class<TakumiLootTableCore> clazz = TakumiLootTableCore.class;

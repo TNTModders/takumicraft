@@ -46,8 +46,8 @@ public class LayerSheepCreeperWool implements LayerRenderer<EntitySheepCreeper> 
 
             this.sheepModel.setModelAttributes(this.sheepRenderer.getMainModel());
             this.sheepModel.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
-            this.sheepModel
-                    .render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            this.sheepModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                    scale);
         }
     }
 

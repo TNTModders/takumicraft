@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
@@ -17,16 +18,21 @@ public class EntityCactusCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedBlocks().forEach(pos -> {
             if (!this.world.isAirBlock(pos)) {
-                this.world.setBlockState(pos, Blocks.SAND.getDefaultState());
+                TakumiUtils.setBlockStateProtected(this.world, pos, Blocks.SAND.getDefaultState());
             }
         });
         event.getAffectedBlocks().forEach(pos -> {
             if (this.world.isAirBlock(pos) && Blocks.CACTUS.canPlaceBlockAt(this.world, pos)) {
-                this.world.setBlockState(pos, Blocks.CACTUS.getDefaultState());
+                TakumiUtils.setBlockStateProtected(this.world, pos, Blocks.CACTUS.getDefaultState());
             }
         });
         event.getAffectedBlocks().clear();
         return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x006600;
     }
 
     @Override
@@ -74,10 +80,5 @@ public class EntityCactusCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 62;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x006600;
     }
 }

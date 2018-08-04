@@ -31,16 +31,6 @@ public class BlockAnvilCreeper extends BlockAnvil implements ITakumiItemBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
-        }
-
-        return true;
-    }
-
-    @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
@@ -64,6 +54,16 @@ public class BlockAnvilCreeper extends BlockAnvil implements ITakumiItemBlock {
 
     public void explode(World world, int x, int y, int z) {
         world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, 3f, true);
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            worldIn.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
+        }
+
+        return true;
     }
 
     @Override

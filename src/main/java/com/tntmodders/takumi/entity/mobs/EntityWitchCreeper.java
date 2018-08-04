@@ -276,8 +276,8 @@ public class EntityWitchCreeper extends EntityTakumiAbstractCreeper implements I
         entityareaeffectcloud.setRadiusOnUse(-0.5F);
         entityareaeffectcloud.setWaitTime(10);
         entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration());
-        entityareaeffectcloud
-                .setRadiusPerTick(-entityareaeffectcloud.getRadius() / entityareaeffectcloud.getDuration());
+        entityareaeffectcloud.setRadiusPerTick(
+                -entityareaeffectcloud.getRadius() / entityareaeffectcloud.getDuration());
         entityareaeffectcloud.addEffect(type.getEffects().get(0));
         this.world.spawnEntity(entityareaeffectcloud);
     }

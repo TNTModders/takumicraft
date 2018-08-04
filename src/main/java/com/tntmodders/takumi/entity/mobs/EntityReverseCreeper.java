@@ -57,15 +57,15 @@ public class EntityReverseCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x55ff00;
+    }
+
+    @Override
     public void onDeath(DamageSource cause) {
         if (cause.getImmediateSource() instanceof EntityPlayer && !this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 12 : 6, true);
         }
         super.onDeath(cause);
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x55ff00;
     }
 }

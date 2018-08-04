@@ -25,17 +25,6 @@ public class EntityWaterTypeForce extends EntityLiving {
     }
 
     @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-        if (this.world.isRemote) {
-            for (int i = 0; i < 6; i++) {
-                this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + this.rand.nextDouble() - 0.5,
-                        this.posY + this.rand.nextDouble() + 1, this.posZ + this.rand.nextDouble() - 0.5, 0, 0, 0);
-            }
-        }
-    }
-
-    @Override
     public void onUpdate() {
         super.onUpdate();
         this.setInvisible(true);
@@ -57,17 +46,18 @@ public class EntityWaterTypeForce extends EntityLiving {
     }
 
     @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.world.isRemote) {
+            for (int i = 0; i < 6; i++) {
+                this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + this.rand.nextDouble() - 0.5,
+                        this.posY + this.rand.nextDouble() + 1, this.posZ + this.rand.nextDouble() - 0.5, 0, 0, 0);
+            }
+        }
+    }
+
+    @Override
     public boolean canBePushed() {
-        return false;
-    }
-
-    @Override
-    public boolean shouldRiderSit() {
-        return false;
-    }
-
-    @Override
-    public boolean shouldDismountInWater(Entity rider) {
         return false;
     }
 
@@ -79,5 +69,15 @@ public class EntityWaterTypeForce extends EntityLiving {
     @Override
     public boolean isImmuneToExplosions() {
         return true;
+    }
+
+    @Override
+    public boolean shouldRiderSit() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldDismountInWater(Entity rider) {
+        return false;
     }
 }

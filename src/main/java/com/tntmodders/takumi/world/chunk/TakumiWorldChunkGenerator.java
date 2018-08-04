@@ -78,10 +78,10 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
             caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, InitMapGenEvent.EventType.CAVE);
             villageGenerator =
                     (MapGenVillage) TerrainGen.getModdedMapGen(villageGenerator, InitMapGenEvent.EventType.VILLAGE);
-            mineshaftGenerator = (MapGenMineshaft) TerrainGen
-                    .getModdedMapGen(mineshaftGenerator, InitMapGenEvent.EventType.MINESHAFT);
-            scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen
-                    .getModdedMapGen(scatteredFeatureGenerator, InitMapGenEvent.EventType.SCATTERED_FEATURE);
+            mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator,
+                    InitMapGenEvent.EventType.MINESHAFT);
+            scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen.getModdedMapGen(scatteredFeatureGenerator,
+                    InitMapGenEvent.EventType.SCATTERED_FEATURE);
             ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
         }
         this.world = worldIn;
@@ -165,9 +165,9 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
     }
 
     public void setTakumiWorldChunkGeneratorInChunk(int x, int z, ChunkPrimer primer) {
-        this.biomesForGeneration = this.world.getBiomeProvider()
-                                             .getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10,
-                                                     10);
+        this.biomesForGeneration =
+                this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10,
+                        10);
         this.generateHeightmap(x * 4, 0, z * 4);
 
         for (int i = 0; i < 4; ++i) {
@@ -230,8 +230,9 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
             return;
         }
         double d0 = 0.03125D;
-        this.depthBuffer = this.surfaceNoise
-                .getRegion(this.depthBuffer, (double) (x * 16), (double) (z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
+        this.depthBuffer =
+                this.surfaceNoise.getRegion(this.depthBuffer, (double) (x * 16), (double) (z * 16), 16, 16, 0.0625D,
+                        0.0625D, 1.0D);
         for (int i = 0; i < 16; ++i) {
             for (int j = 0; j < 16; ++j) {
                 Biome biome = biomesIn[j + i * 16];
@@ -247,17 +248,17 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 (double) this.settings.depthNoiseScaleExponent);
         float f = this.settings.coordinateScale * 2.5f;
         float f1 = this.settings.heightScale * 2.5f;
-        this.mainNoiseRegion = this.mainPerlinNoise
-                .generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5,
-                        (double) (f / this.settings.mainNoiseScaleX),
+        this.mainNoiseRegion =
+                this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_,
+                        5, 33, 5, (double) (f / this.settings.mainNoiseScaleX),
                         (double) (f1 / this.settings.mainNoiseScaleY + 250),
                         (double) (f / this.settings.mainNoiseScaleZ));
-        this.minLimitRegion = this.minLimitPerlinNoise
-                .generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double) f,
-                        (double) f1, (double) f);
-        this.maxLimitRegion = this.maxLimitPerlinNoise
-                .generateNoiseOctaves(this.maxLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double) f,
-                        (double) f1, (double) f);
+        this.minLimitRegion =
+                this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_,
+                        p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
+        this.maxLimitRegion =
+                this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, p_185978_1_, p_185978_2_,
+                        p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
         int i = 0;
         int j = 0;
 

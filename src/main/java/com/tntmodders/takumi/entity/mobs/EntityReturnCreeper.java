@@ -26,15 +26,6 @@ public class EntityReturnCreeper extends EntityTakumiAbstractCreeper {
         return Items.BED;
     }
 
-
-    @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Items.ENDER_PEARL, 1);
-        }
-        super.onDeath(source);
-    }
-
     @Override
     public float getBlockPathWeight(BlockPos pos) {
         return this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world, pos, null) ?
@@ -56,14 +47,24 @@ public class EntityReturnCreeper extends EntityTakumiAbstractCreeper {
                         list.add(((EntityPlayer) entity));
                     }
                 }
-            }); event.getAffectedEntities().removeAll(list);
+            });
+            event.getAffectedEntities().removeAll(list);
 
-        } return true;
+        }
+        return true;
     }
 
     @Override
     public int getPrimaryColor() {
         return 0x003300;
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Items.ENDER_PEARL, 1);
+        }
+        super.onDeath(source);
     }
 
     @Override

@@ -22,16 +22,16 @@ public class EntityDiamondCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x9090a0;
+    }
+
+    @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 1);
         }
         super.onDeath(source);
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x9090a0;
     }
 
     @Override

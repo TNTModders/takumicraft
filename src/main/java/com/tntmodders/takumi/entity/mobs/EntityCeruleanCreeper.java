@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.client.render.RenderCeruleanCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,27 +26,6 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.inWater) {
-            this.setDead();
-            if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX + 0.5, this.posY, this.posZ + 0.5, 2f, true);
-            }
-            this.world.setBlockState(this.getPosition(), Blocks.OBSIDIAN.getDefaultState());
-            this.world.setBlockState(this.getPosition().up(), Blocks.OBSIDIAN.getDefaultState());
-        }
-    }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.REGISTRY.getObject(new ResourceLocation("japaricraftmod", "darksandstar")), 1);
-        }
-        super.onDeath(cause);
-    }
-
-    @Override
     public boolean canRegister() {
         return Item.REGISTRY.containsKey(new ResourceLocation("japaricraftmod", "darksandstar"));
         //return true;
@@ -61,7 +41,8 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
 
         for (BlockPos pos : event.getAffectedBlocks()) {
             if (!this.world.isAirBlock(pos)) {
-                this.world.setBlockState(pos, TakumiBlockCore.CREEPER_SANDSTAR_LOW.getDefaultState());
+                TakumiUtils.setBlockStateProtected(this.world, pos,
+                        TakumiBlockCore.CREEPER_SANDSTAR_LOW.getDefaultState());
             }
         }
 
@@ -78,6 +59,27 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderCeruleanCreeper<>(manager);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.inWater) {
+            this.setDead();
+            if (!this.world.isRemote) {
+                this.world.createExplosion(this, this.posX + 0.5, this.posY, this.posZ + 0.5, 2f, true);
+            }
+            TakumiUtils.setBlockStateProtected(this.world, this.getPosition(), Blocks.OBSIDIAN.getDefaultState());
+            TakumiUtils.setBlockStateProtected(this.world, this.getPosition().up(), Blocks.OBSIDIAN.getDefaultState());
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.REGISTRY.getObject(new ResourceLocation("japaricraftmod", "darksandstar")), 1);
+        }
+        super.onDeath(cause);
     }
 
     @Override

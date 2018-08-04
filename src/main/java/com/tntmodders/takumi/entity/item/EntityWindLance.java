@@ -48,16 +48,6 @@ public class EntityWindLance extends EntityTippedArrow {
     }
 
     @Override
-    public boolean shouldRiderSit() {
-        return false;
-    }
-
-    @Override
-    public boolean shouldDismountInWater(Entity rider) {
-        return false;
-    }
-
-    @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) < 0 ? 1000000f : 0.1f;
     }
@@ -65,5 +55,15 @@ public class EntityWindLance extends EntityTippedArrow {
     @Override
     public boolean isImmuneToExplosions() {
         return true;
+    }
+
+    @Override
+    public boolean shouldRiderSit() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldDismountInWater(Entity rider) {
+        return false;
     }
 }

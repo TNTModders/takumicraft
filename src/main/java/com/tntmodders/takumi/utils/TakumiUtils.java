@@ -16,6 +16,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -34,10 +35,22 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TakumiUtils {
+    public static void setBlockStateProtected(World world, BlockPos pos, IBlockState state) {
+        if (world.getMinecraftServer() != null) {
+            BlockPos blockpos = world.getSpawnPoint();
+            int i = MathHelper.abs(pos.getX() - blockpos.getX());
+            int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
+            int k = Math.max(i, j);
+            if (k > world.getMinecraftServer().getSpawnProtectionSize()) {
+                world.setBlockState(pos, state);
+            }
+        } else {
+            world.setBlockState(pos, state);
+        }
+    }
 
     public static boolean isApril(World world) {
-        return world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 &&
-                world.getCurrentDate().get(Calendar.DATE) == 1;
+        return world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 && world.getCurrentDate().get(Calendar.DATE) == 1;
         //return true;
     }
 
@@ -48,12 +61,10 @@ public class TakumiUtils {
     public static void giveAdvancementImpossible(EntityPlayerMP playerMP, ResourceLocation parent,
             ResourceLocation child) {
         try {
-            if (playerMP.getAdvancements()
-                        .getProgress(playerMP.getServer().getAdvancementManager().getAdvancement(parent))
-                        .hasProgress()) {
-                playerMP.getAdvancements()
-                        .grantCriterion(playerMP.getServer().getAdvancementManager().getAdvancement(child),
-                                "impossible");
+            if (playerMP.getAdvancements().getProgress(
+                    playerMP.getServer().getAdvancementManager().getAdvancement(parent)).hasProgress()) {
+                playerMP.getAdvancements().grantCriterion(
+                        playerMP.getServer().getAdvancementManager().getAdvancement(child), "impossible");
             }
         } catch (Exception e) {
             e.printStackTrace();

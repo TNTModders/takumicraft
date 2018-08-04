@@ -50,14 +50,6 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        if (this.rand.nextInt(5) == 0 && !this.world.isRemote) {
-            this.entityDropItem(this.getHeldItem(EnumHand.OFF_HAND), 0);
-        }
-    }
-
-    @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
             PotionEffect effect = new PotionEffect(
@@ -79,6 +71,14 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
     }
 
     @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
+        if (this.rand.nextInt(5) == 0 && !this.world.isRemote) {
+            this.entityDropItem(this.getHeldItem(EnumHand.OFF_HAND), 0);
+        }
+    }
+
+    @Override
     protected SoundEvent getStepSound() {
         return SoundEvents.ENTITY_STRAY_STEP;
     }
@@ -91,8 +91,8 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
 
     @Override
     protected EntityArrow getArrow(float v) {
-        return TakumiItemCore.TAKUMI_ARROW_HA
-                .createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA), this);
+        return TakumiItemCore.TAKUMI_ARROW_HA.createArrow(this.world, new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA),
+                this);
     }
 
     @Override

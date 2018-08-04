@@ -21,6 +21,46 @@ public class EntityNoobCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.LOW;
+    }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.NORMAL;
+    }
+
+    @Override
+    public int getExplosionPower() {
+        return 3;
+    }
+
+    @Override
+    public int getSecondaryColor() {
+        return 0x22ff00;
+    }
+
+    @Override
+    public boolean isCustomSpawn() {
+        return false;
+    }
+
+    @Override
+    public String getRegisterName() {
+        return "noobcreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 55;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x00aa22;
+    }
+
+    @Override
     public void onUpdate() {
         super.onUpdate();
         if (this.getCreeperState() > 0) {
@@ -54,45 +94,5 @@ public class EntityNoobCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, (this.getPowered() ? 5f : 3f), true);
         }
-    }
-
-    @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.LOW;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL;
-    }
-
-    @Override
-    public int getExplosionPower() {
-        return 3;
-    }
-
-    @Override
-    public int getSecondaryColor() {
-        return 0x22ff00;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x00aa22;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return false;
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "noobcreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 55;
     }
 }

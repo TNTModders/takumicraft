@@ -47,19 +47,6 @@ public class EntityOddDummyGhast extends EntityGhast {
     }
 
     @Override
-    public void onLivingUpdate() {
-        if (this.world.isRemote) {
-            for (int i = 0; i < 5; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.TOTEM,
-                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
-                        this.posY + this.rand.nextDouble() * this.height,
-                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
-            }
-        }
-        super.onLivingUpdate();
-    }
-
-    @Override
     public void onUpdate() {
         super.onUpdate();
         if (!this.world.isRemote && this.ticksExisted % 20 == 0) {
@@ -101,6 +88,19 @@ public class EntityOddDummyGhast extends EntityGhast {
     @Override
     public float getEyeHeight() {
         return 2.6F / 4;
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        if (this.world.isRemote) {
+            for (int i = 0; i < 5; ++i) {
+                this.world.spawnParticle(EnumParticleTypes.TOTEM,
+                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
+                        this.posY + this.rand.nextDouble() * this.height,
+                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+            }
+        }
+        super.onLivingUpdate();
     }
 
     static class AIRandomFly extends EntityAIBase {

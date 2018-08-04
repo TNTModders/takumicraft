@@ -34,17 +34,15 @@ public class BlockTakumiDarkBoard_On extends BlockContainer {
     }
 
     @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
             EnumFacing side) {
         return true;
-    }
-
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
     }
 
     @Override
@@ -53,7 +51,8 @@ public class BlockTakumiDarkBoard_On extends BlockContainer {
     }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
     }
 }

@@ -16,19 +16,14 @@ public class EntityTakumiExpOrb extends EntityXPOrb {
         super(worldIn, x, y, z, expValue);
     }
 
+    public EntityTakumiExpOrb(World worldIn) {
+        super(worldIn);
+    }
+
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         this.setDead();
         return true;
-    }
-
-    @Override
-    public boolean canBeAttackedWithItem() {
-        return true;
-    }
-
-    public EntityTakumiExpOrb(World worldIn) {
-        super(worldIn);
     }
 
     @Override
@@ -55,6 +50,11 @@ public class EntityTakumiExpOrb extends EntityXPOrb {
                 this.setDead();
             }
         }
+    }
+
+    @Override
+    public boolean canBeAttackedWithItem() {
+        return true;
     }
 
     private int xpToDurability(int xp) {

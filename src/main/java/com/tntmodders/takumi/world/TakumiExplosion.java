@@ -110,8 +110,9 @@ public class TakumiExplosion extends Explosion {
                                 f -= (f2 + 0.3F) * 0.3F;
                             }
 
-                            if (f > 0.0F && (this.exploder == null || this.exploder
-                                    .canExplosionDestroyBlock(this, this.world, blockpos, iblockstate, f))) {
+                            if (f > 0.0F && (this.exploder == null ||
+                                    this.exploder.canExplosionDestroyBlock(this, this.world, blockpos, iblockstate,
+                                            f))) {
                                 set.add(blockpos);
                             }
 
@@ -132,8 +133,8 @@ public class TakumiExplosion extends Explosion {
         int i1 = MathHelper.floor(this.y + f3 + 1.0D);
         int j2 = MathHelper.floor(this.z - f3 - 1.0D);
         int j1 = MathHelper.floor(this.z + f3 + 1.0D);
-        List<Entity> list = this.world
-                .getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder,
+                new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
         ForgeEventFactory.onExplosionDetonate(this.world, this, list, f3);
         Vec3d vec3d = new Vec3d(this.x, this.y, this.z);
 
@@ -188,9 +189,8 @@ public class TakumiExplosion extends Explosion {
 
     @Override
     public void doExplosionB(boolean spawnParticles) {
-        this.world
-                .playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F,
-                        (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+        this.world.playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
+                4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
 
         if (this.size >= 2.0F && this.damagesTerrain) {
             this.world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);

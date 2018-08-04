@@ -136,18 +136,6 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.setSitting(compound.getBoolean("Sitting"));
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        ++this.rideCooldownCounter;
-        if (this.getAttackTarget() != null) {
-            this.setOwnerId(this.getAttackTarget().getUniqueID());
-        }
-        super.onUpdate();
-    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_PARROT_HURT;
@@ -441,5 +429,17 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     @SideOnly(Side.CLIENT)
     public Object getRender(RenderManager manager) {
         return new RenderParrotCreeper(manager);
+    }
+
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        ++this.rideCooldownCounter;
+        if (this.getAttackTarget() != null) {
+            this.setOwnerId(this.getAttackTarget().getUniqueID());
+        }
+        super.onUpdate();
     }
 }

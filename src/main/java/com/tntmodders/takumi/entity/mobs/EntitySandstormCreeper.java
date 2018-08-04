@@ -36,13 +36,10 @@ public class EntitySandstormCreeper extends EntityTakumiAbstractCreeper {
                 BlockPos newPos = pos.offset(EnumFacing.VALUES[i]);
                 if (event.getWorld().getBlockState(newPos).getBlock() != Blocks.SAND &&
                         event.getWorld().getBlockState(newPos).getBlockHardness(world, newPos) != -1 &&
-                        (event.getWorld().getBlockState(newPos).getBlock()
-                              .getExplosionResistance(world, newPos, event.getExplosion().getExplosivePlacedBy(),
-                                      event.getExplosion()) < Blocks.OBSIDIAN.getDefaultState().getBlock()
-                                                                             .getExplosionResistance(world, newPos,
-                                                                                     event.getExplosion()
-                                                                                          .getExplosivePlacedBy(),
-                                                                                     event.getExplosion()) ||
+                        (event.getWorld().getBlockState(newPos).getBlock().getExplosionResistance(world, newPos,
+                                event.getExplosion().getExplosivePlacedBy(), event.getExplosion()) <
+                                Blocks.OBSIDIAN.getDefaultState().getBlock().getExplosionResistance(world, newPos,
+                                        event.getExplosion().getExplosivePlacedBy(), event.getExplosion()) ||
                                 event.getWorld().isAirBlock(newPos))) {
                     event.getWorld().setBlockState(newPos, TakumiBlockCore.GUNORE.getDefaultState());
                 }

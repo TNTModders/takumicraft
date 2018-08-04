@@ -199,9 +199,9 @@ public class BlockTakumiPortal extends BlockBreakable {
             }
 
             if (i > 0 && !worldIn.getBlockState(blockpos.up()).isNormalCube()) {
-                Entity entity = ItemMonsterPlacer
-                        .spawnCreature(worldIn, EntityList.getKey(EntityCreeper.class), (double) blockpos.getX() + 0.5D,
-                                (double) blockpos.getY() + 1.1D, (double) blockpos.getZ() + 0.5D);
+                Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getKey(EntityCreeper.class),
+                        (double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 1.1D,
+                        (double) blockpos.getZ() + 0.5D);
                 entity.onStruckByLightning(null);
 
                 if (entity != null) {
@@ -238,8 +238,8 @@ public class BlockTakumiPortal extends BlockBreakable {
                 d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
             }
             //worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
-            Minecraft.getMinecraft().effectRenderer
-                    .addEffect(new ParticleTakumiPortal(worldIn, d0, d1, d2, d3, d4, d5));
+            Minecraft.getMinecraft().effectRenderer.addEffect(
+                    new ParticleTakumiPortal(worldIn, d0, d1, d2, d3, d4, d5));
         }
     }
 

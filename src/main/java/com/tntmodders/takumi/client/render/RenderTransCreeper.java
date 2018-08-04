@@ -91,9 +91,8 @@ public class RenderTransCreeper<T extends EntityTakumiAbstractCreeper> extends R
                 this.creeperRenderer.bindTexture(this.creeperRenderer.getEntityTexture(entitylivingbaseIn));
                 this.creeperModel.setModelAttributes(this.creeperRenderer.getMainModel());
                 Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                this.creeperModel
-                        .render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                                scale);
+                this.creeperModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
+                        headPitch, scale);
                 GlStateManager.popMatrix();
             }
         }

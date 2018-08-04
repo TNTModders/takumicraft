@@ -29,8 +29,8 @@ public class LayerStrayCreeperClothing implements LayerRenderer<EntitySkeletonCr
             this.layerModel.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.renderer.bindTexture(STRAY_CLOTHES_TEXTURES);
-            this.layerModel
-                    .render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            this.layerModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                    scale);
         }
     }
 

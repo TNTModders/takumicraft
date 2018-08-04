@@ -17,8 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDarkVillager extends RenderLiving<EntityMob> {
-    private static final ResourceLocation EVOKER_ILLAGER = new ResourceLocation
-            (TakumiCraftCore.MODID,"textures/entity/darkvillager.png");
+    private static final ResourceLocation EVOKER_ILLAGER =
+            new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/darkvillager.png");
 
     public RenderDarkVillager(RenderManager p_i47207_1_) {
         super(p_i47207_1_, new ModelIllager(0.0F, 0.0F, 64, 64), 0.5F);

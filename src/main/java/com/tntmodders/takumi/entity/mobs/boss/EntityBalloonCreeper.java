@@ -45,6 +45,9 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
 
     private static final DataParameter<Boolean> ATTACKING =
             EntityDataManager.createKey(EntityBalloonCreeper.class, DataSerializers.BOOLEAN);
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.ballooncreeper.name"),
+                    BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
     private int explosionStrength = 3;
 
     public EntityBalloonCreeper(World worldIn) {
@@ -91,15 +94,15 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
         compound.setInteger("ExplosionPower", this.explosionStrength);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            this.setDead();
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName()) {
+            this.bossInfo.setName(this.getDisplayName());
+        }
+
+        if (compound.hasKey("ExplosionPower", 99)) {
+            this.explosionStrength = compound.getInteger("ExplosionPower");
         }
     }
 
@@ -129,6 +132,12 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean isOnLadder() {
         return false;
+    }
+
+    @Override
+    protected void outOfWorld() {
+        this.setHealth(0);
+        super.outOfWorld();
     }
 
     /**
@@ -209,6 +218,21 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
         return SoundCategory.HOSTILE;
     }
 
+    @Override
+    public void onLivingUpdate() {
+        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+            bossInfo.setVisible(true);
+            if (this.world.isRemote) {
+                this.world.spawnEntity(
+                        new EntityLightningBolt(this.world, this.posX + this.rand.nextDouble() * 7 - 3, this.posY,
+                                this.posZ + this.rand.nextDouble() * 7 - 3, true));
+            }
+        } else {
+            bossInfo.setVisible(false);
+        }
+        super.onLivingUpdate();
+    }
+
     /**
      * Called when the entity is attacked.
      */
@@ -225,14 +249,18 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
     @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_GHAST_AMBIENT;
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(40) == 0 && super.getCanSpawnHere() &&
+                this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
     }
 
     @Override
-    public float getEyeHeight() {
-        return 1.3F;
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_GHAST_AMBIENT;
     }
 
     @Override
@@ -280,70 +308,9 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean isImmuneToExplosions() {
-        return true;
-    }
-
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.ballooncreeper.name"),
-                    BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
-
-    @Override
-    public void onLivingUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
-            bossInfo.setVisible(true);
-            if (this.world.isRemote) {
-                this.world.spawnEntity(
-                        new EntityLightningBolt(this.world, this.posX + this.rand.nextDouble() * 7 - 3, this.posY,
-                                this.posZ + this.rand.nextDouble() * 7 - 3, true));
-            }
-        } else {
-            bossInfo.setVisible(false);
-        }
-        super.onLivingUpdate();
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 3), 0);
-        }
-        super.onDeath(source);
-    }
-
-    @Override
-    public void addTrackingPlayer(EntityPlayerMP player) {
-        super.addTrackingPlayer(player);
-        this.bossInfo.addPlayer(player);
-    }
-
-    @Override
-    public void removeTrackingPlayer(EntityPlayerMP player) {
-        super.removeTrackingPlayer(player);
-        this.bossInfo.removePlayer(player);
-    }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (this.hasCustomName()) {
-            this.bossInfo.setName(this.getDisplayName());
-        }
-
-        if (compound.hasKey("ExplosionPower", 99)) {
-            this.explosionStrength = compound.getInteger("ExplosionPower");
-        }
-    }
-
-    @Override
-    protected void outOfWorld() {
-        this.setHealth(0);
-        super.outOfWorld();
-    }
-
-    @Override
-    public boolean isNonBoss() {
-        return false;
+    @SideOnly(Side.CLIENT)
+    public Object getRender(RenderManager manager) {
+        return new RenderBalloonCreeper<>(manager);
     }
 
     @Override
@@ -368,19 +335,51 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
         super.setDead();
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Object getRender(RenderManager manager) {
-        return new RenderBalloonCreeper<>(manager);
-    }
-
     /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
+     * Called to update the entity's position/logic.
      */
     @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(40) == 0 && super.getCanSpawnHere() &&
-                this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+            this.setDead();
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 3), 0);
+        }
+        super.onDeath(source);
+    }
+
+    @Override
+    public boolean isNonBoss() {
+        return false;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return 1.3F;
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
+
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
     }
 
     static class AIFireballAttack extends EntityAIBase {

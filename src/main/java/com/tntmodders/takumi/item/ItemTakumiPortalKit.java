@@ -24,6 +24,16 @@ public class ItemTakumiPortalKit extends Item {
     }
 
     @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+            EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (worldIn.getBlockState(pos).getBlock() == TakumiBlockCore.TAKUMI_PORTAL_FRAME) {
+            TakumiCraftCore.LOGGER.info(pos.offset(facing));
+            TakumiBlockCore.TAKUMI_PORTAL.trySpawnPortal(worldIn, pos.offset(facing));
+        }
+        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return true;
@@ -32,15 +42,5 @@ public class ItemTakumiPortalKit extends Item {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
-    }
-
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-            EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.getBlockState(pos).getBlock() == TakumiBlockCore.TAKUMI_PORTAL_FRAME) {
-            TakumiCraftCore.LOGGER.info(pos.offset(facing));
-            TakumiBlockCore.TAKUMI_PORTAL.trySpawnPortal(worldIn, pos.offset(facing));
-        }
-        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 }

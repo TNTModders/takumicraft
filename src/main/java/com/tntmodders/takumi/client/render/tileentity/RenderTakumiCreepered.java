@@ -124,8 +124,8 @@ public class RenderTakumiCreepered<T extends TileEntityTakumiCreepered> extends 
         World world = this.getWorld();
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
         state = state.getBlock().getExtendedState(state, world, pos);
-        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer()
-                 .renderModel(world, model, state, pos, buffer, true);
+        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(world, model, state,
+                pos, buffer, true);
         buffer.setTranslation(0.0D, 0.0D, 0.0D);
         tessellator.draw();
     }

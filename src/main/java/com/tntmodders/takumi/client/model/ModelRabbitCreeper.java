@@ -177,8 +177,8 @@ public class ModelRabbitCreeper extends ModelBase {
             float p_setLivingAnimations_3_, float p_setLivingAnimations_4_) {
         super.setLivingAnimations(p_setLivingAnimations_1_, p_setLivingAnimations_2_, p_setLivingAnimations_3_,
                 p_setLivingAnimations_4_);
-        this.jumpRotation = MathHelper
-                .sin(((EntityRabbitCreeper) p_setLivingAnimations_1_).setJumpCompletion(p_setLivingAnimations_4_) *
+        this.jumpRotation = MathHelper.sin(
+                ((EntityRabbitCreeper) p_setLivingAnimations_1_).setJumpCompletion(p_setLivingAnimations_4_) *
                         3.1415927F);
     }
 }

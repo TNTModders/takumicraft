@@ -40,17 +40,6 @@ public class ItemTypeSword extends ItemSword {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return this.type == ITakumiEntity.EnumTakumiType.NORMAL ? EnumRarity.EPIC : EnumRarity.RARE;
-    }
-
-    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         boolean flg = this.performEffect(target, attacker);
         if (flg && target instanceof EntityTakumiAbstractCreeper) {
@@ -61,17 +50,6 @@ public class ItemTypeSword extends ItemSword {
             target.attackEntityFrom(DamageSource.causeMobDamage(attacker), f);
         }
         return flg && super.hitEntity(stack, target, attacker);
-    }
-
-    @Override
-    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-        if (this.type == ITakumiEntity.EnumTakumiType.WIND && entityLiving.onGround) {
-            performEffect(null, entityLiving);
-            if (!(entityLiving instanceof EntityPlayer) || !((EntityPlayer) entityLiving).isCreative()) {
-                stack.damageItem(1, entityLiving);
-            }
-        }
-        return super.onEntitySwing(entityLiving, stack);
     }
 
     public boolean performEffect(EntityLivingBase target, EntityLivingBase attacker) {
@@ -185,6 +163,17 @@ public class ItemTypeSword extends ItemSword {
 
     @Override
     @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return this.type == ITakumiEntity.EnumTakumiType.NORMAL ? EnumRarity.EPIC : EnumRarity.RARE;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.type == ITakumiEntity.EnumTakumiType.NORMAL && this.isInCreativeTab(tab)) {
             ItemStack itemStack = new ItemStack(this, 1);
@@ -193,5 +182,16 @@ public class ItemTypeSword extends ItemSword {
         } else {
             super.getSubItems(tab, items);
         }
+    }
+
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        if (this.type == ITakumiEntity.EnumTakumiType.WIND && entityLiving.onGround) {
+            performEffect(null, entityLiving);
+            if (!(entityLiving instanceof EntityPlayer) || !((EntityPlayer) entityLiving).isCreative()) {
+                stack.damageItem(1, entityLiving);
+            }
+        }
+        return super.onEntitySwing(entityLiving, stack);
     }
 }

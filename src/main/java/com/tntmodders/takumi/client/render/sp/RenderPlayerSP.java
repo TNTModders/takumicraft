@@ -16,51 +16,22 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class RenderPlayerSP extends RenderLivingBase<AbstractClientPlayer> {
+    private static final ResourceLocation CREEPER_TEXTURES =
+            new ResourceLocation("textures/entity/creeper/creeper.png");
+
     public RenderPlayerSP(RenderManager renderManager) {
         super(renderManager, new ModelPlayerSP(), 1F);
         this.layerRenderers.clear();
     }
 
-    public float getCreeperFlashIntensity(EntityPlayer player, float partialTicks) {
-        if (player.getActivePotionEffect(MobEffects.SLOWNESS) == null ||
-                player.getActivePotionEffect(MobEffects.SLOWNESS).getAmplifier() != 100 ||
-                player.getActivePotionEffect(MobEffects.SLOWNESS).getDuration() > 30) {
-            return 0;
-        }
-        return (30 - (float) player.getActivePotionEffect(MobEffects.SLOWNESS).getDuration() + partialTicks) / 28f;
-    }
-
-    @Override
-    protected int getColorMultiplier(AbstractClientPlayer entitylivingbaseIn, float lightBrightness,
-            float partialTickTime) {
-        float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
-
-        if ((int) (f * 10.0F) % 2 == 0) {
-            return 0;
-        } else {
-            int i = (int) (f * 0.2F * 255.0F);
-            i = MathHelper.clamp(i, 0, 255);
-            return i << 24 | 822083583;
-        }
-    }
-
-    @Override
-    protected void preRenderCallback(AbstractClientPlayer entitylivingbaseIn, float partialTickTime) {
-        float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
-        if (f > 0) {
-            float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
-            f = MathHelper.clamp(f, 0.0F, 1.0F);
-            f = f * f;
-            f = f * f;
-            float f2 = (1.0F + f * 0.4F) * f1;
-            float f3 = (1.0F + f * 0.1F) / f1;
-            GlStateManager.scale(f2, f3, f2);
-        }
-    }
-
     @Override
     public ModelPlayer getMainModel() {
         return null;
+    }
+
+    @Override
+    public void transformHeldFull3DItemLayer() {
+        GlStateManager.translate(0.0F, 0.1875F, 0.0F);
     }
 
     /**
@@ -84,48 +55,6 @@ public class RenderPlayerSP extends RenderLivingBase<AbstractClientPlayer> {
     }
 
     private void setModelVisibilities(AbstractClientPlayer clientPlayer) {
-    }
-
-    private static final ResourceLocation CREEPER_TEXTURES =
-            new ResourceLocation("textures/entity/creeper/creeper.png");
-
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    @Override
-    public ResourceLocation getEntityTexture(AbstractClientPlayer entity) {
-        return CREEPER_TEXTURES;
-    }
-
-    @Override
-    public void transformHeldFull3DItemLayer() {
-        GlStateManager.translate(0.0F, 0.1875F, 0.0F);
-    }
-
-    /**
-     * Allows the render to do state modifications necessary before the model is rendered.
-     */
-/*    @Override
-    protected void preRenderCallback(AbstractClientPlayer entitylivingbaseIn, float partialTickTime) {
-        float f = 0.9375F;
-        GlStateManager.scale(0.9375F, 0.9375F, 0.9375F);
-    }*/
-    @Override
-    protected void renderEntityName(AbstractClientPlayer entityIn, double x, double y, double z, String name,
-            double distanceSq) {
-        if (distanceSq < 100.0D) {
-            Scoreboard scoreboard = entityIn.getWorldScoreboard();
-            ScoreObjective scoreobjective = scoreboard.getObjectiveInDisplaySlot(2);
-
-            if (scoreobjective != null) {
-                Score score = scoreboard.getOrCreateScore(entityIn.getName(), scoreobjective);
-                this.renderLivingLabel(entityIn, score.getScorePoints() + " " + scoreobjective.getDisplayName(), x, y,
-                        z, 64);
-                y += (double) ((float) this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * 0.025F);
-            }
-        }
-
-        super.renderEntityName(entityIn, x, y, z, name, distanceSq);
     }
 
     /**
@@ -167,5 +96,76 @@ public class RenderPlayerSP extends RenderLivingBase<AbstractClientPlayer> {
         } else {
             super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         }
+    }
+
+    @Override
+    protected int getColorMultiplier(AbstractClientPlayer entitylivingbaseIn, float lightBrightness,
+            float partialTickTime) {
+        float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
+
+        if ((int) (f * 10.0F) % 2 == 0) {
+            return 0;
+        } else {
+            int i = (int) (f * 0.2F * 255.0F);
+            i = MathHelper.clamp(i, 0, 255);
+            return i << 24 | 822083583;
+        }
+    }
+
+    public float getCreeperFlashIntensity(EntityPlayer player, float partialTicks) {
+        if (player.getActivePotionEffect(MobEffects.SLOWNESS) == null ||
+                player.getActivePotionEffect(MobEffects.SLOWNESS).getAmplifier() != 100 ||
+                player.getActivePotionEffect(MobEffects.SLOWNESS).getDuration() > 30) {
+            return 0;
+        }
+        return (30 - (float) player.getActivePotionEffect(MobEffects.SLOWNESS).getDuration() + partialTicks) / 28f;
+    }
+
+    @Override
+    protected void preRenderCallback(AbstractClientPlayer entitylivingbaseIn, float partialTickTime) {
+        float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
+        if (f > 0) {
+            float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
+            f = MathHelper.clamp(f, 0.0F, 1.0F);
+            f = f * f;
+            f = f * f;
+            float f2 = (1.0F + f * 0.4F) * f1;
+            float f3 = (1.0F + f * 0.1F) / f1;
+            GlStateManager.scale(f2, f3, f2);
+        }
+    }
+
+    /**
+     * Allows the render to do state modifications necessary before the model is rendered.
+     */
+/*    @Override
+    protected void preRenderCallback(AbstractClientPlayer entitylivingbaseIn, float partialTickTime) {
+        float f = 0.9375F;
+        GlStateManager.scale(0.9375F, 0.9375F, 0.9375F);
+    }*/
+    @Override
+    protected void renderEntityName(AbstractClientPlayer entityIn, double x, double y, double z, String name,
+            double distanceSq) {
+        if (distanceSq < 100.0D) {
+            Scoreboard scoreboard = entityIn.getWorldScoreboard();
+            ScoreObjective scoreobjective = scoreboard.getObjectiveInDisplaySlot(2);
+
+            if (scoreobjective != null) {
+                Score score = scoreboard.getOrCreateScore(entityIn.getName(), scoreobjective);
+                this.renderLivingLabel(entityIn, score.getScorePoints() + " " + scoreobjective.getDisplayName(), x, y,
+                        z, 64);
+                y += (double) ((float) this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * 0.025F);
+            }
+        }
+
+        super.renderEntityName(entityIn, x, y, z, name, distanceSq);
+    }
+
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    @Override
+    public ResourceLocation getEntityTexture(AbstractClientPlayer entity) {
+        return CREEPER_TEXTURES;
     }
 }

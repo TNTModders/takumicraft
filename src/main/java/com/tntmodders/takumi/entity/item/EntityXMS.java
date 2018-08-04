@@ -32,106 +32,15 @@ public class EntityXMS extends EntityFlying {
     }
 
     @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
-    }
-
-    @Override
     protected void initEntityAI() {
         this.tasks.taskEntries.clear();
         this.targetTasks.taskEntries.clear();
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (compound.getString("crew") != null && !compound.getString("crew").isEmpty()) {
-            if (this.world.getPlayerEntityByName(compound.getString("crew")) != null &&
-                    (this.getPassengers().isEmpty() || this.getPassengers().stream().noneMatch(
-                            entity -> entity instanceof EntityPlayer &&
-                                    entity.getName().equals(compound.getString("crew"))))) {
-                this.world.getPlayerEntityByName(compound.getString("crew")).startRiding(this, true);
-            }
-        }
-    }
-
-    @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        if (this.getControllingPassenger() instanceof EntityPlayer) {
-            compound.setString("crew", this.getControllingPassenger().getName());
-        } else {
-            compound.setString("crew", "");
-        }
-    }
-
-    @Override
-    public double getMountedYOffset() {
-        return this.height * 0.2;
-    }
-
-    @Override
-    protected boolean isMovementBlocked() {
-        return true;
-    }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        if (!this.world.isRemote) {
-            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 8f, true, true);
-        }
-        super.onDeath(cause);
-    }
-
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (this.getControllingPassenger() == null && source.getTrueSource() instanceof EntityPlayer &&
-                !source.isExplosion()) {
-            if (!this.world.isRemote) {
-                EntityItem item = new EntityItem(this.world, this.posX, this.posY, this.posZ,
-                        new ItemStack(TakumiItemCore.TAKUMI_XMS, 1));
-                this.world.spawnEntity(item);
-            }
-            this.setDead();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    private void clientUpdate() {
-        if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
-            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) (this.isAttackMode ? 0 : 1)));
-        }
-    }
-
-    @Override
-    public boolean canBePushed() {
-        return false;
-    }
-
-    @Override
-    protected void collideWithEntity(Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer)) {
-            super.collideWithEntity(entityIn);
-        }
-    }
-
-    @Override
-    public boolean shouldDismountInWater(Entity rider) {
-        return false;
-    }
-
-    @Override
-    protected void doWaterSplashEffect() {
-        super.doWaterSplashEffect();
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        return false;
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
     }
 
     @Override
@@ -152,17 +61,31 @@ public class EntityXMS extends EntityFlying {
     }
 
     @Override
-    public void jump() {
-        super.jump();
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        if (this.getControllingPassenger() instanceof EntityPlayer) {
+            compound.setString("crew", this.getControllingPassenger().getName());
+        } else {
+            compound.setString("crew", "");
+        }
     }
 
-    @Nullable
     @Override
-    public Entity getControllingPassenger() {
-        if (this.getPassengers().isEmpty()) {
-            return null;
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (compound.getString("crew") != null && !compound.getString("crew").isEmpty()) {
+            if (this.world.getPlayerEntityByName(compound.getString("crew")) != null &&
+                    (this.getPassengers().isEmpty() || this.getPassengers().stream().noneMatch(
+                            entity -> entity instanceof EntityPlayer &&
+                                    entity.getName().equals(compound.getString("crew"))))) {
+                this.world.getPlayerEntityByName(compound.getString("crew")).startRiding(this, true);
+            }
         }
-        return this.getPassengers().get(0);
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return false;
     }
 
     @Override
@@ -189,5 +112,82 @@ public class EntityXMS extends EntityFlying {
             }
         }
         return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void clientUpdate() {
+        if (((EntityPlayerSP) this.getControllingPassenger()).movementInput.forwardKeyDown) {
+            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) (this.isAttackMode ? 0 : 1)));
+        }
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (this.getControllingPassenger() == null && source.getTrueSource() instanceof EntityPlayer &&
+                !source.isExplosion()) {
+            if (!this.world.isRemote) {
+                EntityItem item = new EntityItem(this.world, this.posX, this.posY, this.posZ,
+                        new ItemStack(TakumiItemCore.TAKUMI_XMS, 1));
+                this.world.spawnEntity(item);
+            }
+            this.setDead();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (!this.world.isRemote) {
+            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 8f, true, true);
+        }
+        super.onDeath(cause);
+    }
+
+    @Override
+    protected boolean isMovementBlocked() {
+        return true;
+    }
+
+    @Override
+    public void jump() {
+        super.jump();
+    }
+
+    @Override
+    protected void collideWithEntity(Entity entityIn) {
+        if (!(entityIn instanceof EntityPlayer)) {
+            super.collideWithEntity(entityIn);
+        }
+    }
+
+    @Override
+    public boolean canBePushed() {
+        return false;
+    }
+
+    @Override
+    protected void doWaterSplashEffect() {
+        super.doWaterSplashEffect();
+    }
+
+    @Override
+    public double getMountedYOffset() {
+        return this.height * 0.2;
+    }
+
+    @Override
+    public boolean shouldDismountInWater(Entity rider) {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public Entity getControllingPassenger() {
+        if (this.getPassengers().isEmpty()) {
+            return null;
+        }
+        return this.getPassengers().get(0);
     }
 }

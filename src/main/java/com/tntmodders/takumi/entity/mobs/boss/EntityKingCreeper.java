@@ -65,11 +65,13 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
-        }
-        super.onDeath(source);
+    public int getPrimaryColor() {
+        return 0x00ff00;
+    }
+
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
     }
 
     @Override
@@ -113,13 +115,31 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x00ff00;
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        if (this.getHealth() < this.getMaxHealth() / 2) {
+            if (!this.getPowered()) {
+                this.onStruckByLightning(null);
+            }
+            this.heal(0.01f);
+        }
     }
 
     @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/king_creeper_armor.png");
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
+        }
+        super.onDeath(source);
+    }
+
+    public int getAttackID() {
+        return this.dataManager.get(ATTACK_ID);
+    }
+
+    public void setAttackID(int id) {
+        this.dataManager.set(ATTACK_ID, id);
     }
 
     @Override
@@ -148,18 +168,6 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         this.setAttackID(compound.getInteger("attackid"));
         if (this.hasCustomName()) {
             this.bossInfo.setName(this.getDisplayName());
-        }
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        if (this.getHealth() < this.getMaxHealth() / 2) {
-            if (!this.getPowered()) {
-                this.onStruckByLightning(null);
-            }
-            this.heal(0.01f);
         }
     }
 
@@ -256,8 +264,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         IBlockState state =
                                 this.rand.nextInt(10) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
                                         TakumiBlockCore.GUNORE.getDefaultState();
-                        this.world.setBlockState(new BlockPos(MpX, MpY, MpZ), state);
-                        this.world.setBlockState(new BlockPos(PpX, PpY, PpZ), state);
+                        TakumiUtils.setBlockStateProtected(this.world, new BlockPos(MpX, MpY, MpZ), state);
+                        TakumiUtils.setBlockStateProtected(this.world, new BlockPos(PpX, PpY, PpZ), state);
                         this.world.createExplosion(this, MpX, MpY, MpZ, 0, false);
                         this.world.createExplosion(this, PpX, PpY, PpZ, 0, false);
                     } else if (!this.world.isRemote) {
@@ -324,7 +332,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         for (int ty = 0; ty < 6; ty++) {
                             if (this.world.getBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
                                     (int) (this.posZ + w))).getBlock() == Blocks.AIR) {
-                                this.world.setBlockState(new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
+                                TakumiUtils.setBlockStateProtected(this.world,
+                                        new BlockPos((int) (this.posX + v), (int) (this.posY + ty),
                                                 (int) (this.posZ + w)),
                                         this.rand.nextInt(20) == 0 ? TakumiBlockCore.DUMMY_GUNORE.getDefaultState() :
                                                 TakumiBlockCore.GUNORE.getDefaultState());
@@ -477,10 +486,6 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         this.onStruckByLightning(null);
     }
 
-    public int getAttackID() {
-        return this.dataManager.get(ATTACK_ID);
-    }
-
     private BlockPos createRandomPos(BlockPos point, double range) {
         return point.add(MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
                 range * (this.getPowered() ? 2 : 1)),
@@ -488,10 +493,6 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         range * (this.getPowered() ? 2 : 1)),
                 MathHelper.nextDouble(this.rand, -1 * range * (this.getPowered() ? 2 : 1),
                         range * (this.getPowered() ? 2 : 1)));
-    }
-
-    public void setAttackID(int id) {
-        this.dataManager.set(ATTACK_ID, id);
     }
 
     @Override

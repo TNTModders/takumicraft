@@ -23,14 +23,6 @@ public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.TAKUMI_OFALEN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
-        }
-        super.onDeath(source);
-    }
-
-    @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
             for (int x = -10; x <= 10; x++) {
@@ -84,6 +76,14 @@ public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getPrimaryColor() {
         return 0x0000dd;
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.TAKUMI_OFALEN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
+        }
+        super.onDeath(source);
     }
 
     @Override

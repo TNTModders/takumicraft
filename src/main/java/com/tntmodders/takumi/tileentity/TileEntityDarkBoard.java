@@ -18,46 +18,11 @@ import java.util.Random;
 public class TileEntityDarkBoard extends TileEntity implements ITickable {
     public String name;
 
-    @Override
-    public double getMaxRenderDistanceSquared() {
-        return super.getMaxRenderDistanceSquared() * 16;
-    }
-
     public TileEntityDarkBoard() {
         super();
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        if (this.name == null || this.name.isEmpty()) {
-            this.name = compound.getString("monster");
-        }
-    }
-
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        this.readFromNBT(pkt.getNbtCompound());
-        TakumiCraftCore.LOGGER.info("pkt");
-    }
-
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return this.writeToNBT(new NBTTagCompound());
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        if (this.name != null) {
-            compound.setString("monster", this.name);
-        }
-        return super.writeToNBT(compound);
+    }    @Override
+    public double getMaxRenderDistanceSquared() {
+        return super.getMaxRenderDistanceSquared() * 16;
     }
 
     @Override
@@ -90,5 +55,40 @@ public class TileEntityDarkBoard extends TileEntity implements ITickable {
                 }
             });
         }
+    }    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        if (this.name == null || this.name.isEmpty()) {
+            this.name = compound.getString("monster");
+        }
     }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        this.readFromNBT(pkt.getNbtCompound());
+        TakumiCraftCore.LOGGER.info("pkt");
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return this.writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        if (this.name != null) {
+            compound.setString("monster", this.name);
+        }
+        return super.writeToNBT(compound);
+    }
+
+
+
+
 }

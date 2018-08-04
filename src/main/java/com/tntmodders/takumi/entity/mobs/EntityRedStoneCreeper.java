@@ -22,16 +22,16 @@ public class EntityRedStoneCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0xa09090;
+    }
+
+    @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(Item.getItemFromBlock(Blocks.REDSTONE_BLOCK), 1);
         }
         super.onDeath(source);
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0xa09090;
     }
 
     @Override

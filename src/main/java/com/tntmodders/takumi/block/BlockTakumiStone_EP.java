@@ -34,11 +34,6 @@ public class BlockTakumiStone_EP extends Block {
     }
 
     @Override
-    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-        return false;
-    }
-
-    @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
         if (!worldIn.isRemote) {
             EntityAreaEffectCloud cloud = new EntityAreaEffectCloud(worldIn);
@@ -49,5 +44,10 @@ public class BlockTakumiStone_EP extends Block {
             worldIn.spawnEntity(cloud);
         }
         super.onEntityWalk(worldIn, pos, entityIn);
+    }
+
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        return false;
     }
 }

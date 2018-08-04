@@ -107,47 +107,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         this.wasOnGround = compound.getBoolean("wasOnGround");
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL && this.getSlimeSize() > 0) {
-            this.isDead = true;
-        }
-
-        this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
-        this.prevSquishFactor = this.squishFactor;
-        super.onUpdate();
-
-        if (this.onGround && !this.wasOnGround) {
-            int i = this.getSlimeSize();
-            if (spawnCustomParticles()) {
-                i = 0;
-            } // don't spawn particles if it's handled by the implementation itself
-            for (int j = 0; j < i * 8; ++j) {
-                float f = (float) (this.rand.nextFloat() * Math.PI * 2F);
-                float f1 = this.rand.nextFloat() * 0.5F + 0.5F;
-                float f2 = MathHelper.sin(f) * i * 0.5F * f1;
-                float f3 = MathHelper.cos(f) * i * 0.5F * f1;
-                World world = this.world;
-                EnumParticleTypes enumparticletypes = this.getParticleType();
-                double d0 = this.posX + f2;
-                double d1 = this.posZ + f3;
-                world.spawnParticle(enumparticletypes, d0, this.getEntityBoundingBox().minY, d1, 0.0D, 0.0D, 0.0D);
-            }
-
-            this.playSound(this.getSquishSound(), this.getSoundVolume(),
-                    ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
-            this.squishAmount = -0.5F;
-        } else if (!this.onGround && this.wasOnGround) {
-            this.squishAmount = 1.0F;
-        }
-
-        this.wasOnGround = this.onGround;
-        this.alterSquishAmount();
-    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_HURT : SoundEvents.ENTITY_SLIME_HURT;
@@ -162,59 +121,6 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
     @Nullable
     protected ResourceLocation getLootTable() {
         return this.getSlimeSize() == 1 ? LootTableList.ENTITIES_SLIME : LootTableList.EMPTY;
-    }
-
-    protected boolean spawnCustomParticles() {
-        return false;
-    }
-
-    protected EnumParticleTypes getParticleType() {
-        return EnumParticleTypes.SLIME;
-    }
-
-    protected SoundEvent getSquishSound() {
-        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_SQUISH : SoundEvents.ENTITY_SLIME_SQUISH;
-    }
-
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    @Override
-    protected float getSoundVolume() {
-        return 0.4F * this.getSlimeSize();
-    }
-
-    protected void alterSquishAmount() {
-        this.squishAmount *= 0.6F;
-    }
-
-    public boolean isSmallSlime() {
-        return this.getSlimeSize() <= 1;
-    }
-
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    @Override
-    protected void jump() {
-        this.motionY = 0.41999998688697815D;
-        this.isAirBorne = true;
-    }
-
-    @Override
-    public void notifyDataManagerChange(DataParameter<?> key) {
-        if (SLIME_SIZE.equals(key)) {
-            int i = this.getSlimeSize();
-            this.setSize(0.51000005F * i, 0.51000005F * i);
-            this.rotationYaw = this.rotationYawHead;
-            this.renderYawOffset = this.rotationYawHead;
-
-            if (this.isInWater() && this.rand.nextInt(20) == 0) {
-                this.doWaterSplashEffect();
-            }
-        }
-
-        super.notifyDataManagerChange(key);
     }
 
     public void setSlimeSize(int size, boolean resetHealth) {
@@ -236,6 +142,12 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
      */
     protected int getJumpDelay() {
         return this.rand.nextInt(20) + 10;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderSlimeCreeper<>(manager);
     }
 
     /**
@@ -304,10 +216,98 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         super.damageEntity(damageSrc, damageAmount);
     }
 
-    @SideOnly(Side.CLIENT)
+    /**
+     * Called to update the entity's position/logic.
+     */
     @Override
-    public Object getRender(RenderManager manager) {
-        return new RenderSlimeCreeper<>(manager);
+    public void onUpdate() {
+        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL && this.getSlimeSize() > 0) {
+            this.isDead = true;
+        }
+
+        this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
+        this.prevSquishFactor = this.squishFactor;
+        super.onUpdate();
+
+        if (this.onGround && !this.wasOnGround) {
+            int i = this.getSlimeSize();
+            if (spawnCustomParticles()) {
+                i = 0;
+            } // don't spawn particles if it's handled by the implementation itself
+            for (int j = 0; j < i * 8; ++j) {
+                float f = (float) (this.rand.nextFloat() * Math.PI * 2F);
+                float f1 = this.rand.nextFloat() * 0.5F + 0.5F;
+                float f2 = MathHelper.sin(f) * i * 0.5F * f1;
+                float f3 = MathHelper.cos(f) * i * 0.5F * f1;
+                World world = this.world;
+                EnumParticleTypes enumparticletypes = this.getParticleType();
+                double d0 = this.posX + f2;
+                double d1 = this.posZ + f3;
+                world.spawnParticle(enumparticletypes, d0, this.getEntityBoundingBox().minY, d1, 0.0D, 0.0D, 0.0D);
+            }
+
+            this.playSound(this.getSquishSound(), this.getSoundVolume(),
+                    ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+            this.squishAmount = -0.5F;
+        } else if (!this.onGround && this.wasOnGround) {
+            this.squishAmount = 1.0F;
+        }
+
+        this.wasOnGround = this.onGround;
+        this.alterSquishAmount();
+    }
+
+    protected boolean spawnCustomParticles() {
+        return false;
+    }
+
+    protected EnumParticleTypes getParticleType() {
+        return EnumParticleTypes.SLIME;
+    }
+
+    protected SoundEvent getSquishSound() {
+        return this.isSmallSlime() ? SoundEvents.ENTITY_SMALL_SLIME_SQUISH : SoundEvents.ENTITY_SLIME_SQUISH;
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F * this.getSlimeSize();
+    }
+
+    protected void alterSquishAmount() {
+        this.squishAmount *= 0.6F;
+    }
+
+    public boolean isSmallSlime() {
+        return this.getSlimeSize() <= 1;
+    }
+
+    /**
+     * Causes this entity to do an upwards motion (jumping).
+     */
+    @Override
+    protected void jump() {
+        this.motionY = 0.41999998688697815D;
+        this.isAirBorne = true;
+    }
+
+    @Override
+    public void notifyDataManagerChange(DataParameter<?> key) {
+        if (SLIME_SIZE.equals(key)) {
+            int i = this.getSlimeSize();
+            this.setSize(0.51000005F * i, 0.51000005F * i);
+            this.rotationYaw = this.rotationYawHead;
+            this.renderYawOffset = this.rotationYawHead;
+
+            if (this.isInWater() && this.rand.nextInt(20) == 0) {
+                this.doWaterSplashEffect();
+            }
+        }
+
+        super.notifyDataManagerChange(key);
     }
 
     /**
@@ -528,8 +528,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
         @Override
         public void updateTask() {
             this.slime.faceEntity(this.slime.getAttackTarget(), 10.0F, 10.0F);
-            ((SlimeMoveHelper) this.slime.getMoveHelper())
-                    .setDirection(this.slime.rotationYaw, this.slime.canDamagePlayer());
+            ((SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.slime.rotationYaw,
+                    this.slime.canDamagePlayer());
         }
     }
 
@@ -660,9 +660,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                 this.action = Action.WAIT;
 
                 if (this.entity.onGround) {
-                    this.entity.setAIMoveSpeed((float) (this.speed *
-                            this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                       .getAttributeValue()));
+                    this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(
+                            SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 
                     if (this.jumpDelay-- <= 0) {
                         this.jumpDelay = this.slime.getJumpDelay();
@@ -684,9 +683,8 @@ public class EntitySlimeCreeper extends EntityTakumiAbstractCreeper {
                         this.entity.setAIMoveSpeed(0.0F);
                     }
                 } else {
-                    this.entity.setAIMoveSpeed((float) (this.speed *
-                            this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED)
-                                       .getAttributeValue()));
+                    this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(
+                            SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
                 }
             }
         }

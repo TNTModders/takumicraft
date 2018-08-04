@@ -40,11 +40,6 @@ public class EntityStingyCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x880000;
-    }
-
-    @Override
     public boolean isCustomSpawn() {
         return false;
     }
@@ -70,5 +65,10 @@ public class EntityStingyCreeper extends EntityTakumiAbstractCreeper {
         }
         event.getAffectedEntities().clear();
         return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x880000;
     }
 }

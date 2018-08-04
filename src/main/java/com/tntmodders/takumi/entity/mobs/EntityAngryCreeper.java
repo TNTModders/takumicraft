@@ -38,13 +38,23 @@ public class EntityAngryCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x00ffff;
+    public boolean isCustomSpawn() {
+        return false;
     }
 
     @Override
-    public boolean isCustomSpawn() {
-        return false;
+    public String getRegisterName() {
+        return "angrycreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 259;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x00ffff;
     }
 
     @Override
@@ -102,15 +112,5 @@ public class EntityAngryCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.onLivingUpdate();
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "angrycreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 259;
     }
 }

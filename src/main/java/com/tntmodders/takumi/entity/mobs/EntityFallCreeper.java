@@ -46,7 +46,7 @@ public class EntityFallCreeper extends EntityTakumiAbstractCreeper {
                         if (par1World.getBlockState(pos).getBlockHardness(world, pos) != -1 &&
                                 TakumiUtils.takumiGetBlockResistance(this, par1World.getBlockState(pos), pos) != -1 &&
                                 !world.isRemote) {
-                            par1World.setBlockState(pos, Blocks.GRAVEL.getDefaultState());
+                            TakumiUtils.setBlockStateProtected(world, pos, Blocks.GRAVEL.getDefaultState());
                         }
                     }
                 }

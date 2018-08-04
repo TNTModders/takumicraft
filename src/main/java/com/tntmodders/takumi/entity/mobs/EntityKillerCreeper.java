@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.state.IBlockState;
@@ -15,8 +16,8 @@ public class EntityKillerCreeper extends EntityTakumiAbstractCreeper {
 
     static final IBlockState STONE = Blocks.STONEBRICK.getStateFromMeta(BlockStoneBrick.MOSSY_META);
     static final IBlockState IRON =
-            Blocks.IRON_BARS.getDefaultState().withProperty(BlockPane.EAST, true).withProperty(BlockPane.NORTH, false)
-                            .withProperty(BlockPane.SOUTH, false).withProperty(BlockPane.WEST, true);
+            Blocks.IRON_BARS.getDefaultState().withProperty(BlockPane.EAST, true).withProperty(BlockPane.NORTH,
+                    false).withProperty(BlockPane.SOUTH, false).withProperty(BlockPane.WEST, true);
     static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
     static final IBlockState web = Blocks.WEB.getDefaultState();
 
@@ -33,39 +34,39 @@ public class EntityKillerCreeper extends EntityTakumiAbstractCreeper {
         for (int y = 0; y <= 6; y++) {
             for (int x = -1; x <= 8 - y; x++) {
                 for (int z = -1; z <= 1; z++) {
-                    this.world.setBlockState(pos.add(x, y, z), STONE);
+                    TakumiUtils.setBlockStateProtected(this.world, pos.add(x, y, z), STONE);
                     if (z == -1 || z == 1) {
-                        this.world.setBlockState(pos.add(x, y + 1, z), STONE);
-                        this.world.setBlockState(pos.add(x, y + 2, z), IRON);
+                        TakumiUtils.setBlockStateProtected(this.world, pos.add(x, y + 1, z), STONE);
+                        TakumiUtils.setBlockStateProtected(this.world, pos.add(x, y + 2, z), IRON);
                     }
                 }
             }
         }
-        this.world.setBlockState(pos.add(0, 1, -1), IRON);
-        this.world.setBlockState(pos.add(0, 1, 0), LAVA);
-        this.world.setBlockState(pos.add(0, 1, 1), IRON);
-        this.world.setBlockState(pos.add(0, 2, 0), Blocks.AIR.getDefaultState());
-        this.world.setBlockState(pos.add(0, 3, 0), web);
-        this.world.setBlockState(pos.add(0, 4, 0), web);
-        this.world.setBlockState(pos.add(0, 3, -1), IRON);
-        this.world.setBlockState(pos.add(0, 4, -1), IRON);
-        this.world.setBlockState(pos.add(0, 3, 1), IRON);
-        this.world.setBlockState(pos.add(0, 4, 1), IRON);
-        this.world.setBlockState(pos.add(0, 5, 0), Blocks.AIR.getDefaultState());
-        this.world.setBlockState(pos.add(0, 6, 0), Blocks.AIR.getDefaultState());
-        this.world.setBlockState(pos.add(-1, 7, -1), STONE);
-        this.world.setBlockState(pos.add(-1, 7, 1), STONE);
-        this.world.setBlockState(pos.add(-1, 7, 0), STONE);
-        this.world.setBlockState(pos.add(0, 7, -1), STONE);
-        this.world.setBlockState(pos.add(0, 7, 0), Blocks.AIR.getDefaultState());
-        this.world.setBlockState(pos.add(0, 7, 1), STONE);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 1, -1), IRON);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 1, 0), LAVA);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 1, 1), IRON);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 2, 0), Blocks.AIR.getDefaultState());
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 3, 0), web);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 4, 0), web);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 3, -1), IRON);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 4, -1), IRON);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 3, 1), IRON);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 4, 1), IRON);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 5, 0), Blocks.AIR.getDefaultState());
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 6, 0), Blocks.AIR.getDefaultState());
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(-1, 7, -1), STONE);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(-1, 7, 1), STONE);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(-1, 7, 0), STONE);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 7, -1), STONE);
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 7, 0), Blocks.AIR.getDefaultState());
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 7, 1), STONE);
 
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
-                this.world.setBlockState(pos.add(x, 8, z), STONE);
+                TakumiUtils.setBlockStateProtected(this.world, pos.add(x, 8, z), STONE);
             }
         }
-        this.world.setBlockState(pos.add(1, 8, 0), Blocks.GLOWSTONE.getDefaultState());
+        TakumiUtils.setBlockStateProtected(this.world, pos.add(1, 8, 0), Blocks.GLOWSTONE.getDefaultState());
 
         this.getAttackTarget().setPositionAndUpdate(pos.getX(), pos.getY() + 6, pos.getZ());
     }
@@ -107,9 +108,8 @@ public class EntityKillerCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void customSpawn() {
-        EntityRegistry
-                .addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 3, 10, EnumCreatureType.MONSTER,
-                        Biomes.HELL);
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 2, 3, 10,
+                EnumCreatureType.MONSTER, Biomes.HELL);
     }
 
     @Override

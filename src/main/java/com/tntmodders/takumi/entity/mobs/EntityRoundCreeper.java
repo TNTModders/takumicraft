@@ -15,12 +15,10 @@ public class EntityRoundCreeper extends EntityTakumiAbstractCreeper {
         int z;
         for (int x = -40; x <= 40; x++) {
             z = (int) Math.sqrt(40 * 40 - x * x);
-            this.world
-                    .createExplosion(this, this.posX + x, this.world.getHeight(this.getPosition().add(x, 0, z)).getY(),
-                            this.posZ + z, r, true);
-            this.world
-                    .createExplosion(this, this.posX + x, this.world.getHeight(this.getPosition().add(x, 0, -z)).getY(),
-                            this.posZ - z, r, true);
+            this.world.createExplosion(this, this.posX + x,
+                    this.world.getHeight(this.getPosition().add(x, 0, z)).getY(), this.posZ + z, r, true);
+            this.world.createExplosion(this, this.posX + x,
+                    this.world.getHeight(this.getPosition().add(x, 0, -z)).getY(), this.posZ - z, r, true);
         }
     }
 

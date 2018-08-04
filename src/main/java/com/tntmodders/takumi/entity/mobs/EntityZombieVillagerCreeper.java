@@ -76,39 +76,6 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         super.onUpdate();
     }
 
-    @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand) {
-        super.processInteract(player, hand);
-        ItemStack itemstack = player.getHeldItem(hand);
-
-        if (itemstack.getItem() == Items.GOLDEN_APPLE && itemstack.getMetadata() == 0 &&
-                this.isPotionActive(MobEffects.WEAKNESS)) {
-            if (!player.capabilities.isCreativeMode) {
-                itemstack.shrink(1);
-            }
-
-            if (!this.world.isRemote) {
-                this.startConverting(player.getUniqueID(), this.rand.nextInt(2401) + 3600);
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected void startConverting(
-            @Nullable
-                    UUID p_191991_1_, int p_191991_2_) {
-        this.converstionStarter = p_191991_1_;
-        this.conversionTime = p_191991_2_;
-        this.getDataManager().set(CONVERTING, Boolean.TRUE);
-        this.removePotionEffect(MobEffects.WEAKNESS);
-        this.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, p_191991_2_,
-                Math.min(this.world.getDifficulty().getDifficultyId() - 1, 0)));
-        this.world.setEntityState(this, (byte) 16);
-    }
-
     /**
      * Returns whether this zombie is in the process of converting to a villager
      */
@@ -199,6 +166,39 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         this.setProfession(VillagerRegistry.getId(prof));
     }
 
+    @Override
+    public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        super.processInteract(player, hand);
+        ItemStack itemstack = player.getHeldItem(hand);
+
+        if (itemstack.getItem() == Items.GOLDEN_APPLE && itemstack.getMetadata() == 0 &&
+                this.isPotionActive(MobEffects.WEAKNESS)) {
+            if (!player.capabilities.isCreativeMode) {
+                itemstack.shrink(1);
+            }
+
+            if (!this.world.isRemote) {
+                this.startConverting(player.getUniqueID(), this.rand.nextInt(2401) + 3600);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected void startConverting(
+            @Nullable
+                    UUID p_191991_1_, int p_191991_2_) {
+        this.converstionStarter = p_191991_1_;
+        this.conversionTime = p_191991_2_;
+        this.getDataManager().set(CONVERTING, Boolean.TRUE);
+        this.removePotionEffect(MobEffects.WEAKNESS);
+        this.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, p_191991_2_,
+                Math.min(this.world.getDifficulty().getDifficultyId() - 1, 0)));
+        this.world.setEntityState(this, (byte) 16);
+    }
+
     /**
      * Handler for {@link World#setEntityState}
      */
@@ -268,8 +268,8 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         super.readEntityFromNBT(compound);
         this.setProfession(compound.getInteger("Profession"));
         if (compound.hasKey("ProfessionName")) {
-            VillagerProfession p = ForgeRegistries.VILLAGER_PROFESSIONS
-                    .getValue(new ResourceLocation(compound.getString("ProfessionName")));
+            VillagerProfession p = ForgeRegistries.VILLAGER_PROFESSIONS.getValue(
+                    new ResourceLocation(compound.getString("ProfessionName")));
             if (p == null) {
                 p = VillagerRegistry.FARMER;
             }
@@ -300,11 +300,6 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     }
 
     @Override
-    protected ItemStack getSkullDrop() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
     public int getPrimaryColor() {
         return 3869451;
     }
@@ -318,6 +313,11 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+
+    @Override
+    protected ItemStack getSkullDrop() {
+        return ItemStack.EMPTY;
     }
 
     @Override

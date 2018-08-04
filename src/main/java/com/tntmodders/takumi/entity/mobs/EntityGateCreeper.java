@@ -87,12 +87,12 @@ public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IR
     }
 
     @Override
-    public boolean isImmuneToExplosions() {
-        return true;
+    public void setSwingingArms(boolean swingingArms) {
     }
 
     @Override
-    public void setSwingingArms(boolean swingingArms) {
+    public boolean isImmuneToExplosions() {
+        return true;
     }
 
     @Override
@@ -102,12 +102,6 @@ public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IR
                 this.dropItemWithOffset(Items.GUNPOWDER, this.rand.nextInt(16) + 1, 2);
             }
         }
-    }
-
-    @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().removeIf(entity -> entity instanceof EntityItem);
-        return true;
     }
 
     @Override
@@ -143,5 +137,11 @@ public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IR
     @Override
     public int getRegisterID() {
         return 263;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedEntities().removeIf(entity -> entity instanceof EntityItem);
+        return true;
     }
 }

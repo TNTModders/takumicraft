@@ -54,8 +54,8 @@ public class BlockFallingBomb extends BlockFalling {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!worldIn.isRemote && !(player.getHeldItemMainhand() != null &&
-                EnchantmentHelper.getEnchantments(player.getHeldItemMainhand())
-                                 .containsKey(TakumiEnchantmentCore.MINESWEEPER) &&
+                EnchantmentHelper.getEnchantments(player.getHeldItemMainhand()).containsKey(
+                        TakumiEnchantmentCore.MINESWEEPER) &&
                 (player.getHeldItemMainhand().getStrVsBlock(state) > 1.0f || this.getHarvestTool(state) == null))) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

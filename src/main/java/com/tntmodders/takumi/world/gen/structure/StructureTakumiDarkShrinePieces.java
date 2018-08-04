@@ -80,6 +80,87 @@ public class StructureTakumiDarkShrinePieces {
         return list;
     }
 
+    private static StructureComponent generateAndAddComponent(StructureTakumiDarkShrinePieces.Start start,
+            List<StructureComponent> structureComponents, Random rand, int structureMinX, int structureMinY,
+            int structureMinZ, EnumFacing facing, int componentType) {
+        if (componentType > 50) {
+            return null;
+        } else if (Math.abs(structureMinX - start.getBoundingBox().minX) <= 112 &&
+                Math.abs(structureMinZ - start.getBoundingBox().minZ) <= 112) {
+            StructureComponent structurecomponent =
+                    generateComponent(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ,
+                            facing, componentType + 1);
+
+            if (structurecomponent != null) {
+                structureComponents.add(structurecomponent);
+                start.pendingHouses.add(structurecomponent);
+                return structurecomponent;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    private static StructureTakumiDarkShrinePieces.TakumiDarkShrine generateComponent(
+            StructureTakumiDarkShrinePieces.Start start, List<StructureComponent> structureComponents, Random rand,
+            int structureMinX, int structureMinY, int structureMinZ, EnumFacing facing, int componentType) {
+        int i = updatePieceWeight(start.structureTakumiDarkShrineWeightedPieceList);
+
+        if (i <= 0) {
+            return null;
+        } else {
+            int j = 0;
+
+            while (j < 5) {
+                ++j;
+                int k = rand.nextInt(i);
+
+                for (StructureTakumiDarkShrinePieces.PieceWeight structurevillagepieces$pieceweight : start.structureTakumiDarkShrineWeightedPieceList) {
+                    k -= structurevillagepieces$pieceweight.villagePieceWeight;
+
+                    if (k < 0) {
+                        if (!structurevillagepieces$pieceweight.canSpawnMoreTakumiDarkShrinePiecesOfType(
+                                componentType) ||
+                                structurevillagepieces$pieceweight == start.structTakumiDarkShrinePieceWeight &&
+                                        start.structureTakumiDarkShrineWeightedPieceList.size() > 1) {
+                            break;
+                        }
+
+                        StructureTakumiDarkShrinePieces.TakumiDarkShrine structurevillagepieces$village =
+                                findAndCreateComponentFactory(start, structurevillagepieces$pieceweight,
+                                        structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
+                                        componentType);
+
+                        if (structurevillagepieces$village != null) {
+                            ++structurevillagepieces$pieceweight.villagePiecesSpawned;
+                            start.structTakumiDarkShrinePieceWeight = structurevillagepieces$pieceweight;
+
+                            if (!structurevillagepieces$pieceweight.canSpawnMoreTakumiDarkShrinePieces()) {
+                                start.structureTakumiDarkShrineWeightedPieceList.remove(
+                                        structurevillagepieces$pieceweight);
+                            }
+
+                            return structurevillagepieces$village;
+                        }
+                    }
+                }
+            }
+
+            StructureBoundingBox structureboundingbox =
+                    StructureTakumiDarkShrinePieces.Torch.findPieceBox(start, structureComponents, rand, structureMinX,
+                            structureMinY, structureMinZ, facing);
+
+            if (structureboundingbox != null) {
+                return new StructureTakumiDarkShrinePieces.Torch(start, componentType, rand, structureboundingbox,
+                        facing);
+            } else {
+                return null;
+            }
+        }
+    }
+
     private static int updatePieceWeight(List<StructureTakumiDarkShrinePieces.PieceWeight> p_75079_0_) {
         boolean flag = false;
         int i = 0;
@@ -143,87 +224,6 @@ public class StructureTakumiDarkShrinePieces {
         }
 
         return structurevillagepieces$village;
-    }
-
-    private static StructureTakumiDarkShrinePieces.TakumiDarkShrine generateComponent(
-            StructureTakumiDarkShrinePieces.Start start, List<StructureComponent> structureComponents, Random rand,
-            int structureMinX, int structureMinY, int structureMinZ, EnumFacing facing, int componentType) {
-        int i = updatePieceWeight(start.structureTakumiDarkShrineWeightedPieceList);
-
-        if (i <= 0) {
-            return null;
-        } else {
-            int j = 0;
-
-            while (j < 5) {
-                ++j;
-                int k = rand.nextInt(i);
-
-                for (StructureTakumiDarkShrinePieces.PieceWeight structurevillagepieces$pieceweight : start.structureTakumiDarkShrineWeightedPieceList) {
-                    k -= structurevillagepieces$pieceweight.villagePieceWeight;
-
-                    if (k < 0) {
-                        if (!structurevillagepieces$pieceweight.canSpawnMoreTakumiDarkShrinePiecesOfType(
-                                componentType) ||
-                                structurevillagepieces$pieceweight == start.structTakumiDarkShrinePieceWeight &&
-                                        start.structureTakumiDarkShrineWeightedPieceList.size() > 1) {
-                            break;
-                        }
-
-                        StructureTakumiDarkShrinePieces.TakumiDarkShrine structurevillagepieces$village =
-                                findAndCreateComponentFactory(start, structurevillagepieces$pieceweight,
-                                        structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing,
-                                        componentType);
-
-                        if (structurevillagepieces$village != null) {
-                            ++structurevillagepieces$pieceweight.villagePiecesSpawned;
-                            start.structTakumiDarkShrinePieceWeight = structurevillagepieces$pieceweight;
-
-                            if (!structurevillagepieces$pieceweight.canSpawnMoreTakumiDarkShrinePieces()) {
-                                start.structureTakumiDarkShrineWeightedPieceList.remove(
-                                        structurevillagepieces$pieceweight);
-                            }
-
-                            return structurevillagepieces$village;
-                        }
-                    }
-                }
-            }
-
-            StructureBoundingBox structureboundingbox =
-                    StructureTakumiDarkShrinePieces.Torch.findPieceBox(start, structureComponents, rand, structureMinX,
-                            structureMinY, structureMinZ, facing);
-
-            if (structureboundingbox != null) {
-                return new StructureTakumiDarkShrinePieces.Torch(start, componentType, rand, structureboundingbox,
-                        facing);
-            } else {
-                return null;
-            }
-        }
-    }
-
-    private static StructureComponent generateAndAddComponent(StructureTakumiDarkShrinePieces.Start start,
-            List<StructureComponent> structureComponents, Random rand, int structureMinX, int structureMinY,
-            int structureMinZ, EnumFacing facing, int componentType) {
-        if (componentType > 50) {
-            return null;
-        } else if (Math.abs(structureMinX - start.getBoundingBox().minX) <= 112 &&
-                Math.abs(structureMinZ - start.getBoundingBox().minZ) <= 112) {
-            StructureComponent structurecomponent =
-                    generateComponent(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ,
-                            facing, componentType + 1);
-
-            if (structurecomponent != null) {
-                structureComponents.add(structurecomponent);
-                start.pendingHouses.add(structurecomponent);
-                return structurecomponent;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
     }
 
     private static void generateAndAddRoadPiece(Start start, List<StructureComponent> p_176069_1_, Random rand,
@@ -408,19 +408,32 @@ public class StructureTakumiDarkShrinePieces {
             this.cropTypeD = this.getRandomCropType(rand);
         }
 
-        /**
-         * (abstract) Helper method to write subclass data to NBT
-         */
-        @Override
-        protected void writeStructureToNBT(NBTTagCompound tagCompound) {
-            super.writeStructureToNBT(tagCompound);
-            tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(this.cropTypeA));
-            tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(this.cropTypeB));
-            tagCompound.setInteger("CC", Block.REGISTRY.getIDForObject(this.cropTypeC));
-            tagCompound.setInteger("CD", Block.REGISTRY.getIDForObject(this.cropTypeD));
+        private Block getRandomCropType(Random rand) {
+            switch (rand.nextInt(10)) {
+                case 0:
+                case 1:
+                    return Blocks.CARROTS;
+                case 2:
+                case 3:
+                    return Blocks.POTATOES;
+                case 4:
+                    return Blocks.BEETROOTS;
+                default:
+                    return Blocks.WHEAT;
+            }
         }
 
-        /**
+        public static StructureTakumiDarkShrinePieces.Field1 createPiece(StructureTakumiDarkShrinePieces.Start start,
+                List<StructureComponent> p_175851_1_, Random rand, int p_175851_3_, int p_175851_4_, int p_175851_5_,
+                EnumFacing facing, int p_175851_7_) {
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175851_3_, p_175851_4_, p_175851_5_, 0, 0, 0,
+                            13, 4, 9, facing);
+            return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
+                    StructureComponent.findIntersecting(p_175851_1_, structureboundingbox) == null ?
+                    new StructureTakumiDarkShrinePieces.Field1(start, p_175851_7_, rand, structureboundingbox, facing) :
+                    null;
+        }        /**
          * (abstract) Helper method to read subclass data from NBT
          */
         @Override
@@ -448,32 +461,19 @@ public class StructureTakumiDarkShrinePieces {
             }
         }
 
-        private Block getRandomCropType(Random rand) {
-            switch (rand.nextInt(10)) {
-                case 0:
-                case 1:
-                    return Blocks.CARROTS;
-                case 2:
-                case 3:
-                    return Blocks.POTATOES;
-                case 4:
-                    return Blocks.BEETROOTS;
-                default:
-                    return Blocks.WHEAT;
-            }
+        /**
+         * (abstract) Helper method to write subclass data to NBT
+         */
+        @Override
+        protected void writeStructureToNBT(NBTTagCompound tagCompound) {
+            super.writeStructureToNBT(tagCompound);
+            tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(this.cropTypeA));
+            tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(this.cropTypeB));
+            tagCompound.setInteger("CC", Block.REGISTRY.getIDForObject(this.cropTypeC));
+            tagCompound.setInteger("CD", Block.REGISTRY.getIDForObject(this.cropTypeD));
         }
 
-        public static StructureTakumiDarkShrinePieces.Field1 createPiece(StructureTakumiDarkShrinePieces.Start start,
-                List<StructureComponent> p_175851_1_, Random rand, int p_175851_3_, int p_175851_4_, int p_175851_5_,
-                EnumFacing facing, int p_175851_7_) {
-            StructureBoundingBox structureboundingbox =
-                    StructureBoundingBox.getComponentToAddBoundingBox(p_175851_3_, p_175851_4_, p_175851_5_, 0, 0, 0,
-                            13, 4, 9, facing);
-            return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
-                    StructureComponent.findIntersecting(p_175851_1_, structureboundingbox) == null ?
-                    new StructureTakumiDarkShrinePieces.Field1(start, p_175851_7_, rand, structureboundingbox, facing) :
-                    null;
-        }
+
 
         /**
          * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
@@ -573,26 +573,6 @@ public class StructureTakumiDarkShrinePieces {
             this.cropTypeB = this.getRandomCropType(rand);
         }
 
-        /**
-         * (abstract) Helper method to write subclass data to NBT
-         */
-        @Override
-        protected void writeStructureToNBT(NBTTagCompound tagCompound) {
-            super.writeStructureToNBT(tagCompound);
-            tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(this.cropTypeA));
-            tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(this.cropTypeB));
-        }
-
-        /**
-         * (abstract) Helper method to read subclass data from NBT
-         */
-        @Override
-        protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_) {
-            super.readStructureFromNBT(tagCompound, p_143011_2_);
-            this.cropTypeA = Block.getBlockById(tagCompound.getInteger("CA"));
-            this.cropTypeB = Block.getBlockById(tagCompound.getInteger("CB"));
-        }
-
         private Block getRandomCropType(Random rand) {
             switch (rand.nextInt(10)) {
                 case 0:
@@ -606,6 +586,14 @@ public class StructureTakumiDarkShrinePieces {
                 default:
                     return Blocks.WHEAT;
             }
+        }        /**
+         * (abstract) Helper method to write subclass data to NBT
+         */
+        @Override
+        protected void writeStructureToNBT(NBTTagCompound tagCompound) {
+            super.writeStructureToNBT(tagCompound);
+            tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(this.cropTypeA));
+            tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(this.cropTypeB));
         }
 
         public static StructureTakumiDarkShrinePieces.Field2 createPiece(StructureTakumiDarkShrinePieces.Start start,
@@ -618,7 +606,19 @@ public class StructureTakumiDarkShrinePieces {
                     StructureComponent.findIntersecting(p_175852_1_, structureboundingbox) == null ?
                     new StructureTakumiDarkShrinePieces.Field2(start, p_175852_7_, rand, structureboundingbox, facing) :
                     null;
+        }        /**
+         * (abstract) Helper method to read subclass data from NBT
+         */
+        @Override
+        protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_) {
+            super.readStructureFromNBT(tagCompound, p_143011_2_);
+            this.cropTypeA = Block.getBlockById(tagCompound.getInteger("CA"));
+            this.cropTypeB = Block.getBlockById(tagCompound.getInteger("CB"));
         }
+
+
+
+
 
         /**
          * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
@@ -1275,7 +1275,16 @@ public class StructureTakumiDarkShrinePieces {
             this.isRoofAccessible = rand.nextBoolean();
         }
 
-        /**
+        public static StructureTakumiDarkShrinePieces.House4Garden createPiece(
+                StructureTakumiDarkShrinePieces.Start start, List<StructureComponent> p_175858_1_, Random rand,
+                int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_) {
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 5,
+                            6, 5, facing);
+            return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null :
+                    new StructureTakumiDarkShrinePieces.House4Garden(start, p_175858_7_, rand, structureboundingbox,
+                            facing);
+        }        /**
          * (abstract) Helper method to write subclass data to NBT
          */
         @Override
@@ -1293,16 +1302,7 @@ public class StructureTakumiDarkShrinePieces {
             this.isRoofAccessible = tagCompound.getBoolean("Terrace");
         }
 
-        public static StructureTakumiDarkShrinePieces.House4Garden createPiece(
-                StructureTakumiDarkShrinePieces.Start start, List<StructureComponent> p_175858_1_, Random rand,
-                int p_175858_3_, int p_175858_4_, int p_175858_5_, EnumFacing facing, int p_175858_7_) {
-            StructureBoundingBox structureboundingbox =
-                    StructureBoundingBox.getComponentToAddBoundingBox(p_175858_3_, p_175858_4_, p_175858_5_, 0, 0, 0, 5,
-                            6, 5, facing);
-            return StructureComponent.findIntersecting(p_175858_1_, structureboundingbox) != null ? null :
-                    new StructureTakumiDarkShrinePieces.House4Garden(start, p_175858_7_, rand, structureboundingbox,
-                            facing);
-        }
+
 
         /**
          * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
@@ -1424,7 +1424,21 @@ public class StructureTakumiDarkShrinePieces {
             this.length = Math.max(p_i45562_4_.getXSize(), p_i45562_4_.getZSize());
         }
 
-        /**
+        public static StructureBoundingBox findPieceBox(StructureTakumiDarkShrinePieces.Start start,
+                List<StructureComponent> p_175848_1_, Random rand, int p_175848_3_, int p_175848_4_, int p_175848_5_,
+                EnumFacing facing) {
+            for (int i = 7 * MathHelper.getInt(rand, 3, 5); i >= 7; i -= 7) {
+                StructureBoundingBox structureboundingbox =
+                        StructureBoundingBox.getComponentToAddBoundingBox(p_175848_3_, p_175848_4_, p_175848_5_, 0, 0,
+                                0, 3, 3, i, facing);
+
+                if (StructureComponent.findIntersecting(p_175848_1_, structureboundingbox) == null) {
+                    return structureboundingbox;
+                }
+            }
+
+            return null;
+        }        /**
          * (abstract) Helper method to write subclass data to NBT
          */
         @Override
@@ -1534,21 +1548,7 @@ public class StructureTakumiDarkShrinePieces {
             }
         }
 
-        public static StructureBoundingBox findPieceBox(StructureTakumiDarkShrinePieces.Start start,
-                List<StructureComponent> p_175848_1_, Random rand, int p_175848_3_, int p_175848_4_, int p_175848_5_,
-                EnumFacing facing) {
-            for (int i = 7 * MathHelper.getInt(rand, 3, 5); i >= 7; i -= 7) {
-                StructureBoundingBox structureboundingbox =
-                        StructureBoundingBox.getComponentToAddBoundingBox(p_175848_3_, p_175848_4_, p_175848_5_, 0, 0,
-                                0, 3, 3, i, facing);
 
-                if (StructureComponent.findIntersecting(p_175848_1_, structureboundingbox) == null) {
-                    return structureboundingbox;
-                }
-            }
-
-            return null;
-        }
 
         /**
          * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
@@ -1602,8 +1602,8 @@ public class StructureTakumiDarkShrinePieces {
     }
 
     public static class PieceWeight {
-        public Class<? extends StructureTakumiDarkShrinePieces.TakumiDarkShrine> villagePieceClass;
         public final int villagePieceWeight;
+        public Class<? extends StructureTakumiDarkShrinePieces.TakumiDarkShrine> villagePieceClass;
         public int villagePiecesSpawned;
         public int villagePiecesLimit;
 
@@ -1651,25 +1651,26 @@ public class StructureTakumiDarkShrinePieces {
         public Start() {
         }
 
-        protected void generateSpawner(World worldIn, StructureBoundingBox sbb, Random rand, int x, int y, int z) {
-            BlockPos blockpos =
-                    new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+        public Start(BiomeProvider chunkManagerIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_,
+                List<StructureTakumiDarkShrinePieces.PieceWeight> p_i2104_6_, int p_i2104_7_) {
+            super(null, 0, rand, p_i2104_4_, p_i2104_5_);
+            this.worldChunkMngr = chunkManagerIn;
+            this.structureTakumiDarkShrineWeightedPieceList = p_i2104_6_;
+            this.terrainType = p_i2104_7_;
+            Biome biome = chunkManagerIn.getBiome(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.DEFAULT);
+            this.biome = biome;
+            this.startPiece = this;
 
-            if (sbb.isVecInside(blockpos) && worldIn.getBlockState(blockpos).getBlock() != Blocks.MOB_SPAWNER) {
-                this.setBlockState(worldIn, Blocks.MOB_SPAWNER.getDefaultState(), x, y, z, sbb);
-                TileEntity tileentity = worldIn.getTileEntity(blockpos);
-
-                if (tileentity instanceof TileEntityMobSpawner) {
-                    List<EntityTakumiAbstractCreeper> list = new ArrayList<>();
-                    list.add(new EntityRushCreeper(worldIn));
-                    list.add(new EntityZombieCreeper(worldIn));
-                    list.add(new EntitySkeletonCreeper(worldIn));
-                    list.add(new EntityCallCreeper(worldIn));
-                    String name = list.get(rand.nextInt(list.size())).getRegisterName();
-                    ((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setEntityId(
-                            new ResourceLocation(TakumiCraftCore.MODID, name));
-                }
+            if (biome instanceof BiomeDesert) {
+                this.structureType = 1;
+            } else if (biome instanceof BiomeSavanna) {
+                this.structureType = 2;
+            } else if (biome instanceof BiomeTaiga) {
+                this.structureType = 3;
             }
+
+            this.setStructureType(this.structureType);
+            this.isZombieInfested = rand.nextInt(50) == 0;
         }
 
         @Override
@@ -1781,6 +1782,27 @@ public class StructureTakumiDarkShrinePieces {
             return true;
         }
 
+        protected void generateSpawner(World worldIn, StructureBoundingBox sbb, Random rand, int x, int y, int z) {
+            BlockPos blockpos =
+                    new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+
+            if (sbb.isVecInside(blockpos) && worldIn.getBlockState(blockpos).getBlock() != Blocks.MOB_SPAWNER) {
+                this.setBlockState(worldIn, Blocks.MOB_SPAWNER.getDefaultState(), x, y, z, sbb);
+                TileEntity tileentity = worldIn.getTileEntity(blockpos);
+
+                if (tileentity instanceof TileEntityMobSpawner) {
+                    List<EntityTakumiAbstractCreeper> list = new ArrayList<>();
+                    list.add(new EntityRushCreeper(worldIn));
+                    list.add(new EntityZombieCreeper(worldIn));
+                    list.add(new EntitySkeletonCreeper(worldIn));
+                    list.add(new EntityCallCreeper(worldIn));
+                    String name = list.get(rand.nextInt(list.size())).getRegisterName();
+                    ((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setEntityId(
+                            new ResourceLocation(TakumiCraftCore.MODID, name));
+                }
+            }
+        }
+
         protected void setDarkVillager(World worldIn, int x, int y, int z, StructureBoundingBox boundingboxIn) {
             double dx = this.getXWithOffset(x, z);
             double dy = this.getYWithOffset(y);
@@ -1791,28 +1813,6 @@ public class StructureTakumiDarkShrinePieces {
                 darkVillager.setPosition(dx + 0.5, dy, dz + 0.5);
                 worldIn.spawnEntity(darkVillager);
             }
-        }
-
-        public Start(BiomeProvider chunkManagerIn, int p_i2104_2_, Random rand, int p_i2104_4_, int p_i2104_5_,
-                List<StructureTakumiDarkShrinePieces.PieceWeight> p_i2104_6_, int p_i2104_7_) {
-            super(null, 0, rand, p_i2104_4_, p_i2104_5_);
-            this.worldChunkMngr = chunkManagerIn;
-            this.structureTakumiDarkShrineWeightedPieceList = p_i2104_6_;
-            this.terrainType = p_i2104_7_;
-            Biome biome = chunkManagerIn.getBiome(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.DEFAULT);
-            this.biome = biome;
-            this.startPiece = this;
-
-            if (biome instanceof BiomeDesert) {
-                this.structureType = 1;
-            } else if (biome instanceof BiomeSavanna) {
-                this.structureType = 2;
-            } else if (biome instanceof BiomeTaiga) {
-                this.structureType = 3;
-            }
-
-            this.setStructureType(this.structureType);
-            this.isZombieInfested = rand.nextInt(50) == 0;
         }
     }
 
@@ -1871,13 +1871,13 @@ public class StructureTakumiDarkShrinePieces {
 
     public abstract static class TakumiDarkShrine extends StructureComponent {
         protected int averageGroundLvl = -1;
+        protected int structureType;
+        protected boolean isZombieInfested;
+        protected StructureTakumiDarkShrinePieces.Start startPiece;
         /**
          * The number of villagers that have been spawned in this component.
          */
         private int villagersSpawned;
-        protected int structureType;
-        protected boolean isZombieInfested;
-        protected StructureTakumiDarkShrinePieces.Start startPiece;
 
         public TakumiDarkShrine() {
         }
@@ -1890,6 +1890,10 @@ public class StructureTakumiDarkShrinePieces {
                 this.isZombieInfested = start.isZombieInfested;
                 startPiece = start;
             }
+        }
+
+        protected static boolean canTakumiDarkShrineGoDeeper(StructureBoundingBox structurebb) {
+            return structurebb != null && structurebb.minY > 10;
         }
 
         /**
@@ -2013,10 +2017,6 @@ public class StructureTakumiDarkShrinePieces {
             }
         }
 
-        protected static boolean canTakumiDarkShrineGoDeeper(StructureBoundingBox structurebb) {
-            return structurebb != null && structurebb.minY > 10;
-        }
-
         /**
          * Spawns a number of villagers in this component. Parameters: world, component bounding box, x offset, y
          * offset, z offset, number of villagers
@@ -2057,18 +2057,23 @@ public class StructureTakumiDarkShrinePieces {
             }
         }
 
-
-        protected int chooseProfession(int villagersSpawnedIn, int currentVillagerProfession) {
-            return currentVillagerProfession;
-        }
-
         protected net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession chooseForgeProfession(
                 int count, net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof) {
             return net.minecraftforge.fml.common.registry.VillagerRegistry.getById(
                     chooseProfession(count, net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof)));
         }
 
-        protected IBlockState getBiomeSpecificBlockState(IBlockState blockstateIn) {
+        protected int chooseProfession(int villagersSpawnedIn, int currentVillagerProfession) {
+            return currentVillagerProfession;
+        }
+
+        protected void createTakumiDarkShrineDoor(World p_189927_1_, StructureBoundingBox p_189927_2_,
+                Random p_189927_3_, int p_189927_4_, int p_189927_5_, int p_189927_6_, EnumFacing p_189927_7_) {
+            if (!this.isZombieInfested) {
+                this.generateDoor(p_189927_1_, p_189927_2_, p_189927_3_, p_189927_4_, p_189927_5_, p_189927_6_,
+                        EnumFacing.NORTH, this.biomeDoor());
+            }
+        }        protected IBlockState getBiomeSpecificBlockState(IBlockState blockstateIn) {
             return blockstateIn;
         }
 
@@ -2083,14 +2088,6 @@ public class StructureTakumiDarkShrinePieces {
             }
         }
 
-        protected void createTakumiDarkShrineDoor(World p_189927_1_, StructureBoundingBox p_189927_2_,
-                Random p_189927_3_, int p_189927_4_, int p_189927_5_, int p_189927_6_, EnumFacing p_189927_7_) {
-            if (!this.isZombieInfested) {
-                this.generateDoor(p_189927_1_, p_189927_2_, p_189927_3_, p_189927_4_, p_189927_5_, p_189927_6_,
-                        EnumFacing.NORTH, this.biomeDoor());
-            }
-        }
-
         protected void placeTorch(World p_189926_1_, EnumFacing p_189926_2_, int p_189926_3_, int p_189926_4_,
                 int p_189926_5_, StructureBoundingBox p_189926_6_) {
             if (!this.isZombieInfested) {
@@ -2098,6 +2095,10 @@ public class StructureTakumiDarkShrinePieces {
                         Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, p_189926_2_), p_189926_3_,
                         p_189926_4_, p_189926_5_, p_189926_6_);
             }
+        }
+
+        protected void setStructureType(int p_189924_1_) {
+            this.structureType = p_189924_1_;
         }
 
         /**
@@ -2111,9 +2112,7 @@ public class StructureTakumiDarkShrinePieces {
             super.replaceAirAndLiquidDownwards(worldIn, iblockstate, x, y, z, boundingboxIn);
         }
 
-        protected void setStructureType(int p_189924_1_) {
-            this.structureType = p_189924_1_;
-        }
+
     }
 
     public static class Well extends StructureTakumiDarkShrinePieces.TakumiDarkShrine {
@@ -2215,7 +2214,17 @@ public class StructureTakumiDarkShrinePieces {
             this.tablePosition = rand.nextInt(3);
         }
 
-        /**
+        public static StructureTakumiDarkShrinePieces.WoodHut createPiece(StructureTakumiDarkShrinePieces.Start start,
+                List<StructureComponent> p_175853_1_, Random rand, int p_175853_3_, int p_175853_4_, int p_175853_5_,
+                EnumFacing facing, int p_175853_7_) {
+            StructureBoundingBox structureboundingbox =
+                    StructureBoundingBox.getComponentToAddBoundingBox(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, 4,
+                            6, 5, facing);
+            return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
+                    StructureComponent.findIntersecting(p_175853_1_, structureboundingbox) == null ?
+                    new StructureTakumiDarkShrinePieces.WoodHut(start, p_175853_7_, rand, structureboundingbox,
+                            facing) : null;
+        }        /**
          * (abstract) Helper method to write subclass data to NBT
          */
         @Override
@@ -2235,17 +2244,7 @@ public class StructureTakumiDarkShrinePieces {
             this.isTallHouse = tagCompound.getBoolean("C");
         }
 
-        public static StructureTakumiDarkShrinePieces.WoodHut createPiece(StructureTakumiDarkShrinePieces.Start start,
-                List<StructureComponent> p_175853_1_, Random rand, int p_175853_3_, int p_175853_4_, int p_175853_5_,
-                EnumFacing facing, int p_175853_7_) {
-            StructureBoundingBox structureboundingbox =
-                    StructureBoundingBox.getComponentToAddBoundingBox(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, 4,
-                            6, 5, facing);
-            return canTakumiDarkShrineGoDeeper(structureboundingbox) &&
-                    StructureComponent.findIntersecting(p_175853_1_, structureboundingbox) == null ?
-                    new StructureTakumiDarkShrinePieces.WoodHut(start, p_175853_7_, rand, structureboundingbox,
-                            facing) : null;
-        }
+
 
         /**
          * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes

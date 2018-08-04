@@ -108,6 +108,11 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getMaxSpawnedInChunk() {
+        return 3;
+    }
+
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
@@ -139,23 +144,6 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.dataManager.set(HANGING, compound.getByte("BatFlags"));
-    }
-
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (this.getIsBatHanging()) {
-            this.motionX = 0.0D;
-            this.motionY = 0.0D;
-            this.motionZ = 0.0D;
-            this.posY = (double) MathHelper.floor(this.posY) + 1.0D - (double) this.height;
-        } else {
-            this.motionY *= 0.6000000238418579D;
-        }
     }
 
     @Override
@@ -248,6 +236,38 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    @Override
+    public boolean getCanSpawnHere() {
+        if (this.world.provider.getDimensionType().getId() != DimensionType.OVERWORLD.getId() &&
+                this.world.provider.getDimensionType().getId() != TakumiWorldCore.TAKUMI_WORLD.getId()) {
+            return false;
+        }
+        BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+
+        if (blockpos.getY() >= this.world.getSeaLevel()) {
+            return false;
+        } else {
+            int i = this.world.getLightFromNeighbors(blockpos);
+            int j = 2;
+
+            if (this.isDateAroundHalloween(this.world.getCurrentDate())) {
+                j = 7;
+            } else if (this.rand.nextBoolean()) {
+                return false;
+            }
+
+            return i <= this.rand.nextInt(j) && super.getCanSpawnHere();
+        }
+    }
+
+    private boolean isDateAroundHalloween(Calendar p_175569_1_) {
+        return p_175569_1_.get(Calendar.MONTH) + 1 == 10 && p_175569_1_.get(Calendar.DATE) >= 20 ||
+                p_175569_1_.get(Calendar.MONTH) + 1 == 11 && p_175569_1_.get(Calendar.DATE) <= 3;
+    }
+
     @Override
     public void takumiExplode() {
     }
@@ -297,40 +317,20 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
         return new RenderBatCreeper(manager);
     }
 
-    @Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
-
     /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
+     * Called to update the entity's position/logic.
      */
     @Override
-    public boolean getCanSpawnHere() {
-        if (this.world.provider.getDimensionType().getId() != DimensionType.OVERWORLD.getId() &&
-                this.world.provider.getDimensionType().getId() != TakumiWorldCore.TAKUMI_WORLD.getId()) {
-            return false;
-        }
-        BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+    public void onUpdate() {
+        super.onUpdate();
 
-        if (blockpos.getY() >= this.world.getSeaLevel()) {
-            return false;
+        if (this.getIsBatHanging()) {
+            this.motionX = 0.0D;
+            this.motionY = 0.0D;
+            this.motionZ = 0.0D;
+            this.posY = (double) MathHelper.floor(this.posY) + 1.0D - (double) this.height;
         } else {
-            int i = this.world.getLightFromNeighbors(blockpos);
-            int j = 2;
-
-            if (this.isDateAroundHalloween(this.world.getCurrentDate())) {
-                j = 7;
-            } else if (this.rand.nextBoolean()) {
-                return false;
-            }
-
-            return i <= this.rand.nextInt(j) && super.getCanSpawnHere();
+            this.motionY *= 0.6000000238418579D;
         }
-    }
-
-    private boolean isDateAroundHalloween(Calendar p_175569_1_) {
-        return p_175569_1_.get(Calendar.MONTH) + 1 == 10 && p_175569_1_.get(Calendar.DATE) >= 20 ||
-                p_175569_1_.get(Calendar.MONTH) + 1 == 11 && p_175569_1_.get(Calendar.DATE) <= 3;
     }
 }

@@ -16,21 +16,6 @@ public class EntityMSRazer extends AbstractEntityTakumiGrenade {
     }
 
     @Override
-    public int getCount() {
-        return 1;
-    }
-
-    @Override
-    public int getPower() {
-        return 4;
-    }
-
-    @Override
-    public boolean getDestroy() {
-        return false;
-    }
-
-    @Override
     protected void onImpact(RayTraceResult result) {
         if (!(result.entityHit instanceof EntityPlayer || result.entityHit instanceof EntityXMS)) {
             this.count++;
@@ -43,6 +28,21 @@ public class EntityMSRazer extends AbstractEntityTakumiGrenade {
                 }
             }
         }
+    }
+
+    @Override
+    public int getCount() {
+        return 1;
+    }
+
+    @Override
+    public int getPower() {
+        return 4;
+    }
+
+    @Override
+    public boolean getDestroy() {
+        return false;
     }
 
     @Override

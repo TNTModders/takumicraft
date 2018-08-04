@@ -164,8 +164,9 @@ public class TakumiMapGenCaves extends MapGenBase {
 
                                         if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D) {
                                             IBlockState iblockstate1 = p_180702_5_.getBlockState(j3, j2, i2);
-                                            IBlockState iblockstate2 = MoreObjects
-                                                    .firstNonNull(p_180702_5_.getBlockState(j3, j2 + 1, i2), BLK_AIR);
+                                            IBlockState iblockstate2 =
+                                                    MoreObjects.firstNonNull(p_180702_5_.getBlockState(j3, j2 + 1, i2),
+                                                            BLK_AIR);
 
                                             if (isTopBlock(p_180702_5_, j3, j2, i2, p_180702_3_, p_180702_4_)) {
                                                 flag1 = true;

@@ -38,8 +38,8 @@ public class RenderTakumiTNTPrimed<T extends EntityTakumiTNTPrimed> extends Rend
         this.bindEntityTexture(entity);
         GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.translate(-0.5F, -0.5F, 0.5F);
-        blockrendererdispatcher
-                .renderBlockBrightness(TakumiBlockCore.TAKUMI_TNT.getDefaultState(), entity.getBrightness());
+        blockrendererdispatcher.renderBlockBrightness(TakumiBlockCore.TAKUMI_TNT.getDefaultState(),
+                entity.getBrightness());
         GlStateManager.translate(0.0F, 0.0F, 1.0F);
 
         if (this.renderOutlines) {

@@ -103,6 +103,36 @@ public class ItemTakumiArmor extends ItemArmor {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (this.isInCreativeTab(tab)) {
+            ItemStack itemStack = new ItemStack(this, 1);
+            if (!itemStack.isItemEnchanted()) {
+                itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
+                itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
+                itemStack.addEnchantment(Enchantments.MENDING, 10);
+                switch (this.armorType) {
+                    case HEAD:
+                        itemStack.addEnchantment(Enchantments.THORNS, 10);
+                        break;
+
+                    case CHEST:
+                        itemStack.addEnchantment(Enchantments.PROJECTILE_PROTECTION, 10);
+                        break;
+
+                    case LEGS:
+                        itemStack.addEnchantment(Enchantments.FIRE_PROTECTION, 10);
+                        break;
+
+                    case FEET:
+                        itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
+                }
+            }
+            items.add(itemStack);
+        }
+    }
+
+    @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         //ヘルメット
         if (this.armorType == EntityEquipmentSlot.HEAD) {
@@ -151,36 +181,6 @@ public class ItemTakumiArmor extends ItemArmor {
                 case FEET:
                     itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
             }
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (this.isInCreativeTab(tab)) {
-            ItemStack itemStack = new ItemStack(this, 1);
-            if (!itemStack.isItemEnchanted()) {
-                itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
-                itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
-                itemStack.addEnchantment(Enchantments.MENDING, 10);
-                switch (this.armorType) {
-                    case HEAD:
-                        itemStack.addEnchantment(Enchantments.THORNS, 10);
-                        break;
-
-                    case CHEST:
-                        itemStack.addEnchantment(Enchantments.PROJECTILE_PROTECTION, 10);
-                        break;
-
-                    case LEGS:
-                        itemStack.addEnchantment(Enchantments.FIRE_PROTECTION, 10);
-                        break;
-
-                    case FEET:
-                        itemStack.addEnchantment(Enchantments.FEATHER_FALLING, 10);
-                }
-            }
-            items.add(itemStack);
         }
     }
 }

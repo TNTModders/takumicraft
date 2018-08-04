@@ -19,16 +19,6 @@ public class EntityJumpCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.EXP_JUMP, 400));
-            }
-        });
-        return true;
-    }
-
-    @Override
     public EnumTakumiRank takumiRank() {
         return EnumTakumiRank.MID;
     }
@@ -49,13 +39,33 @@ public class EntityJumpCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x00ff00;
+    public boolean isCustomSpawn() {
+        return false;
     }
 
     @Override
-    public boolean isCustomSpawn() {
-        return false;
+    public String getRegisterName() {
+        return "jumpcreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 260;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedEntities().forEach(entity -> {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.EXP_JUMP, 400));
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x00ff00;
     }
 
     @Override
@@ -69,15 +79,5 @@ public class EntityJumpCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return source != DamageSource.FALL && super.attackEntityFrom(source, amount);
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "jumpcreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 260;
     }
 }

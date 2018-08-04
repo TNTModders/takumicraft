@@ -47,29 +47,6 @@ public class BlockTakumiDarkBoard extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.getTileEntity(pos) instanceof TileEntityDarkBoard) {
-            if (playerIn.getHeldItem(hand).getItem() instanceof ItemBlock &&
-                    ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock() instanceof BlockTakumiMonsterBomb &&
-                    ((BlockTakumiMonsterBomb) ((ItemBlock) playerIn.getHeldItem(
-                            hand).getItem()).getBlock()).getName().contains(
-                            ((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
-                worldIn.setBlockState(pos, TakumiBlockCore.DARKBOARD_ON.getDefaultState());
-                if (playerIn instanceof EntityPlayerMP) {
-                    TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) playerIn,
-                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
-                            new ResourceLocation(TakumiCraftCore.MODID, "darkshrine"));
-                }
-                worldIn.createExplosion(playerIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
-            } else {
-                worldIn.addBlockEvent(pos, state.getBlock(), 0, 0);
-            }
-        }
-        return true;
-    }
-
-    @Override
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
         TakumiBlockCore.BOMB_MAP.values().forEach(blockTakumiMonsterBomb -> {
             if (blockTakumiMonsterBomb.getName().contains(((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
@@ -98,6 +75,23 @@ public class BlockTakumiDarkBoard extends BlockContainer {
     }
 
     @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+            EnumFacing side) {
+        return true;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         super.onBlockAdded(worldIn, pos, state);
         if (worldIn.getTileEntity(pos) instanceof TileEntityDarkBoard) {
@@ -121,25 +115,30 @@ public class BlockTakumiDarkBoard extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-            EnumFacing side) {
-        return true;
-    }
-
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (worldIn.getTileEntity(pos) instanceof TileEntityDarkBoard) {
+            if (playerIn.getHeldItem(hand).getItem() instanceof ItemBlock &&
+                    ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock() instanceof BlockTakumiMonsterBomb &&
+                    ((BlockTakumiMonsterBomb) ((ItemBlock) playerIn.getHeldItem(
+                            hand).getItem()).getBlock()).getName().contains(
+                            ((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name)) {
+                worldIn.setBlockState(pos, TakumiBlockCore.DARKBOARD_ON.getDefaultState());
+                if (playerIn instanceof EntityPlayerMP) {
+                    TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) playerIn,
+                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                            new ResourceLocation(TakumiCraftCore.MODID, "darkshrine"));
+                }
+                worldIn.createExplosion(playerIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3f, true);
+            } else {
+                worldIn.addBlockEvent(pos, state.getBlock(), 0, 0);
+            }
+        }
+        return true;
     }
 }

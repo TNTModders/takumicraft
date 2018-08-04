@@ -9,12 +9,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class EntityAIMoveToAttackBlock extends EntityAIBase {
-    World world;
+    protected final int attackInterval = 20;
     protected EntityCreature attacker;
     /**
      * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
      */
     protected int attackTick;
+    World world;
     /**
      * The speed with which the mob will approach the target
      */
@@ -31,7 +32,6 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
     private double targetX;
     private double targetY;
     private double targetZ;
-    protected final int attackInterval = 20;
     private int failedPathFindingPenalty = 0;
 
     public EntityAIMoveToAttackBlock(EntityCreature creature, double speedIn, boolean useLongMemory) {
@@ -51,28 +51,8 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
 
         if (!(entitylivingbase instanceof EntityAttackBlock)) {
             return false;
-        } else if (!entitylivingbase.isEntityAlive()) {
-            return false;
         } else {
-            /*if (canPenalize) {
-                if (--this.delayCounter <= 0) {
-                    this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
-                    this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
-                    return this.entityPathEntity != null;
-                } else {
-                    return true;
-                }
-            }
-            this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
-
-            if (this.entityPathEntity != null) {
-                return true;
-            } else {
-                return this.getAttackReachSqr(entitylivingbase) >=
-                        this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY,
-                                entitylivingbase.posZ);
-            }*/
-            return true;
+            return entitylivingbase.isEntityAlive();
         }
     }
 
@@ -85,10 +65,8 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
 
         if (!(entitylivingbase instanceof EntityAttackBlock)) {
             return false;
-        } else if (!entitylivingbase.isEntityAlive()) {
-            return false;
         } else {
-            return true;
+            return entitylivingbase.isEntityAlive();
         }
     }
 

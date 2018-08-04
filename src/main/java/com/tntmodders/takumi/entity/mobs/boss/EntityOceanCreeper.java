@@ -18,6 +18,10 @@ import net.minecraft.world.World;
 
 public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
 
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.oceancreeper.name"),
+                    BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS);
+
     public EntityOceanCreeper(World worldIn) {
         super(worldIn);
     }
@@ -28,9 +32,13 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
     }
 
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.oceancreeper.name"),
-                    BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS);
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName()) {
+            this.bossInfo.setName(this.getDisplayName());
+        }
+    }
 
     @Override
     public void onLivingUpdate() {
@@ -48,11 +56,24 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 2), 0);
-        }
-        super.onDeath(source);
+    public boolean getCanSpawnHere() {
+        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
+    }
+
+    @Override
+    protected void outOfWorld() {
+        this.setHealth(0);
+        super.outOfWorld();
+    }
+
+    @Override
+    public boolean isNonBoss() {
+        return false;
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
     }
 
     @Override
@@ -68,28 +89,8 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (this.hasCustomName()) {
-            this.bossInfo.setName(this.getDisplayName());
-        }
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-    }
-
-    @Override
-    protected void outOfWorld() {
-        this.setHealth(0);
-        super.outOfWorld();
-    }
-
-    @Override
-    public boolean isNonBoss() {
-        return false;
+    public int getPrimaryColor() {
+        return 0x889988;
     }
 
     @Override
@@ -115,18 +116,24 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        return this.rand.nextInt(5) == 0 && super.getCanSpawnHere();
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc != DamageSource.DROWN) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x889988;
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     @Override
-    public boolean isImmuneToExplosions() {
-        return true;
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 2), 0);
+        }
+        super.onDeath(source);
     }
 
     @Override
@@ -137,7 +144,8 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
                 if (this.world.isAirBlock(this.getPosition().add(x, 5, z)) ||
                         this.world.getBlockState(this.getPosition().add(x, 5, z)).getBlockHardness(this.world,
                                 this.getPosition().add(x, 5, z)) >= 0) {
-                    this.world.setBlockState(this.getPosition().add(x, 5, z), Blocks.WATER.getDefaultState());
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, 5, z),
+                            Blocks.WATER.getDefaultState());
                 }
             }
         }
@@ -176,12 +184,5 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 274;
-    }
-
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc != DamageSource.DROWN) {
-            super.damageEntity(damageSrc, damageAmount);
-        }
     }
 }

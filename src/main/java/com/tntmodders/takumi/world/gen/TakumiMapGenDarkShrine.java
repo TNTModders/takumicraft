@@ -23,17 +23,12 @@ public class TakumiMapGenDarkShrine extends MapGenStructure {
      */
     public static List<Biome> VILLAGE_SPAWN_BIOMES =
             Arrays.asList(Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA);
+    private final int minTownSeparation;
     /**
      * None
      */
     private int size;
     private int distance;
-    private final int minTownSeparation;
-
-    public TakumiMapGenDarkShrine() {
-        this.distance = 32;
-        this.minTownSeparation = 10;
-    }
 
     public TakumiMapGenDarkShrine(Map<String, String> map) {
         this();
@@ -47,9 +42,21 @@ public class TakumiMapGenDarkShrine extends MapGenStructure {
         }
     }
 
+    public TakumiMapGenDarkShrine() {
+        this.distance = 32;
+        this.minTownSeparation = 10;
+    }
+
     @Override
     public String getStructureName() {
         return "TakumiDarkShrine";
+    }
+
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored) {
+        this.world = worldIn;
+        return findNearestStructurePosBySpacing(worldIn, this, pos, this.distance, 8, 10387312, false, 100,
+                findUnexplored);
     }
 
     @Override
@@ -81,13 +88,6 @@ public class TakumiMapGenDarkShrine extends MapGenStructure {
         }
 
         return false;
-    }
-
-    @Override
-    public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored) {
-        this.world = worldIn;
-        return findNearestStructurePosBySpacing(worldIn, this, pos, this.distance, 8, 10387312, false, 100,
-                findUnexplored);
     }
 
     @Override
@@ -140,14 +140,6 @@ public class TakumiMapGenDarkShrine extends MapGenStructure {
             this.hasMoreThanTwoComponents = k > 2;
         }
 
-        /**
-         * currently only defined for Villages, returns true if Village has more than 2 non-road components
-         */
-        @Override
-        public boolean isSizeableStructure() {
-            return this.hasMoreThanTwoComponents;
-        }
-
         @Override
         public void writeToNBT(NBTTagCompound tagCompound) {
             super.writeToNBT(tagCompound);
@@ -158,6 +150,14 @@ public class TakumiMapGenDarkShrine extends MapGenStructure {
         public void readFromNBT(NBTTagCompound tagCompound) {
             super.readFromNBT(tagCompound);
             this.hasMoreThanTwoComponents = tagCompound.getBoolean("Valid");
+        }
+
+        /**
+         * currently only defined for Villages, returns true if Village has more than 2 non-road components
+         */
+        @Override
+        public boolean isSizeableStructure() {
+            return this.hasMoreThanTwoComponents;
         }
     }
 }

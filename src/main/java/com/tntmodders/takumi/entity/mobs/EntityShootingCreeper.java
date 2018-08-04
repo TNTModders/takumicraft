@@ -128,28 +128,26 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.getAttackTarget() == null) {
-            this.setAttackTarget(this.world.getNearestAttackablePlayer(this, 25, 25));
+    public boolean takumiExplodeEvent(Detonate event) {
+        if (!this.dataManager.get(TYPE) && !(event.getExplosion() instanceof TakumiExplosion)) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityPlayer) {
+                    int i = 0;
+                    for (ItemStack itemStack : ((EntityPlayer) entity).inventoryContainer.inventoryItemStacks) {
+                        if (itemStack.getItem() == this.dataManager.get(ITEM).getItem() &&
+                                itemStack.getMetadata() == this.dataManager.get(ITEM).getMetadata()) {
+                            i += itemStack.getCount();
+                        }
+                    }
+                    if (i > 0) {
+                        TakumiUtils.takumiCreateExplosion(this.world, this, entity.posX, entity.posY, entity.posZ,
+                                i / 2, false, true);
+                    }
+                }
+            });
         }
-        if (this.getAttackTarget() != null) {
-            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 1f, 1f);
-        }
-        if (this.dataManager.get(TYPE) && !this.world.isRemote && this.ticksExisted > 1 &&
-                (this.getAttackTarget() != null || this.world.getClosestPlayerToEntity(this, 5) != null)) {
-            if (this.dataManager.get(ITEM).getItem() == TakumiItemCore.TAKUMI_CHOCO_BALL) {
-                EntityTakumiChocolateBall chocolateBall = new EntityTakumiChocolateBall(this.world, this);
-                chocolateBall.setPosition(this.posX + this.rand.nextDouble() - this.rand.nextDouble(),
-                        this.posY + this.rand.nextDouble() + this.rand.nextDouble(),
-                        this.posZ + this.rand.nextDouble() - this.rand.nextDouble());
-                chocolateBall.setHeadingFromThrower(this, this.rotationPitch, this.rotationYawHead, 0.0F, 1.5F, 1.0F);
-                this.world.spawnEntity(chocolateBall);
-            } else {
-                this.entityDropItem(new ItemStack(this.dataManager.get(ITEM).getItem(), 1,
-                        this.dataManager.get(ITEM).getMetadata()), 2);
-            }
-        }
+        event.getAffectedEntities().clear();
+        return true;
     }
 
     @Override
@@ -181,26 +179,28 @@ public class EntityShootingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public boolean takumiExplodeEvent(Detonate event) {
-        if (!this.dataManager.get(TYPE) && !(event.getExplosion() instanceof TakumiExplosion)) {
-            event.getAffectedEntities().forEach(entity -> {
-                if (entity instanceof EntityPlayer) {
-                    int i = 0;
-                    for (ItemStack itemStack : ((EntityPlayer) entity).inventoryContainer.inventoryItemStacks) {
-                        if (itemStack.getItem() == this.dataManager.get(ITEM).getItem() &&
-                                itemStack.getMetadata() == this.dataManager.get(ITEM).getMetadata()) {
-                            i += itemStack.getCount();
-                        }
-                    }
-                    if (i > 0) {
-                        TakumiUtils.takumiCreateExplosion(this.world, this, entity.posX, entity.posY, entity.posZ,
-                                i / 2, false, true);
-                    }
-                }
-            });
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.getAttackTarget() == null) {
+            this.setAttackTarget(this.world.getNearestAttackablePlayer(this, 25, 25));
         }
-        event.getAffectedEntities().clear();
-        return true;
+        if (this.getAttackTarget() != null) {
+            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 1f, 1f);
+        }
+        if (this.dataManager.get(TYPE) && !this.world.isRemote && this.ticksExisted > 1 &&
+                (this.getAttackTarget() != null || this.world.getClosestPlayerToEntity(this, 5) != null)) {
+            if (this.dataManager.get(ITEM).getItem() == TakumiItemCore.TAKUMI_CHOCO_BALL) {
+                EntityTakumiChocolateBall chocolateBall = new EntityTakumiChocolateBall(this.world, this);
+                chocolateBall.setPosition(this.posX + this.rand.nextDouble() - this.rand.nextDouble(),
+                        this.posY + this.rand.nextDouble() + this.rand.nextDouble(),
+                        this.posZ + this.rand.nextDouble() - this.rand.nextDouble());
+                chocolateBall.setHeadingFromThrower(this, this.rotationPitch, this.rotationYawHead, 0.0F, 1.5F, 1.0F);
+                this.world.spawnEntity(chocolateBall);
+            } else {
+                this.entityDropItem(new ItemStack(this.dataManager.get(ITEM).getItem(), 1,
+                        this.dataManager.get(ITEM).getMetadata()), 2);
+            }
+        }
     }
 
     @Override

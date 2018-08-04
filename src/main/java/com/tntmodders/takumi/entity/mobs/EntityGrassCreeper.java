@@ -32,6 +32,11 @@ public class EntityGrassCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public int getPrimaryColor() {
+        return 0x77aa99;
+    }
+
+    @Override
     public void takumiExplode() {
     }
 
@@ -68,10 +73,5 @@ public class EntityGrassCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 63;
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x77aa99;
     }
 }

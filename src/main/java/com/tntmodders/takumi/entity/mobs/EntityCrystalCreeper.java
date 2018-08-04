@@ -23,6 +23,86 @@ public class EntityCrystalCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.getDataManager().register(EXPLODED, Boolean.FALSE);
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        if (this.dataManager.get(EXPLODED)) {
+            compound.setBoolean("exploded", true);
+        }
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.dataManager.set(EXPLODED, compound.getBoolean("exploded"));
+    }
+
+    @Override
+    public void takumiExplode() {
+        this.setInvisible(true);
+        this.ticksExisted = 0;
+        this.getDataManager().set(EXPLODED, true);
+    }
+
+    @Override
+    public EnumTakumiRank takumiRank() {
+        return EnumTakumiRank.LOW;
+    }
+
+    @Override
+    public EnumTakumiType takumiType() {
+        return EnumTakumiType.NORMAL_MD;
+    }
+
+    @Override
+    public int getExplosionPower() {
+        return 0;
+    }
+
+    @Override
+    public int getSecondaryColor() {
+        return 0x00ff00;
+    }
+
+    @Override
+    public boolean isCustomSpawn() {
+        return false;
+    }
+
+    @Override
+    public String getRegisterName() {
+        return "crystalcreeper";
+    }
+
+    @Override
+    public int getRegisterID() {
+        return 65;
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x88aaff;
+    }
+
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/crystal_creeper_armor.png");
+    }
+
+    @Override
+    public void setDead() {
+        if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL || !this.getDataManager().get(EXPLODED) ||
+                this.dead) {
+            super.setDead();
+        }
+    }
+
+    @Override
     public void onUpdate() {
         if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             this.setDead();
@@ -67,85 +147,5 @@ public class EntityCrystalCreeper extends EntityTakumiAbstractCreeper {
             }
             super.onUpdate();
         }
-    }
-
-    @Override
-    public void setDead() {
-        if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL || !this.getDataManager().get(EXPLODED) ||
-                this.dead) {
-            super.setDead();
-        }
-    }
-
-    @Override
-    protected void entityInit() {
-        super.entityInit();
-        this.getDataManager().register(EXPLODED, Boolean.FALSE);
-    }
-
-    @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        if (this.dataManager.get(EXPLODED)) {
-            compound.setBoolean("exploded", true);
-        }
-    }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        this.dataManager.set(EXPLODED, compound.getBoolean("exploded"));
-    }
-
-    @Override
-    public void takumiExplode() {
-        this.setInvisible(true);
-        this.ticksExisted = 0;
-        this.getDataManager().set(EXPLODED, true);
-    }
-
-    @Override
-    public int getPrimaryColor() {
-        return 0x88aaff;
-    }
-
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/crystal_creeper_armor.png");
-    }
-
-    @Override
-    public EnumTakumiRank takumiRank() {
-        return EnumTakumiRank.LOW;
-    }
-
-    @Override
-    public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL_MD;
-    }
-
-    @Override
-    public int getExplosionPower() {
-        return 0;
-    }
-
-    @Override
-    public int getSecondaryColor() {
-        return 0x00ff00;
-    }
-
-    @Override
-    public boolean isCustomSpawn() {
-        return false;
-    }
-
-    @Override
-    public String getRegisterName() {
-        return "crystalcreeper";
-    }
-
-    @Override
-    public int getRegisterID() {
-        return 65;
     }
 }

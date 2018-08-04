@@ -56,6 +56,14 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName()) {
+            this.bossInfo.setName(this.getDisplayName());
+        }
+    }
+
+    @Override
     public void onLivingUpdate() {
         if (this.world.isRemote) {
             for (int i = 0; i < 10; ++i) {
@@ -67,39 +75,6 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
         }
         super.onLivingUpdate();
     }
-
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (!damageSrc.isMagicDamage()) {
-            super.damageEntity(damageSrc, damageAmount);
-        }
-    }
-    @Override
-    public void addTrackingPlayer(EntityPlayerMP player) {
-        super.addTrackingPlayer(player);
-        this.bossInfo.addPlayer(player);
-    }
-
-    @Override
-    public void removeTrackingPlayer(EntityPlayerMP player) {
-        super.removeTrackingPlayer(player);
-        this.bossInfo.removePlayer(player);
-    }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (this.hasCustomName()) {
-            this.bossInfo.setName(this.getDisplayName());
-        }
-    }
-
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-    }
-
 
     @Override
     public boolean isInRangeToRenderDist(double distance) {
@@ -118,6 +93,27 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
         return true;
     }
 
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
+    }
+
+    @Override
+    public int getPrimaryColor() {
+        return 0x90a090;
+    }
+
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/big_creeper_armor.png");
+    }
 
     @Override
     public void setDead() {
@@ -142,13 +138,21 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public int getPrimaryColor() {
-        return 0x90a090;
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (!damageSrc.isMagicDamage()) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
     }
 
     @Override
     public double getSizeAmp() {
         return 100;
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     @Override
@@ -258,10 +262,5 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 503;
-    }
-
-    @Override
-    public ResourceLocation getArmor() {
-        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/big_creeper_armor.png");
     }
 }

@@ -34,8 +34,9 @@ public class TakumiTeleporter extends Teleporter {
                 posField.setAccessible(true);
                 if (!entity.world.isRemote && !Objects.equals(pos, posField.get(entity))) {
                     posField.set(entity, new BlockPos(pos));
-                    PatternHelper blockpattern$patternhelper = TakumiBlockCore.TAKUMI_PORTAL
-                            .createPatternHelper(entity.world, (BlockPos) posField.get(entity));
+                    PatternHelper blockpattern$patternhelper =
+                            TakumiBlockCore.TAKUMI_PORTAL.createPatternHelper(entity.world,
+                                    (BlockPos) posField.get(entity));
                     double d0 = blockpattern$patternhelper.getForwards().getAxis() == Axis.X ?
                             (double) blockpattern$patternhelper.getFrontTopLeft().getZ() :
                             (double) blockpattern$patternhelper.getFrontTopLeft().getX();
@@ -45,10 +46,10 @@ public class TakumiTeleporter extends Teleporter {
                                     blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() ==
                                             AxisDirection.NEGATIVE ? 1 : 0), d0,
                             d0 - (double) blockpattern$patternhelper.getWidth()));
-                    double d2 = MathHelper
-                            .pct(entity.posY - 1.0D, (double) blockpattern$patternhelper.getFrontTopLeft().getY(),
-                                    (double) (blockpattern$patternhelper.getFrontTopLeft().getY() -
-                                            blockpattern$patternhelper.getHeight()));
+                    double d2 = MathHelper.pct(entity.posY - 1.0D,
+                            (double) blockpattern$patternhelper.getFrontTopLeft().getY(),
+                            (double) (blockpattern$patternhelper.getFrontTopLeft().getY() -
+                                    blockpattern$patternhelper.getHeight()));
                     Field vecField = TakumiASMNameMap.getField(Entity.class, "lastPortalVec");
                     vecField.setAccessible(true);
                     vecField.set(entity, new Vec3d(d1, d2, 0.0D));
@@ -185,8 +186,8 @@ public class TakumiTeleporter extends Teleporter {
                 BlockPos pos = new BlockPos(d5, d6, d7);
                 world.setBlockToAir(pos);
                 world.setBlockToAir(pos.up());
-                ((EntityPlayerMP) entityIn).connection
-                        .setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
+                ((EntityPlayerMP) entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw,
+                        entityIn.rotationPitch);
             } else {
                 entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
             }
@@ -203,8 +204,8 @@ public class TakumiTeleporter extends Teleporter {
             for (int y = -1; y <= 3; y++) {
                 for (int z = -3; z <= 3; z++) {
                     if (x == -2 || x == 2 || y == -1 || y == 3 || z == -3 || z == 3) {
-                        this.world
-                                .setBlockState(pos.add(x, y, z), TakumiBlockCore.TAKUMI_PORTAL_FRAME.getDefaultState());
+                        this.world.setBlockState(pos.add(x, y, z),
+                                TakumiBlockCore.TAKUMI_PORTAL_FRAME.getDefaultState());
                     } else {
                         this.world.setBlockToAir(pos.add(x, y, z));
                     }

@@ -93,12 +93,6 @@ public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-
-    }
-
-    @Override
     public boolean takumiExplodeEvent(Detonate event) {
         if (FMLCommonHandler.instance().getSide().isClient()) {
             this.spawnParticle(event);
@@ -124,6 +118,12 @@ public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/dragon_armor.png");
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+
     }
 
     private class ParticleSmokeSinobi extends ParticleSmokeNormal {

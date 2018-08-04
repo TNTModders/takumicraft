@@ -46,10 +46,9 @@ public class TakumiRecipeHolder {
                         if (!Objects.equals(url.getProtocol(), "jar")) {
                             String[] strings = {oldFile.getAbsolutePath().replaceAll(".json", ""),
                                     oldFile.getAbsolutePath().split("out")[0] + "src" +
-                                            oldFile.getAbsolutePath().split("out")[1].replaceAll("production", "main")
-                                                                                     .replaceAll("minecraft",
-                                                                                             "resources")
-                                                                                     .replaceAll(".json", "")};
+                                            oldFile.getAbsolutePath().split("out")[1].replaceAll("production",
+                                                    "main").replaceAll("minecraft", "resources").replaceAll(".json",
+                                                    "")};
                             for (String sPath : strings) {
                                 String sResource =
                                         sPath + recipe.getName().replaceAll("assets/takumicraft/recipes/", "");
@@ -72,13 +71,13 @@ public class TakumiRecipeHolder {
                                             break;
                                         }
                                         h_s = h_s.replaceAll("takumicraft:skull", "takumicraft:" +
-                                                recipe.getName().replaceAll("assets/takumicraft/recipes/", "")
-                                                      .replaceAll("" + ".json", ""));
+                                                recipe.getName().replaceAll("assets/takumicraft/recipes/",
+                                                        "").replaceAll("" + ".json", ""));
                                         try {
                                             stream = new FileInputStream(recipe);
                                             h_s = h_s.replaceAll("minecraft:gunpowder", this.getItem(stream,
-                                                    recipe.getName().replaceAll("assets/takumicraft/recipes/", "")
-                                                          .replaceAll("" + ".json", "")));
+                                                    recipe.getName().replaceAll("assets/takumicraft/recipes/",
+                                                            "").replaceAll("" + ".json", "")));
                                             stream.close();
                                         } catch (Exception e) {
                                             e.printStackTrace();

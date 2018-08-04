@@ -46,20 +46,6 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Items.DIAMOND, this.rand.nextInt(32));
-        }
-        super.onDeath(source);
-    }
-
-    @Override
-    public void setDead() {
-        this.clear();
-        super.setDead();
-    }
-
-    @Override
     public int getPrimaryColor() {
         return 0x005500;
     }
@@ -70,12 +56,9 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
     }
 
     @Override
-    public boolean canBePushed() {
-        return false;
-    }
-
-    @Override
-    protected void initEntityAI() {
+    public void setDead() {
+        this.clear();
+        super.setDead();
     }
 
     @Override
@@ -84,6 +67,23 @@ public class EntityChestCreeper extends EntityTakumiAbstractCreeper implements I
         this.rotationYaw = 0;
         this.rotationPitch = 0;
         this.rotationYawHead = 0;
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Items.DIAMOND, this.rand.nextInt(32));
+        }
+        super.onDeath(source);
+    }
+
+    @Override
+    public boolean canBePushed() {
+        return false;
+    }
+
+    @Override
+    protected void initEntityAI() {
     }
 
     @Override

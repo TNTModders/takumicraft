@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -13,8 +14,8 @@ public class EntityTerracottaCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedBlocks()
-             .forEach(pos -> world.setBlockState(pos, Blocks.CYAN_GLAZED_TERRACOTTA.getDefaultState()));
+        event.getAffectedBlocks().forEach(
+                pos -> TakumiUtils.setBlockStateProtected(world, pos, Blocks.CYAN_GLAZED_TERRACOTTA.getDefaultState()));
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
         return true;
     }

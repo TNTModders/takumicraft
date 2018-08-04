@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,7 +20,7 @@ public class EntityFireCreeper extends EntityTakumiAbstractCreeper {
                 for (int z = (int) this.posZ - range; z < (int) this.posZ + range; z++) {
                     BlockPos pos = new BlockPos(x, y, z);
                     if (this.world.isAirBlock(pos) && Blocks.FIRE.canPlaceBlockAt(this.world, pos)) {
-                        this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+                        TakumiUtils.setBlockStateProtected(this.world, pos, Blocks.FIRE.getDefaultState());
                     }
                 }
             }

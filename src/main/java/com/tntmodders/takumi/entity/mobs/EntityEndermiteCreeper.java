@@ -57,12 +57,6 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onUpdate() {
-        this.renderYawOffset = this.rotationYaw;
-        super.onUpdate();
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return SoundEvents.ENTITY_ENDERMITE_HURT;
     }
@@ -278,5 +272,11 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderEndermiteCreeper<>(manager);
+    }
+
+    @Override
+    public void onUpdate() {
+        this.renderYawOffset = this.rotationYaw;
+        super.onUpdate();
     }
 }

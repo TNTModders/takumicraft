@@ -112,21 +112,6 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void setDead() {
-        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
-            if (!this.world.isRemote) {
-                EntityBirdCreeper birdCreeper = new EntityBirdCreeper(this.world);
-                birdCreeper.copyLocationAndAnglesFrom(this);
-                if (this.getPowered()) {
-                    TakumiUtils.takumiSetPowered(birdCreeper, true);
-                }
-                this.world.spawnEntity(birdCreeper);
-            }
-        }
-        super.setDead();
-    }
-
-    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20,
                 TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore.biomes.toArray(new Biome[0]));
@@ -140,6 +125,21 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderBirdCreeper<>(manager);
+    }
+
+    @Override
+    public void setDead() {
+        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+            if (!this.world.isRemote) {
+                EntityBirdCreeper birdCreeper = new EntityBirdCreeper(this.world);
+                birdCreeper.copyLocationAndAnglesFrom(this);
+                if (this.getPowered()) {
+                    TakumiUtils.takumiSetPowered(birdCreeper, true);
+                }
+                this.world.spawnEntity(birdCreeper);
+            }
+        }
+        super.setDead();
     }
 
     @Override

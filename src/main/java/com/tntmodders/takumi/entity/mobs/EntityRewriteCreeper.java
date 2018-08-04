@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
@@ -75,7 +76,7 @@ public class EntityRewriteCreeper extends EntityTakumiAbstractCreeper {
                             blockState.getBlock().createTileEntity(this.world, blockState) instanceof IInventory) &&
                             blockState.getBlock().canPlaceBlockAt(this.world, this.getPosition()) &&
                             blockState.getBlockHardness(this.world, this.getPosition()) > -1) {
-                        this.world.setBlockState(this.getPosition(), blockState);
+                        TakumiUtils.setBlockStateProtected(this.world, this.getPosition(), blockState);
                         if (blockState.getBlock().canPlaceBlockAt(this.world, this.getPosition().up())) {
                             flg = true;
                         }
@@ -84,7 +85,7 @@ public class EntityRewriteCreeper extends EntityTakumiAbstractCreeper {
             }
             for (BlockPos pos : event.getAffectedBlocks()) {
                 if (!this.world.isAirBlock(pos)) {
-                    this.world.setBlockState(pos, blockState);
+                    TakumiUtils.setBlockStateProtected(this.world, pos, blockState);
                 }
             }
             event.getAffectedBlocks().clear();

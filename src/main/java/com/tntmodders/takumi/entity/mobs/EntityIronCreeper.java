@@ -23,14 +23,6 @@ public class EntityIronCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.getItemFromBlock(Blocks.IRON_BLOCK), 1);
-        }
-        super.onDeath(source);
-    }
-
-    @Override
     public int getPrimaryColor() {
         return 0x909090;
     }
@@ -38,6 +30,14 @@ public class EntityIronCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public double getSizeAmp() {
         return 0.5;
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(Blocks.IRON_BLOCK), 1);
+        }
+        super.onDeath(source);
     }
 
     @Override

@@ -52,8 +52,8 @@ import java.util.UUID;
 public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
 
     protected static final IAttribute SPAWN_REINFORCEMENTS_CHANCE =
-            new RangedAttribute(null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)
-                    .setDescription("Spawn Reinforcements Chance");
+            new RangedAttribute(null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription(
+                    "Spawn Reinforcements Chance");
     private static final UUID BABY_SPEED_BOOST_ID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
     private static final AttributeModifier BABY_SPEED_BOOST =
             new AttributeModifier(BABY_SPEED_BOOST_ID, "Baby speed boost", 0.5D, 1);
@@ -246,8 +246,8 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE)
-            .setBaseValue(this.rand.nextDouble() * ForgeModContainer.zombieSummonBaseChance);
+        this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(
+                this.rand.nextDouble() * ForgeModContainer.zombieSummonBaseChance);
     }
 
     @Override
@@ -337,37 +337,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         }
     }
 
-    /**
-     * Called when the mob's health reaches 0.
-     */
-    @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        for (ItemStack itemStack : this.getArmorInventoryList()) {
-            if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null &&
-                    itemStack.getItem() != Item.getItemFromBlock(Blocks.PUMPKIN) &&
-                    itemStack.getItem() != Item.getItemFromBlock(Blocks.LIT_PUMPKIN)) {
-                this.entityDropItem(itemStack, 0.0f);
-            }
-        }
-        if (cause.getTrueSource() instanceof EntityCreeper) {
-            EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
-
-            if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
-                entitycreeper.incrementDroppedSkulls();
-                ItemStack itemstack = this.getSkullDrop();
-
-                if (!itemstack.isEmpty()) {
-                    this.entityDropItem(itemstack, 0.0F);
-                }
-            }
-        }
-    }
-
-    protected ItemStack getSkullDrop() {
-        return new ItemStack(Items.SKULL, 1, 2);
-    }
-
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         List<Entity> removeList = new ArrayList<>();
@@ -397,6 +366,37 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public ResourceLocation getArmor() {
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+
+    /**
+     * Called when the mob's health reaches 0.
+     */
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
+        for (ItemStack itemStack : this.getArmorInventoryList()) {
+            if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null &&
+                    itemStack.getItem() != Item.getItemFromBlock(Blocks.PUMPKIN) &&
+                    itemStack.getItem() != Item.getItemFromBlock(Blocks.LIT_PUMPKIN)) {
+                this.entityDropItem(itemStack, 0.0f);
+            }
+        }
+        if (cause.getTrueSource() instanceof EntityCreeper) {
+            EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
+
+            if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
+                entitycreeper.incrementDroppedSkulls();
+                ItemStack itemstack = this.getSkullDrop();
+
+                if (!itemstack.isEmpty()) {
+                    this.entityDropItem(itemstack, 0.0F);
+                }
+            }
+        }
+    }
+
+    protected ItemStack getSkullDrop() {
+        return new ItemStack(Items.SKULL, 1, 2);
     }
 
     @SideOnly(Side.CLIENT)
@@ -498,15 +498,15 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         double d0 = this.rand.nextDouble() * 1.5D * f;
 
         if (d0 > 1.0D) {
-            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE)
-                .applyModifier(new AttributeModifier("Random zombie-spawn bonus", d0, 2));
+            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(
+                    new AttributeModifier("Random zombie-spawn bonus", d0, 2));
         }
 
         if (this.rand.nextFloat() < f * 0.05F) {
-            this.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE)
-                .applyModifier(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 0.25D + 0.5D, 0));
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH)
-                .applyModifier(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 3.0D + 1.0D, 2));
+            this.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(
+                    new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 0.25D + 0.5D, 0));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(
+                    new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 3.0D + 1.0D, 2));
             this.setBreakDoorsAItask(true);
         }
 
@@ -518,8 +518,8 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         if (this.world.isDaytime() && !this.world.isRemote && !this.isChild() && this.shouldBurnInDay()) {
             float f = this.getBrightness();
 
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world
-                    .canSeeSky(new BlockPos(this.posX, this.posY + (double) this.getEyeHeight(), this.posZ))) {
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(
+                    new BlockPos(this.posX, this.posY + (double) this.getEyeHeight(), this.posZ))) {
                 boolean flag = true;
                 ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
@@ -570,15 +570,15 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
                     int j1 = j + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
                     int k1 = k + MathHelper.getInt(this.rand, 7, 40) * MathHelper.getInt(this.rand, -1, 1);
 
-                    if (this.world.getBlockState(new BlockPos(i1, j1 - 1, k1))
-                                  .isSideSolid(this.world, new BlockPos(i1, j1 - 1, k1), EnumFacing.UP) &&
+                    if (this.world.getBlockState(new BlockPos(i1, j1 - 1, k1)).isSideSolid(this.world,
+                            new BlockPos(i1, j1 - 1, k1), EnumFacing.UP) &&
                             this.world.getLightFromNeighbors(new BlockPos(i1, j1, k1)) < 10) {
                         entityzombie.setPosition(i1, j1, k1);
 
                         if (!this.world.isAnyPlayerWithinRangeAt((double) i1, (double) j1, (double) k1, 7.0D) &&
                                 this.world.checkNoEntityCollision(entityzombie.getEntityBoundingBox(), entityzombie) &&
-                                this.world.getCollisionBoxes(entityzombie, entityzombie.getEntityBoundingBox())
-                                          .isEmpty() &&
+                                this.world.getCollisionBoxes(entityzombie,
+                                        entityzombie.getEntityBoundingBox()).isEmpty() &&
                                 !this.world.containsAnyLiquid(entityzombie.getEntityBoundingBox())) {
                             this.world.spawnEntity(entityzombie);
                             if (entitylivingbase != null) {

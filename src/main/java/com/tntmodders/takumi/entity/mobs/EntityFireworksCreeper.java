@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFireworkRocket;
@@ -72,15 +73,13 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
             for (int z = (int) entity.posZ - 4; z <= (int) entity.posZ + 4; z++) {
                 for (int y = (int) entity.posY + 2; y >= (int) entity.posY + 1; y--) {
                     for (int i = 0; i < (entity.getPowered() ? 4 : 2); i++) {
-                        entity.world.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
+                        TakumiUtils.setBlockStateProtected(entity.world, new BlockPos(x, y, z),
+                                Blocks.AIR.getDefaultState());
                         if (entity.world.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR &&
                                 entity.world.getBlockState(new BlockPos(x, y + 1, z)).getBlock() == Blocks.AIR &&
                                 entity.world.rand.nextInt(15) == 0) {
-                            Class<? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList()
-                                                                                   .get(entity.world.rand.nextInt(
-                                                                                           TakumiEntityCore
-                                                                                                   .getEntityList()
-                                                                                                   .size())).getClass();
+                            Class<? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(
+                                    entity.world.rand.nextInt(TakumiEntityCore.getEntityList().size())).getClass();
                             try {
                                 Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(entity.world);
                                 if (((ITakumiEntity) creeper).takumiRank() == EnumTakumiRank.LOW ||
@@ -106,9 +105,9 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                     int[] xRange = {-1, 1, 0, 0};
                     int[] zRange = {0, 0, -1, 1};
                     for (int i = 0; i < 4; i++) {
-                        entity.world
-                                .setBlockState(pos.add(xRange[i], y, zRange[i]), Blocks.GLOWSTONE.getDefaultState());
-                        entity.world.setBlockState(pos.add(xRange[i] * 2, y, zRange[i] * 2),
+                        entity.world.setBlockState(pos.add(xRange[i], y, zRange[i]),
+                                Blocks.GLOWSTONE.getDefaultState());
+                        TakumiUtils.setBlockStateProtected(entity.world, pos.add(xRange[i] * 2, y, zRange[i] * 2),
                                 Blocks.CHEST.getDefaultState());
                         TileEntity tile = entity.world.getTileEntity(pos.add(xRange[i] * 2, y, zRange[i] * 2));
                         if (tile instanceof TileEntityChest) {
@@ -119,9 +118,8 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                                         TakumiItemCore.TAKUMI_SHIELD, TakumiItemCore.TAKUMI_BOW, Items.ELYTRA};
                                 Item returner = item[entity.world.rand.nextInt(item.length)];
                                 ((IInventory) tile).setInventorySlotContents(p, new ItemStack(returner,
-                                        entity.world.rand
-                                                .nextInt(returner.getItemStackLimit(new ItemStack(returner)) / 4 + 1) +
-                                                1));
+                                        entity.world.rand.nextInt(
+                                                returner.getItemStackLimit(new ItemStack(returner)) / 4 + 1) + 1));
                             }
                         }
                     }
@@ -130,7 +128,8 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                 case 2: {
                     for (int x = -2; x <= 2; x++) {
                         for (int z = -2; z <= 2; z++) {
-                            entity.world.setBlockState(pos.add(x, y, z), Blocks.LEAVES.getDefaultState());
+                            TakumiUtils.setBlockStateProtected(entity.world, pos.add(x, y, z),
+                                    Blocks.LEAVES.getDefaultState());
                         }
                     }
                     break;
@@ -138,7 +137,8 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                 case 3: {
                     for (int x = -1; x <= 1; x++) {
                         for (int z = -1; z <= 1; z++) {
-                            entity.world.setBlockState(pos.add(x, y, z), Blocks.LEAVES.getDefaultState());
+                            TakumiUtils.setBlockStateProtected(entity.world, pos.add(x, y, z),
+                                    Blocks.LEAVES.getDefaultState());
                         }
                     }
                     break;
@@ -147,26 +147,27 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                     int[] xRange = {-1, 1, 0, 0};
                     int[] zRange = {0, 0, -1, 1};
                     for (int i = 0; i < 4; i++) {
-                        entity.world
-                                .setBlockState(pos.add(xRange[i], y, zRange[i]), Blocks.GLOWSTONE.getDefaultState());
+                        entity.world.setBlockState(pos.add(xRange[i], y, zRange[i]),
+                                Blocks.GLOWSTONE.getDefaultState());
                     }
                     break;
                 }
                 case 5: {
                     for (int x = -1; x <= 1; x++) {
                         for (int z = -1; z <= 1; z++) {
-                            entity.world.setBlockState(pos.add(x, y, z), Blocks.LEAVES.getDefaultState());
+                            TakumiUtils.setBlockStateProtected(entity.world, pos.add(x, y, z),
+                                    Blocks.LEAVES.getDefaultState());
                         }
                     }
                     break;
                 }
                 case 6: {
-                    entity.world.setBlockState(pos.up(y), Blocks.LEAVES.getDefaultState());
+                    TakumiUtils.setBlockStateProtected(entity.world, pos.up(y), Blocks.LEAVES.getDefaultState());
                     break;
                 }
             }
             if (y != 6) {
-                entity.world.setBlockState(pos.up(y), Blocks.LOG.getDefaultState());
+                TakumiUtils.setBlockStateProtected(entity.world, pos.up(y), Blocks.LOG.getDefaultState());
             }
         }
     }
@@ -179,18 +180,18 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
             for (int x = -1 * count[y]; x <= count[y]; x++) {
                 for (int z = -1 * count[y]; z <= count[y]; z++) {
                     if (count[y] != 0) {
-                        entity.world.setBlockState(
+                        TakumiUtils.setBlockStateProtected(entity.world,
                                 new BlockPos((int) (entity.posX + x), (int) (entity.posY + y), (int) (entity.posZ + z)),
-                                Blocks.WOOL.getDefaultState()
-                                           .withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(meta[y])));
+                                Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR,
+                                        EnumDyeColor.byMetadata(meta[y])));
                     }
                 }
             }
             if (count[y] == 0) {
-                entity.world
-                        .setBlockState(new BlockPos((int) entity.posX, (int) (entity.posY + y - 1), (int) entity.posZ),
-                                Blocks.WOOL.getDefaultState()
-                                           .withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(meta[y])));
+                entity.world.setBlockState(
+                        new BlockPos((int) entity.posX, (int) (entity.posY + y - 1), (int) entity.posZ),
+                        Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR,
+                                EnumDyeColor.byMetadata(meta[y])));
             }
         }
     }

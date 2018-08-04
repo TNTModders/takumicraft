@@ -189,13 +189,12 @@ public class TakumiClientEvents {
     }
 
     public static class ModelSaber extends ModelBase {
-        public ModelRenderer handle;
-        public ModelRenderer saber;
-
         public static final ResourceLocation HANDLE_TEXTURE =
                 new ResourceLocation(TakumiCraftCore.MODID, "textures/blocks/creeperiron.png");
         public static final ResourceLocation SABER_TEXTURE =
                 new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+        public ModelRenderer handle;
+        public ModelRenderer saber;
 
         public ModelSaber() {
             this.handle = new ModelRenderer(this, 0, 0);

@@ -68,11 +68,6 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     }
 
     @Override
-    public int quantityDropped(Random random) {
-        return 0;
-    }
-
-    @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
@@ -98,6 +93,11 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         super.breakBlock(worldIn, pos, state);
         worldIn.removeTileEntity(pos);
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
     }
 
     @Override

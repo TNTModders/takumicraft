@@ -15,8 +15,8 @@ public class BiomeTakumiHotSpringMountains extends AbstractBiomeTakumiWorld {
 
     public BiomeTakumiHotSpringMountains() {
         super("takumihotspringmountains",
-                AbstractBiomeTakumiWorld.getBaseProperty("takumihotspringmountains").setHeightVariation(0.4f)
-                                        .setTemperature(0f).setSnowEnabled());
+                AbstractBiomeTakumiWorld.getBaseProperty("takumihotspringmountains").setHeightVariation(
+                        0.4f).setTemperature(0f).setSnowEnabled());
     }
 
     @Override

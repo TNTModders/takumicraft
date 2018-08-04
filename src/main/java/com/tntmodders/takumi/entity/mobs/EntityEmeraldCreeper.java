@@ -22,14 +22,6 @@ public class EntityEmeraldCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(Item.getItemFromBlock(Blocks.EMERALD_BLOCK), 1);
-        }
-        super.onDeath(source);
-    }
-
-    @Override
     public int getPrimaryColor() {
         return 0x90a090;
     }
@@ -37,6 +29,14 @@ public class EntityEmeraldCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public double getSizeAmp() {
         return 2.0;
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(Item.getItemFromBlock(Blocks.EMERALD_BLOCK), 1);
+        }
+        super.onDeath(source);
     }
 
     @Override

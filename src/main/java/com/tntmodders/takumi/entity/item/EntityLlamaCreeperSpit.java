@@ -209,8 +209,8 @@ public class EntityLlamaCreeperSpit extends Entity implements IProjectile {
         if (this.ownerNbt != null && this.ownerNbt.hasUniqueId("OwnerUUID")) {
             UUID uuid = this.ownerNbt.getUniqueId("OwnerUUID");
 
-            for (EntityLlamaCreeper entityllama : this.world
-                    .getEntitiesWithinAABB(EntityLlamaCreeper.class, this.getEntityBoundingBox().grow(15.0D))) {
+            for (EntityLlamaCreeper entityllama : this.world.getEntitiesWithinAABB(EntityLlamaCreeper.class,
+                    this.getEntityBoundingBox().grow(15.0D))) {
                 if (Objects.equals(entityllama.getUniqueID(), uuid)) {
                     this.owner = entityllama;
                     break;
@@ -249,8 +249,8 @@ public class EntityLlamaCreeperSpit extends Entity implements IProjectile {
 
     public void onHit(RayTraceResult p_190536_1_) {
         if (p_190536_1_.entityHit != null && this.owner != null) {
-            p_190536_1_.entityHit
-                    .attackEntityFrom(DamageSource.causeIndirectDamage(this, this.owner).setProjectile(), 1.0F);
+            p_190536_1_.entityHit.attackEntityFrom(DamageSource.causeIndirectDamage(this, this.owner).setProjectile(),
+                    1.0F);
         }
 
         if (!this.world.isRemote) {

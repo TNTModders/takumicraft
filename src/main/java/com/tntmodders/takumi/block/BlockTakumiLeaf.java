@@ -29,7 +29,7 @@ public class BlockTakumiLeaf extends BlockAbstractTakumiBomb {
 
     @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
-        if(worldIn.rand.nextBoolean()){
+        if (worldIn.rand.nextBoolean()) {
             super.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
         }
     }

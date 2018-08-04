@@ -35,8 +35,8 @@ public class RenderIllusionerCreeper<T extends EntityIllusionerCreeper> extends 
 
             @Override
             protected void translateToHand(EnumHandSide p_191361_1_) {
-                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_)
-                                                                                .postRender(0.0625F);
+                ((ModelIllagerCreeper) this.livingEntityRenderer.getMainModel()).getArm(p_191361_1_).postRender(
+                        0.0625F);
             }
         });
         ((ModelIllagerCreeper) this.getMainModel()).hat.showModel = true;

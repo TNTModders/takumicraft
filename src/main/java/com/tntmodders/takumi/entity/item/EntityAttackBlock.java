@@ -5,6 +5,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -38,13 +39,11 @@ public class EntityAttackBlock extends EntityLiving {
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"),
                     BossInfo.Color.BLUE, BossInfo.Overlay.NOTCHED_20).setDarkenSky(true);
-
-    private int spawnTick;
-    private List<ITakumiEntity> entities = new ArrayList<>();
-
     private final Potion[] potions =
             {MobEffects.FIRE_RESISTANCE, MobEffects.JUMP_BOOST, MobEffects.SPEED, MobEffects.WATER_BREATHING,
                     MobEffects.RESISTANCE, MobEffects.REGENERATION};
+    private int spawnTick;
+    private List<ITakumiEntity> entities = new ArrayList<>();
 
     public EntityAttackBlock(World worldIn) {
         super(worldIn);
@@ -63,33 +62,6 @@ public class EntityAttackBlock extends EntityLiving {
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setInteger("sp", spawnTick);
-    }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (this.hasCustomName()) {
-            this.bossInfo.setName(this.getDisplayName());
-        }
-        this.spawnTick = compound.getInteger("sp");
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        return false;
-    }
-
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100000);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25000);
-    }
-
-    @Override
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.taskEntries.clear();
@@ -97,70 +69,10 @@ public class EntityAttackBlock extends EntityLiving {
     }
 
     @Override
-    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
-    }
-
-    @Override
-    public void move(MoverType type, double x, double y, double z) {
-    }
-
-    @Override
-    protected boolean isMovementBlocked() {
-        return true;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender() {
-        return 15728880;
-    }
-
-    @Override
-    public float getBrightness() {
-        return 1.0F;
-    }
-
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.OUT_OF_WORLD) {
-            return super.attackEntityFrom(source, amount);
-        }
-        if (source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) source.getTrueSource()).isCreative()) {
-            this.setHealth(-10);
-            return true;
-        }
-        if (source.isExplosion() && amount > 2) {
-            this.setDead();
-            this.world.loadedEntityList.forEach(entity -> {
-                if (entity instanceof EntityLiving) {
-                    ((EntityLiving) entity).setAttackTarget(null);
-                }
-            });
-            this.world.playerEntities.forEach(player -> {
-                if (!player.isCreative() && !player.isSpectator()) {
-                    player.attackEntityFrom(
-                            DamageSource.causeMobDamage(this).setDamageIsAbsolute().setDamageAllowedInCreativeMode(),
-                            Integer.MAX_VALUE);
-                    player.sendMessage(new TextComponentTranslation("entity.attackblock.lose"));
-                }
-            });
-        }
-        return false;
-    }
-
-    @Override
-    protected void onDeathUpdate() {
-        super.onDeathUpdate();
-        if (this.getHealth() <= 0 && !this.world.isRemote) {
-            this.world.playerEntities.forEach(player -> {
-                player.sendMessage(new TextComponentTranslation("entity.attackblock.win"));
-                player.addExperience(100);
-            });
-            EntityBigCreeper bigCreeper = new EntityBigCreeper(this.world);
-            bigCreeper.setPosition(this.posX, this.posY, this.posZ);
-            this.world.spawnEntity(bigCreeper);
-            this.setDead();
-        }
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100000);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25000);
     }
 
     @Override
@@ -181,13 +93,13 @@ public class EntityAttackBlock extends EntityLiving {
         if (this.spawnTick < 1000 && this.spawnTick % 10 == 0 && this.spawnTick != 0 && !this.world.isRemote) {
             for (int i = -this.spawnTick / 10; i <= this.spawnTick / 10; i++) {
                 if (this.getPosition().getY() != 1) {
-                    this.world.setBlockState(this.getPosition().add(i, -1, -this.spawnTick / 10),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, -this.spawnTick / 10),
                             BLOCK.getDefaultState());
-                    this.world.setBlockState(this.getPosition().add(i, -1, this.spawnTick / 10),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, this.spawnTick / 10),
                             BLOCK.getDefaultState());
-                    this.world.setBlockState(this.getPosition().add(-this.spawnTick / 10, -1, i),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(-this.spawnTick / 10, -1, i),
                             BLOCK.getDefaultState());
-                    this.world.setBlockState(this.getPosition().add(this.spawnTick / 10, -1, i),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(this.spawnTick / 10, -1, i),
                             BLOCK.getDefaultState());
                 }
                 for (int k = 0; k < 5; k++) {
@@ -208,10 +120,11 @@ public class EntityAttackBlock extends EntityLiving {
                         for (int y = 0; y <= 3; y++) {
                             for (int z = -2; z <= 2; z++) {
                                 if (y == 3) {
-                                    this.world.setBlockState(this.getPosition().add(x, y, z), BLOCK.getDefaultState());
+                                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, y, z),
+                                            BLOCK.getDefaultState());
                                 } else if (x == -2 || z == -2 || x == 2 || z == 2) {
                                     if (x != 0 && z != 0) {
-                                        this.world.setBlockState(this.getPosition().add(x, y, z),
+                                        TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, y, z),
                                                 BLOCK.getDefaultState());
                                     }
                                 }
@@ -286,6 +199,47 @@ public class EntityAttackBlock extends EntityLiving {
     }
 
     @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("sp", spawnTick);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName()) {
+            this.bossInfo.setName(this.getDisplayName());
+        }
+        this.spawnTick = compound.getInteger("sp");
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    @Override
+    public void move(MoverType type, double x, double y, double z) {
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender() {
+        return 15728880;
+    }
+
+    @Override
+    public float getBrightness() {
+        return 1.0F;
+    }
+
+    @Override
+    public void setCustomNameTag(String name) {
+        super.setCustomNameTag(name);
+        this.bossInfo.setName(this.getDisplayName());
+    }
+
+    @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         this.bossInfo.addPlayer(player);
@@ -298,8 +252,54 @@ public class EntityAttackBlock extends EntityLiving {
     }
 
     @Override
-    public void setCustomNameTag(String name) {
-        super.setCustomNameTag(name);
-        this.bossInfo.setName(this.getDisplayName());
+    protected void onDeathUpdate() {
+        super.onDeathUpdate();
+        if (this.getHealth() <= 0 && !this.world.isRemote) {
+            this.world.playerEntities.forEach(player -> {
+                player.sendMessage(new TextComponentTranslation("entity.attackblock.win"));
+                player.addExperience(100);
+            });
+            EntityBigCreeper bigCreeper = new EntityBigCreeper(this.world);
+            bigCreeper.setPosition(this.posX, this.posY, this.posZ);
+            this.world.spawnEntity(bigCreeper);
+            this.setDead();
+        }
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.OUT_OF_WORLD) {
+            return super.attackEntityFrom(source, amount);
+        }
+        if (source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) source.getTrueSource()).isCreative()) {
+            this.setHealth(-10);
+            return true;
+        }
+        if (source.isExplosion() && amount > 2) {
+            this.setDead();
+            this.world.loadedEntityList.forEach(entity -> {
+                if (entity instanceof EntityLiving) {
+                    ((EntityLiving) entity).setAttackTarget(null);
+                }
+            });
+            this.world.playerEntities.forEach(player -> {
+                if (!player.isCreative() && !player.isSpectator()) {
+                    player.attackEntityFrom(
+                            DamageSource.causeMobDamage(this).setDamageIsAbsolute().setDamageAllowedInCreativeMode(),
+                            Integer.MAX_VALUE);
+                    player.sendMessage(new TextComponentTranslation("entity.attackblock.lose"));
+                }
+            });
+        }
+        return false;
+    }
+
+    @Override
+    public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
+    }
+
+    @Override
+    protected boolean isMovementBlocked() {
+        return true;
     }
 }
