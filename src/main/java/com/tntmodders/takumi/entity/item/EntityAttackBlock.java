@@ -2,23 +2,19 @@ package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.mobs.EntityEvokerCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityVexCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -39,9 +35,6 @@ public class EntityAttackBlock extends EntityLiving {
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"),
                     BossInfo.Color.BLUE, BossInfo.Overlay.NOTCHED_20).setDarkenSky(true);
-    private final Potion[] potions =
-            {MobEffects.FIRE_RESISTANCE, MobEffects.JUMP_BOOST, MobEffects.SPEED, MobEffects.WATER_BREATHING,
-                    MobEffects.RESISTANCE, MobEffects.REGENERATION};
     private int spawnTick;
     private List<ITakumiEntity> entities = new ArrayList<>();
 
@@ -54,7 +47,10 @@ public class EntityAttackBlock extends EntityLiving {
             if (iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.LOW ||
                     iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.MID) {
                 if (iTakumiEntity.getClass() != EntitySeaGuardianCreeper.class &&
-                        iTakumiEntity.getClass() != EntitySquidCreeper.class) {
+                        iTakumiEntity.getClass() != EntitySquidCreeper.class &&
+                        ((EntityLivingBase) iTakumiEntity).isNonBoss() &&
+                        iTakumiEntity.getClass() != EntityEvokerCreeper.class &
+                                iTakumiEntity.getClass() != EntityVexCreeper.class) {
                     entities.add(iTakumiEntity);
                 }
             }
@@ -90,32 +86,32 @@ public class EntityAttackBlock extends EntityLiving {
             }
         }
         this.spawnTick++;
-        if (this.spawnTick < 1000 && this.spawnTick % 10 == 0 && this.spawnTick != 0 && !this.world.isRemote) {
-            for (int i = -this.spawnTick / 10; i <= this.spawnTick / 10; i++) {
+        if (this.spawnTick < 2000 && this.spawnTick % 20 == 0 && this.spawnTick != 0 && !this.world.isRemote) {
+            for (int i = -this.spawnTick / 20; i <= this.spawnTick / 20; i++) {
                 if (this.getPosition().getY() != 1) {
-                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, -this.spawnTick / 10),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, -this.spawnTick / 20),
                             BLOCK.getDefaultState());
-                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, this.spawnTick / 10),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, this.spawnTick / 20),
                             BLOCK.getDefaultState());
-                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(-this.spawnTick / 10, -1, i),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(-this.spawnTick / 20, -1, i),
                             BLOCK.getDefaultState());
-                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(this.spawnTick / 10, -1, i),
+                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(this.spawnTick / 20, -1, i),
                             BLOCK.getDefaultState());
                 }
                 for (int k = 0; k < 5; k++) {
-                    this.world.setBlockToAir(this.getPosition().add(i, k, -this.spawnTick / 10));
+                    this.world.setBlockToAir(this.getPosition().add(i, k, -this.spawnTick / 20));
                 }
                 for (int k = 0; k < 5; k++) {
-                    this.world.setBlockToAir(this.getPosition().add(i, k, this.spawnTick / 10));
+                    this.world.setBlockToAir(this.getPosition().add(i, k, this.spawnTick / 20));
                 }
                 for (int k = 0; k < 5; k++) {
-                    this.world.setBlockToAir(this.getPosition().add(-this.spawnTick / 10, k, i));
+                    this.world.setBlockToAir(this.getPosition().add(-this.spawnTick / 20, k, i));
                 }
                 for (int k = 0; k < 5; k++) {
-                    this.world.setBlockToAir(this.getPosition().add(this.spawnTick / 10, k, i));
+                    this.world.setBlockToAir(this.getPosition().add(this.spawnTick / 20, k, i));
                 }
 
-                if (this.spawnTick / 10 == 2) {
+                if (this.spawnTick / 20 == 2) {
                     for (int x = -2; x <= 2; x++) {
                         for (int y = 0; y <= 3; y++) {
                             for (int z = -2; z <= 2; z++) {
@@ -134,9 +130,9 @@ public class EntityAttackBlock extends EntityLiving {
                 }
             }
         }
-        if (this.ticksExisted % 40 == 0) {
+        if (this.ticksExisted % 100 == 0) {
             if (!this.world.isRemote) {
-                int r = this.spawnTick > 1000 ? 100 : this.spawnTick / 10;
+                int r = this.spawnTick > 2000 ? 100 : this.spawnTick / 20;
                 for (int i = 0; i < 5; i++) {
                     int rx = MathHelper.getInt(this.rand, -r, r);
                     int rz = MathHelper.getInt(this.rand, -r, r);
@@ -165,7 +161,7 @@ public class EntityAttackBlock extends EntityLiving {
                             e.printStackTrace();
                         }
                     }
-                    if (r > 15) {
+                    if (r > 25) {
                         Entity entity = null;
                         if (!entities.isEmpty()) {
                             try {
@@ -182,15 +178,14 @@ public class EntityAttackBlock extends EntityLiving {
 
                             if ((Math.abs(rx) > 5 && Math.abs(rz) > 5) || this.rand.nextInt(20) == 0) {
                                 entity.setPosition(this.posX + rx, this.posY, this.posZ + rz);
+                                if (entity instanceof EntityLiving) {
+                                    ((EntityLiving) entity).onInitialSpawn(
+                                            this.world.getDifficultyForLocation(this.getPosition().add(rx, 0, rz)),
+                                            null);
+                                }
+                                entity.onStruckByLightning(null);
+                                this.world.spawnEntity(entity);
                             }
-                            if (entity instanceof EntityLiving) {
-                                ((EntityLiving) entity).onInitialSpawn(
-                                        this.world.getDifficultyForLocation(this.getPosition().add(rx, 0, rz)), null);
-                                ((EntityLiving) entity).addPotionEffect(
-                                        new PotionEffect(this.potions[this.rand.nextInt(this.potions.length)],
-                                                10 * 60 * 20, 0));
-                            }
-                            this.world.spawnEntity(entity);
                         }
                     }
                 }
