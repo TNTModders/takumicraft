@@ -385,6 +385,16 @@ public class TakumiEvents {
                 e.setResult(Result.DENY);
             }
         }
+        if (e.getWorld().playerEntities.stream().noneMatch(entityPlayer -> TakumiUtils.getAdvancementUnlocked(
+                new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb")))) {
+            if (e.getEntityLiving() instanceof EntityTakumiAbstractCreeper &&
+                    ((EntityTakumiAbstractCreeper) e.getEntityLiving()).takumiRank() !=
+                            ITakumiEntity.EnumTakumiRank.LOW || e.getWorld().rand.nextInt(10) == 0) {
+                if (!e.getWorld().isThundering()) {
+                    e.setResult(Result.DENY);
+                }
+            }
+        }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {
             ((EntityLiving) e.getEntityLiving()).tasks.addTask(0,
                     new EntityAIFollowCatCreeper((EntityCreeper) e.getEntityLiving()));

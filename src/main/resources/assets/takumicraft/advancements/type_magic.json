@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:typecoresp_magic"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.typemagic.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.typemagic.desc"
+    }
+  },
+  "parent": "takumicraft:typewepon",
+  "criteria": {
+    "crit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:typecoresp_magic"
+          }
+        ]
+      }
+    }
+  }
+}

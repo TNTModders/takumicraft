@@ -131,21 +131,26 @@ public class ItemTypeSword extends ItemSword {
             }
         }
 
-        if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_DEST)) {
-            worldIn.getEntities(EntityLivingBase.class, input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(
-                    entityLivingBase -> {
+        if (entityIn instanceof EntityLivingBase && ((EntityLivingBase) entityIn).getHeldItemMainhand() == stack) {
+            if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_DEST)) {
+                if (entityIn.ticksExisted % 20 == 0) {
+                    worldIn.getEntities(EntityLivingBase.class,
+                            input -> entityIn.getDistanceSqToEntity(input) < 7f).forEach(entityLivingBase -> {
                         if (entityLivingBase != entityIn) {
-                            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 5, 0));
+                            entityLivingBase.attackEntityFrom(
+                                    DamageSource.causeMobDamage(((EntityLivingBase) entityIn)).setExplosion(), 5f);
                         }
                     });
-        }
-        if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_MAGIC)) {
-            worldIn.getEntities(EntityLivingBase.class, input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(
-                    entityLivingBase -> {
-                        if (entityLivingBase != entityIn) {
-                            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2));
-                        }
-                    });
+                }
+            }
+            if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_MAGIC)) {
+                worldIn.getEntities(EntityLivingBase.class,
+                        input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(entityLivingBase -> {
+                    if (entityLivingBase != entityIn) {
+                        entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2));
+                    }
+                });
+            }
         }
     }
 

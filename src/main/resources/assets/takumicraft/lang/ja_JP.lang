@@ -581,6 +581,10 @@ advancements.takumicraft.takumialtar.title=祭壇と篝火
 advancements.takumicraft.takumialtar.desc=王匠の祭壇を入手する 強者を召喚せよ。
 advancements.takumicraft.ofalen.title=不思議な鉱石
 advancements.takumicraft.ofalen.desc=匠オファレンを入手する 科学と魔術はときに同義である。
+advancements.takumicraft.typedest.title=壊の使い手
+advancements.takumicraft.typedest.desc=匠素結晶[壊]を入手する 鉄床で匠素結晶の武器にエンチャント可能 破壊の力は強さを与え、近づくものには傷を与える。
+advancements.takumicraft.typemagic.title=魔の使い手
+advancements.takumicraft.typemagic.desc=匠素結晶[魔]を入手する 鉄床で匠素結晶の武器にエンチャント可能 魔法の力は守りを与え、近づくものには枷を与える。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
 

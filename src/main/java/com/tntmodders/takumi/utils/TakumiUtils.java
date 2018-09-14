@@ -87,8 +87,8 @@ public class TakumiUtils {
 
     @SideOnly(Side.CLIENT)
     public static boolean getAdvancementUnlocked(ResourceLocation location) {
-        ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
         try {
+            ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
             Field field = TakumiASMNameMap.getField(ClientAdvancementManager.class, "advancementToProgress");
             field.setAccessible(true);
             Map<Advancement, AdvancementProgress> advancementToProgress =
@@ -96,7 +96,7 @@ public class TakumiUtils {
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
