@@ -497,6 +497,8 @@ entity.sleepercreeper.name=Sleeper Creeper
 entity.sleepercreeper.desc=Does your bed safe?
 entity.trizombiecreeper.name=TriHead Zombie Creeper
 entity.trizombiecreeper.desc=Three times strong!
+entity.disordercreeper.name=Disorder Creeper
+entity.disordercreeper.desc=CLEAN YOUR INVENTRY
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

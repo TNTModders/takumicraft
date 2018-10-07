@@ -532,6 +532,8 @@ entity.sleepercreeper.name=閨匠
 entity.sleepercreeper.desc=君のベッドは安全ですか……?
 entity.trizombiecreeper.name=三頭匠
 entity.trizombiecreeper.desc=フュージョン! ハッ!!
+entity.disordercreeper.name=散匠
+entity.disordercreeper.desc=ワールドが散らかっているのはいつものことですが
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
