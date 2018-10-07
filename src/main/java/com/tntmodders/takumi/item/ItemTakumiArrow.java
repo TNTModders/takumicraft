@@ -42,7 +42,8 @@ public class ItemTakumiArrow extends ItemArrow {
 
     @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
-        if (shooter.getActiveItemStack().getItem() == Items.BOW) {
+        if (shooter.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_BOW &&
+                shooter.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_BOWGUN) {
             return ((ItemArrow) Items.ARROW).createArrow(worldIn, stack, shooter);
         }
         if (stack.getItem() == TakumiItemCore.TAKUMI_ARROW_SAN) {
