@@ -528,6 +528,8 @@ entity.crystalcreeper.desc=それは一つ目の兵器、結晶にて幽閉を�
 entity.deteriorationcreeper.name=脆匠
 entity.deteriorationcreeper.desc=<データが破損しています>
 entity.deteriorationcreeper.read=ぜいしょう
+entity.sleepercreeper.name=閨匠
+entity.sleepercreeper.desc=君のベッドは安全ですか……?
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

@@ -493,6 +493,8 @@ entity.crystalcreeper.name=Crystal Creeper
 entity.crystalcreeper.desc=Crystalize, and it will tell you the grand battle.
 entity.deteriorationcreeper.name=Deterioration Creeper
 entity.deteriorationcreeper.desc=You will no longer protect yourself.
+entity.sleepercreeper.name=Sleeper Creeper
+entity.sleepercreeper.desc=Does your bed safe?
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
