@@ -163,6 +163,9 @@ public class GuiTakumiBook extends GuiScreen {
         if (entity instanceof EntitySilentCreeper && !flg) {
             return new EntityCreeper(((Entity) entity).world);
         }
+        if (entity instanceof EntityOddCreeper && !flg) {
+            return new EntityCreeper(((Entity) entity).world);
+        }
         if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);
         } else if (entity instanceof EntitySkeletonCreeper) {
