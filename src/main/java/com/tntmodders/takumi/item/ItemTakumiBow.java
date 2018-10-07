@@ -3,6 +3,7 @@ package com.tntmodders.takumi.item;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -35,5 +36,10 @@ public class ItemTakumiBow extends ItemBow {
                         (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
             }
         });
+    }
+
+    @Override
+    protected boolean isArrow(ItemStack stack) {
+        return stack.getItem() == TakumiItemCore.TAKUMI_ARROW_HA || stack.getItem() == Items.ARROW;
     }
 }

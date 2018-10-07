@@ -147,4 +147,9 @@ public class ItemMagicBow extends ItemBow {
 
         return ItemStack.EMPTY;
     }
+
+    @Override
+    protected boolean isArrow(ItemStack stack) {
+        return stack.getItem() == Items.ARROW;
+    }
 }
