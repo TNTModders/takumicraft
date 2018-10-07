@@ -22,6 +22,8 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("inPortal", "field_71087_bX");
         FIELD_MAP.put("closestPlayer", "field_80001_f");
         FIELD_MAP.put("timeSinceIgnited", "field_70833_d");
+        FIELD_MAP.put("progress","field_192758_f");
+        FIELD_MAP.put("ADVANCEMENT_LIST","field_192784_c");
 
         METHOD_MAP.put("onUpdate", "func_70071_h_");
         METHOD_MAP.put("explode", "func_146077_cc");

@@ -4,8 +4,7 @@ import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.world.TakumiExplosion;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.advancements.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -95,6 +94,26 @@ public class TakumiUtils {
                     (Map<Advancement, AdvancementProgress>) field.get(manager);
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @SideOnly(Side.SERVER)
+    public static boolean getAdvancementUnlockedServer(ResourceLocation location,EntityPlayerMP playerMP) {
+        try {
+            PlayerAdvancements advancements = playerMP.getAdvancements();
+            Field field = TakumiASMNameMap.getField(PlayerAdvancements.class, "progress");
+            field.setAccessible(true);
+            Map<Advancement, AdvancementProgress> advancementToProgress =
+                    (Map<Advancement, AdvancementProgress>) field.get(advancements);
+            field = TakumiASMNameMap.getField(AdvancementManager.class, "ADVANCEMENT_LIST");
+            field.setAccessible(true);
+            AdvancementList list = (AdvancementList) field.get(null);
+            if (advancementToProgress.containsKey(list.getAdvancement(location))) {
+                return advancementToProgress.get(list.getAdvancement(location)).isDone();
             }
         } catch (Exception e) {
             e.printStackTrace();

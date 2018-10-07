@@ -192,7 +192,7 @@ public class TakumiEvents {
             event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 5, 4, true, false));
             List<Potion> potions = new ArrayList<>();
             event.getEntityLiving().getActivePotionEffects().forEach(potionEffect -> {
-                if (potionEffect.getPotion().isBadEffect()) {
+                if (potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION) {
                     potions.add(potionEffect.getPotion());
                 }
             });
@@ -385,15 +385,27 @@ public class TakumiEvents {
                 e.setResult(Result.DENY);
             }
         }
-        if (e.getWorld().playerEntities.stream().noneMatch(entityPlayer -> TakumiUtils.getAdvancementUnlocked(
-                new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb")))) {
-            if (e.getEntityLiving() instanceof EntityTakumiAbstractCreeper &&
-                    ((EntityTakumiAbstractCreeper) e.getEntityLiving()).takumiRank() !=
-                            ITakumiEntity.EnumTakumiRank.LOW || e.getWorld().rand.nextInt(10) == 0) {
-                if (!e.getWorld().isThundering()) {
-                    e.setResult(Result.DENY);
+        try {
+            if (e.getWorld().playerEntities.stream().noneMatch(entityPlayer -> {
+                if (FMLCommonHandler.instance().getSide().isClient()) {
+                    return TakumiUtils.getAdvancementUnlocked(
+                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"));
+                } else if (entityPlayer instanceof EntityPlayerMP) {
+                    return TakumiUtils.getAdvancementUnlockedServer(
+                            new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                            ((EntityPlayerMP) entityPlayer));
+                }
+                return false;
+            })) {
+                if (e.getEntityLiving() instanceof EntityTakumiAbstractCreeper &&
+                        ((EntityTakumiAbstractCreeper) e.getEntityLiving()).takumiRank() !=
+                                ITakumiEntity.EnumTakumiRank.LOW || e.getWorld().rand.nextInt(10) == 0) {
+                    if (!e.getWorld().isThundering()) {
+                        e.setResult(Result.DENY);
+                    }
                 }
             }
+        } catch (Exception ignored) {
         }
         if (e.getEntityLiving().getClass() == EntityCreeper.class) {
             ((EntityLiving) e.getEntityLiving()).tasks.addTask(0,
