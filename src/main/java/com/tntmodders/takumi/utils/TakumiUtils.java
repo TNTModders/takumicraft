@@ -95,8 +95,7 @@ public class TakumiUtils {
             if (advancementToProgress.containsKey(manager.getAdvancementList().getAdvancement(location))) {
                 return advancementToProgress.get(manager.getAdvancementList().getAdvancement(location)).isDone();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return false;
     }
@@ -115,8 +114,7 @@ public class TakumiUtils {
             if (advancementToProgress.containsKey(list.getAdvancement(location))) {
                 return advancementToProgress.get(list.getAdvancement(location)).isDone();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return false;
     }

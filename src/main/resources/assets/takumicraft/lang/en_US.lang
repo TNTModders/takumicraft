@@ -491,6 +491,8 @@ entity.floatcreeper.name=Float Creeper
 entity.floatcreeper.desc=Ground floats, and it will tell you the world-end.
 entity.crystalcreeper.name=Crystal Creeper
 entity.crystalcreeper.desc=Crystalize, and it will tell you the grand battle.
+entity.deteriorationcreeper.name=Deterioration Creeper
+entity.deteriorationcreeper.desc=You will no longer protect yourself.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

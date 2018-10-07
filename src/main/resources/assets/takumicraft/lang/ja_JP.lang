@@ -525,6 +525,9 @@ entity.floatcreeper.name=宙匠
 entity.floatcreeper.desc=それは二つ目の兵器、宙への浮揚を誘う匠。
 entity.crystalcreeper.name=晶匠
 entity.crystalcreeper.desc=それは一つ目の兵器、結晶にて幽閉を司る匠。
+entity.deteriorationcreeper.name=脆匠
+entity.deteriorationcreeper.desc=<データが破損しています>
+entity.deteriorationcreeper.read=ぜいしょう
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
