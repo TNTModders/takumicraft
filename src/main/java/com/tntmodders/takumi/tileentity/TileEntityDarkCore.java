@@ -112,7 +112,7 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
                     this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKCORE_SP.getDefaultState());
                     if (!this.world.isRemote) {
                         EntityTransCreeper transCreeper = new EntityTransCreeper(this.world);
-                        transCreeper.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() + 1,
+                        transCreeper.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() - 5,
                                 this.getPos().getZ() + 0.5);
                         this.world.spawnEntity(transCreeper);
                         this.world.createExplosion(transCreeper, transCreeper.posX, transCreeper.posY,
