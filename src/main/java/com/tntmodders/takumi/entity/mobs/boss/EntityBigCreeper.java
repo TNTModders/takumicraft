@@ -7,10 +7,12 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityBigHomingBomb;
 import com.tntmodders.takumi.entity.mobs.EntityGiantCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityYukariCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
@@ -66,7 +68,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onLivingUpdate() {
         if (this.world.isRemote) {
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < 30; ++i) {
                 this.world.spawnAlwaysVisibleParticle(EnumParticleTypes.TOWN_AURA.getParticleID(),
                         this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
                         this.posY + this.rand.nextDouble() * this.height,
@@ -84,7 +86,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
             d0 = 1.0D;
         }
 
-        d0 = d0 * 64.0D * 10;
+        d0 = d0 * 128.0D * 10;
         return distance < d0 * d0;
     }
 
@@ -139,6 +141,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        damageAmount = damageAmount / 4;
         if (!damageSrc.isMagicDamage()) {
             super.damageEntity(damageSrc, damageAmount);
         }
@@ -158,11 +161,11 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            int rnd = 5;
+            int rnd = 7;
             int amp = this.getPowered() ? 3 : 1;
             switch (this.rand.nextInt(rnd)) {
                 case 1: {
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 10; i++) {
                         try {
                             EntityTakumiAbstractCreeper creeper = ((EntityTakumiAbstractCreeper) takumiEntities.get(
                                     this.rand.nextInt(takumiEntities.size())).getClass().getConstructor(
@@ -179,7 +182,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
                     break;
                 }
                 case 2: {
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 10; i++) {
                         double x = this.posX + this.rand.nextInt(50) - 25;
                         double y = this.posY;
                         double z = this.posZ + this.rand.nextInt(50) - 25;
@@ -218,6 +221,38 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
                             this.world.spawnEntity(homingBomb);
 
                         }
+                    }
+                    break;
+                }
+                case 5: {
+                    if (!this.world.isRemote) {
+                        for (double x = -20; x <= 20; x += 0.5) {
+                            for (double z = -20; z <= 20; z += 0.5) {
+                                if (this.rand.nextInt(5) == 0) {
+                                    EntityBigHomingBomb bomb =
+                                            new EntityBigHomingBomb(this.world, this, this.getAttackTarget(),
+                                                    EnumFacing.DOWN.getAxis());
+                                    bomb.setPosition(this.posX + x, this.posY + 20, this.posZ + z);
+                                    this.world.spawnEntity(bomb);
+                                }
+                            }
+                        }
+                        this.world.createExplosion(this, this.posX, this.posY - 1, this.posZ, 5f, true);
+                    }
+                }
+                case 6: {
+                    if (!this.world.isRemote) {
+                        EntityCreeper creeper = new EntityYukariCreeper(this.world);
+                        creeper.copyLocationAndAnglesFrom(this);
+                        NBTTagCompound compound = new NBTTagCompound();
+                        creeper.writeEntityToNBT(compound);
+                        compound.setShort("Fuse", (short) 1);
+                        creeper.readEntityFromNBT(compound);
+                        creeper.setInvisible(true);
+                        creeper.ignite();
+                        world.spawnEntity(creeper);
+                        creeper.onUpdate();
+                        creeper.setDead();
                     }
                     break;
                 }
