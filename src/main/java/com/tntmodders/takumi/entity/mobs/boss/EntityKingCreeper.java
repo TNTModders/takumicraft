@@ -5,6 +5,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
 import com.tntmodders.takumi.entity.item.EntityBigHomingBomb;
 import com.tntmodders.takumi.entity.item.EntityKingDummy;
 import com.tntmodders.takumi.entity.mobs.EntityCraftsmanCreeper;
@@ -54,6 +55,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
 
     public EntityKingCreeper(World worldIn) {
         super(worldIn);
+        this.tasks.addTask(1, new EntityAIBossCreeperSwell(this));
         this.isImmuneToFire = true;
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
@@ -184,7 +186,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         this.rand.nextInt(50), ((EntityLivingBase) this.lastSource.getTrueSource()));
             }
         }
-        int maxID = 17;
+        int maxID = 19;
         int always = 0;
         float power = this.getPowered() ? 12 : 7;
         if (!this.world.isRemote) {
@@ -445,6 +447,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 }
                 break;
             }
+            //ホーミング
             case 17: {
                 for (int t = 0; t < 7 * (this.getPowered() ? 2 : 1); t++) {
                     Random rand = new Random();
@@ -458,6 +461,34 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         this.world.spawnEntity(homingBomb);
 
                     }
+                }
+            }
+            //絨毯ホーミング
+            case 18: {
+                if (!this.world.isRemote) {
+                    for (double x = -7; x <= 7; x += 0.5) {
+                        for (double z = -7; z <= 7; z += 0.5) {
+                            EntityBigHomingBomb bomb = new EntityBigHomingBomb(this.world, this, this.getAttackTarget(),
+                                    EnumFacing.DOWN.getAxis());
+                            bomb.setPosition(this.posX + x, this.posY + 20, this.posZ + z);
+                            this.world.spawnEntity(bomb);
+                        }
+                    }
+                    this.world.createExplosion(this, this.posX, this.posY - 1, this.posZ, 5f, true);
+                }
+            }
+            //接近爆発
+            case 19: {
+                if (this.getAttackTarget() != null) {
+                    this.setPosition(this.getAttackTarget().posX, this.getAttackTarget().posY,
+                            this.getAttackTarget().posZ);
+                    if (!this.world.isRemote) {
+                        for (int i = 0; i < 5; i++) {
+                            this.world.createExplosion(this, this.posX, this.posY - 0.5, this.posZ,
+                                    this.getPowered() ? 10f : 5f, true);
+                        }
+                    }
+                    break;
                 }
             }
             default:

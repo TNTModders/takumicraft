@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.mobs.boss.EntityTransCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityTransCreeper_2;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,9 +50,9 @@ public class EntityTransHomingBomb extends EntityShulkerBullet {
 
     @Override
     protected void bulletHit(RayTraceResult result) {
-        if (!(result.entityHit instanceof EntityTransCreeper)) {
+        if (!(result.entityHit instanceof EntityTransCreeper) && !(result.entityHit instanceof EntityTransCreeper_2)) {
             if (!this.world.isRemote) {
-                TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, true);
+                TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 3f, false, true);
             }
             if (result.entityHit == null) {
                 ((WorldServer) this.world).spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY,

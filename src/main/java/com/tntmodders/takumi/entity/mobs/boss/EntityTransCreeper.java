@@ -4,6 +4,7 @@ import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.client.render.RenderTransCreeper;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
 import com.tntmodders.takumi.entity.item.EntityTransHomingBomb;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +41,7 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
     public EntityTransCreeper(World worldIn) {
         super(worldIn);
         this.isImmuneToFire = true;
+        this.tasks.addTask(1, new EntityAIBossCreeperSwell(this));
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
             field.setAccessible(true);
@@ -100,6 +102,20 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
                 transCreeper.flg = this.flg;
                 transCreeper.setCreeperState(-1);
                 transCreeper.setAttackTarget(null);
+                this.world.spawnEntity(transCreeper);
+            }
+        } else if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL) {
+            if (!this.world.isRemote) {
+                EntityTransCreeper_2 transCreeper = new EntityTransCreeper_2(this.world);
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                this.writeEntityToNBT(tagCompound);
+                tagCompound.setBoolean("ignited", false);
+                transCreeper.readEntityFromNBT(tagCompound);
+                transCreeper.setHealth(transCreeper.getMaxHealth());
+                transCreeper.copyLocationAndAnglesFrom(this);
+                if (this.getPowered()) {
+                    TakumiUtils.takumiSetPowered(transCreeper, true);
+                }
                 this.world.spawnEntity(transCreeper);
             }
         }

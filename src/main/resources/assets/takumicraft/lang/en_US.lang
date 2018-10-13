@@ -499,6 +499,8 @@ entity.trizombiecreeper.name=TriHead Zombie Creeper
 entity.trizombiecreeper.desc=Three times strong!
 entity.disordercreeper.name=Disorder Creeper
 entity.disordercreeper.desc=CLEAN YOUR INVENTRY
+entity.transcreeper_2.name=Transcend Creeper
+entity.transcreeper_2.desc=The world cycles, the ground also do.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
