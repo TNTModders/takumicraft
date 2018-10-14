@@ -6,7 +6,9 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -14,6 +16,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class EntityShulkerCreeper extends EntityTakumiAbstractCreeper {
@@ -98,6 +101,12 @@ public class EntityShulkerCreeper extends EntityTakumiAbstractCreeper {
                 EnumCreatureType.MONSTER, TakumiEntityCore.biomes.toArray(new Biome[0]));
         EntityRegistry.addSpawn(EntityShulkerCreeper.class, this.takumiRank().getSpawnWeight(), 5, 5,
                 EnumCreatureType.MONSTER, Biomes.SKY);
+    }
+
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return Items.SHULKER_SHELL;
     }
 
     @Override

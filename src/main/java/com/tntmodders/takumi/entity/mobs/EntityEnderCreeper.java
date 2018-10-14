@@ -4,6 +4,8 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.lang.reflect.Method;
 import java.util.Random;
@@ -58,6 +61,12 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 9;
+    }
+
+    @Override
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 10, 10, EnumCreatureType.MONSTER,
+                Biomes.SKY);
     }
 
     @Override

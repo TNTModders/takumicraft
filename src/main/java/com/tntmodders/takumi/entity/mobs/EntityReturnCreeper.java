@@ -2,13 +2,16 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -107,5 +110,11 @@ public class EntityReturnCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 266;
+    }
+
+    @Override
+    public void additionalSpawn() {
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 2, 2, EnumCreatureType.MONSTER,
+                Biomes.SKY);
     }
 }
