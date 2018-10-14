@@ -8,6 +8,8 @@ import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
 import com.tntmodders.takumi.entity.item.EntityTransHomingBomb;
+import com.tntmodders.takumi.entity.mobs.EntityDashCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityRushCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -282,7 +284,7 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote && this.getActivePotionEffect(MobEffects.SLOWNESS) != null) {
-            switch (new Random(System.currentTimeMillis()).nextInt(6)) {
+            switch (new Random(System.currentTimeMillis()).nextInt(7)) {
                 case 0: {
                     if (!this.world.isRemote) {
                         for (int i = 0; i < 10; i++) {
@@ -352,6 +354,18 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
                             }
                         }
                         this.world.createExplosion(this, this.posX, this.posY - 1, this.posZ, 5f, true);
+                    }
+                    break;
+                }
+                case 6: {
+                    if (!this.world.isRemote) {
+                        for (int i = 0; i < 6; i++) {
+                            EntityCreeper creeper = this.rand.nextBoolean() ? new EntityRushCreeper(this.world) :
+                                    new EntityDashCreeper(this.world);
+                            creeper.copyLocationAndAnglesFrom(this);
+                            TakumiUtils.takumiSetPowered(creeper, true);
+                            this.world.spawnEntity(creeper);
+                        }
                     }
                 }
             }

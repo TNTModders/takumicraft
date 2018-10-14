@@ -161,7 +161,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            int rnd = 7;
+            int rnd = 8;
             int amp = this.getPowered() ? 3 : 1;
             switch (this.rand.nextInt(rnd)) {
                 case 1: {
@@ -253,6 +253,20 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
                         world.spawnEntity(creeper);
                         creeper.onUpdate();
                         creeper.setDead();
+                    }
+                    break;
+                }
+                case 7: {
+                    if (!this.world.isRemote) {
+                        EntityCreeper[] creepers =
+                                {new EntityBalloonCreeper(this.world), new EntityBigSpiderCreeper(this.world),
+                                        new EntityForestCreeper(this.world), new EntityMineCreeper(this.world),
+                                        new EntityOceanCreeper(this.world), new EntityUnlimitedCreeper(this.world)};
+                        for (EntityCreeper creeper : creepers) {
+                            creeper.copyLocationAndAnglesFrom(this);
+                            TakumiUtils.takumiSetPowered(creeper, true);
+                            this.world.spawnEntity(creeper);
+                        }
                     }
                     break;
                 }
