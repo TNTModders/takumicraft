@@ -18,9 +18,8 @@ import net.minecraft.world.World;
 
 public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
 
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.oceancreeper.name"),
-                    BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS);
+    private final BossInfoServer bossInfo = new BossInfoServer(new TextComponentTranslation("entity.oceancreeper.name"),
+            BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS);
 
     public EntityOceanCreeper(World worldIn) {
         super(worldIn);

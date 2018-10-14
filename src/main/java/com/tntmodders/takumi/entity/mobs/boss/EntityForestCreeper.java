@@ -35,6 +35,13 @@ public class EntityForestCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (damageSrc != DamageSource.IN_WALL) {
+            super.damageEntity(damageSrc, damageAmount);
+        }
+    }
+
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
