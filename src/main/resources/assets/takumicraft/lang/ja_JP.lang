@@ -536,6 +536,9 @@ entity.disordercreeper.name=散匠
 entity.disordercreeper.desc=ワールドが散らかっているのはいつものことですが
 entity.transcreeper_2.name=輪匠[輪廻転匠]
 entity.transcreeper_2.desc=世界は廻る、永劫の封印から解き放たれ。 ████の目覚めは近く。
+entity.nethercreeper.name=煉獄匠
+entity.nethercreeper.read=ねざーたくみ
+entity.nethercreeper.desc=煉獄へ誘い、異界を生み出し、その匠は地を跋扈する。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

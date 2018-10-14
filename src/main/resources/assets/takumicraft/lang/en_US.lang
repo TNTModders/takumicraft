@@ -501,6 +501,8 @@ entity.disordercreeper.name=Disorder Creeper
 entity.disordercreeper.desc=CLEAN YOUR INVENTRY
 entity.transcreeper_2.name=Transcend Creeper
 entity.transcreeper_2.desc=The world cycles, the ground also do.
+entity.nethercreeper.name=Nether Creeper
+entity.nethercreeper.desc=Nether on earth.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

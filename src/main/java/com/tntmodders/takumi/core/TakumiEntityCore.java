@@ -94,9 +94,9 @@ public class TakumiEntityCore {
                 EntityCannonCreeper.class, EntityCactusCreeper.class, EntityGrassCreeper.class, EntityBoxCreeper.class,
                 EntityPoweredCreeper.class, EntityUnlimitedCreeper.class, EntityBigSpiderCreeper.class,
                 EntityMineCreeper.class, EntityBalloonCreeper.class, EntityOceanCreeper.class,
-                EntityForestCreeper.class, EntityOddCreeper.class, EntityFloatCreeper.class,
-                EntityCrystalCreeper.class,EntityDeteriorationCreeper.class,EntitySleeperCreeper.class,
-                EntityTriZombieCreeper.class,EntityDisorderCreeper.class,EntityTransCreeper_2.class));
+                EntityForestCreeper.class, EntityOddCreeper.class, EntityFloatCreeper.class, EntityCrystalCreeper.class,
+                EntityDeteriorationCreeper.class, EntitySleeperCreeper.class, EntityTriZombieCreeper.class,
+                EntityDisorderCreeper.class, EntityTransCreeper_2.class, EntityNetherCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -225,7 +225,7 @@ public class TakumiEntityCore {
                 }
             }
         }
-        TakumiCraftCore.LOGGER.info("Registered all "+ CLASS_LIST.size()+" entites.");
+        TakumiCraftCore.LOGGER.info("Registered all " + CLASS_LIST.size() + " entites.");
         itemRegister();
         if (FMLCommonHandler.instance().getSide().isClient()) {
             renderRegister();
