@@ -9,8 +9,10 @@ import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -26,6 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
 
     private int stoppingCounter;
+    private int dmgCount;
 
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
@@ -136,6 +139,19 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                     ((EntityTakumiAbstractCreeper) damageSrc.getTrueSource()).takumiRank().getLevel() <= 2) {
                 damageAmount *= 0.25;
             }
+        }
+        if (!this.isNonBoss()) {
+            if (this.dmgCount > 0) {
+                damageAmount = damageAmount / (dmgCount * 2.5f);
+                if (this.dmgCount % 10 == 0) {
+                    this.addPotionEffect(PotionTypes.REGENERATION.getEffects().get(0));
+                }
+                if (!this.world.isRemote && this.rand.nextInt(25) == 0 && damageSrc.getTrueSource() != null) {
+                    this.world.spawnEntity(new EntityLightningBolt(this.world, damageSrc.getTrueSource().posX,
+                            damageSrc.getTrueSource().posY, damageSrc.getTrueSource().posZ, false));
+                }
+            }
+            this.dmgCount++;
         }
         if (this.takumiType().getId() == EnumTakumiType.FIRE.getId() && damageSrc.isFireDamage()) {
             return;

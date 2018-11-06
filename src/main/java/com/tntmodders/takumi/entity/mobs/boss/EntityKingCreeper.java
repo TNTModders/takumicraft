@@ -124,7 +124,11 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             if (!this.getPowered()) {
                 this.onStruckByLightning(null);
             }
-            this.heal(0.01f);
+            this.heal(0.025f);
+        }
+        if (!this.world.isRemote && this.getActivePotionEffect(MobEffects.UNLUCK) != null) {
+            this.world.spawnEntity(new EntityLightningBolt(this.world, this.posX + this.rand.nextInt(10) - 5, this.posY,
+                    this.posZ + this.rand.nextInt(10) - 5, false));
         }
     }
 
@@ -186,7 +190,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         this.rand.nextInt(50), ((EntityLivingBase) this.lastSource.getTrueSource()));
             }
         }
-        int maxID = 19;
+        int maxID = 20;
         int always = 0;
         float power = this.getPowered() ? 12 : 7;
         if (!this.world.isRemote) {
@@ -490,6 +494,16 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     }
                     break;
                 }
+            }
+            //連続落雷
+            case 20: {
+                if (!this.world.isRemote) {
+                    for (int i = 0; i < 5; i++) {
+                        this.world.createExplosion(this, this.posX, this.posY - 0.5, this.posZ,
+                                this.getPowered() ? 5f : 3f, true);
+                    }
+                }
+                this.addPotionEffect(new PotionEffect(MobEffects.UNLUCK, 200));
             }
             default:
                 if (!this.world.isRemote) {
