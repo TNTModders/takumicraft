@@ -286,9 +286,17 @@ public class TakumiEvents {
                         return true;
                     }
                     return StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
-                            itemStack -> !EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
-                                    EnchantmentHelper.getEnchantments(itemStack).containsKey(
-                                            TakumiEnchantmentCore.EXPLOSION_PROTECTION));
+                            itemStack -> {
+                                if (!EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
+                                        EnchantmentHelper.getEnchantments(itemStack).containsKey(
+                                                TakumiEnchantmentCore.EXPLOSION_PROTECTION)) {
+                                    itemStack.damageItem(1 + ((EntityLivingBase) entity).getRNG().nextInt(
+                                            5 + event.getWorld().getDifficulty().getDifficultyId()) * 2,
+                                            ((EntityLivingBase) entity));
+                                    return true;
+                                }
+                                return false;
+                            });
                 }
                 return false;
             });
