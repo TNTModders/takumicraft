@@ -539,6 +539,8 @@ entity.transcreeper_2.desc=世界は廻る、永劫の封印から解き放た�
 entity.nethercreeper.name=煉獄匠
 entity.nethercreeper.read=ねざーたくみ
 entity.nethercreeper.desc=煉獄へ誘い、異界を生み出し、その匠は地を跋扈する。
+entity.fescreeper.name=祭匠
+entity.fescreeper.desc=法被着込んでサァ始まり、匠の祭は豪華で絢爛、太鼓囃子に匠が集う!
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

@@ -503,6 +503,8 @@ entity.transcreeper_2.name=Transcend Creeper
 entity.transcreeper_2.desc=The world cycles, the ground also do.
 entity.nethercreeper.name=Nether Creeper
 entity.nethercreeper.desc=Nether on earth.
+entity.fescreeper.name=Festival Creeper
+entity.fescreeper.desc=Creeper carnival has come, noisy, and crazy, so gonna be dizzy?
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
