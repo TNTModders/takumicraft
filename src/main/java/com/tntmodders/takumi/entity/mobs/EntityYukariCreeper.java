@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -32,14 +31,20 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
                 this.world.setBlockToAir(pos);
             } else if (this.world.isAirBlock(pos) || this.world.getBlockState(pos).getMaterial().isLiquid()) {
                 IBlockState state = this.world.getBlockState(this.getPosition().down());
-                if (!(state.getBlock() instanceof BlockTakumiMonsterBomb) &&
-                        state.getBlockHardness(this.world, this.getPosition().down()) > 0) {
+                if (/*!(state.getBlock() instanceof BlockTakumiMonsterBomb) &&*/
+                        state.getBlockHardness(this.world, this.getPosition().down()) >= 0) {
                     TakumiUtils.setBlockStateProtected(this.world, pos, state);
                 }
             }
         }
         event.getAffectedBlocks().clear();
         return true;
+    }
+
+    @Override
+    public boolean canExplosionDestroyBlock(Explosion explosionIn, World worldIn, BlockPos pos,
+            IBlockState blockStateIn, float p_174816_5_) {
+        return super.canExplosionDestroyBlock(explosionIn, worldIn, pos, blockStateIn, p_174816_5_);
     }
 
     @Override

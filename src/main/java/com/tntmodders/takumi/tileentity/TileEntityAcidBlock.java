@@ -9,27 +9,27 @@ public class TileEntityAcidBlock extends TileEntity implements ITickable {
 
     private int tick;
     private int lastTick;
-    private int fuseTime = 60;
+    private int fuseTime = 40;
 
     public TileEntityAcidBlock() {
         super();
     }
 
     public float getCreeperFlashIntensity(float pertialTicks) {
-        return (this.lastTick + (this.tick - this.lastTick) * pertialTicks) / this.fuseTime;
+        return (this.lastTick + (this.tick - this.lastTick) * pertialTicks) / 60;
     }
 
     @Override
     public void update() {
-        if (this.tick == 40) {
-            this.world.addBlockEvent(this.getPos(), this.getBlockType(), 1, 0);
+        if (this.tick == 30) {
+            //this.world.addBlockEvent(this.getPos(), this.getBlockType(), 1, 0);
         }
         this.lastTick = this.tick;
         this.tick++;
-        if (!this.world.isRemote && this.tick > this.fuseTime + this.world.rand.nextInt(90)) {
+        if (!this.world.isRemote && this.tick > this.fuseTime + this.world.rand.nextInt(50)) {
             boolean smoke = this.world.getBlockState(pos).getValue(BlockTakumiAcid.META) < 15;
             this.world.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(),
-                    smoke ? 3 : 7, smoke);
+                    smoke ? 3.375f : 8, smoke);
         }
     }
 

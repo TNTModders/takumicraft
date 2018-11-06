@@ -104,7 +104,7 @@ public class ItemTakumiBowGun extends Item {
                     worldIn.createExplosion(entityLiving, entityLiving.posX, entityLiving.posY, entityLiving.posZ, 0f,
                             false);
                 }
-                entityLiving.knockBack(entityLiving, 1, takumiArrow.motionX, takumiArrow.motionZ);
+                //entityLiving.knockBack(entityLiving, 1, takumiArrow.motionX, takumiArrow.motionZ);
                 if (!(entityLiving instanceof EntityPlayer && ((EntityPlayer) entityLiving).isCreative())) {
                     arrow.shrink(1);
                     itemstack.damageItem(1, entityLiving);

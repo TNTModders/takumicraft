@@ -246,17 +246,20 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onExplosion(Detonate event) {
         if (FMLCommonHandler.instance().getSide().isServer() && event.getWorld().getMinecraftServer() != null) {
-            List<BlockPos> list = new ArrayList<>();
-            event.getAffectedBlocks().forEach(pos -> {
-                BlockPos blockpos = event.getWorld().getSpawnPoint();
-                int i = MathHelper.abs(pos.getX() - blockpos.getX());
-                int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
-                int k = Math.max(i, j);
-                if (k <= event.getWorld().getMinecraftServer().getSpawnProtectionSize()) {
-                    list.add(pos);
-                }
-            });
-            event.getAffectedBlocks().removeAll(list);
+            try {
+                List<BlockPos> list = new ArrayList<>();
+                event.getAffectedBlocks().forEach(pos -> {
+                    BlockPos blockpos = event.getWorld().getSpawnPoint();
+                    int i = MathHelper.abs(pos.getX() - blockpos.getX());
+                    int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
+                    int k = Math.max(i, j);
+                    if (k <= event.getWorld().getMinecraftServer().getSpawnProtectionSize()) {
+                        list.add(pos);
+                    }
+                });
+                event.getAffectedBlocks().removeAll(list);
+            } catch (Exception ignored) {
+            }
         }
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityKingDummy) {
             switch (((EntityKingDummy) event.getExplosion().getExplosivePlacedBy()).id) {
