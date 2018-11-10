@@ -6,8 +6,7 @@ import net.minecraft.block.BlockAnvil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemAnvilBlock;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -16,13 +15,23 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockAnvilCreeper extends BlockAnvil implements ITakumiItemBlock {
+public class BlockAnvilCreeper extends BlockAnvil/* implements ITakumiItemBlock */ {
     public BlockAnvilCreeper() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "anvilcreeperblock");
         //this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("anvilcreeperblock");
         this.setResistance(0f);
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return null;
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return 0;
     }
 
     @Override
@@ -66,8 +75,8 @@ public class BlockAnvilCreeper extends BlockAnvil implements ITakumiItemBlock {
         return true;
     }
 
-    @Override
+/*    @Override
     public ItemBlock getItem() {
         return new ItemAnvilBlock(this);
-    }
+    }*/
 }
