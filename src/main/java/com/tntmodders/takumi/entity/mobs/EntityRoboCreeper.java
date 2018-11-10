@@ -26,13 +26,14 @@ import java.util.Random;
 
 public class EntityRoboCreeper extends EntityTakumiAbstractCreeper {
     private BlockPos pos;
+    int ticksIgnited;
 
     public EntityRoboCreeper(World worldIn) {
         super(worldIn);
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
             field.setAccessible(true);
-            field.set(this, 120);
+            field.set(this, 180);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,34 +166,40 @@ public class EntityRoboCreeper extends EntityTakumiAbstractCreeper {
             this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 0.25f, 0.25f);
         }
         if ((this.hasIgnited() || this.getCreeperState() > 0)) {
-            try {
-                RayTraceResult rayTraceResult = this.rayTrace(64);
-                if (rayTraceResult.getBlockPos() != null) {
-                    pos = rayTraceResult.getBlockPos();
-                }
-                if (this.getAttackTarget() != null &&
-                        !this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
+            this.ticksIgnited++;
+            if (this.ticksIgnited > 60) {
+                try {
+                    RayTraceResult rayTraceResult = this.rayTrace(64);
+                    if (rayTraceResult.getBlockPos() != null) {
+                        pos = rayTraceResult.getBlockPos();
+                    }
+                    if (this.getAttackTarget() != null &&
+                            !this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
+                                    this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
+                                            this.getLookVec().z).grow(32)).isEmpty() &&
+                            this.getLookHelper().getIsLooking()) {
+                        Entity entity = this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
                                 this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
-                                        this.getLookVec().z).grow(32)).isEmpty() &&
-                        this.getLookHelper().getIsLooking()) {
-                    Entity entity = this.world.getEntitiesWithinAABB(this.getAttackTarget().getClass(),
-                            this.getEntityBoundingBox().grow(this.getLookVec().x, this.getLookVec().y,
-                                    this.getLookVec().z).grow(32)).get(0);
-                    if (pos == null || this.getDistanceSqToEntity(entity) < this.getDistanceSq(pos)) {
-                        pos = entity.getPosition();
+                                        this.getLookVec().z).grow(32)).get(0);
+                        if (pos == null || this.getDistanceSqToEntity(entity) < this.getDistanceSq(pos)) {
+                            pos = entity.getPosition();
+                        }
                     }
-                }
-                if (pos != null) {
-                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER,
-                            SoundCategory.WEATHER, 10000.0F, 0.8F + this.rand.nextFloat() * 0.2F);
-                    if (!this.world.isRemote) {
-                        this.world.newExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4f, true,
-                                true);
+                    if (pos != null) {
+                        this.world.playSound(null, this.posX, this.posY, this.posZ,
+                                SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.WEATHER, 10000.0F,
+                                0.8F + this.rand.nextFloat() * 0.2F);
+                        if (!this.world.isRemote) {
+                            this.world.newExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4f,
+                                    true, true);
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } else {
+            this.ticksIgnited = 0;
         }
         super.onUpdate();
     }

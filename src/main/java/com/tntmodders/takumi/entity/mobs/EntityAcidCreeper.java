@@ -63,9 +63,10 @@ public class EntityAcidCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
         event.getAffectedBlocks().forEach(pos -> {
-            if (!this.world.isAirBlock(pos)) {
+            if (!this.world.isAirBlock(pos) && this.rand.nextBoolean()) {
                 event.getWorld().setBlockState(pos,
-                        TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META, 0));
+                        TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META,
+                                this.rand.nextInt(3)));
             }
         });
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());

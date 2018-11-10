@@ -9,7 +9,6 @@ public class TileEntityAcidBlock extends TileEntity implements ITickable {
 
     private int tick;
     private int lastTick;
-    private int fuseTime = 40;
 
     public TileEntityAcidBlock() {
         super();
@@ -26,10 +25,14 @@ public class TileEntityAcidBlock extends TileEntity implements ITickable {
         }
         this.lastTick = this.tick;
         this.tick++;
-        if (!this.world.isRemote && this.tick > this.fuseTime + this.world.rand.nextInt(50)) {
+        int fuseTime = 40;
+        if (!this.world.isRemote && this.tick > fuseTime + this.world.rand.nextInt(50)) {
             boolean smoke = this.world.getBlockState(pos).getValue(BlockTakumiAcid.META) < 15;
             this.world.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(),
                     smoke ? 3.375f : 8, smoke);
+        } else if (!this.world.isRemote && this.world.rand.nextInt(10) == 0) {
+            this.world.createExplosion(null, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 0,
+                    false);
         }
     }
 
