@@ -77,6 +77,7 @@ public class TakumiItemCore {
     public static final Item BATTLE_CREEPER_LEGS_POWERED = new ItemBattleArmor(true, EntityEquipmentSlot.LEGS);
     public static final Item BATTLE_CREEPER_BOOTS_POWERED = new ItemBattleArmor(true, EntityEquipmentSlot.FEET);
     public static final Item ENERGY_CORE = new ItemEnergyCore();
+    public static final Item TAKUMI_MLRS = new ItemMLRS();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

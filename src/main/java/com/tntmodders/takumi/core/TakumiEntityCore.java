@@ -275,6 +275,8 @@ public class TakumiEntityCore {
                 EntityOddDummyGhast.class, "odddummyghast", 918, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "dummyking"),
                 EntityKingDummy.class, "dummyking", 919, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumimlrs"),
+                EntityTakumiMLRS.class, "takumimlrs", 920, TakumiCraftCore.TakumiInstance, 64, 2, true);
 
     }
 
