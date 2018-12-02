@@ -121,7 +121,7 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
                         if (blockState.getBlockHardness(this.world, new BlockPos(x + l1, y + j1, z + i2)) >= 0) {
                             TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + l1, y + j1, z + i2),
                                     Blocks.PACKED_ICE.getDefaultState());
-                            if (j1 != 0 && k1 > 1 &&
+                            if (y - j1 > 0 && j1 != 0 && k1 > 1 &&
                                     blockState.getBlockHardness(this.world, new BlockPos(x + l1, y - j1, z + i2)) >=
                                             0) {
                                 TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + l1, y - j1, z + i2),
