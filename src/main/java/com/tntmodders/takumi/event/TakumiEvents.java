@@ -48,12 +48,15 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Explosion;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -105,7 +108,34 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
+    public void onClickBlock(BlockEvent.BreakEvent event) {
+
+        if (event.getPlayer().world.getDifficulty() == EnumDifficulty.HARD && TakumiConfigCore.TakumiHard &&
+                event.getPlayer() instanceof EntityPlayer) {
+            event.setCanceled(true);
+            if (!event.getPlayer().world.isRemote && !event.getPlayer().isPotionActive(MobEffects.SLOWNESS)) {
+                event.getPlayer().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, 334));
+                event.getPlayer().playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
+        //匠式ハードモード
+        if (event.getEntityLiving().world.getDifficulty() == EnumDifficulty.HARD && TakumiConfigCore.TakumiHard &&
+                event.getEntityLiving() instanceof EntityPlayer) {
+            if (event.getEntityLiving().getActivePotionEffect(MobEffects.SLOWNESS) != null) {
+                PotionEffect effect = event.getEntityLiving().getActivePotionEffect(MobEffects.SLOWNESS);
+                if (effect.getAmplifier() == 334 && effect.getDuration() <= 1 &&
+                        !event.getEntityLiving().world.isRemote) {
+                    Explosion explosion = event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
+                            event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ,
+                            3f, true);
+                    event.getEntityLiving().attackEntityFrom(DamageSource.causeExplosionDamage(explosion), 6);
+                }
+            }
+        }
         if (TakumiUtils.isApril(event.getEntity().world)) {
             if (event.getEntityLiving() instanceof EntityMob) {
                 ((EntityMob) event.getEntityLiving()).setAttackTarget(null);

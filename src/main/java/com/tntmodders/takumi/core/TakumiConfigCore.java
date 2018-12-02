@@ -15,6 +15,7 @@ public class TakumiConfigCore {
     public static int spawnWeightAnimal;
     public static byte amountSmelting = 1;
     public static boolean useTP;
+    public static boolean TakumiHard;
 
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
@@ -59,6 +60,10 @@ public class TakumiConfigCore {
         //TP
         useTP = cfg.getBoolean("isUseTP", GENERAL, false,
                 TakumiUtils.takumiTranslate("config.takumicraft.useTP" + ".desc"), "config.takumicraft.useTP.prop");
+        //TakumiHard
+        TakumiHard = cfg.getBoolean("isTakumiHard", GENERAL, false,
+                TakumiUtils.takumiTranslate("config.takumicraft.takumiHard.desc"),
+                "config.takumicraft.takumiHard.prop");
         // Difficulty
         //amountSmelting = (byte) cfg.getInt("amountSmelting", HOGE, amountSmelting, 1, Byte.MAX_VALUE, "Smelting amount of Aluminium Ingot from
         // Aluminium Ore.", "config.aluminium.prop.amountSmelting");

@@ -3,12 +3,15 @@ package com.tntmodders.takumi.event;
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
+import com.tntmodders.takumi.client.render.sp.RenderPlayerTHM;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.item.EntityXMS;
 import com.tntmodders.takumi.item.ItemBattleArmor;
 import com.tntmodders.takumi.network.MessageMSMove;
+import com.tntmodders.takumi.network.MessageTHMDetonate;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -20,8 +23,10 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -96,6 +101,14 @@ public class TakumiClientEvents {
                 event.getEntity() instanceof AbstractClientPlayer) {
             event.setCanceled(true);
             RenderPlayerSP sp = new RenderPlayerSP(event.getRenderer().getRenderManager());
+            sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
+                    ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
+        }
+        if (event.getEntity().world.getDifficulty() == EnumDifficulty.HARD && TakumiConfigCore.TakumiHard &&
+                (event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
+                event.getEntity() instanceof AbstractClientPlayer) {
+            event.setCanceled(true);
+            RenderPlayerTHM sp = new RenderPlayerTHM(event.getRenderer().getRenderManager());
             sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
                     ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
         }
@@ -185,6 +198,10 @@ public class TakumiClientEvents {
             boolean flg = ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode;
             ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode = !flg;
             TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 2));
+        } else if (TakumiClientCore.keyBindingTHMDetonate.isPressed() && TakumiConfigCore.TakumiHard &&
+                Minecraft.getMinecraft().world.getDifficulty() == EnumDifficulty.HARD) {
+            TakumiPacketCore.INSTANCE.sendToServer(new MessageTHMDetonate((byte) 1));
+            Minecraft.getMinecraft().player.playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
         }
     }
 

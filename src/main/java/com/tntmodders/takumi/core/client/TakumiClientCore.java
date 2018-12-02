@@ -31,12 +31,15 @@ public class TakumiClientCore {
 
     public static KeyBinding keyBindingTakumiBook;
     public static KeyBinding keyBindingYMS;
+    public static KeyBinding keyBindingTHMDetonate;
 
     public static void registerKey() {
         keyBindingTakumiBook = new KeyBinding("takumicraft.takumibook.key", Keyboard.KEY_I, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingTakumiBook);
         keyBindingYMS = new KeyBinding("takumicraft.xms.key", Keyboard.KEY_G, TakumiCraftCore.MODID);
         ClientRegistry.registerKeyBinding(keyBindingYMS);
+        keyBindingTHMDetonate = new KeyBinding("takumicraft.thm.key", Keyboard.KEY_Z, TakumiCraftCore.MODID);
+        ClientRegistry.registerKeyBinding(keyBindingTHMDetonate);
     }
 
     public static void register() {
