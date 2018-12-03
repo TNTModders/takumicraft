@@ -53,6 +53,7 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -105,6 +106,19 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onCloseContainer(Close event) {
+    }
+
+    @SubscribeEvent
+    public void attackEntity(AttackEntityEvent event) {
+        if (event.getEntityLiving().world.getDifficulty() == EnumDifficulty.HARD && TakumiConfigCore.TakumiHard &&
+                event.getEntityLiving() instanceof EntityPlayer) {
+            event.setCanceled(true);
+            if (!event.getEntityLiving().world.isRemote &&
+                    !event.getEntityLiving().isPotionActive(MobEffects.SLOWNESS)) {
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, 334));
+                event.getEntityLiving().playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+            }
+        }
     }
 
     @SubscribeEvent
