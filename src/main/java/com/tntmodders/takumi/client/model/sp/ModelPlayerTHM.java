@@ -13,6 +13,11 @@ public class ModelPlayerTHM extends ModelBase {
     public ModelRenderer leg2;
     public ModelRenderer leg3;
     public ModelRenderer leg4;
+    public ModelRenderer bodyw;
+    public ModelRenderer leg1w;
+    public ModelRenderer leg2w;
+    public ModelRenderer leg3w;
+    public ModelRenderer leg4w;
 
     public ModelPlayerTHM() {
         this.textureWidth = 64;
@@ -27,18 +32,33 @@ public class ModelPlayerTHM extends ModelBase {
         this.body = new ModelRenderer(this, 16, 16);
         this.body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0);
         this.body.setRotationPoint(0.0F, 6.0F, 0.0F);
+        this.bodyw = new ModelRenderer(this, 16, 32);
+        this.bodyw.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0.25f);
+        this.bodyw.setRotationPoint(0.0F, 6.0F, 0.0F);
         this.leg1 = new ModelRenderer(this, 0, 16);
         this.leg1.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0);
         this.leg1.setRotationPoint(-2.0F, 18.0F, 4.0F);
+        this.leg1w = new ModelRenderer(this, 0, 32);
+        this.leg1w.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0.25f);
+        this.leg1w.setRotationPoint(-2.0F, 18.0F, 4.0F);
         this.leg2 = new ModelRenderer(this, 16, 48);
         this.leg2.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0);
         this.leg2.setRotationPoint(2.0F, 18.0F, 4.0F);
+        this.leg2w = new ModelRenderer(this, 0, 48);
+        this.leg2w.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0.25f);
+        this.leg2w.setRotationPoint(2.0F, 18.0F, 4.0F);
         this.leg3 = new ModelRenderer(this, 0, 16);
         this.leg3.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0);
         this.leg3.setRotationPoint(-2.0F, 18.0F, -4.0F);
+        this.leg3w = new ModelRenderer(this, 0, 32);
+        this.leg3w.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0.25f);
+        this.leg3w.setRotationPoint(-2.0F, 18.0F, -4.0F);
         this.leg4 = new ModelRenderer(this, 16, 48);
         this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0);
         this.leg4.setRotationPoint(2.0F, 18.0F, -4.0F);
+        this.leg4w = new ModelRenderer(this, 0, 48);
+        this.leg4w.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, 0.25f);
+        this.leg4w.setRotationPoint(2.0F, 18.0F, -4.0F);
     }
 
     @Override
@@ -47,10 +67,15 @@ public class ModelPlayerTHM extends ModelBase {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
         this.head.render(scale);
         this.body.render(scale);
+        this.bodyw.render(scale);
         this.leg1.render(scale);
         this.leg2.render(scale);
         this.leg3.render(scale);
         this.leg4.render(scale);
+        this.leg1w.render(scale);
+        this.leg2w.render(scale);
+        this.leg3w.render(scale);
+        this.leg4w.render(scale);
     }
 
     @Override
@@ -62,5 +87,11 @@ public class ModelPlayerTHM extends ModelBase {
         this.leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         this.leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         this.leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
+        copyModelAngles(this.body, this.bodyw);
+        copyModelAngles(this.leg1, leg1w);
+        copyModelAngles(this.leg2, leg2w);
+        copyModelAngles(this.leg3, leg3w);
+        copyModelAngles(this.leg4, leg4w);
     }
 }
