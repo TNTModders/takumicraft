@@ -12,6 +12,7 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -50,6 +51,7 @@ public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IR
      */
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
+        this.attackEntityFrom(DamageSource.causeMobDamage(this), 2f);
         for (int i = 0; i < (this.getPowered() ? 2 : 1); i++) {
             EntityTNTPrimed tntPrimed = new EntityTNTPrimed(this.world);
             tntPrimed.setPosition(this.posX + MathHelper.nextFloat(this.rand, -3, 3), this.posY + 2,
