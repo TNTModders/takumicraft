@@ -220,7 +220,7 @@ public class BlockTakumiPortal extends BlockBreakable {
                     false);
         }
 
-        for (int i = 0; i < 150; ++i) {
+        for (int i = 0; i < 300; ++i) {
             double d0 = (double) ((float) pos.getX() + rand.nextFloat());
             double d1 = (double) ((float) pos.getY() + rand.nextFloat());
             double d2 = (double) ((float) pos.getZ() + rand.nextFloat());

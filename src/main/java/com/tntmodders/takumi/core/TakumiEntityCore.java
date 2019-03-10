@@ -7,6 +7,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.*;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -97,7 +98,7 @@ public class TakumiEntityCore {
                 EntityForestCreeper.class, EntityOddCreeper.class, EntityFloatCreeper.class, EntityCrystalCreeper.class,
                 EntityDeteriorationCreeper.class, EntitySleeperCreeper.class, EntityTriZombieCreeper.class,
                 EntityDisorderCreeper.class, EntityTransCreeper_2.class, EntityNetherCreeper.class,
-                EntityFesCreeper.class));
+                EntityFesCreeper.class, EntityBoneCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -277,6 +278,8 @@ public class TakumiEntityCore {
                 EntityKingDummy.class, "dummyking", 919, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumimlrs"),
                 EntityTakumiMLRS.class, "takumimlrs", 920, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "bonecreeperdummy"),
+                EntityBoneDummy.class, "bonecreeperdummy", 921, TakumiCraftCore.TakumiInstance, 64, 2, true);
 
     }
 
@@ -357,6 +360,8 @@ public class TakumiEntityCore {
                         return null;
                     }
                 });
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityBoneDummy.class, RenderBoneDummy ::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

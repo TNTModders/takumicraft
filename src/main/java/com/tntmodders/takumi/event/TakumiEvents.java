@@ -8,12 +8,14 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.item.IItemAntiExplosion;
 import com.tntmodders.takumi.item.ItemTypeCoreSP;
 import com.tntmodders.takumi.item.ItemTypeSword;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
+import com.tntmodders.takumi.world.gen.TakumiMapGenTower_F;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -595,6 +597,13 @@ public class TakumiEvents {
             event.getEntityLiving().dropItem(
                     Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
         }
+        if (event.getEntityLiving() instanceof EntityPlayer &&
+                event.getSource().getTrueSource() instanceof EntityBoneCreeper && event.getSource().isExplosion()) {
+            EntityBoneDummy dummy = new EntityBoneDummy(event.getEntityLiving().world);
+            //EntityCreeper dummy = new EntityWrylyCreeper(event.getEntityLiving().world);
+            dummy.setPosition(event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ);
+            event.getEntityLiving().world.spawnEntity(dummy);
+        }
         if (!event.getEntityLiving().world.isRemote) {
             Calendar calendar = event.getEntityLiving().world.getCurrentDate();
             int month = calendar.get(Calendar.MONTH) + 1;
@@ -680,7 +689,14 @@ public class TakumiEvents {
             mapGenDarkShrine.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
             mapGenDarkShrine.generateStructure(event.getWorld(), event.getRand(),
                     new ChunkPos(event.getChunkX(), event.getChunkZ()));
-
+        }
+        if (event.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD && event.getChunkX() == 0 &&
+                event.getChunkZ() == 0) {
+            TakumiMapGenTower_F takumiMapGenTower_f;
+            takumiMapGenTower_f = new TakumiMapGenTower_F();
+            takumiMapGenTower_f.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
+            takumiMapGenTower_f.generateStructure(event.getWorld(), event.getRand(),
+                    new ChunkPos(event.getChunkX(), event.getChunkZ()));
         }
     }
 

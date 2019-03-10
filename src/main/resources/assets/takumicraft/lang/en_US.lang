@@ -505,6 +505,8 @@ entity.nethercreeper.name=Nether Creeper
 entity.nethercreeper.desc=Nether on earth.
 entity.fescreeper.name=Festival Creeper
 entity.fescreeper.desc=Creeper carnival has come, noisy, and crazy, so gonna be dizzy?
+entity.bonecreeper.name=Bone Creeper
+entity.bonecreeper.desc=I was born, I am bone, A mortal remains somewhere.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -523,6 +525,8 @@ entity.transhomingbomb.name=Trans Creeper
 entity.bighomingbomb.name=Big Creeper
 entity.odddummyghast.name=Odd Creeper
 entity.dummyking.name=King Creeper
+entity.bonecreeperdummy.name=Bone Creeper
+entity.bonecreeperdummy.tag=No response. Looks dead...
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

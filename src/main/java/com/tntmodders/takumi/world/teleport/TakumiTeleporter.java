@@ -2,22 +2,12 @@ package com.tntmodders.takumi.world.teleport;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.BlockTakumiPortal;
-import com.tntmodders.takumi.core.TakumiBlockCore;
-import net.minecraft.block.state.pattern.BlockPattern.PatternHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.EnumFacing.Axis;
-import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 public class TakumiTeleporter extends Teleporter {
 
@@ -30,7 +20,7 @@ public class TakumiTeleporter extends Teleporter {
             entity.timeUntilPortal = entity.getPortalCooldown();
         } else {
             try {
-                Field posField = TakumiASMNameMap.getField(Entity.class, "lastPortalPos");
+/*                Field posField = TakumiASMNameMap.getField(Entity.class, "lastPortalPos");
                 posField.setAccessible(true);
                 if (!entity.world.isRemote && !Objects.equals(pos, posField.get(entity))) {
                     posField.set(entity, new BlockPos(pos));
@@ -56,7 +46,7 @@ public class TakumiTeleporter extends Teleporter {
                     Field directionField = TakumiASMNameMap.getField(Entity.class, "teleportDirection");
                     directionField.setAccessible(true);
                     directionField.set(entity, blockpattern$patternhelper.getForwards());
-                }
+                }*/
                 Field inPortalField = TakumiASMNameMap.getField(Entity.class, "inPortal");
                 inPortalField.setAccessible(true);
                 inPortalField.set(entity, true);
@@ -68,16 +58,18 @@ public class TakumiTeleporter extends Teleporter {
 
     @Override
     public void placeInPortal(Entity entityIn, float rotationYaw) {
-        if (!this.placeInExistingPortal(entityIn, rotationYaw)) {
-            this.makePortal(entityIn);
+        entityIn.setPosition(0, 2, 0);
+        TakumiCraftCore.LOGGER.info("placeInPortal:" + entityIn.getPosition().toString());
+        /*if (!this.placeInExistingPortal(entityIn, rotationYaw)) {
+            //this.makePortal(entityIn);
             //this.placeInExistingPortal(entityIn, rotationYaw);
-            TakumiCraftCore.LOGGER.info("placeInPortal:" + entityIn.getPosition().toString());
-        }
+
+        }*/
     }
 
     @Override
     public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) {
-        int i = 128;
+        /*int i = 128;
         double d0 = -1.0D;
         int j = MathHelper.floor(entityIn.posX);
         int k = MathHelper.floor(entityIn.posZ);
@@ -193,13 +185,13 @@ public class TakumiTeleporter extends Teleporter {
             }
 
             return true;
-        }
+        }*/
         return false;
     }
 
     @Override
     public boolean makePortal(Entity entityIn) {
-        BlockPos pos = entityIn.getPosition().north();
+        /*BlockPos pos = entityIn.getPosition().north();
         for (int x = -2; x <= 2; x++) {
             for (int y = -1; y <= 3; y++) {
                 for (int z = -3; z <= 3; z++) {
@@ -219,7 +211,7 @@ public class TakumiTeleporter extends Teleporter {
                         TakumiBlockCore.TAKUMI_PORTAL.getDefaultState().withProperty(BlockTakumiPortal.AXIS, Axis.X),
                         0);
             }
-        }
+        }*/
         
         /*int i = 16;
         double d0 = -1.0D;

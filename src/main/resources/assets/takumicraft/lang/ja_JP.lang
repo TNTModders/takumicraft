@@ -533,7 +533,7 @@ entity.sleepercreeper.desc=君のベッドは安全ですか……?
 entity.trizombiecreeper.name=三頭匠
 entity.trizombiecreeper.desc=フュージョン! ハッ!!
 entity.disordercreeper.name=散匠
-entity.disordercreeper.desc=ワールドが散らかっているのはいつものことですが
+entity.disordercreeper.desc=ワールドが散らかっているのはいつものことです
 entity.transcreeper_2.name=輪匠[輪廻転匠]
 entity.transcreeper_2.desc=世界は廻る、永劫の封印から解き放たれ。 ████の目覚めは近く。
 entity.nethercreeper.name=煉獄匠
@@ -541,6 +541,8 @@ entity.nethercreeper.read=ねざーたくみ
 entity.nethercreeper.desc=煉獄へ誘い、異界を生み出し、その匠は地を跋扈する。
 entity.fescreeper.name=祭匠
 entity.fescreeper.desc=法被着込んでサァ始まり、匠の祭は豪華で絢爛、太鼓囃子に匠が集う!
+entity.bonecreeper.name=骸匠
+entity.bonecreeper.desc=骨だけでも動くなんて普通のことだよね。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -559,6 +561,8 @@ entity.transhomingbomb.name=輪匠
 entity.bighomingbomb.name=大匠
 entity.odddummyghast.name=奇匠
 entity.dummyking.name=王匠
+entity.bonecreeperdummy.name=骸匠
+entity.bonecreeperdummy.tag=ただのしかばねのようだ……
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

@@ -2,6 +2,7 @@ package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
+import com.tntmodders.takumi.world.gen.TakumiMapGenTower_F;
 import com.tntmodders.takumi.world.gen.structure.StructureTakumiDarkShrinePieces;
 import com.tntmodders.takumi.world.provider.TakumiWorldProvider;
 import net.minecraft.world.DimensionType;
@@ -21,6 +22,7 @@ public class TakumiWorldCore {
 
     public static void registerMapGen() {
         MapGenStructureIO.registerStructure(TakumiMapGenDarkShrine.Start.class, "TakumiDarkShrine");
+        MapGenStructureIO.registerStructure(TakumiMapGenTower_F.Start.class, "TakumiTower_F");
         StructureTakumiDarkShrinePieces.registerTakumiDarkShrinePieces();
 /*        MapGenStructureIO.registerStructure(StructureDarkShrineStart.class,"darkshrine");
         MapGenStructureIO.registerStructureComponent(ComponentDarkShrine.class,"darkshrinebuildings");*/
