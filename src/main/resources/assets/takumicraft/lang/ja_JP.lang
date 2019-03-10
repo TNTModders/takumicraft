@@ -543,6 +543,8 @@ entity.fescreeper.name=祭匠
 entity.fescreeper.desc=法被着込んでサァ始まり、匠の祭は豪華で絢爛、太鼓囃子に匠が集う!
 entity.bonecreeper.name=骸匠
 entity.bonecreeper.desc=骨だけでも動くなんて普通のことだよね。
+entity.mastercreeper.name=師匠
+entity.mastercreeper.desc=弟子よ、さあ修行じゃ! MOB募集:さすらいのENTOさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
