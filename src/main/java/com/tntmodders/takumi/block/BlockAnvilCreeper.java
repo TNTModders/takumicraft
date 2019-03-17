@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import net.minecraft.block.BlockAnvil;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ public class BlockAnvilCreeper extends BlockAnvil/* implements ITakumiItemBlock 
     public BlockAnvilCreeper() {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "anvilcreeperblock");
-        //this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        this.setCreativeTab(CreativeTabs.SEARCH);
         this.setUnlocalizedName("anvilcreeperblock");
         this.setResistance(0f);
     }
