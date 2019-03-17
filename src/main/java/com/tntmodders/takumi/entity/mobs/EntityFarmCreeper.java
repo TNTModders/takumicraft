@@ -91,11 +91,14 @@ public class EntityFarmCreeper extends EntityTakumiAbstractCreeper {
         for (int y = 0; y <= 1; y++) {
             for (int x = -5; x <= 5; x++) {
                 for (int z = -5; z <= 5; z++) {
-                    if (x == -5 || x == 5 || z == -5 || z == 5) {
-                        TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, y, z),
-                                Blocks.OAK_FENCE.getDefaultState());
-                    } else {
-                        this.world.setBlockToAir(this.getPosition().add(x, y, z));
+                    if (this.world.getBlockState(this.getPosition().add(x, y, z)).getBlockHardness(this.world,
+                            this.getPosition().add(x, y, z)) >= 0) {
+                        if (x == -5 || x == 5 || z == -5 || z == 5) {
+                            TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, y, z),
+                                    Blocks.OAK_FENCE.getDefaultState());
+                        } else {
+                            this.world.setBlockToAir(this.getPosition().add(x, y, z));
+                        }
                     }
                 }
             }
