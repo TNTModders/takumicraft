@@ -545,6 +545,8 @@ entity.bonecreeper.name=骸匠
 entity.bonecreeper.desc=骨だけでも動くなんて普通のことだよね。
 entity.mastercreeper.name=師匠
 entity.mastercreeper.desc=弟子よ、さあ修行じゃ! MOB募集:さすらいのENTOさん
+entity.spongecreeper.name=脱水匠
+entity.spongecreeper.desc=水のトラブル、即解消。一気に吸い取る脱水匠。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

@@ -529,6 +529,8 @@ entity.bonecreeperdummy.name=Bone Creeper
 entity.bonecreeperdummy.tag=No response. Looks dead...
 entity.mastercreeper.name=Master Creeper
 entity.mastercreeper.desc=Do or do not, there's no try.
+entity.spongecreeper.name=Sponge Creeper
+entity.spongecreeper.desc=Make it dry, this creeper spawns sponges.
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
