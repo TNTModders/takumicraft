@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.model.ModelBatCreeper;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
 import com.tntmodders.takumi.entity.mobs.EntityBatCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityBigBatCreeper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -50,7 +51,11 @@ public class RenderBatCreeper<T extends EntityBatCreeper> extends RenderLiving<T
      */
     @Override
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
-        GlStateManager.scale(0.35F, 0.35F, 0.35F);
+        if (entitylivingbaseIn instanceof EntityBigBatCreeper) {
+            GlStateManager.scale(1.1F, 1.1F, 1.1F);
+        } else {
+            GlStateManager.scale(0.35F, 0.35F, 0.35F);
+        }
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
