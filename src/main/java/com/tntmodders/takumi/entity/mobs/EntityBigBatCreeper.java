@@ -320,7 +320,7 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 0xffffff;
+        return 0x223322;
     }
 
     @Override
