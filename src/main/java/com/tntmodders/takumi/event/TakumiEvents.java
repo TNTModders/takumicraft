@@ -196,9 +196,15 @@ public class TakumiEvents {
                                 event.getEntityLiving().posZ, 3f, true)), 20f);
             }
         }
-        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK) != null &&
-                event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK).getDuration() <= 1) {
-            if (!event.getEntityLiving().world.isRemote) {
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK) != null) {
+            if (event.getEntityLiving().ticksExisted % 20 == 0) {
+                event.getEntityLiving().world.playSound(event.getEntityLiving().posX, event.getEntityLiving().posY,
+                        event.getEntityLiving().posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 20f, 1,
+                        true);
+            }
+
+            if (!event.getEntityLiving().world.isRemote &&
+                    event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK).getDuration() <= 1) {
                 event.getEntityLiving().attackEntityFrom(DamageSource.causeExplosionDamage(
                         event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
                                 event.getEntityLiving().posX, event.getEntityLiving().posY,
