@@ -560,6 +560,9 @@ entity.mirrorcreeper.name=鏡匠
 entity.mirrorcreeper.desc=鏡よ、鏡、私はだあれ?え、あなたと一緒? MOB募集:レイREI000さん
 entity.fastcreeper.name=先手必匠
 entity.fastcreeper.desc=人生は何事も先手必勝 MOB募集:銀ぴよさん
+entity.whiteeyescreeper.name=白眼匠
+entity.whiteeyescreeper.read=はくがんしょう
+entity.whiteeyescreeper.desc=優しいあの子は、きっと「彼」の友だっただろう。 MOB募集:うおがめさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

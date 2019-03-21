@@ -543,6 +543,8 @@ entity.mirrorcreeper.name=Mirror Creeper
 entity.mirrorcreeper.desc=Mirror mirror in the world, who's me?
 entity.fastcreeper.name=Fast Creeper
 entity.fastcreeper.desc=The fastest, the best.
+entity.whiteeyescreeper.name=WhiteEyes Creeper
+entity.whiteeyescreeper.desc=He, a kind man, may be his "friend".
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
