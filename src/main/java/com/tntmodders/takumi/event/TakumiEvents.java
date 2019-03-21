@@ -199,7 +199,7 @@ public class TakumiEvents {
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK) != null) {
             if (event.getEntityLiving().ticksExisted % 20 == 0) {
                 event.getEntityLiving().world.playSound(event.getEntityLiving().posX, event.getEntityLiving().posY,
-                        event.getEntityLiving().posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 20f, 1,
+                        event.getEntityLiving().posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 50f, 1,
                         true);
             }
 
