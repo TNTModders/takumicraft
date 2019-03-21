@@ -541,6 +541,8 @@ entity.beetrootcreeper.name=Beetroot Creeper
 entity.beetrootcreeper.desc=I will teach you a lesson, long live beetroot!
 entity.mirrorcreeper.name=Mirror Creeper
 entity.mirrorcreeper.desc=Mirror mirror in the world, who's me?
+entity.fastcreeper.name=Fast Creeper
+entity.fastcreeper.desc=The fastest, the best.
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
