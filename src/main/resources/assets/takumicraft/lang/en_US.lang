@@ -535,6 +535,8 @@ entity.bigbatcreeper.name=Big Bat Creeper
 entity.bigbatcreeper.desc=Bloody big bat, you will face to the nightmare of vampire.
 entity.clockcreeper.name=Clock Creeper
 entity.clockcreeper.desc=No one knows when it explodes yet...
+entity.levelupcreeper.name=LevelUp Creeper
+entity.levelupcreeper.desc=The level goes up, going, and will have gone...
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
