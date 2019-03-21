@@ -537,6 +537,8 @@ entity.clockcreeper.name=Clock Creeper
 entity.clockcreeper.desc=No one knows when it explodes yet...
 entity.levelupcreeper.name=LevelUp Creeper
 entity.levelupcreeper.desc=The level goes up, going, and will have gone...
+entity.beetrootcreeper.name=Beetroot Creeper
+entity.beetrootcreeper.desc=I will teach you a lesson, long live beetroot!
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
