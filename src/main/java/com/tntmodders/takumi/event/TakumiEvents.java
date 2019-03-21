@@ -196,6 +196,15 @@ public class TakumiEvents {
                                 event.getEntityLiving().posZ, 3f, true)), 20f);
             }
         }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK) != null &&
+                event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CLOCK).getDuration() <= 1) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().attackEntityFrom(DamageSource.causeExplosionDamage(
+                        event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
+                                event.getEntityLiving().posX, event.getEntityLiving().posY,
+                                event.getEntityLiving().posZ, 7f, true)), 20f);
+            }
+        }
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.VIRUS) != null &&
                 event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.VIRUS).getDuration() <= 1) {
             if (!event.getEntityLiving().world.isRemote) {

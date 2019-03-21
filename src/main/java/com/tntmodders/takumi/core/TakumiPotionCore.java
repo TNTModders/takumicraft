@@ -13,6 +13,7 @@ public class TakumiPotionCore {
     public static final Potion EXP_JUMP = new PotionExplosionJump();
     public static final Potion EP = new PotionEP();
     public static final Potion VIRUS = new PotionVirus();
+    public static final Potion CLOCK = new PotionClockCreeper();
 
     public static void register(IForgeRegistry<Potion> event) {
         event.register(SUBSIDENCE);
@@ -21,6 +22,7 @@ public class TakumiPotionCore {
         event.register(EXP_JUMP);
         event.register(EP);
         event.register(VIRUS);
+        event.register(CLOCK);
     }
 
     public static void registerPotionType(IForgeRegistry<PotionType> event) {

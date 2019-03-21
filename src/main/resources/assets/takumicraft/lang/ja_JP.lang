@@ -549,6 +549,8 @@ entity.spongecreeper.name=脱水匠
 entity.spongecreeper.desc=水のトラブル、即解消。一気に吸い取る脱水匠。
 entity.bigbatcreeper.name=大蝙蝠匠
 entity.bigbatcreeper.desc=血に染まりし大蝙蝠、上がる黒煙は何を意味する。
+entity.clockcreeper.name=時間差匠
+entity.clockcreeper.desc=いつ起こるか分からない恐怖.....  MOB募集:Megane330さん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

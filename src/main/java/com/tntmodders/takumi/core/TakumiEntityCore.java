@@ -98,8 +98,8 @@ public class TakumiEntityCore {
                 EntityForestCreeper.class, EntityOddCreeper.class, EntityFloatCreeper.class, EntityCrystalCreeper.class,
                 EntityDeteriorationCreeper.class, EntitySleeperCreeper.class, EntityTriZombieCreeper.class,
                 EntityDisorderCreeper.class, EntityTransCreeper_2.class, EntityNetherCreeper.class,
-                EntityFesCreeper.class, EntityBoneCreeper.class, EntityMasterCreeper.class, EntitySpongeCreeper.class
-                ,EntityBigBatCreeper.class));
+                EntityFesCreeper.class, EntityBoneCreeper.class, EntityMasterCreeper.class, EntitySpongeCreeper.class,
+                EntityBigBatCreeper.class, EntityClockCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
