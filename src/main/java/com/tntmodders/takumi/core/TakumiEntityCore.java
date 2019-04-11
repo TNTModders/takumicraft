@@ -101,7 +101,7 @@ public class TakumiEntityCore {
                 EntityFesCreeper.class, EntityBoneCreeper.class, EntityMasterCreeper.class, EntitySpongeCreeper.class,
                 EntityBigBatCreeper.class, EntityClockCreeper.class, EntityLevelUpCreeper.class,
                 EntityBeetrootCreeper.class, EntityMirrorCreeper.class, EntityFastCreeper.class,
-                EntityWhiteEyesCreeper.class,EntityHyperspaceCreeper.class));
+                EntityWhiteEyesCreeper.class, EntityHyperspaceCreeper.class, EntityMotherCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -299,12 +299,12 @@ public class TakumiEntityCore {
                 manager -> new RenderSnowball<>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiExpEgg.class,
                 manager -> new RenderSnowball<>(manager, Items.EGG, Minecraft.getMinecraft().getRenderItem()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTNTPrimed.class, RenderTakumiTNTPrimed ::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityLlamaCreeperSpit.class, RenderLlamaCreeperSpit ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTNTPrimed.class, RenderTakumiTNTPrimed :: new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityLlamaCreeperSpit.class, RenderLlamaCreeperSpit :: new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiChocolateBall.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.TAKUMI_CHOCO_BALL,
                         Minecraft.getMinecraft().getRenderItem()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDarkVillager.class, RenderDarkVillager :: new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTransHomingBomb.class,
                 manager -> new RenderShulkerBullet(manager) {
                     @Override
@@ -319,10 +319,10 @@ public class TakumiEntityCore {
                             float partialTicks) {
                     }
                 });
-        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock ::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS ::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer ::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityYMS.class, RenderYMS ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock :: new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS :: new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer :: new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityYMS.class, RenderYMS :: new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLauncher.class,
                 manager -> new Render<EntityTakumiLauncher>(manager) {
                     @Nullable
@@ -364,7 +364,7 @@ public class TakumiEntityCore {
                     }
                 });
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityBoneDummy.class, RenderBoneDummy ::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityBoneDummy.class, RenderBoneDummy :: new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

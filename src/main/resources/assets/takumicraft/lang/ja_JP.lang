@@ -565,6 +565,9 @@ entity.whiteeyescreeper.read=はくがんしょう
 entity.whiteeyescreeper.desc=優しいあの子は、きっと「彼」の友だっただろう。 MOB募集:うおがめさん
 entity.hyperspacecreeper.name=亜空間匠
 entity.hyperspacecreeper.desc=テレポートなんてちゃちなものじゃあない。もっとすごい経験を味わった感じがするぜ MOB募集:澤口シグレさん
+entity.mothercreeper.name=親匠
+entity.mothercreeper.read=おやたくみ
+entity.mothercreeper.desc=願わくは、子らの成功を MOB募集:暁誠治さん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

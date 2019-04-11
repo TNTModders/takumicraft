@@ -547,6 +547,8 @@ entity.whiteeyescreeper.name=WhiteEyes Creeper
 entity.whiteeyescreeper.desc=He, a kind man, may be his "friend".
 entity.hyperspacecreeper.name=Hyperspace Creeper
 entity.hyperspacecreeper.desc=That's no teleporting, it make us run less than twelve parsecs.
+entity.mothercreeper.name=Mother Creeper
+entity.mothercreeper.desc=God bless you, my childlen.
 
 
 #advancements
