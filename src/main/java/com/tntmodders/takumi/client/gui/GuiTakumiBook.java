@@ -64,8 +64,22 @@ public class GuiTakumiBook extends GuiScreen {
         this.bookTotalPages = TakumiEntityCore.getEntityList().size();
     }
 
+    private void push() {
+        GlStateManager.disableLighting();
+        RenderHelper.enableGUIStandardItemLighting();
+        GlStateManager.pushMatrix();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    private void pop() {
+        GlStateManager.popMatrix();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.enableLighting();
+    }
+
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.push();
         this.drawDefaultBackground();
         if (this.currPage != Integer.MAX_VALUE) {
             GL11.glPushMatrix();
@@ -154,6 +168,7 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glPopMatrix();
             super.drawScreen(mouseX, mouseY, partialTicks);
         }
+        this.pop();
     }
 
     private EntityLivingBase getEntity(ITakumiEntity entity, boolean flg) {
@@ -204,7 +219,7 @@ public class GuiTakumiBook extends GuiScreen {
     public void renderEntity(int x, int y, int z, float yaw, float pitch, EntityLivingBase base, boolean flg) {
         GL11.glPushMatrix();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        //GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glTranslatef(x, y, 50.0F);
         GL11.glScalef(-z, z, z);
         this.renderSize(base);
@@ -214,32 +229,33 @@ public class GuiTakumiBook extends GuiScreen {
         float f4 = base.rotationPitch;
         float f5 = base.prevRotationYawHead;
         float f6 = base.rotationYawHead;
-        RenderHelper.disableStandardItemLighting();
+        //RenderHelper.disableStandardItemLighting();
         //RenderHelper.enableGUIStandardItemLighting();
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-((float) Math.atan(pitch / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
-        base.renderYawOffset = -10 + time * 0.5f;
-        base.rotationYaw = -10 + time * 0.5f;
+        base.renderYawOffset = -10 + time * 0.75f;
+        base.rotationYaw = -10 + time * 0.75f;
         base.rotationPitch = 0;
-        base.rotationYawHead = -10f + time * 0.5f;
-        base.prevRotationYawHead = -10f + time * 0.5f;
+        GL11.glRotatef(base.rotationYaw, 0, 1, 0);
+        //base.rotationYawHead = -10f + time * 0.5f;
+        //base.prevRotationYawHead = -10f + time * 0.5f;
         GL11.glTranslatef(0.0F, (float) base.getYOffset(), 0.0F);
         Minecraft.getMinecraft().getRenderManager().playerViewY = 180.0F;
-        if (!flg) {
+        /*if (!flg) {
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
-        }
+        }*/
         this.renderEntityWithPosYaw(base);
         base.renderYawOffset = f2;
         base.rotationYaw = f3;
         base.rotationPitch = f4;
         base.prevRotationYawHead = f5;
         base.rotationYawHead = f6;
-        RenderHelper.enableStandardItemLighting();
-        RenderHelper.enableGUIStandardItemLighting();
-        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        //RenderHelper.enableStandardItemLighting();
+        //RenderHelper.enableGUIStandardItemLighting();
+        //OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         ////GL11.glDisable(GL11.GL_TEXTURE_2D);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        //OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
         GL11.glPopMatrix();
     }
 
@@ -256,7 +272,7 @@ public class GuiTakumiBook extends GuiScreen {
         }
         if (entity instanceof EntitySquidCreeper) {
             GL11.glScaled(0.65, 0.65, 0.65);
-            GL11.glTranslated(-1, -1, 0);
+            GL11.glTranslated(0, -1, 0);
         } else if (entity instanceof EntityGhastCreeper) {
             GL11.glScaled(0.2, 0.2, 0.2);
         } else if (entity instanceof EntityBalloonCreeper) {
@@ -270,24 +286,37 @@ public class GuiTakumiBook extends GuiScreen {
         }
     }
 
-    void renderEntityWithPosYaw(EntityLivingBase p_147939_1_) {
+    void renderEntityWithPosYaw(EntityLivingBase entityLivingBase) {
         RenderManager manager = Minecraft.getMinecraft().getRenderManager();
         Render<EntityLivingBase> render;
 
         try {
-            render = manager.getEntityRenderObject(p_147939_1_);
+            render = manager.getEntityRenderObject(entityLivingBase);
 
             if (render != null && manager.renderEngine != null) {
                 try {
-                    p_147939_1_.world = this.player.world;
-                    render.doRender(p_147939_1_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+                    entityLivingBase.world = this.player.world;
+                    //render.doRender(p_147939_1_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+                    GlStateManager.enableColorMaterial();
+                    GlStateManager.pushMatrix();
+                    RenderHelper.enableStandardItemLighting();
+                    manager.setPlayerViewY(180.0F);
+                    manager.setRenderShadow(false);
+                    manager.doRenderEntity(entityLivingBase, 0, 0, 0, entityLivingBase.rotationYaw, 0, false);
+                    manager.setRenderShadow(true);
+                    RenderHelper.disableStandardItemLighting();
+                    GlStateManager.disableRescaleNormal();
+                    GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+                    GlStateManager.disableTexture2D();
+                    GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+                    GlStateManager.popMatrix();
                 } catch (Throwable throwable2) {
                     throw new ReportedException(
                             CrashReport.makeCrashReport(throwable2, "Rendering entity in takumibook"));
                 }
 
                 try {
-                    render.doRenderShadowAndFire(p_147939_1_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+                    render.doRenderShadowAndFire(entityLivingBase, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
                 } catch (Throwable throwable1) {
                     throw new ReportedException(
                             CrashReport.makeCrashReport(throwable1, "Post-rendering entity in takumibook"));
