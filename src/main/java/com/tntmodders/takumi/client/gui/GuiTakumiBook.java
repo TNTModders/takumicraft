@@ -6,9 +6,7 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
-import com.tntmodders.takumi.entity.mobs.boss.EntityBalloonCreeper;
-import com.tntmodders.takumi.entity.mobs.boss.EntityBigSpiderCreeper;
-import com.tntmodders.takumi.entity.mobs.boss.EntityForestCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -181,6 +179,9 @@ public class GuiTakumiBook extends GuiScreen {
         if (entity instanceof EntityOddCreeper && !flg) {
             return new EntityCreeper(((Entity) entity).world);
         }
+        if (entity instanceof EntityTransCreeper_2 && !flg) {
+            return new EntityTransCreeper(((Entity) entity).world);
+        }
         if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);
         } else if (entity instanceof EntitySkeletonCreeper) {
@@ -242,9 +243,9 @@ public class GuiTakumiBook extends GuiScreen {
         //base.prevRotationYawHead = -10f + time * 0.5f;
         GL11.glTranslatef(0.0F, (float) base.getYOffset(), 0.0F);
         Minecraft.getMinecraft().getRenderManager().playerViewY = 180.0F;
-        /*if (!flg) {
+        if (!flg) {
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
-        }*/
+        }
         this.renderEntityWithPosYaw(base);
         base.renderYawOffset = f2;
         base.rotationYaw = f3;
