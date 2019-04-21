@@ -115,6 +115,7 @@ tile.darkcore.name=Creeper Dark Core Brick
 tile.darkcore_on.name=Creeper Dark Activated Brick
 tile.darkcore_sp.name=Creeper Dark Core Brick
 tile.takumistone_ep.name=Takumi Explosive Stone
+tile.yukaridummy.name=Yukari Creeper Bomb
 
 #item
 item.takumibook.name=Creeper Book
