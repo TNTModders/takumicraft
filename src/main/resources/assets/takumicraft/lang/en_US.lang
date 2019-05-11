@@ -550,6 +550,8 @@ entity.hyperspacecreeper.name=Hyperspace Creeper
 entity.hyperspacecreeper.desc=That's no teleporting, it make us run less than twelve parsecs.
 entity.mothercreeper.name=Mother Creeper
 entity.mothercreeper.desc=God bless you, my childlen.
+entity.constructcreeper.name=Construct Creeper
+entity.constructcreeper.desc=Give you a house, instead of destroy!
 
 
 #advancements

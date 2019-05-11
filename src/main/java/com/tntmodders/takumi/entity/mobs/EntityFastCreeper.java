@@ -1,11 +1,14 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.asm.TakumiASMNameMap;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 
 public class EntityFastCreeper extends EntityTakumiAbstractCreeper {
@@ -19,6 +22,12 @@ public class EntityFastCreeper extends EntityTakumiAbstractCreeper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return TakumiItemCore.TAKUMI_TYPE_SWORD_FIRE;
     }
 
     @Override

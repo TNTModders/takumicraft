@@ -569,6 +569,8 @@ entity.hyperspacecreeper.desc=テレポートなんてちゃちなものじゃ�
 entity.mothercreeper.name=親匠
 entity.mothercreeper.read=おやたくみ
 entity.mothercreeper.desc=願わくは、子らの成功を MOB募集:暁誠治さん
+entity.constructcreeper.name=建築匠
+entity.constructcreeper.desc=破壊したお詫びに新しい家を建てておいたよ MOB募集:ぶらぁぁぁ！さん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
