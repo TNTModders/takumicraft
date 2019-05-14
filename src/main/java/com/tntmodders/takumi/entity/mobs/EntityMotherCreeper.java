@@ -54,11 +54,13 @@ public class EntityMotherCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-        for (int i = 0; i < (this.getPowered() ? 8 : 5); i++) {
-            EntityCreeper creeper = new EntityCreeper(this.world);
-            creeper.copyLocationAndAnglesFrom(this);
-            spawnChild(creeper);
-        }
+       if(!this.world.isRemote){
+           for (int i = 0; i < (this.getPowered() ? 8 : 5); i++) {
+               EntityCreeper creeper = new EntityCreeper(this.world);
+               creeper.copyLocationAndAnglesFrom(this);
+               spawnChild(creeper);
+           }
+       }
     }
 
     @Override
