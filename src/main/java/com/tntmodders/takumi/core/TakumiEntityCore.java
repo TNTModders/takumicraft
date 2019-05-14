@@ -102,7 +102,7 @@ public class TakumiEntityCore {
                 EntityBigBatCreeper.class, EntityClockCreeper.class, EntityLevelUpCreeper.class,
                 EntityBeetrootCreeper.class, EntityMirrorCreeper.class, EntityFastCreeper.class,
                 EntityWhiteEyesCreeper.class, EntityHyperspaceCreeper.class, EntityMotherCreeper.class,
-                EntityConstructCreeper.class));
+                EntityConstructCreeper.class, EntityShockCreeper.class, EntityDoubleCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {

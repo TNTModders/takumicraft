@@ -571,6 +571,11 @@ entity.mothercreeper.read=おやたくみ
 entity.mothercreeper.desc=願わくは、子らの成功を MOB募集:暁誠治さん
 entity.constructcreeper.name=建築匠
 entity.constructcreeper.desc=破壊したお詫びに新しい家を建てておいたよ MOB募集:ぶらぁぁぁ！さん
+entity.shockcreeper.name=匠撃
+entity.shockcreeper.desc=彼の着地には気を付けろ! MOB募集:マグマンさん
+entity.shockcreeper.read=しょうげき
+entity.doublecreeper.name=倍匠
+entity.doublecreeper.desc=カラダもってくれよ!! ２倍爆発拳だっ!!!!!
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

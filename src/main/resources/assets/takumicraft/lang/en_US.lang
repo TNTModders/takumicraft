@@ -552,6 +552,10 @@ entity.mothercreeper.name=Mother Creeper
 entity.mothercreeper.desc=God bless you, my childlen.
 entity.constructcreeper.name=Construct Creeper
 entity.constructcreeper.desc=Give you a house, instead of destroy!
+entity.shockcreeper.name=Shock Creeper
+entity.shockcreeper.desc=Be careful for its jump, danger comes from sky.
+entity.doublecreeper.name=Double Creeper
+entity.doublecreeper.desc=Double bonus!!
 
 
 #advancements
