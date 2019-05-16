@@ -556,6 +556,8 @@ entity.shockcreeper.name=Shock Creeper
 entity.shockcreeper.desc=Be careful for its jump, danger comes from sky.
 entity.doublecreeper.name=Double Creeper
 entity.doublecreeper.desc=Double bonus!!
+entity.meatcreeper.name=Meat Creeper
+entity.meatcreeper.desc=Can I eat that delicious meat?
 
 
 #advancements
