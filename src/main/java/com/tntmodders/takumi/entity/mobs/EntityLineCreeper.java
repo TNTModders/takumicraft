@@ -17,7 +17,7 @@ public class EntityLineCreeper extends EntityTakumiAbstractCreeper {
                     this.world.createExplosion(this,
                             this.posX + Math.cos(Math.toRadians(this.rotationYawHead + 90)) * i, this.posY + y,
                             this.posZ + Math.sin(Math.toRadians(this.rotationYawHead + 90)) * i,
-                            this.getPowered() ? 3.5f : 1.75f, true);
+                            this.getPowered() ? 3.5f : 2f, true);
                 }
             }
         }
