@@ -558,6 +558,8 @@ entity.doublecreeper.name=Double Creeper
 entity.doublecreeper.desc=Double bonus!!
 entity.meatcreeper.name=Meat Creeper
 entity.meatcreeper.desc=Can I eat that delicious meat?
+entity.linecreeper.name=Line Creeper
+entity.linecreeper.desc=The explosion is like a sword, cutting ground and slash the enemy.
 
 
 #advancements

@@ -579,6 +579,9 @@ entity.doublecreeper.desc=カラダもってくれよ!! ２倍爆発拳だっ!!!
 entity.meatcreeper.name=肉匠
 entity.meatcreeper.read=にくみ
 entity.meatcreeper.desc=この肉、まだイケるだろうか……? MOB募集:飛高あのんさん
+entity.linecreeper.name=切匠
+entity.linecreeper.read=せっしょう
+entity.linecreeper.desc=その爆破 斬撃の如し MOB募集:斑沙さん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
