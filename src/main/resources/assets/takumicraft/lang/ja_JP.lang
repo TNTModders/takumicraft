@@ -586,6 +586,8 @@ entity.linecreeper.desc=その爆破 斬撃の如し MOB募集:斑沙さん
 entity.makeupcreeper.name=戦化匠
 entity.makeupcreeper.read=いくさげしょう
 entity.makeupcreeper.desc=さあ、戦いの時間だ。化粧をして、皆を奮い立たせようじゃないか。 MOB募集:kore刻蒼さん
+entity.titancreeper.name=隕匠
+entity.titancreeper.desc=月が満ちる大地に、この匠は現れる。落とせ、大地は今沈む。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

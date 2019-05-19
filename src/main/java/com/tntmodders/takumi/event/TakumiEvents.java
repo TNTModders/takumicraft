@@ -15,7 +15,6 @@ import com.tntmodders.takumi.item.ItemTypeSword;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
-import com.tntmodders.takumi.world.gen.TakumiMapGenTower_F;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -717,14 +716,14 @@ public class TakumiEvents {
             mapGenDarkShrine.generateStructure(event.getWorld(), event.getRand(),
                     new ChunkPos(event.getChunkX(), event.getChunkZ()));
         }
-        if (event.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD && event.getChunkX() == 0 &&
+/*        if (event.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD && event.getChunkX() == 0 &&
                 event.getChunkZ() == 0) {
             TakumiMapGenTower_F takumiMapGenTower_f;
             takumiMapGenTower_f = new TakumiMapGenTower_F();
             takumiMapGenTower_f.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
             takumiMapGenTower_f.generateStructure(event.getWorld(), event.getRand(),
                     new ChunkPos(event.getChunkX(), event.getChunkZ()));
-        }
+        }*/
     }
 
     @SubscribeEvent

@@ -563,6 +563,8 @@ entity.linecreeper.name=Line Creeper
 entity.linecreeper.desc=The explosion is like a sword, cutting ground and slash the enemy.
 entity.makeupcreeper.name=Makeup Creeper
 entity.makeupcreeper.desc=Get up, make up, we must beat up our enemy.
+entity.titancreeper.name=Titan Creeper
+entity.titancreeper.desc=A titan throws a moon, to the ground.
 
 
 #advancements
