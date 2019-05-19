@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.layer.LayerMakeup;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityYukariCreeper;
@@ -27,6 +28,7 @@ public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends 
         super(renderManagerIn, model, 0.5F);
         this.addLayer(new LayerTakumiCharge(this));
         this.addLayer(new LayerSeasonCreepers<>(this));
+        this.addLayer(new LayerMakeup<>(this));
     }
 
     /**

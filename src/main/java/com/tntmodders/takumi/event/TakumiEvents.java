@@ -33,6 +33,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.*;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
@@ -150,6 +151,17 @@ public class TakumiEvents {
                             3f, true);
                     event.getEntityLiving().attackEntityFrom(DamageSource.causeExplosionDamage(explosion), 6);
                 }
+            }
+        }
+        if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == TakumiItemCore.MAKEUP) {
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 100));
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100));
+            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 100, 1));
+            event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).attemptDamageItem(1,
+                    event.getEntityLiving().world.rand, null);
+            if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItemDamage() >
+                    event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getMaxDamage() - 5) {
+                event.getEntityLiving().setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
             }
         }
         if (TakumiUtils.isApril(event.getEntity().world)) {

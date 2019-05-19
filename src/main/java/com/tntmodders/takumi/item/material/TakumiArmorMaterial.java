@@ -21,4 +21,8 @@ public class TakumiArmorMaterial {
     public static final ArmorMaterial BATTLE_POWERED =
             EnumHelper.addArmorMaterial("battle_powered", "takumicraft:battle", 300, new int[]{6, 12, 16, 6}, 40,
                     SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 10.0f);
+
+    public static final ArmorMaterial MAKEUP =
+            EnumHelper.addArmorMaterial("makeup", "takumicraft:makeup", 100, new int[]{1, 1, 1, 1}, 0,
+                    SoundEvents.ENTITY_CREEPER_PRIMED, 0.0f);
 }

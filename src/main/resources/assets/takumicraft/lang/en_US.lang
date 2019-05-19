@@ -182,6 +182,7 @@ item.energycore_normal.name=Energy Core
 item.energycore_red.name=Energy Core[Attack]
 item.energycore_blue.name=Energy Core[Defence]
 item.energycore_yellow.name=Energy Core[Support]
+item.makeup.name=Creeper Makeup
 
 #entity
 #desc max: 72 chars
@@ -560,6 +561,8 @@ entity.meatcreeper.name=Meat Creeper
 entity.meatcreeper.desc=Can I eat that delicious meat?
 entity.linecreeper.name=Line Creeper
 entity.linecreeper.desc=The explosion is like a sword, cutting ground and slash the enemy.
+entity.makeupcreeper.name=Makeup Creeper
+entity.makeupcreeper.desc=Get up, make up, we must beat up our enemy.
 
 
 #advancements
