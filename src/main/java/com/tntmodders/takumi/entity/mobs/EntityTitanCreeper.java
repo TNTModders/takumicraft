@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.init.Blocks;
@@ -14,13 +15,20 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            int i = this.getPowered() ? 25 : 15;
+            int i = this.getPowered() ? 30 : 20;
             for (int x = -i; x <= i; x++) {
-                for (int y = -i; y < 0; y++) {
-                    for (int z = -i; z <= i; z++) {
+                for (int z = -i; z <= i; z++) {
+                    boolean flg = true;
+                    for (int y = -i; y < 0; y++) {
                         if (x * x + y * y + z * z < i * i) {
-                            TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, 256 + y, z),
-                                    Blocks.SAND.getDefaultState());
+                            if (flg && this.rand.nextBoolean()) {
+                                TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, 256 + y, z),
+                                        TakumiBlockCore.FALLING_BOMB.getDefaultState());
+                                flg = false;
+                            } else {
+                                TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, 256 + y, z),
+                                        Blocks.SAND.getDefaultState());
+                            }
                         }
                     }
                 }
