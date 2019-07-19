@@ -18,6 +18,7 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
             if (!this.world.isRemote) {
                 EntityWrylyCreeper wrylyCreeper = new EntityWrylyCreeper(this.world);
                 wrylyCreeper.copyLocationAndAnglesFrom(this);
+                wrylyCreeper.setHealth(this.getHealth());
                 if (this.getPowered()) {
                     TakumiUtils.takumiSetPowered(wrylyCreeper, true);
                 }
