@@ -253,8 +253,6 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
 
             if (this.isDateAroundHalloween(this.world.getCurrentDate())) {
                 j = 7;
-            } else if (this.rand.nextBoolean()) {
-                return false;
             }
 
             return i <= this.rand.nextInt(j) && super.getCanSpawnHere();

@@ -302,13 +302,13 @@ public class TakumiEvents {
 
         if (entity.isPotionActive(MobEffects.JUMP_BOOST)) {
             entity.motionY +=
-                    (double) ((float) (entity.getActivePotionEffect(MobEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
+                    (float) (entity.getActivePotionEffect(MobEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F;
         }
 
         if (entity.isSprinting()) {
             float f = entity.rotationYaw * 0.017453292F;
-            entity.motionX -= (double) (MathHelper.sin(f) * 0.2F);
-            entity.motionZ += (double) (MathHelper.cos(f) * 0.2F);
+            entity.motionX -= MathHelper.sin(f) * 0.2F;
+            entity.motionZ += MathHelper.cos(f) * 0.2F;
         }
 
         entity.isAirBorne = true;
@@ -545,11 +545,20 @@ public class TakumiEvents {
                     e.setResult(Result.DENY);
                 }
             } else if (e.getEntityLiving().getRNG().nextInt(5) == 0 && e.getEntityLiving() instanceof EntityBat) {
-                EntityBatCreeper batCreeper = new EntityBatCreeper(e.getWorld());
-                batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
-                if (batCreeper.getCanSpawnHere()) {
-                    e.getWorld().spawnEntity(batCreeper);
-                    e.setResult(Result.DENY);
+                if(e.getEntityLiving().getRNG().nextInt(10)==0){
+                    EntityBigBatCreeper batCreeper = new EntityBigBatCreeper(e.getWorld());
+                    batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                    /*if (batCreeper.getCanSpawnHere())*/ {
+                        e.getWorld().spawnEntity(batCreeper);
+                        e.setResult(Result.DENY);
+                    }
+                }else{
+                    EntityBatCreeper batCreeper = new EntityBatCreeper(e.getWorld());
+                    batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                    if (batCreeper.getCanSpawnHere()) {
+                        e.getWorld().spawnEntity(batCreeper);
+                        e.setResult(Result.DENY);
+                    }
                 }
             }
         }
