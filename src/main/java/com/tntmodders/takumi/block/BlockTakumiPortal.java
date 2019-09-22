@@ -20,11 +20,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.BlockRenderLayer;
@@ -80,7 +83,7 @@ public class BlockTakumiPortal extends BlockBreakable {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-            EnumFacing side) {
+                                        EnumFacing side) {
         pos = pos.offset(side);
         Axis enumfacing$axis = null;
 
@@ -175,7 +178,7 @@ public class BlockTakumiPortal extends BlockBreakable {
 
     @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_,
-            EnumFacing p_193383_4_) {
+                                            EnumFacing p_193383_4_) {
         return BlockFaceShape.UNDEFINED;
     }
 
@@ -286,12 +289,16 @@ public class BlockTakumiPortal extends BlockBreakable {
         if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
             MinecraftServer server = worldIn.getMinecraftServer();
             if (server != null && entityIn.timeUntilPortal <= 0) {
+                TakumiCraftCore.LOGGER.info("portal:" + entityIn.timeUntilPortal);
                 PlayerList playerList = server.getPlayerList();
                 int i = entityIn.dimension == DimensionType.OVERWORLD.getId() ? TakumiWorldCore.TAKUMI_WORLD.getId() :
                         DimensionType.OVERWORLD.getId();
                 TakumiTeleporter teleporter = new TakumiTeleporter(server.getWorld(i));
-                teleporter.setTakumiPortal(entityIn, pos);
-                entityIn.timeUntilPortal = entityIn.getPortalCooldown() * 2;
+                teleporter.placeInPortal(entityIn, entityIn.rotationYaw);
+                entityIn.timeUntilPortal = 500;
+                if(entityIn instanceof EntityPlayer && !entityIn.world.isRemote){
+                    ((EntityPlayer) entityIn).addPotionEffect(new  PotionEffect(MobEffects.NAUSEA,500));
+                }
                 if (entityIn instanceof EntityPlayerMP) {
                     playerList.transferPlayerToDimension((EntityPlayerMP) entityIn, i, teleporter);
                 } else {
