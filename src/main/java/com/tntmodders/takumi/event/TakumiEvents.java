@@ -545,20 +545,15 @@ public class TakumiEvents {
                     e.setResult(Result.DENY);
                 }
             } else if (e.getEntityLiving().getRNG().nextInt(5) == 0 && e.getEntityLiving() instanceof EntityBat) {
-                if(e.getEntityLiving().getRNG().nextInt(10)==0){
-                    EntityBigBatCreeper batCreeper = new EntityBigBatCreeper(e.getWorld());
-                    batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
-                    /*if (batCreeper.getCanSpawnHere())*/ {
-                        e.getWorld().spawnEntity(batCreeper);
-                        e.setResult(Result.DENY);
+                EntityBatCreeper batCreeper = new EntityBatCreeper(e.getWorld());
+                batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                if (batCreeper.getCanSpawnHere()) {
+                    if (e.getEntityLiving().getRNG().nextInt(10) == 0) {
+                        batCreeper = new EntityBigBatCreeper(e.getWorld());
+                        batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
                     }
-                }else{
-                    EntityBatCreeper batCreeper = new EntityBatCreeper(e.getWorld());
-                    batCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
-                    if (batCreeper.getCanSpawnHere()) {
-                        e.getWorld().spawnEntity(batCreeper);
-                        e.setResult(Result.DENY);
-                    }
+                    e.getWorld().spawnEntity(batCreeper);
+                    e.setResult(Result.DENY);
                 }
             }
         }

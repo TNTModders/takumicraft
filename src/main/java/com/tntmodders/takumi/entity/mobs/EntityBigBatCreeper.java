@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderBatCreeper;
-import com.tntmodders.takumi.core.TakumiWorldCore;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -18,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -237,7 +235,7 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
-    @Override
+   /* @Override
     public boolean getCanSpawnHere() {
         if (this.world.provider.getDimensionType().getId() != DimensionType.OVERWORLD.getId() &&
                 this.world.provider.getDimensionType().getId() != TakumiWorldCore.TAKUMI_WORLD.getId()) {
@@ -257,7 +255,7 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
 
             return i <= this.rand.nextInt(j) && super.getCanSpawnHere();
         }
-    }
+    }*/
 
     private boolean isDateAroundHalloween(Calendar p_175569_1_) {
         return p_175569_1_.get(Calendar.MONTH) + 1 == 10 && p_175569_1_.get(Calendar.DATE) >= 20 ||
