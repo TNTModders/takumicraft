@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -26,8 +27,8 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         List<BlockPos> posList = new ArrayList<>();
         for (BlockPos pos : event.getAffectedBlocks()) {
-            if (pos.getY() > this.posY && (this.world.getBlockState(pos).getBlockHardness(this.world, pos) > 0 ||
-                    this.world.isAirBlock(pos))) {
+            if (pos.getY() > this.posY && (this.world.getBlockState(pos).getBlockHardness(this.world, pos) >= 0 ||
+                    this.world.isAirBlock(pos))|| (this.world.getBlockState(pos).getBlock()== Blocks.BEDROCK && pos.getY()>0)) {
                 this.world.setBlockToAir(pos);
             } else if (this.world.isAirBlock(pos) || this.world.getBlockState(pos).getMaterial().isLiquid()) {
                 IBlockState state = this.world.getBlockState(this.getPosition().down());
@@ -115,6 +116,6 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 1f;
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 && (blockStateIn.getBlock() != Blocks.BEDROCK)? 10000000f : 1f;
     }
 }

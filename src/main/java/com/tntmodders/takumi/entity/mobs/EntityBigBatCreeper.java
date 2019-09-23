@@ -85,8 +85,8 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
             }
 
             if (this.spawnPosition == null || this.rand.nextInt(30) == 0 ||
-                    this.spawnPosition.distanceSq((double) (int) this.posX, (double) (int) this.posY,
-                            (double) (int) this.posZ) < 4.0D) {
+                    this.spawnPosition.distanceSq((int) this.posX, (int) this.posY,
+                            (int) this.posZ) < 4.0D) {
                 this.spawnPosition = new BlockPos((int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7),
                         (int) this.posY + this.rand.nextInt(6) - 2,
                         (int) this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
@@ -256,7 +256,6 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
             return i <= this.rand.nextInt(j) && super.getCanSpawnHere();
         }
     }*/
-
     private boolean isDateAroundHalloween(Calendar p_175569_1_) {
         return p_175569_1_.get(Calendar.MONTH) + 1 == 10 && p_175569_1_.get(Calendar.DATE) >= 20 ||
                 p_175569_1_.get(Calendar.MONTH) + 1 == 11 && p_175569_1_.get(Calendar.DATE) <= 3;
