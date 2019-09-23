@@ -245,6 +245,9 @@ public class EntityBatCreeper extends EntityTakumiAbstractCreeper {
                 this.world.provider.getDimensionType().getId() != TakumiWorldCore.TAKUMI_WORLD.getId()) {
             return false;
         }
+        if (this.world.provider.getDimensionType().getId() == TakumiWorldCore.TAKUMI_WORLD.getId() && rand.nextInt(10) != 0) {
+            return false;
+        }
         BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
 
         if (blockpos.getY() >= this.world.getSeaLevel()) {

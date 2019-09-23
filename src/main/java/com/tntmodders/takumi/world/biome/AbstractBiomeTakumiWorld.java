@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
+import com.tntmodders.takumi.entity.mobs.EntityBatCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
@@ -53,7 +54,8 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
                         iTakumiEntity instanceof EntitySeaGuardianCreeper) &&
                         (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
                                 iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
-                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 5, 100, 200));
+                    int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 100;
+                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 5, count, (count + 2) * 2));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

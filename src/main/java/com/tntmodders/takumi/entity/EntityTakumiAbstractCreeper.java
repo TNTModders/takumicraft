@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity;
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
+import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIMoveToAttackBlock;
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
@@ -18,6 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -248,5 +251,14 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             }
         }
         super.onDeath(source);
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        if (this.world.provider.getDimensionType() != TakumiWorldCore.TAKUMI_WORLD) {
+            return super.getCanSpawnHere();
+        } else {
+            return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
+        }
     }
 }
