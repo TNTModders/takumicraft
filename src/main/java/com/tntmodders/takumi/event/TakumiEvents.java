@@ -65,6 +65,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEve
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.util.*;
 import java.util.stream.StreamSupport;
@@ -466,6 +467,16 @@ public class TakumiEvents {
         if (e.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD) {
             if (!(e.getEntityLiving() instanceof ITakumiEntity)) {
                 e.setResult(Result.DENY);
+            } else if (!e.getWorld().isRemote && e.getEntityLiving().getRNG().nextInt(10) == 0) {
+                try {
+                    int rnd = e.getEntityLiving().getRNG().nextInt(10);
+                    for (int i = 0; i < 1 + rnd; i++) {
+                        EntityLivingBase entity = ((EntityLivingBase) EntityRegistry.getEntry(e.getEntityLiving().getClass()).newInstance(e.getWorld()));
+                        entity.copyLocationAndAnglesFrom(entity);
+                        e.getWorld().spawnEntity(entity);
+                    }
+                } catch (Exception ignored) {
+                }
             }
         }
         try {

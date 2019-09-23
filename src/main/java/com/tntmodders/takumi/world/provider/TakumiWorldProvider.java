@@ -4,6 +4,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -18,12 +19,20 @@ public class TakumiWorldProvider extends WorldProvider {
 
     @Override
     protected void generateLightBrightnessTable() {
-        float f = 0.0F;
-
         for (int i = 0; i <= 15; ++i) {
             float f1 = 1.0F - (float) i / 15.0F;
-            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F * 0.25f;
+            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F * 0.2f;
         }
+    }
+
+    @Override
+    public float getSunBrightness(float par1) {
+        return 0;
+    }
+
+    @Override
+    public float getSunBrightnessFactor(float par1) {
+        return 0;
     }
 
     @Override
@@ -97,12 +106,28 @@ public class TakumiWorldProvider extends WorldProvider {
         return TakumiWorldCore.TAKUMI_WORLD;
     }
 
-    @Override
+/*    @Override
     public void onWorldUpdateEntities() {
         super.onWorldUpdateEntities();
         this.world.getWorldInfo().setRaining(true);
         this.world.getWorldInfo().setRainTime(10000);
         this.world.getWorldInfo().setThundering(true);
         this.world.getWorldInfo().setThunderTime(10000);
+    }*/
+
+    @Override
+    public void resetRainAndThunder() {
+        this.world.getWorldInfo().setRaining(true);
+        this.world.getWorldInfo().setRainTime(Integer.MAX_VALUE - 1);
+        this.world.getWorldInfo().setThundering(true);
+        this.world.getWorldInfo().setThunderTime(Integer.MAX_VALUE - 1);
+    }
+
+    @Override
+    public void onPlayerAdded(EntityPlayerMP player) {
+        this.world.getWorldInfo().setRaining(true);
+        this.world.getWorldInfo().setRainTime(Integer.MAX_VALUE - 1);
+        this.world.getWorldInfo().setThundering(true);
+        this.world.getWorldInfo().setThunderTime(Integer.MAX_VALUE - 1);
     }
 }

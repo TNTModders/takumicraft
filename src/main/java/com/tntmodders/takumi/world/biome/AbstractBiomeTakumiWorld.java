@@ -53,7 +53,7 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
                         iTakumiEntity instanceof EntitySeaGuardianCreeper) &&
                         (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
                                 iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
-                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 100, 30, 70));
+                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 5, 100, 200));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -138,5 +138,10 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
                 }
             }
         }
+    }
+
+    @Override
+    public float getSpawningChance() {
+        return 0.9f;
     }
 }

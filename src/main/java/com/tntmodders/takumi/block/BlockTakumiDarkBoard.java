@@ -37,7 +37,7 @@ public class BlockTakumiDarkBoard extends BlockContainer {
         this.setBlockUnbreakable();
         this.setResistance(10000000f);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setLightLevel(1f);
+        this.setLightLevel(0.4f);
     }
 
     @Nullable
