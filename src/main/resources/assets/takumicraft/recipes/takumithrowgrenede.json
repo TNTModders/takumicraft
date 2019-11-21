@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GQG",
+    "QGQ",
+    "GQG"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:typecore",
+      "data": 5
+    },
+    "G": {
+      "item": "takumicraft:creeperbomb"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumithrowgrenede"
+  }
+}

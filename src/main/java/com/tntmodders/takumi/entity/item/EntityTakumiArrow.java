@@ -6,7 +6,6 @@ import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +31,7 @@ public class EntityTakumiArrow extends EntityArrow {
     }
 
     public EntityTakumiArrow(World worldIn, ItemStack itemStack, EntityLivingBase base,
-            Class<? extends EntityCreeper> creeper) {
+                             Class<? extends EntityCreeper> creeper) {
         this(worldIn, itemStack, base);
         this.type = EnumArrowType.MONSTER;
         this.container = creeper;
@@ -53,7 +52,7 @@ public class EntityTakumiArrow extends EntityArrow {
     }
 
     public EntityTakumiArrow(World worldIn, EntityLivingBase base, int pierce, int power, boolean destroy,
-            Class<EntityCreeper> container, EnumArrowType type) {
+                             Class<EntityCreeper> container, EnumArrowType type) {
         super(worldIn, base);
         this.stack = null;
         this.power = power;
@@ -88,8 +87,7 @@ public class EntityTakumiArrow extends EntityArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.typeOfHit == Type.ENTITY) {
-            if (raytraceResultIn.entityHit == this.shootingEntity ||
-                    raytraceResultIn.entityHit instanceof EntityPlayer) {
+            if (raytraceResultIn.entityHit == this.shootingEntity) {
                 return;
             }
             raytraceResultIn.entityHit.attackEntityFrom(

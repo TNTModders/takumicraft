@@ -79,6 +79,8 @@ public class TakumiItemCore {
     public static final Item ENERGY_CORE = new ItemEnergyCore();
     public static final Item TAKUMI_MLRS = new ItemMLRS();
     public static final Item MAKEUP = new ItemMakeup();
+    public static final Item TESTER = new ItemTester();
+    public static final Item THROW_GRENEDE = new ItemTakumiThrowGrenede();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

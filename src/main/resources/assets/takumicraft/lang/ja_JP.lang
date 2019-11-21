@@ -183,6 +183,7 @@ item.energycore.red.name=匠エネルギーコア[攻]
 item.energycore.blue.name=匠エネルギーコア[守]
 item.energycore.yellow.name=匠エネルギーコア[援]
 item.makeup.name=戦化匠の紋章
+item.takumithrowgrenede.name=匠式手投爆弾
 
 #entity
 ＃descは36文字まで。
@@ -608,6 +609,7 @@ entity.odddummyghast.name=奇匠
 entity.dummyking.name=王匠
 entity.bonecreeperdummy.name=骸匠
 entity.bonecreeperdummy.tag=ただのしかばねのようだ……
+entity.takumithrowgrenede.name=匠式手投爆弾
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

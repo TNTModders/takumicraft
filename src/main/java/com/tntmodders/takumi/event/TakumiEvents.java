@@ -412,8 +412,11 @@ public class TakumiEvents {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
                 AbstractEntityTakumiGrenade grenade =
                         (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();
-                if (grenade.getThrower() != null) {
+                if (grenade.getThrower() != null && !(grenade instanceof EntityTakumiThrowGrenede)) {
                     event.getAffectedEntities().remove(grenade.getThrower());
+                }
+                if (grenade instanceof EntityTakumiThrowGrenede) {
+                    event.getAffectedEntities().removeIf(entity -> entity instanceof EntityMob);
                 }
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
@@ -572,10 +575,10 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void hurt(LivingHurtEvent event) {
-        if (event.getSource().getTrueSource() instanceof EntityTakumiArrow && event.getSource().isExplosion() &&
+/*        if (event.getSource().getTrueSource() instanceof EntityTakumiArrow && event.getSource().isExplosion() &&
                 event.getSource().getImmediateSource() == event.getEntity()) {
             event.setCanceled(true);
-        }
+        }*/
         if (TakumiUtils.isApril(event.getEntityLiving().world) && event.getEntityLiving() instanceof EntityPlayer) {
             event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, 100));
             event.getEntityLiving().playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
@@ -588,10 +591,14 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void damage(LivingAttackEvent event) {
-/*        if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow &&
-                event.getSource().getImmediateSource() == event.getEntity()) {
+        if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiThrowGrenede &&
+                ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower().getClass() == event.getEntityLiving().getClass()) {
             event.setCanceled(true);
-        } else*/
+        } else if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiArrow) {
+            if (((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity.getClass() == event.getEntityLiving().getClass()) {
+                event.setCanceled(true);
+            }
+        }
         if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityRoboCreeper) {
             event.setCanceled(true);
         }

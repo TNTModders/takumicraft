@@ -183,6 +183,7 @@ item.energycore_red.name=Energy Core[Attack]
 item.energycore_blue.name=Energy Core[Defence]
 item.energycore_yellow.name=Energy Core[Support]
 item.makeup.name=Creeper Makeup
+item.takumithrowgrenede.name=Creeper Grenede
 
 #entity
 #desc max: 72 chars
@@ -509,26 +510,6 @@ entity.fescreeper.name=Festival Creeper
 entity.fescreeper.desc=Creeper carnival has come, noisy, and crazy, so gonna be dizzy?
 entity.bonecreeper.name=Bone Creeper
 entity.bonecreeper.desc=I was born, I am bone, A mortal remains somewhere.
-
-entity.takumiarrow.name=Creeper Arrow
-entity.takumisnowball.name=Creeper Snowball
-entity.takumipotion.name=Explosive Potion
-entity.takumitnt.name=Creeper TNT
-entity.takumichocolateball.name=Chocolate Ball
-entity.fallingbomb,name=Falling Bomb
-entity.darkvillager.name=Dark VIllager
-entity.attackblock.name=Takumi Attack Block
-entity.attackblock.lose=Attack Block was destroyed.
-entity.attackblock.win=You compleatly protected Attack Block!
-entity.takumiXMS.name=X-MS
-entity.takumiYMS.name=Y-MS
-entity.watertypeforce.name=Creeper Water Axe
-entity.transhomingbomb.name=Trans Creeper
-entity.bighomingbomb.name=Big Creeper
-entity.odddummyghast.name=Odd Creeper
-entity.dummyking.name=King Creeper
-entity.bonecreeperdummy.name=Bone Creeper
-entity.bonecreeperdummy.tag=No response. Looks dead...
 entity.mastercreeper.name=Master Creeper
 entity.mastercreeper.desc=Do or do not, there's no try.
 entity.spongecreeper.name=Sponge Creeper
@@ -565,6 +546,27 @@ entity.makeupcreeper.name=Makeup Creeper
 entity.makeupcreeper.desc=Get up, make up, we must beat up our enemy.
 entity.titancreeper.name=Titan Creeper
 entity.titancreeper.desc=A titan throws a moon, to the ground.
+
+entity.takumiarrow.name=Creeper Arrow
+entity.takumisnowball.name=Creeper Snowball
+entity.takumipotion.name=Explosive Potion
+entity.takumitnt.name=Creeper TNT
+entity.takumichocolateball.name=Chocolate Ball
+entity.fallingbomb,name=Falling Bomb
+entity.darkvillager.name=Dark VIllager
+entity.attackblock.name=Takumi Attack Block
+entity.attackblock.lose=Attack Block was destroyed.
+entity.attackblock.win=You compleatly protected Attack Block!
+entity.takumiXMS.name=X-MS
+entity.takumiYMS.name=Y-MS
+entity.watertypeforce.name=Creeper Water Axe
+entity.transhomingbomb.name=Trans Creeper
+entity.bighomingbomb.name=Big Creeper
+entity.odddummyghast.name=Odd Creeper
+entity.dummyking.name=King Creeper
+entity.bonecreeperdummy.name=Bone Creeper
+entity.bonecreeperdummy.tag=No response. Looks dead...
+entity.takumithrowgrenede.name=Creeper Grenede
 
 
 #advancements
