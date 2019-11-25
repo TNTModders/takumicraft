@@ -668,7 +668,7 @@ public class TakumiEvents {
             if (FMLCommonHandler.instance().getSide().isServer()) {
                 if (TakumiConfigCore.useTakumiBookSync) {
                     String name = event.getEntityLiving().getClass() == EntityCreeper.class ? "" : ((ITakumiEntity) event.getEntityLiving()).getRegisterName();
-                    List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input -> input.getDistanceSqToEntity(event.getEntityLiving()) < 256);
+                    List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input -> input.getDistanceSqToEntity(event.getEntityLiving()) < 32 * 32);
                     players.forEach(playerMP -> playerMP.getAdvancements().grantCriterion(
                             playerMP.getServer().getAdvancementManager().getAdvancement(
                                     new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + name)), name));
