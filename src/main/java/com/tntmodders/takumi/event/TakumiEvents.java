@@ -663,23 +663,34 @@ public class TakumiEvents {
                         TakumiUtils.takumiTranslate("takumicraft.newyear.item.name")), 0.1f);
             }
         }
-        if (FMLCommonHandler.instance().getSide().isClient() && (event.getEntityLiving() instanceof ITakumiEntity ||
-                event.getEntityLiving() instanceof EntityCreeper) &&
-                event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-            boolean isOK = true;
-            for (ITakumiEntity takumiEntity : TakumiEntityCore.getEntityList()) {
-                if (!TakumiUtils.getAdvancementUnlocked(
-                        new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + takumiEntity.getRegisterName())) &&
-                        takumiEntity.getClass() != event.getEntityLiving().getClass()) {
-                    isOK = false;
-                    break;
+        if (event.getSource().getTrueSource() instanceof EntityPlayer && (event.getEntityLiving() instanceof ITakumiEntity ||
+                event.getEntityLiving() instanceof EntityCreeper)) {
+            if (FMLCommonHandler.instance().getSide().isServer()) {
+                if (TakumiConfigCore.useTakumiBookSync) {
+                    String name = event.getEntityLiving().getClass() == EntityCreeper.class ? "" : ((ITakumiEntity) event.getEntityLiving()).getRegisterName();
+                    List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input -> input.getDistanceSqToEntity(event.getEntityLiving()) < 256);
+                    players.forEach(playerMP -> playerMP.getAdvancements().grantCriterion(
+                            playerMP.getServer().getAdvancementManager().getAdvancement(
+                                    new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + name)), name));
+                }
+                if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
+                    boolean isOK = true;
+                    for (ITakumiEntity takumiEntity : TakumiEntityCore.getEntityList()) {
+                        if (!TakumiUtils.getAdvancementUnlockedServer(
+                                new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + takumiEntity.getRegisterName()),
+                                ((EntityPlayerMP) event.getSource().getTrueSource())) && takumiEntity.getClass() != event.getEntityLiving().getClass()) {
+                            isOK = false;
+                            break;
+                        }
+                    }
+                    if (isOK && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
+                        TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
+                                new ResourceLocation(TakumiCraftCore.MODID, "root"),
+                                new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
+                    }
                 }
             }
-            if (isOK && event.getSource().getTrueSource() instanceof EntityPlayerMP) {
-                TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) event.getSource().getTrueSource(),
-                        new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
-                        new ResourceLocation(TakumiCraftCore.MODID, "allcomplete"));
-            }
+
         }
         if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityLiving &&
                 ((EntityLiving) event.getEntityLiving()).getAttackTarget() instanceof EntityAttackBlock &&
