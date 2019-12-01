@@ -16,7 +16,7 @@ public class TakumiConfigCore {
     public static byte amountSmelting = 1;
     public static boolean useTP;
     public static boolean TakumiHard;
-    public static boolean useTakumiBookSync;
+    public static int rangeTakumiBookSync;
 
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
@@ -69,7 +69,7 @@ public class TakumiConfigCore {
         //amountSmelting = (byte) cfg.getInt("amountSmelting", HOGE, amountSmelting, 1, Byte.MAX_VALUE, "Smelting amount of Aluminium Ingot from
         // Aluminium Ore.", "config.aluminium.prop.amountSmelting");
         //TakumiBookSync
-        useTakumiBookSync = cfg.getBoolean("useTakumiBookSync", GENERAL, true,
+        rangeTakumiBookSync = cfg.getInt("useTakumiBookSync", GENERAL, 16, 0, Integer.MAX_VALUE,
                 TakumiUtils.takumiTranslate("config.takumicraft.booksync.desc"), "config.takumicraft.booksync.prop");
         // 設定内容をコンフィグファイルに保存する。
         cfg.save();

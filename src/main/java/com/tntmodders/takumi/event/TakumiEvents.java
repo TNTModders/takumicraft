@@ -394,9 +394,8 @@ public class TakumiEvents {
                                     event.getWorld().getBlockState(blockPos).getBlockHardness(event.getWorld(),
                                             blockPos) != -1 &&
                                     event.getWorld().getBlockState(blockPos).getBlock() != TakumiBlockCore.ACID_BLOCK) {
-                                event.getWorld().setBlockState(blockPos,
-                                        TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META,
-                                                i));
+                                TakumiUtils.setBlockStateProtected(event.getWorld(), blockPos,
+                                        TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META, i));
                             }
                         }
                     }
@@ -666,9 +665,10 @@ public class TakumiEvents {
         if (event.getSource().getTrueSource() instanceof EntityPlayer && (event.getEntityLiving() instanceof ITakumiEntity ||
                 event.getEntityLiving() instanceof EntityCreeper)) {
             if (FMLCommonHandler.instance().getSide().isServer()) {
-                if (TakumiConfigCore.useTakumiBookSync) {
+                if (TakumiConfigCore.rangeTakumiBookSync > 0) {
                     String name = event.getEntityLiving().getClass() == EntityCreeper.class ? "" : ((ITakumiEntity) event.getEntityLiving()).getRegisterName();
-                    List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input -> input.getDistanceSqToEntity(event.getEntityLiving()) < 32 * 32);
+                    List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input ->
+                            input.getDistanceToEntity(event.getEntityLiving()) < TakumiConfigCore.rangeTakumiBookSync);
                     players.forEach(playerMP -> playerMP.getAdvancements().grantCriterion(
                             playerMP.getServer().getAdvancementManager().getAdvancement(
                                     new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + name)), name));
