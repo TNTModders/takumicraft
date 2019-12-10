@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,7 +44,7 @@ public class EntityYMS extends EntityFlying {
     public void onUpdate() {
         super.onUpdate();
         if (this.getControllingPassenger() instanceof EntityPlayer) {
-            if (this.getControllingPassenger() instanceof EntityPlayerSP) {
+            if (FMLCommonHandler.instance().getSide().isClient() && this.getControllingPassenger() instanceof EntityPlayerSP) {
                 this.clientUpdate();
             }
             this.rotationYaw = this.rotationYawHead = ((EntityPlayer) this.getControllingPassenger()).rotationYawHead;
