@@ -3,13 +3,11 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
@@ -27,10 +25,11 @@ public class EntityBedCreeper extends EntityTakumiAbstractCreeper {
         return Items.BED;
     }
 
-    @Override
+    //nerf
+/*    @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.25f;
-    }
+    }*/
 
     @Override
     public float getBlockPathWeight(BlockPos pos) {

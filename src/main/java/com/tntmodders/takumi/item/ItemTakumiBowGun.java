@@ -71,6 +71,7 @@ public class ItemTakumiBowGun extends Item {
                         0f);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                takumiArrow.shootingEntity = entityLiving;
                 flg = worldIn.spawnEntity(takumiArrow);
             } else if (arrow.getItem() instanceof ItemArrow) {
                 takumiArrow = ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, entityLiving);
@@ -78,6 +79,7 @@ public class ItemTakumiBowGun extends Item {
                         0f);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                takumiArrow.shootingEntity = entityLiving;
                 flg = worldIn.spawnEntity(takumiArrow);
             } else if (arrow.getItem() instanceof ItemBlock &&
                     Block.getBlockFromItem(arrow.getItem()) instanceof BlockTakumiMonsterBomb) {
@@ -89,6 +91,7 @@ public class ItemTakumiBowGun extends Item {
                         0f);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                takumiArrow.shootingEntity = entityLiving;
                 flg = worldIn.spawnEntity(takumiArrow);
             } else if (arrow.getItem() == Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB)) {
                 takumiArrow = new EntityTakumiArrow(worldIn, entityLiving, 1, 5, true, null,
@@ -97,6 +100,7 @@ public class ItemTakumiBowGun extends Item {
                         1.0F);
                 takumiArrow.setIsCritical(true);
                 takumiArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                takumiArrow.shootingEntity = entityLiving;
                 flg = worldIn.spawnEntity(takumiArrow);
             }
             if (flg && takumiArrow != null) {
@@ -116,10 +120,9 @@ public class ItemTakumiBowGun extends Item {
 
     @SideOnly(Side.CLIENT)
     @Override
-    @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack,
-            @Nullable
-                    World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+                               @Nullable
+                                       World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.bowgun"));
     }
 

@@ -117,7 +117,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
 
     public void setRandomAttackID() {
         //@TODO: chage maxID if the var of attacks added. & change debugID if you commit it.
-        int debugID = 5;
+        int debugID = 0;
         if (debugID != 0) {
             this.dataManager.set(ATTACK_ID, debugID);
         } else {
