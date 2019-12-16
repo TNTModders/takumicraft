@@ -184,6 +184,7 @@ item.energycore_blue.name=Energy Core[Defence]
 item.energycore_yellow.name=Energy Core[Support]
 item.makeup.name=Creeper Makeup
 item.takumithrowgrenede.name=Creeper Grenede
+item.explosionbook.name=Minecraft Explosion Processing
 
 #entity
 #desc max: 72 chars
@@ -546,6 +547,8 @@ entity.makeupcreeper.name=Makeup Creeper
 entity.makeupcreeper.desc=Get up, make up, we must beat up our enemy.
 entity.titancreeper.name=Titan Creeper
 entity.titancreeper.desc=A titan throws a moon, to the ground.
+entity.nerdcreeper.name=Nerd Creeper
+entity.nerdcreeper.desc=Fan magazine "Minecraft Explosion Processing" is now on sale!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

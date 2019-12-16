@@ -184,6 +184,7 @@ item.energycore.blue.name=匠エネルギーコア[守]
 item.energycore.yellow.name=匠エネルギーコア[援]
 item.makeup.name=戦化匠の紋章
 item.takumithrowgrenede.name=匠式手投爆弾
+item.explosionbook.name=入門 爆発学
 
 #entity
 ＃descは36文字まで。
@@ -589,6 +590,9 @@ entity.makeupcreeper.read=いくさげしょう
 entity.makeupcreeper.desc=さあ、戦いの時間だ。化粧をして、皆を奮い立たせようじゃないか。 MOB募集:kore刻蒼さん
 entity.titancreeper.name=隕匠
 entity.titancreeper.desc=月が満ちる大地に、この匠は現れる。落とせ、大地は今沈む。
+entity.nerdcreeper.name=ヲ匠
+entity.nerdcreeper.read=オタクみ
+entity.nerdcreeper.desc=新刊「入門爆発学」はスペースB10aで頒布中!
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
