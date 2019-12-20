@@ -602,6 +602,9 @@ entity.crycreeper.desc=同胞よ来たれ、声を今逆襲に代えるとき。
 entity.opaquecreeper.name=闇匠
 entity.opaquecreeper.read=えんしょう
 entity.opaquecreeper.desc=闇へ誘い、異界を生み出し、その匠は空を拡張する。
+entity.layercreeper.name=薄匠
+entity.layercreeper.read=はくしょう
+entity.layercreeper.desc=薄氷を踏むように、足元には気をつけて!
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

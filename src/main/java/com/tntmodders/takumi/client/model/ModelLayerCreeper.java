@@ -15,7 +15,7 @@ public class ModelLayerCreeper extends ModelBase {
         super();
         this.box = new ModelRenderer(this, 0, 0);
         this.box.setTextureSize(16, 16);
-        this.box.addBox(-8, 8, -8, 16, 1, 16, 0);
+        this.box.addBox(-8, 23, -8, 16, 1, 16, 0);
     }
 
     @Override
