@@ -599,6 +599,9 @@ entity.tearcreeper.name=泣匠
 entity.tearcreeper.desc=同朋よ来たれ、涙を今復讐に換えるとき。
 entity.crycreeper.name=鳴匠
 entity.crycreeper.desc=同胞よ来たれ、声を今逆襲に代えるとき。
+entity.opaquecreeper.name=闇匠
+entity.opaquecreeper.read=えんしょう
+entity.opaquecreeper.desc=闇へ誘い、異界を生み出し、その匠は空を拡張する。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

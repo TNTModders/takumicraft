@@ -555,6 +555,8 @@ entity.tearcreeper.name=Tear Creeper
 entity.tearcreeper.desc=To change our tears to revenge, it's time.
 entity.tearcreeper.name=Cry Creeper
 entity.tearcreeper.desc=To change our cry to avenge, it's time.
+entity.opaquecreeper.name=Opaque Creeper
+entity.opaquecreeper.desc=The end on earth.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
