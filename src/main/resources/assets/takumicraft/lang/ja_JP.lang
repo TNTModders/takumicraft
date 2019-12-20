@@ -593,6 +593,8 @@ entity.titancreeper.desc=月が満ちる大地に、この匠は現れる。落�
 entity.nerdcreeper.name=ヲ匠
 entity.nerdcreeper.read=オタクみ
 entity.nerdcreeper.desc=新刊「入門爆発学」はスペースB10aで頒布中!
+entity.daimonjicreeper.name=大文字匠
+entity.daimonjicreeper.desc=山のように、風のように、雄大なる大文字に切り裂かん。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
