@@ -46,7 +46,7 @@ public class EntityNerdCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean canRegister() {
-        return false;
+        return true;
     }
 
     @Override

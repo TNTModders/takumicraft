@@ -158,12 +158,24 @@ public class GuiTakumiBook extends GuiScreen {
         } else {
             this.mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES_SP);
             GL11.glPushMatrix();
-            GL11.glScaled(1.9, 1, 1);
+            GL11.glScaled(1.85, 1, 1);
             this.drawTexturedModalRect(2, 2, 0, 0, 256, 256);
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableBlend();
             GL11.glPopMatrix();
+            int i = (this.width - this.bookImage) / 2;
+            int total = 0;
+            int count = 0;
+            for (ITakumiEntity takumiEntity : TakumiEntityCore.getEntityList()) {
+                boolean flg = TakumiUtils.getAdvancementUnlocked(
+                        new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + takumiEntity.getRegisterName()));
+                if (flg) {
+                    count++;
+                }
+                total++;
+            }
+            this.fontRenderer.drawString(count + " / " + total, i + 120, 150, 0);
             super.drawScreen(mouseX, mouseY, partialTicks);
         }
         this.pop();

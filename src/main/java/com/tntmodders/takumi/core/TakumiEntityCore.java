@@ -147,7 +147,7 @@ public class TakumiEntityCore {
             Class clazz = holder.clazz;
             ITakumiEntity entity = holder.entity;
             if (!entity.canRegister()) {
-                break;
+                continue;
             }
             ResourceLocation location = new ResourceLocation(TakumiCraftCore.MODID, entity.getRegisterName());
             EntityRegistry.registerModEntity(location, clazz, location.getResourcePath(), entity.getRegisterID(),
