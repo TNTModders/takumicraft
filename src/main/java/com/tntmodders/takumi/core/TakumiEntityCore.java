@@ -233,7 +233,7 @@ public class TakumiEntityCore {
                 }
             }
         }
-        TakumiCraftCore.LOGGER.info("Registered all " + CLASS_LIST.size() + " entites.");
+        TakumiCraftCore.LOGGER.info("Registered all " + entityList.size() + " entites.");
         itemRegister();
         if (FMLCommonHandler.instance().getSide().isClient()) {
             renderRegister();
