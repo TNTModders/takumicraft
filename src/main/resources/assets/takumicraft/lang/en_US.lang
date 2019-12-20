@@ -552,7 +552,9 @@ entity.nerdcreeper.desc=Fan magazine "Minecraft Explosion Processing" is now on 
 entity.daimonjicreeper.name=Daimonji Creeper
 entity.daimonjicreeper.desc=Like wind, like a mountain, this creeper slashes majestic.
 entity.tearcreeper.name=Tear Creeper
-entity.tearcreeper.desc=To change tears to revenge, it's time.
+entity.tearcreeper.desc=To change our tears to revenge, it's time.
+entity.tearcreeper.name=Cry Creeper
+entity.tearcreeper.desc=To change our cry to avenge, it's time.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

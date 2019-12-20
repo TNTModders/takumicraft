@@ -597,6 +597,8 @@ entity.daimonjicreeper.name=大文字匠
 entity.daimonjicreeper.desc=山のように、風のように、雄大なる大文字に切り裂かん。
 entity.tearcreeper.name=泣匠
 entity.tearcreeper.desc=同朋よ来たれ、涙を今復讐に換えるとき。
+entity.crycreeper.name=鳴匠
+entity.crycreeper.desc=同胞よ来たれ、声を今逆襲に代えるとき。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
