@@ -628,6 +628,8 @@ entity.opaquecreeper.desc=闇へ誘い、異界を生み出し、その匠は空
 entity.layercreeper.name=薄匠
 entity.layercreeper.read=はくしょう
 entity.layercreeper.desc=薄氷を踏むように、足元には気をつけて!
+entity.chasecreeper.name=追匠
+entity.chasecreeper.desc=その匠、最俊につき。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

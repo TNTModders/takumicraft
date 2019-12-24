@@ -597,6 +597,8 @@ public class TakumiEvents {
             if (((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity.getClass() == event.getEntityLiving().getClass()) {
                 event.setCanceled(true);
             }
+        } else if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityChaseCreeper) {
+            event.setCanceled(true);
         }
         if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityRoboCreeper) {
             event.setCanceled(true);
