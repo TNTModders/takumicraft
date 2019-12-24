@@ -1,0 +1,53 @@
+{
+  "variants": {
+    "color=white": {
+      "model": "takumicraft:white_creepercarpet"
+    },
+    "color=orange": {
+      "model": "takumicraft:orange_creepercarpet"
+    },
+    "color=magenta": {
+      "model": "takumicraft:magenta_creepercarpet"
+    },
+    "color=light_blue": {
+      "model": "takumicraft:light_blue_creepercarpet"
+    },
+    "color=yellow": {
+      "model": "takumicraft:yellow_creepercarpet"
+    },
+    "color=lime": {
+      "model": "takumicraft:lime_creepercarpet"
+    },
+    "color=pink": {
+      "model": "takumicraft:pink_creepercarpet"
+    },
+    "color=gray": {
+      "model": "takumicraft:gray_creepercarpet"
+    },
+    "color=silver": {
+      "model": "takumicraft:silver_creepercarpet"
+    },
+    "color=cyan": {
+      "model": "takumicraft:cyan_creepercarpet"
+    },
+    "color=purple": {
+      "model": "takumicraft:purple_creepercarpet"
+    },
+    "color=blue": {
+      "model": "takumicraft:blue_creepercarpet"
+    },
+    "color=brown": {
+      "model": "takumicraft:brown_creepercarpet"
+    },
+    "color=green": {
+      "model": "takumicraft:green_creepercarpet"
+    },
+    "color=red": {
+      "model": "takumicraft:red_creepercarpet"
+    },
+    "color=black": {
+      "model": "takumicraft:black_creepercarpet"
+    }
+  }
+}
+

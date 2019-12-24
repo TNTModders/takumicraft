@@ -1,0 +1,7 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "particle": "takumicraft:blocks/creeperwool_lime",
+    "wool": "takumicraft:blocks/creeperwool_lime"
+  }
+}

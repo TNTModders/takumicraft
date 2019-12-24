@@ -123,6 +123,22 @@ tile.creeperplanks_stairs.name=Creeper Planks Stairs
 tile.creeperiron_slab.name=Creeper Iron Slab
 tile.creeperbrick_slab.name=Creeper Brick Slab
 tile.creeperplanks_slab.name=Creeper Planks Slab
+tile.creepercarpet.white.name=Creeper White Carpet
+tile.creepercarpet.orange.name=Creeper Orange Carpet
+tile.creepercarpet.magenta.name=Creeper Magenta Carpet
+tile.creepercarpet.light_blue.name=Creeper Light Blue Carpet
+tile.creepercarpet.yellow.name=Creeper Yellow Carpet
+tile.creepercarpet.lime.name=Creeper Lime Carpet
+tile.creepercarpet.pink.name=Creeper Pink Carpet
+tile.creepercarpet.gray.name=Creeper Glay Carpet
+tile.creepercarpet.silver.name=Creeper Silver Carpet
+tile.creepercarpet.cyan.name=Creeper Cyan Carpet
+tile.creepercarpet.purple.name=Creeper Purple Carpet
+tile.creepercarpet.blue.name=Creeper Blue Carpet
+tile.creepercarpet.brown.name=Creeper Brown Carpet
+tile.creepercarpet.green.name=Creeper Green Carpet
+tile.creepercarpet.red.name=Creeper Red Carpet
+tile.creepercarpet.black.name=Creeper Black Carpet
 
 #item
 item.takumibook.name=Creeper Book

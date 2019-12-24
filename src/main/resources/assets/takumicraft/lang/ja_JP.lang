@@ -123,6 +123,22 @@ tile.creeperplanks_stairs.name=匠式硬質木材階段
 tile.creeperiron_slab.name=匠式硬質鋼半材
 tile.creeperbrick_slab.name=匠式硬質煉瓦半材
 tile.creeperplanks_slab.name=匠式硬質木半材
+tile.creepercarpet.white.name=匠式白色硬質敷布
+tile.creepercarpet.orange.name=匠式橙色硬質敷布
+tile.creepercarpet.magenta.name=匠式桃色硬質敷布
+tile.creepercarpet.lightBlue.name=匠式空色硬質敷布
+tile.creepercarpet.yellow.name=匠式黄色硬質敷布
+tile.creepercarpet.lime.name=匠式黄緑硬質敷布
+tile.creepercarpet.pink.name=匠式桜色硬質敷布
+tile.creepercarpet.gray.name=匠式灰色硬質敷布
+tile.creepercarpet.silver.name=匠式灰白硬質敷布
+tile.creepercarpet.cyan.name=匠式青緑硬質敷布
+tile.creepercarpet.purple.name=匠式紫色硬質敷布
+tile.creepercarpet.blue.name=匠式青色硬質敷布
+tile.creepercarpet.brown.name=匠式茶色硬質敷布
+tile.creepercarpet.green.name=匠式緑色硬質敷布
+tile.creepercarpet.red.name=匠式赤色硬質敷布
+tile.creepercarpet.black.name=匠式黒色硬質敷布
 
 #item
 item.takumibook.name=匠の書
