@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "takumicraft:blocks/creeperiron",
+        "top": "takumicraft:blocks/creeperiron",
+        "side": "takumicraft:blocks/creeperiron"
+    }
+}

@@ -104,6 +104,18 @@ public class TakumiBlockCore {
     public static final Block TAKUMI_STONE_EP = new BlockTakumiStone_EP();
     public static final Block YUKARI_DUMMY = new BlockYukariDummy();
 
+    public static final Block CREEPER_IRON_STAIRS = new BlockTakumiAntiExplosionStairs(CREEPER_IRON.getDefaultState(),
+            Material.IRON, "creeperiron_stairs", 5f, "pickaxe");
+    public static final Block CREEPER_BRICK_STAIRS = new BlockTakumiAntiExplosionStairs(CREEPER_BRICK.getDefaultState(),
+            Material.SAND, "creeperbrick_stairs", 2.5f, "pickaxe");
+    public static final Block CREEPER_PLANKS = new BlockTakumiAntiExplosion(Material.WOOD, "creeperplanks", 1.0f, "axe");
+    public static final Block CREEPER_PLANKS_STAIRS = new BlockTakumiAntiExplosionStairs(CREEPER_PLANKS.getDefaultState(),
+            Material.WOOD, "creeperplanks_stairs", 1.0f, "axe");
+    public static final Block CREEPER_BRICK_SLAB = new BlockTakumiAntiExplosionSlab(Material.SAND, "creeperbrick_slab", 2.5f, "pickaxe");
+    public static final Block CREEPER_IRON_SLAB = new BlockTakumiAntiExplosionSlab(Material.IRON, "creeperiron_slab", 5f, "pickaxe");
+    public static final Block CREEPER_PLANKS_SLAB = new BlockTakumiAntiExplosionSlab(Material.WOOD, "creeperplanks_slab", 1.0f, "axe");
+
+
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 
     public static void register(IForgeRegistry<Block> registry) {

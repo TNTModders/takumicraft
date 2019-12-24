@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "half=bottom": { "model": "takumicraft:creeperiron_slab" },
+        "half=top": { "model": "takumicraft:creeperiron_upper_slab" },
+        "half=north": { "model": "takumicraft:creeperiron_north_slab" },
+        "half=south": { "model": "takumicraft:creeperiron_south_slab" },
+        "half=east": { "model": "takumicraft:creeperiron_east_slab" },
+        "half=west": { "model": "takumicraft:creeperiron_west_slab" }
+    }
+}

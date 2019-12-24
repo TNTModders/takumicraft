@@ -116,6 +116,13 @@ tile.darkcore_on.name=深淵の邪石
 tile.darkcore_sp.name=深淵の門石
 tile.takumistone_ep.name=匠爆塵石
 tile.yukaridummy.name=ゆかり匠式高性能爆弾
+tile.creeperplanks.name=匠式硬質木材
+tile.creeperiron_stairs.name=匠式硬質鋼階段
+tile.creeperbrick_stairs.name=匠式硬質煉瓦階段
+tile.creeperplanks_stairs.name=匠式硬質木材階段
+tile.creeperiron_slab.name=匠式硬質鋼半材
+tile.creeperbrick_slab.name=匠式硬質煉瓦半材
+tile.creeperplanks_slab.name=匠式硬質木半材
 
 #item
 item.takumibook.name=匠の書

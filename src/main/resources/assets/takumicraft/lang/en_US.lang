@@ -116,6 +116,13 @@ tile.darkcore_on.name=Creeper Dark Activated Brick
 tile.darkcore_sp.name=Creeper Dark Core Brick
 tile.takumistone_ep.name=Takumi Explosive Stone
 tile.yukaridummy.name=Yukari Creeper Bomb
+tile.creeperplanks.name=Creeper  Planks
+tile.creeperiron_stairs.name=Creeper Iron Stairs
+tile.creeperbrick_stairs.name=Creeper Brick Stairs
+tile.creeperplanks_stairs.name=Creeper Planks Stairs
+tile.creeperiron_slab.name=Creeper Iron Slab
+tile.creeperbrick_slab.name=Creeper Brick Slab
+tile.creeperplanks_slab.name=Creeper Planks Slab
 
 #item
 item.takumibook.name=Creeper Book

@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "half=bottom": { "model": "takumicraft:creeperbrick_slab" },
+        "half=top": { "model": "takumicraft:creeperbrick_upper_slab" },
+        "half=north": { "model": "takumicraft:creeperbrick_north_slab" },
+        "half=south": { "model": "takumicraft:creeperbrick_south_slab" },
+        "half=east": { "model": "takumicraft:creeperbrick_east_slab" },
+        "half=west": { "model": "takumicraft:creeperbrick_west_slab" }
+    }
+}

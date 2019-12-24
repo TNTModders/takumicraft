@@ -1,0 +1,8 @@
+{
+    "parent": "takumicraft:block/west_slab",
+    "textures": {
+        "bottom": "takumicraft:blocks/creeperbrick",
+        "top": "takumicraft:blocks/creeperbrick",
+        "side": "takumicraft:blocks/creeperbrick"
+    }
+}

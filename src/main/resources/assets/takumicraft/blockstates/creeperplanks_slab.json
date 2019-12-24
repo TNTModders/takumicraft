@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "half=bottom": { "model": "takumicraft:creeperplanks_slab" },
+        "half=top": { "model": "takumicraft:creeperplanks_upper_slab" },
+        "half=north": { "model": "takumicraft:creeperplanks_north_slab" },
+        "half=south": { "model": "takumicraft:creeperplanks_south_slab" },
+        "half=east": { "model": "takumicraft:creeperplanks_east_slab" },
+        "half=west": { "model": "takumicraft:creeperplanks_west_slab" }
+    }
+}
