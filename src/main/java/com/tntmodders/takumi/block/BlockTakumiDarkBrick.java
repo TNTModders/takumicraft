@@ -58,7 +58,9 @@ public class BlockTakumiDarkBrick extends Block {
                     ((EntityPlayer) entityIn).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 250, 0, true, false));
                 }
                 if (entityIn instanceof EntityPlayerMP) {
-                    TakumiPacketCore.INSTANCE.sendTo(new MessageDarkShrine(), ((EntityPlayerMP) entityIn));
+                   try{
+                       TakumiPacketCore.INSTANCE.sendTo(new MessageDarkShrine(), ((EntityPlayerMP) entityIn));
+                   }catch (Exception ignored){}
                 }
             }
         }

@@ -41,7 +41,7 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onLivingUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+        if (this.world.playerEntities.stream().anyMatch(this::canEntityBeSeen)) {
             bossInfo.setVisible(true);
             if (this.world.isRemote) {
                 this.world.spawnEntity(
@@ -137,14 +137,16 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-        int i = this.getPowered() ? 40 : 20;
-        for (int x = -i; x <= i; x++) {
-            for (int z = -i; z <= i; z++) {
-                if (this.world.isAirBlock(this.getPosition().add(x, 5, z)) ||
-                        this.world.getBlockState(this.getPosition().add(x, 5, z)).getBlockHardness(this.world,
-                                this.getPosition().add(x, 5, z)) >= 0) {
-                    TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, 5, z),
-                            Blocks.WATER.getDefaultState());
+        if (!this.world.isRemote) {
+            int i = this.getPowered() ? 40 : 20;
+            for (int x = -i; x <= i; x++) {
+                for (int z = -i; z <= i; z++) {
+                    if (this.world.isAirBlock(this.getPosition().add(x, 5, z)) ||
+                            this.world.getBlockState(this.getPosition().add(x, 5, z)).getBlockHardness(this.world,
+                                    this.getPosition().add(x, 5, z)) >= 0) {
+                        TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, 5, z),
+                                Blocks.WATER.getDefaultState());
+                    }
                 }
             }
         }
