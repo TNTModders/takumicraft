@@ -653,12 +653,19 @@ public class TakumiEvents {
             dummy.setPosition(event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ);
             event.getEntityLiving().world.spawnEntity(dummy);
         }
-        if (!event.getEntityLiving().world.isRemote) {
+        if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityCreeper) {
             Calendar calendar = event.getEntityLiving().world.getCurrentDate();
             int month = calendar.get(Calendar.MONTH) + 1;
             int date = calendar.get(Calendar.DATE);
-            if (month == 12 && (date == 24 || date == 25)) {
-                event.getEntityLiving().dropItem(Item.getItemFromBlock(Blocks.CHEST), 1);
+            if (month == 12 && (date == 24 || date == 25) && event.getEntityLiving().getRNG().nextInt(4) == 0) {
+                Item[] xmasItems = {Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), Item.getItemFromBlock(Blocks.TNT), Items.GUNPOWDER, TakumiItemCore.EXP_PRO_PRI};
+                ItemStack stack = new ItemStack(xmasItems[event.getEntityLiving().getRNG().nextInt(xmasItems.length)], 1);
+                if (stack.getItem() != TakumiItemCore.EXP_PRO_PRI) {
+                    stack.setStackDisplayName(TakumiUtils.takumiTranslate("takumicraft.xmas.item.name"));
+                }
+                if (stack.getItem() != TakumiItemCore.EXP_PRO_PRI || event.getEntityLiving().getRNG().nextInt(5) == 0) {
+                    event.getEntityLiving().entityDropItem(stack, 0.1f);
+                }
             } else if (month == 1 && date < 8) {
                 event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4).setStackDisplayName(
                         TakumiUtils.takumiTranslate("takumicraft.newyear.item.name")), 0.1f);

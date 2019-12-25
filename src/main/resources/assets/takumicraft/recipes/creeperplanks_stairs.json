@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q  ",
+    "QQ ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperplanks"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperplanks_stairs",
+    "count": 4
+  }
+}
