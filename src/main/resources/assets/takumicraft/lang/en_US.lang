@@ -586,6 +586,8 @@ entity.chasecreeper.name=Chase Creeper
 entity.chasecreeper.desc=Chase!! Faster than sound!!
 entity.boarcreeper.name=Boar Creeper
 entity.boarcreeper.desc=Going their own way, the boar's disaster is a line.
+entity.mousecreeper.name=Mouse Creeper
+entity.mousecreeper.desc=Come along and hedge'n'hog, and join the explode!
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

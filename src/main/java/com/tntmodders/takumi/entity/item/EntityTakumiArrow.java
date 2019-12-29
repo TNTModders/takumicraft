@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class EntityTakumiArrow extends EntityArrow {
 
     private ItemStack stack;
-    private int power;
+    public int power;
     private boolean destroy;
     private Class<? extends EntityCreeper> container;
     private EnumArrowType type;

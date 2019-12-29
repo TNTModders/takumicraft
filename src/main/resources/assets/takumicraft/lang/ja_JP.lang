@@ -633,6 +633,9 @@ entity.chasecreeper.desc=その匠、最俊につき。
 entity.boarcreeper.name=亥匠
 entity.boarcreeper.desc=猪突猛進、前のみ向いて、真っ直ぐ壊す。
 entity.boarcreeper.read=いのししたくみ
+entity.mousecreeper.name=子匠
+entity.mousecreeper.desc=窮鼠猫を噛み、能ある子は針を隠す。
+entity.mousecreeper.read=ねずみたくみ
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
