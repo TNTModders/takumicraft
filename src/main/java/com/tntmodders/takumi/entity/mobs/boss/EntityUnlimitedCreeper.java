@@ -30,7 +30,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onLivingUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+        if (this.world.playerEntities.stream().anyMatch(this::canEntityBeSeen)) {
             bossInfo.setVisible(true);
             if (this.world.isRemote) {
                 this.world.spawnEntity(
@@ -91,6 +91,7 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
+        this.setHealth(this.getHealth() - this.getMaxHealth() / 10);
         if (!this.world.isRemote) {
             for (int i = 0; i < (this.getPowered() ? 100 : 50); i++) {
                 EntityCreeper creeper = new EntityCreeper(this.world);
@@ -175,6 +176,10 @@ public class EntityUnlimitedCreeper extends EntityTakumiAbstractCreeper {
     public void onUpdate() {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        if (this.ticksExisted > 10000 && !this.world.isRemote) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, 8f, true);
+            this.setDead();
+        }
     }
 
     @Override

@@ -28,7 +28,7 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
     }
 
     @Override
@@ -125,6 +125,10 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     public void onUpdate() {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        if (this.ticksExisted > 10000 && !this.world.isRemote) {
+            this.world.createExplosion(this,this.posX,this.posY,this.posZ,8f,true);
+            this.setDead();
+        }
     }
 
     @Override
@@ -137,6 +141,7 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
+        this.setHealth(this.getHealth() - this.getMaxHealth() / 10);
         if (!this.world.isRemote) {
             int i = this.getPowered() ? 40 : 20;
             for (int x = -i; x <= i; x++) {

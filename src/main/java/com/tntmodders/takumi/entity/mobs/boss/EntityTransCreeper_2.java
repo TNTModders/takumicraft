@@ -131,8 +131,8 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
         if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
             if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && damageSrc != DamageSource.DROWN &&
                     damageSrc != DamageSource.IN_WALL && damageSrc != DamageSource.MAGIC) {
-                if (damageAmount > 6) {
-                    damageAmount = 6;
+                if (damageAmount > 12) {
+                    damageAmount = 12;
                 }
                 if (damageSrc.getTrueSource() instanceof EntityLivingBase) {
                     this.setAttackTarget((EntityLivingBase) damageSrc.getTrueSource());

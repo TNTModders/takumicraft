@@ -71,7 +71,7 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(200.0D);
     }
 
@@ -220,7 +220,7 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onLivingUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+        if (this.world.playerEntities.stream().anyMatch(this::canEntityBeSeen)) {
             bossInfo.setVisible(true);
             if (this.world.isRemote) {
                 this.world.spawnEntity(
@@ -254,7 +254,7 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     public boolean getCanSpawnHere() {
-        return this.rand.nextInt(40) == 0 && super.getCanSpawnHere() &&
+        return this.rand.nextInt(60) == 0 && super.getCanSpawnHere() &&
                 this.world.getDifficulty() != EnumDifficulty.PEACEFUL && TakumiUtils.canSpawnElementBoss(this.world);
     }
 
@@ -265,6 +265,7 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
+        this.setHealth(this.getHealth() - this.getMaxHealth() / 10);
     }
 
     @Override
@@ -343,6 +344,10 @@ public class EntityBalloonCreeper extends EntityTakumiAbstractCreeper {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+            this.setDead();
+        }
+        if (this.ticksExisted > 10000 && !this.world.isRemote) {
+            this.world.createExplosion(this,this.posX,this.posY,this.posZ,8f,true);
             this.setDead();
         }
     }

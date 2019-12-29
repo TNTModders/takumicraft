@@ -141,7 +141,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        damageAmount = damageAmount / 4;
+        damageAmount = damageAmount / 3;
         if (!damageSrc.isMagicDamage()) {
             super.damageEntity(damageSrc, damageAmount);
         }

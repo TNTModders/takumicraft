@@ -145,13 +145,13 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         }
         if (!this.isNonBoss()) {
             if (this.dmgCount > 0) {
-                damageAmount = damageAmount / (dmgCount * 2.5f);
+                damageAmount = damageAmount / (dmgCount * 1.25f);
                 if (this.dmgCount % 10 == 0) {
                     this.addPotionEffect(PotionTypes.REGENERATION.getEffects().get(0));
                 }
                 if (!this.world.isRemote && this.rand.nextInt(25) == 0 && damageSrc.getTrueSource() != null) {
-                    this.world.spawnEntity(new EntityLightningBolt(this.world, damageSrc.getTrueSource().posX,
-                            damageSrc.getTrueSource().posY, damageSrc.getTrueSource().posZ, false));
+                    this.world.spawnEntity(new EntityLightningBolt(this.world, damageSrc.getTrueSource().posX + this.rand.nextInt(5) - 2,
+                            damageSrc.getTrueSource().posY, damageSrc.getTrueSource().posZ + this.rand.nextInt(5) - 2, false));
                 }
             }
             this.dmgCount++;

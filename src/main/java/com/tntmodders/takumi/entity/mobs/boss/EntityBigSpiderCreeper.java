@@ -54,7 +54,7 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
     }
 
@@ -100,8 +100,8 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
     @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+                                            @Nullable
+                                                    IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
 
         if (this.world.rand.nextInt(100) == 0) {
@@ -206,6 +206,7 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
 
     @Override
     public void takumiExplode() {
+        this.setHealth(this.getHealth() - this.getMaxHealth() / 10);
         if (!this.world.isRemote) {
             int r = this.getPowered() ? 15 : 10;
             for (int t = 0; t < r * 1.5; t++) {
@@ -275,11 +276,16 @@ public class EntityBigSpiderCreeper extends EntitySpiderCreeper {
                 this.ignite();
             }
         }
+
+        if (this.ticksExisted > 10000 && !this.world.isRemote) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, 8f, true);
+            this.setDead();
+        }
     }
 
     @Override
     public void onLivingUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+        if (this.world.playerEntities.stream().anyMatch(this::canEntityBeSeen)) {
             bossInfo.setVisible(true);
             if (this.world.isRemote) {
                 this.world.spawnEntity(
