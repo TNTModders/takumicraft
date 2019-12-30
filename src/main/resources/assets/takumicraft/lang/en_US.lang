@@ -602,6 +602,10 @@ entity.boarcreeper.name=Boar Creeper
 entity.boarcreeper.desc=Going their own way, the boar's disaster is a line.
 entity.mousecreeper.name=Mouse Creeper
 entity.mousecreeper.desc=Come along and hedge'n'hog, and join the explode!
+entity.evolutioncreeper.name=Evolution Creeper
+entity.evolutioncreeper.desc=The creeper charges the energy. Fill it, fill it, fill it, fill it, fill it.
+entity.evolutioncreeper_evo.name=Evolution Creeper[Evo]
+entity.evolutioncreeper_evo.desc=The creeper charges the energy. Fill it, fill it, fill it, fill it, fill it.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
