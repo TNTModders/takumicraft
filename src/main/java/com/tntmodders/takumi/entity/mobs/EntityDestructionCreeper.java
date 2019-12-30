@@ -3,6 +3,9 @@ package com.tntmodders.takumi.entity.mobs;
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.client.render.RenderVillagerCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
+import com.tntmodders.takumi.entity.mobs.evo.EntityDestructionCreeper_Evo;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.block.material.Material;
@@ -24,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
+public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper implements ITakumiEvoEntity {
 
     public EntityDestructionCreeper(World worldIn) {
         super(worldIn);
@@ -143,5 +146,15 @@ public class EntityDestructionCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 217;
+    }
+
+    @Override
+    public ITakumiEntity getEvoCreeper() {
+        return new EntityDestructionCreeper_Evo(null);
+    }
+
+    @Override
+    public boolean isEvo() {
+        return false;
     }
 }

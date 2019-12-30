@@ -1,7 +1,11 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIAttackRangedTNT;
+import com.tntmodders.takumi.entity.mobs.evo.EntityGateCreeper_Evo;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,7 +21,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
 
-public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IRangedAttackMob {
+public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IRangedAttackMob, ITakumiEvoEntity {
 
     public EntityGateCreeper(World worldIn) {
         super(worldIn);
@@ -59,15 +63,14 @@ public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IR
             double d0 = target.posX - this.posX;
             double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - tntPrimed.posY;
             double d2 = target.posZ - this.posZ;
-            double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+            double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
             this.setThrowableHeading(tntPrimed, d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F,
                     (float) (14 - this.world.getDifficulty().getDifficultyId() * 4));
             this.world.spawnEntity(tntPrimed);
         }
     }
 
-    private void setThrowableHeading(EntityTNTPrimed tntPrimed, double x, double y, double z, float velocity,
-            float inaccuracy) {
+    protected void setThrowableHeading(Entity tntPrimed, double x, double y, double z, float velocity, float inaccuracy) {
         float f = MathHelper.sqrt(x * x + y * y + z * z);
         x = x / (double) f;
         y = y / (double) f;
@@ -145,5 +148,15 @@ public class EntityGateCreeper extends EntityTakumiAbstractCreeper implements IR
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         event.getAffectedEntities().removeIf(entity -> entity instanceof EntityItem);
         return true;
+    }
+
+    @Override
+    public ITakumiEntity getEvoCreeper() {
+        return new EntityGateCreeper_Evo(null);
+    }
+
+    @Override
+    public boolean isEvo() {
+        return false;
     }
 }

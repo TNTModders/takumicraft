@@ -2,6 +2,9 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderEarthCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
+import com.tntmodders.takumi.entity.mobs.evo.EntityEarthCreeper_Evo;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,7 +22,7 @@ import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
 import javax.annotation.Nullable;
 
-public class EntityEarthCreeper extends EntityTakumiAbstractCreeper {
+public class EntityEarthCreeper extends EntityTakumiAbstractCreeper implements ITakumiEvoEntity {
 
     public EntityEarthCreeper(World worldIn) {
         super(worldIn);
@@ -122,5 +125,15 @@ public class EntityEarthCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 219;
+    }
+
+    @Override
+    public ITakumiEntity getEvoCreeper() {
+        return new EntityEarthCreeper_Evo(null);
+    }
+
+    @Override
+    public boolean isEvo() {
+        return false;
     }
 }

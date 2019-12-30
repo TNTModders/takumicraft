@@ -4,6 +4,9 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Sets;
 import com.tntmodders.takumi.client.render.RenderDarkCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
+import com.tntmodders.takumi.entity.mobs.evo.EntityDarkCreeper_Evo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -41,7 +44,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
-public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
+public class EntityDarkCreeper extends EntityTakumiAbstractCreeper implements ITakumiEvoEntity {
 
     private static final UUID ATTACKING_SPEED_BOOST_ID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final AttributeModifier ATTACKING_SPEED_BOOST =
@@ -107,7 +110,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(1, new AIFindPlayer(this));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityEndermite.class, 10, true, false,
-                EntityEndermite :: isSpawnedByPlayer));
+                EntityEndermite::isSpawnedByPlayer));
     }
 
     @Override
@@ -573,6 +576,16 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         return new RenderDarkCreeper(manager);
     }
 
+    @Override
+    public ITakumiEntity getEvoCreeper() {
+        return new EntityDarkCreeper_Evo(null);
+    }
+
+    @Override
+    public boolean isEvo() {
+        return false;
+    }
+
     static class AIFindPlayer extends EntityAINearestAttackableTarget<EntityPlayer> {
 
         private final EntityDarkCreeper enderman;
@@ -707,7 +720,7 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper {
         }
 
         private boolean canPlaceBlock(World p_188518_1_, BlockPos p_188518_2_, Block p_188518_3_,
-                IBlockState p_188518_4_, IBlockState p_188518_5_) {
+                                      IBlockState p_188518_4_, IBlockState p_188518_5_) {
             return p_188518_3_.canPlaceBlockAt(p_188518_1_, p_188518_2_) && p_188518_4_.getMaterial() == Material.AIR &&
                     p_188518_5_.getMaterial() != Material.AIR && p_188518_5_.isFullCube();
         }

@@ -5,6 +5,8 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
+import com.tntmodders.takumi.entity.mobs.evo.EntityCreativeCreeper_Evo;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -15,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
+public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper  implements ITakumiEvoEntity {
 
     public EntityCreativeCreeper(World worldIn) {
         super(worldIn);
@@ -70,7 +72,7 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
         return 218;
     }
 
-    private void buildHouse(int ox, int oy, int oz) {
+    protected void buildHouse(int ox, int oy, int oz) {
         int r = this.rand.nextInt(4);
         switch (r) {
             /*豆腐*/
@@ -226,7 +228,7 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                 }
                 for (int x = ox - 3; x <= ox + 3; x++) {
                     for (int z = oz - 3; z <= oz + 3; z++) {
-                        for (int y = oy + 2; y >= oy - 1; y--) {
+                        for (int y = oy + 4; y >= oy + 1; y--) {
                             for (int i = 0; i < (this.getPowered() ? 4 : 2); i++) {
                                 if (this.world.getBlockState(new BlockPos(x, y, z)).getBlockHardness(world,
                                         new BlockPos(x, y, z)) > 0 || this.world.isAirBlock(new BlockPos(x, y, z))) {
@@ -257,5 +259,15 @@ public class EntityCreativeCreeper extends EntityTakumiAbstractCreeper {
                 }
                 break;
         }
+    }
+
+    @Override
+    public ITakumiEntity getEvoCreeper() {
+        return new EntityCreativeCreeper_Evo(null);
+    }
+
+    @Override
+    public boolean isEvo() {
+        return false;
     }
 }

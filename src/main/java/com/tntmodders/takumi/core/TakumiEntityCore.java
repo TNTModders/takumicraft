@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.*;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.*;
@@ -128,6 +129,10 @@ public class TakumiEntityCore {
                 //Class clazz = loader.loadClass("com.tntmodders.takumi.entity.mobs." + file.getName().replaceAll(".class", ""));*/
                 ITakumiEntity entity = (ITakumiEntity) clazz.getConstructor(World.class).newInstance((World) null);
                 entityHolders.add(new EntityHolder(clazz, entity));
+                if (entity instanceof ITakumiEvoEntity && !((ITakumiEvoEntity) entity).isEvo()) {
+                    ITakumiEntity evoEntity = ((ITakumiEvoEntity) entity).getEvoCreeper();
+                    entityHolders.add(new EntityHolder(evoEntity.getClass(), evoEntity));
+                }
             } catch (Exception e) {
                 //e.printStackTrace();
             }

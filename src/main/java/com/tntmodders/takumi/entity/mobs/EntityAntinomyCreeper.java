@@ -1,6 +1,9 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.ITakumiEvoEntity;
+import com.tntmodders.takumi.entity.mobs.evo.EntityAntinomyCreeper_Evo;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
+public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper implements ITakumiEvoEntity {
 
     public EntityAntinomyCreeper(World worldIn) {
         super(worldIn);
@@ -213,5 +216,15 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper {
         if (!damageSrc.isFireDamage()) {
             super.damageEntity(damageSrc, damageAmount);
         }
+    }
+
+    @Override
+    public ITakumiEntity getEvoCreeper() {
+        return new EntityAntinomyCreeper_Evo(null);
+    }
+
+    @Override
+    public boolean isEvo() {
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
@@ -7,6 +8,7 @@ import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIMoveToAttackBlock;
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -21,6 +23,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -82,7 +85,18 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     @Override
     public ResourceLocation getArmor() {
+        if (this instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) this).isEvo()) {
+            return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/dragon_armor.png");
+        }
         return new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    }
+
+    @Override
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        if (this instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) this).isEvo()) {
+            return blockStateIn.getBlockHardness(worldIn, pos) < 0 ? super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) : 1f;
+        }
+        return super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
     }
 
     @Override

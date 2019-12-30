@@ -21,7 +21,7 @@ public class LayerTakumiRazer implements LayerRenderer<EntityTakumiAbstractCreep
         if (entitylivingbaseIn instanceof EntityRoboCreeper &&
                 ((EntityRoboCreeper) entitylivingbaseIn).getPos() != null) {
             for (int t = 0; t < 20; t++) {
-                Long boltVertex = entitylivingbaseIn.getRNG().nextLong();
+                long boltVertex = entitylivingbaseIn.getRNG().nextLong();
                 Tessellator tessellator = Tessellator.getInstance();
                 BufferBuilder bufferbuilder = tessellator.getBuffer();
                 GlStateManager.disableTexture2D();
