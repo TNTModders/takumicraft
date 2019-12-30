@@ -274,7 +274,7 @@ public class GuiTakumiBook extends GuiScreen {
 
     private void renderSize(EntityLivingBase entity) {
         if (this.currPage == Integer.MAX_VALUE) {
-            GL11.glScaled(0.3, 0.3, 0.3);
+            GL11.glScaled(0.175, 0.175, 0.175);
         }
         if (entity instanceof EntityTakumiAbstractCreeper && ((EntityTakumiAbstractCreeper) entity).getSizeAmp() != 1) {
             double d = ((EntityTakumiAbstractCreeper) entity).getSizeAmp();
@@ -414,7 +414,7 @@ public class GuiTakumiBook extends GuiScreen {
         SearchButton searchButton = this.addButton(new SearchButton(903, i + 71, 146));
 
         for (int t = 0; t < TakumiEntityCore.getEntityList().size(); t++) {
-            this.addButton(new CreeperButton(t, 11 * (t % 40 + 2), j + 15 + 25 * (int) Math.floor(t / 40)));
+            this.addButton(new CreeperButton(t, 8 * (t % 55 + 2), j + 10 + 20 * (int) Math.floor(t / 55)));
         }
         this.updateButtons();
     }
