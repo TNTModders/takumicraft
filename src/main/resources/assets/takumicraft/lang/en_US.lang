@@ -208,6 +208,7 @@ item.energycore_yellow.name=Energy Core[Support]
 item.makeup.name=Creeper Makeup
 item.takumithrowgrenede.name=Creeper Grenede
 item.explosionbook.name=Minecraft Explosion Processing
+item.evocore.name=Evolution Core
 
 #entity
 #desc max: 72 chars

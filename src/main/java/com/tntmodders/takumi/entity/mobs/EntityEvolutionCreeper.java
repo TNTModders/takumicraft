@@ -1,10 +1,12 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import com.tntmodders.takumi.entity.mobs.evo.EntityEvolutionCreeper_Evo;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
 
@@ -84,5 +86,13 @@ public class EntityEvolutionCreeper extends EntityTakumiAbstractCreeper implemen
     @Override
     public boolean isEvo() {
         return false;
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.EVO_CORE, this.rand.nextInt(3));
+        }
+        super.onDeath(source);
     }
 }
