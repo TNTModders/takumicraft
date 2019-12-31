@@ -656,6 +656,8 @@ entity.evolutioncreeper.name=真化ノ匠
 entity.evolutioncreeper.desc=その匠、真の姿を顕す。閉じよ、閉じよ、閉じよ、閉じよ、閉じよ。
 entity.evolutioncreeper_evo.name=真化ノ匠[真]
 entity.evolutioncreeper_evo.desc=その匠、真の姿を顕す。閉じよ、閉じよ、閉じよ、閉じよ、閉じよ。
+entity.obsidiancreeper.name=黒曜匠
+entity.obsidiancreeper.desc=その匠、ダイヤモンドより砕けない。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

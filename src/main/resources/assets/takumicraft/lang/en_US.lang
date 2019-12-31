@@ -607,6 +607,8 @@ entity.evolutioncreeper.name=Evolution Creeper
 entity.evolutioncreeper.desc=The creeper charges the energy. Fill it, fill it, fill it, fill it, fill it.
 entity.evolutioncreeper_evo.name=Evolution Creeper[Evo]
 entity.evolutioncreeper_evo.desc=The creeper charges the energy. Fill it, fill it, fill it, fill it, fill it.
+entity.obsidiancreeper.name=Obsidian Creeper
+entity.obsidiancreeper.desc=Harder than the diamond.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
