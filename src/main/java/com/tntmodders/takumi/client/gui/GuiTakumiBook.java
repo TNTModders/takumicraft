@@ -296,6 +296,8 @@ public class GuiTakumiBook extends GuiScreen {
             GL11.glScaled(0.35, 0.35, 0.35);
         } else if (entity instanceof EntityBigBatCreeper) {
             GL11.glTranslated(0, 1, 0);
+        }else if (entity instanceof EntityWitherCreeper){
+            GL11.glScaled(0.5,0.5,0.5);
         }
     }
 

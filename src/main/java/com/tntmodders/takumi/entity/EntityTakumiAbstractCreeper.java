@@ -157,7 +157,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                 damageAmount *= 0.25;
             }
         }
-        if (!this.isNonBoss()) {
+        if (!this.isNonBoss() && this.getCreeperState() > 0) {
             if (this.dmgCount > 0) {
                 damageAmount = damageAmount / (dmgCount * 1.25f);
                 if (this.dmgCount % 10 == 0) {

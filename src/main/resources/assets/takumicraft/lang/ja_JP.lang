@@ -658,6 +658,8 @@ entity.evolutioncreeper_evo.name=真化ノ匠[真]
 entity.evolutioncreeper_evo.desc=その匠、真の姿を顕す。閉じよ、閉じよ、閉じよ、閉じよ、閉じよ。
 entity.obsidiancreeper.name=黒曜匠
 entity.obsidiancreeper.desc=その匠、ダイヤモンドより砕けない。
+entity.withercreeper.name=ウィザー匠
+entity.withercreeper.desc=煉獄より来る、怨嗟の呻きは地を砕く。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -679,6 +681,7 @@ entity.dummyking.name=王匠
 entity.bonecreeperdummy.name=骸匠
 entity.bonecreeperdummy.tag=ただのしかばねのようだ……
 entity.takumithrowgrenede.name=匠式手投爆弾
+entity.withercreeperskull.name=ウィザー匠
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

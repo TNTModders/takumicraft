@@ -609,6 +609,8 @@ entity.evolutioncreeper_evo.name=Evolution Creeper[Evo]
 entity.evolutioncreeper_evo.desc=The creeper charges the energy. Fill it, fill it, fill it, fill it, fill it.
 entity.obsidiancreeper.name=Obsidian Creeper
 entity.obsidiancreeper.desc=Harder than the diamond.
+entity.withercreeper.name=Wither Creeper
+entity.withercreeper.desc=Curse scary voice from the nether.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
@@ -630,7 +632,7 @@ entity.dummyking.name=King Creeper
 entity.bonecreeperdummy.name=Bone Creeper
 entity.bonecreeperdummy.tag=No response. Looks dead...
 entity.takumithrowgrenede.name=Creeper Grenede
-
+entity.withercreeperskull.name=Wither Creeper
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

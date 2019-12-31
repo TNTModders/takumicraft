@@ -107,7 +107,7 @@ public class TakumiEntityCore {
                 EntityMeatCreeper.class, EntityLineCreeper.class, EntityMakeupCreeper.class, EntityTitanCreeper.class,
                 EntityNerdCreeper.class, EntityDaimonjiCreeper.class, EntityTearCreeper.class, EntityCryCreeper.class, EntityOpaqueCreeper.class,
                 EntityLayerCreeper.class, EntityChaseCreeper.class, EntityBoarCreeper.class, EntityMouseCreeper.class, EntityEvolutionCreeper.class,
-                EntityObsidianCreeper.class));
+                EntityObsidianCreeper.class, EntityWitherCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -295,6 +295,9 @@ public class TakumiEntityCore {
                 EntityBoneDummy.class, "bonecreeperdummy", 921, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumithrowgrenede"),
                 EntityTakumiThrowGrenede.class, "takumithrowgrenede", 922, TakumiCraftCore.TakumiInstance, 64, 2,
+                true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "withercreeperskull"),
+                EntityWitherCreeperSkull.class, "withercreeperskull", 923, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
     }
 
