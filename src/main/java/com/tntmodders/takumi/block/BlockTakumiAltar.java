@@ -47,44 +47,46 @@ public class BlockTakumiAltar extends Block {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
                                     EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         boolean flg = super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-        Entity entity = null;
-        if (canSpawnWither(worldIn, pos)) {
-            spawnWither(worldIn, pos);
-            return true;
-        } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
-            entity = new EntityKingCreeper(worldIn);
-        } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
-            entity = new EntityAnnivCreeper(worldIn);
-        } else {
-            List<ITakumiEntity> entities = new ArrayList<>();
-            TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
-                if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
-                    entities.add(iTakumiEntity);
-                }
-            });
-            if (!entities.isEmpty()) {
-                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
-                try {
-                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(
-                            World.class).newInstance(worldIn);
-                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-                    e.printStackTrace();
+        if (!worldIn.isRemote) {
+            Entity entity = null;
+            if (canSpawnWither(worldIn, pos)) {
+                spawnWither(worldIn, pos);
+                return true;
+            } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
+                entity = new EntityKingCreeper(worldIn);
+            } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
+                entity = new EntityAnnivCreeper(worldIn);
+            } else {
+                List<ITakumiEntity> entities = new ArrayList<>();
+                TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
+                    if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
+                        entities.add(iTakumiEntity);
+                    }
+                });
+                if (!entities.isEmpty()) {
+                    entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
+                    try {
+                        entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(
+                                World.class).newInstance(worldIn);
+                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
 
-        if (entity != null) {
-            entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-            worldIn.setBlockToAir(pos);
-            if (worldIn.getBlockState(pos.down()).getBlockHardness(worldIn, pos.down()) > 0) {
-                worldIn.setBlockToAir(pos.down());
-            }
-            if (!worldIn.isRemote) {
-                worldIn.createExplosion(new EntityAlterDummy(worldIn), pos.getX() + 0.5, pos.getY() + 0.5,
-                        pos.getZ() + 0.5, 3f, true);
-                worldIn.loadedEntityList.removeIf(entity1 -> entity1 instanceof EntityAlterDummy);
-                if (worldIn.spawnEntity(entity)) {
-                    return true;
+            if (entity != null) {
+                entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                worldIn.setBlockToAir(pos);
+                if (worldIn.getBlockState(pos.down()).getBlockHardness(worldIn, pos.down()) > 0) {
+                    worldIn.setBlockToAir(pos.down());
+                }
+                if (!worldIn.isRemote) {
+                    worldIn.createExplosion(new EntityAlterDummy(worldIn), pos.getX() + 0.5, pos.getY() + 0.5,
+                            pos.getZ() + 0.5, 3f, true);
+                    worldIn.loadedEntityList.removeIf(entity1 -> entity1 instanceof EntityAlterDummy);
+                    if (worldIn.spawnEntity(entity)) {
+                        return true;
+                    }
                 }
             }
         }

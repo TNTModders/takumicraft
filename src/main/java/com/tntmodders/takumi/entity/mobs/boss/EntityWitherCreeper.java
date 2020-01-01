@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs.boss;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.tntmodders.takumi.client.render.RenderWitherCreeper;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.item.EntityWitherCreeperSkull;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -231,13 +232,13 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
             int j1 = this.getInvulTime() - 1;
 
             if (j1 <= 0) {
-                this.world.newExplosion(this, this.posX, this.posY + (double) this.getEyeHeight(), this.posZ,   12.0F, false, net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this));
+                this.world.newExplosion(this, this.posX, this.posY + (double) this.getEyeHeight(), this.posZ, 12.0F, false, net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this));
                 this.world.playBroadcastSound(1023, new BlockPos(this), 0);
             }
 
             this.setInvulTime(j1);
 
-            if (this.ticksExisted % 10 == 0) {
+            if (this.ticksExisted % 5 == 0) {
                 this.heal(10.0F);
             }
         } else {
@@ -344,9 +345,8 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
             if (this.ticksExisted % 20 == 0) {
                 this.heal(1.0F);
             }
-
-            this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         }
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     public static boolean canDestroyBlock(Block blockIn) {
@@ -360,6 +360,11 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
     public void ignite() {
         this.setInvulTime(110);
         this.setHealth(this.getMaxHealth() / 3.0F);
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
     }
 
     /**
@@ -512,6 +517,7 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
         if (entityitem != null) {
             entityitem.setNoDespawn();
         }
+        this.dropItem(TakumiItemCore.THROW_GRENEDE, this.rand.nextInt(16) + 1);
     }
 
     /**

@@ -8,6 +8,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
+import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.item.IItemAntiExplosion;
 import com.tntmodders.takumi.item.ItemTypeCoreSP;
@@ -352,27 +353,6 @@ public class TakumiEvents {
             }
         }
         if (!event.getWorld().isRemote) {
-            event.getAffectedEntities().removeIf(entity -> {
-                if (entity instanceof EntityLivingBase) {
-                    if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
-                        ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));
-                        return true;
-                    }
-                    return StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
-                            itemStack -> {
-                                if (!EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
-                                        EnchantmentHelper.getEnchantments(itemStack).containsKey(
-                                                TakumiEnchantmentCore.EXPLOSION_PROTECTION)) {
-                                    itemStack.damageItem(1 + ((EntityLivingBase) entity).getRNG().nextInt(
-                                            5 + event.getWorld().getDifficulty().getDifficultyId()) * 2,
-                                            ((EntityLivingBase) entity));
-                                    return true;
-                                }
-                                return false;
-                            });
-                }
-                return false;
-            });
             if (event.getExplosion().getExplosivePlacedBy() != null &&
                     event.getExplosion().getExplosivePlacedBy().isPotionActive(TakumiPotionCore.VIRUS)) {
                 event.getAffectedEntities().forEach(entity -> {
@@ -405,6 +385,9 @@ public class TakumiEvents {
             }
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityWitherCreeperSkull) {
+                event.getAffectedEntities().removeIf(entity -> entity instanceof EntityWitherCreeper);
+            }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiLauncher) {
                 event.getAffectedEntities().clear();
             }
@@ -462,6 +445,27 @@ public class TakumiEvents {
                 event.setCanceled(true);
             }
         }
+        event.getAffectedEntities().removeIf(entity -> {
+            if (entity instanceof EntityLivingBase) {
+                if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
+                    ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));
+                    return true;
+                }
+                return StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
+                        itemStack -> {
+                            if (!EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
+                                    EnchantmentHelper.getEnchantments(itemStack).containsKey(
+                                            TakumiEnchantmentCore.EXPLOSION_PROTECTION)) {
+                                itemStack.damageItem(1 + ((EntityLivingBase) entity).getRNG().nextInt(
+                                        3 + event.getWorld().getDifficulty().getDifficultyId()) * 2,
+                                        ((EntityLivingBase) entity));
+                                return true;
+                            }
+                            return false;
+                        });
+            }
+            return false;
+        });
     }
 
     @SubscribeEvent

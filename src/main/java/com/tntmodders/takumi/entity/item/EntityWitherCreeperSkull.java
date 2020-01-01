@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.MobEffects;
@@ -53,7 +54,7 @@ public class EntityWitherCreeperSkull extends EntityWitherSkull {
                 }
             }
 
-            this.world.newExplosion(this, this.posX, this.posY, this.posZ, 4.0F, true,
+            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 4.0F, true,
                     net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.shootingEntity));
             this.setDead();
         }
