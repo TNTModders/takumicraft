@@ -8,15 +8,22 @@ import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
 import com.tntmodders.takumi.entity.item.EntityAlterDummy;
 import com.tntmodders.takumi.entity.mobs.EntityAnnivCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockMaterialMatcher;
+import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
+import net.minecraft.block.state.pattern.FactoryBlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -25,6 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockTakumiAltar extends Block {
+
+    private BlockPattern witherBasePattern;
+    private BlockPattern witherPattern;
 
     public BlockTakumiAltar() {
         super(Material.TNT, MapColor.GREEN);
@@ -35,10 +45,13 @@ public class BlockTakumiAltar extends Block {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         boolean flg = super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
         Entity entity = null;
-        if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
+        if (canSpawnWither(worldIn, pos)) {
+            spawnWither(worldIn, pos);
+            return true;
+        } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
             entity = new EntityKingCreeper(worldIn);
         } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
             entity = new EntityAnnivCreeper(worldIn);
@@ -76,5 +89,53 @@ public class BlockTakumiAltar extends Block {
             }
         }
         return flg;
+    }
+
+    private void spawnWither(World worldIn, BlockPos pos) {
+        BlockPattern blockpattern = this.getWitherPattern();
+        BlockPattern.PatternHelper blockpattern$patternhelper = blockpattern.match(worldIn, pos);
+        for (int j = 0; j < blockpattern.getPalmLength(); ++j) {
+            for (int k = 0; k < blockpattern.getThumbLength(); ++k) {
+                BlockWorldState blockworldstate1 = blockpattern$patternhelper.translateOffset(j, k, 0);
+                worldIn.setBlockState(blockworldstate1.getPos(), Blocks.AIR.getDefaultState(), 2);
+            }
+        }
+
+        BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 0, 0).getPos();
+        EntityWitherCreeper witherCreeper = new EntityWitherCreeper(worldIn);
+        BlockPos blockpos1 = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
+        witherCreeper.setLocationAndAngles((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.55D, (double) blockpos1.getZ() + 0.5D, blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F, 0.0F);
+        witherCreeper.renderYawOffset = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F;
+        witherCreeper.ignite();
+
+        worldIn.spawnEntity(witherCreeper);
+
+        for (int l = 0; l < 120; ++l) {
+            worldIn.spawnParticle(EnumParticleTypes.SNOWBALL, (double) blockpos.getX() + worldIn.rand.nextDouble(), (double) (blockpos.getY() - 2) + worldIn.rand.nextDouble() * 3.9D, (double) blockpos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+        }
+
+        for (int i1 = 0; i1 < blockpattern.getPalmLength(); ++i1) {
+            for (int j1 = 0; j1 < blockpattern.getThumbLength(); ++j1) {
+                BlockWorldState blockworldstate2 = blockpattern$patternhelper.translateOffset(i1, j1, 0);
+                worldIn.notifyNeighborsRespectDebug(blockworldstate2.getPos(), Blocks.AIR, false);
+            }
+        }
+    }
+
+    private boolean canSpawnWither(World worldIn, BlockPos pos) {
+        BlockPattern blockpattern = this.getWitherPattern();
+        BlockPattern.PatternHelper blockpattern$patternhelper = blockpattern.match(worldIn, pos);
+        return blockpattern$patternhelper != null;
+    }
+
+    protected BlockPattern getWitherPattern() {
+        if (this.witherPattern == null) {
+            this.witherPattern = FactoryBlockPattern.start().aisle("aaa", "###", "~#~")
+                    .where('#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.SOUL_SAND)))
+                    .where('a', BlockWorldState.hasState(BlockStateMatcher.forBlock(TakumiBlockCore.CREEPER_ALTAR)))
+                    .where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
+        }
+
+        return this.witherPattern;
     }
 }

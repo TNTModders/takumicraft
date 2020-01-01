@@ -68,7 +68,6 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
 
     public EntityWitherCreeper(World worldIn) {
         super(worldIn);
-        this.setHealth(this.getMaxHealth());
         this.setSize(0.9F, 3.5F);
         this.isImmuneToFire = true;
         ((PathNavigateGround) this.getNavigator()).setCanSwim(true);
@@ -232,7 +231,7 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
             int j1 = this.getInvulTime() - 1;
 
             if (j1 <= 0) {
-                this.world.newExplosion(this, this.posX, this.posY + (double) this.getEyeHeight(), this.posZ, 7.0F, false, net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this));
+                this.world.newExplosion(this, this.posX, this.posY + (double) this.getEyeHeight(), this.posZ,   12.0F, false, net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this));
                 this.world.playBroadcastSound(1023, new BlockPos(this), 0);
             }
 
@@ -359,7 +358,7 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
      */
     @Override
     public void ignite() {
-        this.setInvulTime(220);
+        this.setInvulTime(110);
         this.setHealth(this.getMaxHealth() / 3.0F);
     }
 
