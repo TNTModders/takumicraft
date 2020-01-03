@@ -17,6 +17,7 @@ public class TakumiConfigCore {
     public static boolean useTP;
     public static boolean TakumiHard;
     public static int rangeTakumiBookSync;
+    public static boolean useNewYearTex;
 
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
@@ -72,6 +73,8 @@ public class TakumiConfigCore {
         rangeTakumiBookSync = cfg.getInt("useTakumiBookSync", GENERAL, 16, 0, Integer.MAX_VALUE,
                 TakumiUtils.takumiTranslate("config.takumicraft.booksync.desc"), "config.takumicraft.booksync.prop");
         // 設定内容をコンフィグファイルに保存する。
+        useNewYearTex = cfg.getBoolean("useNewYearTexture", GENERAL, true,
+                TakumiUtils.takumiTranslate("config.takumicraft.nytex.desc"), "config.takumicraft.nytex.prop");
         cfg.save();
     }
 }

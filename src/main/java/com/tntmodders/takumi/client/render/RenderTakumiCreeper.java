@@ -3,6 +3,7 @@ package com.tntmodders.takumi.client.render;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerMakeup;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityYukariCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
@@ -96,21 +97,23 @@ public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends 
             Calendar calendar = entitylivingbaseIn.world.getCurrentDate();
             int month = calendar.get(Calendar.MONTH) + 1;
             int date = calendar.get(Calendar.DATE);
-            if (month == 12 && (date == 24 || date == 25) && entitylivingbaseIn instanceof EntityYukariCreeper) {
-                this.renderTakumiCreeper.bindTexture(location_xmas);
-                Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                        scale);
-                Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
-            } else if (month == 1 && date < 8) {
-                this.renderTakumiCreeper.bindTexture(
-                        entitylivingbaseIn instanceof EntityYukariCreeper ? location_newyear_yukari :
-                                entitylivingbaseIn instanceof EntityKingCreeper ? location_newyear_king :
-                                        location_newyear);
-                Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                        scale);
-                Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+            if(TakumiConfigCore.useNewYearTex){
+                if (month == 12 && (date == 24 || date == 25) && entitylivingbaseIn instanceof EntityYukariCreeper) {
+                    this.renderTakumiCreeper.bindTexture(location_xmas);
+                    Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+                    mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                            scale);
+                    Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                } else if (month == 1 && date < 8) {
+                    this.renderTakumiCreeper.bindTexture(
+                            entitylivingbaseIn instanceof EntityYukariCreeper ? location_newyear_yukari :
+                                    entitylivingbaseIn instanceof EntityKingCreeper ? location_newyear_king :
+                                            location_newyear);
+                    Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+                    mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                            scale);
+                    Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                }
             }
         }
 
