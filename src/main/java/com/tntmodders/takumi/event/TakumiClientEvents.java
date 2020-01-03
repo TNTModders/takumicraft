@@ -26,7 +26,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -37,6 +40,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Arrays;
+
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
 
@@ -45,6 +50,29 @@ public class TakumiClientEvents {
 
     @SideOnly(Side.CLIENT)
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
+
+    @SubscribeEvent
+    public void recievedChat(ClientChatReceivedEvent event) {
+        if (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode().equalsIgnoreCase("ja_jp")) {
+            ITextComponent component = event.getMessage();
+            String[] creepers = event.getMessage().getUnformattedText().split(" ");
+            String creeper = "";
+            TakumiCraftCore.LOGGER.info(Arrays.toString(creepers));
+            for (int i = 0; i < creepers.length; i++) {
+                String str = creepers[i];
+                if (str.equalsIgnoreCase("creeper")) {
+                    creeper = creepers[i - 1] +" "+ creepers[i];
+                }
+            }
+            if (!creeper.isEmpty() && component.toString().contains("death")) {
+                TakumiCraftCore.LOGGER.info(creeper);
+                String creeperJP = TakumiUtils.takumiTranslate("entity." + creeper.toLowerCase().replaceAll(" ","") + ".name");
+                String string = component.getUnformattedText().replace(creeper, creeperJP);
+                component = new TextComponentString(string);
+                event.setMessage(component);
+            }
+        }
+    }
 
     @SubscribeEvent
     public void renderWorld(CameraSetup event) {
@@ -145,7 +173,7 @@ public class TakumiClientEvents {
     }
 
     protected int getColorMultiplier(EntityLivingBase entitylivingbaseIn, float lightBrightness,
-            float partialTickTime) {
+                                     float partialTickTime) {
         float f = this.getCreeperFlashIntensity(entitylivingbaseIn, partialTickTime);
 
         if ((int) (f * 10.0F) % 2 == 0) {
