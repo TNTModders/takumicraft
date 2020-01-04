@@ -24,3 +24,4 @@ run
 old
 *.xlsx
 run_server_test
+/run_server_test/
