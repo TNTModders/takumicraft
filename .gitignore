@@ -23,4 +23,4 @@ run
 *.psd
 old
 *.xlsx
-/server_test/
+/run_server_test/
