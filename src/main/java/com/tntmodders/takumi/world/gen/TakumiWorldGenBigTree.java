@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.world.gen;
 
 import com.google.common.collect.Lists;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockLog.EnumAxis;
@@ -17,6 +18,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
 
     private final IBlockState log;
     private final IBlockState leaf;
+    private  final boolean doBlockNotify;
     int heightLimit;
     int height;
     double heightAttenuation = 0.618D;
@@ -38,6 +40,7 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
         super(notify);
         this.log = log;
         this.leaf = leaf;
+        this.doBlockNotify = notify;
     }
 
     /**
@@ -239,6 +242,16 @@ public class TakumiWorldGenBigTree extends WorldGenAbstractTree {
             } else {
                 this.setBlockAndNotifyAdequately(this.world, blockpos1, p_175937_3_.getDefaultState());
             }
+        }
+    }
+
+    @Override
+    protected void setBlockAndNotifyAdequately(World worldIn, BlockPos pos, IBlockState state) {
+        if (this.doBlockNotify) {
+            TakumiUtils.setBlockStateProtectedFlg(worldIn, pos, state,3);
+        } else {
+            int flag = net.minecraftforge.common.ForgeModContainer.fixVanillaCascading ? 2 | 16 : 2; //Forge: With bit 5 unset, it will notify neighbors and load adjacent chunks.
+            TakumiUtils.setBlockStateProtectedFlg(worldIn, pos, state,3);
         }
     }
 

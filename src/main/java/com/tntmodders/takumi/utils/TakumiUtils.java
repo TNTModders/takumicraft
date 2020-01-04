@@ -62,6 +62,24 @@ public class TakumiUtils {
         }
     }
 
+    public static void setBlockStateProtectedFlg(World world, BlockPos pos, IBlockState state, int flag) {
+        if (FMLCommonHandler.instance().getSide().isServer() && world.getMinecraftServer() != null) {
+            try {
+                BlockPos blockpos = world.getSpawnPoint();
+                int i = MathHelper.abs(pos.getX() - blockpos.getX());
+                int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
+                int k = Math.max(i, j);
+                if (k > world.getMinecraftServer().getSpawnProtectionSize()) {
+                    world.setBlockState(pos, state, flag);
+                }
+            } catch (Exception e) {
+                world.setBlockState(pos, state, flag);
+            }
+        } else {
+            world.setBlockState(pos, state, flag);
+        }
+    }
+
     public static boolean isApril(World world) {
         return world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 && world.getCurrentDate().get(Calendar.DATE) == 1;
         //return true;
@@ -72,7 +90,7 @@ public class TakumiUtils {
     }
 
     public static void giveAdvancementImpossible(EntityPlayerMP playerMP, ResourceLocation parent,
-            ResourceLocation child) {
+                                                 ResourceLocation child) {
         try {
             if (playerMP.getAdvancements().getProgress(
                     playerMP.getServer().getAdvancementManager().getAdvancement(parent)).hasProgress()) {
@@ -101,7 +119,7 @@ public class TakumiUtils {
     }
 
     @SideOnly(Side.SERVER)
-    public static boolean getAdvancementUnlockedServer(ResourceLocation location,EntityPlayerMP playerMP) {
+    public static boolean getAdvancementUnlockedServer(ResourceLocation location, EntityPlayerMP playerMP) {
         try {
             PlayerAdvancements advancements = playerMP.getAdvancements();
             Field field = TakumiASMNameMap.getField(PlayerAdvancements.class, "progress");
@@ -196,12 +214,12 @@ public class TakumiUtils {
     }
 
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
-            boolean fire, boolean destroy) {
+                                             boolean fire, boolean destroy) {
         takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, 1);
     }
 
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
-            boolean fire, boolean destroy, double amp) {
+                                             boolean fire, boolean destroy, double amp) {
         boolean flg = world instanceof WorldServer;
         TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp);
         if (ForgeEventFactory.onExplosionStart(world, explosion)) {
