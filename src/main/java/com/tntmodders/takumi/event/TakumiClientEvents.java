@@ -26,10 +26,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -40,8 +37,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Arrays;
-
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
 
@@ -51,7 +46,7 @@ public class TakumiClientEvents {
     @SideOnly(Side.CLIENT)
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
 
-    @SubscribeEvent
+/*    @SubscribeEvent
     public void recievedChat(ClientChatReceivedEvent event) {
         if (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode().equalsIgnoreCase("ja_jp")) {
             ITextComponent component = event.getMessage();
@@ -72,7 +67,7 @@ public class TakumiClientEvents {
                 event.setMessage(component);
             }
         }
-    }
+    }*/
 
     @SubscribeEvent
     public void renderWorld(CameraSetup event) {
