@@ -40,7 +40,7 @@ public class EntityBoxCreeper extends EntityTakumiAbstractCreeper {
         List<BlockPos> posList = new ArrayList<>();
         this.world.loadedTileEntityList.forEach(tileEntity -> {
             if (tileEntity instanceof IInventory &&
-                    tileEntity.getDistanceSq(this.posX, this.posY, this.posZ) < (this.getPowered() ? 2500 : 1000)) {
+                    tileEntity.getDistanceSq(this.posX, this.posY, this.posZ) < (this.getPowered() ? 40*40 : 20*20)) {
                 posList.add(tileEntity.getPos());
             }
         });
