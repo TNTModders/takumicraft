@@ -19,6 +19,9 @@ public class TakumiConfigCore {
     public static int rangeTakumiBookSync;
     public static boolean useNewYearTex;
 
+    //debugConfig
+    public static boolean inDev = true;
+
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
         cfg = new Configuration(event.getSuggestedConfigurationFile(), TakumiCraftCore.VERSION, true);
