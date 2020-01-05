@@ -44,6 +44,10 @@ public class TakumiBlockCore {
     public static final Block CREEPER_PLANKS_SLAB = new BlockTakumiAntiExplosionSlab(Material.WOOD, "creeperplanks_slab", 1.0f, "axe");
     public static final Block CREEPER_CARPET = new BlockTakumiCarpet();
 
+    //Util Blocks
+    public static final Block CREEPER_VAULT = new BlockAntiExplosionVault();
+
+    //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
     public static final Block ACID_BLOCK = new BlockTakumiAcid();
     public static final Block CREEPER_ALTAR = new BlockTakumiAltar();
