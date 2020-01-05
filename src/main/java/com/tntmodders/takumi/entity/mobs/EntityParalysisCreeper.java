@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.world.World;
 
@@ -52,5 +53,10 @@ public class EntityParalysisCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 410;
+    }
+
+    @Override
+    public boolean canRegister() {
+        return TakumiConfigCore.inDev;
     }
 }
