@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.translation.I18n;
 
-public class BlockTakumiAntiExpliosionWall extends BlockWall {
+public class BlockTakumiAntiExplosionWall extends BlockWall {
 
-    public BlockTakumiAntiExpliosionWall(Block block, Material material, String s, float hardness, String tool) {
+    public BlockTakumiAntiExplosionWall(Block block, Material material, String s, float hardness, String tool) {
         super(block);
         this.setRegistryName(TakumiCraftCore.MODID, s);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
