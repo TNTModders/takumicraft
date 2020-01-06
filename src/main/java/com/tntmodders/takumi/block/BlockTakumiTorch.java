@@ -10,5 +10,6 @@ public class BlockTakumiTorch extends BlockTorch {
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creepertorch");
         this.setResistance(10000000f);
+        this.setLightLevel(1);
     }
 }

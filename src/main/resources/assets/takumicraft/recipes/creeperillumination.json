@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "OOO"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "G": {
+      "item": "takumicraft:creeperglass"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperillumination",
+    "count": 4
+  }
+}
