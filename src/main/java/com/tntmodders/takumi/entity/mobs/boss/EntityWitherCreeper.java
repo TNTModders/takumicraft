@@ -33,10 +33,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.BossInfoServer;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -702,5 +699,10 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderWitherCreeper<>(manager);
+    }
+
+    @Override
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
 }

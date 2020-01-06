@@ -1,13 +1,16 @@
 package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityWitherCreeperSkull extends EntityWitherSkull {
@@ -58,5 +61,10 @@ public class EntityWitherCreeperSkull extends EntityWitherSkull {
                     net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.shootingEntity));
             this.setDead();
         }
+    }
+
+    @Override
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
     }
 }
