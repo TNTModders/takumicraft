@@ -140,6 +140,7 @@ tile.creepercarpet.green.name=Creeper Green Carpet
 tile.creepercarpet.red.name=Creeper Red Carpet
 tile.creepercarpet.black.name=Creeper Black Carpet
 tile.creepervault.name=Creeper Chest
+tile.creepertorch.name=Creeper Torch
 
 #item
 item.takumibook.name=Creeper Book

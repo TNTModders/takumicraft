@@ -46,6 +46,7 @@ public class TakumiBlockCore {
 
     //Util Blocks
     public static final Block CREEPER_VAULT = new BlockAntiExplosionVault();
+    public static final Block CREEPER_TORCH = new BlockTakumiTorch();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

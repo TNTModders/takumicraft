@@ -1,0 +1,6 @@
+{
+    "parent": "block/torch",
+    "textures": {
+        "torch": "takumicraft:blocks/creepertorch"
+    }
+}
