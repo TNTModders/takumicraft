@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "QQQ",
     "QQQ"
   ],
   "key": {
@@ -9,7 +10,7 @@
     }
   },
   "result": {
-    "item": "takumicraft:creeperiron_slab",
+    "item": "takumicraft:creeperiron_wall",
     "count": 6
   }
 }

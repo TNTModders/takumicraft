@@ -144,6 +144,8 @@ tile.creepertorch.name=Creeper Torch
 tile.creeperillumination.name=Creeper Illumination
 tile.creeperlantern.name=Creeper Lantern
 tile.creeperladder.name=Creeper Ladder
+tile.creeperbrick_wall.name=Creeper Brick Wall
+tile.creeperiron_wall.name=Creeper Iron Wall
 
 #item
 item.takumibook.name=Creeper Book

@@ -144,6 +144,8 @@ tile.creepertorch.name=匠式硬質松明
 tile.creeperillumination.name=匠式硬質角灯
 tile.creeperlantern.name=匠式硬質吊灯
 tile.creeperladder.name=匠式硬質梯子
+tile.creeperbrick_wall.name=匠式硬質煉瓦壁
+tile.creeperiron_wall.name=匠式硬質鋼壁
 
 #item
 item.takumibook.name=匠の書
