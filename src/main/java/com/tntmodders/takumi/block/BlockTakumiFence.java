@@ -12,9 +12,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockTakumiAntiExplosionFence extends BlockFence {
+public class BlockTakumiFence extends BlockFence {
 
-    public BlockTakumiAntiExplosionFence(Material material, String s, float hardness, String tool) {
+    public BlockTakumiFence(Material material, String s, float hardness, String tool) {
         super(material, material.getMaterialMapColor());
         this.setRegistryName(TakumiCraftCore.MODID, s);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);

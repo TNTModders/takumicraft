@@ -5,9 +5,9 @@ import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 
-public class BlockTakumiAntiExplosionFenceGate extends BlockFenceGate {
+public class BlockTakumiFenceGate extends BlockFenceGate {
 
-    public BlockTakumiAntiExplosionFenceGate(Material material, String s, float hardness, String tool) {
+    public BlockTakumiFenceGate(Material material, String s, float hardness, String tool) {
         super(BlockPlanks.EnumType.OAK);
         this.setRegistryName(TakumiCraftCore.MODID, s);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);

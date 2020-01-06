@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.block.BlockTakumiAntiExplosionFenceGate;
+import com.tntmodders.takumi.block.BlockTakumiFenceGate;
 import com.tntmodders.takumi.client.render.tileentity.*;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
@@ -121,8 +121,8 @@ public class TakumiClientCore {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperfence_gate"),
-                        "facing=" + state.getValue(BlockTakumiAntiExplosionFenceGate.FACING).getName() + ",in_wall="
-                                + state.getValue(BlockTakumiAntiExplosionFenceGate.IN_WALL) + ",open=" + state.getValue(BlockTakumiAntiExplosionFenceGate.OPEN));
+                        "facing=" + state.getValue(BlockTakumiFenceGate.FACING).getName() + ",in_wall="
+                                + state.getValue(BlockTakumiFenceGate.IN_WALL) + ",open=" + state.getValue(BlockTakumiFenceGate.OPEN));
             }
         });
     }
