@@ -1,11 +1,13 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -64,6 +66,7 @@ public class EntityOpaqueCreeper extends EntityTakumiAbstractCreeper {
                     int r = this.getPowered() ? 4 : 2;
                     if (Math.abs(newPos.getX() - this.posX) < r && Math.abs(newPos.getZ() - this.posZ) < r && newPos.getY() - this.posY < r * 2) {
                         EntityShulker shulker = new EntityShulker(this.world);
+                        shulker.addPotionEffect(new PotionEffect(TakumiPotionCore.VIRUS,1000));
                         shulker.setPosition(pos.getX(), pos.getY(), pos.getZ());
                         this.world.spawnEntity(shulker);
                     } else {

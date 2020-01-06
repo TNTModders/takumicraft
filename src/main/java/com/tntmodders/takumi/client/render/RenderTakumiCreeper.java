@@ -93,26 +93,28 @@ public class RenderTakumiCreeper<T extends EntityTakumiAbstractCreeper> extends 
 
         @Override
         public void doRenderLayer(E entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
-                float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-            Calendar calendar = entitylivingbaseIn.world.getCurrentDate();
-            int month = calendar.get(Calendar.MONTH) + 1;
-            int date = calendar.get(Calendar.DATE);
-            if(TakumiConfigCore.useNewYearTex){
-                if (month == 12 && (date == 24 || date == 25) && entitylivingbaseIn instanceof EntityYukariCreeper) {
-                    this.renderTakumiCreeper.bindTexture(location_xmas);
-                    Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                    mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                            scale);
-                    Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
-                } else if (month == 1 && date < 8) {
-                    this.renderTakumiCreeper.bindTexture(
-                            entitylivingbaseIn instanceof EntityYukariCreeper ? location_newyear_yukari :
-                                    entitylivingbaseIn instanceof EntityKingCreeper ? location_newyear_king :
-                                            location_newyear);
-                    Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-                    mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                            scale);
-                    Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                                  float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+            if (!entitylivingbaseIn.isInvisible()) {
+                Calendar calendar = entitylivingbaseIn.world.getCurrentDate();
+                int month = calendar.get(Calendar.MONTH) + 1;
+                int date = calendar.get(Calendar.DATE);
+                if (TakumiConfigCore.useNewYearTex) {
+                    if (month == 12 && (date == 24 || date == 25) && entitylivingbaseIn instanceof EntityYukariCreeper) {
+                        this.renderTakumiCreeper.bindTexture(location_xmas);
+                        Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+                        mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                                scale);
+                        Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                    } else if (month == 1 && date < 8) {
+                        this.renderTakumiCreeper.bindTexture(
+                                entitylivingbaseIn instanceof EntityYukariCreeper ? location_newyear_yukari :
+                                        entitylivingbaseIn instanceof EntityKingCreeper ? location_newyear_king :
+                                                location_newyear);
+                        Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+                        mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                                scale);
+                        Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                    }
                 }
             }
         }
