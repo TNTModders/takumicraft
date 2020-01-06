@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SQS",
+    "SQS"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperplanks"
+    },
+    "S": {
+      "item": "minecraft:skull",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperfence_gate"
+  }
+}

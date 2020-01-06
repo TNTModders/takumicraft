@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiAntiExplosionFenceGate;
 import com.tntmodders.takumi.client.render.tileentity.*;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
@@ -116,6 +117,14 @@ public class TakumiClientCore {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "takumidirt"), "normal");
             }
         });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_FENCEGATE, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperfence_gate"),
+                        "facing=" + state.getValue(BlockTakumiAntiExplosionFenceGate.FACING).getName() + ",in_wall="
+                                + state.getValue(BlockTakumiAntiExplosionFenceGate.IN_WALL) + ",open=" + state.getValue(BlockTakumiAntiExplosionFenceGate.OPEN));
+            }
+        });
     }
 
     public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {
@@ -138,7 +147,7 @@ public class TakumiClientCore {
                 new RenderTakumiCreepered<>());
         ClientRegistry.registerTileEntity(TileEntityDarkBoard.class, TakumiCraftCore.MODID + ":takumidarkboard",
                 new RenderDarkBoard<>());
-        ClientRegistry.registerTileEntity(TileEntityVault.class,TakumiCraftCore.MODID+":creepervault",
+        ClientRegistry.registerTileEntity(TileEntityVault.class, TakumiCraftCore.MODID + ":creepervault",
                 new RenderVault());
     }
 }
