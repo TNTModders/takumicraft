@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "takumicraft:creeperlantern"
+    },
+    "facing=west": {
+      "model": "takumicraft:creeperlantern",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "takumicraft:creeperlantern",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "takumicraft:creeperlantern",
+      "y": 270
+    }
+  }
+}

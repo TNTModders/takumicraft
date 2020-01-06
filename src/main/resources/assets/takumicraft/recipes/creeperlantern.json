@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "GGG"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creepertorch"
+    },
+    "G": {
+      "item": "minecraft:skull",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperlantern"
+  }
+}
