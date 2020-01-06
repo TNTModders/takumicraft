@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -29,14 +28,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> implements ITakumiRender {
+    private ModelPlayer scalableModel;
 
     public RenderMirrorCreeper(RenderManager renderManager) {
         this(renderManager, false);
     }
 
     public RenderMirrorCreeper(RenderManager renderManager, boolean useSmallArms) {
-        super(renderManager, new ModelPlayer(0.0F, useSmallArms), 0.5F);
-        boolean smallArms = useSmallArms;
+        super(renderManager, new ModelPlayer(0.0F, false), 0.5F);
         this.addLayer(new LayerBipedArmor(this));
         this.addLayer(new LayerHeldItem(this));
         this.addLayer(new LayerArrow(this));
@@ -49,7 +48,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
 
     @Override
     protected int getColorMultiplier(EntityMirrorCreeper entitylivingbaseIn, float lightBrightness,
-            float partialTickTime) {
+                                     float partialTickTime) {
         float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 
         if ((int) (f * 10.0F) % 2 == 0) {
@@ -71,7 +70,11 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
      */
     @Override
     public void doRender(EntityMirrorCreeper entitydummy, double x, double y, double z, float entityYaw,
-            float partialTicks) {
+                         float partialTicks) {
+        if (this.scalableModel == null) {
+            this.scalableModel = new ModelPlayer(0.0f, Minecraft.getMinecraft().player.getSkinType().equals("slim"));
+            this.mainModel = this.scalableModel;
+        }
         EntityPlayer entity = Minecraft.getMinecraft().player;
         entitydummy.setItemStackToSlot(EntityEquipmentSlot.HEAD, entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD));
         entitydummy.setItemStackToSlot(EntityEquipmentSlot.CHEST,
@@ -200,7 +203,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
 
     @Override
     protected void renderEntityName(EntityMirrorCreeper entity, double x, double y, double z, String name,
-            double distanceSq) {
+                                    double distanceSq) {
         EntityPlayer entityIn = Minecraft.getMinecraft().player;
         if (entityIn != null) {
             if (distanceSq < 100.0D) {
@@ -267,7 +270,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
 
     @Override
     protected void applyRotations(EntityMirrorCreeper entityLivingIn, float p_77043_2_, float rotationYaw,
-            float partialTicks) {
+                                  float partialTicks) {
         EntityPlayer entityLiving = Minecraft.getMinecraft().player;
         /*if (entityLiving != null) {
             GlStateManager.rotate(entityLiving.getBedOrientationInDegrees(), 0.0F, 1.0F, 0.0F);
@@ -291,7 +294,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
 
         @Override
         public void doRenderLayer(EntityMirrorCreeper entitylivingbase, float limbSwing, float limbSwingAmount,
-                float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                                  float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             AbstractClientPlayer entitylivingbaseIn = Minecraft.getMinecraft().player;
             if (entitylivingbaseIn != null && "deadmau5".equals(entitylivingbaseIn.getName()) &&
                     entitylivingbaseIn.hasSkin() && !entitylivingbaseIn.isInvisible()) {
@@ -336,7 +339,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
 
         @Override
         public void doRenderLayer(EntityMirrorCreeper entitylivingbase, float limbSwing, float limbSwingAmount,
-                float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                                  float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             AbstractClientPlayer entitylivingbaseIn = Minecraft.getMinecraft().player;
             if (entitylivingbaseIn != null && entitylivingbaseIn.hasPlayerInfo() && !entitylivingbaseIn.isInvisible() &&
                     entitylivingbaseIn.isWearing(EnumPlayerModelParts.CAPE) &&
@@ -405,7 +408,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
         private final ResourceLocation LIGHTNING_TEXTURE =
                 new ResourceLocation("textures/entity/creeper/creeper_armor.png");
         private final RenderMirrorCreeper creeperRenderer;
-        private final ModelCreeper creeperModel = new ModelCreeper(2.0F);
+        private final ModelPlayer creeperModel = new ModelPlayer(2.0f, false);
 
         public LayerCreeperChargeDummy(RenderMirrorCreeper creeperRendererIn) {
             this.creeperRenderer = creeperRendererIn;
@@ -413,7 +416,7 @@ public class RenderMirrorCreeper extends RenderLivingBase<EntityMirrorCreeper> i
 
         @Override
         public void doRenderLayer(EntityCreeper entitylivingbaseIn, float limbSwing, float limbSwingAmount,
-                float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                                  float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             if (entitylivingbaseIn.getPowered()) {
                 boolean flag = entitylivingbaseIn.isInvisible();
                 GlStateManager.depthMask(!flag);
