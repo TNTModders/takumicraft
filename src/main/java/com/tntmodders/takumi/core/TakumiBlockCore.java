@@ -49,6 +49,7 @@ public class TakumiBlockCore {
     public static final Block CREEPER_TORCH = new BlockTakumiTorch();
     public static final Block CREEPER_ILLUMINATION = new BlockTakumiIllumination();
     public static final Block CREEPER_LANTERN = new BlockTakumiLantern();
+    public static final Block CREEPER_LADDER = new BlockTakumiLadder();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

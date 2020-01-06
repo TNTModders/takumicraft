@@ -143,6 +143,7 @@ tile.creepervault.name=匠式硬質チェスト
 tile.creepertorch.name=匠式硬質松明
 tile.creeperillumination.name=匠式硬質角灯
 tile.creeperlantern.name=匠式硬質吊灯
+tile.creeperladder.name=匠式硬質梯子
 
 #item
 item.takumibook.name=匠の書
