@@ -49,6 +49,7 @@ public class TakumiBlockCore {
             "creeperbrick_wall", 2.5f, "pickaxe");
     public static final Block CREEPER_FENCE = new BlockTakumiFence(Material.WOOD, "creeperfence", 1.0f, "axe");
     public static final Block CREEPER_FENCEGATE = new BlockTakumiFenceGate(Material.WOOD, "creeperfence_gate", 1.0f, "axe");
+    public static final Block CREEPER_IRONBARS = new BlockTakumiIronBars(Material.IRON, "creeperironbars", 5f, "pickaxe");
 
     //Util Blocks
     public static final Block CREEPER_VAULT = new BlockAntiExplosionVault();
