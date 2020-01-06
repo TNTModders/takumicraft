@@ -2,9 +2,8 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
@@ -16,19 +15,23 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            int i = this.getPowered() ? 20 : 15;
+            int i = this.getPowered() ? 30 : 20;
             for (int x = -i; x <= i; x++) {
                 for (int z = -i; z <= i; z++) {
                     boolean flg = true;
                     for (int y = -i; y < 0; y++) {
                         if (x * x + y * y + z * z < i * i) {
                             if (flg && this.rand.nextBoolean()) {
-                                TakumiUtils.setBlockStateProtected(this.world, new BlockPos(this.posX + x, 256 + y, this.posZ + z),
-                                        TakumiBlockCore.FALLING_BOMB.getDefaultState());
+                                EntityFallingBlock block = new EntityFallingBlock(this.world, this.posX + x, 300 + y, this.posZ + z, TakumiBlockCore.FALLING_BOMB.getDefaultState());
+                                block.fallTime = 1;
+                                block.motionY = -1;
+                                this.world.spawnEntity(block);
                                 flg = false;
                             } else {
-                                TakumiUtils.setBlockStateProtected(this.world, new BlockPos(this.posX + x, 256 + y, this.posZ + z),
-                                        Blocks.SAND.getDefaultState());
+                                EntityFallingBlock block = new EntityFallingBlock(this.world, this.posX + x, 300 + y, this.posZ + z, Blocks.SAND.getDefaultState());
+                                block.fallTime = 1;
+                                block.motionY = -1;
+                                this.world.spawnEntity(block);
                             }
                         }
                     }

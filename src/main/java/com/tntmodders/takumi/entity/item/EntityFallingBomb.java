@@ -13,4 +13,11 @@ public class EntityFallingBomb extends EntityFallingBlock {
     public EntityFallingBomb(World worldIn) {
         super(worldIn);
     }
+
+    @Override
+    public void setDead() {
+        if (this.fallTime != 0) {
+            super.setDead();
+        }
+    }
 }

@@ -595,10 +595,12 @@ public class TakumiEvents {
     @SubscribeEvent
     public void damage(LivingAttackEvent event) {
         if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiThrowGrenede &&
+                ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower() != null &&
                 ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower().getClass() == event.getEntityLiving().getClass()) {
             event.setCanceled(true);
         } else if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiArrow) {
-            if (((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity.getClass() == event.getEntityLiving().getClass()) {
+            if (((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity != null &&
+                    ((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity.getClass() == event.getEntityLiving().getClass()) {
                 event.setCanceled(true);
             }
         } else if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityChaseCreeper) {
