@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QSQ",
+    "QSQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperplanks"
+    },
+    "S": {
+      "item": "minecraft:skull",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperfence",
+    "count": 3
+  }
+}
