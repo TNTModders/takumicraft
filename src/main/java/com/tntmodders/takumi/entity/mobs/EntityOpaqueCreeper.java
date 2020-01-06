@@ -64,9 +64,11 @@ public class EntityOpaqueCreeper extends EntityTakumiAbstractCreeper {
                                         event.getExplosion().getExplosivePlacedBy(), event.getExplosion()) ||
                                 event.getWorld().isAirBlock(newPos))) {
                     int r = this.getPowered() ? 4 : 2;
-                    if (Math.abs(newPos.getX() - this.posX) < r && Math.abs(newPos.getZ() - this.posZ) < r && newPos.getY() - this.posY < r * 2) {
+                    if (this.rand.nextBoolean() &&
+                            Math.abs(newPos.getX() - this.posX) < r && Math.abs(newPos.getZ() - this.posZ) < r && newPos.getY() - this.posY < r * 2) {
                         EntityShulker shulker = new EntityShulker(this.world);
-                        shulker.addPotionEffect(new PotionEffect(TakumiPotionCore.VIRUS,1000));
+                        shulker.setHealth(2);
+                        shulker.addPotionEffect(new PotionEffect(TakumiPotionCore.EP, 600));
                         shulker.setPosition(pos.getX(), pos.getY(), pos.getZ());
                         this.world.spawnEntity(shulker);
                     } else {
@@ -103,7 +105,7 @@ public class EntityOpaqueCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 0;
+        return 3;
     }
 
     @Override
