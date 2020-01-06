@@ -122,11 +122,13 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper implement
                             (l1 != -k1 && l1 != k1 && i2 != -k1 && i2 != k1 || this.rand.nextFloat() <= 0.75F)) {
                         IBlockState blockState = world.getBlockState(new BlockPos(x + l1, y + j1, z + i2));
                         if (blockState.getBlockHardness(this.world, new BlockPos(x + l1, y + j1, z + i2)) >= 0) {
-                            TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + l1, y + j1, z + i2),
-                                    Blocks.PACKED_ICE.getDefaultState());
+                            if (TakumiUtils.takumiGetBlockResistance(this, blockState, new BlockPos(x + l1, y + j1, z + i2)) != -1) {
+                                TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + l1, y + j1, z + i2),
+                                        Blocks.PACKED_ICE.getDefaultState());
+                            }
                             if (y - j1 > 0 && j1 != 0 && k1 > 1 &&
-                                    blockState.getBlockHardness(this.world, new BlockPos(x + l1, y - j1, z + i2)) >=
-                                            0) {
+                                    blockState.getBlockHardness(this.world, new BlockPos(x + l1, y - j1, z + i2)) >= 0 &&
+                                    TakumiUtils.takumiGetBlockResistance(this, blockState, new BlockPos(x + l1, y - j1, z + i2)) != -1) {
                                 TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + l1, y - j1, z + i2),
                                         Blocks.PACKED_ICE.getDefaultState());
                             }
@@ -161,8 +163,10 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper implement
 
                         if (block1.getMaterial() == Material.AIR || block1 == Blocks.DIRT || block1 == Blocks.SNOW ||
                                 block1 == Blocks.ICE || block1 == Blocks.PACKED_ICE) {
-                            TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + j2, l1, z + k1),
-                                    Blocks.PACKED_ICE.getDefaultState());
+                            if (TakumiUtils.takumiGetBlockResistance(this, block1, new BlockPos(x + j2, l1, z + k1)) != -1) {
+                                TakumiUtils.setBlockStateProtected(this.world, new BlockPos(x + j2, l1, z + k1),
+                                        Blocks.PACKED_ICE.getDefaultState());
+                            }
                             --l1;
                             --k2;
 
@@ -194,10 +198,8 @@ public class EntityAntinomyCreeper extends EntityTakumiAbstractCreeper implement
                     BlockPos pos = new BlockPos(blockX, blockY, blockZ);
 
                     if (world.getBlockState(pos.down()).getBlock() != Blocks.AIR) {
-                        if (world.isAirBlock(pos)) {
-
+                        if (world.isAirBlock(pos) && TakumiUtils.takumiGetBlockResistance(this, world.getBlockState(pos), pos) != -1) {
                             TakumiUtils.setBlockStateProtected(world, pos, Blocks.FIRE.getDefaultState());
-
                         }
 
                     }

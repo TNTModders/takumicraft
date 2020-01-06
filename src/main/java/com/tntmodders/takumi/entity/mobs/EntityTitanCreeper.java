@@ -21,7 +21,7 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
                     boolean flg = true;
                     for (int y = -i; y < 0; y++) {
                         if (x * x + y * y + z * z < i * i) {
-                            if (flg && this.rand.nextBoolean()) {
+                            if (flg && this.rand.nextInt(3) <= 1) {
                                 EntityFallingBlock block = new EntityFallingBlock(this.world, this.posX + x, 300 + y, this.posZ + z, TakumiBlockCore.FALLING_BOMB.getDefaultState());
                                 block.fallTime = 1;
                                 block.motionY = -1;

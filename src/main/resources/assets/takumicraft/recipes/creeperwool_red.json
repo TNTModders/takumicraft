@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "takumicraft:creeperclay",
+  "group": "takumicraft:creeperwool",
   "pattern": [
     "GGG",
     "GQG",
@@ -11,13 +11,13 @@
       "item": "takumicraft:creeperbomb"
     },
     "G": {
-      "item": "minecraft:stained_hardened_clay",
-      "data": 6
+      "item": "minecraft:wool",
+      "data": 14
     }
   },
   "result": {
-    "item": "takumicraft:creeperclay",
+    "item": "takumicraft:creeperwool",
     "count": 8,
-    "data": 6
+    "data": 14
   }
 }
