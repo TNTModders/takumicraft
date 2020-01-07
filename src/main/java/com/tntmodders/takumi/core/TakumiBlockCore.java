@@ -52,11 +52,12 @@ public class TakumiBlockCore {
     public static final Block CREEPER_IRONBARS = new BlockTakumiIronBars(Material.IRON, "creeperironbars", 5f, "pickaxe");
 
     //Util Blocks
-    public static final Block CREEPER_VAULT = new BlockAntiExplosionVault();
+    public static final Block CREEPER_VAULT = new BlockTakumiVault();
     public static final Block CREEPER_TORCH = new BlockTakumiTorch();
     public static final Block CREEPER_ILLUMINATION = new BlockTakumiIllumination();
     public static final Block CREEPER_LANTERN = new BlockTakumiLantern();
     public static final Block CREEPER_LADDER = new BlockTakumiLadder();
+    public static final Block CREEPER_BED = new BlockTakumiBed();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

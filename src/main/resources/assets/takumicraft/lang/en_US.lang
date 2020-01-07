@@ -149,6 +149,7 @@ tile.creeperiron_wall.name=Creeper Iron Wall
 tile.creeperfence.name=Creeper Fence
 tile.creeperfence_gate.name=Creeper FenceGate
 tile.creeperironbars.name=Creeper IronBars
+tile.creeperbed.name=Creeper Bed
 
 #item
 item.takumibook.name=Creeper Book

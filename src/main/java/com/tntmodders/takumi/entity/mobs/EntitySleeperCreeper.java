@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,8 @@ public class EntitySleeperCreeper extends EntityTakumiAbstractCreeper {
                     BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
                     if (pos != null &&
                             this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                    pos, entity)) {
+                                    pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
+                            < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
                         for (int i = 0; i < (this.getPowered() ? 10 : 5); i++) {
                             EntityCreeper creeper = this.rand.nextBoolean() ? new EntityBedCreeper(this.world) :
                                     new EntityReturnCreeper(this.world);

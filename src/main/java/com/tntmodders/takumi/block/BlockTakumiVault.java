@@ -13,8 +13,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class BlockAntiExplosionVault extends BlockChest {
-    public BlockAntiExplosionVault() {
+public class BlockTakumiVault extends BlockChest {
+    public BlockTakumiVault() {
         super(Type.BASIC);
         this.setRegistryName(TakumiCraftCore.MODID, "creepervault");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);

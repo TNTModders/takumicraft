@@ -1,0 +1,81 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperplanks"
+    },
+    "W": [
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 0
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 1
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 2
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 3
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 4
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 5
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 6
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 7
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 8
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 9
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 10
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 11
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 12
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 13
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 14
+      },
+      {
+        "item": "takumicraft:creeperwool",
+        "data": 15
+      }
+    ]
+  },
+  "result": {
+    "item": "takumicraft:creeperbed"
+  }
+}

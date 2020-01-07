@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.client.render.tileentity;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import net.minecraft.block.state.IBlockState;
@@ -46,9 +45,6 @@ public class RenderTakumiBlock<T extends TileEntityTakumiBlock> extends TileEnti
             GlStateManager.pushMatrix();
             BlockPos pos = new BlockPos(x, y, z);
             IBlockState state = te.state != null ? te.state : te.getBlock().getStateFromMeta(te.getMeta());
-            if(te.getWorld().rand.nextInt(20)==0){
-                TakumiCraftCore.LOGGER.info(state);
-            }
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder buffer = tessellator.getBuffer();
             this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);

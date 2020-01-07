@@ -4,6 +4,7 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -56,7 +57,8 @@ public class EntityBedCreeper extends EntityTakumiAbstractCreeper {
                     if (entity instanceof EntityPlayer) {
                         BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
                         if (pos != null && this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos),
-                                this.world, pos, entity)) {
+                                this.world, pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
+                                < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
                             TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX(), pos.getY(), pos.getZ(),
                                     this.getPowered() ? 20 : 12, false, true);
                         }

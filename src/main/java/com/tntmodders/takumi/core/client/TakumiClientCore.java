@@ -149,5 +149,7 @@ public class TakumiClientCore {
                 new RenderDarkBoard<>());
         ClientRegistry.registerTileEntity(TileEntityVault.class, TakumiCraftCore.MODID + ":creepervault",
                 new RenderVault());
+        ClientRegistry.registerTileEntity(TileEntityTakumiBed.class, TakumiCraftCore.MODID + ":creeperbed",
+                new RenderTakumiBed());
     }
 }

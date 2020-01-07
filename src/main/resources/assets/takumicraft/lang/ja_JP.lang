@@ -149,6 +149,7 @@ tile.creeperiron_wall.name=匠式硬質鋼壁
 tile.creeperfence.name=匠式硬質柵
 tile.creeperfence_gate.name=匠式硬質柵扉
 tile.creeperironbars.name=匠式硬質鉄格子
+tile.creeperbed.name=匠式硬質寝具
 
 #item
 item.takumibook.name=匠の書

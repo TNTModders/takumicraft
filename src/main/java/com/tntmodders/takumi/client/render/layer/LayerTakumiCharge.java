@@ -62,7 +62,7 @@ public class LayerTakumiCharge implements LayerRenderer<EntityTakumiAbstractCree
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
-            GlStateManager.depthMask(flag);
+            GlStateManager.depthMask(!flag);
             GlStateManager.popMatrix();
         }
     }
