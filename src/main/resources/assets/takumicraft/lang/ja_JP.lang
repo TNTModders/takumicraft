@@ -671,6 +671,10 @@ entity.obsidiancreeper.name=黒曜匠
 entity.obsidiancreeper.desc=その匠、ダイヤモンドより砕けない。
 entity.withercreeper.name=ウィザー匠
 entity.withercreeper.desc=煉獄より来る、怨嗟の呻きは地を砕く。
+entity.paralysiscreeper.name=金縛匠
+entity.paralysiscreeper.desc=狙った獲物は逃さない。捕えた敵は必ず倒す。 MOB募集:さとしきさん
+entity.angelcreeper.name=輪廻天匠
+entity.angelcreeper.desc=蘇り、猛り、すべての力は此処に。 MOB募集:れがりあさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

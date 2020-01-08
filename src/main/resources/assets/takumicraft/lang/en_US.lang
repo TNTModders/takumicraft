@@ -622,6 +622,8 @@ entity.obsidiancreeper.name=Obsidian Creeper
 entity.obsidiancreeper.desc=Harder than the diamond.
 entity.withercreeper.name=Wither Creeper
 entity.withercreeper.desc=Curse scary voice from the nether.
+entity.paralysiscreeper.name=Paralysis Creeper
+entity.paralysiscreeper.desc=Never forgive, never release, never stay alive.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

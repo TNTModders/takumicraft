@@ -81,7 +81,7 @@ public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.TAKUMI_OFALEN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
+            this.dropItem(TakumiItemCore.TAKUMI_OFALEN, this.rand.nextBoolean() ? 2 : 1 + this.rand.nextInt(2));
         }
         super.onDeath(source);
     }
