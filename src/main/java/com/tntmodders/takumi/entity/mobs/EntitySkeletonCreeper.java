@@ -76,10 +76,10 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
             ItemStack itemstack = this.getHeldItemMainhand();
 
             if (itemstack.getItem() == TakumiItemCore.TAKUMI_BOW) {
-                int i = 20;
+                int i = 40;
 
                 if (this.world.getDifficulty() != EnumDifficulty.HARD) {
-                    i = 40;
+                    i = 60;
                 }
 
                 this.aiArrowAttack.setAttackCooldown(i);
@@ -163,7 +163,7 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
         if (!this.world.isRemote) {
-            if (this.rand.nextInt(5) == 0) {
+            if (this.rand.nextBoolean()) {
                 this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
             }
             if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
