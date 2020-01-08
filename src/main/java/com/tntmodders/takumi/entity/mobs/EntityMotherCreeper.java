@@ -24,6 +24,11 @@ public class EntityMotherCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public boolean getCanSpawnHere() {
+        return this.rand.nextBoolean() && super.getCanSpawnHere();
+    }
+
+    @Override
     public double getSizeAmp() {
         return 2.0;
     }
@@ -37,8 +42,9 @@ public class EntityMotherCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (!this.world.isRemote && source.getTrueSource() instanceof EntityPlayer && this.coolTimer < 0) {
-            this.coolTimer = 50;
+            this.coolTimer = 100;
             EntityCreeper creeper = new EntityCreeper(this.world);
+            creeper.setHealth(10);
             creeper.copyLocationAndAnglesFrom(source.getTrueSource());
             spawnChild(creeper);
         }
@@ -54,13 +60,13 @@ public class EntityMotherCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-       if(!this.world.isRemote){
-           for (int i = 0; i < (this.getPowered() ? 8 : 5); i++) {
-               EntityCreeper creeper = new EntityCreeper(this.world);
-               creeper.copyLocationAndAnglesFrom(this);
-               spawnChild(creeper);
-           }
-       }
+        if (!this.world.isRemote) {
+            for (int i = 0; i < (this.getPowered() ? 8 : 5); i++) {
+                EntityCreeper creeper = new EntityCreeper(this.world);
+                creeper.copyLocationAndAnglesFrom(this);
+                spawnChild(creeper);
+            }
+        }
     }
 
     @Override
