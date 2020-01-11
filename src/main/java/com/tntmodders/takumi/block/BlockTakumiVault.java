@@ -12,10 +12,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class BlockTakumiVault extends BlockChest {
+    public static final BlockChest.Type TAKUMI = EnumHelper.addEnum(Type.class, "TAKUMI", new Class[0], (Object[]) null);
+
     public BlockTakumiVault() {
-        super(Type.BASIC);
+        super(TAKUMI);
         this.setRegistryName(TakumiCraftCore.MODID, "creepervault");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creepervault");
