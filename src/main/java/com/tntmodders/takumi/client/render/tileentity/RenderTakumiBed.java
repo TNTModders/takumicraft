@@ -12,7 +12,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityBedRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.tileentity.TileEntityBed;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -39,16 +38,17 @@ public class RenderTakumiBed extends TileEntityBedRenderer {
 
         boolean flag = te.getWorld() != null;
         boolean flag1 = !flag || te.isHeadPiece();
-        EnumDyeColor enumdyecolor = te != null ? te.getColor() : EnumDyeColor.RED;
         int i = flag ? te.getBlockMetadata() & 3 : 0;
 
         if (destroyStage >= 0) {
+            GlStateManager.pushMatrix();
             this.bindTexture(DESTROY_STAGES[destroyStage]);
             GlStateManager.matrixMode(5890);
             GlStateManager.pushMatrix();
             GlStateManager.scale(4.0F, 4.0F, 1.0F);
             GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
             GlStateManager.matrixMode(5888);
+            GlStateManager.popMatrix();
         } else {
             ResourceLocation resourcelocation = BASE_TEXTURE;
 
@@ -58,11 +58,13 @@ public class RenderTakumiBed extends TileEntityBedRenderer {
         }
 
         if (flag) {
-            this.renderPiece(((TileEntityTakumiBed) te), flag1, x, y, z, i, alpha);
+            GlStateManager.pushMatrix();
+            this.renderPiece(((TileEntityTakumiBed) te), flag1, x, y, z, i, alpha, destroyStage);
+            GlStateManager.popMatrix();
         } else {
             GlStateManager.pushMatrix();
-            this.renderPiece((TileEntityTakumiBed) te, true, x, y, z, i, alpha);
-            this.renderPiece((TileEntityTakumiBed) te, false, x, y, z - 1.0D, i, alpha);
+            this.renderPiece((TileEntityTakumiBed) te, true, x, y, z, i, alpha, destroyStage);
+            this.renderPiece((TileEntityTakumiBed) te, false, x, y, z - 1.0D, i, alpha, destroyStage);
             GlStateManager.popMatrix();
         }
 
@@ -73,7 +75,7 @@ public class RenderTakumiBed extends TileEntityBedRenderer {
         }
     }
 
-    private void renderPiece(TileEntityTakumiBed te, boolean p_193847_1_, double x, double y, double z, int p_193847_8_, float alpha) {
+    private void renderPiece(TileEntityTakumiBed te, boolean p_193847_1_, double x, double y, double z, int p_193847_8_, float alpha, int stage) {
         this.model.preparePiece(p_193847_1_);
         GlStateManager.pushMatrix();
         float f = 0.0F;
@@ -104,47 +106,48 @@ public class RenderTakumiBed extends TileEntityBedRenderer {
         GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
         GlStateManager.popMatrix();
 
-
-        if (this.getOverlayTexture(te) != null) {
-            GlStateManager.pushMatrix();
-            this.bindTexture(this.getOverlayTexture(te));
-            GlStateManager.translate((float) x + f1, (float) y + 0.5625F, (float) z + f2);
-            GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.rotate(f, 0.0F, 0.0F, 1.0F);
-            GlStateManager.enableRescaleNormal();
-            this.overlayModel.preparePiece(p_193847_1_);
-            this.overlayModel.render(null, 0, 0, 0, 0, 0, 0);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
-            GlStateManager.popMatrix();
-        } else {
-            GlStateManager.pushMatrix();
-            GlStateManager.depthMask(true);
-            this.bindTexture(LIGHTNING_TEXTURE);
-            GlStateManager.matrixMode(5890);
-            GlStateManager.loadIdentity();
-            float tick = Minecraft.getMinecraft().player.ticksExisted;
-            GlStateManager.translate(tick * 0.01F, tick * 0.01F, 0.0F);
-            GlStateManager.matrixMode(5888);
-            GlStateManager.enableBlend();
-            GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-            GlStateManager.disableLighting();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-            Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-            GlStateManager.translate((float) x + f1, (float) y + 0.5625F, (float) z + f2);
-            GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.rotate(f, 0.0F, 0.0F, 1.0F);
-            this.poweredModel.preparePiece(p_193847_1_);
-            this.poweredModel.render(null, 0, 0, 0, 0, 0, 0);
-            Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
-            GlStateManager.matrixMode(5890);
-            GlStateManager.loadIdentity();
-            GlStateManager.matrixMode(5888);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
-                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enableLighting();
-            GlStateManager.disableBlend();
-            GlStateManager.depthMask(true);
-            GlStateManager.popMatrix();
+        if(stage <0){
+            if (this.getOverlayTexture(te) != null) {
+                GlStateManager.pushMatrix();
+                this.bindTexture(this.getOverlayTexture(te));
+                GlStateManager.translate((float) x + f1, (float) y + 0.5625F, (float) z + f2);
+                GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate(f, 0.0F, 0.0F, 1.0F);
+                GlStateManager.enableRescaleNormal();
+                this.overlayModel.preparePiece(p_193847_1_);
+                this.overlayModel.render(null, 0, 0, 0, 0, 0, 0);
+                GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
+                GlStateManager.popMatrix();
+            } else {
+                GlStateManager.pushMatrix();
+                GlStateManager.depthMask(true);
+                this.bindTexture(LIGHTNING_TEXTURE);
+                GlStateManager.matrixMode(5890);
+                GlStateManager.loadIdentity();
+                float tick = Minecraft.getMinecraft().player.ticksExisted;
+                GlStateManager.translate(tick * 0.01F, tick * 0.01F, 0.0F);
+                GlStateManager.matrixMode(5888);
+                GlStateManager.enableBlend();
+                GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
+                GlStateManager.disableLighting();
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+                Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+                GlStateManager.translate((float) x + f1, (float) y + 0.5625F, (float) z + f2);
+                GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate(f, 0.0F, 0.0F, 1.0F);
+                this.poweredModel.preparePiece(p_193847_1_);
+                this.poweredModel.render(null, 0, 0, 0, 0, 0, 0);
+                Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                GlStateManager.matrixMode(5890);
+                GlStateManager.loadIdentity();
+                GlStateManager.matrixMode(5888);
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                GlStateManager.enableLighting();
+                GlStateManager.disableBlend();
+                GlStateManager.depthMask(true);
+                GlStateManager.popMatrix();
+            }
         }
     }
 

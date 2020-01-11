@@ -34,6 +34,7 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "creeperbed");
         this.setUnlocalizedName("creeperbed");
+        this.setHardness(0.8f);
         this.setResistance(10000000f);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setLightLevel(1);
@@ -44,7 +45,7 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
         if (state.getValue(PART) == BlockBed.EnumPartType.HEAD) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             EnumDyeColor enumdyecolor = tileentity instanceof TileEntityBed ? ((TileEntityBed) tileentity).getColor() : EnumDyeColor.RED;
-            spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BED), 1, enumdyecolor.getMetadata()));
+            spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BED), 1));
         }
     }
 
@@ -58,7 +59,7 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
 
         TileEntity tileentity = worldIn.getTileEntity(blockpos);
         EnumDyeColor enumdyecolor = tileentity instanceof TileEntityBed ? ((TileEntityBed) tileentity).getColor() : EnumDyeColor.RED;
-        return new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BED), 1, enumdyecolor.getMetadata());
+        return new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BED), 1);
     }
 
     @Override

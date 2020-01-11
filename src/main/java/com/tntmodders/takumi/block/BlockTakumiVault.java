@@ -19,8 +19,9 @@ public class BlockTakumiVault extends BlockChest {
         this.setRegistryName(TakumiCraftCore.MODID, "creepervault");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creepervault");
+        this.setHardness(1f);
         this.setResistance(10000000f);
-        this.setHarvestLevel("pickaxe", 2);
+        this.setHarvestLevel("axe", 2);
     }
 
     @Override
