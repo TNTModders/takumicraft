@@ -11,6 +11,7 @@ import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.item.IItemAntiExplosion;
+import com.tntmodders.takumi.item.ItemTypeCore;
 import com.tntmodders.takumi.item.ItemTypeCoreSP;
 import com.tntmodders.takumi.item.ItemTypeSword;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -22,6 +23,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
@@ -35,6 +37,7 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -96,7 +99,20 @@ public class TakumiEvents {
                             TakumiEnchantmentCore.TYPE_MAGIC)) {
                 event.getOutput().addEnchantment(TakumiEnchantmentCore.TYPE_MAGIC, 1);
             }
-
+        } else if (event.getLeft().getItem() instanceof ItemElytra &&
+                (event.getRight().getItem() instanceof ItemTypeCore || event.getRight().getItem() instanceof ItemTypeCoreSP) &&
+                event.getRight().getCount() == 64 &&
+                !event.getLeft().isItemEnchanted()) {
+            event.setCost(15);
+            event.setMaterialCost(64);
+            event.setOutput(new ItemStack(event.getLeft().getItem(), 1));
+            if (event.getLeft().isItemEnchanted()) {
+                for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                        event.getLeft()).entrySet()) {
+                    event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                }
+            }
+            event.getOutput().addEnchantment(TakumiEnchantmentCore.ROCKET_ELYTRA, 1);
         }
     }
 
@@ -294,6 +310,20 @@ public class TakumiEvents {
                                     event.getEntityLiving().getRNG().nextDouble() * event.getEntityLiving().height * 2,
                             event.getEntityLiving().posZ + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
                                     event.getEntityLiving().width * 6, 0.0D, 0.0D, 0.0D);
+                }
+            }
+        }
+        if (event.getEntityLiving() instanceof EntityPlayer) {
+            EntityPlayer player = ((EntityPlayer) event.getEntityLiving());
+            if (!player.world.isRemote && player.isElytraFlying()) {
+                if (!EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).isEmpty() &&
+                        EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).containsKey(TakumiEnchantmentCore.ROCKET_ELYTRA)) {
+                    event.getEntityLiving().world.createExplosion(player, player.posX, player.posY, player.posZ, 0.5f, false);
+                    if (player.getTicksElytraFlying() % 50 == 0) {
+                        EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(player.world, new ItemStack(Items.FIREWORKS), player);
+                        player.world.spawnEntity(entityfireworkrocket);
+                        Enchantment.getEnchantmentID(TakumiEnchantmentCore.ROCKET_ELYTRA);
+                    }
                 }
             }
         }

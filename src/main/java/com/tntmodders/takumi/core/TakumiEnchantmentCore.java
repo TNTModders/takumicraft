@@ -2,6 +2,7 @@ package com.tntmodders.takumi.core;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.enchantment.EnchantmentTakumiAntiPowered;
+import com.tntmodders.takumi.enchantment.EnchantmentTakumiElytra;
 import com.tntmodders.takumi.enchantment.EnchantmentTakumiExplosionProtection;
 import com.tntmodders.takumi.enchantment.EnchantmentTakumiMineSweeper;
 import net.minecraft.enchantment.Enchantment;
@@ -43,7 +44,7 @@ public class TakumiEnchantmentCore {
                     return false;
                 }
             }.setRegistryName(TakumiCraftCore.MODID, "takumi_type_dest").setName("takumi_type_dest");
-
+    public static final Enchantment ROCKET_ELYTRA = new EnchantmentTakumiElytra();
     public static void register(IForgeRegistry<Enchantment> registry) {
         Class clazz = TakumiEnchantmentCore.class;
         for (Field field : clazz.getFields()) {
