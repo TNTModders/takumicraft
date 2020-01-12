@@ -319,7 +319,7 @@ public class TakumiEvents {
                 if (!EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).isEmpty() &&
                         EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).containsKey(TakumiEnchantmentCore.ROCKET_ELYTRA)) {
                     event.getEntityLiving().world.createExplosion(player, player.posX, player.posY, player.posZ, 0.5f, false);
-                    if (player.getTicksElytraFlying() % 50 == 0) {
+                    if (player.ticksExisted % 50 == 0) {
                         EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(player.world, new ItemStack(Items.FIREWORKS), player);
                         player.world.spawnEntity(entityfireworkrocket);
                         Enchantment.getEnchantmentID(TakumiEnchantmentCore.ROCKET_ELYTRA);
