@@ -28,7 +28,7 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
         List<BlockPos> posList = new ArrayList<>();
         for (BlockPos pos : event.getAffectedBlocks()) {
             if (pos.getY() > this.posY && (this.world.getBlockState(pos).getBlockHardness(this.world, pos) >= 0 ||
-                    this.world.isAirBlock(pos))|| (this.world.getBlockState(pos).getBlock()== Blocks.BEDROCK && pos.getY()>0)) {
+                    this.world.isAirBlock(pos)) || (this.world.getBlockState(pos).getBlock() == Blocks.BEDROCK && pos.getY() > 0)) {
                 this.world.setBlockToAir(pos);
             } else if (this.world.isAirBlock(pos) || this.world.getBlockState(pos).getMaterial().isLiquid()) {
                 IBlockState state = this.world.getBlockState(this.getPosition().down());
@@ -36,7 +36,8 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
                     state = TakumiBlockCore.YUKARI_DUMMY.getDefaultState();
                 }
                 if (/*!(state.getBlock() instanceof BlockTakumiMonsterBomb) &&*/
-                        state.getBlockHardness(this.world, this.getPosition().down()) >= 0) {
+                        state.getBlockHardness(this.world, this.getPosition().down()) >= 0
+                                && !state.getBlock().hasTileEntity(state)) {
                     TakumiUtils.setBlockStateProtected(this.world, pos, state);
                 }
             }
@@ -47,7 +48,7 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean canExplosionDestroyBlock(Explosion explosionIn, World worldIn, BlockPos pos,
-            IBlockState blockStateIn, float p_174816_5_) {
+                                            IBlockState blockStateIn, float p_174816_5_) {
         return super.canExplosionDestroyBlock(explosionIn, worldIn, pos, blockStateIn, p_174816_5_);
     }
 
@@ -116,6 +117,6 @@ public class EntityYukariCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 && (blockStateIn.getBlock() != Blocks.BEDROCK)? 10000000f : 1f;
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 && (blockStateIn.getBlock() != Blocks.BEDROCK) ? 10000000f : 1f;
     }
 }
