@@ -235,7 +235,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                             for (double y = -5; y <= 5; y += 1) {
                                 if (x * x + z * z + y * y <= 25 && x * x + z * z + y * y >= 4.5 * 4.5) {
                                     this.world.newExplosion(this, this.posX + x, this.posY + y, this.posZ + z,
-                                            this.getPowered() ? 5f : 2.5f, true, true);
+                                            this.getPowered() ? 3f : 1.5f, true, true);
                                 }
                             }
                         }
@@ -245,7 +245,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
 
                 //Thunder
                 case 3: {
-                    for (int i = 0; i < (this.getPowered() ? 150 : 100); i++) {
+                    for (int i = 0; i < (this.getPowered() ? 100 : 70); i++) {
 
                         BlockPos pos = this.getRandomPos(2, 1, 2);
                         if (this.rand.nextInt(5) == 0) {
@@ -282,7 +282,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         EntityLargeFireball fireball = new EntityLargeFireball(this.world);
                         fireball.setPosition(pos.getX(), pos.getY(), pos.getZ());
                         fireball.motionY = -1;
-                        fireball.accelerationY=-0.2;
+                        fireball.accelerationY = -0.2;
                         fireball.explosionPower = this.getPowered() ? 5 : 3;
                         this.world.spawnEntity(fireball);
                     }
@@ -298,7 +298,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     }
 
     private void spawnParticle(EnumParticleTypes types, double x, double y, double z, double motionX, double motionY,
-            double motionZ) {
+                               double motionZ) {
         this.world.spawnAlwaysVisibleParticle(types.getParticleID(), this.posX + x, this.posY + y, this.posZ + z,
                 motionX, motionY, motionZ);
     }
@@ -314,7 +314,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }

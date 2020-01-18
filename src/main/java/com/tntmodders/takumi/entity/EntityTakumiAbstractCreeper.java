@@ -35,6 +35,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     private int stoppingCounter;
     private int dmgCount;
+    private float prevHealth;
 
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
@@ -239,7 +240,24 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                 this.ignite();
             }
         }
+        if (!this.isNonBoss()) {
+            if (this.prevHealth > 1 && this.prevHealth - this.getHealth() > 70) {
+                for (int i = 0; i <100; i++) {
+                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, this.posX, this.posY, this.posZ, false);
+                    this.world.addWeatherEffect(bolt);
+                    this.world.spawnEntity(bolt);
+                }
+
+            }
+            this.prevHealth = this.getHealth();
+        }
         super.onUpdate();
+    }
+
+    @Override
+    public void onStruckByLightning(EntityLightningBolt lightningBolt) {
+        this.heal(0.05f);
+        super.onStruckByLightning(lightningBolt);
     }
 
     @Override
