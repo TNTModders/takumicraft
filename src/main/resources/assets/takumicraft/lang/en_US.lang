@@ -220,6 +220,7 @@ item.makeup.name=Creeper Makeup
 item.takumithrowgrenede.name=Creeper Grenede
 item.explosionbook.name=Minecraft Explosion Processing
 item.evocore.name=Evolution Core
+item.paralysiscore.name=Paralysis Creeper's Core
 
 #entity
 #desc max: 72 chars

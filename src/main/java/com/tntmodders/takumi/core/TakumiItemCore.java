@@ -83,6 +83,7 @@ public class TakumiItemCore {
     public static final Item THROW_GRENEDE = new ItemTakumiThrowGrenede();
     public static final Item EXP_PRO_PRI = new ItemExpProcPri();
     public static final Item EVO_CORE = new ItemEvoCore();
+    public static final Item PARALYSIS_CORE = new ItemParalysisCore();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

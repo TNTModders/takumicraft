@@ -2,7 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.client.render.RenderParalysisCreeper;
-import com.tntmodders.takumi.core.TakumiConfigCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,6 +10,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Field;
@@ -101,11 +102,19 @@ public class EntityParalysisCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean canRegister() {
-        return TakumiConfigCore.inDev;
+        return true;
     }
 
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderParalysisCreeper(manager);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        if (!this.world.isRemote) {
+            this.dropItem(TakumiItemCore.PARALYSIS_CORE, this.rand.nextBoolean() ? 1 : this.rand.nextInt(4));
+        }
+        super.onDeath(source);
     }
 }
