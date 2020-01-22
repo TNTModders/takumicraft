@@ -242,7 +242,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         }
         if (!this.isNonBoss()) {
             if (this.prevHealth > 1 && this.prevHealth - this.getHealth() > 70) {
-                for (int i = 0; i <100; i++) {
+                for (int i = 0; i < 100; i++) {
                     EntityLightningBolt bolt = new EntityLightningBolt(this.world, this.posX, this.posY, this.posZ, false);
                     this.world.addWeatherEffect(bolt);
                     this.world.spawnEntity(bolt);
@@ -290,7 +290,12 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         if (this.world.provider.getDimensionType() != TakumiWorldCore.TAKUMI_WORLD) {
             return super.getCanSpawnHere();
         } else {
-            return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
+            return this.world.getDifficulty() != EnumDifficulty.PEACEFUL&& this.world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
         }
+    }
+
+    @Override
+    protected boolean isValidLightLevel() {
+        return this.world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD || super.isValidLightLevel();
     }
 }

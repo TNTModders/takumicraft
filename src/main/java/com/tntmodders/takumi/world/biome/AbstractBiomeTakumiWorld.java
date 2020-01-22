@@ -54,8 +54,8 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
                         iTakumiEntity instanceof EntitySeaGuardianCreeper) &&
                         (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
                                 iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
-                    int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 100;
-                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 5, count, (count + 2) * 2));
+                    int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 70;
+                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 10, count, (count + 2) * 4));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -64,6 +64,7 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
         this.spawnableMonsterList.clear();
         this.spawnableMonsterList.addAll(entryList);
         this.modSpawnableLists.put(EnumCreatureType.MONSTER, entryList);
+        this.modSpawnableLists.put(EnumCreatureType.CREATURE, entryList);
     }
 
     protected static BiomeProperties getBaseProperty(String name) {
