@@ -42,7 +42,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 20 == 0) {
+        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 60 == 0) {
             ((EntityLivingBase) entityIn).heal(0.5f);
             if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
                 ((EntityPlayer) entityIn).getFoodStats().addStats(5, 0.7f);
