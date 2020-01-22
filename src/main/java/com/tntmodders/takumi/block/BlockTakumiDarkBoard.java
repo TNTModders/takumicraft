@@ -109,7 +109,7 @@ public class BlockTakumiDarkBoard extends BlockContainer {
                     e.printStackTrace();
                 }
             }
-            TakumiCraftCore.LOGGER.info(((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name);
+            //TakumiCraftCore.LOGGER.info(((TileEntityDarkBoard) worldIn.getTileEntity(pos)).name);
         }
     }
 

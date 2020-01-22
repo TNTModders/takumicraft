@@ -1768,8 +1768,8 @@ public class StructureTakumiDarkShrinePieces {
             this.setBlockState(worldIn, TakumiBlockCore.DARKCORE.getDefaultState(), 0, 0, 0, structureBoundingBoxIn);
             this.fillWithBlocks(worldIn, structureBoundingBoxIn, -1, 2, -1, 1, 2, 1, Blocks.FIRE.getDefaultState(),
                     Blocks.FIRE.getDefaultState(), false);
-            TakumiCraftCore.LOGGER.info(
-                    new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(10), this.getZWithOffset(0, 0)));
+            /*TakumiCraftCore.LOGGER.info(
+                    new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(10), this.getZWithOffset(0, 0)));*/
             this.setDarkVillager(worldIn, -3, 5, -3, structureBoundingBoxIn);
             this.setDarkVillager(worldIn, 3, 5, -3, structureBoundingBoxIn);
             this.setDarkVillager(worldIn, -3, 5, 3, structureBoundingBoxIn);

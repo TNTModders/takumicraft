@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +45,7 @@ public class EntityReturnCreeper extends EntityTakumiAbstractCreeper {
                             this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
                                     pos, entity)) {
                         ((EntityPlayer) entity).attemptTeleport(pos.getX() + 0.5, pos.getY() + 0.75, pos.getZ() + 0.5);
-                        TakumiCraftCore.LOGGER.info(entity);
+                        //TakumiCraftCore.LOGGER.info(entity);
                         list.add(((EntityPlayer) entity));
                     }
                 }

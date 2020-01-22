@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,7 +24,7 @@ public class EntityBoarCreeper extends EntityPigCreeper{
             this.target = this.getPosition().add(vec3d.x, vec3d.y, vec3d.z);
         }
         if (this.attackerFlg) {
-            TakumiCraftCore.LOGGER.info(this.getPosition().toString() + "/" + this.target.toString());
+            //TakumiCraftCore.LOGGER.info(this.getPosition().toString() + "/" + this.target.toString());
             this.setAttackTarget(null);
             this.setCreeperState(-1);
             this.tasks.taskEntries.clear();

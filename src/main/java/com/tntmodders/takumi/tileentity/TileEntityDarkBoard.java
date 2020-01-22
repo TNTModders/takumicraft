@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.tileentity;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,7 +71,7 @@ public class TileEntityDarkBoard extends TileEntity implements ITickable {
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         this.readFromNBT(pkt.getNbtCompound());
-        TakumiCraftCore.LOGGER.info("pkt");
+        //TakumiCraftCore.LOGGER.info("pkt");
     }
 
     @Override
