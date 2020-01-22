@@ -63,8 +63,7 @@ public class TakumiTeleporter extends Teleporter {
                     }
                 }
             }
-
-            entityIn.setLocationAndAngles(i, j, k, entityIn.rotationYaw, 0.0F);
+            entityIn.setLocationAndAngles(i, j+0.5, k, entityIn.rotationYaw, 0.0F);
             entityIn.motionX = 0.0D;
             entityIn.motionY = 0.0D;
             entityIn.motionZ = 0.0D;
@@ -142,32 +141,32 @@ public class TakumiTeleporter extends Teleporter {
             float f2 = 0.0F;
             float f3 = 0.0F;
 
-           /* if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
-                f = 1.0F;
-                f1 = 1.0F;
-            } else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
-                f = -1.0F;
-                f1 = -1.0F;
-            } else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
-                f2 = 1.0F;
-                f3 = -1.0F;
-            } else {
-                f2 = -1.0F;
-                f3 = 1.0F;
-            }*/
+          if(entityIn.getTeleportDirection() !=null){
+              if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
+                  f = 1.0F;
+                  f1 = 1.0F;
+              } else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
+                  f = -1.0F;
+                  f1 = -1.0F;
+              } else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
+                  f2 = 1.0F;
+                  f3 = -1.0F;
+              } else {
+                  f2 = -1.0F;
+                  f3 = 1.0F;
+              }
+          }
 
             double d3 = entityIn.motionX;
             double d4 = entityIn.motionZ;
             entityIn.motionX = d3 * (double) f + d4 * (double) f3;
             entityIn.motionZ = d3 * (double) f2 + d4 * (double) f1;
             entityIn.rotationYaw = rotationYaw /*- (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float) (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90)*/;
-
             if (entityIn instanceof EntityPlayerMP) {
-                ((EntityPlayerMP) entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
-            } else {
-                entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
+               ((EntityPlayerMP) entityIn).connection.setPlayerLocation(d5+1, d6, d7+1, entityIn.rotationYaw, entityIn.rotationPitch);
             }
-
+            entityIn.setLocationAndAngles(d5+1, d6, d7+1, entityIn.rotationYaw, entityIn.rotationPitch);
+            //TakumiCraftCore.LOGGER.info(entityIn.getPosition());
             return true;
         } else {
             return false;

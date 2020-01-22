@@ -18,14 +18,11 @@ import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.block.state.pattern.BlockPattern.PatternHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
@@ -192,7 +189,7 @@ public class BlockTakumiPortal extends BlockBreakable {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
 
-        if (worldIn.provider.isSurfaceWorld() && worldIn.getGameRules().getBoolean("doMobSpawning") &&
+       /* if (worldIn.provider.isSurfaceWorld() && worldIn.getGameRules().getBoolean("doMobSpawning") &&
                 rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId()) {
             int i = pos.getY();
             BlockPos blockpos;
@@ -211,7 +208,7 @@ public class BlockTakumiPortal extends BlockBreakable {
                     entity.timeUntilPortal = entity.getPortalCooldown();
                 }
             }
-        }
+        }*/
     }
 
     @Override
@@ -289,18 +286,18 @@ public class BlockTakumiPortal extends BlockBreakable {
         if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
             MinecraftServer server = worldIn.getMinecraftServer();
             if (server != null && entityIn.timeUntilPortal <= 0) {
-                TakumiCraftCore.LOGGER.info("portal:" + entityIn.timeUntilPortal);
+                //TakumiCraftCore.LOGGER.info("portal:" + entityIn.timeUntilPortal);
                 PlayerList playerList = server.getPlayerList();
                 int i = entityIn.dimension == DimensionType.OVERWORLD.getId() ? TakumiWorldCore.TAKUMI_WORLD.getId() :
                         DimensionType.OVERWORLD.getId();
                 TakumiTeleporter teleporter = new TakumiTeleporter(server.getWorld(i));
                 teleporter.placeInPortal(entityIn, entityIn.rotationYaw);
-                entityIn.timeUntilPortal = 500;
+                entityIn.timeUntilPortal = 200;
                 if(entityIn instanceof EntityPlayer && !entityIn.world.isRemote){
-                    ((EntityPlayer) entityIn).addPotionEffect(new  PotionEffect(MobEffects.NAUSEA,500));
+                    ((EntityPlayer) entityIn).addPotionEffect(new  PotionEffect(MobEffects.NAUSEA,200));
                 }
                 if (entityIn instanceof EntityPlayerMP) {
-                    playerList.transferPlayerToDimension((EntityPlayerMP) entityIn, i, teleporter);
+                    //playerList.transferPlayerToDimension((EntityPlayerMP) entityIn, i, teleporter);
                 } else {
                     int origin = entityIn.dimension;
                     entityIn.dimension = i;
@@ -308,10 +305,10 @@ public class BlockTakumiPortal extends BlockBreakable {
 
                     entityIn.isDead = false;
 
-                    playerList.transferEntityToWorld(entityIn, origin, server.getWorld(origin), server.getWorld(i),
-                            teleporter);
+                    /*playerList.transferEntityToWorld(entityIn, origin, server.getWorld(origin), server.getWorld(i),
+                            teleporter);*/
                 }
-
+                entityIn.changeDimension(i,teleporter);
             }
         }
     }
