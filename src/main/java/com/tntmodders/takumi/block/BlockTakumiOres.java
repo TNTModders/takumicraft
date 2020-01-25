@@ -23,7 +23,7 @@ public class BlockTakumiOres extends BlockTakumiGunOre {
         if (item == Items.GLOWSTONE_DUST) {
             this.setLightLevel(1f);
         } else {
-            this.setLightLevel(0.25f);
+            this.setLightLevel(0.3f);
         }
     }
 
@@ -45,7 +45,7 @@ public class BlockTakumiOres extends BlockTakumiGunOre {
     @Override
     public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
         Random rand = new Random();
-        return 2 * (rand.nextInt(5) + 3);
+        return 4 * (rand.nextInt(5) + 3);
     }
 
     @Override
@@ -64,9 +64,10 @@ public class BlockTakumiOres extends BlockTakumiGunOre {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         super.onBlockHarvested(worldIn, pos, state, player);
-        if (worldIn.rand.nextInt(3) == 0 && worldIn.getDifficulty() != EnumDifficulty.PEACEFUL && !worldIn.isRemote) {
+        if (worldIn.rand.nextInt(5) == 0 && worldIn.getDifficulty() != EnumDifficulty.PEACEFUL && !worldIn.isRemote) {
             EntityFishCreeper fishCreeper = new EntityFishCreeper(worldIn);
             fishCreeper.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+            fishCreeper.setHealth(2);
             worldIn.spawnEntity(fishCreeper);
         }
     }

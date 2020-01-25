@@ -163,12 +163,9 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
         if (!this.world.isRemote) {
-            if (this.rand.nextBoolean()) {
-                this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
-            }
+            this.entityDropItem(this.getHeldItem(EnumHand.MAIN_HAND), 0);
             if (this.getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_BOW) {
-                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA,
-                        this.rand.nextBoolean() ? this.rand.nextInt(5) : this.rand.nextInt(1));
+                this.dropItem(TakumiItemCore.TAKUMI_ARROW_HA, this.rand.nextInt(5));
             }
         }
     }
@@ -318,8 +315,8 @@ public class EntitySkeletonCreeper extends EntityTakumiAbstractCreeper implement
     @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+                                            @Nullable
+                                                    IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         this.setEquipmentBasedOnDifficulty(difficulty);
         this.setEnchantmentBasedOnDifficulty(difficulty);

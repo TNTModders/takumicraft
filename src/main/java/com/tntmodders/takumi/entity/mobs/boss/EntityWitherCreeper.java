@@ -479,7 +479,7 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
                     Entity entity = source.getImmediateSource();
 
                     if (entity instanceof EntityArrow) {
-                        return false;
+                        amount = amount / 3;
                     }
                 }
 
@@ -546,9 +546,9 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6000000238418579D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7000000238418579D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
     }
 
     @SideOnly(Side.CLIENT)

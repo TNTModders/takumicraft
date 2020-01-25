@@ -34,7 +34,7 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
             field.setAccessible(true);
-            field.set(this, 50);
+            field.set(this, 90);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,7 +134,7 @@ public class EntityGiantCreeper extends EntityZombieCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 0 : this.rand.nextInt(2));
+            this.dropItem(TakumiItemCore.TAKUMI_BOWGUN, this.rand.nextBoolean() ? 1 : this.rand.nextInt(2));
         }
         super.onDeath(source);
     }

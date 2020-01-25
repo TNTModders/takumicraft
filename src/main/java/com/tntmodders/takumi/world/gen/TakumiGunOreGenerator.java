@@ -47,16 +47,15 @@ public class TakumiGunOreGenerator implements IWorldGenerator {
     private void generateOreTakumi(World world, Random random, int x, int z) {
         //1チャンクで生成したい回数だけ繰り返す。
         if (world.provider instanceof TakumiWorldProvider) {
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < 40; i++) {
                 int genX = x + random.nextInt(16);
                 int genY = 1 + random.nextInt(255);
                 int genZ = z + random.nextInt(16);
-                IBlockState iBlockState = TakumiBlockCore.TAKUMI_ORE_COAL.getDefaultState();
+                IBlockState iBlockState;
                 List<BlockTakumiOres> blockTakumiOres = new ArrayList<>();
                 Block.REGISTRY.forEach(block -> {
                     if (block instanceof BlockTakumiOres) {
-                        if (genY < 24 && block == TakumiBlockCore.TAKUMI_ORE_MAGIC ||
-                                block != TakumiBlockCore.TAKUMI_ORE_MAGIC) {
+                        if (genY < 24 || block != TakumiBlockCore.TAKUMI_ORE_MAGIC) {
                             blockTakumiOres.add((BlockTakumiOres) block);
                         }
                     }

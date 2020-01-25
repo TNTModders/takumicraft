@@ -1,18 +1,31 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Field;
+
 public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
+
+    private int ofalenSinceIgnited;
 
     public EntityOfalenCreeper(World worldIn) {
         super(worldIn);
+        try {
+            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
+            field.setAccessible(true);
+            field.set(this, 50);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -20,6 +33,16 @@ public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1D);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        int i = this.getCreeperState();
+        this.ofalenSinceIgnited += i;
+        if (!this.world.isRemote && this.ofalenSinceIgnited % 50 == 0) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, 6f, false);
+        }
     }
 
     @Override

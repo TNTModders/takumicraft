@@ -120,11 +120,6 @@ public class EntityEndermiteCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-
-    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ARTHROPOD;
     }

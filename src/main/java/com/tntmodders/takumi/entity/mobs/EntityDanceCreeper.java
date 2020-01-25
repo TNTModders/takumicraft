@@ -63,12 +63,13 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityEndermite.class, 10, true, false,
-                EntityEndermite :: isSpawnedByPlayer));
+                EntityEndermite::isSpawnedByPlayer));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
@@ -183,7 +184,9 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-    }    /**
+    }
+
+    /**
      * Teleport the enderman to a random nearby position
      */
     protected boolean teleportRandomly() {
@@ -201,7 +204,9 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public EnumTakumiType takumiType() {
         return EnumTakumiType.GROUND_M;
-    }    /**
+    }
+
+    /**
      * Teleport the enderman
      */
     private boolean teleportTo(double x, double y, double z) {
@@ -348,7 +353,9 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         double d2 = this.posY + (this.rand.nextInt(16) - 8) - vec3d.y * 16.0D;
         double d3 = this.posZ + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3d.z * 16.0D;
         return this.teleportTo(d1, d2, d3);
-    }    @Override
+    }
+
+    @Override
     public void setAttackTarget(
             @Nullable
                     EntityLivingBase entitylivingbaseIn) {
@@ -375,7 +382,9 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.teleportCounter, true);
         }
-    }    @Override
+    }
+
+    @Override
     protected SoundEvent getAmbientSound() {
         return this.isScreaming() ? SoundEvents.ENTITY_ENDERMEN_SCREAM : SoundEvents.ENTITY_ENDERMEN_AMBIENT;
     }
@@ -471,7 +480,9 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
                 super.updateTask();
             }
         }
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     protected Item getDropItem() {
         return Items.ENDER_PEARL;
@@ -495,15 +506,6 @@ public class EntityDanceCreeper extends EntityTakumiAbstractCreeper {
 
         super.updateAITasks();
     }
-
-
-
-
-
-
-
-
-
 
 
 }
