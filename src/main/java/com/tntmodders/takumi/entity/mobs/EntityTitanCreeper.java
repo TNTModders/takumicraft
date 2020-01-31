@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.item.EntityTakumiTitanMeteor;
 import net.minecraft.world.World;
 
 public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
@@ -35,6 +36,10 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
                 }
             }
         }*/
+        if (!this.world.isRemote) {
+            EntityTakumiTitanMeteor meteor = new EntityTakumiTitanMeteor(this.world, this.posX, this.posY + 256, this.posZ);
+            this.world.spawnEntity(meteor);
+        }
     }
 
     @Override

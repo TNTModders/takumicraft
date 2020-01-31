@@ -698,6 +698,7 @@ entity.bonecreeperdummy.name=骸匠
 entity.bonecreeperdummy.tag=ただのしかばねのようだ……
 entity.takumithrowgrenede.name=匠式手投爆弾
 entity.withercreeperskull.name=ウィザー匠
+entity.titanmeteor.name=隕匠
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

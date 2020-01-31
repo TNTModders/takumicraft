@@ -365,13 +365,14 @@ public class TakumiEvents {
             } catch (Exception ignored) {
             }
         }
+
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityKingDummy) {
             switch (((EntityKingDummy) event.getExplosion().getExplosivePlacedBy()).id) {
                 default: {
                     event.getAffectedEntities().forEach(entity -> {
                         if (entity instanceof EntityLivingBase) {
                             entity.getEquipmentAndArmor().forEach(itemStack -> {
-                                if (itemStack != ItemStack.EMPTY && entity.world.rand.nextInt(10) == 0) {
+                                if (itemStack != ItemStack.EMPTY && entity.world.rand.nextInt(20) == 0) {
                                     itemStack.shrink(1);
                                 }
                             });
@@ -424,6 +425,16 @@ public class TakumiEvents {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
                 AbstractEntityTakumiGrenade grenade =
                         (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();
+                if (grenade instanceof EntityTakumiTitanMeteor) {
+                    event.getAffectedEntities().forEach(entity -> {
+                        if (entity instanceof EntityLivingBase) {
+                            entity.setFire(30);
+                        } else if (entity instanceof EntityItem) {
+                            entity.setDead();
+                        }
+                    });
+                    event.getAffectedEntities().clear();
+                }
                 if (grenade.getThrower() != null && !(grenade instanceof EntityTakumiThrowGrenede)) {
                     event.getAffectedEntities().remove(grenade.getThrower());
                 }
@@ -487,7 +498,7 @@ public class TakumiEvents {
                                     EnchantmentHelper.getEnchantments(itemStack).containsKey(
                                             TakumiEnchantmentCore.EXPLOSION_PROTECTION)) {
                                 itemStack.damageItem(1 + ((EntityLivingBase) entity).getRNG().nextInt(
-                                        3 + event.getWorld().getDifficulty().getDifficultyId()) * 2,
+                                        3 + event.getWorld().getDifficulty().getDifficultyId()),
                                         ((EntityLivingBase) entity));
                                 return true;
                             }

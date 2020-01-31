@@ -649,6 +649,7 @@ entity.bonecreeperdummy.name=Bone Creeper
 entity.bonecreeperdummy.tag=No response. Looks dead...
 entity.takumithrowgrenede.name=Creeper Grenede
 entity.withercreeperskull.name=Wither Creeper
+entity.titanmeteor.name=Titan Creeper
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

@@ -299,6 +299,9 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "withercreeperskull"),
                 EntityWitherCreeperSkull.class, "withercreeperskull", 923, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "titanmeteor"),
+                EntityTakumiTitanMeteor.class, "titanmeteor", 924, TakumiCraftCore.TakumiInstance, 64, 2,
+                true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -383,6 +386,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiThrowGrenede.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.THROW_GRENEDE,
                         Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTitanMeteor.class, RenderTitanMeteor::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
