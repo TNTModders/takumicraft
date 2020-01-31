@@ -152,6 +152,10 @@ tile.creeperironbars.name=Creeper IronBars
 tile.creeperbed.name=Creeper Bed
 tile.creeperiron_door.name=Creeper Iron Door
 tile.creeperplanks_door.name=Creeper Planks Door
+tile.creeperrail.name=Creeper Rail
+tile.creeperrail_powered.name=Creeper Powered Rail
+tile.creeperrail_detector.name=Creeper Detector Rail
+tile.creeperrail_activator.name=Creeper Activator Rail
 
 #item
 item.takumibook.name=Creeper Book

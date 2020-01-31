@@ -152,6 +152,10 @@ tile.creeperironbars.name=匠式硬質鉄格子
 tile.creeperbed.name=匠式硬質寝具
 tile.creeperiron_door.name=匠式硬質鉄扉
 tile.creeperplanks_door.name=匠式硬質木扉
+tile.creeperrail.name=匠式硬質線路
+tile.creeperrail_powered.name=匠式硬質変速線路
+tile.creeperrail_detector.name=匠式硬質感圧線路
+tile.creeperrail_activator.name=匠式硬質信号線路
 
 #item
 item.takumibook.name=匠の書

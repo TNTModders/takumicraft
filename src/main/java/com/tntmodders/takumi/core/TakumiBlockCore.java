@@ -61,6 +61,12 @@ public class TakumiBlockCore {
     public static final Block CREEPER_IRON_DOOR = new BlockTakumiDoor(Material.IRON, "creeperiron_door", 5f, "pickaxe");
     public static final Block CREEPER_PLANKS_DOOR = new BlockTakumiDoor(Material.WOOD, "creeperplanks_door", 1f, "axe");
 
+    //Rails
+    //public static final Block CREEPER_RAIL = new BlockTakumiRail();
+    //public static final Block CREEPER_RAIL_POWERED = new BlockTakumiRailPowered(false);
+    //public static final Block CREEPER_RAIL_ACTIVATOR = new BlockTakumiRailPowered(true);
+    //public static final Block CREEPER_RAIL_DETECTOR = new BlockTakumiRailDetector();
+
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
     public static final Block ACID_BLOCK = new BlockTakumiAcid();
