@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiDoor;
 import com.tntmodders.takumi.block.BlockTakumiFenceGate;
 import com.tntmodders.takumi.client.render.tileentity.*;
 import com.tntmodders.takumi.core.TakumiBlockCore;
@@ -123,6 +124,22 @@ public class TakumiClientCore {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperfence_gate"),
                         "facing=" + state.getValue(BlockTakumiFenceGate.FACING).getName() + ",in_wall="
                                 + state.getValue(BlockTakumiFenceGate.IN_WALL) + ",open=" + state.getValue(BlockTakumiFenceGate.OPEN));
+            }
+        });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_IRON_DOOR, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperiron_door"),
+                        "facing=" + state.getValue(BlockTakumiDoor.FACING).getName() + ",half="
+                                + state.getValue(BlockTakumiDoor.HALF) + ",hinge=" + state.getValue(BlockTakumiDoor.HINGE) + ",open=" + state.getValue(BlockTakumiDoor.OPEN));
+            }
+        });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_PLANKS_DOOR, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperplanks_door"),
+                        "facing=" + state.getValue(BlockTakumiDoor.FACING).getName() + ",half="
+                                + state.getValue(BlockTakumiDoor.HALF) + ",hinge=" + state.getValue(BlockTakumiDoor.HINGE) + ",open=" + state.getValue(BlockTakumiDoor.OPEN));
             }
         });
     }

@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "takumicraft:blocks/wtd_lower",
+        "top": "takumicraft:blocks/wtd_upper"
+    }
+}
