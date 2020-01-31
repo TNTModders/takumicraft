@@ -113,7 +113,7 @@ public class EntityReturnCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void additionalSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 2, 2, EnumCreatureType.MONSTER,
+        EntityRegistry.addSpawn(this.getClass(), 1, 2, 2, EnumCreatureType.MONSTER,
                 Biomes.SKY);
     }
 }

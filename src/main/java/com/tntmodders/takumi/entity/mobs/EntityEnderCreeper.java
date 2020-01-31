@@ -64,7 +64,7 @@ public class EntityEnderCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void additionalSpawn() {
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight(), 10, 10, EnumCreatureType.MONSTER,
+        EntityRegistry.addSpawn(this.getClass(), 1, 10, 10, EnumCreatureType.MONSTER,
                 Biomes.SKY);
     }
 
