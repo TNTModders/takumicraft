@@ -1,9 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import net.minecraft.entity.item.EntityFallingBlock;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
@@ -14,7 +11,7 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-        if (!this.world.isRemote) {
+     /*   if (!this.world.isRemote) {
             int i = this.getPowered() ? 30 : 20;
             for (int x = -i; x <= i; x++) {
                 for (int z = -i; z <= i; z++) {
@@ -37,7 +34,7 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Override
@@ -52,7 +49,7 @@ public class EntityTitanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 0;
+        return 7;
     }
 
     @Override
