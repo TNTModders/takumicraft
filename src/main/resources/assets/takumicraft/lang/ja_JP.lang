@@ -777,6 +777,17 @@ splash_potion.effect.explosionjump=爆破跳躍のスプラッシュポーショ
 lingering_potion.effect.explosionjump=爆破跳躍の残留ポーション
 ep=爆塵
 creepervirus=匠ウィルス
+antiexplosion=防爆
+potion.effect.antiexplosion=防爆のポーション
+splash_potion.effect.antiexplosion=防爆のスプラッシュポーション
+lingering_potion.effect.antiexplosion=防爆の残留ポーション
+antiswelling=収爆
+potion.effect.antiswelling=収爆のポーション
+splash_potion.effect.antiswelling=収爆のスプラッシュポーション
+lingering_potion.effect.antiswelling=収爆の残留ポーション
+potion.effect.creeper=匠のポーション
+splash_potion.effect.creeper=匠のスプラッシュポーション
+lingering_potion.effect.creeper=匠の残留ポーション
 
 #Vanilla
 item.skull.creeper.name=匠の頭

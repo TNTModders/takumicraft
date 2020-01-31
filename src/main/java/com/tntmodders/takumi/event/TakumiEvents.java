@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.event;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiAcid;
 import com.tntmodders.takumi.core.*;
@@ -71,6 +72,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.StreamSupport;
 
@@ -247,6 +249,20 @@ public class TakumiEvents {
                         event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
                                 event.getEntityLiving().posX, event.getEntityLiving().posY,
                                 event.getEntityLiving().posZ, 3f, true)), 20f);
+            }
+        }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.ANTI_SWELLING) != null &&
+                event.getEntityLiving() instanceof EntityCreeper) {
+            if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.ANTI_SWELLING).getDuration() > 1) {
+                try{
+                    Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
+                    field.setAccessible(true);
+                    field.set(event.getEntityLiving(), 1);
+                    ((EntityCreeper) event.getEntityLiving()).setCreeperState(-1);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
         if (event.getEntityLiving() instanceof EntityCreeper &&
@@ -629,6 +645,10 @@ public class TakumiEvents {
         }
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.EXP_JUMP) != null &&
                 event.getSource() == DamageSource.FALL) {
+            event.setCanceled(true);
+        }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.ANTI_EXPLOSION) != null &&
+                event.getSource().isExplosion()) {
             event.setCanceled(true);
         }
     }

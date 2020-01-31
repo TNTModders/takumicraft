@@ -724,6 +724,17 @@ splash_potion.effect.explosionjump=Splash Potion of Explosion Jump
 lingering_potion.effect.explosionjump=Lingering Potion of Explosion Jump
 ep=Explosion Particle
 creepervirus=Creeper Virus
+antiexplosion=Anti Explosion
+potion.effect.antiexplosion=Potion of Anti Explosion
+splash_potion.effect.antiexplosion=Splash Potion of Anti Explosion
+lingering_potion.effect.antiexplosion=Lingering Potion of Anti Explosion
+antiswelling=Anti Swelling
+potion.effect.antiswelling=Potion of Anti Swelling
+splash_potion.effect.antiswelling=Splash Potion of Anti Swelling
+lingering_potion.effect.antiswelling=Lingering Potion of Anti Swelling
+potion.effect.creeper=Potion of Creeper
+splash_potion.effect.creeper=Splash Potion of Creeper
+lingering_potion.effect.creeper=Lingering Potion of Creeper
 
 #Vanilla
 item.skull.creeper.name=Creeper Head
