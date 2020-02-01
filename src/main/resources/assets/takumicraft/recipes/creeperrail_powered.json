@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QGQ",
+    "QTQ",
+    "QGQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperiron"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperrail_powered",
+    "count": 6
+  }
+}

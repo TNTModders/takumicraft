@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QGQ",
+    "QTQ",
+    "QGQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperiron"
+    },
+    "G": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperrail_activator",
+    "count": 6
+  }
+}
