@@ -78,6 +78,9 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 kingCreeper.readEntityFromNBT(tagCompound);
                 kingCreeper.setHealth(this.getHealth());
                 kingCreeper.copyLocationAndAnglesFrom(this);
+                if (this.hasCustomName()) {
+                    kingCreeper.setCustomNameTag(this.getCustomNameTag());
+                }
                 if (this.getPowered()) {
                     TakumiUtils.takumiSetPowered(kingCreeper, true);
                 }
@@ -307,6 +310,9 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
             this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
+/*            if (FMLCommonHandler.instance().getSide().isServer()) {
+                FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TextComponentString(this.getName() + " has killed!"), true);
+            }*/
         }
         super.onDeath(source);
     }
