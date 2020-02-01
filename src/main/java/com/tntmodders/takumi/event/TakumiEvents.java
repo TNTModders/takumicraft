@@ -252,15 +252,15 @@ public class TakumiEvents {
             }
         }
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.ANTI_SWELLING) != null &&
-                event.getEntityLiving() instanceof EntityCreeper) {
+                event.getEntityLiving() instanceof EntityCreeper && event.getEntityLiving().isNonBoss()) {
             if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.ANTI_SWELLING).getDuration() > 1) {
-                try{
+                try {
                     Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
                     field.setAccessible(true);
                     field.set(event.getEntityLiving(), 1);
                     ((EntityCreeper) event.getEntityLiving()).setCreeperState(-1);
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -420,7 +420,7 @@ public class TakumiEvents {
                                     !event.getWorld().isAirBlock(blockPos) &&
                                     event.getWorld().getBlockState(blockPos).getBlockHardness(event.getWorld(),
                                             blockPos) != -1 &&
-                                    event.getWorld().getBlockState(blockPos).getBlock().getExplosionResistance(event.getWorld(),blockPos,null,null) < 2000 &&
+                                    event.getWorld().getBlockState(blockPos).getBlock().getExplosionResistance(event.getWorld(), blockPos, null, null) < 2000 &&
                                     event.getWorld().getBlockState(blockPos).getBlock() != TakumiBlockCore.ACID_BLOCK) {
                                 TakumiUtils.setBlockStateProtected(event.getWorld(), blockPos,
                                         TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META, i));
@@ -650,7 +650,7 @@ public class TakumiEvents {
         }
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.ANTI_EXPLOSION) != null &&
                 event.getSource().isExplosion()) {
-            event.setCanceled(true);
+            event.setCanceled(event.getAmount() < 20);
         }
     }
 
