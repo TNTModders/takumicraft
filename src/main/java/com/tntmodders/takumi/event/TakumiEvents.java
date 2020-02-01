@@ -18,6 +18,8 @@ import com.tntmodders.takumi.item.ItemTypeSword;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
+import net.minecraft.block.BlockRailBase;
+import net.minecraft.block.BlockRailPowered;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -60,6 +62,7 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
@@ -865,6 +868,80 @@ public class TakumiEvents {
                     }
                     event.getEntityLiving().world.getScoreboard().getOrCreateScore(
                             event.getSource().getTrueSource().getName(), objective).increaseScore(point);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void minecartUpdate(MinecartUpdateEvent event) {
+        if (!event.getMinecart().world.isRemote) {
+            int k = MathHelper.floor(event.getMinecart().posX);
+            int l = MathHelper.floor(event.getMinecart().posY);
+            int i1 = MathHelper.floor(event.getMinecart().posZ);
+            if (BlockRailBase.isRailBlock(event.getMinecart().world, new BlockPos(k, l - 1, i1))) {
+                --l;
+            }
+            BlockPos pos = new BlockPos(k, l, i1);
+            IBlockState iblockstate = event.getMinecart().world.getBlockState(pos);
+            if (event.getMinecart().canUseRail() && BlockRailBase.isRailBlock(iblockstate)) {
+                if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_ACTIVATOR) {
+                    event.getMinecart().onActivatorRailPass(k, l, i1, iblockstate.getValue(BlockRailPowered.POWERED));
+                }
+                if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_POWERED) {
+                    boolean flag;
+                    boolean flag1;
+                    flag = iblockstate.getValue(BlockRailPowered.POWERED);
+                    flag1 = !flag;
+                    Entity entity = event.getMinecart().getPassengers().isEmpty() ? null : event.getMinecart().getPassengers().get(0);
+                    BlockRailBase.EnumRailDirection blockrailbase$enumraildirection = ((BlockRailBase) iblockstate.getBlock()).getRailDirection(event.getMinecart().world, pos, iblockstate, event.getMinecart());
+                    if (entity instanceof EntityLivingBase) {
+                        double d6 = ((EntityLivingBase) entity).moveForward;
+
+                        if (d6 > 0.0D) {
+                            double d7 = -Math.sin(entity.rotationYaw * 0.017453292F);
+                            double d8 = Math.cos(entity.rotationYaw * 0.017453292F);
+                            double d9 = event.getMinecart().motionX * event.getMinecart().motionX + event.getMinecart().motionZ * event.getMinecart().motionZ;
+
+                            if (d9 < 0.01D) {
+                                flag1 = false;
+                            }
+                        }
+                    }
+                    if (flag1 && event.getMinecart().shouldDoRailFunctions()) {
+                        double d17 = Math.sqrt(event.getMinecart().motionX * event.getMinecart().motionX + event.getMinecart().motionZ * event.getMinecart().motionZ);
+
+                        if (d17 < 0.03D) {
+                            event.getMinecart().motionX *= 0.0D;
+                            event.getMinecart().motionY *= 0.0D;
+                            event.getMinecart().motionZ *= 0.0D;
+                        } else {
+                            event.getMinecart().motionX *= 0.5D;
+                            event.getMinecart().motionY *= 0.0D;
+                            event.getMinecart().motionZ *= 0.5D;
+                        }
+                    }
+                    if (flag && event.getMinecart().shouldDoRailFunctions()) {
+                        double d15 = Math.sqrt(event.getMinecart().motionX * event.getMinecart().motionX + event.getMinecart().motionZ * event.getMinecart().motionZ);
+
+                        if (d15 > 0.01D) {
+                            double d16 = 0.06D;
+                            event.getMinecart().motionX += event.getMinecart().motionX / d15 * 0.06D;
+                            event.getMinecart().motionZ += event.getMinecart().motionZ / d15 * 0.06D;
+                        } else if (blockrailbase$enumraildirection == BlockRailBase.EnumRailDirection.EAST_WEST) {
+                            if (event.getMinecart().world.getBlockState(pos.west()).isNormalCube()) {
+                                event.getMinecart().motionX = 0.02D;
+                            } else if (event.getMinecart().world.getBlockState(pos.east()).isNormalCube()) {
+                                event.getMinecart().motionX = -0.02D;
+                            }
+                        } else if (blockrailbase$enumraildirection == BlockRailBase.EnumRailDirection.NORTH_SOUTH) {
+                            if (event.getMinecart().world.getBlockState(pos.north()).isNormalCube()) {
+                                event.getMinecart().motionZ = 0.02D;
+                            } else if (event.getMinecart().world.getBlockState(pos.south()).isNormalCube()) {
+                                event.getMinecart().motionZ = -0.02D;
+                            }
+                        }
+                    }
                 }
             }
         }

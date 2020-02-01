@@ -14,10 +14,7 @@ import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderArrow;
-import net.minecraft.client.renderer.entity.RenderShulkerBullet;
-import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -302,6 +299,9 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "titanmeteor"),
                 EntityTakumiTitanMeteor.class, "titanmeteor", 924, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperminecart"),
+                EntityTakumiMinecart.class, "creeperminecart", 925, TakumiCraftCore.TakumiInstance, 64, 2,
+                true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -387,6 +387,12 @@ public class TakumiEntityCore {
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.THROW_GRENEDE,
                         Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTitanMeteor.class, RenderTitanMeteor::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiMinecart.class, manager -> new RenderMinecart<EntityTakumiMinecart>(manager){
+            @Override
+            protected ResourceLocation getEntityTexture(EntityTakumiMinecart entity) {
+                return new ResourceLocation(TakumiCraftCore.MODID,"textures/entity/creeperminecart.png");
+            }
+        });
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

@@ -227,6 +227,7 @@ item.takumithrowgrenede.name=匠式手投爆弾
 item.explosionbook.name=入門 爆発学
 item.evocore.name=真化ノ証
 item.paralysiscore.name=鎖の結晶
+item.creeperminecart.name=匠式硬質貨車
 
 #entity
 ＃descは36文字まで。
@@ -705,6 +706,7 @@ entity.bonecreeperdummy.tag=ただのしかばねのようだ……
 entity.takumithrowgrenede.name=匠式手投爆弾
 entity.withercreeperskull.name=ウィザー匠
 entity.titanmeteor.name=隕匠
+entity.creeperminecart.name=匠式硬質貨車
 
 #advancements
 advancements.takumicraft.root.title=匠Craft
@@ -788,6 +790,8 @@ lingering_potion.effect.antiswelling=収爆の残留ポーション
 potion.effect.creeper=匠のポーション
 splash_potion.effect.creeper=匠のスプラッシュポーション
 lingering_potion.effect.creeper=匠の残留ポーション
+tipped_arrow.effect.antiswelling=収爆の矢
+tipped_arrow.effect.antiexplosion=防爆の矢
 
 #Vanilla
 item.skull.creeper.name=匠の頭

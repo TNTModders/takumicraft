@@ -227,6 +227,7 @@ item.takumithrowgrenede.name=Creeper Grenede
 item.explosionbook.name=Minecraft Explosion Processing
 item.evocore.name=Evolution Core
 item.paralysiscore.name=Paralysis Creeper's Core
+item.creeperminecart.name=Creeper Minecart
 
 #entity
 #desc max: 72 chars
@@ -656,6 +657,7 @@ entity.bonecreeperdummy.tag=No response. Looks dead...
 entity.takumithrowgrenede.name=Creeper Grenede
 entity.withercreeperskull.name=Wither Creeper
 entity.titanmeteor.name=Titan Creeper
+entity.creeperminecart.name=Creeper Minecart
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
@@ -735,6 +737,8 @@ lingering_potion.effect.antiswelling=Lingering Potion of Anti Swelling
 potion.effect.creeper=Potion of Creeper
 splash_potion.effect.creeper=Splash Potion of Creeper
 lingering_potion.effect.creeper=Lingering Potion of Creeper
+tipped_arrow.effect.antiswelling=Arrow of Anti Swelling
+tipped_arrow.effect.antiexplosion=Arrow of Anti Explosion
 
 #Vanilla
 item.skull.creeper.name=Creeper Head
