@@ -84,12 +84,13 @@ public class TakumiClientEvents {
                         ((ItemBattleArmor) itemStack.getItem()).isPowered)) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TakumiClientEvents.ModelSaber.SABER_TEXTURE);
             GlStateManager.pushMatrix();
+            GlStateManager.translate(event.getX(), event.getY(), event.getZ());
             GlStateManager.depthMask(true);
             GlStateManager.scale(1.0F, -1.0F, -1.0F);
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();
-            float f = Minecraft.getMinecraft().player.ticksExisted * 2;
-            GL11.glTranslated(f * 0.01F, f * 0.01F, 0.0F);
+            float tick = Minecraft.getMinecraft().player.ticksExisted * 2;
+            GL11.glTranslated(tick * 0.01F, tick * 0.01F, 0.0F);
             GlStateManager.matrixMode(5888);
             GlStateManager.enableBlend();
             GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
@@ -112,9 +113,19 @@ public class TakumiClientEvents {
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
-            GlStateManager.depthMask(false);
+            GlStateManager.depthMask(true);
             GlStateManager.popMatrix();
         }
+    }
+
+    protected float interpolateRotation(float prevYawOffset, float yawOffset, float partialTicks) {
+        float f;
+        for (f = yawOffset - prevYawOffset; f < -180.0F; f += 360.0F) {
+        }
+        while (f >= 180.0F) {
+            f -= 360.0F;
+        }
+        return prevYawOffset + partialTicks * f;
     }
 
     @SubscribeEvent
