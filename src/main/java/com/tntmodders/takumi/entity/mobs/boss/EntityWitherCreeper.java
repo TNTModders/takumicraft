@@ -326,7 +326,8 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
                                 IBlockState iblockstate = this.world.getBlockState(blockpos);
                                 Block block = iblockstate.getBlock();
 
-                                if (!block.isAir(iblockstate, this.world, blockpos) && block.canEntityDestroy(iblockstate, world, blockpos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, iblockstate)) {
+                                if (!block.isAir(iblockstate, this.world, blockpos) && this.getExplosionResistance(null, this.world, blockpos, iblockstate) < 1 &&
+                                        block.canEntityDestroy(iblockstate, world, blockpos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, iblockstate)) {
                                     flag = this.world.destroyBlock(blockpos, true) || flag;
                                 }
                             }
