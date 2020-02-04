@@ -66,6 +66,8 @@ import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -944,6 +946,27 @@ public class TakumiEvents {
                     }
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void respawn(PlayerEvent.Clone event) {
+        if (event.isWasDeath() && event.getOriginal().getLastDamageSource().isExplosion() && event.getOriginal().getLastDamageSource().getTrueSource() instanceof EntityKeepCreeper) {
+            event.getEntityPlayer().world.loadedEntityList.forEach(entity -> {
+                if (entity instanceof EntityItem && ((EntityItem) entity).getOwner() != null && ((EntityItem) entity).getOwner().equals(event.getOriginal().getName())) {
+                    event.getEntityPlayer().addItemStackToInventory(((EntityItem) entity).getItem());
+                    entity.setDead();
+                }
+            });
+        }
+    }
+
+    @SubscribeEvent
+    public void playerDrop(PlayerDropsEvent event) {
+        if (event.getSource().getTrueSource() instanceof EntityKeepCreeper && event.getSource().isExplosion()) {
+            event.getDrops().forEach(entityItem -> {
+                entityItem.setOwner(event.getEntityPlayer().getName());
+            });
         }
     }
 }

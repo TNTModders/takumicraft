@@ -634,6 +634,8 @@ entity.withercreeper.name=Wither Creeper
 entity.withercreeper.desc=Curse scary voice from the nether.
 entity.paralysiscreeper.name=Paralysis Creeper
 entity.paralysiscreeper.desc=Never forgive, never release, never stay alive.
+entity.keepcreeper.name=Keep Creeper
+entity.keepcreeper.desc=Our mission is to blow up, but I keep kindness.
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball

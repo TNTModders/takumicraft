@@ -683,6 +683,9 @@ entity.paralysiscreeper.name=金縛匠
 entity.paralysiscreeper.desc=狙った獲物は逃さない。捕えた敵は必ず倒す。 MOB募集:さとしきさん
 entity.angelcreeper.name=輪廻天匠
 entity.angelcreeper.desc=蘇り、猛り、すべての力は此処に。 MOB募集:れがりあさん
+entity.keepcreeper.name=保匠
+entity.keepcreeper.read=ほしょう
+entity.keepcreeper.desc=匠の本懐は爆破だけど、少しくらい慈悲があってもいいよね。      MOB募集:蜂さん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
