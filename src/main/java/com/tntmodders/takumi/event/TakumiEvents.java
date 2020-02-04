@@ -969,4 +969,13 @@ public class TakumiEvents {
             });
         }
     }
+
+    @SubscribeEvent
+    public void breakSpeed(PlayerEvent.BreakSpeed event) {
+        if (event.getState().getBlock() == TakumiBlockCore.CREEPER_WOOL || event.getState().getBlock() == TakumiBlockCore.CREEPER_CARPET) {
+            if (event.getEntityPlayer().getHeldItemMainhand().getItem() == Items.SHEARS) {
+                event.setNewSpeed(5f);
+            }
+        }
+    }
 }

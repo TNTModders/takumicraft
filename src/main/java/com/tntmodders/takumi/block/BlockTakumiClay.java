@@ -10,14 +10,14 @@ import net.minecraft.item.ItemCloth;
 public class BlockTakumiClay extends BlockColored implements ITakumiItemBlock {
 
     public BlockTakumiClay() {
-        super(Material.CLOTH);
+        super(Material.CLAY);
         this.setRegistryName(TakumiCraftCore.MODID, "creeperclay");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creeperclay");
         this.setHardness(2f);
         this.setHarvestLevel("pickaxe", 1);
         this.setResistance(10000000f);
-        this.setSoundType(SoundType.GROUND);
+        this.setSoundType(SoundType.STONE);
     }
 
     @Override
