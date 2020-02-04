@@ -687,6 +687,8 @@ entity.angelcreeper.desc=蘇り、猛り、すべての力は此処に。 MOB募
 entity.keepcreeper.name=保匠
 entity.keepcreeper.read=ほしょう
 entity.keepcreeper.desc=匠の本懐は爆破だけど、少しくらい慈悲があってもいいよね。      MOB募集:蜂さん
+entity.slipcreeper.name=削匠
+entity.slipcreeper.desc=芸術は時に過程を楽しむもの。朽ち果てていくその作品を地獄で見てることだろう。 MOB募集:澤口シグレさん
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉

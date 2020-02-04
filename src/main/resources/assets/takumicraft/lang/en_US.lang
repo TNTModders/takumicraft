@@ -637,6 +637,8 @@ entity.paralysiscreeper.name=Paralysis Creeper
 entity.paralysiscreeper.desc=Never forgive, never release, never stay alive.
 entity.keepcreeper.name=Keep Creeper
 entity.keepcreeper.desc=Our mission is to blow up, but I keep kindness.
+entity.slipcreeper.name=Slip Creeper
+entity.slipcreeper.desc=Slip your life, in a short second...
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
