@@ -228,6 +228,7 @@ item.explosionbook.name=入門 爆発学
 item.evocore.name=真化ノ証
 item.paralysiscore.name=鎖の結晶
 item.creeperminecart.name=匠式硬質貨車
+item.creeperboat.name=匠式硬質小舟
 
 #entity
 ＃descは36文字まで。
@@ -710,6 +711,7 @@ entity.takumithrowgrenede.name=匠式手投爆弾
 entity.withercreeperskull.name=ウィザー匠
 entity.titanmeteor.name=隕匠
 entity.creeperminecart.name=匠式硬質貨車
+entity.creeperboat.name=匠式硬質小舟
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

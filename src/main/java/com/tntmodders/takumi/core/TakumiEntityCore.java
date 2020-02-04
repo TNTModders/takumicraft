@@ -16,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
@@ -302,6 +303,9 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperminecart"),
                 EntityTakumiMinecart.class, "creeperminecart", 925, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperboat"),
+                EntityTakumiBoat.class, "creeperboat", 926, TakumiCraftCore.TakumiInstance, 64, 2,
+                true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -391,6 +395,12 @@ public class TakumiEntityCore {
             @Override
             protected ResourceLocation getEntityTexture(EntityTakumiMinecart entity) {
                 return new ResourceLocation(TakumiCraftCore.MODID,"textures/entity/creeperminecart.png");
+            }
+        });
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiBoat.class, manager -> new RenderBoat(manager){
+            @Override
+            protected ResourceLocation getEntityTexture(EntityBoat entity) {
+                return new ResourceLocation(TakumiCraftCore.MODID,"textures/entity/creeperboat.png");
             }
         });
     }
