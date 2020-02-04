@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -55,6 +56,11 @@ public class EntitySlipCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 302;
+    }
+
+    @Override
+    public boolean canRegister() {
+        return TakumiConfigCore.inDev;
     }
 
     @Override
