@@ -1,0 +1,6 @@
+{
+    "parent": "takumicraft:block/redstone_side",
+    "textures": {
+        "line": "takumicraft:blocks/redstone_dust_line1"
+    }
+}

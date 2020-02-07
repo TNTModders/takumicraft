@@ -169,4 +169,6 @@ public class TakumiClientCore {
         ClientRegistry.registerTileEntity(TileEntityTakumiBed.class, TakumiCraftCore.MODID + ":creeperbed",
                 new RenderTakumiBed());
     }
+
+
 }

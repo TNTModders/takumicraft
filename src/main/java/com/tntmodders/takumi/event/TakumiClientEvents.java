@@ -2,8 +2,10 @@ package com.tntmodders.takumi.event;
 
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiRedstoneWire;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerTHM;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
@@ -27,6 +29,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -68,6 +71,12 @@ public class TakumiClientEvents {
             }
         }
     }*/
+
+    @SubscribeEvent
+    public void color(ColorHandlerEvent.Block event) {
+        event.getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockTakumiRedstoneWire.colorMultiplier(state.getValue(BlockTakumiRedstoneWire.POWER)),
+                TakumiBlockCore.CREEPER_REDSTONE_WIRE);
+    }
 
     @SubscribeEvent
     public void renderWorld(CameraSetup event) {

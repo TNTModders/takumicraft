@@ -67,6 +67,9 @@ public class TakumiBlockCore {
     public static final Block CREEPER_RAIL_ACTIVATOR = new BlockTakumiRailPowered(true);
     public static final Block CREEPER_RAIL_DETECTOR = new BlockTakumiRailDetector();
 
+    //Red(?)stones
+    public static final Block CREEPER_REDSTONE_WIRE = new BlockTakumiRedstoneWire();
+
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
     public static final Block ACID_BLOCK = new BlockTakumiAcid();
