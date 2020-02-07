@@ -9,6 +9,7 @@ public class BlockTakumiRailPowered extends BlockRailPowered {
         String name = activator ? "creeperrail_activator" : "creeperrail_powered";
         this.setRegistryName(TakumiCraftCore.MODID, name);
         this.setUnlocalizedName(name);
+        this.setHardness(0.7f);
         this.setResistance(10000000f);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
     }

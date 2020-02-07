@@ -8,6 +8,7 @@ public class BlockTakumiRailDetector extends BlockRailDetector {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "creeperrail_detector");
         this.setUnlocalizedName("creeperrail_detector");
+        this.setHardness(0.7f);
         this.setResistance(10000000f);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
     }

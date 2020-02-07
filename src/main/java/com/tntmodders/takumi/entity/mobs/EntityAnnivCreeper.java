@@ -27,7 +27,8 @@ public class EntityAnnivCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
-            for (int t = 0; t < (this.getPowered() ? 60 : 30); t++) {
+            int limit = (30 + this.rand.nextInt(20)) * (this.getPowered() ? 2 : 1);
+            for (int t = 0; t < limit; t++) {
                 Random rand = new Random();
                 int i = this.getPowered() ? 50 : 30;
                 double x = this.posX + this.rand.nextInt(i * 2) - i;

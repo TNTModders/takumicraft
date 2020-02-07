@@ -8,6 +8,7 @@ public class BlockTakumiRail extends BlockRail {
         super();
         this.setRegistryName(TakumiCraftCore.MODID, "creeperrail");
         this.setUnlocalizedName("creeperrail");
+        this.setHardness(0.7f);
         this.setResistance(10000000f);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
     }
