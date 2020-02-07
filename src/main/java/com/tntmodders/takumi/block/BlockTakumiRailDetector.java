@@ -10,6 +10,7 @@ public class BlockTakumiRailDetector extends BlockRailDetector {
         this.setUnlocalizedName("creeperrail_detector");
         this.setHardness(0.7f);
         this.setResistance(10000000f);
+        this.setHarvestLevel("pickaxe", 2);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
     }
 }

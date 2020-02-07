@@ -239,7 +239,7 @@ public class BlockTakumiPortal extends BlockBreakable {
             }
             //worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
             Minecraft.getMinecraft().effectRenderer.addEffect(
-                    new ParticleTakumiPortal(worldIn, d0, d1, d2, d3, d4, d5));
+                    new ParticleTakumiPortal(worldIn, d0, d1, d2, d3*-10, d4*-10, d5*-10));
         }
     }
 
