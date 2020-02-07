@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "GGG"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "G": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperredstoneblock",
+    "count": 8
+  }
+}

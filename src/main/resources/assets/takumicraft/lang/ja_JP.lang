@@ -157,6 +157,7 @@ tile.creeperrail_powered.name=匠式硬質変速線路
 tile.creeperrail_detector.name=匠式硬質感圧線路
 tile.creeperrail_activator.name=匠式硬質信号線路
 tile.creeperredstonewire.name=匠式硬質緑石
+tile.creeperredstoneblock.name=匠式硬質緑石ブロック
 
 #item
 item.takumibook.name=匠の書
