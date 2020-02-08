@@ -160,6 +160,10 @@ tile.creeperredstonewire.name=匠式硬質緑石
 tile.creeperredstoneblock.name=匠式硬質緑石ブロック
 tile.creeperredstoneoscillator.name=匠式硬質緑石発振器
 tile.creeperredstonelamp.name=匠式硬質緑石灯
+tile.creeperredstonerepeater_off.name=匠式硬質緑石増幅器
+tile.creeperredstonerepeater_on.name=匠式硬質緑石増幅器
+tile.creeperredstonetorch_off.name=匠式硬質緑石松明
+tile.creeperredstonetorch_on.name=匠式硬質緑石松明
 
 #item
 item.takumibook.name=匠の書

@@ -160,6 +160,10 @@ tile.creeperredstonewire.name=Creeper Redstone
 tile.creeperredstonewire.name=Creeper Redstone Block
 tile.creeperredstoneoscillator.name=Creeper Redstone Oscillator
 tile.creeperredstonelamp.name=Creeper Redstone Lamp
+tile.creeperredstonerepeater_off.name=Creeper Redstone Repeater
+tile.creeperredstonerepeater_on.name=Creeper Redstone Repeater
+tile.creeperredstonetorch_off.name=Creeper Redstone Torch
+tile.creeperredstonetorch_on.name=Creeper Redstone Torch
 
 #item
 item.takumibook.name=Creeper Book

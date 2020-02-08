@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=up":  { "model": "takumicraft:lit_redstone_torch" },
+        "facing=east":  { "model": "takumicraft:lit_redstone_torch_wall" },
+        "facing=south":  { "model": "takumicraft:lit_redstone_torch_wall", "y": 90 },
+        "facing=west":  { "model": "takumicraft:lit_redstone_torch_wall", "y": 180 },
+        "facing=north":  { "model": "takumicraft:lit_redstone_torch_wall", "y": 270 }
+    }
+}

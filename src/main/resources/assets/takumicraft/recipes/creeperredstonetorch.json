@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q",
+    "S"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperredstonewire"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperredstonetorch_on"
+  }
+}

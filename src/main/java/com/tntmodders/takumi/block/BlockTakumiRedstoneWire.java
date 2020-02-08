@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock{
+public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock {
     public static final PropertyEnum<EnumAttachPosition> NORTH = PropertyEnum.create("north", EnumAttachPosition.class);
     public static final PropertyEnum<EnumAttachPosition> EAST = PropertyEnum.create("east", EnumAttachPosition.class);
     public static final PropertyEnum<EnumAttachPosition> SOUTH = PropertyEnum.create("south", EnumAttachPosition.class);
@@ -228,7 +228,8 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock{
 
         for (EnumFacing enumfacing : EnumFacing.values()) {
             int k2 = worldIn.getRedstonePower(pos.offset(enumfacing), enumfacing);
-            if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.REDSTONE_WIRE) {
+            if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.REDSTONE_WIRE ||
+                    worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.POWERED_REPEATER) {
                 k2 = 0;
             }
 
@@ -352,7 +353,8 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock{
         if (!this.canProvidePower) {
             return 0;
         } else {
-            if (blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.REDSTONE_WIRE) {
+            if (blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.REDSTONE_WIRE ||
+                    blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.UNPOWERED_REPEATER) {
                 return 0;
             }
             int i = blockState.getValue(POWER);
@@ -390,7 +392,7 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock{
             return true;
         } else if (canConnectTo(iblockstate, side, worldIn, pos)) {
             return true;
-        } else if (iblockstate.getBlock() == Blocks.POWERED_REPEATER && iblockstate.getValue(BlockRedstoneDiode.FACING) == side) {
+        } else if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_REDSTONE_REPEATER_ON && iblockstate.getValue(BlockRedstoneDiode.FACING) == side) {
             return true;
         } else {
             return !flag && canConnectUpwardsTo(worldIn, blockpos.down());
@@ -403,11 +405,11 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock{
 
     protected static boolean canConnectTo(IBlockState blockState, @Nullable EnumFacing side, IBlockAccess world, BlockPos pos) {
         Block block = blockState.getBlock();
-        if (block == Blocks.REDSTONE_WIRE) {
+        if (block == Blocks.REDSTONE_WIRE || block == Blocks.UNPOWERED_REPEATER || block == Blocks.POWERED_REPEATER) {
             return false;
         } else if (block == TakumiBlockCore.CREEPER_REDSTONE_WIRE) {
             return true;
-        } else if (Blocks.UNPOWERED_REPEATER.isSameDiode(blockState)) {
+        } else if (((BlockTakumiRedstoneRepeater) TakumiBlockCore.CREEPER_REDSTONE_REPEATER).isSameDiode(blockState)) {
             EnumFacing enumfacing = blockState.getValue(BlockRedstoneRepeater.FACING);
             return enumfacing == side || enumfacing.getOpposite() == side;
         } else if (Blocks.OBSERVER == blockState.getBlock()) {

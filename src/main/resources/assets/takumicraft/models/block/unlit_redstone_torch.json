@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/torch",
+    "textures": {
+        "torch": "takumicraft:blocks/redstone_torch_off"
+    }
+}
