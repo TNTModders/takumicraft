@@ -158,6 +158,8 @@ tile.creeperrail_detector.name=Creeper Detector Rail
 tile.creeperrail_activator.name=Creeper Activator Rail
 tile.creeperredstonewire.name=Creeper Redstone
 tile.creeperredstonewire.name=Creeper Redstone Block
+tile.creeperredstoneoscillator.name=Creeper Redstone Oscillator
+tile.creeperredstonelamp.name=Creeper Redstone Lamp
 
 #item
 item.takumibook.name=Creeper Book

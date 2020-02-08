@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "takumicraft:creeperredstoneoscillator_0"
+    },
+    "power=1": {
+      "model": "takumicraft:creeperredstoneoscillator_1"
+    },
+    "power=2": {
+      "model": "takumicraft:creeperredstoneoscillator_2"
+    },
+    "power=3": {
+      "model": "takumicraft:creeperredstoneoscillator_3"
+    },
+    "power=4": {
+      "model": "takumicraft:creeperredstoneoscillator_4"
+    },
+    "power=5": {
+      "model": "takumicraft:creeperredstoneoscillator_5"
+    },
+    "power=6": {
+      "model": "takumicraft:creeperredstoneoscillator_6"
+    },
+    "power=7": {
+      "model": "takumicraft:creeperredstoneoscillator_7"
+    },
+    "power=8": {
+      "model": "takumicraft:creeperredstoneoscillator_8"
+    },
+    "power=9": {
+      "model": "takumicraft:creeperredstoneoscillator_9"
+    },
+    "power=10": {
+      "model": "takumicraft:creeperredstoneoscillator_10"
+    },
+    "power=11": {
+      "model": "takumicraft:creeperredstoneoscillator_11"
+    },
+    "power=12": {
+      "model": "takumicraft:creeperredstoneoscillator_12"
+    },
+    "power=13": {
+      "model": "takumicraft:creeperredstoneoscillator_13"
+    },
+    "power=14": {
+      "model": "takumicraft:creeperredstoneoscillator_14"
+    },
+    "power=15": {
+      "model": "takumicraft:creeperredstoneoscillator_15"
+    }
+  }
+}

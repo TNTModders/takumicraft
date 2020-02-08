@@ -70,6 +70,8 @@ public class TakumiBlockCore {
     //Red(?)stones
     public static final Block CREEPER_REDSTONE_WIRE = new BlockTakumiRedstoneWire();
     public static final Block CREEPER_REDSTONE_BLOCK = new BlockTakumiRedstoneBlock();
+    public static final Block CREEPER_REDSTONE_OSCILLATOR = new BlockTakumiRedstoneOscillator();
+    public static final Block CREEPER_REDSTONE_LAMP = new BlockTakumiRedstoneLight();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

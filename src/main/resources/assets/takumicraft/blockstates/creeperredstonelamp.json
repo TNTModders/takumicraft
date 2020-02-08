@@ -1,0 +1,51 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "takumicraft:creeperredstonelamp_0"
+    },
+    "power=1": {
+      "model": "takumicraft:creeperredstonelamp_1"
+    },
+    "power=2": {
+      "model": "takumicraft:creeperredstonelamp_2"
+    },
+    "power=3": {
+      "model": "takumicraft:creeperredstonelamp_3"
+    },
+    "power=4": {
+      "model": "takumicraft:creeperredstonelamp_4"
+    },
+    "power=5": {
+      "model": "takumicraft:creeperredstonelamp_5"
+    },
+    "power=6": {
+      "model": "takumicraft:creeperredstonelamp_6"
+    },
+    "power=7": {
+      "model": "takumicraft:creeperredstonelamp_7"
+    },
+    "power=8": {
+      "model": "takumicraft:creeperredstonelamp_8"
+    },
+    "power=9": {
+      "model": "takumicraft:creeperredstonelamp_9"
+    },
+    "power=10": {
+      "model": "takumicraft:creeperredstonelamp_10"
+    },
+    "power=11": {
+      "model": "takumicraft:creeperredstonelamp_11"
+    },    "power=12": {
+      "model": "takumicraft:creeperredstonelamp_12"
+    },
+    "power=13": {
+      "model": "takumicraft:creeperredstonelamp_13"
+    },
+    "power=14": {
+      "model": "takumicraft:creeperredstonelamp_14"
+    },
+    "power=15": {
+      "model": "takumicraft:creeperredstonelamp_15"
+    }
+  }
+}
