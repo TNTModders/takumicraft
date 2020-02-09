@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "takumicraft:creeperplate_planks_up"
+    },
+    "powered=true": {
+      "model": "takumicraft:creeperplate_planks_down"
+    }
+  }
+}

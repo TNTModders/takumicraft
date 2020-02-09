@@ -8,6 +8,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.*;
+import net.minecraft.block.BlockPressurePlateWeighted;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -140,6 +141,13 @@ public class TakumiClientCore {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperplanks_door"),
                         "facing=" + state.getValue(BlockTakumiDoor.FACING).getName() + ",half="
                                 + state.getValue(BlockTakumiDoor.HALF) + ",hinge=" + state.getValue(BlockTakumiDoor.HINGE) + ",open=" + state.getValue(BlockTakumiDoor.OPEN));
+            }
+        });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_PLATE_IRON, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperplate_iron"),
+                        state.getValue(BlockPressurePlateWeighted.POWER) > 0 ? "powered=true" : "powered=false");
             }
         });
     }

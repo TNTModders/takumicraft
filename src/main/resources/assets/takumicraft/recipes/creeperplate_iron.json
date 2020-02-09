@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperiron"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperplate_iron"
+  }
+}

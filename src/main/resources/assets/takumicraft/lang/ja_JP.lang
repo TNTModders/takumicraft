@@ -171,6 +171,9 @@ tile.creeperlever.name=匠式硬質桿
 tile.creeperbutton_iron.name=匠式硬質釦[鋼]
 tile.creeperbutton_brick.name=匠式硬質釦[煉瓦]
 tile.creeperbutton_planks.name=匠式硬質釦[木]
+tile.creeperplate_brick.name=匠式硬質感圧板[煉瓦]
+tile.creeperplate_planks.name=匠式硬質感圧板[木]
+tile.creeperplate_iron.name=匠式重量検知板[鋼]
 
 #item
 item.takumibook.name=匠の書

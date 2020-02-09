@@ -170,7 +170,10 @@ tile.creeperobserver.name=Creeper Observer
 tile.creeperlever.name=Creeper Lever
 tile.creeperbutton_iron.name=Creeper Iron Button
 tile.creeperbutton_brick.name=Creeper Brick Button
-tile.creeperbutton_planks.name=Creeper Planks Button
+tile.creeperbutton_planks.name=Creeper Wooden Button
+tile.creeperplate_brick.name=Creeper Brick Pressure Plate
+tile.creeperplate_planks.name=Creeper Wooden Pressure Plate
+tile.creeperplate_iron.name=Creeper Iron Weighted Pressure Plate
 
 #item
 item.takumibook.name=Creeper Book
