@@ -84,9 +84,10 @@ public class TakumiBlockCore {
     public static final Block CREEPER_BUTTON_IRON = new BlockTakumiButton("creeperbutton_iron", false);
     public static final Block CREEPER_BUTTON_BRICK = new BlockTakumiButton("creeperbutton_brick", false);
     public static final Block CREEPER_BUTTON_PLANKS = new BlockTakumiButton("creeperbutton_planks", true);
-    public static final Block CREEPER_PLATE_BRICK = new BlockTakumiPressurePlate(Material.ROCK, BlockPressurePlate.Sensitivity.MOBS,"creeperplate_brick");
-    public static final Block CREEPER_PLATE_PLANKS = new BlockTakumiPressurePlate(Material.WOOD, BlockPressurePlate.Sensitivity.EVERYTHING,"creeperplate_planks");
+    public static final Block CREEPER_PLATE_BRICK = new BlockTakumiPressurePlate(Material.ROCK, BlockPressurePlate.Sensitivity.MOBS, "creeperplate_brick");
+    public static final Block CREEPER_PLATE_PLANKS = new BlockTakumiPressurePlate(Material.WOOD, BlockPressurePlate.Sensitivity.EVERYTHING, "creeperplate_planks");
     public static final Block CREEPER_PLATE_IRON = new BlockTakumiPressurePlateWeighted();
+    public static final Block CREEPER_HOPPER = new BlockTakumiHopper();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

@@ -8,6 +8,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.*;
+import net.minecraft.block.BlockHopper;
 import net.minecraft.block.BlockPressurePlateWeighted;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.state.IBlockState;
@@ -148,6 +149,13 @@ public class TakumiClientCore {
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperplate_iron"),
                         state.getValue(BlockPressurePlateWeighted.POWER) > 0 ? "powered=true" : "powered=false");
+            }
+        });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_HOPPER, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperhopper"),
+                        "facing=" + state.getValue(BlockHopper.FACING));
             }
         });
     }

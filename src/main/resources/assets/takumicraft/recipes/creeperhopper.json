@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G G",
+    "GQG",
+    " G "
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creepervault"
+    },
+    "G": {
+      "item": "takumicraft:creeperiron"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperhopper",
+    "count": 5
+  }
+}
