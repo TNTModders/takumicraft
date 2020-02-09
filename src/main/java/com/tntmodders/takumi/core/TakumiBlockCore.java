@@ -76,6 +76,8 @@ public class TakumiBlockCore {
     public static final Block CREEPER_REDSTONE_REPEATER_ON = new BlockTakumiRedstoneRepeater(true);
     public static final Block CREEPER_REDSTONE_TORCH = new BlockTakumiRedstoneTorch(true);
     public static final Block CREEPER_REDSTONE_TORCH_OFF = new BlockTakumiRedstoneTorch(false);
+    public static final Block CREEPER_REDSTONE_COMPARATOR = new BlockTakumiRedstoneComparator(false);
+    public static final Block CREEPER_REDSTONE_COMPARATOR_ON = new BlockTakumiRedstoneComparator(true);
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

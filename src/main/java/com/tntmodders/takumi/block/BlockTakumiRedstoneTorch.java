@@ -35,6 +35,9 @@ public class BlockTakumiRedstoneTorch extends BlockTorch {
         if (isOn) {
             this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
             this.setLightLevel(0.5f);
+        } else {
+            this.setCreativeTab(null);
+            this.setLightLevel(0f);
         }
         this.setUnlocalizedName(name);
         this.setHardness(0f);

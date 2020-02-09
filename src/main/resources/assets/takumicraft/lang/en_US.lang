@@ -164,6 +164,8 @@ tile.creeperredstonerepeater_off.name=Creeper Redstone Repeater
 tile.creeperredstonerepeater_on.name=Creeper Redstone Repeater
 tile.creeperredstonetorch_off.name=Creeper Redstone Torch
 tile.creeperredstonetorch_on.name=Creeper Redstone Torch
+tile.creeperredstonecomparator_off.name=Creeper Redstone Comparator
+tile.creeperredstonecomparator_on.name=Creeper Redstone Comparator
 
 #item
 item.takumibook.name=Creeper Book

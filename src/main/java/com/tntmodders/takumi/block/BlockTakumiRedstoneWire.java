@@ -229,7 +229,8 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock {
         for (EnumFacing enumfacing : EnumFacing.values()) {
             int k2 = worldIn.getRedstonePower(pos.offset(enumfacing), enumfacing);
             if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.REDSTONE_WIRE ||
-                    worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.POWERED_REPEATER) {
+                    worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.POWERED_REPEATER ||
+                    worldIn.getBlockState(pos.offset(enumfacing)).getBlock() == Blocks.POWERED_COMPARATOR) {
                 k2 = 0;
             }
 
@@ -354,7 +355,8 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock {
             return 0;
         } else {
             if (blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.REDSTONE_WIRE ||
-                    blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.UNPOWERED_REPEATER) {
+                    blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.UNPOWERED_REPEATER ||
+                    blockAccess.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.UNPOWERED_COMPARATOR) {
                 return 0;
             }
             int i = blockState.getValue(POWER);

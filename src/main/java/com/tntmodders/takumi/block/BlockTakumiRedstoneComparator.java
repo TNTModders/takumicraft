@@ -1,29 +1,32 @@
 package com.tntmodders.takumi.block;
 
+import com.google.common.base.Predicate;
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.client.particle.ParticleTakumiRedstone;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRedstoneRepeater;
+import net.minecraft.block.BlockRedstoneComparator;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
-public class BlockTakumiRedstoneRepeater extends BlockRedstoneRepeater {
-    public BlockTakumiRedstoneRepeater(boolean powered) {
+public class BlockTakumiRedstoneComparator extends BlockRedstoneComparator {
+    public BlockTakumiRedstoneComparator(boolean powered) {
         super(powered);
-        String name = "creeperredstonerepeater_" + (powered ? "on" : "off");
+        String name = "creeperredstonecomparator_" + (powered ? "on" : "off");
         this.setRegistryName(TakumiCraftCore.MODID, name);
         if (!powered) {
             this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
@@ -36,7 +39,7 @@ public class BlockTakumiRedstoneRepeater extends BlockRedstoneRepeater {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_REDSTONE_REPEATER);
+        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_REDSTONE_COMPARATOR);
     }
 
     @Override
@@ -46,59 +49,48 @@ public class BlockTakumiRedstoneRepeater extends BlockRedstoneRepeater {
 
     @Override
     protected IBlockState getPoweredState(IBlockState unpoweredState) {
-        Integer integer = unpoweredState.getValue(DELAY);
-        Boolean obool = unpoweredState.getValue(LOCKED);
+        Boolean obool = unpoweredState.getValue(POWERED);
+        BlockRedstoneComparator.Mode blockredstonecomparator$mode = unpoweredState.getValue(MODE);
         EnumFacing enumfacing = unpoweredState.getValue(FACING);
-        return TakumiBlockCore.CREEPER_REDSTONE_REPEATER_ON.getDefaultState().withProperty(FACING, enumfacing).withProperty(DELAY, integer).withProperty(LOCKED, obool);
+        return TakumiBlockCore.CREEPER_REDSTONE_COMPARATOR_ON.getDefaultState().withProperty(FACING, enumfacing).withProperty(POWERED, obool).withProperty(MODE, blockredstonecomparator$mode);
     }
 
     @Override
     protected IBlockState getUnpoweredState(IBlockState poweredState) {
-        Integer integer = poweredState.getValue(DELAY);
-        Boolean obool = poweredState.getValue(LOCKED);
+        Boolean obool = poweredState.getValue(POWERED);
+        BlockRedstoneComparator.Mode blockredstonecomparator$mode = poweredState.getValue(MODE);
         EnumFacing enumfacing = poweredState.getValue(FACING);
-        return TakumiBlockCore.CREEPER_REDSTONE_REPEATER.getDefaultState().withProperty(FACING, enumfacing).withProperty(DELAY, integer).withProperty(LOCKED, obool);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (this.isRepeaterPowered) {
-            EnumFacing enumfacing = stateIn.getValue(FACING);
-            double d0 = (double) ((float) pos.getX() + 0.5F) + (double) (rand.nextFloat() - 0.5F) * 0.2D;
-            double d1 = (double) ((float) pos.getY() + 0.4F) + (double) (rand.nextFloat() - 0.5F) * 0.2D;
-            double d2 = (double) ((float) pos.getZ() + 0.5F) + (double) (rand.nextFloat() - 0.5F) * 0.2D;
-            float f = -5.0F;
-
-            if (rand.nextBoolean()) {
-                f = (float) (stateIn.getValue(DELAY) * 2 - 1);
-            }
-
-            f = f / 16.0F;
-            double d3 = f * (float) enumfacing.getFrontOffsetX();
-            double d4 = f * (float) enumfacing.getFrontOffsetZ();
-            Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleTakumiRedstone(worldIn, d0 + d3, d1, d2 + d4, 0.0f, 0.0f, 0.0f));
-        }
-    }
-
-    @Override
-    protected boolean isAlternateInput(IBlockState state) {
-        return isDiode(state);
-    }
-
-    public static boolean isDiode(IBlockState state) {
-        return ((BlockTakumiRedstoneRepeater) TakumiBlockCore.CREEPER_REDSTONE_REPEATER).isSameDiode(state) ||
-                ((BlockTakumiRedstoneComparator) TakumiBlockCore.CREEPER_REDSTONE_COMPARATOR).isSameDiode(state);
-    }
-
-    @Override
-    public boolean isSameDiode(IBlockState state) {
-        Block block = state.getBlock();
-        return block == this.getPoweredState(this.getDefaultState()).getBlock() || block == this.getUnpoweredState(this.getDefaultState()).getBlock();
+        return TakumiBlockCore.CREEPER_REDSTONE_COMPARATOR.getDefaultState().withProperty(FACING, enumfacing).withProperty(POWERED, obool).withProperty(MODE, blockredstonecomparator$mode);
     }
 
     @Override
     protected int calculateInputStrength(World worldIn, BlockPos pos, IBlockState state) {
+        int i = this.calculateInputStrength_ex(worldIn, pos, state);
+        EnumFacing enumfacing = state.getValue(FACING);
+        BlockPos blockpos = pos.offset(enumfacing);
+        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+
+        if (iblockstate.hasComparatorInputOverride()) {
+            i = iblockstate.getComparatorInputOverride(worldIn, blockpos);
+        } else if (i < 15 && iblockstate.isNormalCube()) {
+            blockpos = blockpos.offset(enumfacing);
+            iblockstate = worldIn.getBlockState(blockpos);
+
+            if (iblockstate.hasComparatorInputOverride()) {
+                i = iblockstate.getComparatorInputOverride(worldIn, blockpos);
+            } else if (iblockstate.getMaterial() == Material.AIR) {
+                EntityItemFrame entityitemframe = this.findItemFrame(worldIn, enumfacing, blockpos);
+
+                if (entityitemframe != null) {
+                    i = entityitemframe.getAnalogOutput();
+                }
+            }
+        }
+
+        return i;
+    }
+
+    protected int calculateInputStrength_ex(World worldIn, BlockPos pos, IBlockState state) {
         EnumFacing enumfacing = state.getValue(FACING);
         BlockPos blockpos = pos.offset(enumfacing);
         int i = worldIn.getRedstonePower(blockpos, enumfacing);
@@ -113,6 +105,19 @@ public class BlockTakumiRedstoneRepeater extends BlockRedstoneRepeater {
             IBlockState iblockstate = worldIn.getBlockState(blockpos);
             return Math.max(i, iblockstate.getBlock() == TakumiBlockCore.CREEPER_REDSTONE_WIRE ? iblockstate.getValue(BlockTakumiRedstoneWire.POWER) : 0);
         }
+    }
+
+    @Nullable
+    private EntityItemFrame findItemFrame(World worldIn, final EnumFacing facing, BlockPos pos) {
+        List<EntityItemFrame> list = worldIn.getEntitiesWithinAABB(EntityItemFrame.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(),
+                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), (Predicate<Entity>) p_apply_1_ -> p_apply_1_ != null && p_apply_1_.getHorizontalFacing() == facing);
+        return list.size() == 1 ? list.get(0) : null;
+    }
+
+    @Override
+    public boolean isSameDiode(IBlockState state) {
+        Block block = state.getBlock();
+        return block == this.getPoweredState(this.getDefaultState()).getBlock() || block == this.getUnpoweredState(this.getDefaultState()).getBlock();
     }
 
     @Override
