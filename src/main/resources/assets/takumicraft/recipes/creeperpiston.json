@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "QXQ",
+    "QRQ"
+  ],
+  "key": {
+    "R": {
+      "item": "takumicraft:creeperredstonewire"
+    },
+    "Q": {
+      "item": "takumicraft:creeperiron"
+    },
+    "T": {
+      "item": "takumicraft:creeperplanks"
+    },
+    "X": {
+      "item": "minecraft:skull",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperpiston"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "Q"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperpiston"
+    },
+    "S": {
+      "item": "minecraft:slime_block"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperpiston_sticky"
+  }
+}

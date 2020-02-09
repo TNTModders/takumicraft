@@ -1,0 +1,8 @@
+{
+    "parent": "minecraft:block/piston_head",
+    "textures": {
+        "unsticky": "takumicraft:blocks/piston_top_normal",
+        "side": "takumicraft:blocks/piston_side",
+        "platform": "takumicraft:blocks/piston_top_sticky"
+    }
+}

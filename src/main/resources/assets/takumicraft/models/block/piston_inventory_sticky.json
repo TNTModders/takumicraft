@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "takumicraft:blocks/piston_bottom",
+        "side": "takumicraft:blocks/piston_side",
+        "top": "takumicraft:blocks/piston_top_sticky"
+    }
+}

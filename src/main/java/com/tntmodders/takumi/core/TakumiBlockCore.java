@@ -88,6 +88,10 @@ public class TakumiBlockCore {
     public static final Block CREEPER_PLATE_PLANKS = new BlockTakumiPressurePlate(Material.WOOD, BlockPressurePlate.Sensitivity.EVERYTHING, "creeperplate_planks");
     public static final Block CREEPER_PLATE_IRON = new BlockTakumiPressurePlateWeighted();
     public static final Block CREEPER_HOPPER = new BlockTakumiHopper();
+    public static final Block CREEPER_PISTON = new BlockTakumiPiston(false);
+    public static final Block CREEPER_STICKY_PISTON = new BlockTakumiPiston(true);
+    public static final Block CREEPER_PISTON_HEAD = new BlockTakumiPistonExtension();
+    public static final Block CREEPER_PISTON_EXTEND = new BlockTakumiPistonMoving();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
