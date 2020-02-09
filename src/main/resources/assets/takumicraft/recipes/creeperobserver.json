@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "QQX",
+    "III"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperredstonewire"
+    },
+    "X": {
+      "item": "minecraft:quartz"
+    },
+    "I": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperobserver"
+  }
+}

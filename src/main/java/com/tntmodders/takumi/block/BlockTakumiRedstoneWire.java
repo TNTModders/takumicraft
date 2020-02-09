@@ -414,7 +414,7 @@ public class BlockTakumiRedstoneWire extends Block implements ITakumiItemBlock {
         } else if (((BlockTakumiRedstoneRepeater) TakumiBlockCore.CREEPER_REDSTONE_REPEATER).isSameDiode(blockState)) {
             EnumFacing enumfacing = blockState.getValue(BlockRedstoneRepeater.FACING);
             return enumfacing == side || enumfacing.getOpposite() == side;
-        } else if (Blocks.OBSERVER == blockState.getBlock()) {
+        } else if (Blocks.OBSERVER == blockState.getBlock() || TakumiBlockCore.CREEPER_OBSERVER == blockState.getBlock()) {
             return side == blockState.getValue(BlockObserver.FACING);
         } else {
             return blockState.getBlock().canConnectRedstone(blockState, world, pos, side);

@@ -166,6 +166,7 @@ tile.creeperredstonetorch_off.name=匠式硬質緑石松明
 tile.creeperredstonetorch_on.name=匠式硬質緑石松明
 tile.creeperredstonecomparator_off.name=匠式硬質緑石演算器
 tile.creeperredstonecomparator_on.name=匠式硬質緑石演算器
+tile.creeperobserver.name=匠式硬質検知器
 
 #item
 item.takumibook.name=匠の書

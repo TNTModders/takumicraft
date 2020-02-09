@@ -1,0 +1,6 @@
+{
+    "parent": "takumicraft:block/creeperobserver",
+    "textures": {
+        "bottom": "takumicraft:blocks/creeperobserver_back_lit"
+    }
+}
