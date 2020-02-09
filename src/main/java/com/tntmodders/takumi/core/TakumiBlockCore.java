@@ -79,6 +79,10 @@ public class TakumiBlockCore {
     public static final Block CREEPER_REDSTONE_COMPARATOR = new BlockTakumiRedstoneComparator(false);
     public static final Block CREEPER_REDSTONE_COMPARATOR_ON = new BlockTakumiRedstoneComparator(true);
     public static final Block CREEPER_OBSERVER = new BlockTakumiObserver();
+    public static final Block CREEPER_LEVER = new BlockTakumiLever();
+    public static final Block CREEPER_BUTTON_IRON = new BlockTakumiButton("creeperbutton_iron", false);
+    public static final Block CREEPER_BUTTON_BRICK = new BlockTakumiButton("creeperbutton_brick", false);
+    public static final Block CREEPER_BUTTON_PLANKS = new BlockTakumiButton("creeperbutton_planks", true);
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

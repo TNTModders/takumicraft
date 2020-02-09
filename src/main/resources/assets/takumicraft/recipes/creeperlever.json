@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q",
+    "X",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:cobblestone"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    },
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperlever"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbrick"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperbutton_brick"
+  }
+}
