@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "takumicraft:creeperdropper_vertical", "x": 180 },
+        "facing=up":    { "model": "takumicraft:creeperdropper_vertical" },
+        "facing=north": { "model": "takumicraft:creeperdropper" },
+        "facing=south": { "model": "takumicraft:creeperdropper", "y": 180 },
+        "facing=west":  { "model": "takumicraft:creeperdropper", "y": 270 },
+        "facing=east":  { "model": "takumicraft:creeperdropper", "y": 90 }
+    }
+}

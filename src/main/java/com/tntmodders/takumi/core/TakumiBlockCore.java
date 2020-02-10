@@ -92,6 +92,8 @@ public class TakumiBlockCore {
     public static final Block CREEPER_STICKY_PISTON = new BlockTakumiPiston(true);
     public static final Block CREEPER_PISTON_HEAD = new BlockTakumiPistonExtension();
     public static final Block CREEPER_PISTON_EXTEND = new BlockTakumiPistonMoving();
+    public static final Block CREEPER_DROPPER = new BlockTakumiDropper();
+    public static final Block CREEPER_DISPENSER = new BlockTakumiDispenser();
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

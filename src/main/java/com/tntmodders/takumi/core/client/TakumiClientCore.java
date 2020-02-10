@@ -8,9 +8,7 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.*;
-import net.minecraft.block.BlockHopper;
-import net.minecraft.block.BlockPressurePlateWeighted;
-import net.minecraft.block.BlockStainedGlassPane;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -156,6 +154,20 @@ public class TakumiClientCore {
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperhopper"),
                         "facing=" + state.getValue(BlockHopper.FACING));
+            }
+        });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_DISPENSER, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperdispenser"),
+                        "facing=" + state.getValue(BlockDispenser.FACING));
+            }
+        });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.CREEPER_DROPPER, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creeperdropper"),
+                        "facing=" + state.getValue(BlockDropper.FACING));
             }
         });
     }

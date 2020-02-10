@@ -1,0 +1,7 @@
+{
+    "parent": "block/orientable_vertical",
+    "textures": {
+        "front": "takumicraft:blocks/dropper_front_vertical",
+        "side": "takumicraft:blocks/furnace_top"
+    }
+}
