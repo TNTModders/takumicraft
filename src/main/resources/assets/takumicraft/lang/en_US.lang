@@ -179,6 +179,8 @@ tile.creeperpiston.name=Creeper Piston
 tile.creeperpiston_sticky.name=Creeper Sticky Piston
 tile.creeperdispenser.name=Creeper Dispenser
 tile.creeperdropper.name=Creeper Dropper
+tile.creeperdetector.name=Creeper Daylight Detector
+tile.creeperdetector_inv.name=Creeper Daylight Detector
 
 #item
 item.takumibook.name=Creeper Book

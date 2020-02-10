@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "power=0": { "model": "takumicraft:creeperdetector_inv" },
+        "power=1": { "model": "takumicraft:creeperdetector_inv" },
+        "power=2": { "model": "takumicraft:creeperdetector_inv" },
+        "power=3": { "model": "takumicraft:creeperdetector_inv" },
+        "power=4": { "model": "takumicraft:creeperdetector_inv" },
+        "power=5": { "model": "takumicraft:creeperdetector_inv" },
+        "power=6": { "model": "takumicraft:creeperdetector_inv" },
+        "power=7": { "model": "takumicraft:creeperdetector_inv" },
+        "power=8": { "model": "takumicraft:creeperdetector_inv" },
+        "power=9": { "model": "takumicraft:creeperdetector_inv" },
+        "power=10": { "model": "takumicraft:creeperdetector_inv" },
+        "power=11": { "model": "takumicraft:creeperdetector_inv" },
+        "power=12": { "model": "takumicraft:creeperdetector_inv" },
+        "power=13": { "model": "takumicraft:creeperdetector_inv" },
+        "power=14": { "model": "takumicraft:creeperdetector_inv" },
+        "power=15": { "model": "takumicraft:creeperdetector_inv" }
+    }
+}
