@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "power=0": { "model": "takumicraft:creepertimedetector" },
+        "power=1": { "model": "takumicraft:creepertimedetector" },
+        "power=2": { "model": "takumicraft:creepertimedetector" },
+        "power=3": { "model": "takumicraft:creepertimedetector" },
+        "power=4": { "model": "takumicraft:creepertimedetector" },
+        "power=5": { "model": "takumicraft:creepertimedetector" },
+        "power=6": { "model": "takumicraft:creepertimedetector" },
+        "power=7": { "model": "takumicraft:creepertimedetector" },
+        "power=8": { "model": "takumicraft:creepertimedetector" },
+        "power=9": { "model": "takumicraft:creepertimedetector" },
+        "power=10": { "model": "takumicraft:creepertimedetector" },
+        "power=11": { "model": "takumicraft:creepertimedetector" },
+        "power=12": { "model": "takumicraft:creepertimedetector" },
+        "power=13": { "model": "takumicraft:creepertimedetector" },
+        "power=14": { "model": "takumicraft:creepertimedetector" },
+        "power=15": { "model": "takumicraft:creepertimedetector" }
+    }
+}

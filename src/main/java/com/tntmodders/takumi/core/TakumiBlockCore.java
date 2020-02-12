@@ -94,8 +94,10 @@ public class TakumiBlockCore {
     public static final Block CREEPER_PISTON_EXTEND = new BlockTakumiPistonMoving();
     public static final Block CREEPER_DROPPER = new BlockTakumiDropper();
     public static final Block CREEPER_DISPENSER = new BlockTakumiDispenser();
-    public static final Block CREEPER_DETECTOR = new BlockTakumiDetector(false);
-    public static final Block CREEPER_DETECTOR_INV = new BlockTakumiDetector(true);
+    public static final Block CREEPER_DETECTOR = new BlockTakumiDetector(false,"creeperdetector");
+    public static final Block CREEPER_DETECTOR_INV = new BlockTakumiDetector(true,"creeperdetector_inv");
+    public static final Block CREEPER_TIME_DETECTOR = new BlockTakumiTimeDetector(false,"creepertimedetector");
+    public static final Block CREEPER_TIME_DETECTOR_INV = new BlockTakumiTimeDetector(true,"creepertimedetector_inv");
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();

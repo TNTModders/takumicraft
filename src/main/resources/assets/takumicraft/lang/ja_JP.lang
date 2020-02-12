@@ -181,6 +181,8 @@ tile.creeperdispenser.name=匠式硬質射出機
 tile.creeperdropper.name=匠式硬質搬出機
 tile.creeperdetector.name=匠式硬質日照検知器
 tile.creeperdetector_inv.name=匠式硬質日照検知器
+tile.creepertimedetector.name=匠式硬質時間検知器
+tile.creepertimedetector_inv.name=匠式硬質時間検知器
 
 #item
 item.takumibook.name=匠の書

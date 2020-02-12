@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "DDD",
+    "QQQ"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:quartz"
+    },
+    "G": {
+      "item": "takumicraft:creeperglass"
+    },
+    "Q": {
+      "item": "takumicraft:creeperbrick_slab"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creepertimedetector"
+  }
+}
