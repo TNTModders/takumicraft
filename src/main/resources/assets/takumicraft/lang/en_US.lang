@@ -183,6 +183,8 @@ tile.creeperdetector.name=Creeper Daylight Detector
 tile.creeperdetector_inv.name=Creeper Daylight Detector
 tile.creepertimedetector.name=Creeper Time Detector
 tile.creepertimedetector_inv.name=Creeper Time Detector
+tile.creepertrapdoor_planks.name=Creeper Wooden Trap Door
+tile.creepertrapdoor_iron.name=Creeper Iron Trap Door
 
 #item
 item.takumibook.name=Creeper Book

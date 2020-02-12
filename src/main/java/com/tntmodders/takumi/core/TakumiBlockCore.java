@@ -23,7 +23,7 @@ public class TakumiBlockCore {
     public static final Block HOT_SPRING = new BlockTakumiHotSpring();
     public static final Block TAKUMI_WATER = new BlockTakumiWater();
     public static final Block CREEPER_BRICK =
-            new BlockTakumiAntiExplosion(Material.SAND, "creeperbrick", 2.5f, "pickaxe");
+            new BlockTakumiAntiExplosion(Material.ROCK, "creeperbrick", 2.5f, "pickaxe");
     public static final Block CREEPER_IRON = new BlockTakumiAntiExplosion(Material.IRON, "creeperiron", 5f, "pickaxe");
     public static final Block DUMMY_GUNORE = new BlockTakumiDummyGunOre();
     public static final Block CREEPER_LOG = new BlockTakumiLog();
@@ -94,10 +94,12 @@ public class TakumiBlockCore {
     public static final Block CREEPER_PISTON_EXTEND = new BlockTakumiPistonMoving();
     public static final Block CREEPER_DROPPER = new BlockTakumiDropper();
     public static final Block CREEPER_DISPENSER = new BlockTakumiDispenser();
-    public static final Block CREEPER_DETECTOR = new BlockTakumiDetector(false,"creeperdetector");
-    public static final Block CREEPER_DETECTOR_INV = new BlockTakumiDetector(true,"creeperdetector_inv");
-    public static final Block CREEPER_TIME_DETECTOR = new BlockTakumiTimeDetector(false,"creepertimedetector");
-    public static final Block CREEPER_TIME_DETECTOR_INV = new BlockTakumiTimeDetector(true,"creepertimedetector_inv");
+    public static final Block CREEPER_DETECTOR = new BlockTakumiDetector(false, "creeperdetector");
+    public static final Block CREEPER_DETECTOR_INV = new BlockTakumiDetector(true, "creeperdetector_inv");
+    public static final Block CREEPER_TIME_DETECTOR = new BlockTakumiTimeDetector(false, "creepertimedetector");
+    public static final Block CREEPER_TIME_DETECTOR_INV = new BlockTakumiTimeDetector(true, "creepertimedetector_inv");
+    public static final Block CREEPER_TRAP_DOOR_WOOD = new BlockTakumiTrapDoor(Material.WOOD, "creepertrapdoor_planks");
+    public static final Block CREEPER_TRAP_DOOR_IRON = new BlockTakumiTrapDoor(Material.IRON, "creepertrapdoor_iron");
 
     //Danger Blocks
     public static final Block CREEPER_SANDSTAR_LOW = new BlockTakumiSandStarLow();
