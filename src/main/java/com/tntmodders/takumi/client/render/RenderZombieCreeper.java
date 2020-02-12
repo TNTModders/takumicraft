@@ -2,10 +2,7 @@ package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
-import com.tntmodders.takumi.entity.mobs.EntityFighterCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityGiantCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityHuskCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityZombieCreeper;
+import com.tntmodders.takumi.entity.mobs.*;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,7 +27,7 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
 
             @Override
             public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount,
-                    float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                                      float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
                 if (!(entitylivingbaseIn instanceof EntityGiantCreeper && entitylivingbaseIn.getIsInvulnerable())) {
                     super.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks,
                             netHeadYaw, headPitch, scale);
@@ -80,7 +77,9 @@ public class RenderZombieCreeper<T extends EntityZombieCreeper> extends RenderBi
                 new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/fightercreeper.png") :
                 entity instanceof EntityHuskCreeper ?
                         new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/huskcreeper.png") :
-                        new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
+                        entity instanceof EntityPsychicCreeper ?
+                                new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/psychiccreeper.png") :
+                                new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/zombiecreeper.png");
     }
 
     @Override

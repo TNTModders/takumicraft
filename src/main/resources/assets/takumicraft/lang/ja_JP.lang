@@ -718,6 +718,49 @@ entity.keepcreeper.read=ほしょう
 entity.keepcreeper.desc=匠の本懐は爆破だけど、少しくらい慈悲があってもいいよね。      MOB募集:蜂さん
 entity.slipcreeper.name=削匠
 entity.slipcreeper.desc=芸術は時に過程を楽しむもの。朽ち果てていくその作品を地獄で見てることだろう。 MOB募集:澤口シグレさん
+entity.edgycreeper.name=中二匠
+entity.edgycreeper.read=ちゅうにくみ
+entity.edgycreeper.desc=闇の記憶的守護者。 MOB募集:白麟さん
+entity.psychiccreeper.name=易匠
+entity.psychiccreeper.read=えきしょう
+entity.psychiccreeper.desc=当たるも八卦、当たらぬも八卦、あなたの身の上案じます。 MOB募集:芒さん
+
+entity.edgycreeper.tip_a.0=闇の
+entity.edgycreeper.tip_a.1=運命の
+entity.edgycreeper.tip_a.2=禁忌の
+entity.edgycreeper.tip_a.3=永遠の
+entity.edgycreeper.tip_a.4=漆黒の
+entity.edgycreeper.tip_a.5=呪われし
+entity.edgycreeper.tip_a.6=選ばれし
+entity.edgycreeper.tip_a.7=封印されし
+entity.edgycreeper.tip_a.8=奈落の
+entity.edgycreeper.tip_a.9=楽園の
+entity.edgycreeper.tip_a.10=終末の
+entity.edgycreeper.tip_a.11=破滅の
+
+entity.edgycreeper.tip_b.0=守護者
+entity.edgycreeper.tip_b.1=堕天使
+entity.edgycreeper.tip_b.2=混沌
+entity.edgycreeper.tip_b.3=鎮魂歌
+entity.edgycreeper.tip_b.4=覇者
+entity.edgycreeper.tip_b.5=宵月
+entity.edgycreeper.tip_b.6=熾天
+entity.edgycreeper.tip_b.7=世界樹
+entity.edgycreeper.tip_b.8=棺
+entity.edgycreeper.tip_b.9=辺獄
+entity.edgycreeper.tip_b.10=怨嗟
+entity.edgycreeper.tip_b.11=審判
+
+entity.psychiccreeper.return.0=大吉
+entity.psychiccreeper.message.0=金運の急上昇が見られます。お金には困らない運命かも?
+entity.psychiccreeper.return.1=中吉
+entity.psychiccreeper.message.1=友人運がとても高い、たくさんの友達と騒いでいる姿が見えました。
+entity.psychiccreeper.return.2=吉
+entity.psychiccreeper.message.2=物運に変化が見られます、探しものが見つかるかもしれません。
+entity.psychiccreeper.return.3=凶
+entity.psychiccreeper.message.3=出会い運の低さが顕著です。暴走族に絡まれてしまうかも。
+entity.psychiccreeper.return.4=大凶
+entity.psychiccreeper.message.4=貴様に安寧後など無い。
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -743,6 +786,8 @@ entity.withercreeperskull.name=ウィザー匠
 entity.titanmeteor.name=隕匠
 entity.creeperminecart.name=匠式硬質貨車
 entity.creeperboat.name=匠式硬質小舟
+
+entity.
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

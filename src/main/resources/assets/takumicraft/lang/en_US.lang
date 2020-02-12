@@ -668,6 +668,47 @@ entity.keepcreeper.name=Keep Creeper
 entity.keepcreeper.desc=Our mission is to blow up, but I keep kindness.
 entity.slipcreeper.name=Slip Creeper
 entity.slipcreeper.desc=Slip your life, in a short second...
+entity.edgycreeper.name=Edgy Creeper
+entity.edgycreeper.desc=I were the guardian of the darkness....
+entity.psychiccreeper.name=Psychic Creeper
+entity.psychiccreeper.desc=Fortune-telling does not always come true.
+
+entity.edgycreeper.tip_a.0=Dark
+entity.edgycreeper.tip_a.1=Fatal
+entity.edgycreeper.tip_a.2=The Taboo
+entity.edgycreeper.tip_a.3=Eternal
+entity.edgycreeper.tip_a.4=The Deep
+entity.edgycreeper.tip_a.5=Cursed
+entity.edgycreeper.tip_a.6=The Chosen
+entity.edgycreeper.tip_a.7=Seald
+entity.edgycreeper.tip_a.8=Void
+entity.edgycreeper.tip_a.9=Heaven
+entity.edgycreeper.tip_a.10=The End
+entity.edgycreeper.tip_a.11=Ruined
+
+entity.edgycreeper.tip_b.0=Guardian
+entity.edgycreeper.tip_b.1=Lucifer
+entity.edgycreeper.tip_b.2=Chaos
+entity.edgycreeper.tip_b.3=Requiem
+entity.edgycreeper.tip_b.4=Master
+entity.edgycreeper.tip_b.5=Crescent
+entity.edgycreeper.tip_b.6=Seraph
+entity.edgycreeper.tip_b.7=Yggdrasil
+entity.edgycreeper.tip_b.8=Coffin
+entity.edgycreeper.tip_b.9=Limbo
+entity.edgycreeper.tip_b.10=Resent
+entity.edgycreeper.tip_b.11=judgement
+
+entity.psychiccreeper.return.0=大吉
+entity.psychiccreeper.message.0=金運の急上昇が見られます。お金には困らない運命かも?
+entity.psychiccreeper.return.1=中吉
+entity.psychiccreeper.message.1=友人運がとても高い、たくさんの友達と騒いでいる姿が見えました。
+entity.psychiccreeper.return.2=吉
+entity.psychiccreeper.message.2=物運に変化が見られます、探しものが見つかるかもしれません。
+entity.psychiccreeper.return.3=凶
+entity.psychiccreeper.message.3=出会い運の低さが顕著です。暴走族に絡まれてしまうかも。
+entity.psychiccreeper.return.4=大凶
+entity.psychiccreeper.message.4=貴様に安寧後など無い。
 
 entity.takumiarrow.name=Creeper Arrow
 entity.takumisnowball.name=Creeper Snowball
