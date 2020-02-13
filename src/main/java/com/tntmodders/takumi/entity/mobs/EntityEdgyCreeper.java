@@ -103,6 +103,6 @@ public class EntityEdgyCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getRegisterID() {
-        return 302;
+        return 303;
     }
 }

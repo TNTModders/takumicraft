@@ -723,7 +723,10 @@ entity.edgycreeper.read=ちゅうにくみ
 entity.edgycreeper.desc=闇の記憶的守護者。 MOB募集:白麟さん
 entity.psychiccreeper.name=易匠
 entity.psychiccreeper.read=えきしょう
-entity.psychiccreeper.desc=当たるも八卦、当たらぬも八卦、あなたの身の上案じます。 MOB募集:芒さん
+entity.psychiccreeper.desc=当たるも八卦、当たらぬも八卦、あなたの身の上案じます。        MOB募集:芒さん
+entity.shrinkcreeper.name=縮匠
+entity.shrinkcreeper.desc=匠が常に同じサイズとは限らない。 MOB募集:月ノ雫さん
+entity.shrinkcreeper.read=しゅくしょう
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

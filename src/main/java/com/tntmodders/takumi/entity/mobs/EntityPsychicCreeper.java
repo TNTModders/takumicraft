@@ -239,6 +239,6 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
 
     @Override
     public int getRegisterID() {
-        return 303;
+        return 304;
     }
 }
