@@ -86,6 +86,7 @@ public class TakumiItemCore {
     public static final Item PARALYSIS_CORE = new ItemParalysisCore();
     public static final Item TAKUMI_MINECART = new ItemTakumiMinecart();
     //public static final Item TAKUMI_BOAT = new ItemTakumiBoat();
+    public static final Item TOSSCREEPER_BOMB = new ItemTossCreeperBomb();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

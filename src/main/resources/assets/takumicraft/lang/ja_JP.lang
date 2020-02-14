@@ -258,6 +258,7 @@ item.evocore.name=真化ノ証
 item.paralysiscore.name=鎖の結晶
 item.creeperminecart.name=匠式硬質貨車
 item.creeperboat.name=匠式硬質小舟
+item.tosscreeperbomb.name=持匠式時限爆弾
 
 #entity
 ＃descは36文字まで。
@@ -727,6 +728,9 @@ entity.psychiccreeper.desc=当たるも八卦、当たらぬも八卦、あな�
 entity.shrinkcreeper.name=縮匠
 entity.shrinkcreeper.desc=匠が常に同じサイズとは限らない。 MOB募集:月ノ雫さん
 entity.shrinkcreeper.read=しゅくしょう
+entity.tosscreeper.name=持匠
+entity.tosscreeper.read=もたせたくみ
+entity.tosscreeper.desc=もしかしたらあなたの手の中に爆弾が……? MOB募集:kazu0404さん
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

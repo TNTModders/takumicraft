@@ -105,8 +105,8 @@ public class TakumiEntityCore {
                 EntityMeatCreeper.class, EntityLineCreeper.class, EntityMakeupCreeper.class, EntityTitanCreeper.class,
                 EntityNerdCreeper.class, EntityDaimonjiCreeper.class, EntityTearCreeper.class, EntityCryCreeper.class, EntityOpaqueCreeper.class,
                 EntityLayerCreeper.class, EntityChaseCreeper.class, EntityBoarCreeper.class, EntityMouseCreeper.class, EntityEvolutionCreeper.class,
-                EntityObsidianCreeper.class, EntityWitherCreeper.class, EntityAngelCreeper.class, EntityParalysisCreeper.class,EntityKeepCreeper.class,
-                EntitySlipCreeper.class,EntityEdgyCreeper.class,EntityPsychicCreeper.class,EntityShrinkCreeper.class));
+                EntityObsidianCreeper.class, EntityWitherCreeper.class, EntityAngelCreeper.class, EntityParalysisCreeper.class, EntityKeepCreeper.class,
+                EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -392,16 +392,16 @@ public class TakumiEntityCore {
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.THROW_GRENEDE,
                         Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiTitanMeteor.class, RenderTitanMeteor::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiMinecart.class, manager -> new RenderMinecart<EntityTakumiMinecart>(manager){
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiMinecart.class, manager -> new RenderMinecart<EntityTakumiMinecart>(manager) {
             @Override
             protected ResourceLocation getEntityTexture(EntityTakumiMinecart entity) {
-                return new ResourceLocation(TakumiCraftCore.MODID,"textures/entity/creeperminecart.png");
+                return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/creeperminecart.png");
             }
         });
-        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiBoat.class, manager -> new RenderBoat(manager){
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiBoat.class, manager -> new RenderBoat(manager) {
             @Override
             protected ResourceLocation getEntityTexture(EntityBoat entity) {
-                return new ResourceLocation(TakumiCraftCore.MODID,"textures/entity/creeperboat.png");
+                return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/creeperboat.png");
             }
         });
     }

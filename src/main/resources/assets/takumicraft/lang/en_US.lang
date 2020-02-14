@@ -258,6 +258,7 @@ item.evocore.name=Evolution Core
 item.paralysiscore.name=Paralysis Creeper's Core
 item.creeperminecart.name=Creeper Minecart
 item.creeperboat.name=Creeper Boat
+item.tosscreeperbomb.name=Toss Creeper Bomb
 
 #entity
 #desc max: 72 chars
@@ -674,6 +675,8 @@ entity.psychiccreeper.name=Psychic Creeper
 entity.psychiccreeper.desc=Fortune-telling does not always come true.
 entity.shrinkcreeper.name=Shrink Creeper
 entity.shrinkcreeper.desc=Creeper does not always the same size.
+entity.tosscreeper.name=Toss Creeper
+entity.tosscreeper.desc=You might have a bomb in your hand...?
 
 entity.edgycreeper.tip_a.0=Dark
 entity.edgycreeper.tip_a.1=Fatal

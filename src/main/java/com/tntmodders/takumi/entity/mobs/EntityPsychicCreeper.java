@@ -47,6 +47,10 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
     }
 
     @Override
+    protected void setArmors() {
+    }
+
+    @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (!this.world.isRemote) {
             event.getAffectedEntities().forEach(entity -> {
@@ -185,6 +189,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
 
     @Override
     public void move(MoverType type, double x, double y, double z) {
+        super.move(type, 0, y, 0);
     }
 
     @Override
