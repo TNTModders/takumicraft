@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,10 +67,5 @@ public class EntityKeepCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getRegisterID() {
         return 84;
-    }
-
-    @Override
-    public boolean canRegister() {
-        return TakumiConfigCore.inDev;
     }
 }

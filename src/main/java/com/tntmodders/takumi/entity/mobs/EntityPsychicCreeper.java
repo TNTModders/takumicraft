@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.boss.EntityUnlimitedCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.EnumPushReaction;
@@ -230,11 +229,6 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
     @Override
     public boolean isCustomSpawn() {
         return false;
-    }
-
-    @Override
-    public boolean canRegister() {
-        return TakumiConfigCore.inDev;
     }
 
     @Override

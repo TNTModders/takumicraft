@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,11 +58,6 @@ public class EntityEdgyCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
-    }
-
-    @Override
-    public boolean canRegister() {
-        return TakumiConfigCore.inDev;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
@@ -73,10 +72,6 @@ public class EntityShrinkCreeper extends EntityTakumiAbstractCreeper {
         return isShrinked() ? 0.5 : 1;
     }
 
-    @Override
-    public boolean canRegister() {
-        return TakumiConfigCore.inDev;
-    }
 
     private boolean isShrinked() {
         return this.getAttackTarget() != null || this.getCreeperState() > 0 || this.hasIgnited();
