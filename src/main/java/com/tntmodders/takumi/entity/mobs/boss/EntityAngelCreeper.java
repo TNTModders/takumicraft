@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs.boss;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
@@ -416,5 +417,10 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
         this.bossInfo.removePlayer(player);
+    }
+
+    @Override
+    public boolean canRegister() {
+        return TakumiConfigCore.inDev;
     }
 }
