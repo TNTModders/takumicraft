@@ -88,7 +88,7 @@ public class BlockTakumiWater extends BlockFluidClassic {
     @Override
     public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         super.updateTick(world, pos, state, rand);
-        if (world.provider.getDimensionType().getId() == TakumiWorldCore.TAKUMI_WORLD.getId()) {
+        if (!world.isRemote && world.provider.getDimensionType().getId() == TakumiWorldCore.TAKUMI_WORLD.getId()) {
             if (world.loadedEntityList.size() < 500 && rand.nextInt(1000) == 0) {
                 Entity entity = rand.nextBoolean() ? new EntitySquidCreeper(world) : new EntitySeaGuardianCreeper(world);
                 entity.setPosition(pos.getX(), pos.getY(), pos.getZ());

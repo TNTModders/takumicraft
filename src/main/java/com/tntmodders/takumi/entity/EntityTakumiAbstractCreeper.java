@@ -290,7 +290,8 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         if (this.world.provider.getDimensionType() != TakumiWorldCore.TAKUMI_WORLD) {
             return super.getCanSpawnHere();
         } else {
-            return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
+            return this.world.loadedEntityList.size() < 500 && this.world.getDifficulty() != EnumDifficulty.PEACEFUL &&
+                    this.world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
         }
     }
 

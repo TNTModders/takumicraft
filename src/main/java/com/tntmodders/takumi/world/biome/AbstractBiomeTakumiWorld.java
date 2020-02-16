@@ -55,7 +55,7 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
                         (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
                                 iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
                     int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 20;
-                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 10, count, (count + 2) * 4));
+                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 10, count, count+1));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -146,6 +146,6 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
 
     @Override
     public float getSpawningChance() {
-        return 0.9f;
+        return 0.1f;
     }
 }
