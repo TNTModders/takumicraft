@@ -4,7 +4,6 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -121,7 +120,7 @@ public class TakumiWorldProvider extends WorldProvider {
         this.world.getWorldInfo().setThunderTime(10000);
     }*/
 
-    @Override
+    /*@Override
     public void resetRainAndThunder() {
         this.world.getWorldInfo().setRaining(true);
         this.world.getWorldInfo().setRainTime(Integer.MAX_VALUE - 1);
@@ -135,5 +134,5 @@ public class TakumiWorldProvider extends WorldProvider {
         this.world.getWorldInfo().setRainTime(Integer.MAX_VALUE - 1);
         this.world.getWorldInfo().setThundering(true);
         this.world.getWorldInfo().setThunderTime(Integer.MAX_VALUE - 1);
-    }
+    }*/
 }

@@ -55,8 +55,14 @@ public class TileEntityTakumiPiston extends TileEntityPiston {
     }
 
     @Override
-    public NBTTagCompound getUpdateTag() {
-        return this.writeToNBT(new NBTTagCompound());
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        this.pistonState = Block.getBlockById(compound.getInteger("blockId")).getStateFromMeta(compound.getInteger("blockData"));
+        this.pistonFacing = EnumFacing.getFront(compound.getInteger("facing"));
+        this.progress = compound.getFloat("progress");
+        this.lastProgress = this.progress;
+        this.extending = compound.getBoolean("extending");
+        this.shouldHeadBeRendered = compound.getBoolean("source");
     }
 
     @Override

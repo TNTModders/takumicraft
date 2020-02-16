@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTakumiWater;
 import com.tntmodders.takumi.block.material.TakumiMaterial;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -73,7 +74,7 @@ public class ItemTakumiBucket extends ItemBucket {
                 return new ActionResult<>(EnumActionResult.SUCCESS,
                         this.fillBucket(itemstack, playerIn, TakumiItemCore.TAKUMI_SPRING_BUCKET));
             }
-            if (material == TakumiMaterial.TAKUMI_WATER && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
+            if (iblockstate.getBlock() instanceof BlockTakumiWater && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
                 playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                 worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                 playerIn.addStat(StatList.getObjectUseStats(this));

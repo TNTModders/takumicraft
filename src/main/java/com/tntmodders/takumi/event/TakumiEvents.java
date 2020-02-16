@@ -599,6 +599,13 @@ public class TakumiEvents {
                     e.getWorld().spawnEntity(squidCreeper);
                     e.setResult(Result.DENY);
                 }
+            } else if (e.getEntityLiving() instanceof EntitySquidCreeper && e.getEntityLiving().world.provider.getDimensionType()== TakumiWorldCore.TAKUMI_WORLD) {
+                if (e.getEntityLiving().getRNG().nextInt(10) == 0) {
+                    EntitySeaGuardianCreeper seaGuardianCreeper = new EntitySeaGuardianCreeper(e.getWorld());
+                    seaGuardianCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
+                    e.getWorld().spawnEntity(seaGuardianCreeper);
+                    e.setResult(Result.DENY);
+                }
             } else if ((e.getEntityLiving().getClass() == EntityZombieCreeper.class ||
                     e.getEntityLiving().getClass() == EntityZombieVillagerCreeper.class) &&
                     (e.getWorld().getBiome(e.getEntityLiving().getPosition()) == Biomes.DESERT ||

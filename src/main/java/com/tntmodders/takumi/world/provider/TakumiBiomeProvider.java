@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.world.provider;
 
 import com.google.common.collect.Lists;
+import com.tntmodders.takumi.core.TakumiBiomeCore;
 import com.tntmodders.takumi.world.gen.layer.GenLayerTakumiWorld;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -25,7 +26,7 @@ import java.util.Random;
 
 public class TakumiBiomeProvider extends BiomeProvider {
 
-    public static List<Biome> allowedBiomes = Lists.newArrayList(Biomes.DESERT);
+    public static List<Biome> allowedBiomes = Lists.newArrayList(TakumiBiomeCore.TAKUMI_PLAINS);
     /**
      * The biome list.
      */
