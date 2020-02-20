@@ -958,7 +958,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void respawn(PlayerEvent.Clone event) {
-        if (event.isWasDeath() && event.getOriginal().getLastDamageSource() != null &&
+        if (!event.getEntityPlayer().world.loadedEntityList.isEmpty() &&  event.isWasDeath() && event.getOriginal().getLastDamageSource() != null &&
                 event.getOriginal().getLastDamageSource().isExplosion() && event.getOriginal().getLastDamageSource().getTrueSource() instanceof EntityKeepCreeper) {
             event.getEntityPlayer().world.loadedEntityList.forEach(entity -> {
                 if (entity instanceof EntityItem && ((EntityItem) entity).getOwner() != null && ((EntityItem) entity).getOwner().equals(event.getOriginal().getName())) {
@@ -971,7 +971,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void playerDrop(PlayerDropsEvent event) {
-        if (event.getSource().getTrueSource() instanceof EntityKeepCreeper && event.getSource().isExplosion()) {
+        if (!event.getDrops().isEmpty() && event.getSource().getTrueSource() instanceof EntityKeepCreeper && event.getSource().isExplosion()) {
             event.getDrops().forEach(entityItem -> {
                 entityItem.setOwner(event.getEntityPlayer().getName());
             });

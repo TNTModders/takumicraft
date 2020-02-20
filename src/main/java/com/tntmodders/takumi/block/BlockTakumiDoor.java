@@ -20,7 +20,7 @@ public class BlockTakumiDoor extends BlockDoor implements ITakumiItemBlock {
     public BlockTakumiDoor(Material materialIn, String s, float hardness, String tool) {
         super(materialIn);
         this.setRegistryName(TakumiCraftCore.MODID, s);
-        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        //this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName(s);
         this.setHardness(hardness);
         this.setResistance(10000000f);
@@ -46,7 +46,7 @@ public class BlockTakumiDoor extends BlockDoor implements ITakumiItemBlock {
     }
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(this.getItem(),1);
+        return new ItemStack(Item.getItemFromBlock(this),1);
     }
 
     @Override

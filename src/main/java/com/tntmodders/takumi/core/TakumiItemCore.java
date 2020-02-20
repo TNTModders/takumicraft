@@ -111,14 +111,16 @@ public class TakumiItemCore {
                 if (field.get(INSTANCE) instanceof Block) {
                     Block block = (Block) field.get(TakumiBlockCore.INSTANCE);
                     Item item = new ItemBlock(block);
-                    if (block instanceof ITakumiItemBlock) {
+                    if (block instanceof ITakumiItemBlock && ((ITakumiItemBlock) block).getItem() != null) {
                         item = ((ITakumiItemBlock) block).getItem();
                     }
-                    item = item.setRegistryName(block.getRegistryName());
-                    registry.register(item);
-                    itemBlocks.add(item);
-                    TakumiCraftCore.LOGGER.info("Registered Item : " + block.getUnlocalizedName());
-                    OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
+                    if (item != null) {
+                        item = item.setRegistryName(block.getRegistryName());
+                        registry.register(item);
+                        itemBlocks.add(item);
+                        TakumiCraftCore.LOGGER.info("Registered Item : " + block.getUnlocalizedName());
+                        OreDictionary.registerOre(item.getRegistryName().getResourcePath(), item);
+                    }
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
