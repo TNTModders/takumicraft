@@ -7,6 +7,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
 import com.tntmodders.takumi.entity.item.EntityAlterDummy;
 import com.tntmodders.takumi.entity.mobs.EntityAnnivCreeper;
+import com.tntmodders.takumi.entity.mobs.boss.EntityAngelCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import net.minecraft.block.Block;
@@ -54,6 +55,8 @@ public class BlockTakumiAltar extends Block {
                 return true;
             } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
                 entity = new EntityKingCreeper(worldIn);
+            }else if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.EMERALD_BLOCK) {
+                entity = new EntityAngelCreeper(worldIn);
             } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
                 entity = new EntityAnnivCreeper(worldIn);
             } else {

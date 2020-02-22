@@ -1,60 +1,90 @@
 package com.tntmodders.takumi.entity.mobs.boss;
 
-import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.core.TakumiConfigCore;
+import com.tntmodders.takumi.client.render.RenderAngelCreeper;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
-import com.tntmodders.takumi.entity.item.EntityBigHomingBomb;
+import com.tntmodders.takumi.entity.item.EntityTakumiTNTPrimed;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.*;
+import net.minecraftforge.event.world.ExplosionEvent;
 
-import java.lang.reflect.Field;
 import java.util.Random;
 
 public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
     private static final DataParameter<Integer> ATTACK_ID =
             EntityDataManager.createKey(EntityAngelCreeper.class, DataSerializers.VARINT);
     private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.kingcreeper.name"), BossInfo.Color.GREEN,
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.angelcreeper.name"), BossInfo.Color.BLUE,
                     BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
     private DamageSource lastSource;
+    public int deathTicks;
 
     public EntityAngelCreeper(World worldIn) {
         super(worldIn);
         this.tasks.addTask(1, new EntityAIBossCreeperSwell(this));
         this.isImmuneToFire = true;
-        try {
-            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
-            field.setAccessible(true);
-            field.set(this, 50);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.setSize(1.8f, 5.1f);
+    }
+
+    @Override
+    public double getSizeAmp() {
+        return 3.0;
     }
 
     @Override
     public int getPrimaryColor() {
         return 0x00ff00;
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        if (this.getAttackID() == 2) {
+            for (BlockPos pos : event.getAffectedBlocks()) {
+                TakumiUtils.setBlockStateProtected(this.world, pos, Blocks.ICE.getDefaultState());
+            }
+            event.getAffectedBlocks().clear();
+        } else if (this.getAttackID() == 6) {
+            for (BlockPos pos : event.getAffectedBlocks()) {
+                TakumiUtils.setBlockStateProtected(this.world, pos,
+                        this.getPowered() ? TakumiBlockCore.TAKUMI_TNT.getDefaultState() :
+                                Blocks.TNT.getDefaultState());
+                if (this.rand.nextInt(5) == 0) {
+                    Entity entity =
+                            this.getPowered() ? new EntityTakumiTNTPrimed(this.world) : new EntityTNTPrimed(this.world);
+                    entity.setPosition(pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
+                    this.world.spawnEntity(entity);
+                }
+            }
+            event.getAffectedBlocks().clear();
+        }
+        return true;
     }
 
     @Override
@@ -64,7 +94,7 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void setDead() {
-        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL || this.deathTicks > 0)) {
             if (!this.world.isRemote) {
                 EntityAngelCreeper kingCreeper = new EntityAngelCreeper(this.world);
                 NBTTagCompound tagCompound = new NBTTagCompound();
@@ -86,9 +116,48 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
+    public void move(MoverType type, double x, double y, double z) {
+        if (this.deathTicks == 0) {
+            super.move(type, x, y, z);
+        }
+    }
+
+    @Override
+    protected void onDeathUpdate() {
+        ++this.deathTicks;
+        TakumiUtils.takumiSetPowered(this, false);
+        this.setAttackID(0);
+        this.rotationYaw = 0;
+        this.rotationPitch = 0;
+        if (this.deathTicks >= 180 && this.deathTicks <= 200) {
+            float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+            float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+            float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, this.posX + (double) f, this.posY + 2.0D + (double) f1, this.posZ + (double) f2, 0.0D, 0.0D, 0.0D);
+        }
+
+        boolean flag = this.world.getGameRules().getBoolean("doMobLoot");
+
+        if (!this.world.isRemote) {
+            if (this.deathTicks == 1) {
+                this.world.playBroadcastSound(1028, new BlockPos(this), 0);
+            }
+        }
+
+        if (this.deathTicks == 200 && !this.world.isRemote) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, 16, true);
+            this.entityDropItem(new ItemStack(TakumiItemCore.KING_CORE, 16), 0.5f);
+            this.setDead();
+        }
+    }
+
+    @Override
     public void damageEntity(DamageSource damageSrc, float damageAmount) {
+        if (!this.world.isRemote && damageSrc == DamageSource.IN_WALL) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 7 : 5, true);
+        }
         if (damageSrc == DamageSource.OUT_OF_WORLD || damageSrc.getTrueSource() instanceof EntityPlayer) {
-            if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() && !damageSrc.isProjectile() &&
+            if (!damageSrc.isExplosion() && !damageSrc.isFireDamage() &&
                     damageSrc != DamageSource.DROWN && damageSrc != DamageSource.IN_WALL) {
                 if (damageAmount > 12) {
                     damageAmount = 12;
@@ -116,7 +185,7 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
         if (debugID != 0) {
             this.dataManager.set(ATTACK_ID, debugID);
         } else {
-            int maxID = 5;
+            int maxID = 6;
             this.dataManager.set(ATTACK_ID, new Random(System.currentTimeMillis()).nextInt(maxID + 1));
         }
     }
@@ -132,160 +201,100 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
             }
             this.heal(0.025f);
         }
-        if (this.world.isRemote) {
-            switch (this.getAttackID()) {
-                //randomFire / N.fire.circle
-                case 1: {
-                    for (double x = -5; x <= 5; x += 0.25) {
-                        for (double z = -5; z <= 5; z += 0.25) {
-                            if (x * x + z * z <= 25 && x * x + z * z >= 4.5 * 4.5 && this.rand.nextBoolean()) {
-                                this.spawnParticle(EnumParticleTypes.FLAME, x, 0, z,
-                                        Math.sin(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2, 0.4,
-                                        Math.cos(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2);
-                            }
-                        }
-                    }
-                    break;
+        if (this.deathTicks > 0) {
+            this.world.loadedEntityList.forEach(entity -> {
+                if (!(entity instanceof EntityAngelCreeper) && this.getDistanceSqToEntity(entity) < 100) {
+                    TakumiCraftCore.LOGGER.info(entity);
+                    entity.motionX += (this.posX - entity.posX) / 100;
+                    entity.motionY += (this.posY - entity.posY) / 100;
+                    entity.motionZ += (this.posZ - entity.posZ) / 100;
                 }
-
-                //QFire / N.fire.Q
-                case 2: {
-                    for (double x = -5; x <= 5; x += 0.5) {
-                        for (double z = -5; z <= 5; z += 0.5) {
-                            for (double y = -5; y <= 5; y += 0.5) {
-                                if (x * x + z * z + y * y <= 25 && x * x + z * z + y * y >= 4.5 * 4.5) {
-                                    this.spawnParticle(EnumParticleTypes.FLAME, x, y, z,
-                                            Math.sin(Math.atan2(z, x) * this.ticksExisted / 10) * 0.01, 0,
-                                            Math.cos(Math.atan2(z, x) * this.ticksExisted / 10) * 0.01);
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-
-                //Thunder /  N.end.zone
-                case 3: {
-                    for (double x = -5; x <= 5; x += 0.5) {
-                        for (double z = -5; z <= 5; z += 0.5) {
-                            if (x * x + z * z <= 25 && this.rand.nextInt(20) == 0) {
-                                this.spawnParticle(EnumParticleTypes.END_ROD, x, 0, z,
-                                        (this.rand.nextDouble() - 0.5) * 0.3, 0.5,
-                                        (this.rand.nextDouble() - 0.5) * 0.3);
-                            }
-                        }
-                    }
-                    break;
-                }
-                //ExpBall / N.smoke_large.zone
-                case 4: {
-                    for (double x = -5; x <= 5; x += 0.5) {
-                        for (double z = -5; z <= 5; z += 0.5) {
-                            if (x * x + z * z <= 25 && this.rand.nextInt(20) == 0) {
-                                this.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, 0, z,
-                                        (this.rand.nextDouble() - 0.5) * 0.3, 0.5,
-                                        (this.rand.nextDouble() - 0.5) * 0.3);
-                            }
-                        }
-                    }
-                    break;
-                }
-
-                //FireBall / N.fire.zone
-                case 5: {
-                    for (double x = -5; x <= 5; x += 0.5) {
-                        for (double z = -5; z <= 5; z += 0.5) {
-                            if (x * x + z * z <= 25 && this.rand.nextInt(20) == 0) {
-                                this.spawnParticle(EnumParticleTypes.LAVA, x, 0, z,
-                                        (this.rand.nextDouble() - 0.5) * 0.3, 0.5,
-                                        (this.rand.nextDouble() - 0.5) * 0.3);
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
+            });
         }
-
     }
 
     @Override
     public void takumiExplode() {
         if (!this.world.isRemote) {
             switch (this.getAttackID()) {
-                //randomFire
+                //demon
                 case 1: {
-                    for (int i = 0; i < (this.getPowered() ? 15 : 10); i++) {
-                        BlockPos pos = this.getRandomPos(9, 4, 9);
-                        this.world.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), this.getPowered() ? 8 : 5,
-                                true, true);
+                    for (int t = 0; t < (this.getPowered() ? 100 : 50); t++) {
+                        Random rand = new Random();
+                        int i = this.getPowered() ? 50 : 30;
+                        double x = this.posX + this.rand.nextInt(i * 2) - i;
+                        double y = this.posY + 50 + this.rand.nextInt(i) - i / 2;
+                        double z = this.posZ + this.rand.nextInt(i * 2) - i;
+                        EntityLargeFireball fireball = new EntityLargeFireball(this.world);
+                        fireball.setPosition(x, y, z);
+                        fireball.motionX = 0;
+                        fireball.motionY = -1;
+                        fireball.motionZ = 0;
+                        fireball.accelerationY = -1;
+                        fireball.explosionPower = this.getPowered() ? 5 : 3;
+                        if (!this.world.isRemote) {
+                            this.world.spawnEntity(fireball);
+                        }
                     }
                     break;
                 }
 
-                //QFire
+                //rare
                 case 2: {
-                    for (double x = -5; x <= 5; x += 1) {
-                        for (double z = -5; z <= 5; z += 1) {
-                            for (double y = -5; y <= 5; y += 1) {
-                                if (x * x + z * z + y * y <= 25 && x * x + z * z + y * y >= 4.5 * 4.5) {
-                                    this.world.newExplosion(this, this.posX + x, this.posY + y, this.posZ + z,
-                                            this.getPowered() ? 5f : 2.5f, true, true);
-                                }
-                            }
-                        }
+                    for (int t = 0; t < (this.getPowered() ? 40 : 20); t++) {
+                        Random rand = new Random();
+                        int i = this.getPowered() ? 50 : 30;
+                        double x = this.posX + this.rand.nextInt(i * 2) - i;
+                        double y = this.posY + this.rand.nextInt(i) - i / 2;
+                        double z = this.posZ + this.rand.nextInt(i * 2) - i;
+                        this.world.createExplosion(this, x, y, z, this.getPowered() ? 5 : 3, true);
                     }
                     break;
                 }
 
-                //Thunder
+                //odd
                 case 3: {
-                    for (int i = 0; i < (this.getPowered() ? 150 : 100); i++) {
+                    for (int t = 0; t < (this.getPowered() ? 25 : 10); t++) {
+                        EntityOddDummyGhast ghast = new EntityOddDummyGhast(this.world);
+                        ghast.setPosition(this.posX + this.rand.nextInt(10) - 5, this.posY + this.rand.nextInt(10) - 5,
+                                this.posZ + this.rand.nextInt(10) - 5);
+                        this.world.spawnEntity(ghast);
+                    }
+                    break;
+                }
 
-                        BlockPos pos = this.getRandomPos(2, 1, 2);
-                        if (this.rand.nextInt(5) == 0) {
-                            this.world.createExplosion(this, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 1.5f,
-                                    true);
-                        }
+                //bolt
+                case 4: {
+                    for (int i = 0; i < 10 * (this.getPowered() ? 3 : 1); i++) {
+                        BlockPos pos = this.getPosition().add(
+                                MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
+                                MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1), 5 * (this.getPowered() ? 2 : 1)),
+                                MathHelper.nextDouble(this.rand, -5 * (this.getPowered() ? 2 : 1),
+                                        5 * (this.getPowered() ? 2 : 1)));
                         EntityLightningBolt bolt =
-                                new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
-                                        false);
+                                new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
                         this.world.addWeatherEffect(bolt);
                         this.world.spawnEntity(bolt);
                     }
                     break;
                 }
 
-                //ExpBall
-                case 4: {
-                    for (int t = 0; t < 30 * (this.getPowered() ? 2 : 1); t++) {
-                        Random rand = new Random();
-                        BlockPos pos = this.getRandomPos(8, 2, 8).up(50);
-                        EntityBigHomingBomb shulkerBullet =
-                                new EntityBigHomingBomb(this.world, this, this.getAttackTarget(), EnumFacing.Axis.Y);
-                        shulkerBullet.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                        this.world.spawnEntity(shulkerBullet);
-                    }
-                    break;
-                }
-
-                //FireBall
+                //ofalen
                 case 5: {
-                    for (int t = 0; t < 30 * (this.getPowered() ? 2 : 1); t++) {
-                        Random rand = new Random();
-                        BlockPos pos = this.getRandomPos(10, 2, 10).up(50);
-                        EntityLargeFireball fireball = new EntityLargeFireball(this.world);
-                        fireball.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                        fireball.motionY = -1;
-                        fireball.accelerationY = -0.2;
-                        fireball.explosionPower = this.getPowered() ? 5 : 3;
-                        this.world.spawnEntity(fireball);
+                    for (int x = -10; x <= 10; x++) {
+                        for (int y = -10; y <= 10; y++) {
+                            for (int z = -10; z <= 10; z++) {
+                                if (x * x + y * y + z * z > 98 && x * x + y * y + z * z < 102) {
+                                    this.world.createExplosion(this, this.posX + x, this.posY + y, this.posZ + z,
+                                            this.getPowered() ? 3 : 1.5f, true);
+                                }
+                            }
+                        }
                     }
                     break;
                 }
-
                 default: {
-                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 10 : 7, true);
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 7 : 4, true);
                 }
             }
         }
@@ -299,17 +308,9 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
-        }
-        super.onDeath(source);
-    }
-
-    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }
@@ -421,6 +422,11 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean canRegister() {
-        return TakumiConfigCore.inDev;
+        return true;
+    }
+
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderAngelCreeper<>(manager);
     }
 }
