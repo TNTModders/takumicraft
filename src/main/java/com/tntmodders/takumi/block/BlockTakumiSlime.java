@@ -19,6 +19,7 @@ public class BlockTakumiSlime extends BlockSlime {
 
     @Override
     public void onLanded(World worldIn, Entity entityIn) {
+        entityIn.fallDistance = 0;
         if (entityIn.isSneaking()) {
             super.onLanded(worldIn, entityIn);
         } else if (entityIn.motionY < 0.0D) {
@@ -28,8 +29,8 @@ public class BlockTakumiSlime extends BlockSlime {
             }
             if (!(entityIn instanceof EntityLivingBase)) {
                 entityIn.motionY *= 0.8D;
-            } else if (entityIn.motionY > 0.1D) {
-                worldIn.createExplosion(entityIn, entityIn.posX, entityIn.posY - 0.5, entityIn.posZ, 1f, false);
+            } else if (entityIn.motionY > 1) {
+                worldIn.createExplosion(entityIn, entityIn.posX, entityIn.posY - 0.5, entityIn.posZ, 0f, false);
             }
         }
     }
