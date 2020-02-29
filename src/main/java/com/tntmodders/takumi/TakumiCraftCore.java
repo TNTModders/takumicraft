@@ -59,7 +59,7 @@ public class TakumiCraftCore {
         TakumiTileEntityCore.register();
         TakumiWorldCore.registerMapGen();
         TakumiLootTableCore.register();
-        TakumiRecipeCore.register();
+        TakumiEnumCore.register();
     }
 
     @SubscribeEvent

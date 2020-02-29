@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QSQ",
+    "QCQ",
+    "QSQ"
+  ],
+  "key": {
+    "C": {
+      "item": "takumicraft:creepervault"
+    },
+    "S": {
+      "item": "minecraft:shulker_shell"
+    },
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creepershulkerbox"
+  }
+}

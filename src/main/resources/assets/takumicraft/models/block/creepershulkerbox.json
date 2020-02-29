@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "takumicraft:blocks/creepershulkerbox_top",
+        "side": "takumicraft:blocks/creepershulkerbox_side",
+        "particle": "takumicraft:blocks/creepershulkerbox_side"
+    }
+}

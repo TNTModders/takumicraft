@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.material.TakumiMaterial;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiFluidCore;
+import com.tntmodders.takumi.core.TakumiPotionCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -43,16 +44,17 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 60 == 0) {
-            ((EntityLivingBase) entityIn).heal(0.5f);
+            ((EntityLivingBase) entityIn).heal(0.25f);
             if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
-                ((EntityPlayer) entityIn).getFoodStats().addStats(5, 0.7f);
+                ((EntityPlayer) entityIn).getFoodStats().addStats(2, 0.7f);
             }
         }
+        ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);
     }
 
     @Override
     public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,
-            double yToTest, Material materialIn, boolean testingHead) {
+                                          double yToTest, Material materialIn, boolean testingHead) {
         return materialIn == Material.WATER ? true :
                 super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
@@ -73,7 +75,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor,
-            float partialTicks) {
+                             float partialTicks) {
         float f12 = 0.0F;
         if (entity instanceof EntityLivingBase) {
             EntityLivingBase ent = (EntityLivingBase) entity;

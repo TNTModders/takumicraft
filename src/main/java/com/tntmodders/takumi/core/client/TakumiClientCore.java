@@ -10,6 +10,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.tileentity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.model.ModelShulker;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.Render;
@@ -196,6 +197,8 @@ public class TakumiClientCore {
                 new RenderVault());
         ClientRegistry.registerTileEntity(TileEntityTakumiBed.class, TakumiCraftCore.MODID + ":creeperbed",
                 new RenderTakumiBed());
+        ClientRegistry.registerTileEntity(TileEntityTakumiShulkerBox.class, TakumiCraftCore.MODID + ":creepershulkerbox",
+                new RenderTakumiShulkerBox(new ModelShulker()));
     }
 
 

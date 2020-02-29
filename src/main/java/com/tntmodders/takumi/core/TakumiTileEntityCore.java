@@ -18,6 +18,7 @@ public class TakumiTileEntityCore {
         GameRegistry.registerTileEntity(TileEntityVault.class,TakumiCraftCore.MODID+":creepervault");
         GameRegistry.registerTileEntity(TileEntityTakumiBed.class, TakumiCraftCore.MODID+":creeperbed");
         GameRegistry.registerTileEntity(TileEntityTakumiPiston.class,TakumiCraftCore.MODID+":creeperpiston");
+        GameRegistry.registerTileEntity(TileEntityTakumiShulkerBox.class,TakumiCraftCore.MODID+":creepershulkerbox");
         if (FMLCommonHandler.instance().getSide().isClient()) {
             TakumiClientCore.registerTileRender();
         }

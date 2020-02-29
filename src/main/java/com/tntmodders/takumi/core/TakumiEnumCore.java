@@ -1,6 +1,6 @@
 package com.tntmodders.takumi.core;
 
-public class TakumiRecipeCore {
+public class TakumiEnumCore {
 
     public static void register() {
     }
