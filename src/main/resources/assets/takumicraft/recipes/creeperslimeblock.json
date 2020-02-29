@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "GGG"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "G": {
+      "item": "minecraft:slime"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperslimeblock"
+  }
+}

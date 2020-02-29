@@ -185,6 +185,7 @@ tile.creepertimedetector.name=Creeper Time Detector
 tile.creepertimedetector_inv.name=Creeper Time Detector
 tile.creepertrapdoor_planks.name=Creeper Wooden Trap Door
 tile.creepertrapdoor_iron.name=Creeper Iron Trap Door
+tile.creeperslimeblock.name=Creeper Slime Block
 
 #item
 item.takumibook.name=Creeper Book
@@ -663,6 +664,8 @@ entity.obsidiancreeper.name=Obsidian Creeper
 entity.obsidiancreeper.desc=Harder than the diamond.
 entity.withercreeper.name=Wither Creeper
 entity.withercreeper.desc=Curse scary voice from the nether.
+entity.angelcreeper.name=Angel Creeper
+entity.angelcreeper.desc=Reborn, rage, all power gathering toward it.
 entity.paralysiscreeper.name=Paralysis Creeper
 entity.paralysiscreeper.desc=Never forgive, never release, never stay alive.
 entity.keepcreeper.name=Keep Creeper

@@ -185,6 +185,7 @@ tile.creepertimedetector.name=匠式硬質時間検知器
 tile.creepertimedetector_inv.name=匠式硬質時間検知器
 tile.creepertrapdoor_planks.name=匠式硬質天扉[木]
 tile.creepertrapdoor_iron.name=匠式硬質天扉[鋼]
+tile.creeperslimeblock.name=匠式硬質スライムブロック
 
 #item
 item.takumibook.name=匠の書

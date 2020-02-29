@@ -61,6 +61,7 @@ public class TakumiBlockCore {
     public static final Block CREEPER_BED = new BlockTakumiBed();
     public static final Block CREEPER_IRON_DOOR = new BlockTakumiDoor(Material.IRON, "creeperiron_door", 5f, "pickaxe");
     public static final Block CREEPER_PLANKS_DOOR = new BlockTakumiDoor(Material.WOOD, "creeperplanks_door", 1f, "axe");
+    public static final Block CREEPER_SLIME = new BlockTakumiSlime();
 
     //Rails
     public static final Block CREEPER_RAIL = new BlockTakumiRail();

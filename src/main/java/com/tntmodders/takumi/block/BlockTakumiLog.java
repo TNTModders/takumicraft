@@ -48,7 +48,9 @@ public class BlockTakumiLog extends BlockLog {
     }
 
     public void explode(World world, int x, int y, int z) {
-        world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, getPower(), true);
+        try{
+            world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, getPower(), true);
+        }catch (Exception ignored){}
     }
 
     float getPower() {
