@@ -26,6 +26,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -599,7 +600,7 @@ public class TakumiEvents {
                     e.getWorld().spawnEntity(squidCreeper);
                     e.setResult(Result.DENY);
                 }
-            } else if (e.getEntityLiving() instanceof EntitySquidCreeper && e.getEntityLiving().world.provider.getDimensionType()== TakumiWorldCore.TAKUMI_WORLD) {
+            } else if (e.getEntityLiving() instanceof EntitySquidCreeper && e.getEntityLiving().world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD) {
                 if (e.getEntityLiving().getRNG().nextInt(10) == 0) {
                     EntitySeaGuardianCreeper seaGuardianCreeper = new EntitySeaGuardianCreeper(e.getWorld());
                     seaGuardianCreeper.copyLocationAndAnglesFrom(e.getEntityLiving());
@@ -897,11 +898,14 @@ public class TakumiEvents {
                 if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_ACTIVATOR) {
                     event.getMinecart().onActivatorRailPass(k, l, i1, iblockstate.getValue(BlockRailPowered.POWERED));
                 }
-                if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_POWERED) {
+                if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_POWERED || iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_EXPLOSIVE) {
                     boolean flag;
                     boolean flag1;
                     flag = iblockstate.getValue(BlockRailPowered.POWERED);
                     flag1 = !flag;
+                    if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_EXPLOSIVE) {
+                        flag1 = false;
+                    }
                     Entity entity = event.getMinecart().getPassengers().isEmpty() ? null : event.getMinecart().getPassengers().get(0);
                     BlockRailBase.EnumRailDirection blockrailbase$enumraildirection = ((BlockRailBase) iblockstate.getBlock()).getRailDirection(event.getMinecart().world, pos, iblockstate, event.getMinecart());
                     if (entity instanceof EntityLivingBase) {
@@ -950,6 +954,18 @@ public class TakumiEvents {
                                 event.getMinecart().motionZ = -0.02D;
                             }
                         }
+
+                        if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_EXPLOSIVE) {
+                            event.getMinecart().motionX = event.getMinecart().motionX * 5;
+                            event.getMinecart().motionZ = event.getMinecart().motionZ * 5;
+                            event.getMinecart().motionY = 3;
+                            event.getMinecart().onGround = false;
+                            event.getMinecart().move(MoverType.SELF, event.getMinecart().motionX, event.getMinecart().motionY, event.getMinecart().motionZ);
+                            if (!event.getMinecart().world.isRemote) {
+                                Explosion explosion = event.getMinecart().world.createExplosion(event.getMinecart(),
+                                        event.getPos().getX(), event.getPos().getY() + 0.5, event.getPos().getZ(), 0f, false);
+                            }
+                        }
                     }
                 }
             }
@@ -958,7 +974,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void respawn(PlayerEvent.Clone event) {
-        if (!event.getEntityPlayer().world.loadedEntityList.isEmpty() &&  event.isWasDeath() && event.getOriginal().getLastDamageSource() != null &&
+        if (!event.getEntityPlayer().world.loadedEntityList.isEmpty() && event.isWasDeath() && event.getOriginal().getLastDamageSource() != null &&
                 event.getOriginal().getLastDamageSource().isExplosion() && event.getOriginal().getLastDamageSource().getTrueSource() instanceof EntityKeepCreeper) {
             event.getEntityPlayer().world.loadedEntityList.forEach(entity -> {
                 if (entity instanceof EntityItem && ((EntityItem) entity).getOwner() != null && ((EntityItem) entity).getOwner().equals(event.getOriginal().getName())) {
@@ -972,9 +988,7 @@ public class TakumiEvents {
     @SubscribeEvent
     public void playerDrop(PlayerDropsEvent event) {
         if (!event.getDrops().isEmpty() && event.getSource().getTrueSource() instanceof EntityKeepCreeper && event.getSource().isExplosion()) {
-            event.getDrops().forEach(entityItem -> {
-                entityItem.setOwner(event.getEntityPlayer().getName());
-            });
+            event.getDrops().forEach(entityItem -> entityItem.setOwner(event.getEntityPlayer().getName()));
         }
     }
 

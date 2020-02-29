@@ -65,8 +65,9 @@ public class TakumiBlockCore {
 
     //Rails
     public static final Block CREEPER_RAIL = new BlockTakumiRail();
-    public static final Block CREEPER_RAIL_POWERED = new BlockTakumiRailPowered(false);
-    public static final Block CREEPER_RAIL_ACTIVATOR = new BlockTakumiRailPowered(true);
+    public static final Block CREEPER_RAIL_POWERED = new BlockTakumiRailPowered(false, false);
+    public static final Block CREEPER_RAIL_EXPLOSIVE = new BlockTakumiRailPowered(false, true);
+    public static final Block CREEPER_RAIL_ACTIVATOR = new BlockTakumiRailPowered(true, false);
     public static final Block CREEPER_RAIL_DETECTOR = new BlockTakumiRailDetector();
 
     //Red(?)stones

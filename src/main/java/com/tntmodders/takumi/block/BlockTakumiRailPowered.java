@@ -4,9 +4,9 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.block.BlockRailPowered;
 
 public class BlockTakumiRailPowered extends BlockRailPowered {
-    public BlockTakumiRailPowered(boolean activator) {
+    public BlockTakumiRailPowered(boolean activator, boolean explosive) {
         super(activator);
-        String name = activator ? "creeperrail_activator" : "creeperrail_powered";
+        String name = explosive ? "creeperrail_explosive" : activator ? "creeperrail_activator" : "creeperrail_powered";
         this.setRegistryName(TakumiCraftCore.MODID, name);
         this.setUnlocalizedName(name);
         this.setHardness(0.7f);

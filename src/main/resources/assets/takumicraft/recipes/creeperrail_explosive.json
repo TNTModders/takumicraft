@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QGQ",
+    "QTQ",
+    "QGQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperiron"
+    },
+    "G": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "T": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creeperrail_explosive"
+  }
+}
