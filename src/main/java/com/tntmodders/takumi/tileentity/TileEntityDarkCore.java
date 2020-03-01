@@ -32,10 +32,10 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
         if (this.getBlockType() == TakumiBlockCore.DARKCORE) {
             boolean flg = this.world.loadedTileEntityList.stream().noneMatch(
                     tileEntity -> world.getBlockState(tileEntity.getPos()).getBlock() == TakumiBlockCore.DARKBOARD &&
-                            this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) < 64) &&
+                            this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) <625) &&
                     this.world.loadedTileEntityList.stream().filter(
                             tileEntity -> world.getBlockState(tileEntity.getPos()).getBlock() == TakumiBlockCore.DARKBOARD_ON &&
-                                    this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) < 64).toArray().length > 7;
+                                    this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) < 625).toArray().length > 7;
             if (flg) {
                 this.world.setBlockState(this.getPos(), TakumiBlockCore.DARKCORE_ON.getDefaultState());
                 this.world.createExplosion(null, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5,
