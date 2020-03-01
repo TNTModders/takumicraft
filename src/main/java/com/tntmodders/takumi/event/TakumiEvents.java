@@ -956,14 +956,16 @@ public class TakumiEvents {
                         }
 
                         if (iblockstate.getBlock() == TakumiBlockCore.CREEPER_RAIL_EXPLOSIVE) {
-                            event.getMinecart().motionX = event.getMinecart().motionX * 5;
-                            event.getMinecart().motionZ = event.getMinecart().motionZ * 5;
-                            event.getMinecart().motionY = 3;
-                            event.getMinecart().onGround = false;
-                            event.getMinecart().move(MoverType.SELF, event.getMinecart().motionX, event.getMinecart().motionY, event.getMinecart().motionZ);
-                            if (!event.getMinecart().world.isRemote) {
-                                Explosion explosion = event.getMinecart().world.createExplosion(event.getMinecart(),
-                                        event.getPos().getX(), event.getPos().getY() + 0.5, event.getPos().getZ(), 0f, false);
+                            if (event.getMinecart().motionX > 0.1 || event.getMinecart().motionZ > 0.1) {
+                                event.getMinecart().motionX = event.getMinecart().motionX * 5;
+                                event.getMinecart().motionZ = event.getMinecart().motionZ * 5;
+                                event.getMinecart().motionY = 3;
+                                event.getMinecart().onGround = false;
+                                event.getMinecart().move(MoverType.SELF, event.getMinecart().motionX, event.getMinecart().motionY, event.getMinecart().motionZ);
+                                if (!event.getMinecart().world.isRemote) {
+                                    Explosion explosion = event.getMinecart().world.createExplosion(event.getMinecart(),
+                                            event.getPos().getX(), event.getPos().getY() + 0.5, event.getPos().getZ(), 0f, false);
+                                }
                             }
                         }
                     }

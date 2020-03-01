@@ -176,7 +176,7 @@ public class TakumiBlockCore {
     public static final Block ANVIL_CREEPER = new BlockAnvilCreeper();
     public static final Block TAKUMI_STONE_EP = new BlockTakumiStone_EP();
     public static final Block YUKARI_DUMMY = new BlockYukariDummy();
-
+    public static final Block CREEPER_ICE = new BlockTakumiIce();
 
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 

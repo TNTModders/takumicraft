@@ -188,6 +188,7 @@ tile.creepertrapdoor_iron.name=Creeper Iron Trap Door
 tile.creeperslimeblock.name=Creeper Slime Block
 tile.creeperrail_explosive.name=Creeper Explosive Rail
 tile.creepershulkerbox.name=Creeper Shulker Box
+tile.creeperice.name=Creeper Ice
 
 #item
 item.takumibook.name=Creeper Book
