@@ -7,7 +7,6 @@ import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
 import com.tntmodders.takumi.entity.mobs.EntityVexCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
-import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -86,7 +85,7 @@ public class EntityAttackBlock extends EntityLiving {
             }
         }
         this.spawnTick++;
-        if (this.spawnTick < 2000 && this.spawnTick % 20 == 0 && this.spawnTick != 0 && !this.world.isRemote) {
+        /*if (this.spawnTick < 2000 && this.spawnTick % 20 == 0 && this.spawnTick != 0 && !this.world.isRemote) {
             for (int i = -this.spawnTick / 20; i <= this.spawnTick / 20; i++) {
                 if (this.getPosition().getY() != 1) {
                     TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(i, -1, -this.spawnTick / 20),
@@ -130,7 +129,7 @@ public class EntityAttackBlock extends EntityLiving {
                 }
             }
         }
-        if (this.ticksExisted % 100 == 0) {
+        */if (this.ticksExisted % 100 == 0) {
             if (!this.world.isRemote) {
                 int r = this.spawnTick > 2000 ? 100 : this.spawnTick / 20;
                 for (int i = 0; i < 5; i++) {

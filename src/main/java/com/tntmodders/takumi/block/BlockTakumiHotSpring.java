@@ -49,7 +49,9 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
                 ((EntityPlayer) entityIn).getFoodStats().addStats(2, 0.7f);
             }
         }
-        ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);
+        if (entityIn instanceof EntityLivingBase) {
+            ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);
+        }
     }
 
     @Override

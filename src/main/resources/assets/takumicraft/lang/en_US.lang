@@ -263,6 +263,7 @@ item.paralysiscore.name=Paralysis Creeper's Core
 item.creeperminecart.name=Creeper Minecart
 item.creeperboat.name=Creeper Boat
 item.tosscreeperbomb.name=Toss Creeper Bomb
+item.creeperpainting.name=Creeper Painting
 
 #entity
 #desc max: 72 chars

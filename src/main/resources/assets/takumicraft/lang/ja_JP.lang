@@ -263,6 +263,7 @@ item.paralysiscore.name=鎖の結晶
 item.creeperminecart.name=匠式硬質貨車
 item.creeperboat.name=匠式硬質小舟
 item.tosscreeperbomb.name=持匠式時限爆弾
+item.creeperpainting.name=匠式硬質絵画
 
 #entity
 ＃descは36文字まで。
