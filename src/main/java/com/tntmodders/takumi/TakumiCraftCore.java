@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.world.biome.Biome;
@@ -40,7 +41,7 @@ public class TakumiCraftCore {
 
     //初期設定
     public static final String MODID = "takumicraft";
-    public static final String VERSION = "2.0.0-β.1.6-tcs16.1";
+    public static final String VERSION = "2.0.0-β.1.6-tcs17";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
@@ -120,4 +121,7 @@ public class TakumiCraftCore {
     public void init(FMLInitializationEvent event) {
         HOLDER.register();
     }
+
+    @SubscribeEvent
+    public void registerRecipe(Register<IRecipe> event){TakumiRecipeCore.register(event.getRegistry());}
 }

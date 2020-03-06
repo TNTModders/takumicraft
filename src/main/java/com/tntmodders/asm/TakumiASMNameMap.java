@@ -29,7 +29,7 @@ public class TakumiASMNameMap {
         METHOD_MAP.put("explode", "func_146077_cc");
         METHOD_MAP.put("renderByItem", "func_179022_a");
         METHOD_MAP.put("renderByItem2", "func_192838_a");
-        METHOD_MAP.put("onBroken"," func_110128_b");
+        METHOD_MAP.put("onBroken","func_110128_b");
         METHOD_MAP.put("entityDropItem","func_70099_a");
     }
 
