@@ -11,10 +11,7 @@ import com.tntmodders.takumi.entity.item.*;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
-import com.tntmodders.takumi.item.IItemAntiExplosion;
-import com.tntmodders.takumi.item.ItemTypeCore;
-import com.tntmodders.takumi.item.ItemTypeCoreSP;
-import com.tntmodders.takumi.item.ItemTypeSword;
+import com.tntmodders.takumi.item.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
@@ -29,6 +26,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
@@ -387,7 +385,6 @@ public class TakumiEvents {
             } catch (Exception ignored) {
             }
         }
-
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityKingDummy) {
             switch (((EntityKingDummy) event.getExplosion().getExplosivePlacedBy()).id) {
                 default: {
@@ -510,6 +507,9 @@ public class TakumiEvents {
             }
         }
         event.getAffectedEntities().removeIf(entity -> {
+            if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {
+                return true;
+            }
             if (entity instanceof EntityLivingBase) {
                 if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
                     ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));

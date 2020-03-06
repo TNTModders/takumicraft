@@ -6,13 +6,18 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.event.TakumiClientEvents;
 import com.tntmodders.takumi.item.ItemBattleShield;
+import com.tntmodders.takumi.item.ItemTakumiPainting;
 import com.tntmodders.takumi.item.ItemTakumiShield;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.entity.EntityHanging;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -20,6 +25,14 @@ import org.lwjgl.opengl.GL11;
 import java.lang.reflect.Field;
 
 public class TakumiASMHooks {
+
+    public static void TakumiPaintingHook(ItemStack itemStack, float f, EntityHanging painting) {
+        ItemStack stack = new ItemStack(painting instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) painting))
+                ? TakumiItemCore.TAKUMI_PAINTING : Items.PAINTING);
+        EntityItem entityitem = new EntityItem(painting.world, painting.posX + (double) ((float) painting.facingDirection.getFrontOffsetX() * 0.15F), painting.posY + (double) 0.5f, painting.posZ + (double) ((float) painting.facingDirection.getFrontOffsetZ() * 0.15F), stack);
+        entityitem.setDefaultPickupDelay();
+        painting.world.spawnEntity(entityitem);
+    }
 
     public static void TakumiExplodeHook(EntityCreeper creeper) {
         try {
@@ -75,7 +88,7 @@ public class TakumiASMHooks {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
             GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
             GlStateManager.scale(1.0F, -1.0F, -1.0F);
-            GlStateManager.scale(1.2,1.2,1.2);
+            GlStateManager.scale(1.2, 1.2, 1.2);
             TakumiClientEvents.MODEL_SHIELD.render();
             GlStateManager.matrixMode(5890);
             GlStateManager.loadIdentity();

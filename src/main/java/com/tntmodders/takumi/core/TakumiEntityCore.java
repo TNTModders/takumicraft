@@ -17,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
@@ -404,6 +405,7 @@ public class TakumiEntityCore {
                 return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/creeperboat.png");
             }
         });
+        RenderingRegistry.registerEntityRenderingHandler(EntityPainting.class, RenderTakumiPainting::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

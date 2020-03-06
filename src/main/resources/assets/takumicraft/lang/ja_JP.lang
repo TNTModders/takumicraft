@@ -798,8 +798,7 @@ entity.withercreeperskull.name=ウィザー匠
 entity.titanmeteor.name=隕匠
 entity.creeperminecart.name=匠式硬質貨車
 entity.creeperboat.name=匠式硬質小舟
-
-entity.
+entity.creeperpainting.name=匠式硬質絵画
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

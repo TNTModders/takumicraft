@@ -746,6 +746,7 @@ entity.withercreeperskull.name=Wither Creeper
 entity.titanmeteor.name=Titan Creeper
 entity.creeperminecart.name=Creeper Minecart
 entity.creeperboat.name=Creeper Boat
+entity.creeperpainting.name=Creeper Painting
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
