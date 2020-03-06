@@ -264,6 +264,7 @@ item.creeperminecart.name=匠式硬質貨車
 item.creeperboat.name=匠式硬質小舟
 item.tosscreeperbomb.name=持匠式時限爆弾
 item.creeperpainting.name=匠式硬質絵画
+item.creepersign.name=匠式硬質看板
 
 #entity
 ＃descは36文字まで。

@@ -199,6 +199,7 @@ public class TakumiClientCore {
                 new RenderTakumiBed());
         ClientRegistry.registerTileEntity(TileEntityTakumiShulkerBox.class, TakumiCraftCore.MODID + ":creepershulkerbox",
                 new RenderTakumiShulkerBox(new ModelShulker()));
+        ClientRegistry.registerTileEntity(TileEntityTakumiSign.class, TakumiCraftCore.MODID + ":creepersign", new RenderTakumiSign());
     }
 
 

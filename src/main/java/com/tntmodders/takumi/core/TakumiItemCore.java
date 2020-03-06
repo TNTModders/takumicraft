@@ -88,6 +88,7 @@ public class TakumiItemCore {
     //public static final Item TAKUMI_BOAT = new ItemTakumiBoat();
     public static final Item TOSSCREEPER_BOMB = new ItemTossCreeperBomb();
     public static final Item TAKUMI_PAINTING = new ItemTakumiPainting();
+    public static final Item CREEPER_SIGN = new ItemTakumiSign();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

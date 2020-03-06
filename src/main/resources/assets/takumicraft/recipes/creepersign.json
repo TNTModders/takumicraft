@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    "QQQ",
+    " X "
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creeperplanks"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creepersign",
+    "count": 3
+  }
+}
