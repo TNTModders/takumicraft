@@ -64,7 +64,7 @@ public class TakumiBlockCore {
     public static final Block CREEPER_SLIME = new BlockTakumiSlime();
     public static final Block CREEPER_SHULKER_BOX = new BlockTakumiShulkerBox();
     public static final Block CREEPER_SIGN_STANDING = new BlockTakumiStandingSign();
-    public static final Block  CREEPER_SIGN_WALL = new BlockTakumiWallSign();
+    public static final Block CREEPER_SIGN_WALL = new BlockTakumiWallSign();
 
     //Rails
     public static final Block CREEPER_RAIL = new BlockTakumiRail();
@@ -179,6 +179,7 @@ public class TakumiBlockCore {
     public static final Block TAKUMI_STONE_EP = new BlockTakumiStone_EP();
     public static final Block YUKARI_DUMMY = new BlockYukariDummy();
     public static final Block CREEPER_ICE = new BlockTakumiIce();
+    public static final Block MAGIC_BLOCK = new BlockMagicBlock();
 
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 

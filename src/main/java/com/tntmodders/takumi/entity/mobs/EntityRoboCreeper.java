@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.client.render.RenderRoboCreeper;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
@@ -14,6 +15,7 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -227,6 +229,7 @@ public class EntityRoboCreeper extends EntityTakumiAbstractCreeper implements IT
                 this.world.createExplosion(this, this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(),
                         this.posZ + this.rand.nextDouble(), 0f, false);
             }
+            this.entityDropItem(new ItemStack(TakumiBlockCore.MAGIC_BLOCK, 1 + this.rand.nextInt(16)), 0.5f);
         }
     }
 

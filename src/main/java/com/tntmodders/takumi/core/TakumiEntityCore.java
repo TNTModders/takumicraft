@@ -3,6 +3,7 @@ package com.tntmodders.takumi.core;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.*;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
+import com.tntmodders.takumi.entity.EntityTakumiLightningBolt;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import com.tntmodders.takumi.entity.item.*;
@@ -308,6 +309,9 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperboat"),
                 EntityTakumiBoat.class, "creeperboat", 926, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperbolt"),
+                EntityTakumiBoat.class, "creeperblt", 927, TakumiCraftCore.TakumiInstance, 160, 2,
+                false);
     }
 
     @SideOnly(Side.CLIENT)
@@ -406,6 +410,7 @@ public class TakumiEntityCore {
             }
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityPainting.class, RenderTakumiPainting::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLightningBolt.class, RenderTakumiLightningBolt::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
