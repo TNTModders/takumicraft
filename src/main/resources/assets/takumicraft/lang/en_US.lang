@@ -686,6 +686,8 @@ entity.shrinkcreeper.name=Shrink Creeper
 entity.shrinkcreeper.desc=Creeper does not always the same size.
 entity.tosscreeper.name=Toss Creeper
 entity.tosscreeper.desc=You might have a bomb in your hand...?
+entity.wondercreeper.name=Wonder Creeper
+entity.wondercreeper.desc=It is wonder of nature, all energy of the ground.
 
 entity.edgycreeper.tip_a.0=Dark
 entity.edgycreeper.tip_a.1=Fatal
@@ -797,6 +799,7 @@ enchantment.takumi_minesweeper=Minesweeper
 enchantment.takumi_type_magic=Magic-powered
 enchantment.takumi_type_dest=Destruction-powered
 enchantment.takumi_elytra=Explosive Elytra
+enchantment.takumi_item_protection=Item Protection
 
 #potion
 takumisubsidence=Subsidence

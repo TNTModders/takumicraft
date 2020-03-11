@@ -738,6 +738,8 @@ entity.shrinkcreeper.read=しゅくしょう
 entity.tosscreeper.name=持匠
 entity.tosscreeper.read=もたせたくみ
 entity.tosscreeper.desc=もしかしたらあなたの手の中に爆弾が……? MOB募集:kazu0404さん
+entity.wondercreeper.name=大自然ノ匠
+entity.wondercreeper.desc=全ての自然の力を纏いし匠の降臨。集えクラフター。この匠を止めるために。 MOB募集:くりやさん
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -853,6 +855,7 @@ enchantment.takumi_minesweeper=地雷除去
 enchantment.takumi_type_magic=魔式守護法
 enchantment.takumi_type_dest=壊式殲滅術
 enchantment.takumi_elytra=匠式エリトラ爆進術
+enchantment.takumi_item_protection=不滅の加護
 
 #potion
 takumisubsidence=潜行

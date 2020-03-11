@@ -2,7 +2,6 @@ package com.tntmodders.takumi.entity.item;
 
 import com.google.common.collect.Lists;
 import com.tntmodders.asm.TakumiASMNameMap;
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.block.BlockLiquid;
@@ -353,7 +352,6 @@ public class EntityTakumiBoat extends EntityBoat {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                TakumiCraftCore.LOGGER.info(entity.isBurning());
             }
         });
     }
