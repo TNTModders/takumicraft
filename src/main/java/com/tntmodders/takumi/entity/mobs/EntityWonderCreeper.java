@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.asm.TakumiASMNameMap;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.EntityLivingBase;
@@ -163,5 +164,10 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean isImmuneToExplosions() {
         return true;
+    }
+
+    @Override
+    public boolean canRegister() {
+        return TakumiConfigCore.inDev;
     }
 }

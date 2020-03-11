@@ -20,7 +20,7 @@ public class TakumiConfigCore {
     public static boolean useNewYearTex;
 
     //debugConfig
-    public static boolean inDev = true;
+    public static boolean inDev = false;
 
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。

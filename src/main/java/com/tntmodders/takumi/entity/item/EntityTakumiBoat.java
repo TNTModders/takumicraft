@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -168,7 +169,11 @@ public class EntityTakumiBoat extends EntityBoat {
 
                 if (flag || this.getDamageTaken() > 40.0F) {
                     if (!flag && this.world.getGameRules().getBoolean("doEntityDrops")) {
-                        this.dropItemWithOffset(this.getItemBoat(), 1, 1F);
+                        EntityItem item = this.dropItemWithOffset(this.getItemBoat(), 1, 1F);
+                        item.setNoPickupDelay();
+                        if (source.getTrueSource() instanceof EntityPlayer) {
+                            item.onCollideWithPlayer(((EntityPlayer) source.getTrueSource()));
+                        }
                     }
 
                     this.setDead();
