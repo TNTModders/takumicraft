@@ -33,7 +33,7 @@ public class EntityBeetrootCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 10;
+        return 3;
     }
 
     @Override

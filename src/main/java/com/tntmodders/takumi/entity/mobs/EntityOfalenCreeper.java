@@ -40,7 +40,10 @@ public class EntityOfalenCreeper extends EntityTakumiAbstractCreeper {
         super.onUpdate();
         int i = this.getCreeperState();
         this.ofalenSinceIgnited += i;
-        if (!this.world.isRemote && this.ofalenSinceIgnited % 50 == 0) {
+        if (this.ofalenSinceIgnited < 0) {
+            this.ofalenSinceIgnited = 0;
+        }
+        if (!this.world.isRemote && this.ofalenSinceIgnited % 50 == 1) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 6f, false);
         }
     }

@@ -24,6 +24,7 @@ public class BlockMagicBlock extends Block {
         this.setHarvestLevel("pickaxe", 3);
         this.setHardness(5f);
         this.setResistance(10000000f);
+        this.setLightLevel(1f);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class BlockMagicBlock extends Block {
      */
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!worldIn.isRemote && entityIn.ticksExisted % 20 == 0) {
+        if (!worldIn.isRemote && entityIn.ticksExisted % 20 == 0 && !entityIn.isDead) {
             EntityLightningBolt bolt = new EntityLightningBolt(worldIn, pos.getX(), pos.getY() + 0.5, pos.getZ(), false);
             worldIn.addWeatherEffect(bolt);
             worldIn.spawnEntity(bolt);

@@ -25,6 +25,7 @@ public class ItemTakumiBoat extends Item {
         this.setRegistryName(TakumiCraftCore.MODID, "creeperboat");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("creeperboat");
+        this.setMaxStackSize(1);
     }
 
     @Override

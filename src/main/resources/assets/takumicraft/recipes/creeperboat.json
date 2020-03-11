@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "Q"
+    "Q Q",
+    "QQQ"
   ],
   "key": {
     "Q": {
-      "item": "takumicraft:magicblock"
+      "item": "takumicraft:creeperplanks"
     }
   },
   "result": {
-    "item": "takumicraft:magicstone",
-    "count": 9
+    "item": "takumicraft:creeperboat"
   }
 }

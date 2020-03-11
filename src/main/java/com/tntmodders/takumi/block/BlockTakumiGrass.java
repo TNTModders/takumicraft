@@ -44,6 +44,7 @@ public class BlockTakumiGrass extends BlockGrass {
                                 Entity entity = entry.newInstance(worldIn);
                                 entity.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
                                 if (entity instanceof EntityMob && ((EntityMob) entity).getCanSpawnHere()) {
+                                    ((EntityMob) entity).onInitialSpawn(worldIn.getDifficultyForLocation(pos), null);
                                     worldIn.spawnEntity(entity);
                                 }
                             }

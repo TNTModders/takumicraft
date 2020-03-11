@@ -10,6 +10,7 @@ import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
+import com.tntmodders.takumi.entity.item.EntityTakumiBoat;
 import com.tntmodders.takumi.entity.item.EntityXMS;
 import com.tntmodders.takumi.item.ItemBattleArmor;
 import com.tntmodders.takumi.network.MessageMSMove;
@@ -25,12 +26,15 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -176,6 +180,9 @@ public class TakumiClientEvents {
         if (event.getEntity().getRidingEntity() instanceof EntityXMS) {
             event.setCanceled(true);
         }
+        if(event.getEntity().getRidingEntity() instanceof EntityTakumiBoat){
+            event.getEntity().extinguish();
+        }
     }
 
     public float getCreeperFlashIntensity(EntityLivingBase entityLivingBase, float partialTicks) {
@@ -245,6 +252,14 @@ public class TakumiClientEvents {
                 Minecraft.getMinecraft().world.getDifficulty() == EnumDifficulty.HARD) {
             TakumiPacketCore.INSTANCE.sendToServer(new MessageTHMDetonate((byte) 1));
             Minecraft.getMinecraft().player.playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+        }
+    }
+
+    @SubscribeEvent
+    public void renderFire(RenderBlockOverlayEvent event) {
+        if (event.getPlayer() != null && event.getPlayer().getRidingEntity() instanceof EntityTakumiBoat && event.getBlockForOverlay().getBlock() == Blocks.FIRE &&
+                event.getBlockPos().equals(new BlockPos(event.getPlayer()))) {
+            event.setCanceled(true);
         }
     }
 
