@@ -108,7 +108,8 @@ public class TakumiEntityCore {
                 EntityNerdCreeper.class, EntityDaimonjiCreeper.class, EntityTearCreeper.class, EntityCryCreeper.class, EntityOpaqueCreeper.class,
                 EntityLayerCreeper.class, EntityChaseCreeper.class, EntityBoarCreeper.class, EntityMouseCreeper.class, EntityEvolutionCreeper.class,
                 EntityObsidianCreeper.class, EntityWitherCreeper.class, EntityAngelCreeper.class, EntityParalysisCreeper.class, EntityKeepCreeper.class,
-                EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class,EntityWonderCreeper.class));
+                EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class, EntityWonderCreeper.class,
+                EntityGemCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -310,7 +311,10 @@ public class TakumiEntityCore {
                 EntityTakumiBoat.class, "creeperboat", 926, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperbolt"),
-                EntityTakumiBoat.class, "creeperblt", 927, TakumiCraftCore.TakumiInstance, 160, 2,
+                EntityTakumiBoat.class, "creeperbolt", 927, TakumiCraftCore.TakumiInstance, 160, 2,
+                false);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperlaser"),
+                EntityTakumiLaser.class, "creeperlaser", 928, TakumiCraftCore.TakumiInstance, 160, 2,
                 false);
     }
 
@@ -411,6 +415,7 @@ public class TakumiEntityCore {
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityPainting.class, RenderTakumiPainting::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLightningBolt.class, RenderTakumiLightningBolt::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLaser.class, RenderTakumiLaser::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

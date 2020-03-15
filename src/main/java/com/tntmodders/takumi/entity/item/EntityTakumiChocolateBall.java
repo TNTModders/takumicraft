@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,7 +38,9 @@ public class EntityTakumiChocolateBall extends EntityThrowable {
 
     @Override
     public void onUpdate() {
-        this.spawnParticle();
+        if(FMLCommonHandler.instance().getSide().isClient()){
+            this.spawnParticle();
+        }
         super.onUpdate();
     }
 

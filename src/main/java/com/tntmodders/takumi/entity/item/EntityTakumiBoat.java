@@ -906,4 +906,9 @@ public class EntityTakumiBoat extends EntityBoat {
             this.rotationPitch = (float) this.lerpXRot;
         }
     }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
 }

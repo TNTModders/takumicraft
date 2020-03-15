@@ -30,7 +30,7 @@ public class EntityVoidCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 8;
+        return 5;
     }
 
     @Override

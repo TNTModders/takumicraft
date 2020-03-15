@@ -63,7 +63,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(8.0D);
     }
 
     @Override
@@ -342,7 +342,7 @@ public class EntityBlazeCreeper extends EntityTakumiAbstractCreeper {
 
         private double getFollowDistance() {
             IAttributeInstance iattributeinstance = this.blaze.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
-            return iattributeinstance == null ? 16.0D : iattributeinstance.getAttributeValue();
+            return iattributeinstance == null ? 8.0D : iattributeinstance.getAttributeValue();
         }
     }
 

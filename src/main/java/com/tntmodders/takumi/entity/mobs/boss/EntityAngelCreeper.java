@@ -146,7 +146,7 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
 
         if (this.deathTicks == 200 && !this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 16, true);
-            this.entityDropItem(new ItemStack(TakumiItemCore.KING_CORE, 16), 0.5f);
+            this.entityDropItem(new ItemStack(TakumiItemCore.KING_CORE, this.rand.nextInt(3)+1), 0.5f);
             this.setDead();
         }
     }
@@ -204,7 +204,6 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
         if (this.deathTicks > 0) {
             this.world.loadedEntityList.forEach(entity -> {
                 if (!(entity instanceof EntityAngelCreeper) && this.getDistanceSqToEntity(entity) < 100) {
-                    TakumiCraftCore.LOGGER.info(entity);
                     entity.motionX += (this.posX - entity.posX) / 100;
                     entity.motionY += (this.posY - entity.posY) / 100;
                     entity.motionZ += (this.posZ - entity.posZ) / 100;

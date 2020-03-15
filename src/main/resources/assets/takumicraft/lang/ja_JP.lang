@@ -740,6 +740,9 @@ entity.tosscreeper.read=もたせたくみ
 entity.tosscreeper.desc=もしかしたらあなたの手の中に爆弾が……? MOB募集:kazu0404さん
 entity.wondercreeper.name=大自然ノ匠
 entity.wondercreeper.desc=全ての自然の力を纏いし匠の降臨。集えクラフター。この匠を止めるために。 MOB募集:くりやさん
+entity.gemcreeper.name=玉匠
+entity.gemcreeper.read=ぎょくしょう
+entity.gemcreeper.desc=玉にありて宝にあらず、球であれども、其の在りようは玉なり。 MOB募集:せじぽんさん
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -803,6 +806,7 @@ entity.titanmeteor.name=隕匠
 entity.creeperminecart.name=匠式硬質貨車
 entity.creeperboat.name=匠式硬質小舟
 entity.creeperpainting.name=匠式硬質絵画
+entity.creeperbolt.name=龍雷
 
 #advancements
 advancements.takumicraft.root.title=匠Craft

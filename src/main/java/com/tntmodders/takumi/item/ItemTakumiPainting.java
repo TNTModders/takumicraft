@@ -32,7 +32,10 @@ public class ItemTakumiPainting extends Item {
             nbt.setTag("ForgeData", data);
             painting.readFromNBT(nbt);
             painting.setNoGravity(true);
-            worldIn.spawnEntity(painting);
+            boolean flg = worldIn.spawnEntity(painting);
+            if(flg && !player.isCreative()){
+                player.getHeldItem(hand).shrink(1);
+            }
         }
         return EnumActionResult.SUCCESS;
     }
