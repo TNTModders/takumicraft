@@ -3,7 +3,6 @@ package com.tntmodders.takumi.entity.mobs.boss;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderGemCreeper;
-import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
@@ -143,13 +142,13 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
                 if (this.getAttackTarget() != null) {
                     this.moveHelper.setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, 1.5);
                     if (!this.world.isRemote) {
-                        this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 8 : 5, true);
+                        this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 5 : 3, true);
                     }
 
                     this.rotationYaw += 20;
                     this.activeTimer++;
                     this.setCreeperState(-2);
-                    if (this.activeTimer > 200 || this.getDistanceSqToEntity(this.getAttackTarget()) < 6.25) {
+                    if (this.activeTimer > 200 || this.getDistanceSqToEntity(this.getAttackTarget()) < 9) {
                         this.clearActivePotions();
                         this.lastID = -1;
                     }
@@ -161,6 +160,8 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
                     this.spawnLaser(1);
                     this.lastID = 0;
                 }
+            } else if (this.lastID == 2 && !this.onGround) {
+                this.rotationYaw += 20;
             }
         }
         super.onUpdate();
@@ -201,10 +202,10 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote) {
             EntityTakumiLaser laser = new EntityTakumiLaser(this.world);
             laser.setPositionAndRotation(this.posX + 5 * index * Math.cos((this.rotationYaw - 90) * Math.PI / 180), this.posY + 2.25,
-                    this.posZ + 5 * index * Math.sin((this.rotationYaw - 90) * Math.PI / 180), this.rotationYaw - 90, 0);
+                    this.posZ + 5 * index * Math.sin((this.rotationYaw - 90) * Math.PI / 180), this.rotationYaw + 90, 0);
             laser.setGlowing(true);
             laser.setThrower(this);
-            laser.setHeadingFromThrower(this, 0, this.rotationYaw + 90, 0f, 2f, 0);
+            laser.setHeadingFromThrower(this, 0, this.rotationYaw + 90, 0f, 4f, 0);
             this.world.spawnEntity(laser);
         }
     }
@@ -240,10 +241,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
-/*            if (FMLCommonHandler.instance().getSide().isServer()) {
-                FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TextComponentString(this.getName() + " has killed!"), true);
-            }*/
+            this.dropItem(TakumiItemCore.CHAMP_CORE, this.rand.nextInt(3) + 1);
         }
         super.onDeath(source);
     }
@@ -251,7 +249,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(150);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }
@@ -363,7 +361,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean canRegister() {
-        return TakumiConfigCore.inDev;
+        return true;
     }
 
     @Override

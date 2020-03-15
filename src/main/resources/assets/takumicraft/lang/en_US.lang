@@ -266,6 +266,7 @@ item.creeperboat.name=Creeper Boat
 item.tosscreeperbomb.name=Toss Creeper Bomb
 item.creeperpainting.name=Creeper Painting
 item.creepersign.name=Creeper Sign
+item.champcore.name=Champ Core
 
 #entity
 #desc max: 72 chars

@@ -146,7 +146,7 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
 
         if (this.deathTicks == 200 && !this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 16, true);
-            this.entityDropItem(new ItemStack(TakumiItemCore.KING_CORE, this.rand.nextInt(3)+1), 0.5f);
+            this.entityDropItem(new ItemStack(TakumiItemCore.CHAMP_CORE, this.rand.nextInt(3)+1), 0.5f);
             this.setDead();
         }
     }

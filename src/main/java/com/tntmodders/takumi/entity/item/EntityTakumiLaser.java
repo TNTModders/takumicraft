@@ -26,7 +26,7 @@ public class EntityTakumiLaser extends EntityThrowable {
     public void onUpdate() {
         this.setGlowing(true);
         super.onUpdate();
-        this.world.createExplosion(this, this.lastTickPosX, this.lastTickPosY, this.lastTickPosZ, 1f, false);
+        this.world.createExplosion(this, this.lastTickPosX, this.lastTickPosY, this.lastTickPosZ, 2f, true);
         if (this.world.isRemote) {
         }
         if (this.ticksExisted > 200) {

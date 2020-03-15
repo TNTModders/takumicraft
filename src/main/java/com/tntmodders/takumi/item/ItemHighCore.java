@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemParalysisCore extends Item {
+public class ItemHighCore extends Item {
 
-    public ItemParalysisCore() {
+    public ItemHighCore(String s) {
         super();
-        this.setRegistryName(TakumiCraftCore.MODID, "paralysiscore");
+        this.setRegistryName(TakumiCraftCore.MODID, s);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("paralysiscore");
+        this.setUnlocalizedName(s);
     }
 
     @Override
