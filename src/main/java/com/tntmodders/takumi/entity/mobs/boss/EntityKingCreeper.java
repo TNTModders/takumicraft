@@ -55,6 +55,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.experienceValue = 50;
     }
 
     @Override

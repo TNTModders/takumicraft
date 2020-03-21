@@ -860,7 +860,7 @@ enchantment.takumi_minesweeper=地雷除去
 enchantment.takumi_type_magic=魔式守護法
 enchantment.takumi_type_dest=壊式殲滅術
 enchantment.takumi_elytra=匠式エリトラ爆進術
-enchantment.takumi_item_protection=不滅の加護
+enchantment.takumi_item_protection=アイテム抗爆化
 
 #potion
 takumisubsidence=潜行

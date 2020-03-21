@@ -86,8 +86,8 @@ public class ItemTakumiArmor extends ItemArmor {
     @Override
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack,
-            @Nullable
-                    World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+                               @Nullable
+                                       World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.armor"));
     }
 
@@ -134,24 +134,26 @@ public class ItemTakumiArmor extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        //ヘルメット
-        if (this.armorType == EntityEquipmentSlot.HEAD) {
-            player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 1200, 0));
-        }
+        if (!world.isRemote) {
+            //ヘルメット
+            if (this.armorType == EntityEquipmentSlot.HEAD) {
+                player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 1200, 0));
+            }
 
-        //チェストプレート
-        if (this.armorType == EntityEquipmentSlot.CHEST) {
-            player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 1200, 1));
-        }
+            //チェストプレート
+            if (this.armorType == EntityEquipmentSlot.CHEST) {
+                player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 1200, 1));
+            }
 
-        //レギンス
-        if (this.armorType == EntityEquipmentSlot.LEGS && !player.isPotionActive(MobEffects.INSTANT_HEALTH)) {
-            player.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1200, 0));
-        }
+            //レギンス
+            if (this.armorType == EntityEquipmentSlot.LEGS && !player.isPotionActive(MobEffects.INSTANT_HEALTH)) {
+                player.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1200, 0));
+            }
 
-        //ブーツ
-        if (this.armorType == EntityEquipmentSlot.FEET) {
-            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1200, 0));
+            //ブーツ
+            if (this.armorType == EntityEquipmentSlot.FEET) {
+                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1200, 0));
+            }
         }
         boolean flg = true;
         for (ItemStack stack : player.getArmorInventoryList()) {

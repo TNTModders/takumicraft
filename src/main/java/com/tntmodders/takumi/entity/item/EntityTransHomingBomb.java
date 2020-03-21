@@ -65,12 +65,14 @@ public class EntityTransHomingBomb extends EntityShulkerBullet {
                 if (flag) {
                     this.applyEnchantments(this.owner, result.entityHit);
 
-                    if (result.entityHit instanceof EntityLivingBase) {
-                        ((EntityLivingBase) result.entityHit).addPotionEffect(
-                                new PotionEffect(MobEffects.LEVITATION, 150));
-                        ((EntityLivingBase) result.entityHit).addPotionEffect(
-                                new PotionEffect(TakumiPotionCore.INVERSION, 150));
-                    }
+                  if(!this.world.isRemote){
+                      if (result.entityHit instanceof EntityLivingBase) {
+                          ((EntityLivingBase) result.entityHit).addPotionEffect(
+                                  new PotionEffect(MobEffects.LEVITATION, 150));
+                          ((EntityLivingBase) result.entityHit).addPotionEffect(
+                                  new PotionEffect(TakumiPotionCore.INVERSION, 150));
+                      }
+                  }
                 }
             }
 

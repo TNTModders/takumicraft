@@ -28,8 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.*;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.Field;
 
@@ -42,8 +40,6 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
             EntityDataManager.createKey(EntityGemCreeper.class, DataSerializers.VARINT);
     private int lastID;
     private int activeTimer;
-
-    @SideOnly(Side.CLIENT)
     public boolean isBook = false;
 
     public EntityGemCreeper(World worldIn) {
@@ -58,6 +54,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.experienceValue = 50;
     }
 
     public int getAttackID() {
@@ -106,7 +103,8 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
                 kingCreeper.setAttackTarget(null);
                 kingCreeper.setRandomAttackID();
                 kingCreeper.lastID = this.getAttackID();
-                if (this.getAttackID() == 0) {
+                kingCreeper.activeTimer = 0;
+                if (this.getAttackID() == 0 && !this.world.isRemote) {
                     this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 100, 10));
                 }
                 this.world.spawnEntity(kingCreeper);
@@ -138,7 +136,8 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         if (!this.dead && !this.isDead && this.getHealth() > 0) {
-            if (this.lastID == 0 && this.getActivePotionEffect(MobEffects.SPEED) != null && this.getActivePotionEffect(MobEffects.SPEED).getAmplifier() == 10) {
+            if (this.activeTimer >= 0 && this.lastID == 0 &&
+                    this.getActivePotionEffect(MobEffects.SPEED) != null && this.getActivePotionEffect(MobEffects.SPEED).getAmplifier() == 10) {
                 if (this.getAttackTarget() != null) {
                     this.moveHelper.setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, 1.5);
                     if (!this.world.isRemote) {
@@ -148,8 +147,9 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
                     this.rotationYaw += 20;
                     this.activeTimer++;
                     this.setCreeperState(-2);
-                    if (this.activeTimer > 200 || this.getDistanceSqToEntity(this.getAttackTarget()) < 9) {
+                    if (this.activeTimer > 200 || (this.getDistanceSqToEntity(this.getAttackTarget()) < 9 && this.rand.nextInt(40) == 0)) {
                         this.clearActivePotions();
+                        this.activeTimer = -1;
                         this.lastID = -1;
                     }
                 }
@@ -205,7 +205,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
                     this.posZ + 5 * index * Math.sin((this.rotationYaw - 90) * Math.PI / 180), this.rotationYaw + 90, 0);
             laser.setGlowing(true);
             laser.setThrower(this);
-            laser.setHeadingFromThrower(this, 0, this.rotationYaw + 90, 0f, 4f, 0);
+            laser.setHeadingFromThrower(this, 0, this.rotationYaw + 90, 0f, 5f, 0);
             this.world.spawnEntity(laser);
         }
     }
@@ -232,7 +232,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
         super.fall(distance, damageMultiplier);
         if (this.lastID == 2) {
             if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX, this.posY, this.posZ, (this.getPowered() ? 15f : 10f) + distance / 3, true);
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, (this.getPowered() ? 18f : 12f) + distance / 3, true);
             }
             this.lastID = 0;
         }
@@ -249,7 +249,7 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(150);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }

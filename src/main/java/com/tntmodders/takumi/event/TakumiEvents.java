@@ -119,6 +119,38 @@ public class TakumiEvents {
                 }
             }
             event.getOutput().addEnchantment(TakumiEnchantmentCore.ROCKET_ELYTRA, 1);
+        } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.CHAMP_CORE) {
+            event.setCost(30);
+            event.setMaterialCost(1);
+            event.setOutput(new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata()));
+            int i = 10;
+            if (event.getLeft().isItemEnchanted()) {
+                for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                        event.getLeft()).entrySet()) {
+                    if (entry.getKey() == TakumiEnchantmentCore.ITEM_PROTECTION) {
+                        i += entry.getValue();
+                    } else {
+                        event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                    }
+                }
+            }
+            event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
+        } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.PARALYSIS_CORE) {
+            event.setCost(10);
+            event.setMaterialCost(1);
+            event.setOutput(new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata()));
+            int i = 1;
+            if (event.getLeft().isItemEnchanted()) {
+                for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                        event.getLeft()).entrySet()) {
+                    if (entry.getKey() == TakumiEnchantmentCore.ITEM_PROTECTION) {
+                        i += entry.getValue();
+                    } else {
+                        event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                    }
+                }
+            }
+            event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION,  Math.min(i, 10));
         }
     }
 
@@ -177,9 +209,11 @@ public class TakumiEvents {
             }
         }
         if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == TakumiItemCore.MAKEUP) {
-            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 100));
-            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100));
-            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 100, 1));
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 100));
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100));
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 100, 1));
+            }
             event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).attemptDamageItem(1,
                     event.getEntityLiving().world.rand, null);
             if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItemDamage() >
@@ -299,15 +333,16 @@ public class TakumiEvents {
 
         if (EnchantmentHelper.getEnchantments(event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND)).containsKey(
                 TakumiEnchantmentCore.TYPE_MAGIC)) {
-            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 5, 4, true, false));
-            List<Potion> potions = new ArrayList<>();
-            event.getEntityLiving().getActivePotionEffects().forEach(potionEffect -> {
-                if (potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION) {
-                    potions.add(potionEffect.getPotion());
-                }
-            });
-            potions.forEach(potion -> event.getEntityLiving().removePotionEffect(potion));
-            if (event.getEntityLiving().world.isRemote) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 5, 4, true, false));
+                List<Potion> potions = new ArrayList<>();
+                event.getEntityLiving().getActivePotionEffects().forEach(potionEffect -> {
+                    if (potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION) {
+                        potions.add(potionEffect.getPotion());
+                    }
+                });
+                potions.forEach(potion -> event.getEntityLiving().removePotionEffect(potion));
+            } else {
                 for (int i = 0; i < 5; i++) {
                     event.getEntityLiving().world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE,
                             event.getEntityLiving().posX + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
@@ -320,9 +355,10 @@ public class TakumiEvents {
         }
         if (EnchantmentHelper.getEnchantments(event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND)).containsKey(
                 TakumiEnchantmentCore.TYPE_DEST)) {
-            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 5, 4, true, false));
-            event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SATURATION, 5, 0, true, false));
-            if (event.getEntityLiving().world.isRemote) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 5, 4, true, false));
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SATURATION, 5, 0, true, false));
+            } else {
                 for (int i = 0; i < 20; ++i) {
                     event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                             event.getEntityLiving().posX + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
@@ -468,10 +504,12 @@ public class TakumiEvents {
                 if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
                     PotionType type = PotionUtils.getPotionFromItem(
                             ((EntityLivingBase) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));
-                    for (Entity entity : event.getAffectedEntities()) {
-                        if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
-                            PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
-                            ((EntityLivingBase) entity).addPotionEffect(effect);
+                    if (!event.getWorld().isRemote) {
+                        for (Entity entity : event.getAffectedEntities()) {
+                            if (entity instanceof EntityLivingBase && entity != takumiArrow.shootingEntity) {
+                                PotionEffect effect = new PotionEffect(type.getEffects().get(0).getPotion(), 400);
+                                ((EntityLivingBase) entity).addPotionEffect(effect);
+                            }
                         }
                     }
                 }
@@ -488,12 +526,14 @@ public class TakumiEvents {
                 }
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTransHomingBomb) {
-                event.getAffectedEntities().forEach(entity -> {
-                    if (entity instanceof EntityPlayer) {
-                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 150));
-                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 150));
-                    }
-                });
+                if (!event.getWorld().isRemote) {
+                    event.getAffectedEntities().forEach(entity -> {
+                        if (entity instanceof EntityPlayer) {
+                            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 150));
+                            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 150));
+                        }
+                    });
+                }
             }
         }
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityAlterDummy) {
@@ -507,6 +547,24 @@ public class TakumiEvents {
             }
         }
         event.getAffectedEntities().removeIf(entity -> {
+            if (entity instanceof EntityItem && EnchantmentHelper.getEnchantments(((EntityItem) entity).getItem()).containsKey(TakumiEnchantmentCore.ITEM_PROTECTION)) {
+                if (!event.getWorld().isRemote) {
+                    ItemStack stack = ((EntityItem) entity).getItem();
+                    Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
+                    int lv = map.get(TakumiEnchantmentCore.ITEM_PROTECTION);
+                    map.remove(TakumiEnchantmentCore.ITEM_PROTECTION);
+                    if (lv > 1) {
+                        int i = lv;
+                        if (entity.world.rand.nextInt(lv + 1) == 0) {
+                            i = i - 1;
+                        }
+                        map.put(TakumiEnchantmentCore.ITEM_PROTECTION, i);
+                    }
+                    EnchantmentHelper.setEnchantments(map, stack);
+                    ((EntityItem) entity).setItem(stack);
+                }
+                return true;
+            }
             if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {
                 return true;
             }

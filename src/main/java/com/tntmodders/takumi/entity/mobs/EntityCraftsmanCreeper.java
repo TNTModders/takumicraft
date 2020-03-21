@@ -73,11 +73,13 @@ public class EntityCraftsmanCreeper extends EntityTakumiAbstractCreeper {
             }
         });
         event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase && !(entity instanceof EntityCreeper)) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.CREEPERED, 30));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase && !(entity instanceof EntityCreeper)) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.CREEPERED, 30));
+                }
+            });
+        }
         return true;
     }
 

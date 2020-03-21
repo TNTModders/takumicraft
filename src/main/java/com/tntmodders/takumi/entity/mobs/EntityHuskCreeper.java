@@ -24,13 +24,13 @@ public class EntityHuskCreeper extends EntityZombieCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(
-                        new PotionEffect(MobEffects.HUNGER, 400, this.getPowered() ? 2 : 0));
-            }
-        }
         if (!this.world.isRemote) {
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(
+                            new PotionEffect(MobEffects.HUNGER, 400, this.getPowered() ? 2 : 0));
+                }
+            }
             for (int i = 0; i < 3 * this.world.getDifficulty().getDifficultyId(); i++) {
                 EntityHusk husk = new EntityHusk(this.world);
                 husk.copyLocationAndAnglesFrom(this);

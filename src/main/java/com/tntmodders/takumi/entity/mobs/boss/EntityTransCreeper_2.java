@@ -76,12 +76,14 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityPlayer) {
-                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
-                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityPlayer) {
+                    ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
+                    ((EntityPlayer) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
+                }
+            });
+        }
         if (this.getActivePotionEffect(MobEffects.SLOWNESS) != null) {
             ArrayList<BlockPos> posArrayList = new ArrayList<>();
             event.getAffectedBlocks().forEach(blockPos -> {

@@ -59,14 +59,16 @@ public class EntitySlipCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if(entity instanceof EntityLivingBase){
-                entity.setFire(10);
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON,200));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER,200));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.HUNGER,200,127));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase) {
+                    entity.setFire(10);
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 200));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.HUNGER, 200, 127));
+                }
+            });
+        }
         event.getAffectedEntities().clear();
         return true;
     }

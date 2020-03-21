@@ -161,7 +161,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         if (!this.isNonBoss() && this.getCreeperState() > 0) {
             if (this.dmgCount > 0) {
                 damageAmount = damageAmount / (dmgCount * 1.25f);
-                if (this.dmgCount % 10 == 0) {
+                if (this.dmgCount % 10 == 0 && !this.world.isRemote) {
                     this.addPotionEffect(PotionTypes.REGENERATION.getEffects().get(0));
                 }
                 if (!this.world.isRemote && this.rand.nextInt(25) == 0 && damageSrc.getTrueSource() != null) {

@@ -45,12 +45,12 @@ public class TakumiEnchantmentCore {
                 }
             }.setRegistryName(TakumiCraftCore.MODID, "takumi_type_dest").setName("takumi_type_dest");
     public static final Enchantment ROCKET_ELYTRA = new EnchantmentTakumiElytra();
-/*    public static final Enchantment ITEM_PROTECTION = new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.ALL, EntityEquipmentSlot.values()) {
+    public static final Enchantment ITEM_PROTECTION = new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.ALL, EntityEquipmentSlot.values()) {
         @Override
         public boolean canApplyAtEnchantingTable(ItemStack stack) {
             return false;
         }
-    }.setRegistryName(TakumiCraftCore.MODID, "takumi_item_protection").setName("takumi_item_protection");*/
+    }.setRegistryName(TakumiCraftCore.MODID, "takumi_item_protection").setName("takumi_item_protection");
 
     public static void register(IForgeRegistry<Enchantment> registry) {
         Class clazz = TakumiEnchantmentCore.class;

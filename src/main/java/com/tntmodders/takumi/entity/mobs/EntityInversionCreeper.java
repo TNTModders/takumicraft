@@ -18,12 +18,14 @@ public class EntityInversionCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 600));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 590));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 600));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 590));
+                }
+            });
+        }
         return true;
     }
 

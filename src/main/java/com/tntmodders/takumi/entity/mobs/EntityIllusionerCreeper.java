@@ -332,8 +332,8 @@ public class EntityIllusionerCreeper extends EntityAbstractSpellCreeper implemen
 
         @Override
         protected void castSpell() {
-            EntityIllusionerCreeper.this.getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 400));
             if (!EntityIllusionerCreeper.this.world.isRemote) {
+                EntityIllusionerCreeper.this.getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 400));
                 EntityIllusionerCreeper.this.world.createExplosion(EntityIllusionerCreeper.this,
                         EntityIllusionerCreeper.this.posX, EntityIllusionerCreeper.this.posY,
                         EntityIllusionerCreeper.this.posZ, 3f, true);

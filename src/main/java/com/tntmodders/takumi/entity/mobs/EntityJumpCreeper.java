@@ -55,11 +55,13 @@ public class EntityJumpCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.EXP_JUMP, 400));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.EXP_JUMP, 400));
+                }
+            });
+        }
         return true;
     }
 

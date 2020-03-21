@@ -55,9 +55,11 @@ public class EntityInvisibleCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 2400));
+        if (!this.world.isRemote) {
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 2400));
+                }
             }
         }
         event.getAffectedEntities().clear();

@@ -113,7 +113,7 @@ public class EntityParalysisCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.PARALYSIS_CORE, this.rand.nextBoolean() ? 1 : this.rand.nextInt(4));
+            this.dropItem(TakumiItemCore.PARALYSIS_CORE, 1 + this.rand.nextInt(3));
         }
         super.onDeath(source);
     }

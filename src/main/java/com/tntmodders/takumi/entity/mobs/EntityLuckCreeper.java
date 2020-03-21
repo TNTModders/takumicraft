@@ -60,11 +60,13 @@ public class EntityLuckCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).heal(((EntityLivingBase) entity).getMaxHealth());
-                ((EntityLivingBase) entity).curePotionEffects(new ItemStack(Items.MILK_BUCKET));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LUCK, 600, 1));
+        if (!this.world.isRemote) {
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).heal(((EntityLivingBase) entity).getMaxHealth());
+                    ((EntityLivingBase) entity).curePotionEffects(new ItemStack(Items.MILK_BUCKET));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LUCK, 600, 1));
+                }
             }
         }
         event.getAffectedEntities().clear();

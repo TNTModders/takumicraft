@@ -51,7 +51,7 @@ public class EntityStrayCreeper extends EntitySkeletonCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM) {
+        if (this.getHeldItem(EnumHand.OFF_HAND).getItem() == Items.POTIONITEM && !this.world.isRemote) {
             PotionEffect effect = new PotionEffect(
                     PotionUtils.getPotionFromItem(this.getHeldItem(EnumHand.OFF_HAND)).getEffects().get(0).getPotion(),
                     400);

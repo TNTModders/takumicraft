@@ -71,9 +71,11 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, 400, 0));
+        if (!this.world.isRemote) {
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, 400, 0));
+                }
             }
         }
         float power = this.getPowered() ? 6f : 3f;
@@ -97,7 +99,7 @@ public class EntityLightCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onUpdate() {
-        if (this.world.playerEntities.stream().anyMatch(this :: canEntityBeSeen)) {
+        if (this.world.playerEntities.stream().anyMatch(this::canEntityBeSeen)) {
             this.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0));
         }
         super.onUpdate();

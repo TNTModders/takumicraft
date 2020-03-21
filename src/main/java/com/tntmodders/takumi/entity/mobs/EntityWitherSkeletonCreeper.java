@@ -59,9 +59,11 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+        if (!this.world.isRemote) {
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+                }
             }
         }
         return true;
@@ -117,8 +119,8 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
     @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+                                            @Nullable
+                                                    IEntityLivingData livingdata) {
         IEntityLivingData ientitylivingdata = super.onInitialSpawn(difficulty, livingdata);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         this.setCombatTask();
@@ -157,7 +159,7 @@ public class EntityWitherSkeletonCreeper extends EntitySkeletonCreeper {
         if (!super.attackEntityAsMob(entityIn)) {
             return false;
         } else {
-            if (entityIn instanceof EntityLivingBase) {
+            if (entityIn instanceof EntityLivingBase && !this.world.isRemote) {
                 ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
             }
 

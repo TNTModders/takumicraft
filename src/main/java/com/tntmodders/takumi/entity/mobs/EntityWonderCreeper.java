@@ -32,6 +32,7 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
             e.printStackTrace();
         }
         this.isImmuneToFire = true;
+        this.experienceValue = 50;
     }
 
     @Override
@@ -43,10 +44,12 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
                         this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width,
                         this.posY + this.rand.nextDouble() * 0.5 * this.height,
                         this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
-                this.world.spawnParticle(EnumParticleTypes.FLAME,
-                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
-                        this.posY + this.rand.nextDouble() * 0.5 * (double) this.height + 1,
-                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+                if (this.rand.nextBoolean()) {
+                    this.world.spawnParticle(EnumParticleTypes.FLAME,
+                            this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
+                            this.posY + this.rand.nextDouble() * 0.5 * (double) this.height + 1,
+                            this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+                }
             }
         }
         super.onLivingUpdate();
@@ -55,7 +58,7 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(150);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
     }
 
     @Override
@@ -83,12 +86,12 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
                             for (int y = -3; y <= 7; y++) {
                                 if (this.world.getBlockState(this.getPosition().add(x, y, z)).getBlockHardness(world, this.getPosition().add(x, y, z)) >= 0) {
                                     TakumiUtils.setBlockStateProtected(this.world, this.getPosition().add(x, y, z), Blocks.PACKED_ICE.getDefaultState());
-                                    this.world.createExplosion(this, this.posX + x, this.posY + y, this.posZ + z, 0f, false);
                                 }
                             }
                         }
                     }
                 }
+                this.wonderSinceIgnited = 999;
             }
         }
     }
@@ -142,14 +145,16 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
         if (!this.dead) {
             return super.takumiExplodeEvent(event);
         }
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 9));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 1200, 9));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 9));
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1200, 9));
-            }
-        });
+        if(!this.world.isRemote){
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 9));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 1200, 9));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 9));
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1200, 9));
+                }
+            });
+        }
         return true;
     }
 

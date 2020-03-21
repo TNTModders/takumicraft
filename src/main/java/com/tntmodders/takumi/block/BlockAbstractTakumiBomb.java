@@ -26,9 +26,11 @@ public abstract class BlockAbstractTakumiBomb extends Block {
 
     @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
-        worldIn.setBlockToAir(pos);
-        if (!worldIn.isRemote) {
-            this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
+        if (!pos.equals(new BlockPos(explosionIn.getPosition().addVector(-0.5, -0.5, -0.5))) || explosionIn.getExplosivePlacedBy() != null) {
+            worldIn.setBlockToAir(pos);
+            if (!worldIn.isRemote) {
+                this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
+            }
         }
     }
 
@@ -38,6 +40,7 @@ public abstract class BlockAbstractTakumiBomb extends Block {
                 EnchantmentHelper.getEnchantments(player.getHeldItemMainhand()).containsKey(
                         TakumiEnchantmentCore.MINESWEEPER) &&
                 (player.getHeldItemMainhand().getStrVsBlock(state) > 1.0f || this.getHarvestTool(state) == null))) {
+            worldIn.setBlockToAir(pos);
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
     }

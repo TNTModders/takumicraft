@@ -346,7 +346,9 @@ public class EntityTakumiBoat extends EntityBoat {
 
         this.getPassengers().forEach(entity -> {
             if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 111, 0, true, false));
+                if (!this.world.isRemote) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 111, 0, true, false));
+                }
                 entity.extinguish();
                 try {
                     Field managerField = TakumiASMNameMap.getField(Entity.class, "dataManager");

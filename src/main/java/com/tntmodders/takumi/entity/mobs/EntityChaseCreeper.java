@@ -97,7 +97,7 @@ public class EntityChaseCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onLivingUpdate() {
-        if (this.getPowered() && !this.isPotionActive(MobEffects.SPEED)) {
+        if (this.getPowered() && !this.isPotionActive(MobEffects.SPEED) &&!this.world.isRemote) {
             this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 3, true, false));
         }
         if (this.world.isRemote) {

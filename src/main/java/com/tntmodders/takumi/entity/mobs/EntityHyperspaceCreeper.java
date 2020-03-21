@@ -60,11 +60,13 @@ public class EntityHyperspaceCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         event.getAffectedBlocks().clear();
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SPEED, 250,50));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SPEED, 250, 50));
+                }
+            });
+        }
         return true;
     }
 }

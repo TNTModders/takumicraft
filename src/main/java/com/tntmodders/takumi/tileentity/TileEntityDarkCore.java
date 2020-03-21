@@ -32,7 +32,7 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
         if (this.getBlockType() == TakumiBlockCore.DARKCORE) {
             boolean flg = this.world.loadedTileEntityList.stream().noneMatch(
                     tileEntity -> world.getBlockState(tileEntity.getPos()).getBlock() == TakumiBlockCore.DARKBOARD &&
-                            this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) <625) &&
+                            this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) < 625) &&
                     this.world.loadedTileEntityList.stream().filter(
                             tileEntity -> world.getBlockState(tileEntity.getPos()).getBlock() == TakumiBlockCore.DARKBOARD_ON &&
                                     this.getDistanceSq(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()) < 625).toArray().length > 7;
@@ -104,8 +104,7 @@ public class TileEntityDarkCore extends TileEntity implements ITickable {
                         if (entity instanceof EntityDarkVillager) {
                             ((EntityDarkVillager) entity).setHealth(0);
                             entity.setDead();
-                        } else if (entity instanceof EntityLivingBase &&
-                                entity.getDistanceSq(this.getPos()) < 15 * 15) {
+                        } else if (entity instanceof EntityLivingBase && entity.getDistanceSq(this.getPos()) < 15 * 15 && !this.world.isRemote) {
                             ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 600));
                             ((EntityLivingBase) entity).addPotionEffect(
                                     new PotionEffect(TakumiPotionCore.INVERSION, 600));

@@ -66,12 +66,14 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        event.getAffectedEntities().forEach(entity -> {
-            if (entity instanceof EntityPlayer) {
-                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
-                ((EntityPlayer) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
-            }
-        });
+        if (!this.world.isRemote) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityPlayer) {
+                    ((EntityPlayer) entity).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60));
+                    ((EntityPlayer) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.INVERSION, 60));
+                }
+            });
+        }
         return true;
     }
 
@@ -232,9 +234,9 @@ public class EntityTransCreeper extends EntityTakumiAbstractCreeper {
                 break;
             }
             case FLOAT: {
-                this.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 1200));
-                this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 5));
                 if (!this.world.isRemote) {
+                    this.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 1200));
+                    this.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 5));
                     this.world.createExplosion(this, this.posX, this.posY, this.posZ, 1f, false);
                 }
                 this.flg = EnumAttackFlg.DOWN;
