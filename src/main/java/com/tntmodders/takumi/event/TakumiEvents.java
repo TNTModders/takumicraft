@@ -38,10 +38,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemElytra;
-import net.minecraft.item.ItemShield;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -150,7 +147,7 @@ public class TakumiEvents {
                     }
                 }
             }
-            event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION,  Math.min(i, 10));
+            event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
         }
     }
 
@@ -547,23 +544,27 @@ public class TakumiEvents {
             }
         }
         event.getAffectedEntities().removeIf(entity -> {
-            if (entity instanceof EntityItem && EnchantmentHelper.getEnchantments(((EntityItem) entity).getItem()).containsKey(TakumiEnchantmentCore.ITEM_PROTECTION)) {
-                if (!event.getWorld().isRemote) {
-                    ItemStack stack = ((EntityItem) entity).getItem();
-                    Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
-                    int lv = map.get(TakumiEnchantmentCore.ITEM_PROTECTION);
-                    map.remove(TakumiEnchantmentCore.ITEM_PROTECTION);
-                    if (lv > 1) {
-                        int i = lv;
-                        if (entity.world.rand.nextInt(lv + 1) == 0) {
-                            i = i - 1;
+            if (entity instanceof EntityItem) {
+                if (((EntityItem) entity).getItem().getRarity() == EnumRarity.EPIC) {
+                    return true;
+                } else if (EnchantmentHelper.getEnchantments(((EntityItem) entity).getItem()).containsKey(TakumiEnchantmentCore.ITEM_PROTECTION)) {
+                    if (!event.getWorld().isRemote) {
+                        ItemStack stack = ((EntityItem) entity).getItem();
+                        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
+                        int lv = map.get(TakumiEnchantmentCore.ITEM_PROTECTION);
+                        map.remove(TakumiEnchantmentCore.ITEM_PROTECTION);
+                        if (lv > 1) {
+                            int i = lv;
+                            if (entity.world.rand.nextInt(lv + 1) == 0) {
+                                i = i - 1;
+                            }
+                            map.put(TakumiEnchantmentCore.ITEM_PROTECTION, i);
                         }
-                        map.put(TakumiEnchantmentCore.ITEM_PROTECTION, i);
+                        EnchantmentHelper.setEnchantments(map, stack);
+                        ((EntityItem) entity).setItem(stack);
                     }
-                    EnchantmentHelper.setEnchantments(map, stack);
-                    ((EntityItem) entity).setItem(stack);
+                    return true;
                 }
-                return true;
             }
             if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {
                 return true;

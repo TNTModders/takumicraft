@@ -76,9 +76,11 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
                     this.world.addWeatherEffect(bolt);
                     this.world.spawnEntity(bolt);
                 }
+                this.wonderSinceIgnited += 1;
             } else if (this.wonderSinceIgnited == 100) {
                 Explosion explosion = this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 8 : 4, true);
                 explosion.getAffectedBlockPositions().forEach(pos -> this.world.setBlockState(pos, Blocks.FIRE.getDefaultState()));
+                this.wonderSinceIgnited += 1;
             } else if (this.wonderSinceIgnited == 150) {
                 for (int x = -5; x <= 5; x++) {
                     for (int z = -5; z <= 5; z++) {
@@ -145,7 +147,7 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
         if (!this.dead) {
             return super.takumiExplodeEvent(event);
         }
-        if(!this.world.isRemote){
+        if (!this.world.isRemote) {
             event.getAffectedEntities().forEach(entity -> {
                 if (entity instanceof EntityLivingBase) {
                     ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 9));
