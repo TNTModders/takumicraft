@@ -218,7 +218,7 @@ public class TakumiEvents {
                 event.getEntityLiving().setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
             }
         }
-        if (TakumiUtils.isApril(event.getEntity().world)) {
+/*        if (TakumiUtils.isApril(event.getEntity().world)) {
             if (event.getEntityLiving() instanceof EntityMob) {
                 ((EntityMob) event.getEntityLiving()).setAttackTarget(null);
                 if (event.getEntityLiving() instanceof EntityCreeper) {
@@ -243,7 +243,7 @@ public class TakumiEvents {
                 event.getEntityLiving().attackEntityFrom(
                         DamageSource.causeMobDamage(event.getEntityLiving()).setExplosion(), 20f);
             }
-        }
+        }*/
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CREEPERED) != null &&
                 event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CREEPERED).getDuration() <= 1) {
             if (!event.getEntityLiving().world.isRemote) {
@@ -712,10 +712,10 @@ public class TakumiEvents {
                 event.getSource().getImmediateSource() == event.getEntity()) {
             event.setCanceled(true);
         }*/
-        if (TakumiUtils.isApril(event.getEntityLiving().world) && event.getEntityLiving() instanceof EntityPlayer) {
+/*        if (TakumiUtils.isApril(event.getEntityLiving().world) && event.getEntityLiving() instanceof EntityPlayer) {
             event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, 100));
             event.getEntityLiving().playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
-        }
+        }*/
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.EXP_JUMP) != null &&
                 event.getSource() == DamageSource.FALL) {
             event.setCanceled(true);

@@ -3,6 +3,7 @@ package com.tntmodders.takumi.event;
 import com.google.common.collect.Lists;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiRedstoneWire;
+import com.tntmodders.takumi.client.render.sp.RenderEntityLivingSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerTHM;
 import com.tntmodders.takumi.core.TakumiBlockCore;
@@ -23,6 +24,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -143,13 +145,20 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderPlayer(RenderLivingEvent.Pre event) {
-        if (TakumiUtils.isApril(Minecraft.getMinecraft().world) &&
-                (event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
-                event.getEntity() instanceof AbstractClientPlayer) {
-            event.setCanceled(true);
-            RenderPlayerSP sp = new RenderPlayerSP(event.getRenderer().getRenderManager());
-            sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
-                    ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
+        if (TakumiUtils.isApril(Minecraft.getMinecraft().world)) {
+            event.getEntity().setCustomNameTag("匠");
+            if ((event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
+                    event.getEntity() instanceof AbstractClientPlayer) {
+                event.setCanceled(true);
+                RenderPlayerSP sp = new RenderPlayerSP(event.getRenderer().getRenderManager());
+                sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
+                        ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
+            } else if (event.getRenderer() instanceof RenderLivingBase && !(event.getRenderer() instanceof RenderEntityLivingSP)) {
+                event.setCanceled(true);
+                RenderEntityLivingSP sp = new RenderEntityLivingSP(event.getRenderer().getRenderManager());
+                sp.doRender(event.getEntity(), event.getX(), event.getY(), event.getZ(),
+                        (event.getEntity()).rotationYaw, event.getPartialRenderTick());
+            }
         }
         if (event.getEntity().world.getDifficulty() == EnumDifficulty.HARD && TakumiConfigCore.TakumiHard &&
                 (event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
@@ -180,7 +189,7 @@ public class TakumiClientEvents {
         if (event.getEntity().getRidingEntity() instanceof EntityXMS) {
             event.setCanceled(true);
         }
-        if(event.getEntity().getRidingEntity() instanceof EntityTakumiBoat){
+        if (event.getEntity().getRidingEntity() instanceof EntityTakumiBoat) {
             event.getEntity().extinguish();
         }
     }
