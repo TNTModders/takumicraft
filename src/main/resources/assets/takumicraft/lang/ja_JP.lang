@@ -744,6 +744,9 @@ entity.wondercreeper.desc=全ての自然の力を纏いし匠の降臨。集え
 entity.gemcreeper.name=玉匠
 entity.gemcreeper.read=ぎょくしょう
 entity.gemcreeper.desc=玉にありて宝にあらず、球であれども、其の在りようは玉なり。 MOB募集:せじぽんさん
+entity.fakecreeper.name=偽匠
+entity.fakecreeper.desc=嘘偽りなく最強の匠。
+entity.fakecreeper.message=偽匠に騙された!
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

@@ -7,7 +7,6 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
@@ -65,8 +64,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
                             if (pos != null &&
                                     this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
-                                    < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
+                                            pos, entity) ) {
                                 for (int t = 0; t < 4; t++) {
                                     EntityCreeper creeper = new EntityDiamondCreeper(this.world);
                                     creeper.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
@@ -86,8 +84,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
                             if (pos != null &&
                                     this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
-                                    < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
+                                            pos, entity) ) {
                                 EntityCreeper creeper = new EntityLeadCreeper(this.world);
                                 creeper.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                                 this.world.spawnEntity(creeper);
@@ -106,8 +103,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
                             if (pos != null &&
                                     this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
-                                    < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
+                                            pos, entity) ) {
                                 EntityCreeper creeper1 = new EntityArtCreeper(this.world);
                                 creeper1.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                                 this.world.spawnEntity(creeper1);
@@ -129,8 +125,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
                             if (pos != null &&
                                     this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
-                                    < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
+                                            pos, entity) ) {
                                 EntityCreeper creeper1 = new EntityRushCreeper(this.world);
                                 creeper1.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                                 this.world.spawnEntity(creeper1);
@@ -167,8 +162,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
             BlockPos pos = entity.getBedLocation(this.world.provider.getDimension());
             if (pos != null &&
                     this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                            pos, entity) && this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this, null)
-                    < Blocks.OBSIDIAN.getExplosionResistance(world, pos, this, null)) {
+                            pos, entity) ) {
                 EntityCreeper creeper = new EntityUnlimitedCreeper(this.world);
                 creeper.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                 this.world.spawnEntity(creeper);

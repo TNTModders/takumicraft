@@ -17,8 +17,16 @@ public class TakumiGuiHandler implements IGuiHandler {
     @Nullable
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == 0) {
-            return new GuiTakumiBook(player);
+        switch (ID) {
+            case 0: {
+                return new GuiTakumiBook(player);
+            }
+            case 1: {
+                return new GuiFakeGameOver();
+            }
+            case 2: {
+                return new GuiFakeGameOver_2();
+            }
         }
         return null;
     }

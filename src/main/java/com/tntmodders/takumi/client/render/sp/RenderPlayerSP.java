@@ -157,7 +157,6 @@ public class RenderPlayerSP extends RenderLivingBase<AbstractClientPlayer> {
                 y += (double) ((float) this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * 0.025F);
             }
         }
-
         super.renderEntityName(entityIn, x, y, z, name, distanceSq);
     }
 

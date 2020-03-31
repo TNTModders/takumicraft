@@ -691,6 +691,9 @@ entity.wondercreeper.name=Wonder Creeper
 entity.wondercreeper.desc=It is wonder of nature, all energy of the ground.
 entity.gemcreeper.name=Gem Creeper
 entity.gemcreeper.desc=Like a gem, not a treasure, it's a danger, great dame's.
+entity.fakecreeper.name=Fake Creeper
+entity.fakecreeper.desc=No doubt, the greatest creeper.
+entity.fakecreeper.message=You tricked!
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
