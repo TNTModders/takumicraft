@@ -81,20 +81,8 @@ public class TakumiUtils {
     }
 
     public static boolean isApril(World world) {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            return isAprilOnClient(world);
-        }
-        return world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 && world.getCurrentDate().get(Calendar.DATE) == 1;
-        //return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static boolean isAprilOnClient(World world) {
-        boolean flg = false;
-        if (Minecraft.getMinecraft().getCurrentServerData() != null && world.playerEntities.stream().anyMatch(entityPlayer -> entityPlayer.getDisplayNameString().equals("tomkate"))) {
-            flg = true;
-        }
-        return flg && world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 && world.getCurrentDate().get(Calendar.DATE) == 1;
+        //return world.getCurrentDate().get(Calendar.MONTH) + 1 == 4 && world.getCurrentDate().get(Calendar.DATE) == 1;
+        return false;
     }
 
     public static String takumiTranslate(String s) {

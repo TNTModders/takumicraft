@@ -41,7 +41,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
         this.tasks.addTask(3, new EntityAIFollowCatCreeper(this));
-        this.tasks.addTask(3, new EntityAIMoveToAttackBlock(this, 1.1, false));
+        this.tasks.addTask(3, new EntityAIMoveToAttackBlock(this, 1.5, true));
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityAttackBlock.class, false) {
             @Override
             protected double getTargetDistance() {

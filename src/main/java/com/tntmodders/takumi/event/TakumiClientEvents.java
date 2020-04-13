@@ -27,7 +27,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -153,7 +152,7 @@ public class TakumiClientEvents {
                 RenderPlayerSP sp = new RenderPlayerSP(event.getRenderer().getRenderManager());
                 sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
                         ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
-            } else if (event.getEntity() instanceof EntityMob && event.getRenderer() instanceof RenderLivingBase && !(event.getRenderer() instanceof RenderEntityLivingSP)) {
+            } else if (event.getEntity() instanceof EntityLivingBase && event.getRenderer() instanceof RenderLivingBase && !(event.getRenderer() instanceof RenderEntityLivingSP)) {
                 event.getEntity().setCustomNameTag("匠");
                 event.setCanceled(true);
                 RenderEntityLivingSP sp = new RenderEntityLivingSP(event.getRenderer().getRenderManager());

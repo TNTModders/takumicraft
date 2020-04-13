@@ -68,7 +68,7 @@ public class EntityMirrorCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onDeath(DamageSource source) {
-        if (!this.world.isRemote && source.getTrueSource() instanceof EntityPlayer) {
+        if (!this.world.isRemote && source.getTrueSource() instanceof EntityPlayer && this.getDistanceSqToEntity(source.getTrueSource()) < 9f) {
             ((EntityPlayer) source.getTrueSource()).inventory.mainInventory.forEach(
                     itemStack -> this.entityDropItem(itemStack, 0f));
             ((EntityPlayer) source.getTrueSource()).inventory.armorInventory.forEach(

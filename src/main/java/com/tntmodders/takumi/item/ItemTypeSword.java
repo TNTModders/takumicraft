@@ -60,7 +60,7 @@ public class ItemTypeSword extends ItemSword {
                     Vec3d vec3d = attacker.getLookVec().normalize();
                     for (double i = 1.5; i < 7; i += 1d) {
                         attacker.world.newExplosion(attacker, attacker.posX + vec3d.x * i * 2,
-                                attacker.posY + vec3d.y * i * 2, attacker.posZ + vec3d.z * i * 2, 2f, true, true);
+                                attacker.posY + vec3d.y * i * 2, attacker.posZ + vec3d.z * i * 2, 2f, true, false);
                     }
                 }
                 break;
@@ -82,7 +82,7 @@ public class ItemTypeSword extends ItemSword {
                         double x = target.posX + MathHelper.getInt(target.getRNG(), -3, 3);
                         double y = target.posY + 1;
                         double z = target.posZ + MathHelper.getInt(target.getRNG(), -3, 3);
-                        attacker.world.createExplosion(attacker, x, y, z, 2f, true);
+                        attacker.world.createExplosion(attacker, x, y, z, 2f, false);
                     }
                     int i = 20;
                     while (i > 0) {
@@ -111,7 +111,7 @@ public class ItemTypeSword extends ItemSword {
                     for (int i = 0; i < 9; i++) {
                         double x = attacker.posX + Math.cos(Math.PI * i * 2 / 9) * 4;
                         double z = attacker.posZ + Math.sin(Math.PI * i * 2 / 9) * 4;
-                        attacker.world.createExplosion(attacker, x, attacker.posY, z, 2, true);
+                        attacker.world.createExplosion(attacker, x, attacker.posY, z, 2, false);
                     }
                 }
                 break;

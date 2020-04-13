@@ -1,13 +1,10 @@
 package com.tntmodders.takumi.entity.item;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.MoverType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityWaterTypeForce extends EntityLiving {
@@ -38,7 +35,7 @@ public class EntityWaterTypeForce extends EntityLiving {
             }
             if (this.ticksExisted > 100) {
                 if (!this.world.isRemote) {
-                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, 1.5f, true);
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, 1.5f, false);
                 }
                 this.setDead();
             }
@@ -59,11 +56,6 @@ public class EntityWaterTypeForce extends EntityLiving {
     @Override
     public boolean canBePushed() {
         return false;
-    }
-
-    @Override
-    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) < 0 ? 1000000f : 0.1f;
     }
 
     @Override
