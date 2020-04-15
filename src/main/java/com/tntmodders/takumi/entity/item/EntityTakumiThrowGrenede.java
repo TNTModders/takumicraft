@@ -19,7 +19,7 @@ public class EntityTakumiThrowGrenede extends AbstractEntityTakumiGrenade {
 
     @Override
     public int getPower() {
-        return 15;
+        return 10;
     }
 
     @Override

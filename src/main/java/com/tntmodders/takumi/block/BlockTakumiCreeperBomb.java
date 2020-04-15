@@ -1,7 +1,10 @@
 package com.tntmodders.takumi.block;
 
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class BlockTakumiCreeperBomb extends BlockAbstractTakumiBomb {
 
@@ -13,5 +16,10 @@ public class BlockTakumiCreeperBomb extends BlockAbstractTakumiBomb {
     @Override
     float getPower() {
         return 5f;
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        return !TakumiConfigCore.inEventServer && super.canPlaceBlockAt(worldIn, pos);
     }
 }

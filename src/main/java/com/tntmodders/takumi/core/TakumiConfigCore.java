@@ -22,6 +22,11 @@ public class TakumiConfigCore {
     //debugConfig
     public static boolean inDev = false;
 
+    /**@TODO
+     *  delete related code on release.
+     */
+    public static boolean inEventServer ;
+
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
         cfg = new Configuration(event.getSuggestedConfigurationFile(), TakumiCraftCore.VERSION, true);
@@ -78,6 +83,8 @@ public class TakumiConfigCore {
         // 設定内容をコンフィグファイルに保存する。
         useNewYearTex = cfg.getBoolean("useNewYearTexture", GENERAL, true,
                 TakumiUtils.takumiTranslate("config.takumicraft.nytex.desc"), "config.takumicraft.nytex.prop");
+
+        inEventServer = cfg.getBoolean("ineventserver",GENERAL,false,"ONLY IN SERVER, FOR TCS EVENT","null");
         cfg.save();
     }
 }

@@ -732,9 +732,12 @@ public class TakumiEvents {
                 ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower() != null &&
                 ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower().getClass() == event.getEntityLiving().getClass()) {
             event.setCanceled(true);
-        } else if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiArrow) {
-            if (((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity != null &&
-                    ((EntityTakumiArrow) event.getSource().getImmediateSource()).shootingEntity.getClass() == event.getEntityLiving().getClass()) {
+        } else if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow) {
+            if (TakumiConfigCore.inEventServer) {
+                event.setCanceled(true);
+            }
+            if (((EntityTakumiArrow) event.getSource().getTrueSource()).shootingEntity != null &&
+                    ((EntityTakumiArrow) event.getSource().getTrueSource()).shootingEntity.getClass() == event.getEntityLiving().getClass()) {
                 event.setCanceled(true);
             }
         } else if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityChaseCreeper) {

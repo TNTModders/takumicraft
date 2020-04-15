@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
 import com.tntmodders.takumi.item.ItemTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -19,8 +20,8 @@ import net.minecraft.world.World;
 
 public class EntityTakumiArrow extends EntityArrow {
 
-    private ItemStack stack;
     public int power;
+    private ItemStack stack;
     private boolean destroy;
     private Class<? extends EntityCreeper> container;
     private EnumArrowType type;
@@ -87,11 +88,13 @@ public class EntityTakumiArrow extends EntityArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.typeOfHit == Type.ENTITY) {
-            if (raytraceResultIn.entityHit == this.shootingEntity) {
+            if (raytraceResultIn.entityHit == this.shootingEntity || this.ticksExisted < 15) {
                 return;
             }
-            raytraceResultIn.entityHit.attackEntityFrom(
-                    new EntityDamageSourceIndirect("explosion.player", this.shootingEntity, this), 15.0f);
+            if (!TakumiConfigCore.inEventServer) {
+                raytraceResultIn.entityHit.attackEntityFrom(
+                        new EntityDamageSourceIndirect("explosion.player", this.shootingEntity, this), 15.0f);
+            }
         }
         if (this.type == null) {
             this.type = EnumArrowType.NORMAL;
@@ -99,8 +102,13 @@ public class EntityTakumiArrow extends EntityArrow {
         if (!this.world.isRemote) {
             switch (this.type) {
                 case NORMAL: {
-                    TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
-                            this.posX, this.posY, this.posZ, power, false, destroy);
+                    if (TakumiConfigCore.inEventServer) {
+                        TakumiUtils.takumiCreateExplosion(world, this,
+                                this.posX, this.posY, this.posZ, 15, false, false);
+                    } else {
+                        TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
+                                this.posX, this.posY, this.posZ, power, false, destroy);
+                    }
                     break;
                 }
                 case SHOT: {
