@@ -122,7 +122,7 @@ public class EntityCannonCreeper extends EntityTakumiAbstractCreeper implements 
         double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - entityarrow.posY;
         double d2 = target.posZ - this.posZ;
         double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
-        entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F,
+        entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 10f,
                 (float) (14 - this.world.getDifficulty().getDifficultyId() * 4));
         this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
         this.world.spawnEntity(entityarrow);
@@ -138,7 +138,6 @@ public class EntityCannonCreeper extends EntityTakumiAbstractCreeper implements 
     public void setSwingingArms(boolean swingingArms) {
     }
 
-
     /**
      * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
      * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
@@ -146,8 +145,8 @@ public class EntityCannonCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+                                            @Nullable
+                                                    IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         this.setCombatTask();
         return livingdata;

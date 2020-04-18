@@ -304,4 +304,9 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     protected boolean isValidLightLevel() {
         return this.world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD || super.isValidLightLevel();
     }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return this.getAttackTarget() instanceof EntityAttackBlock && super.isImmuneToExplosions();
+    }
 }

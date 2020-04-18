@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -20,7 +21,13 @@ import net.minecraft.util.math.BlockPos.PooledMutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
+
+    int noPathTick;
+    List<BlockPos> posCache = new ArrayList<>();
 
     public EntityLapisCreeper(World worldIn) {
         super(worldIn);
@@ -65,6 +72,27 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
         super.onUpdate();
         this.noClip = false;
         this.setNoGravity(true);
+
+        if (!this.world.isRemote && this.getAttackTarget() instanceof EntityAttackBlock && this.isGlowing()) {
+            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 10);
+            if (this.getDistanceSqToEntity(this.getAttackTarget()) < 16) {
+                this.setCreeperState(1);
+            } else {
+                this.setMoveForward(10);
+            }
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    if (x * x + z * z <= 4) {
+                        BlockPos pos = this.getPosition().add(x, -1, z);
+                        if (this.world.isAirBlock(pos) && this.world.getBlockState(pos).getBlockHardness(this.world, pos) >= 0 && this.getAttackTarget().getDistanceSq(pos) > 4
+                                && !this.posCache.contains(pos.down())) {
+                            this.world.setBlockState(pos, Blocks.LAPIS_BLOCK.getDefaultState());
+                            this.posCache.add(pos);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -188,7 +216,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                 double d1 = this.posY - EntityLapisCreeper.this.posY;
                 double d2 = this.posZ - EntityLapisCreeper.this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                d3 = (double) MathHelper.sqrt(d3);
+                d3 = MathHelper.sqrt(d3);
 
                 if (d3 < EntityLapisCreeper.this.getEntityBoundingBox().getAverageEdgeLength()) {
                     this.action = Action.WAIT;

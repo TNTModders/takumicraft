@@ -12,6 +12,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
@@ -134,7 +135,7 @@ public class ItemTypeSword extends ItemSword {
         if (entityIn instanceof EntityLivingBase && ((EntityLivingBase) entityIn).getHeldItemMainhand() == stack) {
             if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_DEST)) {
                 if (entityIn.ticksExisted % 20 == 0) {
-                    worldIn.getEntities(EntityLivingBase.class,
+                    worldIn.getEntities(EntityMob.class,
                             input -> entityIn.getDistanceSqToEntity(input) < 7f).forEach(entityLivingBase -> {
                         if (entityLivingBase.getClass() != entityIn.getClass()) {
                             entityLivingBase.attackEntityFrom(

@@ -498,6 +498,9 @@ public class TakumiEvents {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
                 EntityTakumiArrow takumiArrow =
                         (EntityTakumiArrow) ((TakumiExplosion) event.getExplosion()).getExploder();
+                if (takumiArrow.shootingEntity != null) {
+                    event.getAffectedEntities().remove(takumiArrow.shootingEntity);
+                }
                 if (takumiArrow.shootingEntity instanceof EntityStrayCreeper) {
                     PotionType type = PotionUtils.getPotionFromItem(
                             ((EntityLivingBase) takumiArrow.shootingEntity).getHeldItem(EnumHand.OFF_HAND));

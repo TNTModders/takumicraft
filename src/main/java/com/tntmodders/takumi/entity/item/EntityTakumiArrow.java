@@ -2,9 +2,11 @@ package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityCannonCreeper;
 import com.tntmodders.takumi.item.ItemTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -104,7 +106,7 @@ public class EntityTakumiArrow extends EntityArrow {
                 case NORMAL: {
                     if (TakumiConfigCore.inEventServer) {
                         TakumiUtils.takumiCreateExplosion(world, this,
-                                this.posX, this.posY, this.posZ, 15, false, false);
+                                this.posX, this.posY + 0.25, this.posZ, 15, false, false, 4);
                     } else {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
                                 this.posX, this.posY, this.posZ, power, false, destroy);
@@ -117,6 +119,17 @@ public class EntityTakumiArrow extends EntityArrow {
                                 this.shootingEntity != null ? this.shootingEntity : this,
                                 this.posX + rand.nextInt(7) - 3, this.posY + rand.nextInt(3),
                                 this.posZ + rand.nextInt(7) - 3, power, false, destroy);
+                    }
+                    if (this.shootingEntity instanceof EntityCannonCreeper && this.shootingEntity.isGlowing() && ((EntityCannonCreeper) this.shootingEntity).getAttackTarget() instanceof EntityAttackBlock) {
+                        TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
+                                this.posX, this.posY, this.posZ, power * 2, false, true);
+                        try {
+                            EntityLiving entity = (EntityCreeper) EntityAttackBlock.ARTILLERIES.get(this.rand.nextInt(EntityAttackBlock.ARTILLERIES.size()))
+                                    .getConstructor(World.class).newInstance(this.world);
+                            entity.setPosition(this.posX, this.posY, this.posZ);
+                            this.world.spawnEntity(entity);
+                        } catch (Exception ignored) {
+                        }
                     }
                     break;
                 }

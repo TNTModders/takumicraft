@@ -96,17 +96,16 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
         this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
         this.attacker.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1);
-        this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, 1);
         if (this.attacker.getNavigator().noPath()) {
             double distX = this.attacker.posX - entitylivingbase.posX;
             double distZ = this.attacker.posZ - entitylivingbase.posZ;
-            if (distX * distX + distZ * distZ < 16 && this.attacker instanceof EntityCreeper) {
-                ((EntityCreeper) this.attacker).setCreeperState(1);
+            if (distX * distX + distZ * distZ < 36 && this.attacker instanceof EntityCreeper) {
+                ((EntityCreeper) this.attacker).ignite();
             } else {
                 double offX = -8 + this.world.rand.nextInt(17);
                 double offY = -8 + this.world.rand.nextInt(17);
                 double offZ = -8 + this.world.rand.nextInt(17);
-                this.attacker.getNavigator().tryMoveToXYZ(entitylivingbase.posX + offX, entitylivingbase.posY + offY, entitylivingbase.posZ + offZ, 1);
+               this.attacker.getMoveHelper().setMoveTo(entitylivingbase.posX + offX, entitylivingbase.posY + offY, entitylivingbase.posZ + offZ, 1);
             }
         }
         double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY,

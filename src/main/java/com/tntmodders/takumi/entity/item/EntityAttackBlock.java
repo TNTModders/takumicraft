@@ -2,12 +2,11 @@ package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.entity.mobs.EntityEvokerCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityVexCreeper;
+import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
+import com.tntmodders.takumi.entity.mobs.evo.EntityRoboCreeper_Evo;
 import net.minecraft.entity.*;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,9 +21,26 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class EntityAttackBlock extends EntityLiving {
+    public static final List<Class<? extends Entity>> ENGINEERS = new ArrayList<>();
+    public static final List<Class<? extends Entity>> ARTILLERIES = new ArrayList<>();
+
+    static {
+        ENGINEERS.add(EntityIceCreeper.class);
+        ENGINEERS.add(EntitySpongeCreeper.class);
+        ENGINEERS.add(EntitySandCreeper.class);
+        ENGINEERS.add(EntityTerracottaCreeper.class);
+
+        ARTILLERIES.add(EntityCannonCreeper.class);
+        ARTILLERIES.add(EntitySkeletonCreeper.class);
+        ARTILLERIES.add(EntitySnowCreeper.class);
+        ARTILLERIES.add(EntityStrayCreeper.class);
+    }
+
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"),
                     BossInfo.Color.BLUE, BossInfo.Overlay.NOTCHED_20).setDarkenSky(true);
@@ -42,8 +58,10 @@ public class EntityAttackBlock extends EntityLiving {
                 if (iTakumiEntity.getClass() != EntitySeaGuardianCreeper.class &&
                         iTakumiEntity.getClass() != EntitySquidCreeper.class &&
                         ((EntityLivingBase) iTakumiEntity).isNonBoss() &&
-                        iTakumiEntity.getClass() != EntityEvokerCreeper.class &
-                                iTakumiEntity.getClass() != EntityVexCreeper.class) {
+                        iTakumiEntity.getClass() != EntityEvokerCreeper.class &&
+                        iTakumiEntity.getClass() != EntityVexCreeper.class &&
+                        iTakumiEntity.getClass() != EntityRoboCreeper.class &&
+                        iTakumiEntity.getClass() != EntityRoboCreeper_Evo.class) {
                     entities.add(iTakumiEntity);
                 }
             }
@@ -61,7 +79,7 @@ public class EntityAttackBlock extends EntityLiving {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100000);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5000);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25000);
     }
 
     @Override
@@ -71,21 +89,25 @@ public class EntityAttackBlock extends EntityLiving {
         this.spawnTick++;
         this.world.setBlockToAir(this.getPosition());
         this.world.setBlockToAir(this.getPosition().up());
-        if (this.ticksExisted % 100 == 0 && !this.world.isRemote) {
+        if (this.ticksExisted % 50 == 0) {
             List<Entity> list = this.world.loadedEntityList;
-            list.removeIf(entity -> this.getDistanceSqToEntity(entity) > 10000);
+            list.removeIf(entity -> this.getDistanceSqToEntity(entity) > 10000 || !(entity instanceof EntityLivingBase));
+            list.sort(Comparator.comparingDouble(EntityAttackBlock.this::getDistanceSqToEntity));
             list.forEach(entity -> {
-                if (entity instanceof EntityCreeper && ((EntityCreeper) entity).getAttackTarget() == null) {
-                    ((EntityCreeper) entity).setAttackTarget(this);
+                if (entity instanceof EntityCreeper) {
+                    if (((EntityCreeper) entity).getAttackTarget() == null) {
+                        ((EntityCreeper) entity).setAttackTarget(this);
+                    }
                 }
             });
             BlockPos pos = null;
-            if (list.size() < 200) {
+            if (list.size() < 500) {
                 boolean flg = true;
                 while (flg) {
-                    double x = this.posX - 50 + this.rand.nextInt(100);
-                    double z = this.posZ - 50 + this.rand.nextInt(100);
-                    double y = Math.min(this.world.getHeight((int) x, (int) z), this.posY) + this.rand.nextInt(20);
+                    Random random = this.rand;
+                    double x = this.posX - 50 + random.nextInt(100);
+                    double z = this.posZ - 50 + random.nextInt(100);
+                    double y = Math.min(this.world.getHeight((int) x, (int) z), this.posY) + random.nextInt(20);
                     pos = new BlockPos(x, y, z);
                     if (this.world.isAirBlock(pos) && this.world.isAirBlock(pos.up())) {
                         flg = false;
@@ -93,21 +115,83 @@ public class EntityAttackBlock extends EntityLiving {
                 }
 
                 if (pos != null) {
-                    for (int i = 0; i < 10; ) {
-                        double offX = -5 + this.rand.nextInt(11);
-                        double offY = -5 + this.rand.nextInt(11);
-                        double offZ = -5 + this.rand.nextInt(11);
-                        try {
-                            EntityLiving entity = ((EntityLiving) entities.get(this.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(this.world));
-                            entity.setPosition(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
-                            if (entity.getCanSpawnHere() && entity.isNotColliding()) {
-                                if (this.world.spawnEntity(entity)) {
-                                    i++;
+                    if (!this.world.isRemote && this.world.getGameRules().getBoolean("doMobSpawning")) {
+                        if (this.rand.nextInt(10) == 0) {
+                            int id = this.rand.nextInt(2);
+                            switch (id) {
+                                case 1: {
+                                    for (int i = 0; i < 30; i++) {
+                                        double offX = -5 + this.rand.nextInt(11);
+                                        double offY = -5 + this.rand.nextInt(11);
+                                        double offZ = -5 + this.rand.nextInt(11);
+                                        try {
+                                            EntityLiving entity = (EntityCreeper) ARTILLERIES.get(this.rand.nextInt(ARTILLERIES.size())).getConstructor(World.class).newInstance(this.world);
+                                            entity.setPosition(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
+                                            entity.setGlowing(true);
+                                            entity.setAttackTarget(this);
+                                            if (entity.getCanSpawnHere() && entity.isNotColliding()) {
+                                                if (this.world.spawnEntity(entity)) {
+                                                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, entity.posX, entity.posY, entity.posZ, true);
+                                                    this.world.addWeatherEffect(bolt);
+                                                    this.world.spawnEntity(bolt);
+                                                    i++;
+                                                }
+                                            } else if (this.rand.nextInt(20) == 0) {
+                                                i++;
+                                            }
+                                        } catch (Exception ignored) {
+                                        }
+                                    }
+                                    break;
                                 }
-                            } else if (this.rand.nextInt(10) == 0) {
-                                i++;
+                                default: {
+                                    for (int i = 0; i < 15; i++) {
+                                        EntityLapisCreeper lapisCreeper = new EntityLapisCreeper(this.world);
+                                        lapisCreeper.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                                        lapisCreeper.setGlowing(true);
+                                        lapisCreeper.setHealth(2f);
+                                        this.world.spawnEntity(lapisCreeper);
+
+                                        try {
+                                            EntityCreeper creeper = (EntityCreeper) ENGINEERS.get(this.rand.nextInt(ENGINEERS.size())).getConstructor(World.class).newInstance(this.world);
+                                            creeper.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
+                                            creeper.setGlowing(true);
+                                            this.world.spawnEntity(creeper);
+                                            creeper.startRiding(lapisCreeper);
+                                            EntityLightningBolt bolt = new EntityLightningBolt(this.world, creeper.posX, creeper.posY, creeper.posZ, true);
+                                            this.world.addWeatherEffect(bolt);
+                                            this.world.spawnEntity(bolt);
+                                        } catch (Exception ignored) {
+                                        }
+                                    }
+                                    break;
+                                }
                             }
-                        } catch (Exception ignored) {
+                        } else {
+                            int max = 40;
+                            if (this.world.playerEntities != null) {
+                                max += this.world.playerEntities.size() * 2;
+                            }
+                            for (int i = 0; i < max; ) {
+                                double offX = -5 + this.rand.nextInt(11);
+                                double offY = -5 + this.rand.nextInt(11);
+                                double offZ = -5 + this.rand.nextInt(11);
+                                try {
+                                    EntityLiving entity = ((EntityLiving) entities.get(this.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(this.world));
+                                    entity.setPosition(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
+                                    if (entity.getCanSpawnHere() && entity.isNotColliding()) {
+                                        if (this.world.spawnEntity(entity)) {
+                                            EntityLightningBolt bolt = new EntityLightningBolt(this.world, entity.posX, entity.posY, entity.posZ, true);
+                                            this.world.addWeatherEffect(bolt);
+                                            this.world.spawnEntity(bolt);
+                                            i++;
+                                        }
+                                    } else if (this.rand.nextInt(20) == 0) {
+                                        i++;
+                                    }
+                                } catch (Exception ignored) {
+                                }
+                            }
                         }
                     }
                 }
