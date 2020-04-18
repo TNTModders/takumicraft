@@ -41,7 +41,7 @@ public class TakumiCraftCore {
 
     //初期設定
     public static final String MODID = "takumicraft";
-    public static final String VERSION = "2.0.0-β.1.8-tcs03";
+    public static final String VERSION = "2.0.0-β.1.8-tcs04";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final CreativeTabs TAB_CREEPER = new TakumiCreativeTab();
     public static final CreativeTabs TAB_EGGS = new EggCreativeTab();
