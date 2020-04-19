@@ -36,10 +36,10 @@ public class ItemMagicBow extends ItemBow {
             @Override
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack,
-                    @Nullable
-                            World worldIn,
-                    @Nullable
-                            EntityLivingBase entityIn) {
+                               @Nullable
+                                       World worldIn,
+                               @Nullable
+                                       EntityLivingBase entityIn) {
                 if (entityIn == null) {
                     return 0.0F;
                 }
@@ -150,6 +150,6 @@ public class ItemMagicBow extends ItemBow {
 
     @Override
     protected boolean isArrow(ItemStack stack) {
-        return stack.getItem() == Items.ARROW;
+        return stack.getItem() == Items.ARROW || stack.getItem() == Items.TIPPED_ARROW || stack.getItem() == Items.SPECTRAL_ARROW;
     }
 }
