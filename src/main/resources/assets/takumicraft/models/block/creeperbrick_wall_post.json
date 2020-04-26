@@ -1,5 +1,5 @@
 {
-    "parent": "block/wall_post",
+    "parent": "takumicraft:block/wall_post",
     "textures": {
         "wall": "takumicraft:blocks/creeperbrick"
     }

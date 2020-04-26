@@ -1,5 +1,5 @@
 {
-    "parent": "block/wall_inventory",
+    "parent": "takumicraft:block/wall_inventory",
     "textures": {
         "wall": "takumicraft:blocks/creeperiron"
     }

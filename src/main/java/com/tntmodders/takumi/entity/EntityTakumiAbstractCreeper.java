@@ -50,6 +50,36 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         });
     }
 
+    public static float getTypeMatchFactor(EnumTakumiType attacker, EnumTakumiType damaged) {
+        float f = 1f;
+        if ((attacker.isDest() && damaged.isMagic()) || (attacker.isMagic() && damaged.isDest())) {
+            f *= 1.2;
+        }
+        if ((attacker.isDest() && damaged.isDest()) || (attacker.isMagic() && damaged.isMagic())) {
+            f *= 0.8;
+        }
+        if (attacker.getId() == EnumTakumiType.GROUND.getId() || damaged.getId() == EnumTakumiType.GROUND.getId()) {
+            f *= 1.15;
+        }
+        if (attacker.getId() == EnumTakumiType.WIND.getId() || damaged.getId() == EnumTakumiType.WIND.getId()) {
+            f *= 0.85;
+        }
+        if ((attacker.getId() == EnumTakumiType.GRASS.getId() && damaged.getId() == EnumTakumiType.WATER.getId()) ||
+                attacker.getId() == EnumTakumiType.WATER.getId() && damaged.getId() == EnumTakumiType.FIRE.getId() ||
+                (attacker.getId() == EnumTakumiType.FIRE.getId() && damaged.getId() == EnumTakumiType.GRASS.getId())) {
+            f *= 1.25;
+        }
+        if ((damaged.getId() == EnumTakumiType.GRASS.getId() && attacker.getId() == EnumTakumiType.WATER.getId()) ||
+                damaged.getId() == EnumTakumiType.WATER.getId() && attacker.getId() == EnumTakumiType.FIRE.getId() ||
+                (damaged.getId() == EnumTakumiType.FIRE.getId() && attacker.getId() == EnumTakumiType.GRASS.getId())) {
+            f *= 0.75;
+        }
+        if (damaged.getId() == EnumTakumiType.DRAGON.getId() || damaged.getId() == EnumTakumiType.TAKUMI.getId()) {
+            f *= 0.5;
+        }
+        return f;
+    }
+
     @Override
     public void additionalSpawn() {
     }
@@ -171,13 +201,15 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             }
             this.dmgCount++;
         }
-        if (this.takumiType().getId() == EnumTakumiType.FIRE.getId() && damageSrc.isFireDamage()) {
+        if ((this.takumiType().getId() == EnumTakumiType.FIRE.getId() || this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock))
+                && damageSrc.isFireDamage()) {
             return;
         }
         if (this.takumiType().getId() == EnumTakumiType.WATER.getId() && damageSrc == DamageSource.DROWN) {
             return;
         }
-        if (this.takumiType().getId() == EnumTakumiType.GRASS.getId() && damageSrc == DamageSource.FALL) {
+        if ((this.takumiType().getId() == EnumTakumiType.GRASS.getId() || this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock))
+                && damageSrc == DamageSource.FALL) {
             return;
         }
         if (damageSrc == DamageSource.LIGHTNING_BOLT) {
@@ -188,36 +220,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             return;
         }
         super.damageEntity(damageSrc, damageAmount);
-    }
-
-    public static float getTypeMatchFactor(EnumTakumiType attacker, EnumTakumiType damaged) {
-        float f = 1f;
-        if ((attacker.isDest() && damaged.isMagic()) || (attacker.isMagic() && damaged.isDest())) {
-            f *= 1.2;
-        }
-        if ((attacker.isDest() && damaged.isDest()) || (attacker.isMagic() && damaged.isMagic())) {
-            f *= 0.8;
-        }
-        if (attacker.getId() == EnumTakumiType.GROUND.getId() || damaged.getId() == EnumTakumiType.GROUND.getId()) {
-            f *= 1.15;
-        }
-        if (attacker.getId() == EnumTakumiType.WIND.getId() || damaged.getId() == EnumTakumiType.WIND.getId()) {
-            f *= 0.85;
-        }
-        if ((attacker.getId() == EnumTakumiType.GRASS.getId() && damaged.getId() == EnumTakumiType.WATER.getId()) ||
-                attacker.getId() == EnumTakumiType.WATER.getId() && damaged.getId() == EnumTakumiType.FIRE.getId() ||
-                (attacker.getId() == EnumTakumiType.FIRE.getId() && damaged.getId() == EnumTakumiType.GRASS.getId())) {
-            f *= 1.25;
-        }
-        if ((damaged.getId() == EnumTakumiType.GRASS.getId() && attacker.getId() == EnumTakumiType.WATER.getId()) ||
-                damaged.getId() == EnumTakumiType.WATER.getId() && attacker.getId() == EnumTakumiType.FIRE.getId() ||
-                (damaged.getId() == EnumTakumiType.FIRE.getId() && attacker.getId() == EnumTakumiType.GRASS.getId())) {
-            f *= 0.75;
-        }
-        if (damaged.getId() == EnumTakumiType.DRAGON.getId() || damaged.getId() == EnumTakumiType.TAKUMI.getId()) {
-            f *= 0.5;
-        }
-        return f;
     }
 
     public double getSizeAmp() {
@@ -263,17 +265,19 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(this.getDropItem(), this.rand.nextInt(3));
-            if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(5) == 0) {
+            if (this.getDropItem() != null && this.rand.nextInt(3) == 0) {
+                int amount = Math.min(this.rand.nextInt(3), this.getDropItem().getItemStackLimit());
+                this.dropItem(this.getDropItem(), amount);
+            }
+            if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(3) == 0) {
                 this.dropItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), 1);
             }
-            int drop = this.rand.nextInt(2);
+            int drop = this.rand.nextInt(4);
             int i = this.takumiType().getId();
-            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 15 : 10) == 0 && drop > 0 && i > 0 &&
-                    i < 7) {
+            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 10 : 5) == 0 && drop > 0 && i > 0 && i < 7) {
                 this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, drop, i - 1), 0f);
             }
-            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 10 : 5) == 0 && drop > 0) {
+            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 15 : 10) == 0 && drop > 0) {
                 if (this.takumiType().isMagic() && this.rand.nextBoolean()) {
                     this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_MAGIC, drop), 0f);
                 }
@@ -307,6 +311,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     @Override
     public boolean isImmuneToExplosions() {
-        return this.getAttackTarget() instanceof EntityAttackBlock && super.isImmuneToExplosions();
+        return this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) || super.isImmuneToExplosions();
     }
 }

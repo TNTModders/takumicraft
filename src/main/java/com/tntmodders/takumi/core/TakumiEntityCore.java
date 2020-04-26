@@ -171,7 +171,8 @@ public class TakumiEntityCore {
                 Biome.REGISTRY.iterator().forEachRemaining(biome -> {
                     if (!(biome instanceof BiomeOcean) && biome != Biomes.HELL && biome != Biomes.VOID &&
                             biome != Biomes.SKY) {
-                        EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 10, 30,
+                        int mp = entity.takumiRank() == ITakumiEntity.EnumTakumiRank.LOW ? 2 : 1;
+                        EntityRegistry.addSpawn(clazz, entity.takumiRank().getSpawnWeight(), 10 * mp, 20 * mp,
                                 EnumCreatureType.MONSTER, biome);
                     }
                 });

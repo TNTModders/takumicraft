@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.EnumCreatureType;
@@ -131,6 +132,6 @@ public class EntityOpaqueCreeper extends EntityTakumiAbstractCreeper {
     @Nullable
     @Override
     protected Item getDropItem() {
-        return Item.getItemFromBlock(Blocks.GREEN_SHULKER_BOX);
+        return Item.getItemFromBlock(TakumiBlockCore.CREEPER_SHULKER_BOX);
     }
 }

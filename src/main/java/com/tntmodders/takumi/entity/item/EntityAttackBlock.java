@@ -79,7 +79,7 @@ public class EntityAttackBlock extends EntityLiving {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100000);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25000);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30000);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class EntityAttackBlock extends EntityLiving {
         this.world.setBlockToAir(this.getPosition());
         this.world.setBlockToAir(this.getPosition().up());
         if (this.ticksExisted % 50 == 0) {
-            List<Entity> list = this.world.loadedEntityList;
+            List<Entity> list = new ArrayList<>(this.world.loadedEntityList);
             list.removeIf(entity -> this.getDistanceSqToEntity(entity) > 10000 || !(entity instanceof EntityLivingBase));
             list.sort(Comparator.comparingDouble(EntityAttackBlock.this::getDistanceSqToEntity));
             list.forEach(entity -> {
@@ -107,9 +107,9 @@ public class EntityAttackBlock extends EntityLiving {
                     Random random = this.rand;
                     double x = this.posX - 50 + random.nextInt(100);
                     double z = this.posZ - 50 + random.nextInt(100);
-                    double y = Math.min(this.world.getHeight((int) x, (int) z), this.posY) + random.nextInt(20);
+                    double y = Math.min(this.world.getHeight((int) x, (int) z), this.posY) + random.nextInt(40) - random.nextInt(40);
                     pos = new BlockPos(x, y, z);
-                    if (this.world.isAirBlock(pos) && this.world.isAirBlock(pos.up())) {
+                    if (y > 1 && this.world.isAirBlock(pos) && this.world.isAirBlock(pos.up()) && this.getDistanceSq(pos) > 400) {
                         flg = false;
                     }
                 }
@@ -120,17 +120,17 @@ public class EntityAttackBlock extends EntityLiving {
                             int id = this.rand.nextInt(2);
                             switch (id) {
                                 case 1: {
-                                    for (int i = 0; i < 30; i++) {
-                                        double offX = -5 + this.rand.nextInt(11);
-                                        double offY = -5 + this.rand.nextInt(11);
-                                        double offZ = -5 + this.rand.nextInt(11);
+                                    for (int i = 0; i < 10; i++) {
+                                        double offX = -4 + this.rand.nextInt(9);
+                                        double offY = -4 + this.rand.nextInt(9);
+                                        double offZ = -4 + this.rand.nextInt(9);
                                         try {
                                             EntityLiving entity = (EntityCreeper) ARTILLERIES.get(this.rand.nextInt(ARTILLERIES.size())).getConstructor(World.class).newInstance(this.world);
                                             entity.setPosition(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
                                             entity.setGlowing(true);
                                             entity.setAttackTarget(this);
-                                            if (entity.getCanSpawnHere() && entity.isNotColliding()) {
-                                                if (this.world.spawnEntity(entity)) {
+                                            if (entity.isNotColliding()) {
+                                                if (entity.posY > 1 && this.world.spawnEntity(entity)) {
                                                     EntityLightningBolt bolt = new EntityLightningBolt(this.world, entity.posX, entity.posY, entity.posZ, true);
                                                     this.world.addWeatherEffect(bolt);
                                                     this.world.spawnEntity(bolt);
@@ -145,7 +145,7 @@ public class EntityAttackBlock extends EntityLiving {
                                     break;
                                 }
                                 default: {
-                                    for (int i = 0; i < 15; i++) {
+                                    for (int i = 0; i < 5; i++) {
                                         EntityLapisCreeper lapisCreeper = new EntityLapisCreeper(this.world);
                                         lapisCreeper.setPosition(pos.getX(), pos.getY(), pos.getZ());
                                         lapisCreeper.setGlowing(true);
@@ -168,18 +168,18 @@ public class EntityAttackBlock extends EntityLiving {
                                 }
                             }
                         } else {
-                            int max = 40;
+                            int max = 10;
                             if (this.world.playerEntities != null) {
-                                max += this.world.playerEntities.size() * 2;
+                                max += this.world.playerEntities.size() * 1.5;
                             }
                             for (int i = 0; i < max; ) {
-                                double offX = -5 + this.rand.nextInt(11);
-                                double offY = -5 + this.rand.nextInt(11);
-                                double offZ = -5 + this.rand.nextInt(11);
+                                double offX = -4 + this.rand.nextInt(9);
+                                double offY = -4 + this.rand.nextInt(9);
+                                double offZ = -4 + this.rand.nextInt(9);
                                 try {
                                     EntityLiving entity = ((EntityLiving) entities.get(this.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(this.world));
                                     entity.setPosition(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
-                                    if (entity.getCanSpawnHere() && entity.isNotColliding()) {
+                                    if (entity.posY > 1 && entity.isNotColliding()) {
                                         if (this.world.spawnEntity(entity)) {
                                             EntityLightningBolt bolt = new EntityLightningBolt(this.world, entity.posX, entity.posY, entity.posZ, true);
                                             this.world.addWeatherEffect(bolt);

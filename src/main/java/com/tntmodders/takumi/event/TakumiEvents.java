@@ -732,8 +732,9 @@ public class TakumiEvents {
     @SubscribeEvent
     public void damage(LivingAttackEvent event) {
         if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiThrowGrenede &&
-                ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower() != null &&
-                ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower().getClass() == event.getEntityLiving().getClass()) {
+                ((((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower() != null &&
+                        ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower().getClass() == event.getEntityLiving().getClass()) ||
+                        TakumiConfigCore.inEventServer)) {
             event.setCanceled(true);
         } else if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow) {
             if (TakumiConfigCore.inEventServer) {
@@ -786,11 +787,12 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onKillEntity(LivingDeathEvent event) {
-        if (!event.getEntityLiving().world.isRemote && event.getSource().getTrueSource() instanceof EntityPlayer &&
-                TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) &&
+        if (!event.getEntityLiving().world.isRemote && TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) &&
                 event.getEntityLiving().getRNG().nextInt(10) == 0) {
-            event.getEntityLiving().dropItem(
-                    Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), 1);
+            int i = event.getEntityLiving().getRNG().nextInt(3);
+            if (i > 0) {
+                event.getEntityLiving().dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), i);
+            }
         }
         if (event.getEntityLiving() instanceof EntityPlayer &&
                 event.getSource().getTrueSource() instanceof EntityBoneCreeper && event.getSource().isExplosion()) {
@@ -848,7 +850,7 @@ public class TakumiEvents {
             }
 
         }
-        if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityLiving &&
+        if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityCreeper &&
                 ((EntityLiving) event.getEntityLiving()).getAttackTarget() instanceof EntityAttackBlock &&
                 event.getSource().getTrueSource() instanceof EntityPlayer) {
             if (!event.getEntityLiving().world.isRemote) {
