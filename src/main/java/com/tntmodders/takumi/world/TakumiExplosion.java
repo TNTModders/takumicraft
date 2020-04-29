@@ -48,10 +48,17 @@ public class TakumiExplosion extends Explosion {
     private final Map<EntityPlayer, Vec3d> playerKnockbackMap;
     private final Vec3d position;
     private final double amp;
+    private final boolean damage;
 
     public TakumiExplosion(World worldIn, Entity entityIn, double x, double y, double z, float size, boolean flaming,
-            boolean damagesTerrain, double amp) {
+                           boolean damagesTerrain, double amp) {
+        this(worldIn, entityIn, x, y, z, size, flaming, damagesTerrain, amp, true);
+    }
+
+    public TakumiExplosion(World worldIn, Entity entityIn, double x, double y, double z, float size, boolean flaming,
+                           boolean damagesTerrain, double amp, boolean damage) {
         super(worldIn, entityIn, x, y, z, size, flaming, damagesTerrain);
+        this.damage = damage;
         this.random = new Random();
         this.amp = amp;
         this.affectedBlockPositions = Lists.newArrayList();
@@ -154,15 +161,17 @@ public class TakumiExplosion extends Explosion {
                         d9 = d9 / d13;
                         double d14 = this.world.getBlockDensity(vec3d, entity.getEntityBoundingBox());
                         double d10 = (1.0D - d12) * d14;
-                        if (exploder instanceof EntityArrow) {
-                            entity.attackEntityFrom(new EntityDamageSourceIndirect("explosion",
-                                            ((EntityArrow) this.exploder).shootingEntity, this.exploder).setExplosion(),
-                                    (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
+                        if (this.damage) {
+                            if (exploder instanceof EntityArrow) {
+                                entity.attackEntityFrom(new EntityDamageSourceIndirect("explosion",
+                                                ((EntityArrow) this.exploder).shootingEntity, this.exploder).setExplosion(),
+                                        (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
 
-                        } else {
-                            entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder).setExplosion(),
-                                    (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
+                            } else {
+                                entity.attackEntityFrom(new EntityDamageSource("explosion", this.exploder).setExplosion(),
+                                        (int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
 
+                            }
                         }
                         d10 = d10 * this.amp;
                         double d11 = d10;

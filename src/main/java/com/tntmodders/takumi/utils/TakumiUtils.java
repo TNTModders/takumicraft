@@ -220,8 +220,13 @@ public class TakumiUtils {
 
     public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
                                              boolean fire, boolean destroy, double amp) {
+        takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, amp, true);
+    }
+
+    public static void takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
+                                             boolean fire, boolean destroy, double amp, boolean damage) {
         boolean flg = world instanceof WorldServer;
-        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp);
+        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp, damage);
         if (ForgeEventFactory.onExplosionStart(world, explosion)) {
             return;
         }

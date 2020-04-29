@@ -19,6 +19,7 @@ import com.tntmodders.takumi.network.MessageTHMDetonate;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelShield;
@@ -34,11 +35,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
@@ -55,28 +53,51 @@ public class TakumiClientEvents {
     @SideOnly(Side.CLIENT)
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
 
-/*    @SubscribeEvent
-    public void recievedChat(ClientChatReceivedEvent event) {
-        if (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode().equalsIgnoreCase("ja_jp")) {
-            ITextComponent component = event.getMessage();
-            String[] creepers = event.getMessage().getUnformattedText().split(" ");
-            String creeper = "";
-            TakumiCraftCore.LOGGER.info(Arrays.toString(creepers));
-            for (int i = 0; i < creepers.length; i++) {
-                String str = creepers[i];
-                if (str.equalsIgnoreCase("creeper")) {
-                    creeper = creepers[i - 1] +" "+ creepers[i];
+    /*    @SubscribeEvent
+        public void recievedChat(ClientChatReceivedEvent event) {
+            if (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode().equalsIgnoreCase("ja_jp")) {
+                ITextComponent component = event.getMessage();
+                String[] creepers = event.getMessage().getUnformattedText().split(" ");
+                String creeper = "";
+                TakumiCraftCore.LOGGER.info(Arrays.toString(creepers));
+                for (int i = 0; i < creepers.length; i++) {
+                    String str = creepers[i];
+                    if (str.equalsIgnoreCase("creeper")) {
+                        creeper = creepers[i - 1] +" "+ creepers[i];
+                    }
+                }
+                if (!creeper.isEmpty() && component.toString().contains("death")) {
+                    TakumiCraftCore.LOGGER.info(creeper);
+                    String creeperJP = TakumiUtils.takumiTranslate("entity." + creeper.toLowerCase().replaceAll(" ","") + ".name");
+                    String string = component.getUnformattedText().replace(creeper, creeperJP);
+                    component = new TextComponentString(string);
+                    event.setMessage(component);
                 }
             }
-            if (!creeper.isEmpty() && component.toString().contains("death")) {
-                TakumiCraftCore.LOGGER.info(creeper);
-                String creeperJP = TakumiUtils.takumiTranslate("entity." + creeper.toLowerCase().replaceAll(" ","") + ".name");
-                String string = component.getUnformattedText().replace(creeper, creeperJP);
-                component = new TextComponentString(string);
-                event.setMessage(component);
+        }*/
+
+    private static long respawnTime;
+    private static long prevRespawnTime;
+
+    @SubscribeEvent
+    public void guiScreenEvent(GuiScreenEvent.DrawScreenEvent.Post event) {
+        if (event.getGui() instanceof GuiGameOver && event.getGui().mc.getCurrentServerData() != null) {
+            if (event.getGui().mc.getCurrentServerData().serverMOTD.contains(":tc_server")) {
+                if (event.getGui().mc.player.deathTime < 10) {
+                    TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
+                    TakumiClientEvents.prevRespawnTime = TakumiClientEvents.respawnTime;
+                } else {
+                    TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
+                    long time = respawnTime - prevRespawnTime;
+                    event.getGui().drawCenteredString(event.getGui().mc.fontRenderer, "リスポーンまで: " + Math.max(0, 10 - Math.round(time / 20)), event.getGui().width / 2, 120, 16777215);
+                    if (time > 200) {
+                        event.getGui().mc.player.respawnPlayer();
+                        event.getGui().mc.displayGuiScreen(null);
+                    }
+                }
             }
         }
-    }*/
+    }
 
     @SubscribeEvent
     public void color(ColorHandlerEvent.Block event) {

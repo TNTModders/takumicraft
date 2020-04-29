@@ -1,6 +1,9 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
+import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -23,6 +26,9 @@ public class ItemTakumiBook extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (TakumiConfigCore.inEventServer) {
+            return super.onItemRightClick(worldIn, playerIn, handIn);
+        }
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         playerIn.openGui(TakumiCraftCore.TakumiInstance, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY,
                 (int) playerIn.posZ);
@@ -39,5 +45,16 @@ public class ItemTakumiBook extends Item {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        if (TakumiConfigCore.inEventServer) {
+            if (!target.world.isRemote) {
+                TakumiUtils.takumiCreateExplosion(target.world, attacker, attacker.posX, attacker.posY, attacker.posZ, 2f, false, false, 5, false);
+            }
+            return false;
+        }
+        return super.hitEntity(stack, target, attacker);
     }
 }

@@ -785,6 +785,18 @@ public class TakumiEvents {
         }
     }
 
+/*    @SubscribeEvent
+    public void rightClick(PlayerInteractEvent.RightClickBlock event) {
+        if (!event.getWorld().isRemote) {
+            if (event.getHitVec() != null && event.getWorld().getTileEntity(new BlockPos(event.getHitVec())) instanceof TileEntityCommandBlock) {
+                TileEntityCommandBlock commandBlock = ((TileEntityCommandBlock) event.getWorld().getTileEntity(new BlockPos(event.getHitVec())));
+                if (commandBlock.getCommandBlockLogic() != null) {
+                    TakumiCraftCore.LOGGER.info("tssystem:" + commandBlock.getCommandBlockLogic().getCommand());
+                }
+            }
+        }
+    }*/
+
     @SubscribeEvent
     public void onKillEntity(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote && TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) &&

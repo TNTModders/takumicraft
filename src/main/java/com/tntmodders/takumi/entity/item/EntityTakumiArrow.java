@@ -90,7 +90,7 @@ public class EntityTakumiArrow extends EntityArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.typeOfHit == Type.ENTITY) {
-            if (raytraceResultIn.entityHit == this.shootingEntity || this.ticksExisted < 15) {
+            if (raytraceResultIn.entityHit == this.shootingEntity) {
                 return;
             }
             if (!TakumiConfigCore.inEventServer) {
@@ -106,7 +106,7 @@ public class EntityTakumiArrow extends EntityArrow {
                 case NORMAL: {
                     if (TakumiConfigCore.inEventServer) {
                         TakumiUtils.takumiCreateExplosion(world, this,
-                                this.posX, this.posY + 0.25, this.posZ, 15, false, false, 4);
+                                this.posX, this.posY, this.posZ, 15, false, false, 4);
                     } else {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
                                 this.posX, this.posY, this.posZ, power, false, destroy);
@@ -212,6 +212,9 @@ public class EntityTakumiArrow extends EntityArrow {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        if (TakumiConfigCore.inEventServer && this.type == EnumArrowType.NORMAL) {
+            return 0;
+        }
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f :
                 super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) / 3;
     }
