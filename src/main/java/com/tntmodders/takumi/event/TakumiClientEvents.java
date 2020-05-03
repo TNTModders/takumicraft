@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.event;
 
 import com.google.common.collect.Lists;
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiRedstoneWire;
 import com.tntmodders.takumi.client.render.sp.RenderEntityLivingSP;
@@ -44,6 +45,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.lang.reflect.Field;
+
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
 
@@ -81,19 +84,31 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void guiScreenEvent(GuiScreenEvent.DrawScreenEvent.Post event) {
-        if (event.getGui() instanceof GuiGameOver && event.getGui().mc.getCurrentServerData() != null) {
-            if (event.getGui().mc.getCurrentServerData().serverMOTD.contains(":tc_server")) {
-                if (event.getGui().mc.player.deathTime < 10) {
-                    TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
-                    TakumiClientEvents.prevRespawnTime = TakumiClientEvents.respawnTime;
-                } else {
-                    TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
-                    long time = respawnTime - prevRespawnTime;
-                    event.getGui().drawCenteredString(event.getGui().mc.fontRenderer, "リスポーンまで: " + Math.max(0, 10 - Math.round(time / 20)), event.getGui().width / 2, 120, 16777215);
-                    if (time > 200) {
+        if (event.getGui() instanceof GuiGameOver) {
+            if ((event.getGui().mc.getCurrentServerData() != null && event.getGui().mc.getCurrentServerData().serverMOTD.contains(":tc_server")) || TakumiConfigCore.inEventServerClient) {
+                if (event.getGui().mc.world != null && event.getGui().mc.player != null) {
+                    if (event.getGui().mc.player.deathTime < 3) {
+                        TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
+                        TakumiClientEvents.prevRespawnTime = TakumiClientEvents.respawnTime;
+                    } else {
+                        TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
+                        long time = respawnTime - prevRespawnTime;
+                        event.getGui().drawCenteredString(event.getGui().mc.fontRenderer, "リスポーンまで: " + Math.max(0, 5 - Math.round(time / 20)), event.getGui().width / 2, 120, 16777215);
+                        if (time > 100) {
+                            event.getGui().mc.player.respawnPlayer();
+                            event.getGui().mc.displayGuiScreen(null);
+                        }
+                    }
+                }
+                try {
+                    Field field = TakumiASMNameMap.getField(GuiGameOver.class, "enableButtonsTimer");
+                    field.setAccessible(true);
+                    int timer = (int) field.get(event.getGui());
+                    if (timer > 100) {
                         event.getGui().mc.player.respawnPlayer();
                         event.getGui().mc.displayGuiScreen(null);
                     }
+                } catch (Exception ignored) {
                 }
             }
         }

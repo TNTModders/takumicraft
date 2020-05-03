@@ -26,6 +26,7 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("ADVANCEMENT_LIST","field_192784_c");
         FIELD_MAP.put("dataManager","field_70180_af");
         FIELD_MAP.put("fire","field_190534_ay");
+        FIELD_MAP.put("enableButtonsTimer","field_146347_a");
 
         METHOD_MAP.put("onUpdate", "func_70071_h_");
         METHOD_MAP.put("explode", "func_146077_cc");

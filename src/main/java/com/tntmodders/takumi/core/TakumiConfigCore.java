@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class TakumiConfigCore {
 
+    public static final boolean inEventServerClient = true;
+
     public static final String GENERAL = "General";
     private static final String SPAWN = GENERAL + ".Spawn";
     private static final String HOGE = GENERAL + ".hoge";
@@ -18,14 +20,12 @@ public class TakumiConfigCore {
     public static boolean TakumiHard;
     public static int rangeTakumiBookSync;
     public static boolean useNewYearTex;
-
     //debugConfig
     public static boolean inDev = false;
-
-    /**@TODO
-     *  delete related code on release.
+    /**
+     * @TODO delete related code on release.
      */
-    public static boolean inEventServer ;
+    public static boolean inEventServer;
 
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
@@ -84,7 +84,7 @@ public class TakumiConfigCore {
         useNewYearTex = cfg.getBoolean("useNewYearTexture", GENERAL, true,
                 TakumiUtils.takumiTranslate("config.takumicraft.nytex.desc"), "config.takumicraft.nytex.prop");
 
-        inEventServer = cfg.getBoolean("ineventserver",GENERAL,false,"ONLY IN SERVER, FOR TCS EVENT","null");
+        inEventServer = cfg.getBoolean("ineventserver", GENERAL, false, "ONLY IN SERVER, FOR TCS EVENT", "null");
         cfg.save();
     }
 }

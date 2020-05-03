@@ -33,6 +33,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -55,6 +56,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.GameType;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -190,7 +192,23 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
+    public void playerLoggedOut(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent e) {
+        if (TakumiConfigCore.inEventServer && e.player.getWorldScoreboard().removePlayerFromTeams(e.player.getName())) {
+            Scoreboard scoreboard = e.player.getWorldScoreboard();
+            e.player.setGameType(GameType.SPECTATOR);
+            e.player.setSpawnPoint(null, true);
+            String s = e.player.getName();
+            scoreboard.removeObjectiveFromEntity(s, null);
+        }
+    }
+
+    @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
+        if (TakumiConfigCore.inEventServer && event.getEntityLiving() instanceof EntityVillager) {
+            if (event.getEntityLiving().getTags().contains("V1")) {
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY));
+            }
+        }
         //匠式ハードモード
         if (event.getEntityLiving().world.getDifficulty() == EnumDifficulty.HARD && TakumiConfigCore.TakumiHard &&
                 event.getEntityLiving() instanceof EntityPlayer) {
