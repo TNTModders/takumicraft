@@ -17,7 +17,7 @@ public class EnchantmentTakumiElytra extends Enchantment {
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() == Items.ELYTRA && super.canApply(stack);
+        return stack.getItem() == Items.ELYTRA;
     }
 
     @Override

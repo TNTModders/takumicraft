@@ -27,4 +27,9 @@ public class EnchantmentTakumiExplosionProtection extends Enchantment {
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         return stack.getItem() instanceof ItemTakumiArmor && super.canApplyAtEnchantingTable(stack);
     }
+
+    @Override
+    public boolean canApply(ItemStack stack) {
+        return stack.getItem() instanceof ItemTakumiArmor && super.canApply(stack);
+    }
 }

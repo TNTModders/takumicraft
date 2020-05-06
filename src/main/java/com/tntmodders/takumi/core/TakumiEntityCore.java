@@ -167,7 +167,7 @@ public class TakumiEntityCore {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (entity.takumiRank().getSpawnWeight() != 0 && !entity.isAnimal()) {
+            } else if (entity.takumiRank().getSpawnWeight() != 0 && !entity.isAnimal() && !(entity instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) entity).isEvo())) {
                 Biome.REGISTRY.iterator().forEachRemaining(biome -> {
                     if (!(biome instanceof BiomeOcean) && biome != Biomes.HELL && biome != Biomes.VOID &&
                             biome != Biomes.SKY) {

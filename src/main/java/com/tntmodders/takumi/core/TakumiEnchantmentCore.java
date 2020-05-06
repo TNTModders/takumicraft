@@ -18,19 +18,6 @@ public class TakumiEnchantmentCore {
     public static final Enchantment ANTI_POWERED = new EnchantmentTakumiAntiPowered();
     public static final Enchantment EXPLOSION_PROTECTION = new EnchantmentTakumiExplosionProtection();
     public static final Enchantment MINESWEEPER = new EnchantmentTakumiMineSweeper();
-    public static final Enchantment TYPE_MAGIC =
-            new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON,
-                    new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND}) {
-                @Override
-                protected boolean canApplyTogether(Enchantment ench) {
-                    return ench != TYPE_DEST && super.canApplyTogether(ench);
-                }
-
-                @Override
-                public boolean canApplyAtEnchantingTable(ItemStack stack) {
-                    return false;
-                }
-            }.setRegistryName(TakumiCraftCore.MODID, "takumi_type_magic").setName("takumi_type_magic");
     public static final Enchantment TYPE_DEST =
             new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON,
                     new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND}) {
@@ -44,6 +31,19 @@ public class TakumiEnchantmentCore {
                     return false;
                 }
             }.setRegistryName(TakumiCraftCore.MODID, "takumi_type_dest").setName("takumi_type_dest");
+    public static final Enchantment TYPE_MAGIC =
+            new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON,
+                    new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND}) {
+                @Override
+                protected boolean canApplyTogether(Enchantment ench) {
+                    return ench != TYPE_DEST && super.canApplyTogether(ench);
+                }
+
+                @Override
+                public boolean canApplyAtEnchantingTable(ItemStack stack) {
+                    return false;
+                }
+            }.setRegistryName(TakumiCraftCore.MODID, "takumi_type_magic").setName("takumi_type_magic");
     public static final Enchantment ROCKET_ELYTRA = new EnchantmentTakumiElytra();
     public static final Enchantment ITEM_PROTECTION = new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.ALL, EntityEquipmentSlot.values()) {
         @Override
@@ -59,7 +59,7 @@ public class TakumiEnchantmentCore {
                 if (field.get(TakumiItemCore.INSTANCE) instanceof Enchantment) {
                     Enchantment enchantment = (Enchantment) field.get(TakumiItemCore.INSTANCE);
                     registry.register(enchantment);
-                    TakumiCraftCore.LOGGER.info("Registered Enchantment : " + enchantment.getName());
+                    TakumiCraftCore.LOGGER.info("Registered Enchantment : " + enchantment.getName() + " as ID : " + Enchantment.getEnchantmentID(enchantment));
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

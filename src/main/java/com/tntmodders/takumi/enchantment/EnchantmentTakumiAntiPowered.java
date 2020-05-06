@@ -31,9 +31,7 @@ public class EnchantmentTakumiAntiPowered extends Enchantment {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        boolean flg = Arrays.asList(APPLYABLE).contains(stack.getItem()) && super.canApplyAtEnchantingTable(stack);
-        //TakumiCraftCore.LOGGER.info(flg);
-        return flg;
+        return Arrays.asList(APPLYABLE).contains(stack.getItem()) && super.canApplyAtEnchantingTable(stack);
     }
 
     @Override
@@ -45,4 +43,5 @@ public class EnchantmentTakumiAntiPowered extends Enchantment {
     public int getMaxEnchantability(int enchantmentLevel) {
         return 30;
     }
+
 }
