@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.EnumHelper;
 public class TakumiArmorMaterial {
 
     public static final ArmorMaterial CREEPER =
-            EnumHelper.addArmorMaterial("creeper", "takumicraft:creeper", 10, new int[]{0, 0, 0, 0}, 0,
+            EnumHelper.addArmorMaterial("creeper", "takumicraft:creeper", 50, new int[]{0, 0, 0, 0}, 0,
                     SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 10.0f);
 
     public static final ArmorMaterial MAGIC =
@@ -15,7 +15,7 @@ public class TakumiArmorMaterial {
                     SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 10.0f);
 
     public static final ArmorMaterial BATTLE =
-            EnumHelper.addArmorMaterial("battle", "takumicraft:battle", 33, new int[]{3, 6, 8, 3}, 40,
+            EnumHelper.addArmorMaterial("battle", "takumicraft:battle", 100, new int[]{3, 6, 8, 3}, 40,
                     SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0f);
 
     public static final ArmorMaterial BATTLE_POWERED =

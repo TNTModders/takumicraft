@@ -8,39 +8,39 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityBed;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityTakumiBed extends TileEntityBed {
+    private String texture;
+    private int meta;
     public TileEntityTakumiBed() {
         super();
     }
 
-    private String texture;
-    private int meta;
-
     public String getTexture() {
         return this.texture;
-    }
-
-    public int getMeta() {
-        return this.meta;
-    }
-
-    public void clear() {
-        this.texture = null;
-        this.meta = 0;
-        this.markDirty();
     }
 
     public void setTexture(String s) {
         this.texture = s;
     }
 
+    public int getMeta() {
+        return this.meta;
+    }
+
     public void setMeta(int i) {
         this.meta = i;
+    }
+
+    public void clear() {
+        this.texture = null;
+        this.meta = 0;
+        this.markDirty();
     }
 
     @Override
@@ -98,5 +98,10 @@ public class TileEntityTakumiBed extends TileEntityBed {
     @Override
     public ItemStack getItemStack() {
         return new ItemStack(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BED), 1);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.getNbtCompound());
     }
 }

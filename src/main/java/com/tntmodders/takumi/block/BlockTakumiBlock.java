@@ -329,6 +329,9 @@ public class BlockTakumiBlock extends BlockContainer {
                         playerIn.getHeldItem(hand).getMetadata(), playerIn, hand);
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(block.getMetaFromState(blockState));
                 worldIn.notifyNeighborsOfStateChange(pos, block, true);
+                if (!worldIn.isRemote) {
+                    worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
+                }
                 this.getActualState(state, worldIn, pos);
                 return true;
             }
@@ -347,6 +350,9 @@ public class BlockTakumiBlock extends BlockContainer {
             ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath("");
             ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(0);
             worldIn.notifyNeighborsOfStateChange(pos, this, true);
+            if (!worldIn.isRemote) {
+                worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
+            }
             this.getActualState(state, worldIn, pos);
             return true;
         }

@@ -85,6 +85,10 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
             if (blockState.isFullCube() && worldIn.getTileEntity(pos) instanceof TileEntityTakumiBed) {
                 ((TileEntityTakumiBed) worldIn.getTileEntity(pos)).setItemValues(playerIn.getHeldItemMainhand());
                 worldIn.notifyNeighborsRespectDebug(pos, this, true);
+                if (!worldIn.isRemote) {
+                    worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
+                }
+
                 EnumFacing offset = state.getValue(FACING);
                 if (!this.isBedFoot(worldIn, pos)) {
                     offset = offset.getOpposite();
@@ -92,14 +96,20 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
                 if (worldIn.getTileEntity(pos.offset(offset)) instanceof TileEntityTakumiBed) {
                     ((TileEntityTakumiBed) worldIn.getTileEntity(pos.offset(offset))).setItemValues(playerIn.getHeldItemMainhand());
                     worldIn.notifyNeighborsRespectDebug(pos, this, true);
+                    if (!worldIn.isRemote) {
+                        worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos.offset(offset)).getUpdatePacket());
+                    }
                 }
-
                 return true;
             }
         } else if (playerIn.getHeldItemMainhand().isEmpty()) {
             if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBed) {
                 ((TileEntityTakumiBed) worldIn.getTileEntity(pos)).clear();
                 worldIn.notifyNeighborsRespectDebug(pos, this, true);
+                if (!worldIn.isRemote) {
+                    worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
+                }
+
                 EnumFacing offset = state.getValue(FACING);
                 if (!this.isBedFoot(worldIn, pos)) {
                     offset = offset.getOpposite();
@@ -107,7 +117,9 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
                 if (worldIn.getTileEntity(pos.offset(offset)) instanceof TileEntityTakumiBed) {
                     ((TileEntityTakumiBed) worldIn.getTileEntity(pos.offset(offset))).clear();
                     worldIn.notifyNeighborsRespectDebug(pos, this, true);
-
+                    if (!worldIn.isRemote) {
+                        worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos.offset(offset)).getUpdatePacket());
+                    }
                 }
                 return true;
             }

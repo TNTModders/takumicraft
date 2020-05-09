@@ -77,7 +77,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.StreamSupport;
 
 public class TakumiEvents {
 
@@ -436,6 +435,55 @@ public class TakumiEvents {
             } catch (Exception ignored) {
             }
         }
+        event.getAffectedEntities().removeIf(entity -> {
+            if (entity instanceof EntityItem) {
+                if (((EntityItem) entity).getItem().getRarity() == EnumRarity.EPIC) {
+                    return true;
+                } else if (EnchantmentHelper.getEnchantments(((EntityItem) entity).getItem()).containsKey(TakumiEnchantmentCore.ITEM_PROTECTION)) {
+                    if (!event.getWorld().isRemote) {
+                        ItemStack stack = ((EntityItem) entity).getItem();
+                        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
+                        int lv = map.get(TakumiEnchantmentCore.ITEM_PROTECTION);
+                        map.remove(TakumiEnchantmentCore.ITEM_PROTECTION);
+                        if (lv > 1) {
+                            int i = lv;
+                            if (entity.world.rand.nextInt(lv + 1) == 0) {
+                                i = i - 1;
+                            }
+                            map.put(TakumiEnchantmentCore.ITEM_PROTECTION, i);
+                        }
+                        EnchantmentHelper.setEnchantments(map, stack);
+                        ((EntityItem) entity).setItem(stack);
+                    }
+                    return true;
+                }
+            }
+            if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {
+                return true;
+            }
+            if (entity instanceof EntityLivingBase) {
+                if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
+                    ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));
+                    return true;
+                }
+
+                boolean flg = false;
+                for (ItemStack itemStack : entity.getArmorInventoryList()) {
+                    if (!EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
+                            EnchantmentHelper.getEnchantments(itemStack).containsKey(
+                                    TakumiEnchantmentCore.EXPLOSION_PROTECTION)) {
+                        if (((EntityLivingBase) entity).getRNG().nextInt(12) == 0) {
+                            itemStack.damageItem(1 + ((EntityLivingBase) entity).getRNG().nextInt(
+                                    1 + event.getWorld().getDifficulty().getDifficultyId()),
+                                    ((EntityLivingBase) entity));
+                        }
+                        flg = true;
+                    }
+                    return flg;
+                }
+            }
+            return false;
+        });
         if (event.getExplosion().getExplosivePlacedBy() instanceof EntityKingDummy) {
             switch (((EntityKingDummy) event.getExplosion().getExplosivePlacedBy()).id) {
                 default: {
@@ -564,52 +612,6 @@ public class TakumiEvents {
                 event.setCanceled(true);
             }
         }
-        event.getAffectedEntities().removeIf(entity -> {
-            if (entity instanceof EntityItem) {
-                if (((EntityItem) entity).getItem().getRarity() == EnumRarity.EPIC) {
-                    return true;
-                } else if (EnchantmentHelper.getEnchantments(((EntityItem) entity).getItem()).containsKey(TakumiEnchantmentCore.ITEM_PROTECTION)) {
-                    if (!event.getWorld().isRemote) {
-                        ItemStack stack = ((EntityItem) entity).getItem();
-                        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
-                        int lv = map.get(TakumiEnchantmentCore.ITEM_PROTECTION);
-                        map.remove(TakumiEnchantmentCore.ITEM_PROTECTION);
-                        if (lv > 1) {
-                            int i = lv;
-                            if (entity.world.rand.nextInt(lv + 1) == 0) {
-                                i = i - 1;
-                            }
-                            map.put(TakumiEnchantmentCore.ITEM_PROTECTION, i);
-                        }
-                        EnchantmentHelper.setEnchantments(map, stack);
-                        ((EntityItem) entity).setItem(stack);
-                    }
-                    return true;
-                }
-            }
-            if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {
-                return true;
-            }
-            if (entity instanceof EntityLivingBase) {
-                if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
-                    ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));
-                    return true;
-                }
-                return StreamSupport.stream(entity.getArmorInventoryList().spliterator(), false).anyMatch(
-                        itemStack -> {
-                            if (!EnchantmentHelper.getEnchantments(itemStack).isEmpty() &&
-                                    EnchantmentHelper.getEnchantments(itemStack).containsKey(
-                                            TakumiEnchantmentCore.EXPLOSION_PROTECTION)) {
-                                itemStack.damageItem(1 + ((EntityLivingBase) entity).getRNG().nextInt(
-                                        3 + event.getWorld().getDifficulty().getDifficultyId()),
-                                        ((EntityLivingBase) entity));
-                                return true;
-                            }
-                            return false;
-                        });
-            }
-            return false;
-        });
     }
 
     @SubscribeEvent
