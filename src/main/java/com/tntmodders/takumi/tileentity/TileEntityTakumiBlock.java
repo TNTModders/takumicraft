@@ -2,6 +2,7 @@ package com.tntmodders.takumi.tileentity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -13,12 +14,16 @@ public class TileEntityTakumiBlock extends TileEntity {
     String location;
     Block block;
     int meta;
+    public String owner;
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.setPath(compound.getString("location"));
         this.setMeta(compound.getInteger("meta"));
+        if (compound.hasKey("owner") && !compound.getString("owner").isEmpty()) {
+            this.owner = compound.getString("owner");
+        }
     }
 
     public void setPath(String path) {
@@ -38,6 +43,9 @@ public class TileEntityTakumiBlock extends TileEntity {
             compound.setString("location", this.location);
         }
         compound.setInteger("meta", this.meta);
+        if (this.owner != null && !this.owner.isEmpty()) {
+            compound.setString("owner", this.owner);
+        }
         return compound;
     }
 
@@ -60,12 +68,19 @@ public class TileEntityTakumiBlock extends TileEntity {
     }
 
     public void setMeta(int meta) {
-
         this.meta = meta;
     }
 
     public void setState(IBlockState state) {
         this.state = state;
+    }
+
+    public void setOwner(EntityPlayer player) {
+        this.owner = player.getName();
+    }
+
+    public boolean isOwner(EntityPlayer player) {
+        return this.owner == null || this.owner.isEmpty() || player.getName().matches(this.owner);
     }
 
     @Override

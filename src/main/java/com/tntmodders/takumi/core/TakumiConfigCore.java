@@ -20,6 +20,7 @@ public class TakumiConfigCore {
     public static boolean TakumiHard;
     public static int rangeTakumiBookSync;
     public static boolean useNewYearTex;
+    public static boolean ownerLockTakumiBlock;
     //debugConfig
     public static boolean inDev = false;
     /**
@@ -85,6 +86,10 @@ public class TakumiConfigCore {
                 TakumiUtils.takumiTranslate("config.takumicraft.nytex.desc"), "config.takumicraft.nytex.prop");
 
         inEventServer = cfg.getBoolean("ineventserver", GENERAL, false, "ONLY IN SERVER, FOR TCS EVENT", "null");
+
+        ownerLockTakumiBlock = cfg.getBoolean("ownerLockTakumiBlock", GENERAL, true,
+                TakumiUtils.takumiTranslate("config.takumicraft.oltb.desc"), "config.takumicraft.oltb.prop");
+
         cfg.save();
     }
 }

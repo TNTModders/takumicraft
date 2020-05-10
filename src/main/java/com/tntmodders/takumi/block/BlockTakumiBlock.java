@@ -2,7 +2,9 @@ package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.EnumPushReaction;
@@ -10,10 +12,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -23,6 +28,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.GameType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -169,9 +176,9 @@ public class BlockTakumiBlock extends BlockContainer {
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
-            List<AxisAlignedBB> collidingBoxes,
-            @Nullable
-                    Entity entityIn, boolean p_185477_7_) {
+                                      List<AxisAlignedBB> collidingBoxes,
+                                      @Nullable
+                                              Entity entityIn, boolean p_185477_7_) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
             this.getActualState(state, worldIn, pos);
@@ -273,7 +280,7 @@ public class BlockTakumiBlock extends BlockContainer {
 
     @Override
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start,
-            Vec3d end) {
+                                            Vec3d end) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
             IBlockState state = ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
@@ -301,60 +308,64 @@ public class BlockTakumiBlock extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-            EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (playerIn.getHeldItem(hand).getItem() instanceof ItemBlock &&
-                playerIn.getHeldItem(hand).getItem() != Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK) &&
-                ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getRenderType(
-                        ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getDefaultState()) ==
-                        EnumBlockRenderType.MODEL) {
-            Block block = ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock();
-            if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
-                    block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.MODEL) {
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (worldIn.isRemote) {
+            return true;
+        }
+        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock && this.canEditBlock(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)), playerIn, true)) {
+            if (playerIn.getHeldItem(hand).getItem() instanceof ItemBlock &&
+                    playerIn.getHeldItem(hand).getItem() != Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK) &&
+                    ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getRenderType(
+                            ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getDefaultState()) ==
+                            EnumBlockRenderType.MODEL) {
+                Block block = ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock();
+                if (block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.MODEL) {
+                    if (!playerIn.isCreative()) {
+                        if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null && !worldIn.isRemote) {
+                            EntityItem item = new EntityItem(worldIn);
+                            item.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                            item.setItem(
+                                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos,
+                                            ((TileEntityTakumiBlock) worldIn.getTileEntity(
+                                                    pos)).getBlock().getStateFromMeta(
+                                                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta())));
+                            worldIn.spawnEntity(item);
+                        }
+                        playerIn.getHeldItem(hand).shrink(1);
+                    }
+
+                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath(block.getRegistryName().toString());
+                    IBlockState blockState = block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ,
+                            playerIn.getHeldItem(hand).getMetadata(), playerIn, hand);
+                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(block.getMetaFromState(blockState));
+                    worldIn.notifyNeighborsOfStateChange(pos, block, true);
+                    if (!worldIn.isRemote) {
+                        worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
+                    }
+                    this.getActualState(state, worldIn, pos);
+                    return true;
+                }
+            }
+            if (playerIn.getHeldItem(hand).isEmpty()) {
                 if (!playerIn.isCreative()) {
                     if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null && !worldIn.isRemote) {
                         EntityItem item = new EntityItem(worldIn);
                         item.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                        item.setItem(
-                                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos,
-                                        ((TileEntityTakumiBlock) worldIn.getTileEntity(
-                                                pos)).getBlock().getStateFromMeta(
-                                                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta())));
+                        item.setItem(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos,
+                                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
+                                        ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta())));
                         worldIn.spawnEntity(item);
                     }
-                    playerIn.getHeldItem(hand).shrink(1);
                 }
-
-                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath(block.getRegistryName().toString());
-                IBlockState blockState = block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ,
-                        playerIn.getHeldItem(hand).getMetadata(), playerIn, hand);
-                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(block.getMetaFromState(blockState));
-                worldIn.notifyNeighborsOfStateChange(pos, block, true);
+                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath("");
+                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(0);
+                worldIn.notifyNeighborsOfStateChange(pos, this, true);
                 if (!worldIn.isRemote) {
                     worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
                 }
                 this.getActualState(state, worldIn, pos);
                 return true;
             }
-        }
-        if (playerIn.getHeldItem(hand).isEmpty() && worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock) {
-            if (!playerIn.isCreative()) {
-                if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null && !worldIn.isRemote) {
-                    EntityItem item = new EntityItem(worldIn);
-                    item.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                    item.setItem(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos,
-                            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
-                                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta())));
-                    worldIn.spawnEntity(item);
-                }
-            }
-            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setPath("");
-            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setMeta(0);
-            worldIn.notifyNeighborsOfStateChange(pos, this, true);
-            if (!worldIn.isRemote) {
-                worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
-            }
-            this.getActualState(state, worldIn, pos);
-            return true;
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
@@ -372,16 +383,33 @@ public class BlockTakumiBlock extends BlockContainer {
     @Override
     public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
         super.onBlockClicked(worldIn, pos, playerIn);
-        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock && !playerIn.isCreative() &&
-                !worldIn.isRemote) {
-            if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
-                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().dropBlockAsItem(worldIn, pos,
-                        ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
-                                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta()), 0);
+        if (!worldIn.isRemote) {
+            if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock) {
+                if (this.canEditBlock(((TileEntityTakumiBlock) worldIn.getTileEntity(pos)), playerIn, true)) {
+                    if (!playerIn.isCreative()) {
+                        if (((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
+                            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().dropBlockAsItem(worldIn, pos,
+                                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
+                                            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta()), 0);
+                        }
+                        this.dropBlockAsItem(worldIn, pos, this.getDefaultState(), 0);
+                    }
+                    worldIn.setBlockToAir(pos);
+                }
             }
-            this.dropBlockAsItem(worldIn, pos, this.getDefaultState(), 0);
         }
-        worldIn.setBlockToAir(pos);
+    }
+
+    private boolean canEditBlock(TileEntityTakumiBlock tile, EntityPlayer playerIn, boolean showMsg) {
+        if (!TakumiConfigCore.ownerLockTakumiBlock) {
+            return true;
+        }
+        boolean flg = playerIn instanceof EntityPlayerMP && ((EntityPlayerMP) playerIn).interactionManager.getGameType() != GameType.ADVENTURE &&
+                (tile.isOwner(playerIn) || playerIn.canUseCommand(2, ""));
+        if (!flg && showMsg) {
+            playerIn.sendStatusMessage(new TextComponentString("§4§l" + TakumiUtils.takumiTranslate("tile.takumiblock.message")), true);
+        }
+        return flg;
     }
 
     @Override
@@ -417,6 +445,14 @@ public class BlockTakumiBlock extends BlockContainer {
         return EnumPushReaction.BLOCK;
     }
 
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock && placer instanceof EntityPlayer) {
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setOwner(((EntityPlayer) placer));
+        }
+    }
+
     /*@Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
@@ -442,8 +478,8 @@ public class BlockTakumiBlock extends BlockContainer {
 
     @Override
     public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
-            @Nullable
-                    Entity entity) {
+                                 @Nullable
+                                         Entity entity) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock) {
             if (((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
                 try {
