@@ -13,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -153,17 +154,17 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
         return this.prof;
     }
 
+    public void setForgeProfession(VillagerProfession prof) {
+        this.prof = prof;
+        this.setProfession(VillagerRegistry.getId(prof));
+    }
+
     public int getProfession() {
         return Math.max(this.dataManager.get(PROFESSION), 0);
     }
 
     public void setProfession(int profession) {
         this.dataManager.set(PROFESSION, profession);
-    }
-
-    public void setForgeProfession(VillagerProfession prof) {
-        this.prof = prof;
-        this.setProfession(VillagerRegistry.getId(prof));
     }
 
     @Override
@@ -332,15 +333,19 @@ public class EntityZombieVillagerCreeper extends EntityZombieCreeper {
     @Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+                                            @Nullable
+                                                    IEntityLivingData livingdata) {
         this.setProfession(this.world.rand.nextInt(6));
         return super.onInitialSpawn(difficulty, livingdata);
     }
 
     @Override
     protected void setArmors() {
-
+        if (this.rand.nextInt(25) == 0) {
+            if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()) {
+                this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.ELYTRA));
+            }
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderZombieCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperAttack;
 import com.tntmodders.takumi.entity.ai.EntityAIZombieCreeperSwell;
@@ -79,6 +80,10 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
         this.setSize(0.6F, 1.95F);
     }
 
+    public static void registerFixesZombie(DataFixer fixer) {
+        EntityLiving.registerFixesMob(fixer, EntityZombieCreeper.class);
+    }
+
     /**
      * Sets the width and height of the entity.
      */
@@ -119,6 +124,24 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     }
 
     /**
+     * Set whether this zombie is a child.
+     */
+    public void setChild(boolean childZombie) {
+        this.getDataManager().set(IS_CHILD, childZombie);
+
+        if (this.world != null && !this.world.isRemote) {
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+            iattributeinstance.removeModifier(BABY_SPEED_BOOST);
+
+            if (childZombie) {
+                iattributeinstance.applyModifier(BABY_SPEED_BOOST);
+            }
+        }
+
+        this.setChildSize(childZombie);
+    }
+
+    /**
      * Get this Entity's EnumCreatureAttribute
      */
     @Override
@@ -140,24 +163,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
      */
     public void setChildSize(boolean isChild) {
         this.multiplySize(isChild ? 0.5F : 1.0F);
-    }
-
-    /**
-     * Set whether this zombie is a child.
-     */
-    public void setChild(boolean childZombie) {
-        this.getDataManager().set(IS_CHILD, childZombie);
-
-        if (this.world != null && !this.world.isRemote) {
-            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-            iattributeinstance.removeModifier(BABY_SPEED_BOOST);
-
-            if (childZombie) {
-                iattributeinstance.applyModifier(BABY_SPEED_BOOST);
-            }
-        }
-
-        this.setChildSize(childZombie);
     }
 
     /**
@@ -213,10 +218,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
      */
     protected final void multiplySize(float size) {
         super.setSize(this.zombieWidth * size, this.zombieHeight * size);
-    }
-
-    public static void registerFixesZombie(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityZombieCreeper.class);
     }
 
     @Override
@@ -441,9 +442,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
      */
     @Override
     @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty,
-            @Nullable
-                    IEntityLivingData livingdata) {
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         float f = difficulty.getClampedAdditionalDifficulty();
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
@@ -509,12 +508,27 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
                     new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 3.0D + 1.0D, 2));
             this.setBreakDoorsAItask(true);
         }
-
         return livingdata;
+    }
+
+    public void setElytraFlying() {
+        this.setFlag(7, true);
+    }
+
+    public void clearElytraFlying() {
+        this.setFlag(7, true);
+        this.setFlag(7, false);
     }
 
     @Override
     public void onLivingUpdate() {
+        if (true) {
+            if (this.motionY < -0.1 && !this.isInWater() && !this.isInLava()) {
+                this.setElytraFlying();
+            } else {
+                this.clearElytraFlying();
+            }
+        }
         if (this.world.isDaytime() && !this.world.isRemote && !this.isChild() && this.shouldBurnInDay()) {
             float f = this.getBrightness();
 
@@ -575,7 +589,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
                             this.world.getLightFromNeighbors(new BlockPos(i1, j1, k1)) < 10) {
                         entityzombie.setPosition(i1, j1, k1);
 
-                        if (!this.world.isAnyPlayerWithinRangeAt((double) i1, (double) j1, (double) k1, 7.0D) &&
+                        if (!this.world.isAnyPlayerWithinRangeAt(i1, j1, k1, 7.0D) &&
                                 this.world.checkNoEntityCollision(entityzombie.getEntityBoundingBox(), entityzombie) &&
                                 this.world.getCollisionBoxes(entityzombie,
                                         entityzombie.getEntityBoundingBox()).isEmpty() &&
@@ -607,25 +621,92 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
 
     protected void setArmors() {
         if (this.rand.nextInt(3) == 0) {
-            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, this.getArmorItem(Items.IRON_SWORD));
+            if (this.rand.nextBoolean()) {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, this.getArmorItem(Items.IRON_SWORD));
+            } else {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, this.getArmorItem(Items.DIAMOND_SWORD));
+            }
         } else if (this.rand.nextInt(3) != 2) {
-            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, this.getArmorItem(Items.IRON_SHOVEL));
+            if (this.rand.nextBoolean()) {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, this.getArmorItem(Items.IRON_SHOVEL));
+            } else {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, this.getArmorItem(Items.DIAMOND_SHOVEL));
+            }
         }
-        if (this.rand.nextInt(25) == 0) {
-            this.setItemStackToSlot(EntityEquipmentSlot.OFFHAND,
-                    this.getArmorItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB)));
+        int id = this.rand.nextInt(3);
+        if (this.rand.nextInt(3) == 0) {
+            if (this.rand.nextInt(20) == 0) {
+                ItemStack stack = new ItemStack(TakumiBlockCore.CREEPER_ALTAR);
+                stack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);
+                this.setItemStackToSlot(EntityEquipmentSlot.HEAD, stack);
+                this.setItemStackToSlot(EntityEquipmentSlot.OFFHAND,
+                        this.getArmorItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB)));
+            } else {
+                switch (id) {
+                    case 1: {
+                        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, this.getArmorItem(Items.DIAMOND_HELMET));
+                        break;
+                    }
+                    case 2: {
+                        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, this.getArmorItem(Items.IRON_HELMET));
+                        break;
+                    }
+                    default: {
+                        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, this.getArmorItem(Items.CHAINMAIL_HELMET));
+                    }
+                }
+
+            }
         }
-        if (this.rand.nextInt(5) == 0) {
-            this.setItemStackToSlot(EntityEquipmentSlot.HEAD, this.getArmorItem(Items.CHAINMAIL_HELMET));
+        if (this.rand.nextInt(3) == 0) {
+            switch (id) {
+                case 1: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.DIAMOND_CHESTPLATE));
+                    break;
+                }
+                case 2: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.IRON_CHESTPLATE));
+                    break;
+                }
+                default: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.CHAINMAIL_CHESTPLATE));
+                }
+            }
         }
-        if (this.rand.nextInt(5) == 0) {
-            this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.CHAINMAIL_CHESTPLATE));
+        if (this.rand.nextInt(3) == 0) {
+            switch (id) {
+                case 1: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.LEGS, this.getArmorItem(Items.DIAMOND_LEGGINGS));
+                    break;
+                }
+                case 2: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.LEGS, this.getArmorItem(Items.IRON_LEGGINGS));
+                    break;
+                }
+                default: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.LEGS, this.getArmorItem(Items.CHAINMAIL_LEGGINGS));
+                }
+            }
         }
-        if (this.rand.nextInt(5) == 0) {
-            this.setItemStackToSlot(EntityEquipmentSlot.LEGS, this.getArmorItem(Items.CHAINMAIL_LEGGINGS));
+        if (this.rand.nextInt(3) == 0) {
+            switch (id) {
+                case 1: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.FEET, this.getArmorItem(Items.DIAMOND_BOOTS));
+                    break;
+                }
+                case 2: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.FEET, this.getArmorItem(Items.IRON_BOOTS));
+                    break;
+                }
+                default: {
+                    this.setItemStackToSlot(EntityEquipmentSlot.FEET, this.getArmorItem(Items.CHAINMAIL_BOOTS));
+                }
+            }
         }
-        if (this.rand.nextInt(5) == 0) {
-            this.setItemStackToSlot(EntityEquipmentSlot.FEET, this.getArmorItem(Items.CHAINMAIL_BOOTS));
+        if (this.rand.nextInt(20) == 0) {
+            if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()) {
+                this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.ELYTRA));
+            }
         }
     }
 
@@ -633,7 +714,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
      * Gives armor or weapon for entity based on given DifficultyInstance
      */
 
-    private ItemStack getArmorItem(Item item) {
+    protected ItemStack getArmorItem(Item item) {
         ItemStack itemStack = new ItemStack(item);
         int i = item.getMaxDamage(itemStack) - 1;
         if (i > 0) {

@@ -1123,6 +1123,4 @@ public class TakumiEvents {
             }
         }
     }
-
-
 }
