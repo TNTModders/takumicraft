@@ -317,6 +317,9 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "creeperlaser"),
                 EntityTakumiLaser.class, "creeperlaser", 928, TakumiCraftCore.TakumiInstance, 160, 2,
                 false);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumithrowgrenede_sp"),
+                EntityTakumiThrowGrenede_SP.class, "takumithrowgrenede", 929, TakumiCraftCore.TakumiInstance, 64, 2,
+                true);
     }
 
     @SideOnly(Side.CLIENT)

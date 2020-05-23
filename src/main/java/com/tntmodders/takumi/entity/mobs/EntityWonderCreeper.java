@@ -144,6 +144,7 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        this.clearActivePotions();
         if (!this.dead) {
             return super.takumiExplodeEvent(event);
         }

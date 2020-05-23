@@ -11,6 +11,7 @@ import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -30,6 +31,8 @@ import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Collection;
 
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
 
@@ -170,6 +173,26 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public void setDead() {
         super.setDead();
+        //prevent #EntityCreeper.spawnLingeringCloud();
+        Collection<PotionEffect> collection = this.getActivePotionEffects();
+
+        if (!collection.isEmpty()) {
+            EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
+            entityareaeffectcloud.setRadius(2.5F);
+            entityareaeffectcloud.setRadiusOnUse(-0.5F);
+            entityareaeffectcloud.setWaitTime(10);
+            entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration() / 2);
+            entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float) entityareaeffectcloud.getDuration());
+
+            for (PotionEffect potioneffect : collection) {
+                entityareaeffectcloud.addEffect(new PotionEffect(potioneffect));
+            }
+
+            if (!this.world.isRemote) {
+                this.world.spawnEntity(entityareaeffectcloud);
+            }
+        }
+        this.getActivePotionEffects().clear();
     }
 
     @Override

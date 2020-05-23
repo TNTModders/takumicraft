@@ -479,8 +479,8 @@ public class TakumiEvents {
                         }
                         flg = true;
                     }
-                    return flg;
                 }
+                return flg;
             }
             return false;
         });
@@ -559,6 +559,27 @@ public class TakumiEvents {
                 }
                 if (grenade instanceof EntityTakumiThrowGrenede) {
                     event.getAffectedEntities().removeIf(entity -> entity instanceof EntityMob);
+                    if (TakumiConfigCore.inEventServer && grenade.getThrower() != null && grenade instanceof EntityTakumiThrowGrenede_SP) {
+                        event.getAffectedEntities().removeIf(entity -> {
+                            if (entity instanceof EntityPlayer && entity != grenade.getThrower() && entity.getTeam() != null) {
+                                switch (entity.getTeam().getCollisionRule()) {
+                                    case NEVER: {
+                                        return true;
+                                    }
+                                    case HIDE_FOR_OTHER_TEAMS: {
+                                        return entity.isOnSameTeam(grenade.getThrower());
+                                    }
+                                    case HIDE_FOR_OWN_TEAM: {
+                                        return !entity.isOnSameTeam(grenade.getThrower());
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                            return false;
+                        });
+                    }
                 }
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {
@@ -1102,4 +1123,6 @@ public class TakumiEvents {
             }
         }
     }
+
+
 }

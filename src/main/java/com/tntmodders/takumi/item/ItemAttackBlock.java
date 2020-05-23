@@ -32,8 +32,11 @@ public class ItemAttackBlock extends Item {
             if (worldIn.isAirBlock(blockPos) && worldIn.isAirBlock(blockPos.up())) {
                 attackBlock.setPosition(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
             }
-            if (worldIn.spawnEntity(attackBlock) && !player.isCreative()) {
-                player.getHeldItem(hand).shrink(1);
+            if (worldIn.spawnEntity(attackBlock)) {
+                worldIn.playBroadcastSound(1038, pos, 0);
+                if(!player.isCreative()){
+                    player.getHeldItem(hand).shrink(1);
+                }
             }
 
         }
