@@ -146,6 +146,10 @@ public class TakumiBlockCore {
             new BlockTakumiMonsterBomb(EntitySinobiCreeper.class, "sinobicreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_INVISIBLE =
             new BlockTakumiMonsterBomb(EntityInvisibleCreeper.class, "invisiblecreeper");
+    public static final BlockTakumiMonsterBomb TAKUMI_BOMB_KEEP =
+            new BlockTakumiMonsterBomb(EntityKeepCreeper.class, "keepcreeper");
+    public static final BlockTakumiMonsterBomb TAKUMI_BOMB_LUCK =
+            new BlockTakumiMonsterBomb(EntityLuckCreeper.class, "luckcreeper");
 
     public static final Block TAKUMI_BLOCK = new BlockTakumiBlock();
     public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();
