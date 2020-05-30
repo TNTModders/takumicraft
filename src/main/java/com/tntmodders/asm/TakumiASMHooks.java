@@ -1,6 +1,5 @@
 package com.tntmodders.asm;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
@@ -37,7 +36,6 @@ public class TakumiASMHooks {
 
     public static void TakumiExplodeHook(EntityCreeper creeper) {
         try {
-            TakumiCraftCore.LOGGER.info("suc");
             if (creeper instanceof EntityTakumiAbstractCreeper) {
                 int i = ((ITakumiEntity) creeper).getExplosionPower();
                 Field field = TakumiASMNameMap.getField(EntityCreeper.class, "explosionRadius");

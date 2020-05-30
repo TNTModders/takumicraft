@@ -309,6 +309,9 @@ public class BlockTakumiBlock extends BlockContainer {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
                                     EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!(playerIn.getHeldItem(hand).getItem() instanceof ItemBlock) && !playerIn.getHeldItem(hand).isEmpty()) {
+            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+        }
         if (worldIn.isRemote) {
             return true;
         }

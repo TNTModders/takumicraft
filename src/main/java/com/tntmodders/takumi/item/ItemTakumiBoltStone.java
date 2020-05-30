@@ -3,6 +3,7 @@ package com.tntmodders.takumi.item;
 import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -74,5 +75,13 @@ public class ItemTakumiBoltStone extends Item {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
+    }
+
+    @Override
+    public boolean onEntityItemUpdate(EntityItem entityItem) {
+        if (entityItem instanceof EntityItem) {
+            entityItem.setEntityInvulnerable(entityItem.ticksExisted < 1200);
+        }
+        return super.onEntityItemUpdate(entityItem);
     }
 }

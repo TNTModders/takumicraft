@@ -523,7 +523,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onLivingUpdate() {
         if (true) {
-            if (this.motionY < -0.1 && !this.isInWater() && !this.isInLava()) {
+            if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA && this.motionY < -0.1 && !this.isInWater() && !this.isInLava()) {
                 this.setElytraFlying();
             } else {
                 this.clearElytraFlying();
@@ -703,7 +703,7 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
                 }
             }
         }
-        if (this.rand.nextInt(20) == 0) {
+        if (this.rand.nextInt(7) == 0) {
             if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()) {
                 this.setItemStackToSlot(EntityEquipmentSlot.CHEST, this.getArmorItem(Items.ELYTRA));
             }

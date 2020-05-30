@@ -198,6 +198,7 @@ public class TakumiEvents {
             e.player.setSpawnPoint(null, true);
             String s = e.player.getName();
             scoreboard.removeObjectiveFromEntity(s, null);
+            e.player.getTags().clear();
         }
     }
 

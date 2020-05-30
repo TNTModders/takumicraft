@@ -51,15 +51,19 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
 
     @Override
     public void onLivingUpdate() {
-        if (this.world.isRemote && this.world.loadedTileEntityList.stream().anyMatch(
-                tileEntity -> tileEntity.getBlockType() == TakumiBlockCore.DARKCORE_ON)) {
-            for (int i = 0; i < 10; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.FLAME,
-                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
-                        this.posY + this.rand.nextDouble() * this.height,
-                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+        try {
+            if (this.world.isRemote && this.world.loadedTileEntityList.stream().anyMatch(
+                    tileEntity -> tileEntity.getBlockType() == TakumiBlockCore.DARKCORE_ON)) {
+                for (int i = 0; i < 10; ++i) {
+                    this.world.spawnParticle(EnumParticleTypes.FLAME,
+                            this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
+                            this.posY + this.rand.nextDouble() * this.height,
+                            this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
+                }
+                this.setFire(100);
             }
-            this.setFire(100);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         super.onLivingUpdate();
     }

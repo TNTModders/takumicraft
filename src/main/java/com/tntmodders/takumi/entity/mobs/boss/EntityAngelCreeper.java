@@ -204,6 +204,7 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
         if (this.deathTicks > 0) {
             this.world.loadedEntityList.forEach(entity -> {
                 if (!(entity instanceof EntityAngelCreeper) && this.getDistanceSqToEntity(entity) < 100) {
+                    if(!(entity instanceof EntityPlayer) || !(((EntityPlayer) entity).isCreative() || ((EntityPlayer) entity).isSpectator()))
                     entity.motionX += (this.posX - entity.posX) / 100;
                     entity.motionY += (this.posY - entity.posY) / 100;
                     entity.motionZ += (this.posZ - entity.posZ) / 100;

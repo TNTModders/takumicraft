@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,5 +26,13 @@ public class ItemHighCore extends Item {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean onEntityItemUpdate(EntityItem entityItem) {
+        if (entityItem instanceof EntityItem) {
+            entityItem.setEntityInvulnerable(entityItem.ticksExisted < 1200);
+        }
+        return super.onEntityItemUpdate(entityItem);
     }
 }

@@ -9,6 +9,7 @@ import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.*;
@@ -140,5 +141,14 @@ public class ItemTakumiBowGun extends Item {
     @Override
     public boolean isEnchantable(ItemStack stack) {
         return false;
+    }
+
+
+    @Override
+    public boolean onEntityItemUpdate(EntityItem entityItem) {
+        if (entityItem instanceof EntityItem) {
+            entityItem.setEntityInvulnerable(entityItem.ticksExisted < 1200);
+        }
+        return super.onEntityItemUpdate(entityItem);
     }
 }

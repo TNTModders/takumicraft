@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -41,5 +42,13 @@ public class ItemEvoCore extends Item {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean onEntityItemUpdate(EntityItem entityItem) {
+        if (entityItem instanceof EntityItem) {
+            entityItem.setEntityInvulnerable(entityItem.ticksExisted < 1200);
+        }
+        return super.onEntityItemUpdate(entityItem);
     }
 }
