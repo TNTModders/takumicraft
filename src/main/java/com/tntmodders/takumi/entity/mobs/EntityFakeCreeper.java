@@ -61,7 +61,7 @@ public class EntityFakeCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (this.world.isRemote) {
             event.getAffectedEntities().forEach(entity -> {
-                if (entity instanceof EntityPlayer) {
+                if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !((EntityPlayer) entity).isSpectator()) {
                     ((EntityPlayer) entity).openGui(TakumiCraftCore.TakumiInstance, 1, this.world, (int) entity.posX, (int) entity.posY, (int) entity.posZ);
                 }
             });

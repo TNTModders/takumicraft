@@ -86,7 +86,11 @@ public class TakumiEvents {
                 event.getRight().getItem() instanceof ItemTypeCoreSP) {
             event.setCost(10);
             event.setMaterialCost(1);
-            event.setOutput(new ItemStack(event.getLeft().getItem(), 1));
+            ItemStack stack = new ItemStack(event.getLeft().getItem(), 1);
+            if (event.getLeft().hasDisplayName()) {
+                stack.setStackDisplayName(event.getLeft().getDisplayName());
+            }
+            event.setOutput(stack);
             if (event.getLeft().isItemEnchanted()) {
                 for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
                         event.getLeft()).entrySet()) {
@@ -109,7 +113,11 @@ public class TakumiEvents {
                 !event.getLeft().isItemEnchanted()) {
             event.setCost(15);
             event.setMaterialCost(64);
-            event.setOutput(new ItemStack(event.getLeft().getItem(), 1));
+            ItemStack stack = new ItemStack(event.getLeft().getItem(), 1);
+            if (event.getLeft().hasDisplayName()) {
+                stack.setStackDisplayName(event.getLeft().getDisplayName());
+            }
+            event.setOutput(stack);
             if (event.getLeft().isItemEnchanted()) {
                 for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
                         event.getLeft()).entrySet()) {
@@ -120,7 +128,11 @@ public class TakumiEvents {
         } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.CHAMP_CORE) {
             event.setCost(30);
             event.setMaterialCost(1);
-            event.setOutput(new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata()));
+            ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
+            if (event.getLeft().hasDisplayName()) {
+                stack.setStackDisplayName(event.getLeft().getDisplayName());
+            }
+            event.setOutput(stack);
             int i = 10;
             if (event.getLeft().isItemEnchanted()) {
                 for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
@@ -136,7 +148,11 @@ public class TakumiEvents {
         } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.PARALYSIS_CORE) {
             event.setCost(10);
             event.setMaterialCost(1);
-            event.setOutput(new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata()));
+            ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
+            if (event.getLeft().hasDisplayName()) {
+                stack.setStackDisplayName(event.getLeft().getDisplayName());
+            }
+            event.setOutput(stack);
             int i = 1;
             if (event.getLeft().isItemEnchanted()) {
                 for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
@@ -884,6 +900,11 @@ public class TakumiEvents {
                     players.forEach(playerMP -> playerMP.getAdvancements().grantCriterion(
                             playerMP.getServer().getAdvancementManager().getAdvancement(
                                     new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + name)), name));
+                    if (event.getEntityLiving().getClass() == EntitySheepCreeper.class && ((EntitySheepCreeper) event.getEntityLiving()).getRainbow()) {
+                        players.forEach(playerMP -> TakumiUtils.giveAdvancementImpossible(playerMP,
+                                new ResourceLocation(TakumiCraftCore.MODID, "disarmament"),
+                                new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep")));
+                    }
                 }
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {
                     boolean isOK = true;
@@ -904,18 +925,36 @@ public class TakumiEvents {
             }
 
         }
-        if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityCreeper &&
+/*        if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityCreeper &&
                 ((EntityLiving) event.getEntityLiving()).getAttackTarget() instanceof EntityAttackBlock &&
                 event.getSource().getTrueSource() instanceof EntityPlayer) {
             if (!event.getEntityLiving().world.isRemote) {
                 event.getEntityLiving().entityDropItem(new ItemStack(TakumiItemCore.ENERGY_CORE, 1), 0);
             }
             EntityAttackBlock entity = ((EntityAttackBlock) ((EntityLiving) event.getEntityLiving()).getAttackTarget());
-            entity.setHealth(entity.getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
+            if (entity.getActivePotionEffect(MobEffects.NIGHT_VISION) != null) {
+                entity.setHealth(entity.getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
+                TakumiCraftCore.LOGGER.info(entity.getHealth());
+            }
+            entity.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 2));
             if (entity.getHealth() <= 0) {
                 event.getEntityLiving().world.playerEntities.forEach(
                         player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
             }
+        }*/
+        if (!event.getEntityLiving().world.isRemote && event.getEntityLiving().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) &&
+                event.getSource().getTrueSource() instanceof EntityPlayer) {
+            event.getEntityLiving().world.loadedEntityList.stream().filter(entity -> entity instanceof EntityAttackBlock).forEach(entity -> {
+                if (((EntityAttackBlock) entity).spawns.contains(event.getEntityLiving())) {
+                    ((EntityAttackBlock) entity).setHealth(((EntityAttackBlock) entity).getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
+                    event.getEntityLiving().entityDropItem(new ItemStack(TakumiItemCore.ENERGY_CORE, 1), 0);
+                    ((EntityAttackBlock) entity).spawns.remove(event.getEntityLiving());
+                    if (((EntityAttackBlock) entity).getHealth() <= 0) {
+                        event.getEntityLiving().world.playerEntities.forEach(
+                                player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
+                    }
+                }
+            });
         }
         if (TakumiConfigCore.useTP) {
             ScoreObjective objective = event.getEntityLiving().world.getScoreboard().getObjective("tp");

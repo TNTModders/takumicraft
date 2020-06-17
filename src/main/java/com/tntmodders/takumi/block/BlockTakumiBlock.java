@@ -168,8 +168,12 @@ public class BlockTakumiBlock extends BlockContainer {
     public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing facing) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
-            return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getBlockFaceShape(world,
-                    ((TileEntityTakumiBlock) world.getTileEntity(pos)).state, pos, facing);
+            try {
+                return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getBlockFaceShape(world,
+                        ((TileEntityTakumiBlock) world.getTileEntity(pos)).state, pos, facing);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return super.getBlockFaceShape(world, state, pos, facing);
     }

@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,10 +11,7 @@ import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.ItemArrow;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -47,6 +45,11 @@ public class ItemMagicBow extends ItemBow {
                         (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
             }
         });
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == Item.getItemFromBlock(TakumiBlockCore.MAGIC_BLOCK) || super.getIsRepairable(toRepair, repair);
     }
 
     @Override

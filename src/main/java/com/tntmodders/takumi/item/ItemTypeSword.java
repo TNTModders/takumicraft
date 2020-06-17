@@ -2,6 +2,7 @@ package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityWaterTypeForce;
@@ -137,7 +138,7 @@ public class ItemTypeSword extends ItemSword {
                 if (entityIn.ticksExisted % 20 == 0) {
                     worldIn.getEntities(EntityMob.class,
                             input -> entityIn.getDistanceSqToEntity(input) < 7f).forEach(entityLivingBase -> {
-                        if (entityLivingBase.getClass() != entityIn.getClass()) {
+                        if (entityLivingBase.getClass() != entityIn.getClass() && !worldIn.isRemote) {
                             entityLivingBase.attackEntityFrom(
                                     DamageSource.causeMobDamage(((EntityLivingBase) entityIn)).setExplosion(), 5f);
                         }
@@ -147,7 +148,7 @@ public class ItemTypeSword extends ItemSword {
             if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_MAGIC)) {
                 worldIn.getEntities(EntityLivingBase.class,
                         input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(entityLivingBase -> {
-                    if (entityLivingBase.getClass() != entityIn.getClass()) {
+                    if (entityLivingBase.getClass() != entityIn.getClass() && !worldIn.isRemote) {
                         entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2));
                     }
                 });
@@ -199,5 +200,11 @@ public class ItemTypeSword extends ItemSword {
             }
         }
         return super.onEntitySwing(entityLiving, stack);
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return (toRepair.getItem() != TakumiItemCore.TAKUMI_TYPE_SWORD_NORMAL &&
+                repair.getItem() == TakumiItemCore.TAKUMI_TYPE_CORE && repair.getMetadata() + 1 == type.getId()) || super.getIsRepairable(toRepair, repair);
     }
 }

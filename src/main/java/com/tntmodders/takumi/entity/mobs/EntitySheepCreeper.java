@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -344,11 +343,11 @@ public class EntitySheepCreeper extends EntityTakumiAbstractCreeper implements I
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        if (source.getTrueSource() instanceof EntityPlayerMP && this.getRainbow() &&
+/*        if (source.getTrueSource() instanceof EntityPlayerMP && this.getRainbow() &&
                 !TakumiUtils.getAdvancementUnlocked(new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"))) {
             TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) source.getTrueSource(),
                     new ResourceLocation(TakumiCraftCore.MODID, "disarmament"),
                     new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep"));
-        }
+        }*/
     }
 }

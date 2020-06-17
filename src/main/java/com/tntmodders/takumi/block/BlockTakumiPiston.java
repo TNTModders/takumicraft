@@ -41,6 +41,55 @@ public class BlockTakumiPiston extends BlockPistonBase {
         this.setResistance(10000000f);
     }
 
+    @Nullable
+    public static EnumFacing getFacing(int meta) {
+        int i = meta & 7;
+        return i > 5 ? null : EnumFacing.getFront(i);
+    }
+
+    @Override
+    public EnumPushReaction getMobilityFlag(IBlockState state) {
+        return state.getValue(EXTENDED) ? super.getMobilityFlag(state) :EnumPushReaction.PUSH_ONLY;
+    }
+
+    /**
+     * Checks if the piston can push the given BlockState.
+     */
+    public static boolean canPush(IBlockState blockStateIn, World worldIn, BlockPos pos, EnumFacing facing, boolean destroyBlocks, EnumFacing p_185646_5_) {
+        Block block = blockStateIn.getBlock();
+
+        if (block == Blocks.OBSIDIAN) {
+            return false;
+        } else if (!worldIn.getWorldBorder().contains(pos)) {
+            return false;
+        } else if (pos.getY() >= 0 && (facing != EnumFacing.DOWN || pos.getY() != 0)) {
+            if (pos.getY() <= worldIn.getHeight() - 1 && (facing != EnumFacing.UP || pos.getY() != worldIn.getHeight() - 1)) {
+                if (block != TakumiBlockCore.CREEPER_PISTON && block != TakumiBlockCore.CREEPER_STICKY_PISTON) {
+                    if (blockStateIn.getBlockHardness(worldIn, pos) == -1.0F) {
+                        return false;
+                    }
+
+                    switch (blockStateIn.getMobilityFlag()) {
+                        case BLOCK:
+                            return false;
+                        case DESTROY:
+                            return destroyBlocks;
+                        case PUSH_ONLY:
+                            return facing == p_185646_5_;
+                    }
+                } else if (blockStateIn.getValue(EXTENDED)) {
+                    return false;
+                }
+
+                return !block.hasTileEntity(blockStateIn);
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public boolean causesSuffocation(IBlockState state) {
         return !state.getValue(EXTENDED);
@@ -243,50 +292,6 @@ public class BlockTakumiPiston extends BlockPistonBase {
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
-    }
-
-    @Nullable
-    public static EnumFacing getFacing(int meta) {
-        int i = meta & 7;
-        return i > 5 ? null : EnumFacing.getFront(i);
-    }
-
-    /**
-     * Checks if the piston can push the given BlockState.
-     */
-    public static boolean canPush(IBlockState blockStateIn, World worldIn, BlockPos pos, EnumFacing facing, boolean destroyBlocks, EnumFacing p_185646_5_) {
-        Block block = blockStateIn.getBlock();
-
-        if (block == Blocks.OBSIDIAN) {
-            return false;
-        } else if (!worldIn.getWorldBorder().contains(pos)) {
-            return false;
-        } else if (pos.getY() >= 0 && (facing != EnumFacing.DOWN || pos.getY() != 0)) {
-            if (pos.getY() <= worldIn.getHeight() - 1 && (facing != EnumFacing.UP || pos.getY() != worldIn.getHeight() - 1)) {
-                if (block != TakumiBlockCore.CREEPER_PISTON && block != TakumiBlockCore.CREEPER_STICKY_PISTON) {
-                    if (blockStateIn.getBlockHardness(worldIn, pos) == -1.0F) {
-                        return false;
-                    }
-
-                    switch (blockStateIn.getMobilityFlag()) {
-                        case BLOCK:
-                            return false;
-                        case DESTROY:
-                            return destroyBlocks;
-                        case PUSH_ONLY:
-                            return facing == p_185646_5_;
-                    }
-                } else if (blockStateIn.getValue(EXTENDED)) {
-                    return false;
-                }
-
-                return !block.hasTileEntity(blockStateIn);
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
     }
 
     private boolean doMove(World worldIn, BlockPos pos, EnumFacing direction, boolean extending) {

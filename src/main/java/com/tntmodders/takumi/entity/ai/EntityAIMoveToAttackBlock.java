@@ -94,38 +94,40 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
     @Override
     public void updateTask() {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
-        this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
-        this.attacker.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.75);
-        if (this.attacker.getNavigator().noPath()) {
-            double distX = this.attacker.posX - entitylivingbase.posX;
-            double distZ = this.attacker.posZ - entitylivingbase.posZ;
-            if (distX * distX + distZ * distZ < 36 && this.attacker instanceof EntityCreeper) {
-                ((EntityCreeper) this.attacker).ignite();
-            } else {
-                double offX = -8 + this.world.rand.nextInt(17);
-                double offY = -8 + this.world.rand.nextInt(17);
-                double offZ = -8 + this.world.rand.nextInt(17);
-               this.attacker.getMoveHelper().setMoveTo(entitylivingbase.posX + offX, entitylivingbase.posY + offY, entitylivingbase.posZ + offZ, 0.75);
+        if (entitylivingbase != null) {
+            this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
+            this.attacker.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.75);
+            if (this.attacker.getNavigator().noPath()) {
+                double distX = this.attacker.posX - entitylivingbase.posX;
+                double distZ = this.attacker.posZ - entitylivingbase.posZ;
+                if (distX * distX + distZ * distZ < 36 && this.attacker instanceof EntityCreeper) {
+                    ((EntityCreeper) this.attacker).ignite();
+                } else {
+                    double offX = -8 + this.world.rand.nextInt(17);
+                    double offY = -8 + this.world.rand.nextInt(17);
+                    double offZ = -8 + this.world.rand.nextInt(17);
+                    this.attacker.getMoveHelper().setMoveTo(entitylivingbase.posX + offX, entitylivingbase.posY + offY, entitylivingbase.posZ + offZ, 0.75);
+                }
             }
-        }
-        double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY,
-                entitylivingbase.posZ);
-        --this.delayCounter;
+            double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY,
+                    entitylivingbase.posZ);
+            --this.delayCounter;
 
-        if (this.delayCounter <= 0 && (this.targetX == 0.0D && this.targetY == 0.0D && this.targetZ == 0.0D ||
-                entitylivingbase.getDistanceSq(this.targetX, this.targetY, this.targetZ) >= 1.0D ||
-                this.attacker.getRNG().nextFloat() < 0.1F)) {
-            this.targetX = entitylivingbase.posX;
-            this.targetY = entitylivingbase.getEntityBoundingBox().minY;
-            this.targetZ = entitylivingbase.posZ;
-            this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
-            if (!this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget)) {
-                this.delayCounter += 5;
+            if (this.delayCounter <= 0 && (this.targetX == 0.0D && this.targetY == 0.0D && this.targetZ == 0.0D ||
+                    entitylivingbase.getDistanceSq(this.targetX, this.targetY, this.targetZ) >= 1.0D ||
+                    this.attacker.getRNG().nextFloat() < 0.1F)) {
+                this.targetX = entitylivingbase.posX;
+                this.targetY = entitylivingbase.getEntityBoundingBox().minY;
+                this.targetZ = entitylivingbase.posZ;
+                this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
+                if (!this.attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.speedTowardsTarget)) {
+                    this.delayCounter += 5;
+                }
             }
-        }
 
-        this.attackTick = Math.max(this.attackTick - 1, 0);
-        this.checkAndPerformAttack(entitylivingbase, d0);
+            this.attackTick = Math.max(this.attackTick - 1, 0);
+            this.checkAndPerformAttack(entitylivingbase, d0);
+        }
     }
 
     protected void checkAndPerformAttack(EntityLivingBase p_190102_1_, double p_190102_2_) {
