@@ -25,10 +25,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class ItemBattleShield extends ItemShield implements IItemAntiExplosion {
     public static final ResourceLocation SHIELD_TEXTURE =
             new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/shield_battle.png");
+    protected static final UUID SHIELD_ARMOR_MODIFIER = UUID.fromString("7ABE2D17-F418-4EC4-BFC2-E7B2A1AB89B8");
+    protected static final UUID SHIELD_SPEED_MODIFIER = UUID.fromString("7ABE2D17-F418-4EC4-BFC2-E7B2A1AB89B9");
     private final boolean isPowered;
 
     public ItemBattleShield(boolean flg) {
@@ -58,6 +61,14 @@ public class ItemBattleShield extends ItemShield implements IItemAntiExplosion {
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if (!attacker.world.isRemote) {
             attacker.world.createExplosion(attacker, target.posX, target.posY, target.posZ, 0f, false);
+            double d1 = attacker.posX - target.posX;
+            double d0;
+
+            for (d0 = attacker.posZ - target.posZ; d1 * d1 + d0 * d0 < 1.0E-4D; d0 = (Math.random() - Math.random()) * 0.01D) {
+                d1 = (Math.random() - Math.random()) * 0.01D;
+            }
+
+            target.knockBack(attacker, 1.5F, d1, d0);
         }
         stack.damageItem(1, attacker);
         return true;
@@ -116,17 +127,26 @@ public class ItemBattleShield extends ItemShield implements IItemAntiExplosion {
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                    new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.isPowered ? 19 : 6, 0));
+                    new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.isPowered ? 29 : 9, 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
                     new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.5d, 0));
+            multimap.put(SharedMonsterAttributes.ARMOR.getName(),
+                    new AttributeModifier(SHIELD_ARMOR_MODIFIER, "Armor modifier", 10f, 0));
+            multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(),
+                    new AttributeModifier(SHIELD_SPEED_MODIFIER, "Speed modifier", -0.025f, 0));
+        } else if (equipmentSlot == EntityEquipmentSlot.OFFHAND) {
+            multimap.put(SharedMonsterAttributes.ARMOR.getName(),
+                    new AttributeModifier(SHIELD_ARMOR_MODIFIER, "Armor modifier", 10f, 0));
+            multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(),
+                    new AttributeModifier(SHIELD_SPEED_MODIFIER, "Speed modifier", -0.025f, 0));
         }
         return multimap;
     }
 
     @Override
     public boolean isShield(ItemStack stack,
-            @Nullable
-                    EntityLivingBase entity) {
+                            @Nullable
+                                    EntityLivingBase entity) {
         return true;
     }
 }
