@@ -42,7 +42,7 @@ public class ItemMagicBow extends ItemBow {
                     return 0.0F;
                 }
                 return entityIn.getActiveItemStack().getItem() != TakumiItemCore.MAGIC_BOW ? 0.0F :
-                        (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F;
+                        (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15.0F;
             }
         });
     }
@@ -91,6 +91,7 @@ public class ItemMagicBow extends ItemBow {
                                 entityarrow.setIsCritical(true);
                             }
 
+                            entityarrow.setDamage(entityarrow.getDamage() / 1.25);
                             int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 
                             if (j > 0) {
