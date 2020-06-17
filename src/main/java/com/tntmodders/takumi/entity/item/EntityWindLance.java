@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 public class EntityWindLance extends EntityTippedArrow {
     public EntityWindLance(World worldIn) {
         super(worldIn);
+        this.setSize(0.6F, 1.8F);
     }
 
     public EntityWindLance(World worldIn, EntityLivingBase shooter) {
@@ -25,20 +26,19 @@ public class EntityWindLance extends EntityTippedArrow {
         if (!(raytraceResultIn.entityHit instanceof EntityPlayer)) {
             Entity entity = this.getRidingEntity();
             if (entity != null) {
-                entity.setPosition(entity.posX, entity.posY + 0.5, entity.posZ);
+                entity.setPosition(this.prevPosX, this.prevPosY, this.prevPosZ);
             }
             this.dismountRidingEntity();
             this.setDead();
         }
     }
 
-
     @Override
     public void onUpdate() {
         super.onUpdate();
         this.setInvisible(true);
         if (!this.world.isRemote) {
-            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 1.5f, false, false);
+            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 1.25);
         }
     }
 
@@ -65,5 +65,10 @@ public class EntityWindLance extends EntityTippedArrow {
     @Override
     public boolean shouldDismountInWater(Entity rider) {
         return false;
+    }
+
+    @Override
+    public double getMountedYOffset() {
+        return 0;
     }
 }

@@ -101,7 +101,7 @@ public class ItemTypeSword extends ItemSword {
                 if (!attacker.world.isRemote) {
                     EntityWindLance lance = new EntityWindLance(attacker.world, attacker);
                     lance.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-                    lance.setAim(attacker, -5, attacker.rotationYaw, 0.0F, 3.0F, 1.0F);
+                    lance.setAim(attacker, 0, attacker.rotationYaw, 0.0F, 1.0F, 1.0F);
                     attacker.world.spawnEntity(lance);
                     attacker.setPosition(lance.posX, lance.posY, lance.posZ);
                     attacker.startRiding(lance, true);
