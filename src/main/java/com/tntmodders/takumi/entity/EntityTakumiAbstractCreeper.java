@@ -6,13 +6,10 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
-import com.tntmodders.takumi.entity.ai.EntityAIMoveToAttackBlock;
-import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.MobEffects;
@@ -34,6 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 
+//import com.tntmodders.takumi.entity.item.EntityAttackBlock;
+
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
 
     private int stoppingCounter;
@@ -44,13 +43,13 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
         this.tasks.addTask(3, new EntityAIFollowCatCreeper(this));
-        this.tasks.addTask(3, new EntityAIMoveToAttackBlock(this, 1.5, true));
+        /*this.tasks.addTask(3, new EntityAIMoveToAttackBlock(this, 1.5, true));
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityAttackBlock.class, false) {
             @Override
             protected double getTargetDistance() {
                 return 256;
             }
-        });
+        });*/
     }
 
     public static float getTypeMatchFactor(EnumTakumiType attacker, EnumTakumiType damaged) {
@@ -224,14 +223,14 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             }
             this.dmgCount++;
         }
-        if ((this.takumiType().getId() == EnumTakumiType.FIRE.getId() || this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock))
+        if ((this.takumiType().getId() == EnumTakumiType.FIRE.getId()/* || this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock)*/)
                 && damageSrc.isFireDamage()) {
             return;
         }
         if (this.takumiType().getId() == EnumTakumiType.WATER.getId() && damageSrc == DamageSource.DROWN) {
             return;
         }
-        if ((this.takumiType().getId() == EnumTakumiType.GRASS.getId() || this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock))
+        if ((this.takumiType().getId() == EnumTakumiType.GRASS.getId()/* || this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock)*/)
                 && damageSrc == DamageSource.FALL) {
             return;
         }
@@ -256,7 +255,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         } else if (this.takumiType().getId() == EnumTakumiType.GROUND.getId() && this.ticksExisted % 100 == 0) {
             this.heal(1f);
         }
-        if (this.getAttackTarget() instanceof EntityAttackBlock) {
+        /*if (this.getAttackTarget() instanceof EntityAttackBlock) {
             this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY,
                     this.getAttackTarget().posZ, 0.5);
             double x = this.posX - this.getAttackTarget().posX;
@@ -264,7 +263,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             if (x * x + z * z <= 9) {
                 this.ignite();
             }
-        }
+        }*/
         if (!this.isNonBoss()) {
             if (this.prevHealth > 1 && this.prevHealth - this.getHealth() > 70) {
                 for (int i = 0; i < 100; i++) {
@@ -334,6 +333,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     @Override
     public boolean isImmuneToExplosions() {
-        return this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) || super.isImmuneToExplosions();
+        return /*this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) || */super.isImmuneToExplosions();
     }
 }

@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -75,9 +74,6 @@ public class EntityPierceCreeper extends EntityTakumiAbstractCreeper {
     }
 
     private boolean canDeath() {
-        if (this.getAttackTarget() instanceof EntityAttackBlock) {
-            return true;
-        }
         return (this.world.getBlockState(this.getPosition().down()).getBlockHardness(this.world,
                 this.getPosition().down()) < 0 && !this.world.isAirBlock(this.getPosition().down())) ||
                 this.posY <= 5 && this.onGround;

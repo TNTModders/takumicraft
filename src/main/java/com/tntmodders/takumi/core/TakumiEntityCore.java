@@ -272,8 +272,8 @@ public class TakumiEntityCore {
                 EntityDarkVillager.class, "darkvillager", 908, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "transhomingbomb"),
                 EntityTransHomingBomb.class, "transhomingbomb", 909, TakumiCraftCore.TakumiInstance, 64, 2, true);
-        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "attackblock"),
-                EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 64, 2, true);
+       /* EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "attackblock"),
+                EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 64, 2, true);*/
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiXMS"), EntityXMS.class,
                 "takumiXMS", 911, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "msrazer"), EntityMSRazer.class,
@@ -358,7 +358,7 @@ public class TakumiEntityCore {
                                          float partialTicks) {
                     }
                 });
-        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock::new);
+/*        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock::new);*/
         RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityYMS.class, RenderYMS::new);

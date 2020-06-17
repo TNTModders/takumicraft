@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -73,7 +72,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
         this.noClip = false;
         this.setNoGravity(true);
 
-        if (!this.world.isRemote && this.getAttackTarget() instanceof EntityAttackBlock && this.isGlowing()) {
+/*        if (!this.world.isRemote && this.getAttackTarget() instanceof EntityAttackBlock && this.isGlowing()) {
             this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 10);
             if (this.getDistanceSqToEntity(this.getAttackTarget()) < 16) {
                 this.setCreeperState(1);
@@ -92,7 +91,7 @@ public class EntityLapisCreeper extends EntityTakumiAbstractCreeper {
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Override

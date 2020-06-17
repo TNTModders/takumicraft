@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.ai;
 
+/*
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,22 +13,30 @@ import net.minecraft.world.World;
 public class EntityAIMoveToAttackBlock extends EntityAIBase {
     protected final int attackInterval = 20;
     protected EntityCreature attacker;
-    /**
+    */
+/**
      * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
-     */
+     *//*
+
     protected int attackTick;
     World world;
-    /**
+    */
+/**
      * The speed with which the mob will approach the target
-     */
+     *//*
+
     double speedTowardsTarget;
-    /**
+    */
+/**
      * When true, the mob will continue chasing its target, even if it can't find a path to them right now.
-     */
+     *//*
+
     boolean longMemory;
-    /**
+    */
+/**
      * The PathEntity of our entity.
-     */
+     *//*
+
     Path entityPathEntity;
     private int delayCounter;
     private double targetX;
@@ -43,9 +52,11 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
         this.setMutexBits(3);
     }
 
-    /**
+    */
+/**
      * Returns whether the EntityAIBase should begin execution.
-     */
+     *//*
+
     @Override
     public boolean shouldExecute() {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
@@ -57,9 +68,11 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
         }
     }
 
-    /**
+    */
+/**
      * Returns whether an in-progress EntityAIBase should continue executing
-     */
+     *//*
+
     @Override
     public boolean shouldContinueExecuting() {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
@@ -71,26 +84,32 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
         }
     }
 
-    /**
+    */
+/**
      * Execute a one shot task or start executing a continuous task
-     */
+     *//*
+
     @Override
     public void startExecuting() {
         this.attacker.getNavigator().setPath(this.entityPathEntity, this.speedTowardsTarget);
         this.delayCounter = 0;
     }
 
-    /**
+    */
+/**
      * Reset the task's internal state. Called when this task is interrupted by another one
-     */
+     *//*
+
     @Override
     public void resetTask() {
         this.attacker.getNavigator().clearPathEntity();
     }
 
-    /**
+    */
+/**
      * Keep ticking a continuous task that has already been started
-     */
+     *//*
+
     @Override
     public void updateTask() {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
@@ -143,4 +162,4 @@ public class EntityAIMoveToAttackBlock extends EntityAIBase {
     protected double getAttackReachSqr(EntityLivingBase attackTarget) {
         return (double) (this.attacker.width * 2.0F * this.attacker.width * 2.0F + attackTarget.width);
     }
-}
+}*/

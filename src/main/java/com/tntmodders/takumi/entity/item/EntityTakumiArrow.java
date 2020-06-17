@@ -2,11 +2,9 @@ package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityCannonCreeper;
 import com.tntmodders.takumi.item.ItemTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -120,7 +118,7 @@ public class EntityTakumiArrow extends EntityArrow {
                                 this.posX + rand.nextInt(7) - 3, this.posY + rand.nextInt(3),
                                 this.posZ + rand.nextInt(7) - 3, power, false, destroy);
                     }
-                    if (this.shootingEntity instanceof EntityCannonCreeper && this.shootingEntity.isGlowing() && ((EntityCannonCreeper) this.shootingEntity).getAttackTarget() instanceof EntityAttackBlock) {
+/*                    if (this.shootingEntity instanceof EntityCannonCreeper && this.shootingEntity.isGlowing() && ((EntityCannonCreeper) this.shootingEntity).getAttackTarget() instanceof EntityAttackBlock) {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
                                 this.posX, this.posY, this.posZ, power * 2, false, true);
                         try {
@@ -130,7 +128,7 @@ public class EntityTakumiArrow extends EntityArrow {
                             this.world.spawnEntity(entity);
                         } catch (Exception ignored) {
                         }
-                    }
+                    }*/
                     break;
                 }
                 case PIERCE: {

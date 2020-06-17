@@ -1,31 +1,6 @@
 package com.tntmodders.takumi.entity.item;
 
-import com.tntmodders.takumi.core.TakumiEntityCore;
-import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.entity.mobs.*;
-import com.tntmodders.takumi.entity.mobs.boss.EntityBigCreeper;
-import com.tntmodders.takumi.entity.mobs.evo.EntityRoboCreeper_Evo;
-import net.minecraft.entity.*;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.BossInfoServer;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
-
-public class EntityAttackBlock extends EntityLiving {
+/*public class EntityAttackBlock extends EntityLiving {
     public static final List<Class<? extends Entity>> ENGINEERS = new ArrayList<>();
     public static final List<Class<? extends Entity>> ARTILLERIES = new ArrayList<>();
 
@@ -290,7 +265,7 @@ public class EntityAttackBlock extends EntityLiving {
                 }
             });
             this.world.playerEntities.forEach(player -> {
-                if (/*!player.isCreative() && */!player.isSpectator()) {
+                if (*//*!player.isCreative() && *//*!player.isSpectator()) {
                     player.sendMessage(new TextComponentTranslation("entity.attackblock.lose"));
                 }
             });
@@ -306,4 +281,4 @@ public class EntityAttackBlock extends EntityLiving {
     protected boolean isMovementBlocked() {
         return true;
     }
-}
+}*/

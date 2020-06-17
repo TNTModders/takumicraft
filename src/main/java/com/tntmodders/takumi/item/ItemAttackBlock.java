@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -25,7 +24,7 @@ public class ItemAttackBlock extends Item {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
             EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote && worldIn.loadedEntityList.stream().noneMatch(
+/*        if (!worldIn.isRemote && worldIn.loadedEntityList.stream().noneMatch(
                 entity -> entity instanceof EntityAttackBlock && !entity.isDead)) {
             EntityAttackBlock attackBlock = new EntityAttackBlock(worldIn);
             BlockPos blockPos = pos.offset(facing);
@@ -38,8 +37,7 @@ public class ItemAttackBlock extends Item {
                     player.getHeldItem(hand).shrink(1);
                 }
             }
-
-        }
+        }*/
         return EnumActionResult.SUCCESS;
     }
 

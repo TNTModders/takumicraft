@@ -1,5 +1,5 @@
 package com.tntmodders.takumi.client.render;
-
+/*
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelCreeper;
@@ -56,4 +56,4 @@ public class RenderAttackBlock<T extends EntityAttackBlock> extends RenderLiving
     protected ResourceLocation getEntityTexture(T entity) {
         return LIGHTNING_TEXTURE;
     }
-}
+}*/

@@ -52,7 +52,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
@@ -942,7 +941,7 @@ public class TakumiEvents {
                         player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
             }
         }*/
-        if (!event.getEntityLiving().world.isRemote && event.getEntityLiving().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) &&
+        /*if (!event.getEntityLiving().world.isRemote && event.getEntityLiving().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) &&
                 event.getSource().getTrueSource() instanceof EntityPlayer) {
             event.getEntityLiving().world.loadedEntityList.stream().filter(entity -> entity instanceof EntityAttackBlock).forEach(entity -> {
                 if (((EntityAttackBlock) entity).spawns.contains(event.getEntityLiving())) {
@@ -955,7 +954,7 @@ public class TakumiEvents {
                     }
                 }
             });
-        }
+        }*/
         if (TakumiConfigCore.useTP) {
             ScoreObjective objective = event.getEntityLiving().world.getScoreboard().getObjective("tp");
             if (objective != null) {
@@ -971,8 +970,8 @@ public class TakumiEvents {
                             event.getSource().getTrueSource().getName(), objective).increaseScore(point);
                 }
                 if (event.getEntityLiving() instanceof EntityPlayer &&
-                        !(event.getSource().getTrueSource() instanceof EntityPlayer) &&
-                        !(event.getSource().getTrueSource() instanceof EntityAttackBlock)) {
+                        !(event.getSource().getTrueSource() instanceof EntityPlayer) /*&&
+                        !(event.getSource().getTrueSource() instanceof EntityAttackBlock)*/) {
                     event.getEntityLiving().world.getScoreboard().getOrCreateScore(event.getEntityLiving().getName(),
                             objective).setScorePoints(0);
                 }
