@@ -13,7 +13,7 @@ public class BlockTakumiIce extends BlockPackedIce {
         this.setUnlocalizedName(s);
         this.setHardness(1.0f);
         this.setResistance(10000000f);
-        this.setDefaultSlipperiness(1f);
+        this.setDefaultSlipperiness(1.01f);
         this.setSoundType(SoundType.GLASS);
     }
 }

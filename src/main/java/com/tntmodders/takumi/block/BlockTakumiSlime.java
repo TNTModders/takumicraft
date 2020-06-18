@@ -6,16 +6,9 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
 public class BlockTakumiSlime extends BlockSlime {
-
-    protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.125D, 0.125D, 0.125D, 0.875D, 0.875D, 0.875D);
 
     public BlockTakumiSlime() {
         super();
@@ -27,17 +20,11 @@ public class BlockTakumiSlime extends BlockSlime {
     }
 
     @Override
-    @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return AABB;
-    }
-
-    @Override
     public void onLanded(World worldIn, Entity entityIn) {
         entityIn.fallDistance = 0;
         if (entityIn.isSneaking()) {
             super.onLanded(worldIn, entityIn);
-        } else if (entityIn.motionY < 0.0D) {
+        } else if (entityIn.motionY < 0) {
             entityIn.motionY = -entityIn.motionY * 2;
             if (entityIn.motionY > 10) {
                 entityIn.motionY = 10;
@@ -51,7 +38,7 @@ public class BlockTakumiSlime extends BlockSlime {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+    public boolean isStickyBlock(IBlockState state) {
+        return true;
     }
 }
