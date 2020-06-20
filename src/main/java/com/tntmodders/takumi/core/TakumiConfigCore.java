@@ -65,7 +65,7 @@ public class TakumiConfigCore {
                 "config.takumicraft.cerulean.prop");
 
         //Spawn
-        spawnWeightAnimal = cfg.getInt("spawnWeightAnimal", SPAWN, 15, 1, 50,
+        spawnWeightAnimal = cfg.getInt("spawnWeightAnimal", SPAWN, 10, 1, 50,
                 TakumiUtils.takumiTranslate("config.takumicraft.weightanimal" + ".desc"),
                 "config.takumicraft.weightanimal.prop");
         //TP

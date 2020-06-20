@@ -49,7 +49,7 @@ public class TakumiEntityCore {
             EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);
     public static final List<Class<? extends ITakumiEntity>> CLASS_LIST = new ArrayList<>();
     public static List<Biome> biomes = new ArrayList<>();
-    private static List<ITakumiEntity> entityList = new ArrayList<>();
+    private static final List<ITakumiEntity> ENTITY_LIST = new ArrayList<>();
 
     static {
         CLASS_LIST.addAll(Arrays.asList(EntityAcidCreeper.class, EntityAnnivCreeper.class, EntityAntinomyCreeper.class,
@@ -113,7 +113,7 @@ public class TakumiEntityCore {
     }
 
     public static List<ITakumiEntity> getEntityList() {
-        return entityList;
+        return ENTITY_LIST;
     }
 
     public static void register() {
@@ -181,7 +181,7 @@ public class TakumiEntityCore {
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiClientCore.registerEntityRender(clazz, entity);
             }
-            entityList.add(entity);
+            ENTITY_LIST.add(entity);
             TakumiCraftCore.LOGGER.info(
                     "Registered entity on ID " + entity.getRegisterID() + " : " + location.getResourcePath() + " , " +
                             entity.takumiRank().name() + " and " + entity.takumiType().name());
@@ -243,7 +243,7 @@ public class TakumiEntityCore {
                 }
             }
         }
-        TakumiCraftCore.LOGGER.info("Registered all " + entityList.size() + " entites.");
+        TakumiCraftCore.LOGGER.info("Registered all " + ENTITY_LIST.size() + " entites.");
         itemRegister();
         if (FMLCommonHandler.instance().getSide().isClient()) {
             renderRegister();
