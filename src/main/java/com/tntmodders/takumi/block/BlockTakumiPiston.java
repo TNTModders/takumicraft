@@ -49,7 +49,7 @@ public class BlockTakumiPiston extends BlockPistonBase {
 
     @Override
     public EnumPushReaction getMobilityFlag(IBlockState state) {
-        return state.getValue(EXTENDED) ? super.getMobilityFlag(state) :EnumPushReaction.PUSH_ONLY;
+        return state.getValue(EXTENDED) ? super.getMobilityFlag(state) :EnumPushReaction.NORMAL;
     }
 
     /**

@@ -46,7 +46,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
         if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 60 == 0) {
             ((EntityLivingBase) entityIn).heal(0.25f);
             if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
-                ((EntityPlayer) entityIn).getFoodStats().addStats(2, 0.7f);
+                ((EntityPlayer) entityIn).getFoodStats().addStats(2, 0.5f);
             }
         }
         if (entityIn instanceof EntityLivingBase) {

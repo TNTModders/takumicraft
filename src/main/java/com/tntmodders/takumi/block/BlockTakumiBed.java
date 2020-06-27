@@ -104,24 +104,26 @@ public class BlockTakumiBed extends BlockBed implements ITakumiItemBlock {
             }
         } else if (playerIn.getHeldItemMainhand().isEmpty()) {
             if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBed) {
-                ((TileEntityTakumiBed) worldIn.getTileEntity(pos)).clear();
-                worldIn.notifyNeighborsRespectDebug(pos, this, true);
-                if (!worldIn.isRemote) {
-                    worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
-                }
-
-                EnumFacing offset = state.getValue(FACING);
-                if (!this.isBedFoot(worldIn, pos)) {
-                    offset = offset.getOpposite();
-                }
-                if (worldIn.getTileEntity(pos.offset(offset)) instanceof TileEntityTakumiBed) {
-                    ((TileEntityTakumiBed) worldIn.getTileEntity(pos.offset(offset))).clear();
+                if (((TileEntityTakumiBed) worldIn.getTileEntity(pos)).getTexture() != null && !((TileEntityTakumiBed) worldIn.getTileEntity(pos)).getTexture().isEmpty()) {
+                    ((TileEntityTakumiBed) worldIn.getTileEntity(pos)).clear();
                     worldIn.notifyNeighborsRespectDebug(pos, this, true);
                     if (!worldIn.isRemote) {
-                        worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos.offset(offset)).getUpdatePacket());
+                        worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos).getUpdatePacket());
                     }
+
+                    EnumFacing offset = state.getValue(FACING);
+                    if (!this.isBedFoot(worldIn, pos)) {
+                        offset = offset.getOpposite();
+                    }
+                    if (worldIn.getTileEntity(pos.offset(offset)) instanceof TileEntityTakumiBed) {
+                        ((TileEntityTakumiBed) worldIn.getTileEntity(pos.offset(offset))).clear();
+                        worldIn.notifyNeighborsRespectDebug(pos, this, true);
+                        if (!worldIn.isRemote) {
+                            worldIn.getMinecraftServer().getPlayerList().sendPacketToAllPlayers(worldIn.getTileEntity(pos.offset(offset)).getUpdatePacket());
+                        }
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

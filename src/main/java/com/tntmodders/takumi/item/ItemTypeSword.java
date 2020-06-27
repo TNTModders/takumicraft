@@ -47,8 +47,8 @@ public class ItemTypeSword extends ItemSword {
         if (flg && target instanceof EntityTakumiAbstractCreeper) {
             ITakumiEntity.EnumTakumiType targetType = ((EntityTakumiAbstractCreeper) target).takumiType();
             float f = EntityTakumiAbstractCreeper.getTypeMatchFactor(this.type, targetType);
-            f = f * f * f * f * f * f * f * f;
-            f *= 4;
+            f = ((float) Math.pow(f, 8));
+            f *= 5;
             target.attackEntityFrom(DamageSource.causeMobDamage(attacker), f);
         }
         return flg && super.hitEntity(stack, target, attacker);
@@ -60,7 +60,7 @@ public class ItemTypeSword extends ItemSword {
                 target.setFire(100);
                 if (!attacker.world.isRemote) {
                     Vec3d vec3d = attacker.getLookVec().normalize();
-                    for (double i = 1.5; i < 7; i += 1d) {
+                    for (double i = 1.5; i < 9; i += 1d) {
                         attacker.world.newExplosion(attacker, attacker.posX + vec3d.x * i * 2,
                                 attacker.posY + vec3d.y * i * 2, attacker.posZ + vec3d.z * i * 2, 2f, true, false);
                     }
@@ -86,14 +86,14 @@ public class ItemTypeSword extends ItemSword {
                         double z = target.posZ + MathHelper.getInt(target.getRNG(), -3, 3);
                         attacker.world.createExplosion(attacker, x, y, z, 2f, false);
                     }
-                    int i = 20;
+                    int i = 50;
                     while (i > 0) {
                         int j = EntityXPOrb.getXPSplit(i);
                         i -= j;
                         target.world.spawnEntity(
                                 new EntityXPOrb(target.world, target.posX, target.posY, target.posZ, j));
                     }
-                    attacker.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1, 0));
+                    attacker.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1, 5));
                 }
                 break;
             }
@@ -111,8 +111,8 @@ public class ItemTypeSword extends ItemSword {
             case GROUND: {
                 if (!attacker.world.isRemote) {
                     for (int i = 0; i < 9; i++) {
-                        double x = attacker.posX + Math.cos(Math.PI * i * 2 / 9) * 4;
-                        double z = attacker.posZ + Math.sin(Math.PI * i * 2 / 9) * 4;
+                        double x = attacker.posX + Math.cos(Math.PI * i * 2 / 9) * 5;
+                        double z = attacker.posZ + Math.sin(Math.PI * i * 2 / 9) * 5;
                         attacker.world.createExplosion(attacker, x, attacker.posY, z, 2, false);
                     }
                 }

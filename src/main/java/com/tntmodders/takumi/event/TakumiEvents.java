@@ -551,6 +551,14 @@ public class TakumiEvents {
             }
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityWindLance) {
+                event.getAffectedEntities().removeIf(entity -> !(entity instanceof EntityMob));
+                event.getAffectedEntities().forEach(entity -> {
+                    if (entity instanceof EntityMob) {
+                        entity.attackEntityFrom(DamageSource.causeExplosionDamage(event.getExplosion()), 4f);
+                    }
+                });
+            }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityWitherCreeperSkull) {
                 event.getAffectedEntities().removeIf(entity -> entity instanceof EntityWitherCreeper);
             }

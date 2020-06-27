@@ -499,7 +499,7 @@ public class BlockTakumiBlock extends BlockContainer {
         return super.getSlipperiness(state, world, pos, entity);
     }
 
-    /*@Override
+    @Override
     public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
@@ -507,7 +507,7 @@ public class BlockTakumiBlock extends BlockContainer {
         }
         return super.isLadder(state, world, pos, entity);
     }
-*/
+
     @Override
     public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&

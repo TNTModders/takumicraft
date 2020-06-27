@@ -38,7 +38,7 @@ public class EntityWindLance extends EntityTippedArrow {
         super.onUpdate();
         this.setInvisible(true);
         if (!this.world.isRemote) {
-            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 1.25);
+            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 2);
         }
     }
 
