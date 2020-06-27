@@ -7,10 +7,7 @@ import com.tntmodders.takumi.block.BlockTakumiRedstoneWire;
 import com.tntmodders.takumi.client.render.sp.RenderEntityLivingSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerTHM;
-import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.core.TakumiConfigCore;
-import com.tntmodders.takumi.core.TakumiPacketCore;
-import com.tntmodders.takumi.core.TakumiPotionCore;
+import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.item.EntityTakumiBoat;
 import com.tntmodders.takumi.entity.item.EntityXMS;
@@ -22,19 +19,28 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelElytra;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
+import net.minecraft.client.renderer.entity.layers.LayerElytra;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
@@ -56,6 +62,7 @@ public class TakumiClientEvents {
     @SideOnly(Side.CLIENT)
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
 
+    private static long respawnTime;
     /*    @SubscribeEvent
         public void recievedChat(ClientChatReceivedEvent event) {
             if (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode().equalsIgnoreCase("ja_jp")) {
@@ -78,8 +85,6 @@ public class TakumiClientEvents {
                 }
             }
         }*/
-
-    private static long respawnTime;
     private static long prevRespawnTime;
 
     @SubscribeEvent
@@ -182,6 +187,9 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderPlayer(RenderLivingEvent.Pre event) {
+        if (event.getEntity().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
+            event.getRenderer().addLayer(new LayerTakumiElytra(event.getRenderer()));
+        }
         if (TakumiUtils.isApril(Minecraft.getMinecraft().world)) {
             if ((event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
                     event.getEntity() instanceof AbstractClientPlayer) {
@@ -333,6 +341,171 @@ public class TakumiClientEvents {
             //this.plate.render(0.0625F);
             this.saber.render(0.0625F);
         }
+    }
 
+    public class LayerTakumiElytra extends LayerElytra {
+        private final ResourceLocation TEXTURE_ELYTRA = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/takumi_elytra.png");
+        private final ResourceLocation LIGHTNING_TEXTURE =
+                new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+        private final ModelElytra modelElytra = new ModelElytra();
+        private final ModelElytra modelElytra_ext = new ModelTakumiElytra();
+
+        public LayerTakumiElytra(RenderLivingBase<?> p_i47185_1_) {
+            super(p_i47185_1_);
+        }
+
+        @Override
+        public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+            if (entitylivingbaseIn.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA &&
+                    EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.ROCKET_ELYTRA, entitylivingbaseIn.getItemStackFromSlot(EntityEquipmentSlot.CHEST)) > 0) {
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.enableBlend();
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+
+                if (entitylivingbaseIn instanceof AbstractClientPlayer) {
+                    AbstractClientPlayer abstractclientplayer = (AbstractClientPlayer) entitylivingbaseIn;
+
+                    if (abstractclientplayer.isPlayerInfoSet() && abstractclientplayer.getLocationElytra() != null) {
+                        renderPlayer.bindTexture(abstractclientplayer.getLocationElytra());
+                    } else if (abstractclientplayer.hasPlayerInfo() && abstractclientplayer.getLocationCape() != null && abstractclientplayer.isWearing(EnumPlayerModelParts.CAPE)) {
+                        renderPlayer.bindTexture(abstractclientplayer.getLocationCape());
+                    } else {
+                        renderPlayer.bindTexture(TEXTURE_ELYTRA);
+                    }
+                } else {
+                    renderPlayer.bindTexture(TEXTURE_ELYTRA);
+                }
+
+                GlStateManager.pushMatrix();
+                GlStateManager.translate(0.0F, 0.0F, 0.125F);
+                this.modelElytra.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entitylivingbaseIn);
+                this.modelElytra.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+                if (entitylivingbaseIn.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isItemEnchanted()) {
+                    LayerArmorBase.renderEnchantedGlint(this.renderPlayer, entitylivingbaseIn, this.modelElytra, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+                }
+
+                GlStateManager.disableBlend();
+                GlStateManager.popMatrix();
+
+                GlStateManager.pushMatrix();
+                boolean flag = entitylivingbaseIn.isInvisible();
+                GlStateManager.depthMask(!flag);
+                this.renderPlayer.bindTexture(LIGHTNING_TEXTURE);
+                GlStateManager.matrixMode(5890);
+                GlStateManager.loadIdentity();
+                float f = entitylivingbaseIn.ticksExisted + partialTicks;
+                GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
+                GlStateManager.matrixMode(5888);
+                GlStateManager.enableBlend();
+                GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
+                GlStateManager.disableLighting();
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+                this.modelElytra_ext.setModelAttributes(this.renderPlayer.getMainModel());
+                Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+                GlStateManager.translate(0.0F, 0.0F, 0.125F);
+                this.modelElytra_ext.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entitylivingbaseIn);
+                this.modelElytra_ext.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
+                GlStateManager.matrixMode(5890);
+                GlStateManager.loadIdentity();
+                GlStateManager.matrixMode(5888);
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                GlStateManager.enableLighting();
+                GlStateManager.disableBlend();
+                GlStateManager.depthMask(!flag);
+                GlStateManager.popMatrix();
+            }
+        }
+
+        private class ModelTakumiElytra extends ModelElytra {
+
+            private final ModelRenderer rightWing;
+            private final ModelRenderer leftWing = new ModelRenderer(this, 22, 0);
+
+            public ModelTakumiElytra() {
+                this.leftWing.addBox(-10.0F, 0.0F, 0.0F, 10, 20, 2, 1.2F);
+                this.rightWing = new ModelRenderer(this, 22, 0);
+                this.rightWing.mirror = true;
+                this.rightWing.addBox(0.0F, 0.0F, 0.0F, 10, 20, 2, 1.2F);
+            }
+
+            /**
+             * Sets the models various rotation angles then renders the model.
+             */
+            @Override
+            public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                GlStateManager.disableRescaleNormal();
+                GlStateManager.disableCull();
+
+                if (entityIn instanceof EntityLivingBase && ((EntityLivingBase) entityIn).isChild()) {
+                    GlStateManager.pushMatrix();
+                    GlStateManager.scale(0.5F, 0.5F, 0.5F);
+                    GlStateManager.translate(0.0F, 1.5F, -0.1F);
+                    this.leftWing.render(scale);
+                    this.rightWing.render(scale);
+                    GlStateManager.popMatrix();
+                } else {
+                    this.leftWing.render(scale);
+                    this.rightWing.render(scale);
+                }
+            }
+
+            /**
+             * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
+             * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
+             * "far" arms and legs can swing at most.
+             */
+            @Override
+            public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+                super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+                float f = 0.2617994F;
+                float f1 = -0.2617994F;
+                float f2 = 0.0F;
+                float f3 = 0.0F;
+
+                if (entityIn instanceof EntityLivingBase && ((EntityLivingBase) entityIn).isElytraFlying()) {
+                    float f4 = 1.0F;
+
+                    if (entityIn.motionY < 0.0D) {
+                        Vec3d vec3d = (new Vec3d(entityIn.motionX, entityIn.motionY, entityIn.motionZ)).normalize();
+                        f4 = 1.0F - (float) Math.pow(-vec3d.y, 1.5D);
+                    }
+
+                    f = f4 * 0.34906584F + (1.0F - f4) * f;
+                    f1 = f4 * -((float) Math.PI / 2F) + (1.0F - f4) * f1;
+                } else if (entityIn.isSneaking()) {
+                    f = ((float) Math.PI * 2F / 9F);
+                    f1 = -((float) Math.PI / 4F);
+                    f2 = 3.0F;
+                    f3 = 0.08726646F;
+                }
+
+                this.leftWing.rotationPointX = 5.0F;
+                this.leftWing.rotationPointY = f2;
+
+                if (entityIn instanceof AbstractClientPlayer) {
+                    AbstractClientPlayer abstractclientplayer = (AbstractClientPlayer) entityIn;
+                    abstractclientplayer.rotateElytraX = (float) ((double) abstractclientplayer.rotateElytraX + (double) (f - abstractclientplayer.rotateElytraX) * 0.1D);
+                    abstractclientplayer.rotateElytraY = (float) ((double) abstractclientplayer.rotateElytraY + (double) (f3 - abstractclientplayer.rotateElytraY) * 0.1D);
+                    abstractclientplayer.rotateElytraZ = (float) ((double) abstractclientplayer.rotateElytraZ + (double) (f1 - abstractclientplayer.rotateElytraZ) * 0.1D);
+                    this.leftWing.rotateAngleX = abstractclientplayer.rotateElytraX;
+                    this.leftWing.rotateAngleY = abstractclientplayer.rotateElytraY;
+                    this.leftWing.rotateAngleZ = abstractclientplayer.rotateElytraZ;
+                } else {
+                    this.leftWing.rotateAngleX = f;
+                    this.leftWing.rotateAngleZ = f1;
+                    this.leftWing.rotateAngleY = f3;
+                }
+
+                this.rightWing.rotationPointX = -this.leftWing.rotationPointX;
+                this.rightWing.rotateAngleY = -this.leftWing.rotateAngleY;
+                this.rightWing.rotationPointY = this.leftWing.rotationPointY;
+                this.rightWing.rotateAngleX = this.leftWing.rotateAngleX;
+                this.rightWing.rotateAngleZ = -this.leftWing.rotateAngleZ;
+            }
+
+        }
     }
 }
