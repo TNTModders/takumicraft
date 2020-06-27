@@ -28,6 +28,7 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("fire","field_190534_ay");
         FIELD_MAP.put("enableButtonsTimer","field_146347_a");
         FIELD_MAP.put("isImmuneToFire","field_70178_ae");
+        FIELD_MAP.put("layerRenderers","field_177097_h");
 
         METHOD_MAP.put("onUpdate", "func_70071_h_");
         METHOD_MAP.put("explode", "func_146077_cc");

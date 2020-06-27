@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,6 +53,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class TakumiClientEvents {
@@ -188,7 +190,14 @@ public class TakumiClientEvents {
     @SubscribeEvent
     public void renderPlayer(RenderLivingEvent.Pre event) {
         if (event.getEntity().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
-            event.getRenderer().addLayer(new LayerTakumiElytra(event.getRenderer()));
+            try{
+                Field field =TakumiASMNameMap.getField(RenderLivingBase.class,"layerRenderers");
+                field.setAccessible(true);
+                List<LayerRenderer> layerRenderers = ((List) field.get(event.getRenderer()));
+                if(layerRenderers.stream().noneMatch(layerRenderer -> layerRenderer instanceof LayerTakumiElytra)){
+                    event.getRenderer().addLayer(new LayerTakumiElytra(event.getRenderer()));
+                }
+            }catch (Exception e){}
         }
         if (TakumiUtils.isApril(Minecraft.getMinecraft().world)) {
             if ((event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
