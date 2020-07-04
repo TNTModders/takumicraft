@@ -1,5 +1,212 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.TakumiCraftCore;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+
+
+public class EntityAttackBlock extends Entity {
+    private static final DataParameter<Float> TP = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
+    private static final DataParameter<BlockPos> POS = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.BLOCK_POS);
+    private static final DataParameter<Float> DX = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> DZ = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
+    public final int attackTick = 1000;
+    private final BossInfoServer bigcreeper =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigcreeper.name"), BossInfo.Color.GREEN,
+                    BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
+    private final BossInfoServer attackblock =
+            new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"), BossInfo.Color.BLUE,
+                    BossInfo.Overlay.NOTCHED_20);
+    private final float maxTP = 100f;
+    public int dist = 100;
+    public int nearest = 50;
+    private EntityBigCreeperDummy dummy;
+
+    public EntityAttackBlock(World worldIn) {
+        super(worldIn);
+        this.setSize(0.75f, 1.65f);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (!this.world.isRemote) {
+            if (this.dummy == null) {
+                if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityBigCreeperDummy)) {
+                    this.dummy = ((EntityBigCreeperDummy) this.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityBigCreeperDummy).toArray()[0]);
+                }
+                TakumiCraftCore.LOGGER.info(this.dummy);
+            }
+            if (this.dummy != null) {
+                if (this.getDistanceSqToEntity(this.dummy) > this.nearest * this.nearest) {
+                    TakumiCraftCore.LOGGER.info("dx: " + this.getDX() + " dz: " + this.getDZ());
+                    double x = this.dummy.posX - this.getDX();
+                    double z = this.dummy.posZ - this.getDZ();
+                    double dy = (this.world.getHeight(((int) x), (int) z) - this.dummy.posY) / 5;
+                    this.dummy.setPosition(x, this.dummy.posY + dy, z);
+                }
+            }
+        }
+        this.bigcreeper.setPercent(this.getTP() / this.maxTP);
+        float distance = this.dist * this.dist - this.nearest * this.nearest;
+        float maxDistance = distance;
+        if (this.dummy != null) {
+            distance = (float) ((this.getDistanceSqXZ(this.dummy.getPosition()) - this.nearest * this.nearest));
+            if (distance > maxDistance) {
+                distance = maxDistance;
+            }
+        }
+        this.attackblock.setPercent((distance / maxDistance));
+    }
+
+    protected double getDistanceSqXZ(BlockPos pos) {
+        double x = this.posX - pos.getX();
+        double z = this.posZ - pos.getZ();
+        return x * x + z * z;
+    }
+
+
+    /**
+     * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
+     * pushable on contact, like boats or minecarts.
+     */
+    @Override
+    @Nullable
+    public AxisAlignedBB getCollisionBox(Entity entityIn) {
+        return this.getEntityBoundingBox();
+    }
+
+    /**
+     * Returns the collision bounding box for this entity
+     */
+    @Override
+    @Nullable
+    public AxisAlignedBB getCollisionBoundingBox() {
+        return this.getEntityBoundingBox();
+    }
+
+    @Override
+    protected void entityInit() {
+        this.dataManager.register(TP, this.maxTP);
+        this.dataManager.register(POS, this.getPosition());
+        this.dataManager.register(DX, 0f);
+        this.dataManager.register(DZ, 0f);
+    }
+
+    public float getTP() {
+        return this.dataManager.get(TP);
+    }
+
+    public void setTP(float f) {
+        this.dataManager.set(TP, f);
+    }
+
+    public BlockPos getPos() {
+        return this.dataManager.get(POS);
+    }
+
+    public void setPos(BlockPos pos) {
+        this.dataManager.set(POS, pos);
+    }
+
+    public float getDX() {
+        return this.dataManager.get(DX);
+    }
+
+    public void setDX(float x) {
+        this.dataManager.set(DX, x);
+    }
+
+    public float getDZ() {
+        return this.dataManager.get(DZ);
+    }
+
+    public void setDZ(float z) {
+        this.dataManager.set(DZ, z);
+    }
+
+    @Override
+    protected void readEntityFromNBT(NBTTagCompound compound) {
+        this.setTP(compound.getFloat("tp"));
+        int x = compound.getInteger("bigX");
+        int y = compound.getInteger("bigY");
+        int z = compound.getInteger("bigZ");
+        this.setPos(new BlockPos(x, y, z));
+        this.setDX(compound.getFloat("dx"));
+        this.setDZ(compound.getFloat("dz"));
+    }
+
+    @Override
+    protected void writeEntityToNBT(NBTTagCompound compound) {
+        compound.setFloat("tp", this.getTP());
+        compound.setInteger("bigX", this.getPos().getX());
+        compound.setInteger("bigY", this.getPos().getY());
+        compound.setInteger("bigZ", this.getPos().getZ());
+        compound.setFloat("dx", this.getDX());
+        compound.setFloat("dz", this.getDZ());
+    }
+
+    @Override
+    public boolean hitByEntity(Entity entityIn) {
+        if (entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative()) {
+            this.setDead();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return !this.isDead;
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
+    }
+
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bigcreeper.addPlayer(player);
+        this.attackblock.addPlayer(player);
+    }
+
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bigcreeper.removePlayer(player);
+        this.attackblock.removePlayer(player);
+    }
+
+    @Override
+    public boolean isInRangeToRender3d(double x, double y, double z) {
+        return true;
+    }
+
+    @Override
+    public boolean isInRangeToRenderDist(double distance) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return true;
+    }
+}
+
 /*public class EntityAttackBlock extends EntityLiving {
     public static final List<Class<? extends Entity>> ENGINEERS = new ArrayList<>();
     public static final List<Class<? extends Entity>> ARTILLERIES = new ArrayList<>();

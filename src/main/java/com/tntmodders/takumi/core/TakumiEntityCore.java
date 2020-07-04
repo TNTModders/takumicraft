@@ -48,8 +48,8 @@ public class TakumiEntityCore {
     public static final EnumCreatureType WATER_TAKUMI =
             EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);
     public static final List<Class<? extends ITakumiEntity>> CLASS_LIST = new ArrayList<>();
-    public static List<Biome> biomes = new ArrayList<>();
     private static final List<ITakumiEntity> ENTITY_LIST = new ArrayList<>();
+    public static List<Biome> biomes = new ArrayList<>();
 
     static {
         CLASS_LIST.addAll(Arrays.asList(EntityAcidCreeper.class, EntityAnnivCreeper.class, EntityAntinomyCreeper.class,
@@ -272,8 +272,8 @@ public class TakumiEntityCore {
                 EntityDarkVillager.class, "darkvillager", 908, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "transhomingbomb"),
                 EntityTransHomingBomb.class, "transhomingbomb", 909, TakumiCraftCore.TakumiInstance, 64, 2, true);
-       /* EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "attackblock"),
-                EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 64, 2, true);*/
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "attackblock"),
+                EntityAttackBlock.class, "attackblock", 910, TakumiCraftCore.TakumiInstance, 1024, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiXMS"), EntityXMS.class,
                 "takumiXMS", 911, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "msrazer"), EntityMSRazer.class,
@@ -323,6 +323,8 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiepicitem"),
                 EntityItemEpicDrop.class, "takumiepicitem", 930, TakumiCraftCore.TakumiInstance, 64, 2,
                 true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "bigcreeperdummy"),
+                EntityBigCreeperDummy.class, "bigcreeperdummy", 931, TakumiCraftCore.TakumiInstance, 1024, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -358,7 +360,8 @@ public class TakumiEntityCore {
                                          float partialTicks) {
                     }
                 });
-/*        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock::new);*/
+        RenderingRegistry.registerEntityRenderingHandler(EntityAttackBlock.class, RenderAttackBlock::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityBigCreeperDummy.class, RenderBigCreeperDummy::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityXMS.class, RenderXMS::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMSRazer.class, RenderMSRazer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityYMS.class, RenderYMS::new);

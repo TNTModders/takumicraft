@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.client.render;
 
-import com.tntmodders.takumi.entity.item.EntityAttackBlock;
-import net.minecraft.client.Minecraft;
+import com.tntmodders.takumi.entity.item.EntityBigCreeperDummy;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class RenderAttackBlock<T extends EntityAttackBlock> extends Render<T> {
+public class RenderBigCreeperDummy<T extends EntityBigCreeperDummy> extends Render<T> {
 
     private static final ResourceLocation LIGHTNING_TEXTURE =
             new ResourceLocation("textures/entity/creeper/creeper_armor.png");
@@ -21,7 +20,7 @@ public class RenderAttackBlock<T extends EntityAttackBlock> extends Render<T> {
     private final ModelBase model = new ModelCreeper();
 
 
-    public RenderAttackBlock(RenderManager renderManagerIn) {
+    public RenderBigCreeperDummy(RenderManager renderManagerIn) {
         super(renderManagerIn);
         this.shadowSize = 0F;
     }
@@ -35,32 +34,12 @@ public class RenderAttackBlock<T extends EntityAttackBlock> extends Render<T> {
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
-        boolean flag = entity.isInvisible();
-        GlStateManager.depthMask(!flag);
-        this.bindTexture(LIGHTNING_TEXTURE);
-        GlStateManager.matrixMode(5890);
-        GlStateManager.loadIdentity();
-        float f = entity.ticksExisted + partialTicks;
-        GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableBlend();
-        GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-        GlStateManager.disableLighting();
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-        Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
+        this.bindTexture(CREEPER_TEXTURES);
         GlStateManager.translate(x, y, z);
         GlStateManager.rotate(180, 0, 0, 1);
-        GlStateManager.translate(0, -1.5, 0);
+        GlStateManager.scale(100, 100, 100);
+        GlStateManager.translate(0, -1.3, 0);
         this.model.render(entity, 0, 0, 0, entity.ticksExisted, 0, 0.065f);
-        Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
-        GlStateManager.matrixMode(5890);
-        GlStateManager.loadIdentity();
-        GlStateManager.matrixMode(5888);
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        GlStateManager.enableLighting();
-        GlStateManager.disableBlend();
-        GlStateManager.depthMask(!flag);
         GlStateManager.popMatrix();
     }
 
