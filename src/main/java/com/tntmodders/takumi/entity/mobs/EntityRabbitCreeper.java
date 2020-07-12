@@ -229,11 +229,6 @@ public class EntityRabbitCreeper extends EntityTakumiAbstractCreeper {
                 super.attackEntityFrom(p_attackEntityFrom_1_, p_attackEntityFrom_2_);
     }
 
-    @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-
     protected SoundEvent getJumpSound() {
         return SoundEvents.ENTITY_RABBIT_JUMP;
     }

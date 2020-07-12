@@ -141,9 +141,4 @@ public class EntityCowCreeper extends EntityTakumiAbstractCreeper {
     public Object getRender(RenderManager manager) {
         return new RenderCowCreeper(manager);
     }
-
-    @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
 }

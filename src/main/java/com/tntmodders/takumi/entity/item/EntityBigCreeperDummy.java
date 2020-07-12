@@ -11,9 +11,19 @@ import javax.annotation.Nullable;
 
 public class EntityBigCreeperDummy extends Entity {
 
+    private boolean charging;
+
     public EntityBigCreeperDummy(World worldIn) {
         super(worldIn);
         this.setSize(1, 1);
+    }
+
+    public boolean getCharging() {
+        return this.charging;
+    }
+
+    public void setCharging(boolean charging) {
+        this.charging = charging;
     }
 
     @Override

@@ -323,7 +323,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
 
     @Override
     public int getMaxSpawnedInChunk() {
-        return this.world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD ? 50 : 5;
+        return this.world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD ? 100 : 5;
     }
 
     @Override

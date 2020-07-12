@@ -96,11 +96,6 @@ public class EntityBirdCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-
-    @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT;
     }

@@ -1,8 +1,10 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.block.BlockTakumiBed;
 import com.tntmodders.takumi.entity.mobs.boss.EntityUnlimitedCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.EnumPushReaction;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -48,6 +50,12 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
     protected void setArmors() {
     }
 
+    private boolean canSpawn(BlockPos pos, Entity entity) {
+        return pos != null &&
+                this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world, pos, entity) &&
+                !(this.world.getBlockState(pos).getBlock() instanceof BlockTakumiBed);
+    }
+
     @Override
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (!this.world.isRemote) {
@@ -62,9 +70,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             ((EntityPlayer) entity).setHeldItem(EnumHand.MAIN_HAND, itemStack);
 
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
-                            if (pos != null &&
-                                    this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) ) {
+                            if (canSpawn(pos,entity)) {
                                 for (int t = 0; t < 4; t++) {
                                     EntityCreeper creeper = new EntityDiamondCreeper(this.world);
                                     creeper.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
@@ -82,9 +88,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             ((EntityPlayer) entity).setHeldItem(EnumHand.MAIN_HAND, itemStack);
 
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
-                            if (pos != null &&
-                                    this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) ) {
+                            if (canSpawn(pos,entity)) {
                                 EntityCreeper creeper = new EntityLeadCreeper(this.world);
                                 creeper.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                                 this.world.spawnEntity(creeper);
@@ -101,9 +105,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             ((EntityPlayer) entity).setHeldItem(EnumHand.MAIN_HAND, itemStack);
 
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
-                            if (pos != null &&
-                                    this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) ) {
+                            if (canSpawn(pos,entity)) {
                                 EntityCreeper creeper1 = new EntityArtCreeper(this.world);
                                 creeper1.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                                 this.world.spawnEntity(creeper1);
@@ -123,9 +125,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
                             ((EntityPlayer) entity).dropItem(((EntityPlayer) entity).getHeldItemMainhand(), false);
                             ((EntityPlayer) entity).setHeldItem(EnumHand.MAIN_HAND, itemStack);
                             BlockPos pos = ((EntityPlayer) entity).getBedLocation(this.world.provider.getDimension());
-                            if (pos != null &&
-                                    this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                                            pos, entity) ) {
+                            if (canSpawn(pos,entity)) {
                                 EntityCreeper creeper1 = new EntityRushCreeper(this.world);
                                 creeper1.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                                 this.world.spawnEntity(creeper1);
@@ -160,9 +160,7 @@ public class EntityPsychicCreeper extends EntityZombieCreeper {
             entity.dropItem(entity.getHeldItemMainhand(), false);
             entity.setHeldItem(EnumHand.MAIN_HAND, itemStack);
             BlockPos pos = entity.getBedLocation(this.world.provider.getDimension());
-            if (pos != null &&
-                    this.world.getBlockState(pos).getBlock().isBed(this.world.getBlockState(pos), this.world,
-                            pos, entity) ) {
+            if (canSpawn(pos,entity)) {
                 EntityCreeper creeper = new EntityUnlimitedCreeper(this.world);
                 creeper.setPosition(pos.getX(), pos.getY() + 0.6, pos.getZ());
                 this.world.spawnEntity(creeper);

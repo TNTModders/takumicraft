@@ -136,9 +136,4 @@ public class EntityPigCreeper extends EntityTakumiAbstractCreeper {
     public Object getRender(RenderManager manager) {
         return new RenderPigCreeper(manager);
     }
-
-    @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
 }

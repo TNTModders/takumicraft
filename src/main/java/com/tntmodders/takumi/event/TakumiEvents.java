@@ -796,10 +796,10 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void damage(LivingAttackEvent event) {
-        if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiThrowGrenede &&
+        if (event.getSource().isExplosion() && event.getSource().getImmediateSource() instanceof EntityTakumiThrowGrenede /*&&
                 ((((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower() != null &&
                         ((EntityTakumiThrowGrenede) event.getSource().getImmediateSource()).getThrower().getClass() == event.getEntityLiving().getClass()) ||
-                        TakumiConfigCore.inEventServer)) {
+                        TakumiConfigCore.inEventServer)*/) {
             event.setCanceled(true);
         } else if (event.getSource().isExplosion() && event.getSource().getTrueSource() instanceof EntityTakumiArrow) {
             if (TakumiConfigCore.inEventServer) {

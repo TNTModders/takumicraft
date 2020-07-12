@@ -61,6 +61,10 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         this.moveHelper = new EntityFlyHelper(this);
     }
 
+    private static float getPitch(Random random) {
+        return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
+    }
+
     public boolean isFlying() {
         return !this.onGround;
     }
@@ -151,6 +155,12 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         return (UUID) ((Optional) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
     }
 
+    public void setOwnerId(
+            @Nullable
+                    UUID p_184754_1_) {
+        this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
+    }
+
     public boolean isSitting() {
         return (this.dataManager.get(TAMED) & 1) != 0;
     }
@@ -163,12 +173,6 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         } else {
             this.dataManager.set(TAMED, (byte) (b0 & -2));
         }
-    }
-
-    public void setOwnerId(
-            @Nullable
-                    UUID p_184754_1_) {
-        this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(p_184754_1_));
     }
 
     public boolean setEntityOnShoulder(EntityPlayer p_191994_1_) {
@@ -193,10 +197,6 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     protected float getSoundPitch() {
         return getPitch(this.rand);
-    }
-
-    private static float getPitch(Random random) {
-        return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
     }
 
     @Override
@@ -267,11 +267,6 @@ public class EntityParrotCreeper extends EntityTakumiAbstractCreeper implements 
         }
 
         this.flap += this.flapping * 2.0F;
-    }
-
-    @Override
-    protected boolean isValidLightLevel() {
-        return true;
     }
 
     /**

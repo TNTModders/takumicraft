@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.item;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,6 +9,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
@@ -23,7 +23,7 @@ public class EntityAttackBlock extends Entity {
     private static final DataParameter<BlockPos> POS = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.BLOCK_POS);
     private static final DataParameter<Float> DX = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> DZ = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
-    public final int attackTick = 1000;
+    public final int attackTick = 100;
     private final BossInfoServer bigcreeper =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigcreeper.name"), BossInfo.Color.GREEN,
                     BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
@@ -31,8 +31,11 @@ public class EntityAttackBlock extends Entity {
             new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"), BossInfo.Color.BLUE,
                     BossInfo.Overlay.NOTCHED_20);
     private final float maxTP = 100f;
+    private final float maxChargeTick = 600;
+    private final boolean[] msgflgs = new boolean[3];
     public int dist = 100;
     public int nearest = 50;
+    private float chargeTick;
     private EntityBigCreeperDummy dummy;
 
     public EntityAttackBlock(World worldIn) {
@@ -48,28 +51,52 @@ public class EntityAttackBlock extends Entity {
                 if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityBigCreeperDummy)) {
                     this.dummy = ((EntityBigCreeperDummy) this.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityBigCreeperDummy).toArray()[0]);
                 }
-                TakumiCraftCore.LOGGER.info(this.dummy);
             }
             if (this.dummy != null) {
                 if (this.getDistanceSqToEntity(this.dummy) > this.nearest * this.nearest) {
-                    TakumiCraftCore.LOGGER.info("dx: " + this.getDX() + " dz: " + this.getDZ());
                     double x = this.dummy.posX - this.getDX();
                     double z = this.dummy.posZ - this.getDZ();
-                    double dy = (this.world.getHeight(((int) x), (int) z) - this.dummy.posY) / 5;
+                    double dy = (this.world.getHeight(((int) x), (int) z) - this.dummy.posY) / 20;
                     this.dummy.setPosition(x, this.dummy.posY + dy, z);
+
+                    float distance = this.dist * this.dist - this.nearest * this.nearest;
+                    float maxDistance = distance;
+                    if (this.dummy != null) {
+                        distance = (float) ((this.getDistanceSqXZ(this.dummy.getPosition()) - this.nearest * this.nearest));
+                        if (distance > maxDistance) {
+                            distance = maxDistance;
+                        }
+                    }
+                    this.attackblock.setPercent((distance / maxDistance));
+                } else {
+                    this.attackblock.setColor(BossInfo.Color.RED);
+                    this.chargeTick++;
+                    float f = this.chargeTick / this.maxChargeTick;
+                    this.attackblock.setPercent(f);
+                    this.dummy.setCharging(true);
+                    if (this.chargeTick > 0 & !msgflgs[0]) {
+                        this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
+                                -> player.sendMessage(new TextComponentString("01")));
+                        this.msgflgs[0] = true;
+                    }
+                    if (this.chargeTick > (this.maxChargeTick / 3) && !msgflgs[1]) {
+                        this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
+                                -> player.sendMessage(new TextComponentString("02")));
+                        this.msgflgs[1] = true;
+                    }
+                    if (this.chargeTick > (this.maxChargeTick * 2 / 3) && !msgflgs[2]) {
+                        this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
+                                -> player.sendMessage(new TextComponentString("03")));
+                        this.msgflgs[2] = true;
+                    }
+                    if (f > 1) {
+                        this.setDead();
+                        this.dummy.setDead();
+                    }
                 }
             }
         }
         this.bigcreeper.setPercent(this.getTP() / this.maxTP);
-        float distance = this.dist * this.dist - this.nearest * this.nearest;
-        float maxDistance = distance;
-        if (this.dummy != null) {
-            distance = (float) ((this.getDistanceSqXZ(this.dummy.getPosition()) - this.nearest * this.nearest));
-            if (distance > maxDistance) {
-                distance = maxDistance;
-            }
-        }
-        this.attackblock.setPercent((distance / maxDistance));
     }
 
     protected double getDistanceSqXZ(BlockPos pos) {
@@ -147,6 +174,7 @@ public class EntityAttackBlock extends Entity {
         this.setPos(new BlockPos(x, y, z));
         this.setDX(compound.getFloat("dx"));
         this.setDZ(compound.getFloat("dz"));
+        this.chargeTick = compound.getFloat("chargetick");
     }
 
     @Override
@@ -157,6 +185,7 @@ public class EntityAttackBlock extends Entity {
         compound.setInteger("bigZ", this.getPos().getZ());
         compound.setFloat("dx", this.getDX());
         compound.setFloat("dz", this.getDZ());
+        compound.setFloat("chargetick", this.chargeTick);
     }
 
     @Override

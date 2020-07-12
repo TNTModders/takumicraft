@@ -291,11 +291,6 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-
-    @Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
         this.playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
     }

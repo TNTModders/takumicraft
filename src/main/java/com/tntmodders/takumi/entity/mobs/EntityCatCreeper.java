@@ -130,11 +130,6 @@ public class EntityCatCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    protected boolean isValidLightLevel() {
-        return true;
-    }
-
-    @Override
     public void takumiExplode() {
     }
 
