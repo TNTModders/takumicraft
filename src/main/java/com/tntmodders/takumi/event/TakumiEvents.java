@@ -124,46 +124,48 @@ public class TakumiEvents {
                 }
             }
             event.getOutput().addEnchantment(TakumiEnchantmentCore.ROCKET_ELYTRA, 1);
-        } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.CHAMP_CORE) {
-            event.setCost(30);
-            event.setMaterialCost(1);
-            ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
-            if (event.getLeft().hasDisplayName()) {
-                stack.setStackDisplayName(event.getLeft().getDisplayName());
-            }
-            event.setOutput(stack);
-            int i = 10;
-            if (event.getLeft().isItemEnchanted()) {
-                for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
-                        event.getLeft()).entrySet()) {
-                    if (entry.getKey() == TakumiEnchantmentCore.ITEM_PROTECTION) {
-                        i += entry.getValue();
-                    } else {
-                        event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+        } else if ((event.getLeft().getItem().isEnchantable(event.getLeft()) && event.getLeft().isItemEnchanted()) || !event.getLeft().hasTagCompound()) {
+            if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.CHAMP_CORE) {
+                event.setCost(30);
+                event.setMaterialCost(1);
+                ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
+                if (event.getLeft().hasDisplayName()) {
+                    stack.setStackDisplayName(event.getLeft().getDisplayName());
+                }
+                event.setOutput(stack);
+                int i = 10;
+                if (event.getLeft().isItemEnchanted()) {
+                    for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                            event.getLeft()).entrySet()) {
+                        if (entry.getKey() == TakumiEnchantmentCore.ITEM_PROTECTION) {
+                            i += entry.getValue();
+                        } else {
+                            event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                        }
                     }
                 }
-            }
-            event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
-        } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.PARALYSIS_CORE) {
-            event.setCost(10);
-            event.setMaterialCost(1);
-            ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
-            if (event.getLeft().hasDisplayName()) {
-                stack.setStackDisplayName(event.getLeft().getDisplayName());
-            }
-            event.setOutput(stack);
-            int i = 1;
-            if (event.getLeft().isItemEnchanted()) {
-                for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
-                        event.getLeft()).entrySet()) {
-                    if (entry.getKey() == TakumiEnchantmentCore.ITEM_PROTECTION) {
-                        i += entry.getValue();
-                    } else {
-                        event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
+            } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.PARALYSIS_CORE) {
+                event.setCost(10);
+                event.setMaterialCost(1);
+                ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
+                if (event.getLeft().hasDisplayName()) {
+                    stack.setStackDisplayName(event.getLeft().getDisplayName());
+                }
+                event.setOutput(stack);
+                int i = 1;
+                if (event.getLeft().isItemEnchanted()) {
+                    for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                            event.getLeft()).entrySet()) {
+                        if (entry.getKey() == TakumiEnchantmentCore.ITEM_PROTECTION) {
+                            i += entry.getValue();
+                        } else {
+                            event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                        }
                     }
                 }
+                event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
             }
-            event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
         }
     }
 
@@ -900,17 +902,21 @@ public class TakumiEvents {
                 event.getEntityLiving() instanceof EntityCreeper)) {
             if (FMLCommonHandler.instance().getSide().isServer()) {
                 if (TakumiConfigCore.rangeTakumiBookSync > 0) {
-                    int range = event.getEntityLiving().isNonBoss() ? TakumiConfigCore.rangeTakumiBookSync : TakumiConfigCore.rangeTakumiBookSync * 5;
-                    String name = event.getEntityLiving().getClass() == EntityCreeper.class ? "" : ((ITakumiEntity) event.getEntityLiving()).getRegisterName();
-                    List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input ->
-                            input.getDistanceToEntity(event.getEntityLiving()) < range);
-                    players.forEach(playerMP -> playerMP.getAdvancements().grantCriterion(
-                            playerMP.getServer().getAdvancementManager().getAdvancement(
-                                    new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + name)), name));
-                    if (event.getEntityLiving().getClass() == EntitySheepCreeper.class && ((EntitySheepCreeper) event.getEntityLiving()).getRainbow()) {
-                        players.forEach(playerMP -> TakumiUtils.giveAdvancementImpossible(playerMP,
-                                new ResourceLocation(TakumiCraftCore.MODID, "disarmament"),
-                                new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep")));
+                    try {
+                        int range = event.getEntityLiving().isNonBoss() ? TakumiConfigCore.rangeTakumiBookSync : TakumiConfigCore.rangeTakumiBookSync * 5;
+                        String name = event.getEntityLiving().getClass() == EntityCreeper.class ? "" : ((ITakumiEntity) event.getEntityLiving()).getRegisterName();
+                        List<EntityPlayerMP> players = event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, input ->
+                                input.getDistanceToEntity(event.getEntityLiving()) < range);
+                        players.forEach(playerMP -> playerMP.getAdvancements().grantCriterion(
+                                playerMP.getServer().getAdvancementManager().getAdvancement(
+                                        new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_" + name)), name));
+                        if (event.getEntityLiving().getClass() == EntitySheepCreeper.class && ((EntitySheepCreeper) event.getEntityLiving()).getRainbow()) {
+                            players.forEach(playerMP -> TakumiUtils.giveAdvancementImpossible(playerMP,
+                                    new ResourceLocation(TakumiCraftCore.MODID, "disarmament"),
+                                    new ResourceLocation(TakumiCraftCore.MODID, "rainbowsheep")));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 if (event.getSource().getTrueSource() instanceof EntityPlayerMP) {

@@ -34,7 +34,6 @@ public class ItemAttackBlock extends Item {
                 attackBlock.setPosition(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
             }
             double theta = Math.toRadians(worldIn.rand.nextFloat() * 360);
-            TakumiCraftCore.LOGGER.info(blockPos);
             BlockPos bigPos = blockPos.add(Math.cos(theta) * attackBlock.dist, 0, Math.sin(theta) * attackBlock.dist);
             bigPos = worldIn.getHeight(bigPos);
             attackBlock.setPos(bigPos);

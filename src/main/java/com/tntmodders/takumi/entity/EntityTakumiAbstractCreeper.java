@@ -6,12 +6,15 @@ import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
+import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
@@ -305,6 +308,25 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                 }
                 if (this.takumiType().isDest() && this.rand.nextBoolean()) {
                     this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_DEST, drop), 0f);
+                }
+            }
+            if (source.isExplosion() && !(source.getTrueSource() instanceof EntityMob) || source.getTrueSource() instanceof EntityPlayer) {
+                try {
+                    if (this.world.loadedEntityList != null && this.world.loadedEntityList.size() > 0) {
+                        if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock)) {
+                            EntityAttackBlock entityAttackBlock = ((EntityAttackBlock) this.world.loadedEntityList.stream()
+                                    .filter(entity -> entity instanceof EntityAttackBlock).iterator().next());
+                            if (entityAttackBlock != null) {
+                                float point = entityAttackBlock.getTP() - this.takumiRank().getPoint();
+                                if (point <= 0) {
+                                    point = 0;
+                                }
+                                entityAttackBlock.setTP(point);
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+
                 }
             }
         }

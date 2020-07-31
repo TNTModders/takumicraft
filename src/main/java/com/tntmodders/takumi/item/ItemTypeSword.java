@@ -68,7 +68,7 @@ public class ItemTypeSword extends ItemSword {
                 break;
             }
             case WATER: {
-                if (!attacker.world.isRemote) {
+                if (!attacker.world.isRemote && target.isNonBoss()) {
                     EntityWaterTypeForce force = new EntityWaterTypeForce(attacker.world);
                     force.setPosition(target.posX, target.posY + 0.5, target.posZ);
                     attacker.world.spawnEntity(force);

@@ -54,7 +54,7 @@ public class BlockTakumiLog extends BlockLog {
     }
 
     float getPower() {
-        return 1.5f;
+        return 1f;
     }
 
     @Override

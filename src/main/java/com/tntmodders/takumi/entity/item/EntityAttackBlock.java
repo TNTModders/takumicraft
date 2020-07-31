@@ -1,14 +1,26 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.core.TakumiEntityCore;
+import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
+import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
@@ -16,6 +28,8 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class EntityAttackBlock extends Entity {
@@ -23,17 +37,23 @@ public class EntityAttackBlock extends Entity {
     private static final DataParameter<BlockPos> POS = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.BLOCK_POS);
     private static final DataParameter<Float> DX = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> DZ = EntityDataManager.createKey(EntityAttackBlock.class, DataSerializers.FLOAT);
-    public final int attackTick = 100;
+    //default: 12000
+    public final int attackTick = 120;
     private final BossInfoServer bigcreeper =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.bigcreeper.name"), BossInfo.Color.GREEN,
                     BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
     private final BossInfoServer attackblock =
             new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"), BossInfo.Color.BLUE,
                     BossInfo.Overlay.NOTCHED_20);
-    private final float maxTP = 100f;
+    //default 1500f
+    private final float maxTP = 1500f;
+    //defau;t 600
     private final float maxChargeTick = 600;
     private final boolean[] msgflgs = new boolean[3];
+    private final List<ITakumiEntity> entities = new ArrayList<>();
+    //default 100
     public int dist = 100;
+    //default 50
     public int nearest = 50;
     private float chargeTick;
     private EntityBigCreeperDummy dummy;
@@ -41,19 +61,30 @@ public class EntityAttackBlock extends Entity {
     public EntityAttackBlock(World worldIn) {
         super(worldIn);
         this.setSize(0.75f, 1.65f);
+        TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
+            if (iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.LOW ||
+                    iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.MID ||
+                    iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.HIGH) {
+                if (iTakumiEntity.getClass() != EntitySeaGuardianCreeper.class &&
+                        iTakumiEntity.getClass() != EntitySquidCreeper.class &&
+                        ((EntityCreeper) iTakumiEntity).isNonBoss()) {
+                    entities.add(iTakumiEntity);
+                }
+            }
+        });
     }
 
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (!this.world.isRemote) {
-            if (this.dummy == null) {
-                if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityBigCreeperDummy)) {
-                    this.dummy = ((EntityBigCreeperDummy) this.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityBigCreeperDummy).toArray()[0]);
-                }
+        if (this.dummy == null) {
+            if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityBigCreeperDummy)) {
+                this.dummy = ((EntityBigCreeperDummy) this.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityBigCreeperDummy).toArray()[0]);
             }
-            if (this.dummy != null) {
-                if (this.getDistanceSqToEntity(this.dummy) > this.nearest * this.nearest) {
+        }
+        if (this.dummy != null) {
+            if (this.getDistanceSqToEntity(this.dummy) > this.nearest * this.nearest) {
+                if (this.getTP() > 0) {
                     double x = this.dummy.posX - this.getDX();
                     double z = this.dummy.posZ - this.getDZ();
                     double dy = (this.world.getHeight(((int) x), (int) z) - this.dummy.posY) / 20;
@@ -68,12 +99,59 @@ public class EntityAttackBlock extends Entity {
                         }
                     }
                     this.attackblock.setPercent((distance / maxDistance));
+                    this.bigcreeper.setPercent(this.getTP() / this.maxTP);
+                    if (!this.world.isRemote && this.rand.nextInt(50) == 0) {
+                        if (this.world.getEntitiesWithinAABB(EntityMob.class, this.dummy.getCollisionBoundingBox().grow(100)).size() < 100) {
+                            EntityCreeper creeper = null;
+                            try {
+                                creeper = (EntityCreeper) entities.get(
+                                        this.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(this.world);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            if (creeper != null) {
+                                creeper.setWorld(this.world);
+                                BlockPos pos = new BlockPos(this.dummy.posX + this.rand.nextFloat() * 50 - this.rand.nextFloat() * 50,
+                                        0, this.dummy.posZ + this.rand.nextFloat() * 50 - this.rand.nextFloat() * 50);
+                                pos = this.world.getHeight(pos);
+                                creeper.setPosition(pos.getX(), pos.getY() + 0.5, pos.getZ());
+                                creeper.setGlowing(true);
+                                TakumiUtils.takumiSetPowered(creeper, true);
+                                this.world.spawnEntity(creeper);
+                            }
+                        }
+                    } else if (this.rand.nextInt(100) == 0) {
+                        for (int i = 0; i < 20; i++) {
+                            BlockPos pos = this.dummy.getPosition().add(
+                                    MathHelper.nextDouble(this.rand, -50, 50),
+                                    MathHelper.nextDouble(this.rand, -50, 50),
+                                    MathHelper.nextDouble(this.rand, -50, 50));
+                            for (int j = 0; j < 10; j++) {
+                                EntityLightningBolt bolt =
+                                        new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
+                                this.world.addWeatherEffect(bolt);
+                                this.world.spawnEntity(bolt);
+                            }
+                        }
+                    }
                 } else {
-                    this.attackblock.setColor(BossInfo.Color.RED);
-                    this.chargeTick++;
-                    float f = this.chargeTick / this.maxChargeTick;
-                    this.attackblock.setPercent(f);
-                    this.dummy.setCharging(true);
+                    this.bigcreeper.setColor(BossInfo.Color.PURPLE);
+                    this.bigcreeper.setPercent(0);
+                }
+            } else {
+                this.attackblock.setColor(BossInfo.Color.RED);
+                this.chargeTick++;
+                float f = this.chargeTick / this.maxChargeTick;
+                this.attackblock.setPercent(f);
+                this.dummy.setCharging(true);
+                if (!this.world.isRemote) {
+                    if (this.chargeTick < this.maxChargeTick && this.chargeTick % (50 - Math.round((this.chargeTick / this.maxChargeTick) * 48)) == 0) {
+                        for (int i = 0; i < (this.chargeTick / this.maxChargeTick) * 10; i++) {
+                            this.world.playSound(null, this.dummy.posX, this.dummy.posY, this.dummy.posZ,
+                                    SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.MASTER, ((float) Math.exp(this.chargeTick / this.maxChargeTick) * 10),
+                                    (float) (Math.exp(this.chargeTick / this.maxChargeTick) - 1) * 5f);
+                        }
+                    }
                     if (this.chargeTick > 0 & !msgflgs[0]) {
                         this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
                                 -> player.sendMessage(new TextComponentString("01")));
@@ -89,14 +167,46 @@ public class EntityAttackBlock extends Entity {
                                 -> player.sendMessage(new TextComponentString("03")));
                         this.msgflgs[2] = true;
                     }
-                    if (f > 1) {
+                    if (this.chargeTick > this.maxChargeTick - 60) {
+                        for (int i = 0; i < 100; i++) {
+                            EntityLightningBolt bolt = new EntityLightningBolt(this.world, this.dummy.posX, this.dummy.posY, this.dummy.posZ, false);
+                            this.world.addWeatherEffect(bolt);
+                            this.world.spawnEntity(bolt);
+                            this.world.playSound(null, this.posX, this.posY, this.posZ,
+                                    SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.MASTER, 10000.0F,
+                                    (1.8F + this.rand.nextFloat() * 0.2f) * 2f);
+                        }
+                    }
+                }
+                if (f > 1) {
+                    for (int r = 0; r < 200; r++) {
+                        for (int t = 0; t < 36; t++) {
+                            double x = this.dummy.posX + r * Math.cos(Math.toRadians(t * 10));
+                            double z = this.dummy.posZ + r * Math.sin(Math.toRadians(t * 10));
+                            double y = this.world.getHeight((int) x, (int) z);
+                            EntityLightningBolt bolt = new EntityLightningBolt(this.world, x, y, z, false);
+                            this.world.addWeatherEffect(bolt);
+                            this.world.spawnEntity(bolt);
+                            if (!this.world.isRemote) {
+                                this.world.newExplosion(this.dummy, x, y, z, 3f, true, true);
+                            }
+                        }
+                    }
+                    if (!this.world.isRemote) {
                         this.setDead();
                         this.dummy.setDead();
+                        this.world.loadedEntityList.forEach(entity -> {
+                            if (entity.isGlowing() && entity instanceof EntityCreeper && !(entity instanceof EntityPlayer) && !entity.isDead) {
+                                ((EntityCreeper) entity).setHealth(0);
+                            } else if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !((EntityPlayer) entity).isSpectator()) {
+                                entity.attackEntityFrom(DamageSource.causeExplosionDamage(this.world.createExplosion(this.dummy, this.dummy.posX, this.dummy.posY, this.dummy.posZ, 1f, false)),
+                                        20f);
+                            }
+                        });
                     }
                 }
             }
         }
-        this.bigcreeper.setPercent(this.getTP() / this.maxTP);
     }
 
     protected double getDistanceSqXZ(BlockPos pos) {

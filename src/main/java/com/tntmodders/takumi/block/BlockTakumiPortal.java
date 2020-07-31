@@ -61,6 +61,13 @@ public class BlockTakumiPortal extends BlockBreakable {
         this.setLightLevel(0.5f);
     }
 
+    public static int getMetaForAxis(Axis axis) {
+        if (axis == Axis.X) {
+            return 1;
+        }
+        return axis == Axis.Z ? 2 : 0;
+    }
+
     public boolean trySpawnPortal(World worldIn, BlockPos pos) {
         Size blockportal$size = new Size(worldIn, pos, Axis.X);
 
@@ -123,13 +130,6 @@ public class BlockTakumiPortal extends BlockBreakable {
     @Override
     public int getMetaFromState(IBlockState state) {
         return getMetaForAxis(state.getValue(AXIS));
-    }
-
-    public static int getMetaForAxis(Axis axis) {
-        if (axis == Axis.X) {
-            return 1;
-        }
-        return axis == Axis.Z ? 2 : 0;
     }
 
     /**
@@ -239,7 +239,7 @@ public class BlockTakumiPortal extends BlockBreakable {
             }
             //worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
             Minecraft.getMinecraft().effectRenderer.addEffect(
-                    new ParticleTakumiPortal(worldIn, d0, d1, d2, d3*-10, d4*-10, d5*-10));
+                    new ParticleTakumiPortal(worldIn, d0, d1, d2, d3 * -10, d4 * -10, d5 * -10));
         }
     }
 
@@ -284,31 +284,35 @@ public class BlockTakumiPortal extends BlockBreakable {
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
-            MinecraftServer server = worldIn.getMinecraftServer();
-            if (server != null && entityIn.timeUntilPortal <= 0) {
-                //TakumiCraftCore.LOGGER.info("portal:" + entityIn.timeUntilPortal);
-                PlayerList playerList = server.getPlayerList();
-                int i = entityIn.dimension == DimensionType.OVERWORLD.getId() ? TakumiWorldCore.TAKUMI_WORLD.getId() :
-                        DimensionType.OVERWORLD.getId();
-                TakumiTeleporter teleporter = new TakumiTeleporter(server.getWorld(i));
-                teleporter.placeInPortal(entityIn, entityIn.rotationYaw);
-                entityIn.timeUntilPortal = 200;
-                if(entityIn instanceof EntityPlayer && !entityIn.world.isRemote){
-                    ((EntityPlayer) entityIn).addPotionEffect(new  PotionEffect(MobEffects.NAUSEA,200));
-                }
-                if (entityIn instanceof EntityPlayerMP) {
-                    //playerList.transferPlayerToDimension((EntityPlayerMP) entityIn, i, teleporter);
-                } else {
-                    int origin = entityIn.dimension;
-                    entityIn.dimension = i;
-                    worldIn.removeEntityDangerously(entityIn);
+            try {
+                MinecraftServer server = worldIn.getMinecraftServer();
+                if (server != null && entityIn.timeUntilPortal <= 0) {
+                    //TakumiCraftCore.LOGGER.info("portal:" + entityIn.timeUntilPortal);
+                    PlayerList playerList = server.getPlayerList();
+                    int i = entityIn.dimension == DimensionType.OVERWORLD.getId() ? TakumiWorldCore.TAKUMI_WORLD.getId() :
+                            DimensionType.OVERWORLD.getId();
+                    TakumiTeleporter teleporter = new TakumiTeleporter(server.getWorld(i));
+                    teleporter.placeInPortal(entityIn, entityIn.rotationYaw);
+                    entityIn.timeUntilPortal = 200;
+                    if (entityIn instanceof EntityPlayer && !entityIn.world.isRemote) {
+                        ((EntityPlayer) entityIn).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200));
+                    }
+                    if (entityIn instanceof EntityPlayerMP) {
+                        //playerList.transferPlayerToDimension((EntityPlayerMP) entityIn, i, teleporter);
+                    } else {
+                        int origin = entityIn.dimension;
+                        entityIn.dimension = i;
+                        worldIn.removeEntityDangerously(entityIn);
 
-                    entityIn.isDead = false;
+                        entityIn.isDead = false;
 
                     /*playerList.transferEntityToWorld(entityIn, origin, server.getWorld(origin), server.getWorld(i),
                             teleporter);*/
+                    }
+                    entityIn.changeDimension(i, teleporter);
                 }
-                entityIn.changeDimension(i,teleporter);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

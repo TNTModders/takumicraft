@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class EntityTakumiArrow extends EntityArrow {
 
-    public int power;
+    public float power;
     private ItemStack stack;
     private boolean destroy;
     private Class<? extends EntityCreeper> container;
@@ -179,7 +179,7 @@ public class EntityTakumiArrow extends EntityArrow {
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
-        compound.setInteger("power", this.power);
+        compound.setDouble("exprange", this.power);
         compound.setBoolean("destroy", this.destroy);
         if (this.container != null) {
             compound.setString("container", this.container.getName());
@@ -189,7 +189,7 @@ public class EntityTakumiArrow extends EntityArrow {
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
-        this.power = compound.getInteger("power");
+        this.power = ((float) compound.getDouble("exprange"));
         this.destroy = compound.getBoolean("destroy");
         try {
             this.container = (Class<? extends EntityCreeper>) Class.forName(compound.getString("container"));

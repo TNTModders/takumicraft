@@ -36,6 +36,6 @@ public class BlockTakumiLeaf extends BlockAbstractTakumiBomb {
 
     @Override
     float getPower() {
-        return 1.5f;
+        return 1f;
     }
 }

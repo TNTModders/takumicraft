@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.item;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +11,7 @@ import javax.annotation.Nullable;
 public class EntityBigCreeperDummy extends Entity {
 
     private boolean charging;
+    public int chargingTicks;
 
     public EntityBigCreeperDummy(World worldIn) {
         super(worldIn);
@@ -29,7 +29,9 @@ public class EntityBigCreeperDummy extends Entity {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        TakumiCraftCore.LOGGER.info(this.getPosition());
+        if(this.getCharging()){
+            this.chargingTicks++;
+        }
     }
 
     @Override
