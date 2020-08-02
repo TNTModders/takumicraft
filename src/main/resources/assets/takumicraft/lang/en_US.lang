@@ -695,6 +695,8 @@ entity.gemcreeper.desc=Like a gem, not a treasure, it's a danger, great dame's.
 entity.fakecreeper.name=Fake Creeper
 entity.fakecreeper.desc=No doubt, the greatest creeper.
 entity.fakecreeper.message=You tricked!
+entity.phantomcreeper.name=Phantom Creeper
+entity.phantomcreeper.desc=A flying nightmare, shows a phantom of fighter from the air.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
