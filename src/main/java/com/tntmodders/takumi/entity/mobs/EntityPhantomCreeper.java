@@ -1,12 +1,15 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderPhantomCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -199,23 +202,36 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
     public void onUpdate() {
         super.onUpdate();
         this.setNoGravity(true);
-        if (!this.world.isRemote && this.getAttackTarget() != null) {
+        if (this.getAttackTarget() == null) {
+            EntityPlayer player = this.world.getNearestAttackablePlayer(this, 100, 256);
+            if (player != null) {
+                this.setAttackTarget(player);
+            }
+        } else {
             if (this.ticksExisted % 60 == 0) {
-                double dx = this.posX - this.getAttackTarget().posX;
-                double dz = this.posZ - this.getAttackTarget().posZ;
-                double dy = this.posY - this.getAttackTarget().posY;
+                this.playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
+                if (!this.world.isRemote) {
+                    double dx = this.posX - this.getAttackTarget().posX;
+                    double dz = this.posZ - this.getAttackTarget().posZ;
+                    double dy = this.posY - this.getAttackTarget().posY;
 
-                if (dx * dx + dz * dz < 25 && dy < 20) {
-                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
-                    EntityZombieCreeper creeper = new EntityZombieCreeper(this.world);
-                    creeper.setPosition(this.posX, this.posY, this.posZ);
-                    creeper.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.ELYTRA));
-                    creeper.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.CHAINMAIL_HELMET));
-                    creeper.setAttackTarget(this.getAttackTarget());
-                    this.world.spawnEntity(creeper);
+                    if (dx * dx + dz * dz < 25 && dy < 20) {
+                        this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
+                        EntityZombieCreeper creeper = new EntityZombieCreeper(this.world);
+                        creeper.setPosition(this.posX, this.posY, this.posZ);
+                        creeper.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.ELYTRA));
+                        creeper.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.CHAINMAIL_HELMET));
+                        creeper.setAttackTarget(this.getAttackTarget());
+                        this.world.spawnEntity(creeper);
+                    }
                 }
             }
         }
+    }
+
+    @Override
+    public boolean isImmuneToExplosions() {
+        return true;
     }
 
     @Override
@@ -337,9 +353,9 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
                     EntityPhantomCreeper.this.motionY *= 0.5D;
                     EntityPhantomCreeper.this.motionZ *= 0.5D;
                 } else {
-                    EntityPhantomCreeper.this.motionX += d0 / d3 * 0.05D * this.speed;
-                    EntityPhantomCreeper.this.motionY += d1 / d3 * 0.05D * this.speed;
-                    EntityPhantomCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed;
+                    EntityPhantomCreeper.this.motionX += d0 / d3 * 0.05D * this.speed * 2;
+                    EntityPhantomCreeper.this.motionY += d1 / d3 * 0.05D * this.speed * 1.25;
+                    EntityPhantomCreeper.this.motionZ += d2 / d3 * 0.05D * this.speed * 2;
 
                     if (EntityPhantomCreeper.this.getAttackTarget() == null) {
                         EntityPhantomCreeper.this.rotationYaw = -((float) MathHelper.atan2(EntityPhantomCreeper.this.motionX,
@@ -357,6 +373,7 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
     }
 
     class AIMoveRandom extends EntityAIBase {
+        private int groundTick = -1;
 
         public AIMoveRandom() {
             this.setMutexBits(1);
@@ -387,24 +404,38 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
 
             if (blockpos == null) {
                 blockpos = new BlockPos(EntityPhantomCreeper.this);
+                EntityPhantomCreeper.this.setBoundOrigin(blockpos);
             }
 
-            int r = EntityPhantomCreeper.this.getAttackTarget() != null ? 3 : 10;
+            if (EntityPhantomCreeper.this.getAttackTarget() != null) {
+                blockpos = EntityPhantomCreeper.this.getAttackTarget().getPosition();
+                blockpos.up(EntityPhantomCreeper.this.rand.nextInt(4));
+            }
+
+            int r = EntityPhantomCreeper.this.getAttackTarget() != null ? 1 : 10;
             double y = EntityPhantomCreeper.this.rand.nextDouble() * r - (r / 2);
-            if (EntityPhantomCreeper.this.onGround) {
+            World world = EntityPhantomCreeper.this.world;
+            BlockPos pos = EntityPhantomCreeper.this.getPosition().down();
+            if (this.groundTick >= 0 || EntityPhantomCreeper.this.onGround
+                    || world.getBlockState(pos).getCollisionBoundingBox(world, pos) != Block.NULL_AABB
+                    || EntityPhantomCreeper.this.world.collidesWithAnyBlock(EntityPhantomCreeper.this.getEntityBoundingBox().expand(1, 1, 1))) {
+
                 y += EntityPhantomCreeper.this.rand.nextDouble() * r;
+                this.groundTick++;
+                if (this.groundTick > 10) {
+                    this.groundTick = -1;
+                }
             }
 
             blockpos = blockpos.add(r * Math.cos(EntityPhantomCreeper.this.ticksExisted), y, r * Math.sin(EntityPhantomCreeper.this.ticksExisted));
 
             for (int i = 0; i < 3; ++i) {
                 BlockPos blockpos1 = blockpos.add(EntityPhantomCreeper.this.rand.nextInt(15) - 7,
-                        EntityPhantomCreeper.this.rand.nextInt(11) - 5, EntityPhantomCreeper.this.rand.nextInt(15) - 7);
-
+                        EntityPhantomCreeper.this.rand.nextInt(7) - 3, EntityPhantomCreeper.this.rand.nextInt(15) - 7);
                 if (EntityPhantomCreeper.this.world.isAirBlock(blockpos1)) {
                     EntityPhantomCreeper.this.moveHelper.setMoveTo((double) blockpos1.getX() + 0.5D,
                             (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 0.25D);
-
+                    TakumiCraftCore.LOGGER.info(blockpos1.getY());
                     if (EntityPhantomCreeper.this.getAttackTarget() == null) {
                         EntityPhantomCreeper.this.getLookHelper().setLookPosition((double) blockpos1.getX() + 0.5D,
                                 (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
