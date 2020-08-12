@@ -305,7 +305,7 @@ public class EntityBigBatCreeper extends EntityBatCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL;
+        return EnumTakumiType.NORMAL_D;
     }
 
     @Override

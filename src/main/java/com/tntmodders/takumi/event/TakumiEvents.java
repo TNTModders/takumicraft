@@ -337,16 +337,16 @@ public class TakumiEvents {
         }
         if (event.getEntityLiving() instanceof EntityCreeper &&
                 !((EntityCreeper) event.getEntityLiving()).getPowered() &&
-                (((EntityCreeper) event.getEntityLiving()).world.isThundering() ||
+                (event.getEntityLiving().world.isThundering() ||
                         event.getEntity().world.provider.getDimension() == TakumiWorldCore.TAKUMI_WORLD.getId())) {
             TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), true);
         }
         if (event.getEntityLiving() instanceof EntityParrot) {
             if (event.getEntityLiving().getEntityData().hasKey("creeper") &&
                     event.getEntityLiving().getEntityData().getBoolean("creeper")) {
-                ((EntityParrot) event.getEntityLiving()).world.createExplosion(event.getEntityLiving(),
-                        ((EntityParrot) event.getEntityLiving()).posX, ((EntityParrot) event.getEntityLiving()).posY,
-                        ((EntityParrot) event.getEntityLiving()).posZ, 4f, true);
+                event.getEntityLiving().world.createExplosion(event.getEntityLiving(),
+                        event.getEntityLiving().posX, event.getEntityLiving().posY,
+                        event.getEntityLiving().posZ, 4f, true);
                 event.getEntityLiving().setDead();
             }
         }
@@ -938,37 +938,10 @@ public class TakumiEvents {
             }
 
         }
-/*        if (event.getEntityLiving() instanceof ITakumiEntity && event.getEntityLiving() instanceof EntityCreeper &&
-                ((EntityLiving) event.getEntityLiving()).getAttackTarget() instanceof EntityAttackBlock &&
-                event.getSource().getTrueSource() instanceof EntityPlayer) {
-            if (!event.getEntityLiving().world.isRemote) {
-                event.getEntityLiving().entityDropItem(new ItemStack(TakumiItemCore.ENERGY_CORE, 1), 0);
-            }
-            EntityAttackBlock entity = ((EntityAttackBlock) ((EntityLiving) event.getEntityLiving()).getAttackTarget());
-            if (entity.getActivePotionEffect(MobEffects.NIGHT_VISION) != null) {
-                entity.setHealth(entity.getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
-                TakumiCraftCore.LOGGER.info(entity.getHealth());
-            }
-            entity.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 2));
-            if (entity.getHealth() <= 0) {
-                event.getEntityLiving().world.playerEntities.forEach(
-                        player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
-            }
-        }*/
-        /*if (!event.getEntityLiving().world.isRemote && event.getEntityLiving().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) &&
-                event.getSource().getTrueSource() instanceof EntityPlayer) {
-            event.getEntityLiving().world.loadedEntityList.stream().filter(entity -> entity instanceof EntityAttackBlock).forEach(entity -> {
-                if (((EntityAttackBlock) entity).spawns.contains(event.getEntityLiving())) {
-                    ((EntityAttackBlock) entity).setHealth(((EntityAttackBlock) entity).getHealth() - ((ITakumiEntity) event.getEntityLiving()).takumiRank().getPoint());
-                    event.getEntityLiving().entityDropItem(new ItemStack(TakumiItemCore.ENERGY_CORE, 1), 0);
-                    ((EntityAttackBlock) entity).spawns.remove(event.getEntityLiving());
-                    if (((EntityAttackBlock) entity).getHealth() <= 0) {
-                        event.getEntityLiving().world.playerEntities.forEach(
-                                player -> player.sendMessage(new TextComponentTranslation("entity.attackblock.win")));
-                    }
-                }
-            });
-        }*/
+        if (!event.getEntity().world.isRemote && event.getEntity() instanceof ITakumiEntity && event.getEntity().isGlowing() && event.getEntity().world.loadedEntityList != null &&
+                event.getEntity().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock)) {
+            event.getEntity().dropItem(TakumiItemCore.ENERGY_CORE, event.getEntity().world.rand.nextInt(3));
+        }
         if (TakumiConfigCore.useTP) {
             ScoreObjective objective = event.getEntityLiving().world.getScoreboard().getObjective("tp");
             if (objective != null) {

@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderPhantomCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
@@ -157,7 +156,7 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public EnumTakumiType takumiType() {
-        return EnumTakumiType.NORMAL_M;
+        return EnumTakumiType.NORMAL_D;
     }
 
     @Override
@@ -435,7 +434,6 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
                 if (EntityPhantomCreeper.this.world.isAirBlock(blockpos1)) {
                     EntityPhantomCreeper.this.moveHelper.setMoveTo((double) blockpos1.getX() + 0.5D,
                             (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 0.25D);
-                    TakumiCraftCore.LOGGER.info(blockpos1.getY());
                     if (EntityPhantomCreeper.this.getAttackTarget() == null) {
                         EntityPhantomCreeper.this.getLookHelper().setLookPosition((double) blockpos1.getX() + 0.5D,
                                 (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 180.0F, 20.0F);

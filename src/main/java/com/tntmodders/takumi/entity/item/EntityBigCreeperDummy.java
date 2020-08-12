@@ -3,19 +3,37 @@ package com.tntmodders.takumi.entity.item;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
 public class EntityBigCreeperDummy extends Entity {
 
-    private boolean charging;
+    public final float maxHP = 2500;
     public int chargingTicks;
+    private boolean isDamaged;
+    private boolean charging;
+    private float hp;
 
     public EntityBigCreeperDummy(World worldIn) {
         super(worldIn);
-        this.setSize(1, 1);
+        this.setSize(2, 2);
+        this.hp = this.maxHP;
+    }
+
+    public boolean isDamaged() {
+        return isDamaged;
+    }
+
+    public void setDamaged(boolean damaged) {
+        isDamaged = damaged;
+    }
+
+    public float getHP() {
+        return hp;
     }
 
     public boolean getCharging() {
@@ -29,7 +47,7 @@ public class EntityBigCreeperDummy extends Entity {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if(this.getCharging()){
+        if (this.getCharging()) {
             this.chargingTicks++;
         }
     }
@@ -40,10 +58,16 @@ public class EntityBigCreeperDummy extends Entity {
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound compound) {
+        this.hp = compound.getFloat("bigcreeperHP");
+        this.isDamaged = compound.getBoolean("isDamaged");
+        this.charging = compound.getBoolean("charging");
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound) {
+        compound.setFloat("bigcreeperHP", this.hp);
+        compound.setBoolean("isDamaged", this.isDamaged);
+        compound.setBoolean("charging", this.charging);
     }
 
     @Override
@@ -58,7 +82,15 @@ public class EntityBigCreeperDummy extends Entity {
     @Override
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox() {
-        return this.getEntityBoundingBox();
+        return this.isDamaged ? this.getEntityBoundingBox() : null;
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.isExplosion() && this.isDamaged) {
+            this.hp = this.hp - amount;
+        }
+        return false;
     }
 
     @Override
@@ -71,12 +103,21 @@ public class EntityBigCreeperDummy extends Entity {
 
     @Override
     public boolean canBeCollidedWith() {
-        return !this.isDead;
+        return this.isDamaged;
     }
 
     @Override
     public boolean isImmuneToExplosions() {
-        return true;
+        return !this.isDamaged;
+    }
+
+    @Override
+    public void setDead() {
+        super.setDead();
+        if (!this.world.isRemote && this.isDamaged && this.hp < 0) {
+            this.world.getPlayers(EntityPlayer.class, input -> EntityBigCreeperDummy.this.getDistanceSqToEntity(input) < 10000).forEach(player
+                    -> player.sendMessage(new TextComponentString("dead")));
+        }
     }
 
     @Override
@@ -93,4 +134,6 @@ public class EntityBigCreeperDummy extends Entity {
     public boolean shouldRenderInPass(int pass) {
         return true;
     }
+
+
 }

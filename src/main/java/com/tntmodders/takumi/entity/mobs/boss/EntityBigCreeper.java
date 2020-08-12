@@ -44,7 +44,7 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
                 iTakumiEntity -> iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH).iterator()));
         takumiEntities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityGiantCreeper);
         this.isImmuneToFire = true;
-        this.setSize(8,8);
+        this.setSize(8, 8);
     }
 
     @Override
@@ -155,6 +155,10 @@ public class EntityBigCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onUpdate() {
+        //unuse this entity
+        this.setHealth(0);
+        this.setDead();
+
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
