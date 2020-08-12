@@ -226,7 +226,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 case 1: {
                     for (int i = 0; i < (this.getPowered() ? 15 : 10); i++) {
                         BlockPos pos = this.getRandomPos(9, 4, 9);
-                        this.world.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), this.getPowered() ? 8 : 5,
+                        this.world.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), this.getPowered() ? 9 : 6,
                                 true, true);
                     }
                     break;
@@ -239,7 +239,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                             for (double y = -5; y <= 5; y += 1) {
                                 if (x * x + z * z + y * y <= 25 && x * x + z * z + y * y >= 4.5 * 4.5) {
                                     this.world.newExplosion(this, this.posX + x, this.posY + y, this.posZ + z,
-                                            this.getPowered() ? 3f : 1.5f, true, true);
+                                            this.getPowered() ? 4f : 2f, true, true);
                                 }
                             }
                         }
@@ -287,14 +287,14 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         fireball.setPosition(pos.getX(), pos.getY(), pos.getZ());
                         fireball.motionY = -1;
                         fireball.accelerationY = -0.2;
-                        fireball.explosionPower = this.getPowered() ? 5 : 3;
+                        fireball.explosionPower = this.getPowered() ? 6 : 4;
                         this.world.spawnEntity(fireball);
                     }
                     break;
                 }
 
                 default: {
-                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 10 : 7, true);
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 12 : 8, true);
                 }
             }
         }

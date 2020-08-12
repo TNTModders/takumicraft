@@ -72,7 +72,7 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
         if (!this.world.isRemote) {
             for (int t = 0; t < (this.getPowered() ? 75 : 40); t++) {
                 Random rand = new Random();
-                int i = this.getPowered() ? 50 : 30;
+                int i = this.getPowered() ? 40 : 25;
                 double x = this.posX + this.rand.nextInt(i * 2) - i;
                 double y = this.posY + this.rand.nextInt(i) - i / 2;
                 double z = this.posZ + this.rand.nextInt(i * 2) - i;

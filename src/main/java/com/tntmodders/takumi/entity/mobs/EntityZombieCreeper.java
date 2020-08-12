@@ -375,6 +375,12 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
+        if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
+            this.setItemStackToSlot(EntityEquipmentSlot.CHEST, ItemStack.EMPTY);
+            if (this.rand.nextInt(4) == 0) {
+                this.entityDropItem(new ItemStack(Items.ELYTRA), 0.0f);
+            }
+        }
         for (ItemStack itemStack : this.getArmorInventoryList()) {
             if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null &&
                     itemStack.getItem() != Item.getItemFromBlock(Blocks.PUMPKIN) &&

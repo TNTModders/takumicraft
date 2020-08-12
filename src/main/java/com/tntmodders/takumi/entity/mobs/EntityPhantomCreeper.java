@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -222,6 +223,7 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
                         creeper.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.CHAINMAIL_HELMET));
                         creeper.setAttackTarget(this.getAttackTarget());
                         this.world.spawnEntity(creeper);
+                        this.damageEntity(DamageSource.causeMobDamage(this), 1);
                     }
                 }
             }

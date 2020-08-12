@@ -54,9 +54,9 @@ public class EntityIllusionerCreeper extends EntityAbstractSpellCreeper implemen
         this.tasks.taskEntries.clear();
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new AICastingApell());
+        this.tasks.addTask(1, new EntityAIAttackRangedBow(this, 0.5D, 20, 15.0F));
         this.tasks.addTask(4, new AIMirriorSpell());
         this.tasks.addTask(5, new AIBlindnessSpell());
-        this.tasks.addTask(6, new EntityAIAttackRangedBow(this, 0.5D, 20, 15.0F));
         this.tasks.addTask(8, new EntityAIWander(this, 0.6D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
