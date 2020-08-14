@@ -33,16 +33,18 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (Entity entity : event.getAffectedEntities()) {
-            if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+        if (this.canRegister()) {
+            for (Entity entity : event.getAffectedEntities()) {
+                if (entity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 200));
+                }
             }
-        }
 
-        for (BlockPos pos : event.getAffectedBlocks()) {
-            if (!this.world.isAirBlock(pos)) {
-                TakumiUtils.setBlockStateProtected(this.world, pos,
-                        TakumiBlockCore.CREEPER_SANDSTAR_LOW.getDefaultState());
+            for (BlockPos pos : event.getAffectedBlocks()) {
+                if (!this.world.isAirBlock(pos)) {
+                    TakumiUtils.setBlockStateProtected(this.world, pos,
+                            TakumiBlockCore.CREEPER_SANDSTAR_LOW.getDefaultState());
+                }
             }
         }
 
@@ -64,6 +66,9 @@ public class EntityCeruleanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         super.onUpdate();
+        if (!this.canRegister()) {
+            this.setDead();
+        }
         if (this.inWater) {
             this.setDead();
             if (!this.world.isRemote) {

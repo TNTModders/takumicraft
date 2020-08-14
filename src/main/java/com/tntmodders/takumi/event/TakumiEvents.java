@@ -455,7 +455,7 @@ public class TakumiEvents {
         }
         event.getAffectedEntities().removeIf(entity -> {
             if (entity instanceof EntityItem) {
-                if (((EntityItem) entity).getItem().getRarity() == EnumRarity.EPIC) {
+                if (((EntityItem) entity).getItem().getRarity() == EnumRarity.EPIC || ((EntityItem) entity).getItem().getItem() == Items.NETHER_STAR) {
                     return true;
                 } else if (EnchantmentHelper.getEnchantments(((EntityItem) entity).getItem()).containsKey(TakumiEnchantmentCore.ITEM_PROTECTION)) {
                     if (!event.getWorld().isRemote) {

@@ -20,6 +20,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -40,15 +41,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements IRangedAttackMob {
-    private final BossInfoServer bossInfo =
-            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.withercreeper.name"), BossInfo.Color.PURPLE,
-                    BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
-
     private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.createKey(EntityWitherCreeper.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.createKey(EntityWitherCreeper.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.createKey(EntityWitherCreeper.class, DataSerializers.VARINT);
     private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[]{FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET};
     private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.createKey(EntityWitherCreeper.class, DataSerializers.VARINT);
+    private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_
+            -> p_apply_1_ instanceof EntityLivingBase
+            && !(p_apply_1_ instanceof EntityCreeper)
+            && ((EntityLivingBase) p_apply_1_).attackable();
+    private final BossInfoServer bossInfo =
+            (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.withercreeper.name"), BossInfo.Color.PURPLE,
+                    BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
     private final float[] xRotationHeads = new float[2];
     private final float[] yRotationHeads = new float[2];
     private final float[] xRotOHeads = new float[2];
@@ -59,10 +63,6 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
      * Time before the Wither tries to break blocks
      */
     private int blockBreakCounter;
-    private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_
-            -> p_apply_1_ instanceof EntityLivingBase
-            && !(p_apply_1_ instanceof EntityCreeper)
-            && ((EntityLivingBase) p_apply_1_).attackable();
 
     public EntityWitherCreeper(World worldIn) {
         super(worldIn);
@@ -70,6 +70,10 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
         this.isImmuneToFire = true;
         ((PathNavigateGround) this.getNavigator()).setCanSwim(true);
         this.experienceValue = 50;
+    }
+
+    public static boolean canDestroyBlock(Block blockIn) {
+        return blockIn != Blocks.BEDROCK && blockIn != Blocks.END_PORTAL && blockIn != Blocks.END_PORTAL_FRAME && blockIn != Blocks.COMMAND_BLOCK && blockIn != Blocks.REPEATING_COMMAND_BLOCK && blockIn != Blocks.CHAIN_COMMAND_BLOCK && blockIn != Blocks.BARRIER && blockIn != Blocks.STRUCTURE_BLOCK && blockIn != Blocks.STRUCTURE_VOID && blockIn != Blocks.PISTON_EXTENSION && blockIn != Blocks.END_GATEWAY;
     }
 
     @Override
@@ -347,10 +351,6 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
-    public static boolean canDestroyBlock(Block blockIn) {
-        return blockIn != Blocks.BEDROCK && blockIn != Blocks.END_PORTAL && blockIn != Blocks.END_PORTAL_FRAME && blockIn != Blocks.COMMAND_BLOCK && blockIn != Blocks.REPEATING_COMMAND_BLOCK && blockIn != Blocks.CHAIN_COMMAND_BLOCK && blockIn != Blocks.BARRIER && blockIn != Blocks.STRUCTURE_BLOCK && blockIn != Blocks.STRUCTURE_VOID && blockIn != Blocks.PISTON_EXTENSION && blockIn != Blocks.END_GATEWAY;
-    }
-
     /**
      * Initializes this Wither's explosion sequence and makes it invulnerable. Called immediately after spawning.
      */
@@ -480,7 +480,7 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
                     Entity entity = source.getImmediateSource();
 
                     if (entity instanceof EntityArrow) {
-                        amount = amount / 3;
+                        amount = amount / 6;
                     }
                 }
 
@@ -510,11 +510,7 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
      */
     @Override
     protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
-        EntityItem entityitem = this.dropItem(Items.NETHER_STAR, 1);
-
-        if (entityitem != null) {
-            entityitem.setNoDespawn();
-        }
+        super.dropFewItems(wasRecentlyHit, lootingModifier);
         this.dropItem(TakumiItemCore.THROW_GRENEDE, this.rand.nextInt(16) + 1);
     }
 
@@ -617,20 +613,6 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
     public void setSwingingArms(boolean swingingArms) {
     }
 
-    class AIDoNothing extends EntityAIBase {
-        public AIDoNothing() {
-            this.setMutexBits(7);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        @Override
-        public boolean shouldExecute() {
-            return EntityWitherCreeper.this.getInvulTime() > 0;
-        }
-    }
-
     @Override
     public void setDead() {
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
@@ -651,6 +633,22 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
             }
         }
         super.setDead();
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        if (!this.world.isRemote) {
+            EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(Items.NETHER_STAR, this.rand.nextInt(3) + 1));
+            entityitem.setNoDespawn();
+            entityitem.setEntityInvulnerable(true);
+            entityitem.setDefaultPickupDelay();
+            if (captureDrops) {
+                this.capturedDrops.add(entityitem);
+            } else {
+                this.world.spawnEntity(entityitem);
+            }
+        }
     }
 
     @Override
@@ -705,5 +703,19 @@ public class EntityWitherCreeper extends EntityTakumiAbstractCreeper implements 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
+    }
+
+    class AIDoNothing extends EntityAIBase {
+        public AIDoNothing() {
+            this.setMutexBits(7);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        @Override
+        public boolean shouldExecute() {
+            return EntityWitherCreeper.this.getInvulTime() > 0;
+        }
     }
 }
