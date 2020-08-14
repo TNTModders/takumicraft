@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.item;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
@@ -22,10 +21,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -50,7 +49,7 @@ public class EntityAttackBlock extends Entity {
             new BossInfoServer(new TextComponentTranslation("entity.attackblock.name"), BossInfo.Color.BLUE,
                     BossInfo.Overlay.NOTCHED_20);
     //default 1500f
-    private final float maxTP = 10f;
+    private final float maxTP = 1500f;
     //default 600
     private final float maxChargeTick = 600;
     private final boolean[] msgflgs = new boolean[3];
@@ -76,7 +75,8 @@ public class EntityAttackBlock extends Entity {
                     iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.HIGH) {
                 if (iTakumiEntity.getClass() != EntitySeaGuardianCreeper.class &&
                         iTakumiEntity.getClass() != EntitySquidCreeper.class &&
-                        ((EntityCreeper) iTakumiEntity).isNonBoss()) {
+                        ((EntityCreeper) iTakumiEntity).isNonBoss() &&
+                        !iTakumiEntity.takumiType().isMagic()) {
                     entities.add(iTakumiEntity);
                 }
             }
@@ -92,7 +92,6 @@ public class EntityAttackBlock extends Entity {
     }
 
     public void setRandomAttackID() {
-        //@TODO: chage maxID if the var of attacks added. & change debugID if you commit it.
         int debugID = 0;
         if (debugID != 0) {
             this.dataManager.set(ATTACK_ID, debugID);
@@ -105,219 +104,231 @@ public class EntityAttackBlock extends Entity {
     @Override
     public void onUpdate() {
         super.onUpdate();
+        if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+            this.dummy.setDead();
+            this.setDead();
+        }
         if (this.dummy == null) {
             if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityBigCreeperDummy)) {
                 this.dummy = ((EntityBigCreeperDummy) this.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityBigCreeperDummy).toArray()[0]);
             }
         }
         if (this.dummy != null) {
-            if (this.getDistanceSqToEntity(this.dummy) > this.nearest * this.nearest) {
-                if (this.getTP() > 0) {
-                    double x = this.dummy.posX - this.getDX();
-                    double z = this.dummy.posZ - this.getDZ();
-                    double dy = (this.world.getHeight(((int) x), (int) z) - this.dummy.posY) / 20;
-                    this.dummy.setPosition(x, this.dummy.posY + dy, z);
+            if (this.getTP() > 0) {
+                double x = this.dummy.posX - this.getDX();
+                double z = this.dummy.posZ - this.getDZ();
+                double dy = (this.world.getHeight(((int) x), (int) z) - this.dummy.posY) / 20;
+                this.dummy.setPosition(x, this.dummy.posY + dy, z);
 
-                    float distance = this.dist * this.dist - this.nearest * this.nearest;
-                    float maxDistance = distance;
-                    if (this.dummy != null) {
-                        distance = (float) ((this.getDistanceSqXZ(this.dummy.getPosition()) - this.nearest * this.nearest));
-                        if (distance > maxDistance) {
-                            distance = maxDistance;
-                        }
+                float distance = this.dist * this.dist - this.nearest * this.nearest;
+                float maxDistance = distance;
+                if (this.dummy != null) {
+                    distance = (float) ((this.getDistanceSqXZ(this.dummy.getPosition()) - this.nearest * this.nearest));
+                    if (distance > maxDistance) {
+                        distance = maxDistance;
                     }
+                }
+                boolean flg = this.getDistanceSqToEntity(this.dummy) > this.nearest * this.nearest;
+                if (flg) {
                     this.attackblock.setPercent((distance / maxDistance));
-                    this.bigcreeper.setPercent(this.getTP() / this.maxTP);
-                    if (!this.world.isRemote && this.rand.nextInt(50) == 0) {
-                        if (this.world.getEntitiesWithinAABB(EntityMob.class, this.dummy.getEntityBoundingBox().grow(100)).size() < 100) {
-                            EntityCreeper creeper = null;
-                            try {
-                                creeper = (EntityCreeper) entities.get(
-                                        this.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(this.world);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            if (creeper != null) {
-                                creeper.setWorld(this.world);
-                                BlockPos pos = new BlockPos(this.dummy.posX + this.rand.nextFloat() * 50 - this.rand.nextFloat() * 50,
-                                        0, this.dummy.posZ + this.rand.nextFloat() * 50 - this.rand.nextFloat() * 50);
-                                pos = this.world.getHeight(pos);
-                                creeper.setPosition(pos.getX(), pos.getY() + 0.5, pos.getZ());
-                                creeper.setGlowing(true);
-                                TakumiUtils.takumiSetPowered(creeper, true);
-                                this.world.spawnEntity(creeper);
-                            }
+                }
+                this.bigcreeper.setPercent(this.getTP() / this.maxTP);
+                if (flg && !this.world.isRemote && this.rand.nextInt(50) == 0) {
+                    if (this.world.getEntitiesWithinAABB(EntityMob.class, this.dummy.getEntityBoundingBox().grow(100)).size() < 100) {
+                        EntityCreeper creeper = null;
+                        try {
+                            creeper = (EntityCreeper) entities.get(
+                                    this.rand.nextInt(entities.size())).getClass().getConstructor(World.class).newInstance(this.world);
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } else if (this.rand.nextInt(100) == 0) {
-                        for (int i = 0; i < 20; i++) {
-                            BlockPos pos = this.dummy.getPosition().add(
-                                    MathHelper.nextDouble(this.rand, -50, 50),
-                                    MathHelper.nextDouble(this.rand, -50, 50),
-                                    MathHelper.nextDouble(this.rand, -50, 50));
-                            for (int j = 0; j < 10; j++) {
-                                EntityLightningBolt bolt =
-                                        new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
-                                this.world.addWeatherEffect(bolt);
-                                this.world.spawnEntity(bolt);
-                            }
+                        if (creeper != null) {
+                            creeper.setWorld(this.world);
+                            BlockPos pos = new BlockPos(this.dummy.posX + this.rand.nextFloat() * 50 - this.rand.nextFloat() * 50,
+                                    0, this.dummy.posZ + this.rand.nextFloat() * 50 - this.rand.nextFloat() * 50);
+                            pos = this.world.getHeight(pos);
+                            creeper.setPosition(pos.getX(), pos.getY() + 0.5, pos.getZ());
+                            creeper.setGlowing(true);
+                            TakumiUtils.takumiSetPowered(creeper, true);
+                            this.world.spawnEntity(creeper);
                         }
                     }
+                } else if (this.rand.nextInt(100) == 0) {
+                    for (int i = 0; i < 20; i++) {
+                        BlockPos pos = this.dummy.getPosition().add(
+                                MathHelper.nextDouble(this.rand, -50, 50),
+                                MathHelper.nextDouble(this.rand, -50, 50),
+                                MathHelper.nextDouble(this.rand, -50, 50));
+                        for (int j = 0; j < 10; j++) {
+                            EntityLightningBolt bolt =
+                                    new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
+                            this.world.addWeatherEffect(bolt);
+                            this.world.spawnEntity(bolt);
+                        }
+                    }
+                }
+            } else {
+                if (this.damagedTick > this.maxDamagedTick) {
+                    this.damagedTick = 0;
+                    this.bigcreeper.setColor(BossInfo.Color.GREEN);
+                    this.dummy.setDamaged(false);
+                    if (this.lastTP < 1) {
+                        this.lastTP = this.maxTP;
+                    }
+                    float tp = this.lastTP / 2;
+                    this.setTP(tp);
+                    this.lastTP = tp;
                 } else {
-                    if (this.damagedTick > this.maxDamagedTick) {
-                        this.damagedTick = 0;
-                        this.bigcreeper.setColor(BossInfo.Color.GREEN);
-                        this.dummy.setDamaged(false);
-                        if (this.lastTP < 1) {
-                            this.lastTP = this.maxTP;
-                        }
-                        float tp = this.lastTP / 2;
-                        this.setTP(tp);
-                        this.lastTP = tp;
-                        TakumiCraftCore.LOGGER.info("reboot");
-                    } else {
-                        this.bigcreeper.setColor(BossInfo.Color.PURPLE);
-                        float health = this.dummy.getHP() / this.dummy.maxHP;
-                        this.bigcreeper.setPercent(health);
-                        this.dummy.setDamaged(true);
-                        this.damagedTick++;
+                    this.bigcreeper.setColor(BossInfo.Color.PURPLE);
+                    this.bigcreeper.setName(new TextComponentTranslation("entity.attackblock.info.damaged"));
+                    float health = this.dummy.getHP() / this.dummy.maxHP;
+                    this.bigcreeper.setPercent(health);
+                    this.dummy.setDamaged(true);
+                    this.damagedTick++;
+                    if (this.damagedTick == 1) {
+                        this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
+                                -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.attack")));
+                    }
 
-                        if (health < 0 && !this.world.isRemote) {
-                            this.setDead();
-                            this.dummy.setDead();
-                            this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                                    -> player.sendMessage(new TextComponentString("done")));
-                        }
-                        if (this.ticksExisted % 200 == 0) {
-                            long l = Math.floorDiv(System.currentTimeMillis(), 1000);
-                            Random random = new Random(l);
-                            random.setSeed(l);
-                            this.setRandomAttackID();
+                    if (health < 0 && !this.world.isRemote) {
+                        this.setDead();
+                        this.dummy.setDead();
+                        this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
+                                -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.done")));
+                    }
+                    if (this.ticksExisted % 200 == 0) {
+                        long l = Math.floorDiv(System.currentTimeMillis(), 1000);
+                        Random random = new Random(l);
+                        random.setSeed(l);
+                        this.setRandomAttackID();
 
-                            for (int i = 0; i < 5; i++) {
-                                double x = this.dummy.posX + random.nextDouble() * 51 - 25;
-                                double z = this.dummy.posZ + random.nextDouble() * 51 - 25;
-                                double y = this.world.getHeight((int) x, (int) z);
-                                this.thunderPoint.add(new BlockPos(x, y, z));
-                            }
-                        } else if (this.ticksExisted % 200 == 100) {
-                            if (!this.thunderPoint.isEmpty()) {
-                                switch (this.getAttackID()) {
-                                    //straight thunder
-                                    case 1: {
-                                        for (int d = -10; d <= 10; d++) {
-                                            EntityLightningBolt boltX = new EntityLightningBolt(this.world, this.dummy.posX + d, this.dummy.posY, this.dummy.posZ, false);
-                                            this.world.addWeatherEffect(boltX);
-                                            this.world.spawnEntity(boltX);
-                                            EntityLightningBolt boltZ = new EntityLightningBolt(this.world, this.dummy.posX, this.dummy.posY, this.dummy.posZ + d, false);
-                                            this.world.addWeatherEffect(boltZ);
-                                            this.world.spawnEntity(boltZ);
-                                        }
-                                        break;
+                        for (int i = 0; i < 5; i++) {
+                            double x = this.dummy.posX + random.nextDouble() * 51 - 25;
+                            double z = this.dummy.posZ + random.nextDouble() * 51 - 25;
+                            double y = this.world.getHeight((int) x, (int) z);
+                            this.thunderPoint.add(new BlockPos(x, y, z));
+                        }
+                    } else if (this.ticksExisted % 200 == 100) {
+                        if (!this.thunderPoint.isEmpty()) {
+                            switch (this.getAttackID()) {
+                                //straight thunder
+                                case 1: {
+                                    for (int d = -10; d <= 10; d++) {
+                                        EntityLightningBolt boltX = new EntityLightningBolt(this.world, this.dummy.posX + d, this.dummy.posY, this.dummy.posZ, false);
+                                        this.world.addWeatherEffect(boltX);
+                                        this.world.spawnEntity(boltX);
+                                        EntityLightningBolt boltZ = new EntityLightningBolt(this.world, this.dummy.posX, this.dummy.posY, this.dummy.posZ + d, false);
+                                        this.world.addWeatherEffect(boltZ);
+                                        this.world.spawnEntity(boltZ);
                                     }
-                                    //random thunder
-                                    case 2: {
+                                    break;
+                                }
+                                //random thunder
+                                case 2: {
+                                    for (BlockPos pos : this.thunderPoint) {
+                                        for (int i = 0; i < 10; i++) {
+                                            EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX(), pos.getY(), pos.getZ(), false);
+                                            this.world.addWeatherEffect(bolt);
+                                            this.world.spawnEntity(bolt);
+                                        }
+                                    }
+                                    break;
+                                }
+                                //explode
+                                case 3: {
+                                    if (!this.world.isRemote) {
                                         for (BlockPos pos : this.thunderPoint) {
-                                            for (int i = 0; i < 10; i++) {
-                                                EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX(), pos.getY(), pos.getZ(), false);
-                                                this.world.addWeatherEffect(bolt);
-                                                this.world.spawnEntity(bolt);
+                                            for (int i = 0; i < 5; i++) {
+                                                this.world.newExplosion(this.dummy, pos.getX(), pos.getY(), pos.getZ(), 3f, true, true);
                                             }
                                         }
-                                        break;
                                     }
-                                    //explode
-                                    case 3: {
-                                        if (!this.world.isRemote) {
-                                            for (BlockPos pos : this.thunderPoint) {
-                                                for (int i = 0; i < 5; i++) {
-                                                    this.world.newExplosion(this.dummy, pos.getX(), pos.getY(), pos.getZ(), 3f, true, true);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    }
-                                    //summon
-                                    case 4: {
-                                        if (!this.world.isRemote) {
-                                            for (BlockPos pos : this.thunderPoint) {
-                                                for (int i = 0; i < 5; i++) {
-                                                    int type = this.rand.nextInt(3);
-                                                    EntityCreeper creeper = new EntityCreeper(this.world);
-                                                    switch (type) {
-                                                        case 0: {
-                                                            creeper = new EntityBigBatCreeper(this.world);
-                                                            break;
-                                                        }
-                                                        case 1: {
-                                                            creeper = new EntityPhantomCreeper(this.world);
-                                                            break;
-                                                        }
-                                                        case 2: {
-                                                            creeper = new EntityBlazeCreeper(this.world);
-                                                            break;
-                                                        }
+                                    break;
+                                }
+                                //summon
+                                case 4: {
+                                    if (!this.world.isRemote) {
+                                        for (BlockPos pos : this.thunderPoint) {
+                                            for (int i = 0; i < 5; i++) {
+                                                int type = this.rand.nextInt(3);
+                                                EntityCreeper creeper = new EntityCreeper(this.world);
+                                                switch (type) {
+                                                    case 0: {
+                                                        creeper = new EntityBigBatCreeper(this.world);
+                                                        break;
                                                     }
-                                                    creeper.setPosition(pos.getX(), pos.getY() + 0.5, pos.getZ());
-                                                    creeper.setGlowing(true);
-                                                    TakumiUtils.takumiSetPowered(creeper, true);
+                                                    case 1: {
+                                                        creeper = new EntityPhantomCreeper(this.world);
+                                                        break;
+                                                    }
+                                                    case 2: {
+                                                        creeper = new EntityBlazeCreeper(this.world);
+                                                        break;
+                                                    }
+                                                }
+                                                creeper.setPosition(pos.getX(), pos.getY() + 1.5, pos.getZ());
+                                                creeper.setGlowing(true);
+                                                TakumiUtils.takumiSetPowered(creeper, true);
+                                                if(!this.world.collidesWithAnyBlock(creeper.getEntityBoundingBox())){
                                                     this.world.spawnEntity(creeper);
                                                 }
                                             }
                                         }
-                                        break;
                                     }
+                                    break;
                                 }
                             }
-                            this.thunderPoint.clear();
-                        } else if (this.getAttackID() > 0) {
-                            if (this.ticksExisted % 200 < 100) {
-                                if (!this.thunderPoint.isEmpty()) {
-                                    switch (this.getAttackID()) {
-                                        case 1: {
-                                            for (int d = -10; d <= 10; d++) {
-                                                for (int i = 0; i < 30; i++) {
-                                                    this.world.spawnParticle(EnumParticleTypes.END_ROD, this.dummy.posX + d + this.rand.nextDouble() - 0.5d, this.dummy.posY, this.dummy.posZ + this.rand.nextDouble() - 0.5
-                                                            , (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
-                                                    this.world.spawnParticle(EnumParticleTypes.END_ROD, this.dummy.posX + this.rand.nextDouble() - 0.5d, this.dummy.posY, this.dummy.posZ + d + this.rand.nextDouble() - 0.5
-                                                            , (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
-                                                }
+                        }
+                        this.thunderPoint.clear();
+                    } else if (this.getAttackID() > 0) {
+                        if (this.ticksExisted % 200 < 100) {
+                            if (!this.thunderPoint.isEmpty()) {
+                                switch (this.getAttackID()) {
+                                    case 1: {
+                                        for (int d = -10; d <= 10; d++) {
+                                            for (int i = 0; i < 30; i++) {
+                                                this.world.spawnParticle(EnumParticleTypes.END_ROD, this.dummy.posX + d + this.rand.nextDouble() - 0.5d, this.dummy.posY, this.dummy.posZ + this.rand.nextDouble() - 0.5
+                                                        , (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
+                                                this.world.spawnParticle(EnumParticleTypes.END_ROD, this.dummy.posX + this.rand.nextDouble() - 0.5d, this.dummy.posY, this.dummy.posZ + d + this.rand.nextDouble() - 0.5
+                                                        , (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
                                             }
-                                            break;
                                         }
-                                        case 2: {
-                                            for (BlockPos pos : this.thunderPoint) {
-                                                for (int i = 0; i < 30; i++) {
-                                                    this.world.spawnParticle(EnumParticleTypes.END_ROD, pos.getX() + this.rand.nextDouble() - 0.5, pos.getY(), pos.getZ() + this.rand.nextDouble() - 0.5,
-                                                            (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
-                                                }
+                                        break;
+                                    }
+                                    case 2: {
+                                        for (BlockPos pos : this.thunderPoint) {
+                                            for (int i = 0; i < 30; i++) {
+                                                this.world.spawnParticle(EnumParticleTypes.END_ROD, pos.getX() + this.rand.nextDouble() - 0.5, pos.getY(), pos.getZ() + this.rand.nextDouble() - 0.5,
+                                                        (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
                                             }
-                                            break;
                                         }
-                                        case 3: {
-                                            for (BlockPos pos : this.thunderPoint) {
-                                                for (int i = 0; i < 30; i++) {
-                                                    this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + this.rand.nextDouble() - 0.5, pos.getY(), pos.getZ() + this.rand.nextDouble() - 0.5,
-                                                            (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
-                                                }
+                                        break;
+                                    }
+                                    case 3: {
+                                        for (BlockPos pos : this.thunderPoint) {
+                                            for (int i = 0; i < 30; i++) {
+                                                this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + this.rand.nextDouble() - 0.5, pos.getY(), pos.getZ() + this.rand.nextDouble() - 0.5,
+                                                        (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
                                             }
-                                            break;
                                         }
-                                        case 4: {
-                                            for (BlockPos pos : this.thunderPoint) {
-                                                for (int i = 0; i < 30; i++) {
-                                                    this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + this.rand.nextDouble() - 0.5, pos.getY(), pos.getZ() + this.rand.nextDouble() - 0.5,
-                                                            (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
-                                                }
+                                        break;
+                                    }
+                                    case 4: {
+                                        for (BlockPos pos : this.thunderPoint) {
+                                            for (int i = 0; i < 30; i++) {
+                                                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + this.rand.nextDouble() - 0.5, pos.getY(), pos.getZ() + this.rand.nextDouble() - 0.5,
+                                                        (this.rand.nextDouble() - 0.5) / 10, 0.1, (this.rand.nextDouble() - 0.5) / 10);
                                             }
-                                            break;
                                         }
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
                 }
-            } else {
+            }
+            if (this.getDistanceSqToEntity(this.dummy) <= this.nearest * this.nearest) {
                 this.attackblock.setColor(BossInfo.Color.RED);
                 this.chargeTick++;
                 float f = this.chargeTick / this.maxChargeTick;
@@ -333,17 +344,17 @@ public class EntityAttackBlock extends Entity {
                     }
                     if (this.chargeTick > 0 & !msgflgs[0]) {
                         this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                                -> player.sendMessage(new TextComponentString("01")));
+                                -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.charge.01")));
                         this.msgflgs[0] = true;
                     }
                     if (this.chargeTick > (this.maxChargeTick / 3) && !msgflgs[1]) {
                         this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                                -> player.sendMessage(new TextComponentString("02")));
+                                -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.charge.02")));
                         this.msgflgs[1] = true;
                     }
                     if (this.chargeTick > (this.maxChargeTick * 2 / 3) && !msgflgs[2]) {
                         this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                                -> player.sendMessage(new TextComponentString("03")));
+                                -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.charge.03")));
                         this.msgflgs[2] = true;
                     }
                     if (this.chargeTick > this.maxChargeTick - 25) {
@@ -374,6 +385,7 @@ public class EntityAttackBlock extends Entity {
                             } else if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !((EntityPlayer) entity).isSpectator() && entity.getDistanceSqToEntity(this.dummy) < 150 * 150) {
                                 entity.attackEntityFrom(DamageSource.causeExplosionDamage(this.world.createExplosion(this.dummy, this.dummy.posX, this.dummy.posY, this.dummy.posZ, 1f, false)),
                                         20f);
+                                entity.sendMessage(new TextComponentTranslation("entity.attackblock.message.failed"));
                             }
                         });
                     }

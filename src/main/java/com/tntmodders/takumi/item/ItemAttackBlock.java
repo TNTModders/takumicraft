@@ -11,6 +11,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,9 +39,9 @@ public class ItemAttackBlock extends Item {
             bigPos = worldIn.getHeight(bigPos);
             attackBlock.setPos(bigPos);
             double dx = bigPos.getX() - blockPos.getX();
-            attackBlock.setDX(((float) (dx / attackBlock.attackTick)));
+            attackBlock.setDX(((float) (dx / EntityAttackBlock.attackTick)));
             double dz = bigPos.getZ() - blockPos.getZ();
-            attackBlock.setDZ(((float) (dz / attackBlock.attackTick)));
+            attackBlock.setDZ(((float) (dz / EntityAttackBlock.attackTick)));
             if (worldIn.spawnEntity(attackBlock)) {
                 EntityBigCreeperDummy bigCreeperDummy = new EntityBigCreeperDummy(worldIn);
                 bigCreeperDummy.setPosition(bigPos.getX(), bigPos.getY(), bigPos.getZ());
@@ -49,6 +50,13 @@ public class ItemAttackBlock extends Item {
                 if (!player.isCreative()) {
                     player.getHeldItem(hand).shrink(1);
                 }
+                worldIn.getPlayers(EntityPlayer.class, input -> attackBlock.getDistanceSqToEntity(input) < 10000).forEach(player1
+                                -> {
+                            player1.sendMessage(new TextComponentTranslation("entity.attackblock.message.summon.01"));
+                            player1.sendMessage(new TextComponentTranslation("entity.attackblock.message.summon.02"));
+                            player1.sendMessage(new TextComponentTranslation("entity.attackblock.message.summon.03"));
+                        }
+                );
             }
         }
         return EnumActionResult.SUCCESS;

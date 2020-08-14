@@ -116,7 +116,7 @@ public class EntityBigCreeperDummy extends Entity {
         super.setDead();
         if (!this.world.isRemote && this.isDamaged && this.hp < 0) {
             this.world.getPlayers(EntityPlayer.class, input -> EntityBigCreeperDummy.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                    -> player.sendMessage(new TextComponentString("dead")));
+                    -> player.sendMessage(new TextComponentString("entity.attackblock.message.dead")));
         }
     }
 

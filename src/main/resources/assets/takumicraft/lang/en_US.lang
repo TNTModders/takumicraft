@@ -762,6 +762,18 @@ entity.creeperboat.name=Creeper Boat
 entity.creeperpainting.name=Creeper Painting
 entity.creeperbolt.name=Creeper Bolt
 
+entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
+entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.
+entity.attackblock.message.charge.03=The enemy's attack is starting.
+entity.attackblock.message.done=The enemy was destroyed. Extraction is now on progress.
+entity.attackblock.message.dead=Succeed to defend Attack Block.
+entity.attackblock.message.failed=Failed to defend Attack Block.
+entity.attackblock.message.attack=The enemy core has shown. Blast it.
+entity.attackblock.message.summon.01=Magic_Entropic_Extractor_γ starting.
+entity.attackblock.message.summon.02=The enemy starts attacking on the extractor.
+entity.attackblock.message.summon.03=Destroy soldiers and exposure the enemy's core.
+entity.attackblock.info.damaged=Attack the core by the explosion
+
 #advancements
 advancements.takumicraft.root.title=Takumi Craft
 advancements.takumicraft.root.desc=Going into creeper chaotic world!

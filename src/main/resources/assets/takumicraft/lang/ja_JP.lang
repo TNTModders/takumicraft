@@ -815,6 +815,18 @@ entity.creeperboat.name=匠式硬質小舟
 entity.creeperpainting.name=匠式硬質絵画
 entity.creeperbolt.name=龍雷
 
+entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
+entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ
+entity.attackblock.message.charge.03=敵性体 攻撃態勢
+entity.attackblock.message.done=敵性体 討伐完了 抽出開始
+entity.attackblock.message.dead=進撃ブロックの防衛に成功した。
+entity.attackblock.message.failed=進撃ブロックの防衛に失敗した。
+entity.attackblock.message.attack=敵性体 コア露出 速やかに爆破攻撃せよ
+entity.attackblock.message.summon.01=丙型魔式熵換装置 起動
+entity.attackblock.message.summon.02=敵性体の進撃を確認
+entity.attackblock.message.summon.03=敵性体周辺の兵を撃破し コアを露出させよ
+entity.attackblock.info.damaged=爆発ダメージでコアの体力を削れ
+
 #advancements
 advancements.takumicraft.root.title=匠Craft
 advancements.takumicraft.root.desc=この匠だらけの世界へ!
