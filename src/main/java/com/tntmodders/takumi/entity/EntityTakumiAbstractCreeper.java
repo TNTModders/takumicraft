@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
@@ -310,7 +309,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                     this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_DEST, drop), 0f);
                 }
             }
-            if (source.isExplosion() && !(source.getTrueSource() instanceof EntityMob) || source.getTrueSource() instanceof EntityPlayer) {
+            if (source.getTrueSource() instanceof EntityPlayer) {
                 try {
                     if (this.world.loadedEntityList != null && this.world.loadedEntityList.size() > 0) {
                         if (this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock)) {

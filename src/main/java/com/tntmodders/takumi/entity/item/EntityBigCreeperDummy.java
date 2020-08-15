@@ -5,14 +5,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
 public class EntityBigCreeperDummy extends Entity {
 
-    public final float maxHP = 2500;
+    public static final float MAX_HP = 2500;
     public int chargingTicks;
     private boolean isDamaged;
     private boolean charging;
@@ -21,7 +21,7 @@ public class EntityBigCreeperDummy extends Entity {
     public EntityBigCreeperDummy(World worldIn) {
         super(worldIn);
         this.setSize(2, 2);
-        this.hp = this.maxHP;
+        this.hp = MAX_HP;
     }
 
     public boolean isDamaged() {
@@ -95,9 +95,6 @@ public class EntityBigCreeperDummy extends Entity {
 
     @Override
     public boolean hitByEntity(Entity entityIn) {
-        if (entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative()) {
-            this.setDead();
-        }
         return false;
     }
 
@@ -116,7 +113,7 @@ public class EntityBigCreeperDummy extends Entity {
         super.setDead();
         if (!this.world.isRemote && this.isDamaged && this.hp < 0) {
             this.world.getPlayers(EntityPlayer.class, input -> EntityBigCreeperDummy.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                    -> player.sendMessage(new TextComponentString("entity.attackblock.message.dead")));
+                    -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.dead")));
         }
     }
 
@@ -134,6 +131,4 @@ public class EntityBigCreeperDummy extends Entity {
     public boolean shouldRenderInPass(int pass) {
         return true;
     }
-
-
 }

@@ -773,6 +773,7 @@ entity.attackblock.message.summon.01=Magic_Entropic_Extractor_γ starting.
 entity.attackblock.message.summon.02=The enemy starts attacking on the extractor.
 entity.attackblock.message.summon.03=Destroy soldiers and exposure the enemy's core.
 entity.attackblock.info.damaged=Attack the core by the explosion
+entity.attackblock.message.restart=The enemy restarts attacking.
 
 #advancements
 advancements.takumicraft.root.title=Takumi Craft

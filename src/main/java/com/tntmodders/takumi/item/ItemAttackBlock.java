@@ -35,13 +35,13 @@ public class ItemAttackBlock extends Item {
                 attackBlock.setPosition(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
             }
             double theta = Math.toRadians(worldIn.rand.nextFloat() * 360);
-            BlockPos bigPos = blockPos.add(Math.cos(theta) * attackBlock.dist, 0, Math.sin(theta) * attackBlock.dist);
+            BlockPos bigPos = blockPos.add(Math.cos(theta) * EntityAttackBlock.DIST, 0, Math.sin(theta) * EntityAttackBlock.DIST);
             bigPos = worldIn.getHeight(bigPos);
             attackBlock.setPos(bigPos);
             double dx = bigPos.getX() - blockPos.getX();
-            attackBlock.setDX(((float) (dx / EntityAttackBlock.attackTick)));
+            attackBlock.setDX(((float) (dx / EntityAttackBlock.ATTACK_TICK)));
             double dz = bigPos.getZ() - blockPos.getZ();
-            attackBlock.setDZ(((float) (dz / EntityAttackBlock.attackTick)));
+            attackBlock.setDZ(((float) (dz / EntityAttackBlock.ATTACK_TICK)));
             if (worldIn.spawnEntity(attackBlock)) {
                 EntityBigCreeperDummy bigCreeperDummy = new EntityBigCreeperDummy(worldIn);
                 bigCreeperDummy.setPosition(bigPos.getX(), bigPos.getY(), bigPos.getZ());
