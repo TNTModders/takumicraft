@@ -191,6 +191,15 @@ tile.creeperrail_explosive.name=匠式硬質爆進線路
 tile.creepershulkerbox.name=匠式硬質シュルカーボックス
 tile.creeperice.name=匠式硬質氷
 tile.magicblock.name=匠魔石ブロック
+tile.takumiinstantwall.name=魔式即席防壁
+tile.creeperstonebrick.name=匠式硬質石瓦
+tile.creeperstonebrick_stairs.name=匠式硬質石瓦階段
+tile.creeperstonebrick_slab.name=匠式硬質石瓦半材
+tile.creeperstonebrick_wall.name=匠式硬質石瓦壁
+tile.creepercobblestone.name=匠式硬質丸石
+tile.creepercobblestone_stairs.name=匠式硬質丸石階段
+tile.creepercobblestone_slab.name=匠式硬質丸石半材
+tile.creepercobblestone_wall.name=匠式硬質丸石壁
 
 #item
 item.takumibook.name=匠の書

@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "takumicraft:blocks/creepercobblestone",
+        "top": "takumicraft:blocks/creepercobblestone",
+        "side": "takumicraft:blocks/creepercobblestone"
+    }
+}

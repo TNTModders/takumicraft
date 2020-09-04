@@ -51,6 +51,18 @@ public class TakumiBlockCore {
     public static final Block CREEPER_FENCE = new BlockTakumiFence(Material.WOOD, "creeperfence", 1.0f, "axe");
     public static final Block CREEPER_FENCEGATE = new BlockTakumiFenceGate(Material.WOOD, "creeperfence_gate", 1.0f, "axe");
     public static final Block CREEPER_IRONBARS = new BlockTakumiIronBars(Material.IRON, "creeperironbars", 5f, "pickaxe");
+    public static final Block CREEPER_STONEBRICK = new BlockTakumiAntiExplosion(Material.ROCK, "creeperstonebrick", 3f, "pickaxe");
+    public static final Block CREEPER_STONEBRICK_STAIRS = new BlockTakumiAntiExplosionStairs(CREEPER_STONEBRICK.getDefaultState(),
+            Material.ROCK, "creeperstonebrick_stairs", 3f, "pickaxe");
+    public static final Block CREEPER_STONEBRICK_SLAB = new BlockTakumiAntiExplosionSlab(Material.ROCK, "creeperstonebrick_slab", 3f, "pickaxe");
+    public static final Block CREEPER_STONEBRICK_WALL = new BlockTakumiAntiExplosionWall(CREEPER_STONEBRICK, Material.ROCK,
+            "creeperstonebrick_wall", 3f, "pickaxe");
+    public static final Block CREEPER_COBBLESTONE = new BlockTakumiAntiExplosion(Material.ROCK,"creepercobblestone",2f,"pickaxe");
+    public static final Block CREEPER_COBBLESTONE_STAIRS = new BlockTakumiAntiExplosionStairs(CREEPER_COBBLESTONE.getDefaultState(),
+            Material.ROCK, "creepercobblestone_stairs", 3f, "pickaxe");
+    public static final Block CREEPER_COBBLESTONE_SLAB = new BlockTakumiAntiExplosionSlab(Material.ROCK, "creepercobblestone_slab", 3f, "pickaxe");
+    public static final Block CREEPER_COBBLESTONE_WALL = new BlockTakumiAntiExplosionWall(CREEPER_COBBLESTONE, Material.ROCK,
+            "creepercobblestone_wall", 3f, "pickaxe");
 
     //Util Blocks
     public static final Block CREEPER_VAULT = new BlockTakumiVault();
@@ -65,6 +77,7 @@ public class TakumiBlockCore {
     public static final Block CREEPER_SHULKER_BOX = new BlockTakumiShulkerBox();
     public static final Block CREEPER_SIGN_STANDING = new BlockTakumiStandingSign();
     public static final Block CREEPER_SIGN_WALL = new BlockTakumiWallSign();
+    public static final Block CREEPER_INSTANT_WALL = new BlockTakumiInstantWall();
 
     //Rails
     public static final Block CREEPER_RAIL = new BlockTakumiRail();

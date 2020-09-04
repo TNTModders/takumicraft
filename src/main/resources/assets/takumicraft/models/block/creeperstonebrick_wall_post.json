@@ -1,0 +1,6 @@
+{
+    "parent": "takumicraft:block/wall_post",
+    "textures": {
+        "wall": "takumicraft:blocks/creeperstonebrick"
+    }
+}

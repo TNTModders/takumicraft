@@ -1,0 +1,6 @@
+{
+    "parent": "takumicraft:block/wall_side",
+    "textures": {
+        "wall": "takumicraft:blocks/creepercobblestone"
+    }
+}

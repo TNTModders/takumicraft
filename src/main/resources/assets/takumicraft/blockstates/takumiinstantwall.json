@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "wallmeta=0": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=1": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=2": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=3": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=4": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=5": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=6": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=7": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=8": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=9": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=10": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=11": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=12": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=13": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=14": {
+      "model": "takumicraft:takumiinstantwall"
+    },
+    "wallmeta=15": {
+      "model": "takumicraft:takumiinstantwall"
+    }
+  }
+}

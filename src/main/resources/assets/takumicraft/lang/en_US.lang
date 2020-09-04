@@ -191,6 +191,16 @@ tile.creeperrail_explosive.name=Creeper Explosive Rail
 tile.creepershulkerbox.name=Creeper Shulker Box
 tile.creeperice.name=Creeper Ice
 tile.magicblock.name=MagicStone Block
+tile.takumiinstantwall.name=Magical Instant Wall
+tile.creeperstonebrick.name=Creeper Stonebrick
+tile.creeperstonebrick_stairs.name=Creeper Stonebrick Stairs
+tile.creeperstonebrick_slab.name=Creeper Stonebrick Slab
+tile.creeperstonebrick_wall.name=Creeper Stonebrick Wall
+tile.creepercobblestone.name=Creeper Cobblestone
+tile.creepercobblestone_stairs.name=Creeper Cobblestone Stairs
+tile.creepercobblestone_slab.name=Creeper Cobblestone Slab
+tile.creepercobblestone_wall.name=Creeper Cobblestone Wall
+
 
 #item
 item.takumibook.name=Creeper Book
