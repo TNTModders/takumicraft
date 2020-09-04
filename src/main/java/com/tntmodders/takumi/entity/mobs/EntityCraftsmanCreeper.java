@@ -3,8 +3,8 @@ package com.tntmodders.takumi.entity.mobs;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
-import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiCreepered;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiSuperPowered;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -65,9 +65,9 @@ public class EntityCraftsmanCreeper extends EntityTakumiAbstractCreeper {
                 IBlockState state = event.getWorld().getBlockState(pos);
                 event.getWorld().setBlockState(pos, TakumiBlockCore.TAKUMI_CREEPERED.getDefaultState());
                 if (event.getWorld().getTileEntity(pos) instanceof TileEntityTakumiCreepered) {
-                    ((TileEntityTakumiBlock) event.getWorld().getTileEntity(pos)).setPath(
+                    ((TileEntityTakumiSuperPowered) event.getWorld().getTileEntity(pos)).setPath(
                             state.getBlock().getRegistryName().toString());
-                    ((TileEntityTakumiBlock) event.getWorld().getTileEntity(pos)).setMeta(
+                    ((TileEntityTakumiSuperPowered) event.getWorld().getTileEntity(pos)).setMeta(
                             state.getBlock().getMetaFromState(state));
                 }
             }

@@ -114,7 +114,7 @@ public class EntityFireworksCreeper extends EntityTakumiAbstractCreeper {
                             int point = entity.world.rand.nextInt(10) + 1;
                             for (int p = 0; p <= point; p++) {
                                 Item[] item = {Items.DIAMOND, Items.GUNPOWDER,
-                                        Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK), Items.EMERALD,
+                                        Item.getItemFromBlock(TakumiBlockCore.TAKUMI_SUPERPOWERED), Items.EMERALD,
                                         TakumiItemCore.TAKUMI_SHIELD, TakumiItemCore.TAKUMI_BOW, Items.ELYTRA};
                                 Item returner = item[entity.world.rand.nextInt(item.length)];
                                 ((IInventory) tile).setInventorySlotContents(p, new ItemStack(returner,

@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.client.render.tileentity;
 
 import com.tntmodders.takumi.core.TakumiBlockCore;
-import com.tntmodders.takumi.tileentity.TileEntityTakumiBlock;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiSuperPowered;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 
 @SideOnly(Side.CLIENT)
-public class RenderTakumiBlock<T extends TileEntityTakumiBlock> extends TileEntitySpecialRenderer<T> {
+public class RenderTakumiBlock<T extends TileEntityTakumiSuperPowered> extends TileEntitySpecialRenderer<T> {
 
     private static final ResourceLocation TEXTURE_ARMOR =
             new ResourceLocation("textures/entity/creeper/creeper_armor.png");
@@ -52,9 +52,9 @@ public class RenderTakumiBlock<T extends TileEntityTakumiBlock> extends TileEnti
             GlStateManager.popMatrix();
         }
         if (te.getBlock() == null || Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() ==
-                Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK) ||
+                Item.getItemFromBlock(TakumiBlockCore.TAKUMI_SUPERPOWERED) ||
                 Minecraft.getMinecraft().player.getHeldItemOffhand().getItem() ==
-                        Item.getItemFromBlock(TakumiBlockCore.TAKUMI_BLOCK)) {
+                        Item.getItemFromBlock(TakumiBlockCore.TAKUMI_SUPERPOWERED)) {
             GlStateManager.pushMatrix();
             GlStateManager.depthMask(true);
             this.bindTexture(TEXTURE_ARMOR);

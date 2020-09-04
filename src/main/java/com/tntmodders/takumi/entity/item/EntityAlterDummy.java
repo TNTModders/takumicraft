@@ -39,7 +39,7 @@ public class EntityAlterDummy extends EntityLivingBase {
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         return pos.getY() == 0 ? 1000000000 : (worldIn.getBlockState(pos).getBlock() == Blocks.BEDROCK ||
-                worldIn.getBlockState(pos).getBlock() == TakumiBlockCore.TAKUMI_BLOCK) ? 0 :
+                worldIn.getBlockState(pos).getBlock() == TakumiBlockCore.TAKUMI_SUPERPOWERED) ? 0 :
                 worldIn.getBlockState(pos).getBlockHardness(worldIn, pos) > 0 ? 0 :
                         super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
     }

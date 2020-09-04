@@ -1,20 +1,25 @@
 package com.tntmodders.takumi.tileentity;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-public class TileEntityTakumiBlock extends TileEntity {
+public class TileEntityTakumiSuperPowered extends TileEntity implements ITickable {
 
     public IBlockState state;
+    public String owner;
     String location;
     Block block;
     int meta;
-    public String owner;
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -86,5 +91,20 @@ public class TileEntityTakumiBlock extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         this.readFromNBT(pkt.getNbtCompound());
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return newSate.getBlock() == Blocks.AIR;
+    }
+
+    @Override
+    public void update() {
+        if (!this.world.isRemote && this.world.getBlockState(pos).getBlock() != TakumiBlockCore.TAKUMI_SUPERPOWERED) {
+            IBlockState oldState = this.world.getBlockState(pos);
+            this.world.setBlockState(pos, TakumiBlockCore.TAKUMI_SUPERPOWERED.getDefaultState());
+            this.setState(oldState);
+            this.setMeta(oldState.getBlock().getMetaFromState(oldState));
+        }
     }
 }

@@ -1,9 +1,8 @@
 package com.tntmodders.takumi.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
 
-public class TileEntityTakumiCreepered extends TileEntityTakumiBlock implements ITickable {
+public class TileEntityTakumiCreepered extends TileEntityTakumiSuperPowered {
 
     private int tick;
     private int lastTick;
@@ -37,12 +36,14 @@ public class TileEntityTakumiCreepered extends TileEntityTakumiBlock implements 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         this.tick = compound.getInteger("tick");
+        this.fuseTime = compound.getInteger("fuseTime");
         super.readFromNBT(compound);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setInteger("tick", this.tick);
+        compound.setInteger("fuseTime", this.fuseTime);
         return super.writeToNBT(compound);
     }
 }

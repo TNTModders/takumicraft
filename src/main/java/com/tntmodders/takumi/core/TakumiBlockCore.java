@@ -151,7 +151,7 @@ public class TakumiBlockCore {
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_LUCK =
             new BlockTakumiMonsterBomb(EntityLuckCreeper.class, "luckcreeper");
 
-    public static final Block TAKUMI_BLOCK = new BlockTakumiBlock();
+    public static final Block TAKUMI_SUPERPOWERED = new BlockTakumiSuperPowered();
     public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();
     public static final Block TAKUMI_PORTAL_FRAME = new BlockTakumiPortalFrame();
     public static final BlockTakumiPortal TAKUMI_PORTAL = new BlockTakumiPortal();

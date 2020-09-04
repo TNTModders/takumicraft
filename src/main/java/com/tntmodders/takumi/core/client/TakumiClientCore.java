@@ -187,7 +187,7 @@ public class TakumiClientCore {
                 new RenderAcidBlock<>());
         ClientRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb",
                 new RenderMonsterBomb<>());
-        ClientRegistry.registerTileEntity(TileEntityTakumiBlock.class, TakumiCraftCore.MODID + ":takumiblock",
+        ClientRegistry.registerTileEntity(TileEntityTakumiSuperPowered.class, TakumiCraftCore.MODID + ":takumiblock",
                 new RenderTakumiBlock<>());
         ClientRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered",
                 new RenderTakumiCreepered<>());
