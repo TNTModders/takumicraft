@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creepercobblestone"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creepercobblestone_slab",
+    "count": 6
+  }
+}
