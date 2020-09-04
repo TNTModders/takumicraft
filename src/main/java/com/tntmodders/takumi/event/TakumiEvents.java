@@ -124,7 +124,7 @@ public class TakumiEvents {
                 }
             }
             event.getOutput().addEnchantment(TakumiEnchantmentCore.ROCKET_ELYTRA, 1);
-        } else if ((event.getLeft().getItem().isEnchantable(event.getLeft()) && event.getLeft().isItemEnchanted()) || !event.getLeft().hasTagCompound()) {
+        } else if ((event.getLeft().getItem().isEnchantable(event.getLeft()) && event.getLeft().isItemEnchanted()) || (!event.getLeft().hasTagCompound())) {
             if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.CHAMP_CORE) {
                 event.setCost(30);
                 event.setMaterialCost(1);
@@ -403,15 +403,42 @@ public class TakumiEvents {
         }
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = ((EntityPlayer) event.getEntityLiving());
-            if (!player.world.isRemote && player.isElytraFlying()) {
-                if (!EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).isEmpty() &&
-                        EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).containsKey(TakumiEnchantmentCore.ROCKET_ELYTRA)) {
-                    event.getEntityLiving().world.createExplosion(player, player.posX, player.posY, player.posZ, 0f, false);
-                    if (player.ticksExisted % 40 == 0) {
-                        EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(player.world, new ItemStack(Items.FIREWORKS), player);
-                        player.world.spawnEntity(entityfireworkrocket);
-                        Enchantment.getEnchantmentID(TakumiEnchantmentCore.ROCKET_ELYTRA);
+            if (player.isElytraFlying() && !EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).isEmpty() &&
+                    EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EntityEquipmentSlot.CHEST)).containsKey(TakumiEnchantmentCore.ROCKET_ELYTRA)) {
+                //event.getEntityLiving().world.createExplosion(player, player.posX, player.posY, player.posZ, 0f, false);
+                event.getEntity().world.playSound(null, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
+                        0.3F, (1.0F + (event.getEntity().world.rand.nextFloat() - event.getEntity().world.rand.nextFloat()) * 0.2F) * 0.7F);
+
+                event.getEntity().world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, event.getEntity().posX - event.getEntity().motionX * 0.1,
+                        event.getEntity().posY - event.getEntity().motionX * 0.1, event.getEntity().posZ - event.getEntity().motionX * 0.1, 0, 0, 0);
+                if (FMLCommonHandler.instance().getSide().isClient()) {
+                    float red, green, blue;
+                    if (player.getTeam() != null && player.getTeam().getColor() != null && player.getTeam().getColor().isColor()) {
+                        int color = TakumiUtils.getColorFromText(player.getTeam().getColor());
+                        red = (color >> 16) / 255f;
+                        green = (color >> 8 & 255) / 255f;
+                        blue = (color & 255) / 255f;
+                    } else {
+                        red = 0;
+                        green = 1;
+                        blue = 0;
                     }
+                    for (int i = 0; i < 50; i++) {
+                        Random random = new Random();
+                        double x = (random.nextDouble() - 0.5) / 10 - event.getEntity().motionX * 0.8 / 50 * i;
+                        double y = (random.nextDouble() - 0.5) / 10 - event.getEntity().motionY * 0.8 / 50 * i;
+                        double z = (random.nextDouble() - 0.5) / 10 - event.getEntity().motionZ * 0.8 / 50 * i;
+
+                        TakumiUtils.spawnColoredParticle(event.getEntity().world, event.getEntity().posX + x, event.getEntity().posY + y
+                                , event.getEntity().posZ + z, x / 2, y / 2, z / 2, red, green, blue, 200 + random.nextInt(100));
+                    }
+                }
+                if (!player.world.isRemote && player.ticksExisted % 40 == 0) {
+                    EntityFireworkRocket entityfireworkrocket = new EntityFireworkRocket(player.world, new ItemStack(Items.FIREWORKS), player);
+                    entityfireworkrocket.setSilent(true);
+                    entityfireworkrocket.setInvisible(true);
+                    player.world.spawnEntity(entityfireworkrocket);
+                    Enchantment.getEnchantmentID(TakumiEnchantmentCore.ROCKET_ELYTRA);
                 }
             }
         }

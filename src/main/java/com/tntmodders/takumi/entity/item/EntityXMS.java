@@ -91,7 +91,7 @@ public class EntityXMS extends EntityFlying {
 
     @Override
     protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
-        if (this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer)) {
+/*        if (!this.getPassengers().isEmpty() && this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer)) {
             if (this.serverAttackMode) {
                 EntityMSRazer razer =
                         new EntityMSRazer(entityPlayer.world, ((EntityXMS) entityPlayer.getRidingEntity()));
@@ -108,10 +108,10 @@ public class EntityXMS extends EntityFlying {
                 entityPlayer.world.updateEntities();
             }
         } else {
-            if (!this.world.isRemote) {
+            if (!this.world.isRemote && this.getPassengers().isEmpty()) {
                 entityPlayer.startRiding(this, true);
             }
-        }
+        }*/
         return true;
     }
 

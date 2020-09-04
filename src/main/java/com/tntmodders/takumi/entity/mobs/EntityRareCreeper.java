@@ -1,7 +1,9 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -10,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 
 public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
@@ -17,6 +20,13 @@ public class EntityRareCreeper extends EntityTakumiAbstractCreeper {
     public EntityRareCreeper(World worldIn) {
         super(worldIn);
         this.setSize(0.6F * 3, 1.7F * 3);
+        try {
+            Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
+            field.setAccessible(true);
+            field.set(this, 40);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

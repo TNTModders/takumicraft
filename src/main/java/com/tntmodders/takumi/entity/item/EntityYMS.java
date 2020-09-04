@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -82,7 +81,7 @@ public class EntityYMS extends EntityFlying {
 
     @Override
     protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
-        if (this.getControllingPassenger() == null && !this.world.isRemote) {
+/*        if (this.getPassengers().isEmpty() && !this.world.isRemote) {
             entityPlayer.startRiding(this, true);
         }
         if (this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer) && !this.world.isRemote) {
@@ -90,7 +89,7 @@ public class EntityYMS extends EntityFlying {
             primed.setPosition(this.posX, this.posY, this.posZ);
             primed.setFuse(30);
             this.world.spawnEntity(primed);
-        }
+        }*/
         return true;
     }
 

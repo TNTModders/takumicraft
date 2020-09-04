@@ -221,9 +221,9 @@ public class BlockTakumiPortal extends BlockBreakable {
         }
 
         for (int i = 0; i < 300; ++i) {
-            double d0 = (double) ((float) pos.getX() + rand.nextFloat());
-            double d1 = (double) ((float) pos.getY() + rand.nextFloat());
-            double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+            double d0 = (float) pos.getX() + rand.nextFloat();
+            double d1 = (float) pos.getY() + rand.nextFloat();
+            double d2 = (float) pos.getZ() + rand.nextFloat();
             double d3 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
             double d4 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
@@ -232,10 +232,10 @@ public class BlockTakumiPortal extends BlockBreakable {
             if (worldIn.getBlockState(pos.west()).getBlock() != this &&
                     worldIn.getBlockState(pos.east()).getBlock() != this) {
                 d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
-                d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
+                d3 = rand.nextFloat() * 2.0F * (float) j;
             } else {
                 d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
-                d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
+                d5 = rand.nextFloat() * 2.0F * (float) j;
             }
             //worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
             Minecraft.getMinecraft().effectRenderer.addEffect(

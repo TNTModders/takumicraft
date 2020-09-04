@@ -8,15 +8,20 @@ import net.minecraft.advancements.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleRedstone;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -245,5 +250,53 @@ public class TakumiUtils {
                 }
             }
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void spawnColoredParticle(World world, double x, double y, double z, double speedX, double speedY, double speedZ, float red, float green, float blue, int tick) {
+        Particle particle = new ParticleRedstone.Factory().createParticle(EnumParticleTypes.REDSTONE.getParticleID(), world, x, y, z, speedX, speedY, speedZ);
+        particle.setRBGColorF(red, green, blue);
+        particle.setMaxAge(tick);
+        Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+    }
+
+    public static int getColorFromText(TextFormatting formatting) {
+        switch (formatting) {
+            case WHITE:
+                return EnumDyeColor.WHITE.getColorValue();
+            case GOLD:
+                return EnumDyeColor.ORANGE.getColorValue();
+            case AQUA:
+                return EnumDyeColor.LIGHT_BLUE.getColorValue();
+            case BLUE:
+                return EnumDyeColor.BLUE.getColorValue();
+            case YELLOW:
+                return EnumDyeColor.YELLOW.getColorValue();
+            case GREEN:
+                return EnumDyeColor.LIME.getColorValue();
+            case LIGHT_PURPLE:
+                return EnumDyeColor.PINK.getColorValue();
+            case DARK_GRAY:
+                return EnumDyeColor.GRAY.getColorValue();
+            case GRAY:
+                return EnumDyeColor.SILVER.getColorValue();
+            case DARK_AQUA:
+                return EnumDyeColor.CYAN.getColorValue();
+            case DARK_PURPLE:
+                return EnumDyeColor.PURPLE.getColorValue();
+            case DARK_BLUE:
+                return ((int) (EnumDyeColor.BLUE.getColorValue() * 0.75));
+            case DARK_GREEN:
+                return EnumDyeColor.GREEN.getColorValue();
+            case DARK_RED: {
+                int color = EnumDyeColor.RED.getColorValue();
+                return (((int) ((color >> 16) * 0.75)) << 16) ;
+            }
+            case RED:
+                return EnumDyeColor.RED.getColorValue();
+            case BLACK:
+                return EnumDyeColor.BLACK.getColorValue();
+        }
+        return EnumDyeColor.BLACK.getColorValue();
     }
 }

@@ -54,10 +54,9 @@ public class BlockTakumiBlock extends BlockContainer {
         this.setResistance(10000000);
     }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityTakumiBlock();
+    public static IBlockState getBlockStateFromTE(IBlockAccess world, BlockPos pos) {
+        return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getStateFromMeta(
+                ((TileEntityTakumiBlock) world.getTileEntity(pos)).getMeta());
     }
 
     /*private class WorldDummyTakumiBlock extends World {
@@ -112,6 +111,12 @@ public class BlockTakumiBlock extends BlockContainer {
         }
     }*/
 
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityTakumiBlock();
+    }
+
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
@@ -122,6 +127,15 @@ public class BlockTakumiBlock extends BlockContainer {
         return false;
     }
 
+
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
+                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
+            return ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().isPassable(worldIn, pos);
+        }
+        return super.isPassable(worldIn, pos);
+    }
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
@@ -142,23 +156,12 @@ public class BlockTakumiBlock extends BlockContainer {
         return super.getActualState(state, worldIn, pos);
     }
 
-
-   /* @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
-                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
-            return ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().isPassable(worldIn, pos);
-        }
-        return super.isPassable(worldIn, pos);
-    }*/
-
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
             this.getActualState(state, worldIn, pos);
-            IBlockState blockState = ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
-                    ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getMeta());
+            IBlockState blockState = getBlockStateFromTE(worldIn, pos);
             return blockState.getBoundingBox(worldIn, pos);
         }
         return super.getBoundingBox(state, worldIn, pos);
@@ -210,6 +213,16 @@ public class BlockTakumiBlock extends BlockContainer {
         return super.getCollisionBoundingBox(state, worldIn, pos);
     }
 
+    /*@Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
+                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().updateTick(worldIn, pos, state, rand);
+        } else {
+            super.updateTick(worldIn, pos, state, rand);
+        }
+    }*/
+
     @Override
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
@@ -221,14 +234,30 @@ public class BlockTakumiBlock extends BlockContainer {
         return super.getSelectedBoundingBox(state, worldIn, pos);
     }
 
-    /*@Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
-                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
-            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().updateTick(worldIn, pos, state, rand);
+/*    @Override
+    public void neighborChanged(IBlockState stateIn, World world, BlockPos pos, Block blockIn, BlockPos neighbor) {
+        if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
+                ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
+            if (((TileEntityTakumiBlock) world.getTileEntity(pos)).state == null) {
+                ((TileEntityTakumiBlock) world.getTileEntity(pos)).setState(
+                        ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getDefaultState().getActualState(
+                                world, pos));
+            }
+            ((TileEntityTakumiBlock) world.getTileEntity(pos)).state.neighborChanged(world, pos,
+                    ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock(), pos);
         } else {
-            super.updateTick(worldIn, pos, state, rand);
+            super.neighborChanged(stateIn, world, pos, blockIn, neighbor);
         }
+    }
+
+    @Override
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        if (blockAccess.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
+                ((TileEntityTakumiBlock) blockAccess.getTileEntity(pos)).getBlock() != null) {
+            return ((TileEntityTakumiBlock) blockAccess.getTileEntity(pos)).getBlock().getWeakPower(blockState,
+                    blockAccess, pos, side);
+        }
+        return blockState.getWeakPower(blockAccess, pos, side);
     }*/
 
     @Override
@@ -248,39 +277,6 @@ public class BlockTakumiBlock extends BlockContainer {
             super.randomDisplayTick(stateIn, worldIn, pos, rand);
         }
     }
-
-    /*@Override
-    public void neighborChanged(IBlockState stateIn, World world, BlockPos pos, Block blockIn, BlockPos neighbor) {
-        if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
-                ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
-            if (this.dummyWorld == null) {
-                this.dummyWorld = new WorldDummyTakumiBlock(world);
-            }
-            if (((TileEntityTakumiBlock) world.getTileEntity(pos)).state == null) {
-                ((TileEntityTakumiBlock) world.getTileEntity(pos)).setState(
-                        ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getDefaultState().getActualState(
-                                world, pos));
-            }
-            ((TileEntityTakumiBlock) world.getTileEntity(pos)).state.neighborChanged(this.dummyWorld, pos,
-                    ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock(), pos);
-            if (this.dummyWorld.stateMap.containsKey(pos)) {
-                ((TileEntityTakumiBlock) world.getTileEntity(pos)).state = this.dummyWorld.stateMap.get(pos);
-                this.dummyWorld.stateMap.remove(pos);
-            }
-        } else {
-            super.neighborChanged(stateIn, world, pos, blockIn, neighbor);
-        }
-    }
-
-    @Override
-    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        if (blockAccess.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
-                ((TileEntityTakumiBlock) blockAccess.getTileEntity(pos)).getBlock() != null) {
-            return ((TileEntityTakumiBlock) blockAccess.getTileEntity(pos)).getBlock().getWeakPower(blockState,
-                    blockAccess, pos, side);
-        }
-        return blockState.getWeakPower(blockAccess, pos, side);
-    }*/
 
     @Override
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start,
@@ -308,6 +304,16 @@ public class BlockTakumiBlock extends BlockContainer {
     @Override
     public int getMetaFromState(IBlockState state) {
         return 0;
+    }
+
+    @Override
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
+                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().onEntityWalk(worldIn, pos, entityIn);
+        } else {
+            super.onEntityWalk(worldIn, pos, entityIn);
+        }
     }
 
     @Override
@@ -376,16 +382,6 @@ public class BlockTakumiBlock extends BlockContainer {
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
-/*
-    @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
-                ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
-            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().onEntityWalk(worldIn, pos, entityIn);
-        } else {
-            super.onEntityWalk(worldIn, pos, entityIn);
-        }
-    }*/
 
     @Override
     public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
@@ -438,9 +434,9 @@ public class BlockTakumiBlock extends BlockContainer {
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock() != null) {
             try {
                 ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).getBlock().onEntityCollidedWithBlock(worldIn, pos,
-                        state, entityIn);
+                        getBlockStateFromTE(worldIn, pos), entityIn);
             } catch (Exception e) {
-                super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+                super.onEntityCollidedWithBlock(worldIn, pos, getBlockStateFromTE(worldIn, pos), entityIn);
             }
         } else {
             super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
@@ -450,14 +446,6 @@ public class BlockTakumiBlock extends BlockContainer {
     @Override
     public EnumPushReaction getMobilityFlag(IBlockState state) {
         return EnumPushReaction.BLOCK;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock && placer instanceof EntityPlayer) {
-            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setOwner(((EntityPlayer) placer));
-        }
     }
 
     /*@Override
@@ -484,13 +472,21 @@ public class BlockTakumiBlock extends BlockContainer {
     }*/
 
     @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiBlock && placer instanceof EntityPlayer) {
+            ((TileEntityTakumiBlock) worldIn.getTileEntity(pos)).setOwner(((EntityPlayer) placer));
+        }
+    }
+
+    @Override
     public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos,
                                  @Nullable
                                          Entity entity) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock) {
             if (((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
                 try {
-                    return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getSlipperiness(state, world,
+                    return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().getSlipperiness(getBlockStateFromTE(world, pos), world,
                             pos, entity);
                 } catch (Exception ignored) {
                 }
@@ -503,7 +499,7 @@ public class BlockTakumiBlock extends BlockContainer {
     public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
-            return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().isLadder(state, world, pos, entity);
+            return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().isLadder(getBlockStateFromTE(world, pos), world, pos, entity);
         }
         return super.isLadder(state, world, pos, entity);
     }
@@ -512,15 +508,21 @@ public class BlockTakumiBlock extends BlockContainer {
     public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
                 ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
-            return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().isNormalCube(state, world, pos);
+            return ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock().isNormalCube(getBlockStateFromTE(world, pos), world, pos);
         }
         return super.isNormalCube(state, world, pos);
     }
 
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return false;
+        if (world.getTileEntity(pos) instanceof TileEntityTakumiBlock &&
+                ((TileEntityTakumiBlock) world.getTileEntity(pos)).getBlock() != null) {
+            return getBlockStateFromTE(world, pos).doesSideBlockRendering(world, pos, face);
+        } else {
+            return false;
+        }
     }
+
 
     /*@Override
     public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
