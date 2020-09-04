@@ -42,8 +42,6 @@ import java.util.Random;
 
 public class BlockTakumiSuperPowered extends BlockContainer {
 
-    //private WorldDummyTakumiBlock dummyWorld;
-
     public BlockTakumiSuperPowered() {
         super(Material.BARRIER);
         this.setRegistryName(TakumiCraftCore.MODID, "takumiblock");
