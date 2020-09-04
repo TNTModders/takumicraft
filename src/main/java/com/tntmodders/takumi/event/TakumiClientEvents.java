@@ -190,14 +190,15 @@ public class TakumiClientEvents {
     @SubscribeEvent
     public void renderPlayer(RenderLivingEvent.Pre event) {
         if (event.getEntity().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
-            try{
-                Field field =TakumiASMNameMap.getField(RenderLivingBase.class,"layerRenderers");
+            try {
+                Field field = TakumiASMNameMap.getField(RenderLivingBase.class, "layerRenderers");
                 field.setAccessible(true);
                 List<LayerRenderer> layerRenderers = ((List) field.get(event.getRenderer()));
-                if(layerRenderers.stream().noneMatch(layerRenderer -> layerRenderer instanceof LayerTakumiElytra)){
+                if (layerRenderers.stream().noneMatch(layerRenderer -> layerRenderer instanceof LayerTakumiElytra)) {
                     event.getRenderer().addLayer(new LayerTakumiElytra(event.getRenderer()));
                 }
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
         }
         if (TakumiUtils.isApril(Minecraft.getMinecraft().world)) {
             if ((event.getRenderer() instanceof RenderPlayer && !(event.getRenderer() instanceof RenderPlayerSP)) &&
@@ -205,7 +206,7 @@ public class TakumiClientEvents {
                 event.setCanceled(true);
                 RenderPlayerSP sp = new RenderPlayerSP(event.getRenderer().getRenderManager());
                 sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
-                        ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
+                        event.getEntity().rotationYaw, event.getPartialRenderTick());
             } else if (event.getEntity() instanceof EntityLivingBase && event.getRenderer() instanceof RenderLivingBase && !(event.getRenderer() instanceof RenderEntityLivingSP)) {
                 event.getEntity().setCustomNameTag("匠");
                 event.setCanceled(true);
@@ -220,7 +221,7 @@ public class TakumiClientEvents {
             event.setCanceled(true);
             RenderPlayerTHM sp = new RenderPlayerTHM(event.getRenderer().getRenderManager());
             sp.doRender(((AbstractClientPlayer) event.getEntity()), event.getX(), event.getY(), event.getZ(),
-                    ((AbstractClientPlayer) event.getEntity()).rotationYaw, event.getPartialRenderTick());
+                    event.getEntity().rotationYaw, event.getPartialRenderTick());
         }
         if (event.getEntity() instanceof EntityPlayer && event.getEntity().isPotionActive(TakumiPotionCore.INVERSION)) {
             GlStateManager.popMatrix();
@@ -308,9 +309,11 @@ public class TakumiClientEvents {
                     (int) playerIn.posY, (int) playerIn.posZ);
         } else if (TakumiClientCore.keyBindingYMS.isPressed() &&
                 Minecraft.getMinecraft().player.getRidingEntity() instanceof EntityXMS) {
-            boolean flg = ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode;
-            ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).isAttackMode = !flg;
-            TakumiPacketCore.INSTANCE.sendToServer(new MessageMSMove((byte) 2));
+            boolean flg = ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).getAttackMode();
+            ((EntityXMS) Minecraft.getMinecraft().player.getRidingEntity()).setAttackMode(!flg);
+            MessageMSMove message = new MessageMSMove(!flg ? (byte) 2 : (byte) 3);
+
+            TakumiPacketCore.INSTANCE.sendToServer(message);
         } else if (TakumiClientCore.keyBindingTHMDetonate.isPressed() && TakumiConfigCore.TakumiHard &&
                 Minecraft.getMinecraft().world.getDifficulty() == EnumDifficulty.HARD) {
             TakumiPacketCore.INSTANCE.sendToServer(new MessageTHMDetonate((byte) 1));

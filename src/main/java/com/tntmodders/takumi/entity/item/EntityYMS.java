@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 
 public class EntityYMS extends EntityFlying {
 
+    private int tntTick;
+
     public EntityYMS(World worldIn) {
         super(worldIn);
         this.setSize(8F, 6F);
@@ -42,6 +44,7 @@ public class EntityYMS extends EntityFlying {
     @Override
     public void onUpdate() {
         super.onUpdate();
+        this.tntTick++;
         if (this.getControllingPassenger() instanceof EntityPlayer) {
             if (FMLCommonHandler.instance().getSide().isClient() && this.getControllingPassenger() instanceof EntityPlayerSP) {
                 this.clientUpdate();
@@ -81,15 +84,19 @@ public class EntityYMS extends EntityFlying {
 
     @Override
     protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
-/*        if (this.getPassengers().isEmpty() && !this.world.isRemote) {
+        if (this.getPassengers().isEmpty() && !this.world.isRemote) {
             entityPlayer.startRiding(this, true);
+            this.tntTick = 0;
         }
-        if (this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer) && !this.world.isRemote) {
-            EntityTNTPrimed primed = new EntityTNTPrimed(this.world);
+        if (!this.world.isRemote && this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer) && this.tntTick > 200 &&
+                !this.world.collidesWithAnyBlock(this.getEntityBoundingBox().expand(0, -2, 0))) {
+            EntityTakumiTNTPrimed primed = new EntityTakumiTNTPrimed(this.world);
             primed.setPosition(this.posX, this.posY, this.posZ);
+            primed.setGriefing(false);
             primed.setFuse(30);
             this.world.spawnEntity(primed);
-        }*/
+            this.tntTick = 180;
+        }
         return true;
     }
 

@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.network;
 
+import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.entity.item.EntityXMS;
 import com.tntmodders.takumi.entity.item.EntityYMS;
 import net.minecraft.entity.MoverType;
@@ -31,9 +32,17 @@ public class MessageMSMoveHandler implements IMessageHandler<MessageMSMove, IMes
             }
             case 2: {
                 if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
-                    ((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode =
-                            !((EntityXMS) entityPlayer.getRidingEntity()).serverAttackMode;
+                    ((EntityXMS) entityPlayer.getRidingEntity()).setAttackMode(true);
+                    TakumiPacketCore.INSTANCE.sendToAll(new MessageMSFoil(entityPlayer.getRidingEntity().getEntityId(), true));
                 }
+                break;
+            }
+            case 3: {
+                if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                    ((EntityXMS) entityPlayer.getRidingEntity()).setAttackMode(false);
+                    TakumiPacketCore.INSTANCE.sendToAll(new MessageMSFoil(entityPlayer.getRidingEntity().getEntityId(), false));
+                }
+                break;
             }
         }
         return null;

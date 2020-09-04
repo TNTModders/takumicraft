@@ -26,6 +26,7 @@ public class BlockTakumiTNT extends BlockTNT {
             EntityTakumiTNTPrimed entitytntprimed =
                     new EntityTakumiTNTPrimed(worldIn, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F,
                             explosionIn.getExplosivePlacedBy());
+            entitytntprimed.setGriefing(true);
             entitytntprimed.setFuse(
                     (short) (worldIn.rand.nextInt(entitytntprimed.getFuse() / 4) + entitytntprimed.getFuse() / 8));
             worldIn.spawnEntity(entitytntprimed);
@@ -38,6 +39,7 @@ public class BlockTakumiTNT extends BlockTNT {
             if (state.getValue(EXPLODE)) {
                 EntityTakumiTNTPrimed entitytntprimed =
                         new EntityTakumiTNTPrimed(worldIn, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, igniter);
+                entitytntprimed.setGriefing(true);
                 worldIn.spawnEntity(entitytntprimed);
                 worldIn.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ,
                         SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);

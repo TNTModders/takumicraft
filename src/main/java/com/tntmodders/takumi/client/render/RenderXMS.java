@@ -43,7 +43,7 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
         GlStateManager.scale(5F, 5F, 5F);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         if (!entitylivingbaseIn.onGround) {
-            float fa = entitylivingbaseIn.isAttackMode ? 2.5f : 1f;
+            float fa = entitylivingbaseIn.getAttackMode() ? 2.5f : 1f;
             GlStateManager.translate(0, -0.35, 0);
             GlStateManager.rotate(entitylivingbaseIn.rotationPitch / fa, 1, 0, 0);
             GlStateManager.translate(0, 0.35, 0);
@@ -70,9 +70,13 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
         ModelRenderer canopy;
         //操縦手
         ModelRenderer crew_head;
+        ModelRenderer crew_head_overlay;
         ModelRenderer crew_body;
+        ModelRenderer crew_body_overlay;
         ModelRenderer crew_left_hand;
+        ModelRenderer crew_left_hand_overlay;
         ModelRenderer crew_right_hand;
+        ModelRenderer crew_right_hand_overlay;
         ModelRenderer crew_head_helmet;
 
         public ModelXMS() {
@@ -112,13 +116,19 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
 
             this.crew_head = new ModelRenderer(this, 0, 0);
             this.crew_head.setTextureSize(64, 64);
-            this.crew_head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8);
+            this.crew_head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.25f);
+            this.crew_head_overlay = new ModelRenderer(this, 24, 0);
+            this.crew_head_overlay.setTextureSize(64, 64);
+            this.crew_head_overlay.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8);
             this.crew_head_helmet = new ModelRenderer(this, 0, 0);
             this.crew_head_helmet.setTextureSize(64, 32);
             this.crew_head_helmet.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.5f);
             this.crew_body = new ModelRenderer(this, 16, 16);
             this.crew_body.setTextureSize(64, 64);
             this.crew_body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4);
+            this.crew_body_overlay = new ModelRenderer(this, 16, 32);
+            this.crew_body_overlay.setTextureSize(64, 64);
+            this.crew_body_overlay.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0.25f);
             this.crew_left_hand = new ModelRenderer(this, 32, 48);
             this.crew_left_hand.setTextureSize(64, 64);
             this.crew_left_hand.addBox(-1.0F, -2.0F, -2.0F, 3, 12, 4);
@@ -127,13 +137,21 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
             this.crew_right_hand.setTextureSize(64, 64);
             this.crew_right_hand.addBox(-2.0F, -2.0F, -2.0F, 3, 12, 4);
             this.crew_right_hand.setRotationPoint(-5.0F, 2.5F, 0.0F);
+            this.crew_left_hand_overlay = new ModelRenderer(this, 48, 48);
+            this.crew_left_hand_overlay.setTextureSize(64, 64);
+            this.crew_left_hand_overlay.addBox(-1.0F, -2.0F, -2.0F, 3, 12, 4, 0.25f);
+            this.crew_left_hand_overlay.setRotationPoint(5.0F, 2.5F, 0.0F);
+            this.crew_right_hand_overlay = new ModelRenderer(this, 40, 32);
+            this.crew_right_hand_overlay.setTextureSize(64, 64);
+            this.crew_right_hand_overlay.addBox(-2.0F, -2.0F, -2.0F, 3, 12, 4, 0.25f);
+            this.crew_right_hand_overlay.setRotationPoint(-5.0F, 2.5F, 0.0F);
         }
 
         @Override
         public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-                float headPitch, float scale) {
-            EntityXMS yms = ((EntityXMS) entityIn);
-            int tick = yms.attackModeTick > 10 ? 10 : yms.attackModeTick;
+                           float headPitch, float scale) {
+            EntityXMS xms = ((EntityXMS) entityIn);
+            int tick = Math.min(xms.attackModeTick, 10);
             this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
             GlStateManager.pushMatrix();
             GlStateManager.translate(0.0F, 1.25F, 0.0F);
@@ -153,15 +171,19 @@ public class RenderXMS<T extends EntityXMS> extends RenderLiving<T> {
             this.canopy.render(scale);
 
             if (entityIn.getControllingPassenger() instanceof AbstractClientPlayer &&
-                    Minecraft.getMinecraft().getRenderManager().options.thirdPersonView != 0) {
+                    (Minecraft.getMinecraft().getRenderManager().options.thirdPersonView != 0 || entityIn.getControllingPassenger() != Minecraft.getMinecraft().player)) {
                 GlStateManager.scale(0.25, 0.25, 0.25);
                 GlStateManager.translate(0, -0.2, 0);
                 Minecraft.getMinecraft().renderEngine.bindTexture(
                         ((AbstractClientPlayer) entityIn.getControllingPassenger()).getLocationSkin());
                 this.crew_body.render(scale);
+                this.crew_body_overlay.render(scale);
                 this.crew_head.render(scale);
+                this.crew_head_overlay.render(scale);
                 this.crew_left_hand.render(scale);
+                this.crew_left_hand_overlay.render(scale);
                 this.crew_right_hand.render(scale);
+                this.crew_right_hand_overlay.render(scale);
                 Minecraft.getMinecraft().renderEngine.bindTexture(LOCATION);
                 this.crew_head_helmet.render(scale);
                 GlStateManager.translate(0, 0.2, 0);

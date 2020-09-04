@@ -23,6 +23,7 @@ public class EntityTakumiTNTPrimed extends Entity {
      * How long the fuse is
      */
     private int fuse;
+    private boolean griefing;
 
     public EntityTakumiTNTPrimed(World worldIn, double x, double y, double z, EntityLivingBase igniter) {
         this(worldIn);
@@ -43,6 +44,7 @@ public class EntityTakumiTNTPrimed extends Entity {
         this.fuse = 80;
         this.preventEntitySpawning = true;
         this.isImmuneToFire = true;
+        this.griefing = true;
         this.setSize(0.98F, 0.98F);
     }
 
@@ -113,6 +115,7 @@ public class EntityTakumiTNTPrimed extends Entity {
     @Override
     protected void readEntityFromNBT(NBTTagCompound compound) {
         this.setFuse(compound.getShort("Fuse"));
+        this.setGriefing(compound.getBoolean("Griefing"));
     }
 
     /**
@@ -121,6 +124,11 @@ public class EntityTakumiTNTPrimed extends Entity {
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound) {
         compound.setShort("Fuse", (short) this.getFuse());
+        compound.setBoolean("Griefing", this.griefing);
+    }
+
+    public void setGriefing(boolean griefing) {
+        this.griefing = griefing;
     }
 
     @Override
@@ -153,7 +161,7 @@ public class EntityTakumiTNTPrimed extends Entity {
 
     private void explode() {
         float f = 4.0F;
-        this.world.createExplosion(this, this.posX, this.posY + this.height / 16.0F, this.posZ, 7.0F, true);
+        this.world.createExplosion(this, this.posX, this.posY + this.height / 16.0F, this.posZ, 7.0F, this.griefing);
     }
 
     /**
