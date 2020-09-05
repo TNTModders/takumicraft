@@ -277,6 +277,7 @@ item.tosscreeperbomb.name=持匠式時限爆弾
 item.creeperpainting.name=匠式硬質絵画
 item.creepersign.name=匠式硬質看板
 item.champcore.name=覇者ノ証
+item.destgolem.name=壊式即応機兵
 
 #entity
 ＃descは36文字まで。
@@ -823,6 +824,7 @@ entity.creeperminecart.name=匠式硬質貨車
 entity.creeperboat.name=匠式硬質小舟
 entity.creeperpainting.name=匠式硬質絵画
 entity.creeperbolt.name=龍雷
+entity.destgolem.name=壊式即応機兵
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ

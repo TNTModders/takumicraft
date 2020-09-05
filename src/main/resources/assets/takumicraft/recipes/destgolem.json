@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "CQC",
-    "BSB",
-    "SSS"
+    "BQB",
+    "SSS",
+    "CSC"
   ],
   "key": {
     "Q": {
-      "item": "takumicraft:typecoresp_magic"
+      "item": "takumicraft:typecoresp_dest"
     },
     "C": {
       "item": "takumicraft:typecore",
       "data": 5
     },
     "S": {
-      "item": "minecraft:stonebrick",
+      "item": "minecraft:cobblestone",
       "data": 0
     },
     "B": {
@@ -22,6 +22,6 @@
     }
   },
   "result": {
-    "item": "takumicraft:takumiinstantwall"
+    "item": "takumicraft:destgolem"
   }
 }

@@ -278,6 +278,7 @@ item.tosscreeperbomb.name=Toss Creeper Bomb
 item.creeperpainting.name=Creeper Painting
 item.creepersign.name=Creeper Sign
 item.champcore.name=Champ Core
+item.destgolem.name=Dest Golem
 
 #entity
 #desc max: 72 chars
@@ -771,6 +772,7 @@ entity.creeperminecart.name=Creeper Minecart
 entity.creeperboat.name=Creeper Boat
 entity.creeperpainting.name=Creeper Painting
 entity.creeperbolt.name=Creeper Bolt
+entity.destgolem.name=Dest Golem
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

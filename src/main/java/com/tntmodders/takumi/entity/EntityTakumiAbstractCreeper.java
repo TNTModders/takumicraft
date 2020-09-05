@@ -7,10 +7,13 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
+import com.tntmodders.takumi.entity.item.EntityDestGolem;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
+import net.minecraft.entity.ai.EntityAIFindEntityNearest;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,14 +47,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
         this.experienceValue = this.takumiRank().getExperiment();
-        this.tasks.addTask(3, new EntityAIFollowCatCreeper(this));
-        /*this.tasks.addTask(3, new EntityAIMoveToAttackBlock(this, 1.5, true));
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityAttackBlock.class, false) {
-            @Override
-            protected double getTargetDistance() {
-                return 256;
-            }
-        });*/
     }
 
     public static float getTypeMatchFactor(EnumTakumiType attacker, EnumTakumiType damaged) {
@@ -82,6 +77,26 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
             f *= 0.5;
         }
         return f;
+    }
+
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(3, new EntityAIFollowCatCreeper(this));
+        if (!this.takumiType().isDest() && this.takumiRank().getLevel() < 3) {
+            this.tasks.addTask(3, new EntityAIFindEntityNearest(this, EntityDestGolem.class) {
+                @Override
+                protected double getFollowRange() {
+                    return 64;
+                }
+            });
+            this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityDestGolem.class, true) {
+                @Override
+                protected double getTargetDistance() {
+                    return 4;
+                }
+            });
+        }
     }
 
     @Override

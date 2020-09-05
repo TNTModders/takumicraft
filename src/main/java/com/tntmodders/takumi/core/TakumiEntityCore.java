@@ -15,10 +15,12 @@ import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
@@ -325,6 +327,8 @@ public class TakumiEntityCore {
                 true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "bigcreeperdummy"),
                 EntityBigCreeperDummy.class, "bigcreeperdummy", 931, TakumiCraftCore.TakumiInstance, 1024, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "destgolem"),
+                EntityDestGolem.class, "destgolem", 932, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -426,6 +430,18 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityPainting.class, RenderTakumiPainting::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLightningBolt.class, RenderTakumiLightningBolt::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLaser.class, RenderTakumiLaser::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDestGolem.class, manager -> new RenderIronGolem(manager) {
+            @Override
+            protected ResourceLocation getEntityTexture(EntityIronGolem entity) {
+                return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/destgolem.png");
+            }
+
+            @Override
+            protected void preRenderCallback(EntityIronGolem entitylivingbaseIn, float partialTickTime) {
+                super.preRenderCallback(entitylivingbaseIn, partialTickTime);
+                GlStateManager.scale(0.5f, 0.5f, 0.5f);
+            }
+        });
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

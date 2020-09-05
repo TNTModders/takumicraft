@@ -91,6 +91,7 @@ public class TakumiItemCore {
     public static final Item TAKUMI_PAINTING = new ItemTakumiPainting();
     public static final Item CREEPER_SIGN = new ItemTakumiSign();
     public static final Item THROW_GRENEDE_SP = new ItemTakumiThrowGrenede_SP();
+    public static final Item DEST_GOLEM = new ItemDestGolem();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 
@@ -133,7 +134,7 @@ public class TakumiItemCore {
         Items.SPAWN_EGG.setCreativeTab(TakumiCraftCore.TAB_EGGS);
 
         registry.getValuesCollection().forEach(item -> {
-            if(item.getCreativeTab() instanceof TakumiCreativeTab){
+            if (item.getCreativeTab() instanceof TakumiCreativeTab) {
                 TakumiCraftCore.LOGGER.info(item.getUnlocalizedName());
             }
         });

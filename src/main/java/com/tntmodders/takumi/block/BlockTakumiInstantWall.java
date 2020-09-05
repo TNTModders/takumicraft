@@ -75,7 +75,7 @@ public class BlockTakumiInstantWall extends Block {
                         for (int y = 0; y <= 2; y++) {
                             BlockPos blockPos = pos.add(x, y, 0);
                             if (worldIn.isAirBlock(blockPos) || worldIn.getBlockState(blockPos).getBlock() == this || worldIn.getBlockState(blockPos).getBlock().isReplaceable(worldIn, blockPos)) {
-                                worldIn.setBlockState(pos.add(x, y, 0), this.getDefaultState().withProperty(META, 10));
+                                worldIn.setBlockState(pos.add(x, y, 0), this.getDefaultState().withProperty(META, 11));
                             }
                         }
                     }
@@ -84,7 +84,7 @@ public class BlockTakumiInstantWall extends Block {
                         for (int y = 0; y <= 2; y++) {
                             BlockPos blockPos = pos.add(0, y, z);
                             if (worldIn.isAirBlock(blockPos) || worldIn.getBlockState(blockPos).getBlock() == this || worldIn.getBlockState(blockPos).getBlock().isReplaceable(worldIn, blockPos)) {
-                                worldIn.setBlockState(pos.add(0, y, z), this.getDefaultState().withProperty(META, 10));
+                                worldIn.setBlockState(pos.add(0, y, z), this.getDefaultState().withProperty(META, 11));
                             }
                         }
                     }
