@@ -28,19 +28,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.*;
+import net.minecraftforge.event.world.ExplosionEvent;
 
 import java.lang.reflect.Field;
 
 public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
+    private static final DataParameter<Integer> ATTACK_ID =
+            EntityDataManager.createKey(EntityGemCreeper.class, DataSerializers.VARINT);
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.gemcreeper.name"), BossInfo.Color.WHITE,
                     BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
+    public boolean isBook = false;
     private DamageSource lastSource;
-    private static final DataParameter<Integer> ATTACK_ID =
-            EntityDataManager.createKey(EntityGemCreeper.class, DataSerializers.VARINT);
     private int lastID;
     private int activeTimer;
-    public boolean isBook = false;
 
     public EntityGemCreeper(World worldIn) {
         super(worldIn);
@@ -367,5 +368,11 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public Object getRender(RenderManager manager) {
         return new RenderGemCreeper<>(manager);
+    }
+
+    @Override
+    public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
+        event.getAffectedBlocks().removeIf(pos -> pos.getY() < this.posY);
+        return true;
     }
 }
