@@ -70,9 +70,9 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void clientChatRecieved(ClientChatReceivedEvent event) {
-       /* if (TakumiUtils.isInEventServer(Minecraft.getMinecraft())) */{
+        if (TakumiUtils.isInEventServer(Minecraft.getMinecraft())) {
             //[spec]->takumicraft.tcs.spec
-            if (event.getMessage().getUnformattedText().contains("[spec]") && !Minecraft.getMinecraft().player.isSpectator()) {
+            if (event.getMessage().getStyle().getClickEvent() != null && event.getMessage().getStyle().getClickEvent().getValue().contains("tcs_spec") && !Minecraft.getMinecraft().player.isSpectator()) {
                 event.setCanceled(true);
             }
         }

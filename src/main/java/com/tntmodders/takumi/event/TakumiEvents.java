@@ -52,7 +52,11 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
@@ -1182,14 +1186,19 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void serverChat(ServerChatEvent event) {
-        /*if (TakumiConfigCore.inEventServer) */
-        {
+        if (TakumiConfigCore.inEventServer) {
             if (event.getPlayer().isSpectator()) {
                 //[spec]->takumicraft.tcs.spec, compString -> compTranslation
-                TextComponentString comp = new TextComponentString("[spec]");
-                event.setComponent(comp.appendSibling(event.getComponent()));
+                Style style = new Style();
+                style.setColor(TextFormatting.DARK_PURPLE);
+                style.setBold(true);
+                style.setClickEvent(new ClickEvent(ClickEvent.Action.CHANGE_PAGE, "tcs_spec"));
+                ITextComponent comp = new TextComponentTranslation("takumicraft.tcs.spec");
+                comp.setStyle(style);
+                comp.appendText(" ");
+                ITextComponent message = comp.appendSibling(event.getComponent().setStyle(new Style().setColor(TextFormatting.RESET).setBold(false)));
+                event.setComponent(message);
             }
         }
     }
-
 }
