@@ -974,4 +974,5 @@ config.takumicraft.oltb.prop=匠式超硬質ブロック: ロック機能
 config.takumicraft.oltb.desc=超硬質ブロックを設置者とOP以外に編集を許可する場合falseにしてください。
 takumicraft.takumibook.key=匠図鑑 表示
 takumicraft.xms.key=X-MS Sフォイル展開
+takumicraft.tcs.spec=†冥界チャット†
 takumicraft.thm.key=匠式ハードモード 自爆

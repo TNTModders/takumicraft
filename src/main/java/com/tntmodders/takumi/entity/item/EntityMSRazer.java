@@ -31,6 +31,14 @@ public class EntityMSRazer extends AbstractEntityTakumiGrenade {
     }
 
     @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.ticksExisted > 150) {
+            this.setDead();
+        }
+    }
+
+    @Override
     public int getCount() {
         return 1;
     }

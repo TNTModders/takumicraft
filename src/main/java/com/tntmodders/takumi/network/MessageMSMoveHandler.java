@@ -2,9 +2,9 @@ package com.tntmodders.takumi.network;
 
 import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.entity.item.EntityXMS;
-import com.tntmodders.takumi.entity.item.EntityYMS;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -16,18 +16,26 @@ public class MessageMSMoveHandler implements IMessageHandler<MessageMSMove, IMes
         EntityPlayer entityPlayer = ctx.getServerHandler().player;
         switch (message.key) {
             case 0: {
-                if (entityPlayer.getRidingEntity() instanceof EntityXMS ||
-                        entityPlayer.getRidingEntity() instanceof EntityYMS) {
-                    entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x * 2,
-                            entityPlayer.getLookVec().y / 1.5f, entityPlayer.getLookVec().z * 2);
+                //attack mode
+                if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
+                    entityPlayer.getRidingEntity().motionX = MathHelper.sin(-entityPlayer.getRidingEntity().rotationYaw * 0.017453292F) * 2;
+                    entityPlayer.getRidingEntity().motionY = MathHelper.sin(-entityPlayer.getRidingEntity().rotationPitch * 0.017453292F) * 1.25;
+                    entityPlayer.getRidingEntity().motionZ = MathHelper.cos(entityPlayer.getRidingEntity().rotationYaw * 0.017453292F) * 2;
+                } else {
+                    entityPlayer.getRidingEntity().motionX = MathHelper.sin(-entityPlayer.getRidingEntity().rotationYaw * 0.017453292F) * 2;
+                    entityPlayer.getRidingEntity().motionY = MathHelper.sin(-entityPlayer.getRidingEntity().rotationPitch * 0.017453292F) * 2;
+                    entityPlayer.getRidingEntity().motionZ = MathHelper.cos(entityPlayer.getRidingEntity().rotationYaw * 0.017453292F) * 2;
                 }
+                entityPlayer.move(MoverType.PLAYER, entityPlayer.getRidingEntity().motionX, entityPlayer.getRidingEntity().motionY, entityPlayer.getRidingEntity().motionZ);
                 break;
             }
             case 1: {
                 if (entityPlayer.getRidingEntity() instanceof EntityXMS) {
-                    entityPlayer.getRidingEntity().move(MoverType.PLAYER, entityPlayer.getLookVec().x,
-                            entityPlayer.getLookVec().y, entityPlayer.getLookVec().z);
+                    entityPlayer.getRidingEntity().motionX = MathHelper.sin(-entityPlayer.getRidingEntity().rotationYaw * 0.017453292F) * 3;
+                    entityPlayer.getRidingEntity().motionY = MathHelper.sin(-entityPlayer.getRidingEntity().rotationPitch * 0.017453292F) * 3;
+                    entityPlayer.getRidingEntity().motionZ = MathHelper.cos(entityPlayer.getRidingEntity().rotationYaw * 0.017453292F) * 3;
                 }
+                entityPlayer.move(MoverType.PLAYER, entityPlayer.getRidingEntity().motionX, entityPlayer.getRidingEntity().motionY, entityPlayer.getRidingEntity().motionZ);
                 break;
             }
             case 2: {

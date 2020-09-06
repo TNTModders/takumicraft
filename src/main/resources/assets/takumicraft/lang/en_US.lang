@@ -918,4 +918,5 @@ config.takumicraft.oltb.prop=Takumi Super Block : Owner Lock
 config.takumicraft.oltb.desc=If true, only placer and opped player can edit and destroy Takumi Super Block.
 takumicraft.takumibook.key=Show TakumiBook
 takumicraft.xms.key=X-MS S-foil
+takumicraft.tcs.spec=【Spectators】
 takumicraft.thm.key=TakumiHardMode Explode

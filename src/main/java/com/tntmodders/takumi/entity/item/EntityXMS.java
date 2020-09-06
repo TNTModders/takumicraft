@@ -3,21 +3,22 @@ package com.tntmodders.takumi.entity.item;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.network.MessageMSMove;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,23 +30,81 @@ public class EntityXMS extends EntityFlying {
 
     private static final DataParameter<Boolean> ATTACK_MODE =
             EntityDataManager.createKey(EntityXMS.class, DataSerializers.BOOLEAN);
-    private final PotionEffect marker = new PotionEffect(MobEffects.FIRE_RESISTANCE, 10, 64);
     public int attackModeTick;
 
     public EntityXMS(World worldIn) {
         super(worldIn);
-        this.setSize(10, 2);
+        this.setSize(4, 2);
     }
 
     public Boolean getAttackMode() {
-/*        if (this.world.isRemote &&this.getActivePotionEffect(marker.getPotion()) != null && this.getActivePotionEffect(marker.getPotion()).getAmplifier() == marker.getAmplifier()) {
-            return true;
-        }*/
         return this.dataManager.get(ATTACK_MODE);
     }
 
     public void setAttackMode(Boolean flg) {
         this.dataManager.set(ATTACK_MODE, flg);
+    }
+
+    @Override
+    public void fall(float distance, float damageMultiplier) {
+    }
+
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+    }
+
+    @Override
+    public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
+        if (this.isInWater()) {
+            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.02F);
+            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.800000011920929D;
+            this.motionY *= 0.800000011920929D;
+            this.motionZ *= 0.800000011920929D;
+        } else if (this.isInLava()) {
+            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, 0.02F);
+            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.5D;
+            this.motionY *= 0.5D;
+            this.motionZ *= 0.5D;
+        } else {
+            float f = 0.91F;
+
+/*            if (this.onGround) {
+                BlockPos underPos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ));
+                IBlockState underState = this.world.getBlockState(underPos);
+                f = underState.getBlock().getSlipperiness(underState, this.world, underPos, this) * 0.91F;
+            }*/
+
+            float f1 = 0.16277136F / (f * f * f);
+            this.moveRelative(p_191986_1_, p_191986_2_, p_191986_3_, this.onGround ? 0.1F * f1 : 0.02F);
+            f = 0.91F;
+
+            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+            this.motionX *= f;
+            this.motionY *= f;
+            this.motionZ *= f;
+        }
+
+        this.prevLimbSwingAmount = this.limbSwingAmount;
+        double d1 = this.posX - this.prevPosX;
+        double d0 = this.posZ - this.prevPosZ;
+        float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+
+        if (f2 > 1.0F) {
+            f2 = 1.0F;
+        }
+
+        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
+        this.limbSwing += this.limbSwingAmount;
+    }
+
+    /**
+     * returns true if this entity is by a ladder, false otherwise
+     */
+    @Override
+    public boolean isOnLadder() {
+        return false;
     }
 
     @Override
@@ -83,32 +142,6 @@ public class EntityXMS extends EntityFlying {
             this.rotationYaw = this.rotationYawHead = ((EntityPlayer) this.getControllingPassenger()).rotationYawHead;
             this.rotationPitch = this.getControllingPassenger().rotationPitch;
         }
-        if (!this.world.isRemote && this.getAttackMode()) {
-            this.addPotionEffect(marker);
-        }
-    }
-
-    @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        if (this.getControllingPassenger() instanceof EntityPlayer) {
-            compound.setString("crew", this.getControllingPassenger().getName());
-        } else {
-            compound.setString("crew", "");
-        }
-    }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        if (compound.getString("crew") != null && !compound.getString("crew").isEmpty()) {
-            if (this.world.getPlayerEntityByName(compound.getString("crew")) != null &&
-                    (this.getPassengers().isEmpty() || this.getPassengers().stream().noneMatch(
-                            entity -> entity instanceof EntityPlayer &&
-                                    entity.getName().equals(compound.getString("crew"))))) {
-                this.world.getPlayerEntityByName(compound.getString("crew")).startRiding(this, true);
-            }
-        }
     }
 
     @Override
@@ -117,22 +150,22 @@ public class EntityXMS extends EntityFlying {
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
+    public boolean processInteract(EntityPlayer entityPlayer, EnumHand hand) {
         if (!this.getPassengers().isEmpty() && this.getPassengers().stream().anyMatch(entity -> entity == entityPlayer)) {
-            if (this.getAttackMode()) {
+            if (!this.world.isRemote && this.getAttackMode()) {
                 EntityMSRazer razer =
                         new EntityMSRazer(entityPlayer.world, ((EntityXMS) entityPlayer.getRidingEntity()));
                 razer.setHeadingFromThrower(entityPlayer.getRidingEntity(),
                         entityPlayer.getRidingEntity().rotationPitch / 2.5f,
                         entityPlayer.getRidingEntity().rotationYaw + 5, 0, 10f, 0f);
                 entityPlayer.world.spawnEntity(razer);
-                entityPlayer.world.updateEntities();
+                //entityPlayer.world.updateEntities();
                 razer = new EntityMSRazer(entityPlayer.world, ((EntityXMS) entityPlayer.getRidingEntity()));
                 razer.setHeadingFromThrower(entityPlayer.getRidingEntity(),
                         entityPlayer.getRidingEntity().rotationPitch / 2.5f,
                         entityPlayer.getRidingEntity().rotationYaw - 5, 0, 10f, 0f);
                 entityPlayer.world.spawnEntity(razer);
-                entityPlayer.world.updateEntities();
+                //entityPlayer.world.updateEntities();
             }
         } else {
             if (!this.world.isRemote && this.getPassengers().isEmpty()) {
@@ -185,9 +218,6 @@ public class EntityXMS extends EntityFlying {
 
     @Override
     protected void collideWithEntity(Entity entityIn) {
-        if (!(entityIn instanceof EntityPlayer)) {
-            super.collideWithEntity(entityIn);
-        }
     }
 
     @Override
