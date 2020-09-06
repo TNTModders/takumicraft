@@ -12,7 +12,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
-import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -84,12 +83,6 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         super.initEntityAI();
         this.tasks.addTask(3, new EntityAIFollowCatCreeper(this));
         if (!this.takumiType().isDest() && this.takumiRank().getLevel() < 3) {
-            this.tasks.addTask(3, new EntityAIFindEntityNearest(this, EntityDestGolem.class) {
-                @Override
-                protected double getFollowRange() {
-                    return 64;
-                }
-            });
             this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityDestGolem.class, true) {
                 @Override
                 protected double getTargetDistance() {

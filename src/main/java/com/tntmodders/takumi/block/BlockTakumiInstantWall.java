@@ -8,6 +8,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -135,5 +136,15 @@ public class BlockTakumiInstantWall extends Block {
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, META);
+    }
+
+    @Override
+    protected ItemStack getSilkTouchDrop(IBlockState state) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public boolean canDropFromExplosion(Explosion explosionIn) {
+        return false;
     }
 }

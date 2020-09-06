@@ -2,6 +2,7 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.*;
@@ -260,6 +261,11 @@ public class TakumiUtils {
         Minecraft.getMinecraft().effectRenderer.addEffect(particle);
     }
 
+    @SideOnly(Side.CLIENT)
+    public static boolean isInEventServer(Minecraft mc) {
+        return (mc.getCurrentServerData() != null && mc.getCurrentServerData().serverMOTD.contains(":tc_server")) || TakumiConfigCore.inEventServerClient;
+    }
+
     public static int getColorFromText(TextFormatting formatting) {
         switch (formatting) {
             case WHITE:
@@ -290,7 +296,7 @@ public class TakumiUtils {
                 return EnumDyeColor.GREEN.getColorValue();
             case DARK_RED: {
                 int color = EnumDyeColor.RED.getColorValue();
-                return (((int) ((color >> 16) * 0.75)) << 16) ;
+                return (((int) ((color >> 16) * 0.75)) << 16);
             }
             case RED:
                 return EnumDyeColor.RED.getColorValue();

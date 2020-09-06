@@ -4,10 +4,13 @@ import com.google.common.base.Predicate;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -19,19 +22,33 @@ public class EntityDestGolem extends EntityIronGolem {
 
     @Override
     protected void initEntityAI() {
-        super.initEntityAI();
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 1, false,
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 64.0F));
+        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false,
                 false, (Predicate<EntityLiving>) living ->
-                living != null && IMob.VISIBLE_MOB_SELECTOR.apply(living) &&
-                        (!(living instanceof EntityTakumiAbstractCreeper) ||
-                                (!((EntityTakumiAbstractCreeper) living).takumiType().isDest() && ((EntityTakumiAbstractCreeper) living).takumiRank().getLevel() < 3)) &&
-                        living.isNonBoss()) {
-            @Override
-            protected double getTargetDistance() {
-                return 256;
-            }
-        });
+                living != null && living.isNonBoss()
+                        && ((living instanceof EntityTakumiAbstractCreeper && !((EntityTakumiAbstractCreeper) living).takumiType().isDest() && ((EntityTakumiAbstractCreeper) living).takumiRank().getLevel() < 3)
+                        || (living instanceof EntityMob && !(living instanceof EntityTakumiAbstractCreeper)))));
     }
+
+    @Override
+    protected void collideWithEntity(Entity entityIn) {
+        if (entityIn instanceof IMob && this.getRNG().nextInt(20) == 0) {
+            this.setAttackTarget((EntityLivingBase) entityIn);
+        }
+
+        super.collideWithEntity(entityIn);
+    }
+
+    @Override
+    public boolean canAttackClass(Class<? extends EntityLivingBase> cls) {
+        return !this.isPlayerCreated() || !EntityPlayer.class.isAssignableFrom(cls);
+    }
+
 
     @Override
     protected void applyEntityAttributes() {

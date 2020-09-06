@@ -52,11 +52,13 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.GameType;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
@@ -850,7 +852,8 @@ public class TakumiEvents {
             if (!EnchantmentHelper.getEnchantments(stack).isEmpty() &&
                     EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.ANTI_POWERED) &&
                     event.getEntityLiving() instanceof EntityCreeper &&
-                    ((EntityCreeper) event.getEntityLiving()).getPowered()) {
+                    ((EntityCreeper) event.getEntityLiving()).getPowered() &&
+                    !event.getSource().isMagicDamage()) {
                 event.getEntityLiving().attackEntityFrom(DamageSource.causeMobDamage(
                         (EntityLivingBase) event.getSource().getTrueSource()).setMagicDamage(), 20f);
                 TakumiUtils.takumiSetPowered((EntityCreeper) event.getEntityLiving(), false);
@@ -1176,4 +1179,17 @@ public class TakumiEvents {
             }
         }
     }
+
+    @SubscribeEvent
+    public void serverChat(ServerChatEvent event) {
+        /*if (TakumiConfigCore.inEventServer) */
+        {
+            if (event.getPlayer().isSpectator()) {
+                //[spec]->takumicraft.tcs.spec, compString -> compTranslation
+                TextComponentString comp = new TextComponentString("[spec]");
+                event.setComponent(comp.appendSibling(event.getComponent()));
+            }
+        }
+    }
+
 }

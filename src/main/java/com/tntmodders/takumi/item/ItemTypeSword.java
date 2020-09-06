@@ -140,7 +140,7 @@ public class ItemTypeSword extends ItemSword {
                             input -> entityIn.getDistanceSqToEntity(input) < 7f).forEach(entityLivingBase -> {
                         if (entityLivingBase.getClass() != entityIn.getClass() && !worldIn.isRemote) {
                             entityLivingBase.attackEntityFrom(
-                                    DamageSource.causeMobDamage(((EntityLivingBase) entityIn)).setExplosion(), 5f);
+                                    DamageSource.causeMobDamage(((EntityLivingBase) entityIn)).setExplosion().setMagicDamage(), 5f);
                         }
                     });
                 }

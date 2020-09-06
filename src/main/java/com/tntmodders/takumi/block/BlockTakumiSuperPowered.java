@@ -119,10 +119,12 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
                 ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock() != null) {
             try {
-                return ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock().getBlockFaceShape(world,
-                        ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).state, pos, facing);
+                TileEntityTakumiSuperPowered te = ((TileEntityTakumiSuperPowered) world.getTileEntity(pos));
+                if (te.state == null) {
+                    te.setState(te.getBlock().getStateFromMeta(te.getMeta()));
+                }
+                return te.getBlock().getBlockFaceShape(world, te.state, pos, facing);
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return super.getBlockFaceShape(world, state, pos, facing);

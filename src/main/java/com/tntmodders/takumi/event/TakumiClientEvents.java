@@ -65,35 +65,24 @@ public class TakumiClientEvents {
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
 
     private static long respawnTime;
-    /*    @SubscribeEvent
-        public void recievedChat(ClientChatReceivedEvent event) {
-            if (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode().equalsIgnoreCase("ja_jp")) {
-                ITextComponent component = event.getMessage();
-                String[] creepers = event.getMessage().getUnformattedText().split(" ");
-                String creeper = "";
-                TakumiCraftCore.LOGGER.info(Arrays.toString(creepers));
-                for (int i = 0; i < creepers.length; i++) {
-                    String str = creepers[i];
-                    if (str.equalsIgnoreCase("creeper")) {
-                        creeper = creepers[i - 1] +" "+ creepers[i];
-                    }
-                }
-                if (!creeper.isEmpty() && component.toString().contains("death")) {
-                    TakumiCraftCore.LOGGER.info(creeper);
-                    String creeperJP = TakumiUtils.takumiTranslate("entity." + creeper.toLowerCase().replaceAll(" ","") + ".name");
-                    String string = component.getUnformattedText().replace(creeper, creeperJP);
-                    component = new TextComponentString(string);
-                    event.setMessage(component);
-                }
-            }
-        }*/
     private static long prevRespawnTime;
+
+
+    @SubscribeEvent
+    public void clientChatRecieved(ClientChatReceivedEvent event) {
+       /* if (TakumiUtils.isInEventServer(Minecraft.getMinecraft())) */{
+            //[spec]->takumicraft.tcs.spec
+            if (event.getMessage().getUnformattedText().contains("[spec]") && !Minecraft.getMinecraft().player.isSpectator()) {
+                event.setCanceled(true);
+            }
+        }
+    }
 
     @SubscribeEvent
     public void guiScreenEvent(GuiScreenEvent.DrawScreenEvent.Post event) {
         if (event.getGui() instanceof GuiGameOver) {
             try {
-                if ((event.getGui().mc.getCurrentServerData() != null && event.getGui().mc.getCurrentServerData().serverMOTD.contains(":tc_server")) || TakumiConfigCore.inEventServerClient) {
+                if (TakumiUtils.isInEventServer(event.getGui().mc)) {
                     if (event.getGui().mc.world != null && event.getGui().mc.player != null) {
                         if (event.getGui().mc.player.deathTime < 3) {
                             TakumiClientEvents.respawnTime = event.getGui().mc.world.getTotalWorldTime();
