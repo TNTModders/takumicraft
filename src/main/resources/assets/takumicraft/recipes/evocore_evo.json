@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Q ",
+    "QQQ",
+    " Q "
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:evocore"
+    }
+  },
+  "result": {
+    "item": "takumicraft:evocore_evo"
+  }
+}

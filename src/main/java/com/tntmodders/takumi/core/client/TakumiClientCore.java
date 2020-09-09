@@ -171,6 +171,13 @@ public class TakumiClientCore {
                         "facing=" + state.getValue(BlockDropper.FACING));
             }
         });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.TAKUMI_BOMB_SNOW, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "creepersnowbomb"),
+                        state.getValue(BlockPressurePlateWeighted.POWER) > 0 ? "powered=true" : "powered=false");
+            }
+        });
     }
 
     public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {

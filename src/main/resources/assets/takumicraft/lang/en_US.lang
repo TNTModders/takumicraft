@@ -200,7 +200,8 @@ tile.creepercobblestone.name=Creeper Cobblestone
 tile.creepercobblestone_stairs.name=Creeper Cobblestone Stairs
 tile.creepercobblestone_slab.name=Creeper Cobblestone Slab
 tile.creepercobblestone_wall.name=Creeper Cobblestone Wall
-
+tile.creeperslimebomb.name=Slime Creeper Bomb
+tile.creepersnowbomb.name=Layer Creeper Bomb
 
 #item
 item.takumibook.name=Creeper Book
@@ -279,6 +280,7 @@ item.creeperpainting.name=Creeper Painting
 item.creepersign.name=Creeper Sign
 item.champcore.name=Champ Core
 item.destgolem.name=Dest Golem
+item.evocore_evo.name=Evolution Core[Powered]
 
 #entity
 #desc max: 72 chars

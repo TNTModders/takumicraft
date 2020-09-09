@@ -92,6 +92,7 @@ public class TakumiItemCore {
     public static final Item CREEPER_SIGN = new ItemTakumiSign();
     public static final Item THROW_GRENEDE_SP = new ItemTakumiThrowGrenede_SP();
     public static final Item DEST_GOLEM = new ItemDestGolem();
+    public static final Item EVO_CORE_EVO = new ItemEvoCore(true);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

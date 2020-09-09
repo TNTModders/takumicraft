@@ -1,10 +1,13 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -13,17 +16,24 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemEvoCore extends Item {
+    boolean flg;
+
+    public ItemEvoCore(boolean flg) {
+        super();
+        String name = flg ? "evocore_evo" : "evocore";
+        this.setRegistryName(TakumiCraftCore.MODID, name);
+        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
+        this.setUnlocalizedName(name);
+    }
 
     public ItemEvoCore() {
-        super();
-        this.setRegistryName(TakumiCraftCore.MODID, "evocore");
-        this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("evocore");
+        this(false);
     }
+
 
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.UNCOMMON;
+        return stack.getItem() == TakumiItemCore.EVO_CORE_EVO ? EnumRarity.RARE : EnumRarity.UNCOMMON;
     }
 
     @Override
@@ -33,6 +43,9 @@ public class ItemEvoCore extends Item {
                 Entity entity = ((Entity) ((ITakumiEvoEntity) target).getEvoCreeper().getClass().getConstructor(World.class).newInstance(playerIn.world));
                 entity.copyLocationAndAnglesFrom(target);
                 target.setDead();
+                if (this.flg) {
+                    TakumiUtils.takumiSetPowered(((EntityCreeper) entity), true);
+                }
                 playerIn.world.spawnEntity(entity);
                 if (!playerIn.isCreative()) {
                     stack.shrink(1);
@@ -50,5 +63,10 @@ public class ItemEvoCore extends Item {
             entityItem.setEntityInvulnerable(entityItem.ticksExisted < 1200);
         }
         return super.onEntityItemUpdate(entityItem);
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return stack.getItem() == TakumiItemCore.EVO_CORE_EVO;
     }
 }

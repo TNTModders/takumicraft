@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "takumicraft:creepersnowbomb_up"
+    },
+    "powered=true": {
+      "model": "takumicraft:creepersnowbomb_down"
+    }
+  }
+}

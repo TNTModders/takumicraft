@@ -57,7 +57,7 @@ public class TakumiBlockCore {
     public static final Block CREEPER_STONEBRICK_SLAB = new BlockTakumiAntiExplosionSlab(Material.ROCK, "creeperstonebrick_slab", 3f, "pickaxe");
     public static final Block CREEPER_STONEBRICK_WALL = new BlockTakumiAntiExplosionWall(CREEPER_STONEBRICK, Material.ROCK,
             "creeperstonebrick_wall", 3f, "pickaxe");
-    public static final Block CREEPER_COBBLESTONE = new BlockTakumiAntiExplosion(Material.ROCK,"creepercobblestone",2f,"pickaxe");
+    public static final Block CREEPER_COBBLESTONE = new BlockTakumiAntiExplosion(Material.ROCK, "creepercobblestone", 2f, "pickaxe");
     public static final Block CREEPER_COBBLESTONE_STAIRS = new BlockTakumiAntiExplosionStairs(CREEPER_COBBLESTONE.getDefaultState(),
             Material.ROCK, "creepercobblestone_stairs", 3f, "pickaxe");
     public static final Block CREEPER_COBBLESTONE_SLAB = new BlockTakumiAntiExplosionSlab(Material.ROCK, "creepercobblestone_slab", 3f, "pickaxe");
@@ -163,6 +163,8 @@ public class TakumiBlockCore {
             new BlockTakumiMonsterBomb(EntityKeepCreeper.class, "keepcreeper");
     public static final BlockTakumiMonsterBomb TAKUMI_BOMB_LUCK =
             new BlockTakumiMonsterBomb(EntityLuckCreeper.class, "luckcreeper");
+    public static final BlockSlimeBomb TAKUMI_BOMB_SLIME = new BlockSlimeBomb();
+    public static final BlockSnowBomb TAKUMI_BOMB_SNOW = new BlockSnowBomb();
 
     public static final Block TAKUMI_SUPERPOWERED = new BlockTakumiSuperPowered();
     public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();

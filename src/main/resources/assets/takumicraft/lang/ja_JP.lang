@@ -200,6 +200,8 @@ tile.creepercobblestone.name=匠式硬質丸石
 tile.creepercobblestone_stairs.name=匠式硬質丸石階段
 tile.creepercobblestone_slab.name=匠式硬質丸石半材
 tile.creepercobblestone_wall.name=匠式硬質丸石壁
+tile.creeperslimebomb.name=魔式特殊爆弾[スライム]
+tile.creepersnowbomb.name=壊式特殊爆弾[薄]
 
 #item
 item.takumibook.name=匠の書
@@ -278,6 +280,7 @@ item.creeperpainting.name=匠式硬質絵画
 item.creepersign.name=匠式硬質看板
 item.champcore.name=覇者ノ証
 item.destgolem.name=壊式即応機兵
+item.evocore_evo.name=真化ノ証[真]
 
 #entity
 ＃descは36文字まで。
