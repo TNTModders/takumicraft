@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CEC",
+    "CQC",
+    "CBC"
+  ],
+  "key": {
+    "C": {
+      "item": "takumicraft:typecoresp_magic"
+    },
+    "B": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "E": {
+      "item": "takumicraft:evocore_evo"
+    },
+    "Q": {
+      "item": "minecraft:cooked_beef"
+    }
+  },
+  "result": {
+    "item": "takumicraft:creepermeatbomb"
+  }
+}

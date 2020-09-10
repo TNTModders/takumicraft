@@ -36,17 +36,19 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
         if (world.isRemote && rand.nextBoolean()) {
-            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + (rand.nextDouble() - 0.5D),
-                    pos.getY() + 0.375 + rand.nextDouble(), pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
+            for (int i = 0; i < 4; i++) {
+                world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + (rand.nextDouble() - 0.5D),
+                        pos.getY() + 0.375 + rand.nextDouble(), pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
+            }
         }
     }
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 60 == 0) {
-            ((EntityLivingBase) entityIn).heal(0.25f);
+        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 120 == 0) {
+            ((EntityLivingBase) entityIn).heal(0.5f);
             if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
-                ((EntityPlayer) entityIn).getFoodStats().addStats(2, 0.5f);
+                ((EntityPlayer) entityIn).getFoodStats().addStats(1, 0.25f);
             }
         }
         if (entityIn instanceof EntityLivingBase) {
@@ -57,8 +59,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     @Override
     public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,
                                           double yToTest, Material materialIn, boolean testingHead) {
-        return materialIn == Material.WATER ? true :
-                super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
+        return materialIn == Material.WATER || super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
 
     @Override

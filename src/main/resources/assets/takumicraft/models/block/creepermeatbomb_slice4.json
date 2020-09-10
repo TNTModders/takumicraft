@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "takumicraft:blocks/creepermeatbomb_side",
+        "bottom": "takumicraft:blocks/creepermeatbomb_bottom",
+        "top": "takumicraft:blocks/creepermeatbomb_top",
+        "side": "takumicraft:blocks/creepermeatbomb_side",
+        "inside": "takumicraft:blocks/creepermeatbomb_inner"
+    },
+    "elements": [
+        {   "from": [ 9, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

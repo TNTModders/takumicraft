@@ -165,6 +165,7 @@ public class TakumiBlockCore {
             new BlockTakumiMonsterBomb(EntityLuckCreeper.class, "luckcreeper");
     public static final BlockSlimeBomb TAKUMI_BOMB_SLIME = new BlockSlimeBomb();
     public static final BlockSnowBomb TAKUMI_BOMB_SNOW = new BlockSnowBomb();
+    public static  final BlockMeatBomb TAKUMI_BOMB_MEAT = new BlockMeatBomb();
 
     public static final Block TAKUMI_SUPERPOWERED = new BlockTakumiSuperPowered();
     public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();

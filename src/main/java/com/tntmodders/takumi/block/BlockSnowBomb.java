@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSnowBomb extends BlockPressurePlateWeighted {
+public class BlockSnowBomb extends BlockPressurePlateWeighted implements ITakumiSPBomb{
 
     public BlockSnowBomb() {
         super(Material.SNOW, 15);
@@ -70,7 +70,7 @@ public class BlockSnowBomb extends BlockPressurePlateWeighted {
     public void explode(World world, int x, int y, int z) {
         try {
             world.setBlockToAir(new BlockPos(x, y, z));
-            world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, 3f, true);
+            world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, 5f, true);
         } catch (Exception ignored) {
         }
     }
