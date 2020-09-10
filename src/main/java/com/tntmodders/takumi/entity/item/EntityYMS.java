@@ -203,7 +203,7 @@ public class EntityYMS extends EntityFlying {
 
     @Override
     public double getMountedYOffset() {
-        return this.height * 0.4;
+        return this.height * 0.25;
     }
 
     @Override
@@ -218,5 +218,10 @@ public class EntityYMS extends EntityFlying {
             return null;
         }
         return this.getPassengers().get(0);
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0f;
     }
 }

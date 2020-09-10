@@ -12,8 +12,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class ItemEvoCore extends Item {
     boolean flg;
@@ -43,7 +49,7 @@ public class ItemEvoCore extends Item {
                 Entity entity = ((Entity) ((ITakumiEvoEntity) target).getEvoCreeper().getClass().getConstructor(World.class).newInstance(playerIn.world));
                 entity.copyLocationAndAnglesFrom(target);
                 target.setDead();
-                if (this.flg) {
+                if (stack.getItem() == TakumiItemCore.EVO_CORE_EVO) {
                     TakumiUtils.takumiSetPowered(((EntityCreeper) entity), true);
                 }
                 playerIn.world.spawnEntity(entity);
@@ -68,5 +74,47 @@ public class ItemEvoCore extends Item {
     @Override
     public boolean hasEffect(ItemStack stack) {
         return stack.getItem() == TakumiItemCore.EVO_CORE_EVO;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        ActionResult result = new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        if (playerIn.getHeldItem(handIn).getItem() == TakumiItemCore.EVO_CORE_EVO) {
+            List<EntityCreeper> list = worldIn.getEntitiesWithinAABB(EntityCreeper.class, playerIn.getEntityBoundingBox().grow(6),
+                    entity -> entity instanceof ITakumiEvoEntity && !((ITakumiEvoEntity) entity).isEvo());
+            if (!list.isEmpty()) {
+                list.sort(Comparator.comparingDouble(playerIn::getDistanceSqToEntity));
+                EntityCreeper target = list.get(0);
+                if (target != null && (target.posX - playerIn.posX) * (target.posX - playerIn.posX) + (target.posZ - playerIn.posZ) * (target.posZ - playerIn.posZ) < 25
+                        && (target.posY - playerIn.posY) * (target.posY - playerIn.posY) < 16) {
+                    if (!worldIn.isRemote) {
+                        try {
+                            Entity entity = ((Entity) ((ITakumiEvoEntity) target).getEvoCreeper().getClass().getConstructor(World.class).newInstance(playerIn.world));
+                            entity.copyLocationAndAnglesFrom(target);
+                            target.setDead();
+                            playerIn.world.spawnEntity(entity);
+                            if (!playerIn.isCreative()) {
+                                playerIn.getHeldItem(handIn).shrink(1);
+                            }
+
+                        } catch (Exception ignored) {
+                        }
+                    } else {
+                        for (int x = -5; x <= 5; x++) {
+                            for (int z = -5; z <= 5; z++) {
+                                if ((x ^ 2 + z ^ 2) < 25 && (x ^ 2 + z ^ 2) > 20) {
+                                    for (int i = 0; i < 10; i++) {
+                                        worldIn.spawnParticle(EnumParticleTypes.PORTAL, playerIn.posX + x + worldIn.rand.nextDouble() - 0.5, playerIn.posY + 0.5,
+                                                playerIn.posZ + z + worldIn.rand.nextDouble() - 0.5, 0, 0, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+                }
+            }
+        }
+        return result;
     }
 }

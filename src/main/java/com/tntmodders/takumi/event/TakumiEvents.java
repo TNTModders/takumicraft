@@ -417,7 +417,7 @@ public class TakumiEvents {
 
                 event.getEntity().world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, event.getEntity().posX - event.getEntity().motionX * 0.1,
                         event.getEntity().posY - event.getEntity().motionX * 0.1, event.getEntity().posZ - event.getEntity().motionX * 0.1, 0, 0, 0);
-                if (FMLCommonHandler.instance().getSide().isClient()) {
+                if (FMLCommonHandler.instance().getSide().isClient() && player.getTicksElytraFlying() > 20) {
                     float red, green, blue;
                     if (player.getTeam() != null && player.getTeam().getColor() != null && player.getTeam().getColor().isColor()) {
                         int color = TakumiUtils.getColorFromText(player.getTeam().getColor());
@@ -532,6 +532,9 @@ public class TakumiEvents {
                     }
                 }
                 return flg;
+            }
+            if (entity instanceof EntityPlayer) {
+                return entity.getRidingEntity() != null && (entity.getRidingEntity() instanceof EntityXMS || entity.getRidingEntity() instanceof EntityYMS);
             }
             return false;
         });

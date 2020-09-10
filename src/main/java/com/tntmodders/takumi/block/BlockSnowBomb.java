@@ -2,6 +2,7 @@ package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiSuperPowered;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlateWeighted;
 import net.minecraft.block.material.Material;
@@ -10,8 +11,10 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -31,7 +34,8 @@ public class BlockSnowBomb extends BlockPressurePlateWeighted {
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!worldIn.isRemote && entityIn instanceof EntityLivingBase && !entityIn.isSneaking()) {
+        if (!worldIn.isRemote && !(worldIn.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered) &&
+                ((entityIn instanceof EntityLivingBase && !entityIn.isSneaking()) || computeRedstoneStrength(worldIn, pos) > 3)) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
@@ -90,4 +94,15 @@ public class BlockSnowBomb extends BlockPressurePlateWeighted {
 
         return block != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
+
+    @Override
+    protected void playClickOnSound(World worldIn, BlockPos color) {
+        worldIn.playSound(null, color, SoundEvents.BLOCK_SNOW_STEP, SoundCategory.BLOCKS, 0.3F, 0.90000004F);
+    }
+
+    @Override
+    protected void playClickOffSound(World worldIn, BlockPos pos) {
+        worldIn.playSound(null, pos, SoundEvents.BLOCK_SNOW_STEP, SoundCategory.BLOCKS, 0.3F, 0.75F);
+    }
+
 }

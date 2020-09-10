@@ -26,8 +26,11 @@ public class ItemDestGolem extends Item {
             BlockPos blockPos = pos.offset(facing);
             if (worldIn.isAirBlock(blockPos)) {
                 destGolem.setPosition(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
-                if (worldIn.spawnEntity(destGolem) && !player.isCreative()) {
-                    player.getHeldItem(hand).shrink(1);
+                if (worldIn.spawnEntity(destGolem)) {
+                    if (!player.isCreative()) {
+                        player.getHeldItem(hand).shrink(1);
+                    }
+                    player.getCooldownTracker().setCooldown(this, 100);
                 }
             }
         }

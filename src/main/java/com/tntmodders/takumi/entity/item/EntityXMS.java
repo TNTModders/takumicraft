@@ -248,4 +248,9 @@ public class EntityXMS extends EntityFlying {
         }
         return this.getPassengers().get(0);
     }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0f;
+    }
 }

@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -8,7 +9,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -21,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockTakumiInstantWall extends Block {
+public class BlockTakumiInstantWall extends Block implements ITakumiItemBlock {
     public static final PropertyInteger META = PropertyInteger.create("wallmeta", 0, 15);
     private Explosion lastblasted;
 
@@ -146,5 +149,17 @@ public class BlockTakumiInstantWall extends Block {
     @Override
     public boolean canDropFromExplosion(Explosion explosionIn) {
         return false;
+    }
+
+    @Override
+    public ItemBlock getItem() {
+        return new ItemBlock(TakumiBlockCore.CREEPER_INSTANT_WALL) {
+            @Override
+            public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+                EnumActionResult result = super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+                player.getCooldownTracker().setCooldown(this, 100);
+                return result;
+            }
+        };
     }
 }
