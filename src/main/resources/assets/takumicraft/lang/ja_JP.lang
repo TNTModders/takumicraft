@@ -282,6 +282,7 @@ item.creepersign.name=匠式硬質看板
 item.champcore.name=覇者ノ証
 item.destgolem.name=壊式即応機兵
 item.evocore_evo.name=真化ノ証[真]
+item.takumiparachute.name=匠式落下傘
 
 #entity
 ＃descは36文字まで。

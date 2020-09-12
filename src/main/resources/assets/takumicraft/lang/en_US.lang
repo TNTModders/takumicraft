@@ -282,6 +282,7 @@ item.creepersign.name=Creeper Sign
 item.champcore.name=Champ Core
 item.destgolem.name=Dest Golem
 item.evocore_evo.name=Evolution Core[Powered]
+item.takumiparachute.name=Takumi Parachute
 
 #entity
 #desc max: 72 chars

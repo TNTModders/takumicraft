@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BQB",
+    "BSB"
+  ],
+  "key": {
+    "Q": {
+      "item": "minecraft:ghast_tear"
+    },
+    "B": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "S": {
+      "item": "takumicraft:typecore",
+      "data": 5
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiparachute"
+  }
+}

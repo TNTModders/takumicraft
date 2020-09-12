@@ -329,6 +329,8 @@ public class TakumiEntityCore {
                 EntityBigCreeperDummy.class, "bigcreeperdummy", 931, TakumiCraftCore.TakumiInstance, 1024, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "destgolem"),
                 EntityDestGolem.class, "destgolem", 932, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiparachute"),
+                EntityTakumiParachute.class, "takumiparachute", 933, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -442,6 +444,7 @@ public class TakumiEntityCore {
                 GlStateManager.scale(0.5f, 0.5f, 0.5f);
             }
         });
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiParachute.class, RenderTakumiParachute::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
