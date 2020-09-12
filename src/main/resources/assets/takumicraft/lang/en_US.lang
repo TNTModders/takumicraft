@@ -830,6 +830,8 @@ advancements.takumicraft.ofalen.title=Magic and Science
 advancements.takumicraft.ofalen.desc=Get Ofalen.
 entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=is registerd to Creeper Book.
+advancements.takumicraft.parachute.title=Parachute Fall
+advancements.takumicraft.parachute.desc=Fall 50 blocks high using takumi parachute.
 
 #enchantment
 enchantment.takumi_anti_powered=Anti-powered

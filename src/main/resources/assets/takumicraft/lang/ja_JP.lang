@@ -887,6 +887,8 @@ advancements.takumicraft.typemagic.title=魔の使い手
 advancements.takumicraft.typemagic.desc=匠素結晶[魔]を入手する 鉄床で匠素結晶の武器にエンチャント可能 魔法の力は守りを与え、近づくものには枷を与える。
 entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=が匠の書に追加された
+advancements.takumicraft.parachute.title=快適なガスト匠の旅
+advancements.takumicraft.parachute.desc=匠式落下傘で50ブロック以上降下する たまにはゆっくり、ガスト匠と一緒に快適な空の旅を。
 
 #enchantment
 enchantment.takumi_anti_powered=巨匠特攻

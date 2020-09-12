@@ -1,17 +1,24 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityTakumiParachute extends Entity {
+    public double initY;
 
     public EntityTakumiParachute(World worldIn) {
         super(worldIn);
         this.setSize(1, 1);
         this.noClip = false;
+        this.setEntityInvulnerable(false);
     }
 
     @Override
@@ -55,6 +62,11 @@ public class EntityTakumiParachute extends Entity {
             this.motionX = this.getControllingPassenger().motionX * 2;
             this.motionZ = this.getControllingPassenger().motionZ * 2;
             this.rotationYaw = this.getControllingPassenger().rotationYaw;
+            if (this.initY - this.posY > 50 && this.getControllingPassenger() instanceof EntityPlayerMP) {
+                TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) this.getControllingPassenger(),
+                        new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                        new ResourceLocation(TakumiCraftCore.MODID, "parachutefall"));
+            }
         }
         this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
         if (this.onGround || this.getPassengers().stream().anyMatch(entity -> entity.onGround)) {
@@ -82,7 +94,7 @@ public class EntityTakumiParachute extends Entity {
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (amount > 2 && !source.isExplosion()) {
             if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 3f, false);
+                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5f, false);
             }
             this.setDead();
         }
@@ -92,5 +104,20 @@ public class EntityTakumiParachute extends Entity {
     @Override
     public boolean isImmuneToExplosions() {
         return true;
+    }
+
+    @Override
+    public AxisAlignedBB getCollisionBox(Entity entity) {
+        return this.getEntityBoundingBox();
+    }
+
+/*    @Override
+    public AxisAlignedBB getCollisionBoundingBox() {
+        return this.getEntityBoundingBox();
+    }*/
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return !this.isDead;
     }
 }

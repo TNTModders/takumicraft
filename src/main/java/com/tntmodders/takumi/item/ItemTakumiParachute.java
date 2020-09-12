@@ -28,6 +28,7 @@ public class ItemTakumiParachute extends Item {
                     playerIn.getHeldItem(handIn).shrink(1);
                 }
                 playerIn.startRiding(parachute, true);
+                parachute.initY = playerIn.posY;
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
