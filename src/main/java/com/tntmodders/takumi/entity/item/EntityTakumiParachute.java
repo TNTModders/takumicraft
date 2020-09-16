@@ -59,8 +59,8 @@ public class EntityTakumiParachute extends Entity {
         super.onUpdate();
         this.motionY = -0.1;
         if (this.getControllingPassenger() != null) {
-            this.motionX = this.getControllingPassenger().motionX * 2;
-            this.motionZ = this.getControllingPassenger().motionZ * 2;
+            this.motionX = this.getControllingPassenger().motionX * 10;
+            this.motionZ = this.getControllingPassenger().motionZ * 10;
             this.rotationYaw = this.getControllingPassenger().rotationYaw;
             if (this.initY - this.posY > 50 && this.getControllingPassenger() instanceof EntityPlayerMP) {
                 TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) this.getControllingPassenger(),
@@ -71,6 +71,10 @@ public class EntityTakumiParachute extends Entity {
         this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
         if (this.onGround || this.getPassengers().stream().anyMatch(entity -> entity.onGround)) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
+            this.getPassengers().forEach(entity -> {
+                entity.dismountRidingEntity();
+                entity.setPosition(entity.posX, entity.posY + 1.5d, entity.posZ);
+            });
             this.setDead();
         }
     }
@@ -92,7 +96,7 @@ public class EntityTakumiParachute extends Entity {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (amount > 2 && !source.isExplosion()) {
+        if (amount > 2 && !source.isExplosion() && source.getTrueSource() != this.getControllingPassenger()) {
             if (!this.world.isRemote) {
                 this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5f, false);
             }

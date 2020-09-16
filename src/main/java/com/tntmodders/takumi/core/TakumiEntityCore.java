@@ -331,6 +331,9 @@ public class TakumiEntityCore {
                 EntityDestGolem.class, "destgolem", 932, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiparachute"),
                 EntityTakumiParachute.class, "takumiparachute", 933, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumirandomchest"),
+                EntityTakumiRandomChest.class, "takumirandomchest", 934, TakumiCraftCore.TakumiInstance, 64, 2, true);
+
     }
 
     @SideOnly(Side.CLIENT)

@@ -283,6 +283,7 @@ item.champcore.name=Champ Core
 item.destgolem.name=Dest Golem
 item.evocore_evo.name=Evolution Core[Powered]
 item.takumiparachute.name=Takumi Parachute
+item.takumiparachute.message=Couldn't use parachute here.
 
 #entity
 #desc max: 72 chars
@@ -777,6 +778,7 @@ entity.creeperboat.name=Creeper Boat
 entity.creeperpainting.name=Creeper Painting
 entity.creeperbolt.name=Creeper Bolt
 entity.destgolem.name=Dest Golem
+entity.takumiparachute.name=Takumi Parachute
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class BlockMeatBomb extends BlockCake implements ITakumiSPBomb {
 
     public BlockMeatBomb() {
@@ -90,5 +92,15 @@ public class BlockMeatBomb extends BlockCake implements ITakumiSPBomb {
 
             return true;
         }
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
+    protected ItemStack getSilkTouchDrop(IBlockState state) {
+        return ItemStack.EMPTY;
     }
 }
