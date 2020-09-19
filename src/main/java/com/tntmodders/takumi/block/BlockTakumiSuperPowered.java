@@ -33,6 +33,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.GameType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,9 +52,13 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         this.setLightOpacity(255);
         this.setBlockUnbreakable();
         this.setResistance(10000000);
+        this.setTickRandomly(true);
     }
 
     public static IBlockState getBlockStateFromTE(IBlockAccess world, BlockPos pos) {
+        if (((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).state != null) {
+            return ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).state;
+        }
         return ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock().getStateFromMeta(
                 ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getMeta());
     }
@@ -82,6 +87,60 @@ public class BlockTakumiSuperPowered extends BlockContainer {
             return ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock().isPassable(worldIn, pos);
         }
         return super.isPassable(worldIn, pos);
+    }
+
+    @Override
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+        return true;
+    }
+
+    @Override
+    public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+        return true;
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        if (world.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
+                ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock() != null) {
+            try {
+                TileEntityTakumiSuperPowered te = ((TileEntityTakumiSuperPowered) world.getTileEntity(pos));
+                if (te.state == null) {
+                    te.setState(te.getBlock().getStateFromMeta(te.getMeta()));
+                }
+                te.getBlock().updateTick(world, pos, te.state, rand);
+            } catch (Exception e) {
+            }
+        } else {
+            super.updateTick(world, pos, state, rand);
+        }
+    }
+
+    @Override
+    public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+        if (world.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
+                ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock() != null) {
+            try {
+                TileEntityTakumiSuperPowered te = ((TileEntityTakumiSuperPowered) world.getTileEntity(pos));
+                if (te.state == null) {
+                    te.setState(te.getBlock().getStateFromMeta(te.getMeta()));
+                }
+                te.getBlock().randomTick(world, pos, te.state, random);
+            } catch (Exception e) {
+            }
+        } else {
+            super.randomTick(world, pos, state, random);
+        }
     }
 
     @Override
