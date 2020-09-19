@@ -203,6 +203,7 @@ tile.creepercobblestone_wall.name=匠式硬質丸石壁
 tile.creeperslimebomb.name=魔式特殊爆弾[スライム]
 tile.creepersnowbomb.name=壊式特殊爆弾[薄]
 tile.creepermeatbomb.name=魔式特殊爆弾[肉]
+tile.creeperchestbomb.name=壊式特殊爆弾[チェスト]
 
 #item
 item.takumibook.name=匠の書

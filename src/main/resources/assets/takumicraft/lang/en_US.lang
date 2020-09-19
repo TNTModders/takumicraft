@@ -203,6 +203,7 @@ tile.creepercobblestone_wall.name=Creeper Cobblestone Wall
 tile.creeperslimebomb.name=Slime Creeper Bomb
 tile.creepersnowbomb.name=Layer Creeper Bomb
 tile.creepermeatbomb.name=Meat Creeper Bomb
+tile.creeperchestbomb.name=Chest Creeper Bomb
 
 #item
 item.takumibook.name=Creeper Book

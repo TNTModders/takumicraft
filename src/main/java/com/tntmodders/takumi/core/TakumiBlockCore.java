@@ -166,6 +166,7 @@ public class TakumiBlockCore {
     public static final BlockSlimeBomb TAKUMI_BOMB_SLIME = new BlockSlimeBomb();
     public static final BlockSnowBomb TAKUMI_BOMB_SNOW = new BlockSnowBomb();
     public static  final BlockMeatBomb TAKUMI_BOMB_MEAT = new BlockMeatBomb();
+    public static final BlockChestBomb TAKUMI_BOMB_CHEST = new BlockChestBomb();
 
     public static final Block TAKUMI_SUPERPOWERED = new BlockTakumiSuperPowered();
     public static final Block TAKUMI_CREEPERED = new BlockTakumiCreepered();

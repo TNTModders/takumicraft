@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.entity.mobs.EntityHuskCreeper;
 import net.minecraft.block.BlockCake;
@@ -102,5 +103,10 @@ public class BlockMeatBomb extends BlockCake implements ITakumiSPBomb {
     @Override
     protected ItemStack getSilkTouchDrop(IBlockState state) {
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(TakumiBlockCore.TAKUMI_BOMB_MEAT);
     }
 }

@@ -73,7 +73,11 @@ public class EntityTakumiParachute extends Entity {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
             this.getPassengers().forEach(entity -> {
                 entity.dismountRidingEntity();
-                entity.setPosition(entity.posX, entity.posY + 1.5d, entity.posZ);
+                if (entity instanceof EntityTakumiParachute) {
+                    entity.setPosition(entity.posX, entity.posY - 0.7d, entity.posZ);
+                } else {
+                    entity.setPosition(entity.posX, entity.posY + 1.5d, entity.posZ);
+                }
             });
             this.setDead();
         }

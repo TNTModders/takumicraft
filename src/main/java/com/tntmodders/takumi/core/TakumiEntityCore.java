@@ -448,6 +448,7 @@ public class TakumiEntityCore {
             }
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiParachute.class, RenderTakumiParachute::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiRandomChest.class, RenderTakumiRandomChest::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
