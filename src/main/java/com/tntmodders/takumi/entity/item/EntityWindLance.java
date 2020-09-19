@@ -24,12 +24,7 @@ public class EntityWindLance extends EntityTippedArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (!(raytraceResultIn.entityHit instanceof EntityPlayer)) {
-            Entity entity = this.getRidingEntity();
-            if (entity != null) {
-                entity.setPosition(this.prevPosX, this.prevPosY, this.prevPosZ);
-            }
-            this.dismountRidingEntity();
-            this.setDead();
+            this.dismount();
         }
     }
 
@@ -39,7 +34,19 @@ public class EntityWindLance extends EntityTippedArrow {
         this.setInvisible(true);
         if (!this.world.isRemote) {
             TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 2);
+            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(1))) {
+                this.dismount();
+            }
         }
+    }
+
+    private void dismount() {
+        Entity entity = this.getRidingEntity();
+        if (entity != null) {
+            entity.setPosition(this.prevPosX, this.prevPosY, this.prevPosZ);
+        }
+        this.dismountRidingEntity();
+        this.setDead();
     }
 
     @Override

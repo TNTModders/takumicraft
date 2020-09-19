@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "takumicraft:item_frame"
+    },
+    "map": {
+      "model": "takumicraft:item_frame_map"
+    }
+  }
+}

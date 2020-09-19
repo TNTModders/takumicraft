@@ -22,20 +22,21 @@ public class TakumiASMNameMap {
         FIELD_MAP.put("inPortal", "field_71087_bX");
         FIELD_MAP.put("closestPlayer", "field_80001_f");
         FIELD_MAP.put("timeSinceIgnited", "field_70833_d");
-        FIELD_MAP.put("progress","field_192758_f");
-        FIELD_MAP.put("ADVANCEMENT_LIST","field_192784_c");
-        FIELD_MAP.put("dataManager","field_70180_af");
-        FIELD_MAP.put("fire","field_190534_ay");
-        FIELD_MAP.put("enableButtonsTimer","field_146347_a");
-        FIELD_MAP.put("isImmuneToFire","field_70178_ae");
-        FIELD_MAP.put("layerRenderers","field_177097_h");
+        FIELD_MAP.put("progress", "field_192758_f");
+        FIELD_MAP.put("ADVANCEMENT_LIST", "field_192784_c");
+        FIELD_MAP.put("dataManager", "field_70180_af");
+        FIELD_MAP.put("fire", "field_190534_ay");
+        FIELD_MAP.put("enableButtonsTimer", "field_146347_a");
+        FIELD_MAP.put("isImmuneToFire", "field_70178_ae");
+        FIELD_MAP.put("layerRenderers", "field_177097_h");
 
         METHOD_MAP.put("onUpdate", "func_70071_h_");
         METHOD_MAP.put("explode", "func_146077_cc");
         METHOD_MAP.put("renderByItem", "func_179022_a");
         METHOD_MAP.put("renderByItem2", "func_192838_a");
-        METHOD_MAP.put("onBroken","func_110128_b");
-        METHOD_MAP.put("entityDropItem","func_70099_a");
+        METHOD_MAP.put("onBroken", "func_110128_b");
+        METHOD_MAP.put("entityDropItem", "func_70099_a");
+        METHOD_MAP.put("dropItemOrSelf", "func_146065_b");
     }
 
     public static boolean matchName(String name1, String name2) {

@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.IMob;
@@ -333,7 +334,6 @@ public class TakumiEntityCore {
                 EntityTakumiParachute.class, "takumiparachute", 933, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumirandomchest"),
                 EntityTakumiRandomChest.class, "takumirandomchest", 934, TakumiCraftCore.TakumiInstance, 64, 2, true);
-
     }
 
     @SideOnly(Side.CLIENT)
@@ -433,6 +433,7 @@ public class TakumiEntityCore {
             }
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityPainting.class, RenderTakumiPainting::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityItemFrame.class, manager -> new RenderTakumiItemFrame(manager, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLightningBolt.class, RenderTakumiLightningBolt::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiLaser.class, RenderTakumiLaser::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDestGolem.class, manager -> new RenderIronGolem(manager) {

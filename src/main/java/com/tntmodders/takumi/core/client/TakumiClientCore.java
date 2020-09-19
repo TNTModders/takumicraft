@@ -178,6 +178,9 @@ public class TakumiClientCore {
                         state.getValue(BlockPressurePlateWeighted.POWER) > 0 ? "powered=true" : "powered=false");
             }
         });
+
+        ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 1, new ModelResourceLocation("takumicraft:creeperframe","normal"));
+        ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 2, new ModelResourceLocation("takumicraft:creeperframe","map"));
     }
 
     public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {

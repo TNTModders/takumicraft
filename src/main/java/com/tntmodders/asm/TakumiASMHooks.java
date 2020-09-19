@@ -6,6 +6,7 @@ import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.event.TakumiClientEvents;
 import com.tntmodders.takumi.item.ItemBattleShield;
+import com.tntmodders.takumi.item.ItemTakumiItemFrame;
 import com.tntmodders.takumi.item.ItemTakumiPainting;
 import com.tntmodders.takumi.item.ItemTakumiShield;
 import net.minecraft.block.Block;
@@ -15,23 +16,58 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 
 import java.lang.reflect.Field;
 
 public class TakumiASMHooks {
 
-    public static void TakumiPaintingHook(ItemStack itemStack, float f, EntityHanging painting) {
-        ItemStack stack = new ItemStack(painting instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) painting))
-                ? TakumiItemCore.TAKUMI_PAINTING : Items.PAINTING);
-        EntityItem entityitem = new EntityItem(painting.world, painting.posX + (double) ((float) painting.facingDirection.getFrontOffsetX() * 0.15F), painting.posY + (double) 0.5f, painting.posZ + (double) ((float) painting.facingDirection.getFrontOffsetZ() * 0.15F), stack);
-        entityitem.setDefaultPickupDelay();
-        painting.world.spawnEntity(entityitem);
+    public static void TakumiPaintingHook(ItemStack itemStack, float f, EntityHanging hanging) {
+        ItemStack stack = ItemStack.EMPTY;
+        if (hanging instanceof EntityPainting) {
+            stack = new ItemStack(hanging instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) hanging))
+                    ? TakumiItemCore.TAKUMI_PAINTING : Items.PAINTING);
+        } else if (hanging instanceof EntityItemFrame) {
+            stack = new ItemStack(hanging instanceof EntityItemFrame && ItemTakumiItemFrame.isItemFrameAntiExplosion(((EntityItemFrame) hanging))
+                    ? TakumiItemCore.TAKUMI_FRAME : Items.ITEM_FRAME);
+        }
+        if (!stack.isEmpty()) {
+            EntityItem entityitem = new EntityItem(hanging.world, hanging.posX + (double) ((float) hanging.facingDirection.getFrontOffsetX() * 0.15F), hanging.posY + (double) 0.5f, hanging.posZ + (double) ((float) hanging.facingDirection.getFrontOffsetZ() * 0.15F), stack);
+            entityitem.setDefaultPickupDelay();
+            hanging.world.spawnEntity(entityitem);
+        }
+    }
+
+    public static void TakumiFrameHook(ItemStack itemStack, float f, EntityHanging hanging) {
+        ItemStack stack = itemStack;
+        if (hanging instanceof EntityPainting && itemStack.getItem() == Items.PAINTING) {
+            stack = new ItemStack(hanging instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) hanging))
+                    ? TakumiItemCore.TAKUMI_PAINTING : Items.PAINTING);
+        } else if (hanging instanceof EntityItemFrame && itemStack.getItem() == Items.ITEM_FRAME) {
+            stack = new ItemStack(hanging instanceof EntityItemFrame && ItemTakumiItemFrame.isItemFrameAntiExplosion(((EntityItemFrame) hanging))
+                    ? TakumiItemCore.TAKUMI_FRAME : Items.ITEM_FRAME);
+            if (stack.getItem() == TakumiItemCore.TAKUMI_FRAME || ItemTakumiItemFrame.isItemFrameAntiExplosion(((EntityItemFrame) hanging))) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                NBTTagCompound data = hanging.getEntityData();
+                data.setBoolean(ItemTakumiItemFrame.KEY, false);
+                nbt = hanging.writeToNBT(nbt);
+                nbt.setTag("ForgeData", data);
+                hanging.readFromNBT(nbt);
+                hanging.setNoGravity(false);
+            }
+        }
+        if (!stack.isEmpty()) {
+            EntityItem entityitem = new EntityItem(hanging.world, hanging.posX + (double) ((float) hanging.facingDirection.getFrontOffsetX() * 0.15F), hanging.posY + (double) 0.5f, hanging.posZ + (double) ((float) hanging.facingDirection.getFrontOffsetZ() * 0.15F), stack);
+            entityitem.setDefaultPickupDelay();
+            hanging.world.spawnEntity(entityitem);
+        }
     }
 
     public static void TakumiExplodeHook(EntityCreeper creeper) {

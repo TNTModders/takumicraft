@@ -285,6 +285,7 @@ item.destgolem.name=壊式即応機兵
 item.evocore_evo.name=真化ノ証[真]
 item.takumiparachute.name=匠式落下傘
 item.takumiparachute.message=落下傘を展開する十分な広さがない
+item.creeperframe.name=匠式硬質額縁
 
 #entity
 ＃descは36文字まで。

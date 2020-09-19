@@ -26,6 +26,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
@@ -510,6 +511,9 @@ public class TakumiEvents {
                 }
             }
             if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {
+                return true;
+            }
+            if (entity instanceof EntityItemFrame && ItemTakumiItemFrame.isItemFrameAntiExplosion(((EntityItemFrame) entity))) {
                 return true;
             }
             if (entity instanceof EntityLivingBase) {
