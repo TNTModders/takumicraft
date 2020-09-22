@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -104,6 +105,11 @@ public class TakumiCraftCore {
         TakumiBiomeCore.register(event.getRegistry());
     }
 
+    @SubscribeEvent
+    public void registerSoundEvent(Register<SoundEvent> event) {
+        TakumiSoundCore.register(event.getRegistry());
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         TakumiWorldCore.register();
@@ -123,5 +129,7 @@ public class TakumiCraftCore {
     }
 
     @SubscribeEvent
-    public void registerRecipe(Register<IRecipe> event){TakumiRecipeCore.register(event.getRegistry());}
+    public void registerRecipe(Register<IRecipe> event) {
+        TakumiRecipeCore.register(event.getRegistry());
+    }
 }

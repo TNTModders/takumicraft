@@ -95,6 +95,7 @@ public class TakumiItemCore {
     public static final Item EVO_CORE_EVO = new ItemEvoCore(true);
     public static final Item TAKUMI_PARACHUTE = new ItemTakumiParachute();
     public static final Item TAKUMI_FRAME = new ItemTakumiItemFrame();
+    public static final Item RECORD_EXPLOSION= new ItemTakumiRecord("record_explosion",TakumiSoundCore.RECORD_EXPLOSION);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

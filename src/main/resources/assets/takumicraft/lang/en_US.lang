@@ -286,6 +286,8 @@ item.evocore_evo.name=Evolution Core[Powered]
 item.takumiparachute.name=Creeper Parachute
 item.takumiparachute.message=Couldn't use parachute here.
 item.creeperframe.name=Creeper ItemFrame
+item.record_explosion.name=Record
+item.record.record_explosion.desc=Creeper - blastworld_001
 
 #entity
 #desc max: 72 chars

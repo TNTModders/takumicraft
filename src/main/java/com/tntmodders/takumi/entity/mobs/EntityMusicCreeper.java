@@ -76,7 +76,7 @@ public class EntityMusicCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource cause) {
         if (!this.world.isRemote) {
-            this.dropItem(Items.RECORD_13, 1);
+            this.dropItemWithOffset(Items.RECORD_13, 1, 0.0f);
         }
         super.onDeath(cause);
     }
