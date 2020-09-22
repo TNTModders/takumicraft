@@ -27,6 +27,7 @@ public class TakumiConfigCore {
      * @TODO delete related code on release.
      */
     public static boolean inEventServer;
+    public static boolean inTCPVP;
 
     public static void loadConfig(FMLPreInitializationEvent event) {
         // net.minecraftforge.common.config.Configurationのインスタンスを生成する。
@@ -86,6 +87,7 @@ public class TakumiConfigCore {
                 TakumiUtils.takumiTranslate("config.takumicraft.nytex.desc"), "config.takumicraft.nytex.prop");
 
         inEventServer = cfg.getBoolean("ineventserver", GENERAL, false, "ONLY IN SERVER, FOR TCS EVENT", "null");
+        inTCPVP = cfg.getBoolean("intcpvp", GENERAL, false, "ONLY IN SERVER, FOR TCS PvP", "null");
 
         ownerLockTakumiBlock = cfg.getBoolean("ownerLockTakumiBlock", GENERAL, true,
                 TakumiUtils.takumiTranslate("config.takumicraft.oltb.desc"), "config.takumicraft.oltb.prop");

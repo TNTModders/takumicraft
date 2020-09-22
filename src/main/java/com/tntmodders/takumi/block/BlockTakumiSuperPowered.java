@@ -100,6 +100,16 @@ public class BlockTakumiSuperPowered extends BlockContainer {
     }
 
     @Override
+    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return true;
+    }
+
+    @Override
     public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
         return true;
     }
@@ -109,7 +119,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         return true;
     }
 
-    @Override
+/*    @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
                 ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock() != null) {
@@ -141,7 +151,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         } else {
             super.randomTick(world, pos, state, random);
         }
-    }
+    }*/
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
@@ -232,7 +242,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         return super.getSelectedBoundingBox(state, worldIn, pos);
     }
 
-    @Override
+/*    @Override
     public void neighborChanged(IBlockState stateIn, World world, BlockPos pos, Block blockIn, BlockPos neighbor) {
         if (world.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
                 ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock() != null) {
@@ -246,7 +256,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         } else {
             super.neighborChanged(stateIn, world, pos, blockIn, neighbor);
         }
-    }
+    }*/
 
     @Override
     public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {

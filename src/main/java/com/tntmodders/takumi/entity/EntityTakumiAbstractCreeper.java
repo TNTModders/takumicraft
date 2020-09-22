@@ -14,11 +14,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -363,5 +365,13 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public boolean isImmuneToExplosions() {
         return /*this.world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) || */super.isImmuneToExplosions();
+    }
+
+    @Override
+    public EntityItem dropItem(Item itemIn, int size) {
+        if (itemIn instanceof ItemRecord && this.rand.nextInt(20) == 0) {
+            return super.dropItem(TakumiItemCore.RECORD_EXPLOSION, 1);
+        }
+        return super.dropItem(itemIn, size);
     }
 }

@@ -102,7 +102,7 @@ public class EntityTakumiArrow extends EntityArrow {
         if (!this.world.isRemote) {
             switch (this.type) {
                 case NORMAL: {
-                    if (TakumiConfigCore.inEventServer) {
+                    if (TakumiConfigCore.inEventServer && !TakumiConfigCore.inTCPVP) {
                         TakumiUtils.takumiCreateExplosion(world, this,
                                 this.posX, this.posY, this.posZ, 15, false, false, 4);
                     } else {

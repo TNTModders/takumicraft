@@ -471,6 +471,14 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onExplosion(Detonate event) {
+        if (TakumiConfigCore.inTCPVP) {
+            if (event.getExplosion().getPosition().y < 50) {
+                event.setCanceled(true);
+            }
+            event.getAffectedEntities().removeIf(entity -> entity.posY < 49);
+            event.getAffectedBlocks().removeIf(pos -> pos.getY() < 50);
+            return;
+        }
         if (FMLCommonHandler.instance().getSide().isServer() && event.getWorld().getMinecraftServer() != null) {
             try {
                 List<BlockPos> list = new ArrayList<>();

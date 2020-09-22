@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import net.minecraft.block.BlockAnvil;
 import net.minecraft.block.state.IBlockState;
@@ -63,7 +64,9 @@ public class BlockAnvilCreeper extends BlockAnvil/* implements ITakumiItemBlock 
     }
 
     public void explode(World world, int x, int y, int z) {
-        world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, 4f, true);
+        if(!TakumiConfigCore.inTCPVP){
+            world.createExplosion(null, x + 0.5, y + 0.5, z + 0.5, 4f, true);
+        }
     }
 
     @Override
