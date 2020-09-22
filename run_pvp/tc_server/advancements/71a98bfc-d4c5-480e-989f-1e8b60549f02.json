@@ -1,0 +1,108 @@
+{
+  "takumicraft:recipes/recipe_creeperbomb": {
+    "criteria": {
+      "has_ingredient": "2020-09-09 23:55:28 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_ha": {
+    "criteria": {
+      "has_ingredient": "2020-09-09 23:55:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "entered_water": "2020-09-09 23:55:03 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/shiny_gear": {
+    "criteria": {
+      "diamond_boots": "2020-05-02 20:39:02 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "entered_water": "2020-09-09 23:55:03 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:king_armor": {
+    "criteria": {
+      "takumi_chestplate": "2020-05-02 20:48:45 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/red_dye_from_poppy": {
+    "criteria": {
+      "has_red_flower": "2020-09-09 23:34:25 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "entered_water": "2020-09-09 23:55:03 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:root": {
+    "criteria": {
+      "takumi": "2020-05-02 20:39:02 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2020-05-02 20:59:29 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/boat": {
+    "criteria": {
+      "entered_water": "2020-09-09 23:55:03 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/yellow_dye_from_dandelion": {
+    "criteria": {
+      "has_yellow_flower": "2020-09-09 23:52:32 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "entered_water": "2020-09-09 23:55:03 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "entered_water": "2020-09-09 23:55:03 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest": "2020-09-09 23:40:37 +0900",
+      "swampland": "2020-09-09 23:39:39 +0900",
+      "birch_forest": "2020-09-09 23:37:37 +0900",
+      "desert_hills": "2020-09-09 23:38:25 +0900",
+      "forest_hills": "2020-09-09 23:42:39 +0900",
+      "plains": "2020-05-02 20:39:02 +0900",
+      "savanna": "2020-09-09 23:37:14 +0900",
+      "birch_forest_hills": "2020-09-09 23:37:44 +0900",
+      "roofed_forest": "2020-09-09 23:42:14 +0900",
+      "river": "2020-09-09 23:36:51 +0900",
+      "desert": "2020-09-09 23:37:10 +0900"
+    },
+    "done": false
+  },
+  "minecraft:recipes/decorations/armor_stand": {
+    "criteria": {
+      "has_stone_slab": "2020-09-09 23:41:46 +0900"
+    },
+    "done": true
+  }
+}

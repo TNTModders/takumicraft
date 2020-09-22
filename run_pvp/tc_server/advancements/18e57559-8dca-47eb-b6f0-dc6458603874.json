@@ -1,0 +1,6219 @@
+{
+  "minecraft:recipes/building_blocks/red_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperironbars": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/lever": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_lilac": {
+    "criteria": {
+      "has_double_plant": "2020-08-16 15:00:24 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_blue_dye_from_blue_orchid": {
+    "criteria": {
+      "has_red_flower": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_sword": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/observer": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_quartz": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_cobblestone": {
+    "criteria": {
+      "has_vine": "2020-09-01 20:50:52 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_white": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:darkshrine": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_white_tulip": {
+    "criteria": {
+      "has_red_flower": "2020-08-16 15:00:29 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lime_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/iron_pickaxe": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_objetcreeper": {
+    "criteria": {
+      "objetcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_cyan": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/leather_helmet": {
+    "criteria": {
+      "has_leather": "2020-08-22 21:35:39 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperrail_activator": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/magenta_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stonebrick": {
+    "criteria": {
+      "has_mossy_cobblestone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_energycore_yellow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/melon_seeds": {
+    "criteria": {
+      "has_melon": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/ladder": {
+    "criteria": {
+      "has_stick": "2020-08-16 15:09:48 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/black_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperpiston": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/magenta_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperhopper": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_phantomcreeper": {
+    "criteria": {
+      "phantomcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/torch": {
+    "criteria": {
+      "has_stone_pickaxe": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lime_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_wrylycreeper": {
+    "criteria": {
+      "wrylycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cake": {
+    "criteria": {
+      "has_egg": "2020-08-30 21:35:27 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/detector_rail": {
+    "criteria": {
+      "has_rail": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dark_oak_planks": {
+    "criteria": {
+      "has_log2": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_slipcreeper": {
+    "criteria": {
+      "slipcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_emerald_bucket": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_leggings": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone_stairs": {
+    "criteria": {
+      "has_sandstone": "2020-08-31 21:19:34 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dark_oak_door": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/brown_banner": {
+    "criteria": {
+      "has_brown_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/shield": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_sandstone_stairs": {
+    "criteria": {
+      "has_red_sandstone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_purple": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_ingot_from_block": {
+    "criteria": {
+      "has_iron_block": "2020-08-16 21:34:05 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_bed": {
+    "criteria": {
+      "has_gray_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/hopper": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_black": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_layercreeper": {
+    "criteria": {
+      "layercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/coarse_dirt": {
+    "criteria": {
+      "has_gravel": "2020-09-20 15:07:57 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/fence_gate": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_gray_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_tearcreeper": {
+    "criteria": {
+      "tearcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bangcreeper": {
+    "criteria": {
+      "bangcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/magenta_carpet": {
+    "criteria": {
+      "has_magenta_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/lime_dye": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/leather_leggings": {
+    "criteria": {
+      "has_leather": "2020-08-22 21:35:39 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_shockcreeper": {
+    "criteria": {
+      "shockcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/pink_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone_slab": {
+    "criteria": {
+      "has_sandstone": "2020-08-31 21:19:34 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_farmcreeper": {
+    "criteria": {
+      "farmcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/emerald": {
+    "criteria": {
+      "has_emerald_block": "2020-08-16 14:55:09 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/iron_bars": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_silver": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/sugar": {
+    "criteria": {
+      "has_reeds": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_": {
+    "criteria": {
+      "creeper_hoge": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brick_stairs": {
+    "criteria": {
+      "has_brick_block": "2020-09-14 20:37:56 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blue_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/obtain_armor": {
+    "criteria": {
+      "iron_boots": "2020-09-20 15:22:17 +0900",
+      "iron_chestplate": "2020-09-20 15:22:17 +0900",
+      "iron_leggings": "2020-09-20 15:22:17 +0900",
+      "iron_helmet": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_opaquecreeper": {
+    "criteria": {
+      "opaquecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/comparator": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_quartz": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:forcemaster": {
+    "criteria": {
+      "takumishield": "2020-09-01 20:15:56 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/chest_minecart": {
+    "criteria": {
+      "has_minecart": "2020-09-01 21:16:34 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/diamond_leggings": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_planks": {
+    "criteria": {
+      "has_log": "2020-09-19 16:46:58 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/lava_bucket": {
+    "criteria": {
+      "lava_bucket": "2020-08-16 21:29:01 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepersnowbomb": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/quartz_stairs": {
+    "criteria": {
+      "has_quartz_block": "2020-08-17 21:59:52 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:takumiworld": {
+    "criteria": {
+      "entered_takumi": "2020-09-20 15:19:53 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/red_carpet": {
+    "criteria": {
+      "has_red_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_portalkit": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_purple": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstonebrick_slab": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/black_bed": {
+    "criteria": {
+      "has_black_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperdetector": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_linecreeper": {
+    "criteria": {
+      "linecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_witherskeletoncreeper": {
+    "criteria": {
+      "witherskeletoncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/kill_dragon": {
+    "criteria": {
+      "killed_dragon": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_light_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbrick_stairs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiportalframe": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/orange_bed": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_orange_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_subsidencecreeper": {
+    "criteria": {
+      "subsidencecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_acidcreeper": {
+    "criteria": {
+      "acidcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/pink_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_azure_bluet": {
+    "criteria": {
+      "has_red_flower": "2020-08-16 15:00:29 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dark_oak_fence_gate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/brown_bed": {
+    "criteria": {
+      "has_brown_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_gray": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_mirrorcreeper": {
+    "criteria": {
+      "mirrorcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/all_potions": {
+    "criteria": {
+      "all_effects": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_chunkcreeper": {
+    "criteria": {
+      "chunkcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_green": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperrail_detector": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_orange": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumithrowgrenede": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_blue_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/orange_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/blue_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_legs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_lime": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/tame_an_animal": {
+    "criteria": {
+      "tamed_animal": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_seaguardiancreeper": {
+    "criteria": {
+      "seaguardiancreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_orange": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbed": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperrail_explosive": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/cyan_dye": {
+    "criteria": {
+      "has_green_dye": "2020-09-20 15:22:17 +0900",
+      "has_lapis": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_forestcreeper": {
+    "criteria": {
+      "forestcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/purple_bed": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_purple_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_chasecreeper": {
+    "criteria": {
+      "chasecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/yellow_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_lapis_red_pink": {
+    "criteria": {
+      "has_pink_dye": "2020-09-20 15:22:17 +0900",
+      "has_lapis": "2020-09-20 15:22:17 +0900",
+      "has_red_dye": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_cyan": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_randcreeper": {
+    "criteria": {
+      "randcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/glass_bottle": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_energycore_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_frostcreeper": {
+    "criteria": {
+      "frostcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/create_beacon": {
+    "criteria": {
+      "beacon": "2020-08-16 18:53:32 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/leather": {
+    "criteria": {
+      "has_rabbit_hide": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_silver": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstonebrick_wall": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_gray_bed": {
+    "criteria": {
+      "has_light_gray_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/quartz_slab": {
+    "criteria": {
+      "has_quartz_block": "2020-08-17 21:59:52 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstonetorch": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplanks": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_white": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/green_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/deflect_arrow": {
+    "criteria": {
+      "deflected_projectile": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_typesword_water": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_tosscreeper": {
+    "criteria": {
+      "tosscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_blue_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/wooden_button": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_yellow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_boltcreeper": {
+    "criteria": {
+      "boltcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_arrowcreeper": {
+    "criteria": {
+      "arrowcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/golden_rail": {
+    "criteria": {
+      "has_rail": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/cyan_banner": {
+    "criteria": {
+      "has_cyan_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/bookshelf": {
+    "criteria": {
+      "has_book": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstonebrick": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/golden_axe": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_giantcreeper": {
+    "criteria": {
+      "giantcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_evolutioncreeper": {
+    "criteria": {
+      "evolutioncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/jungle_planks": {
+    "criteria": {
+      "has_log": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumitnt": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_brown": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/red_banner": {
+    "criteria": {
+      "has_red_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dark_oak_wooden_slab": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_boots": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_quartz_block": {
+    "criteria": {
+      "has_quartz_block": "2020-08-17 21:59:52 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_planks": {
+    "criteria": {
+      "has_log": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperiron_door": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/bone_meal_from_bone": {
+    "criteria": {
+      "has_bone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:disarmament": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/iron_tools": {
+    "criteria": {
+      "iron_pickaxe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/orange_banner": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_orange_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_wooden_slab": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:type_magic": {
+    "criteria": {
+      "crit": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_chestplate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_magmacreeper": {
+    "criteria": {
+      "magmacreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:ofalen": {
+    "criteria": {
+      "boltstone": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fishcreeper": {
+    "criteria": {
+      "fishcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:kingslayer": {
+    "criteria": {
+      "kingcore": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/noteblock": {
+    "criteria": {
+      "has_redstone": "2020-08-16 21:27:45 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_blue_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_ha": {
+    "criteria": {
+      "has_ingredient": "2020-09-14 20:57:02 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_green": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_returncreeper": {
+    "criteria": {
+      "returncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/golden_pickaxe": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/sticky_piston": {
+    "criteria": {
+      "has_slime_ball": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperfence_gate": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_evolutioncreeper_evo": {
+    "criteria": {
+      "evolutioncreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_straightcreeper": {
+    "criteria": {
+      "straightcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_creativecreeper": {
+    "criteria": {
+      "creativecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/magma_cream": {
+    "criteria": {
+      "has_blaze_powder": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_slimecreeper": {
+    "criteria": {
+      "slimecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_ghastcreeper": {
+    "criteria": {
+      "ghastcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/book": {
+    "criteria": {
+      "has_paper": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/purple_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_yms": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purpur_slab": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_purpur_block": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_pink": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarmor_chest": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/brew_potion": {
+    "criteria": {
+      "potion": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/stone_sword": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/cobblestone_wall": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_luckcreeper": {
+    "criteria": {
+      "luckcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/magenta_banner": {
+    "criteria": {
+      "has_magenta_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/fermented_spider_eye": {
+    "criteria": {
+      "has_spider_eye": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/stone_pickaxe": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_withercreeper": {
+    "criteria": {
+      "withercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepersign": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brown_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/boat": {
+    "criteria": {
+      "entered_water": "2020-08-16 14:55:36 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/purple_dye": {
+    "criteria": {
+      "has_lapis": "2020-09-20 15:22:17 +0900",
+      "has_red_dye": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperglass": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbrick_wall": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_angelcreeper": {
+    "criteria": {
+      "angelcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brown_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_gray_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/brown_carpet": {
+    "criteria": {
+      "has_brown_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_destgolem": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/dragon_egg": {
+    "criteria": {
+      "dragon_egg": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbutton_iron": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/red_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/purple_shulker_box": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_shulker_shell": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lapis_block": {
+    "criteria": {
+      "has_at_least_9_lapis": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brick_slab": {
+    "criteria": {
+      "has_brick_block": "2020-09-14 20:37:56 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_rushcreeper": {
+    "criteria": {
+      "rushcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_minesweeper_axe": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/prismarine": {
+    "criteria": {
+      "has_prismarine_shard": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/diamond": {
+    "criteria": {
+      "has_diamond_block": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/bone_meal_from_block": {
+    "criteria": {
+      "has_bone_block": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_diorite": {
+    "criteria": {
+      "has_stone": "2020-08-16 15:59:05 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_silver": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_orange": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_gray_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purple_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/orange_dye_from_red_yellow": {
+    "criteria": {
+      "has_red_dye": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_yellow_dye": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/stone_axe": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbutton_brick": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_powered_legs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_creativecreeper_evo": {
+    "criteria": {
+      "creativecreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_zombievillagercreeper": {
+    "criteria": {
+      "zombievillagercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperglasspane": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purple_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_batcreeper": {
+    "criteria": {
+      "batcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/rabbit_stew_from_brown_mushroom": {
+    "criteria": {
+      "has_cooked_rabbit": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_light_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/magenta_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/blue_bed": {
+    "criteria": {
+      "has_blue_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/pillar_quartz_block": {
+    "criteria": {
+      "has_quartz_block": "2020-08-17 21:59:52 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/lime_carpet": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_lime_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/green_bed": {
+    "criteria": {
+      "has_green_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/sniper_duel": {
+    "criteria": {
+      "killed_skeleton": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_beetrootcreeper": {
+    "criteria": {
+      "beetrootcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplate_brick": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_makeupcreeper": {
+    "criteria": {
+      "makeupcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/furnace_minecart": {
+    "criteria": {
+      "has_minecart": "2020-09-01 21:16:34 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/root": {
+    "criteria": {
+      "entered_nether": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_minesweeper_shovel": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperfence": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_pink": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_attackblock": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_grasscreeper": {
+    "criteria": {
+      "grasscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_hotspringcreeper": {
+    "criteria": {
+      "hotspringcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/lime_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_nugget": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/hopper_minecart": {
+    "criteria": {
+      "has_minecart": "2020-09-01 21:16:34 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brown_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/levitate": {
+    "criteria": {
+      "levitated": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/cyan_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/diamond_sword": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blue_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fastcreeper": {
+    "criteria": {
+      "fastcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cyan_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/jukebox": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_red": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_robocreeper_evo": {
+    "criteria": {
+      "robocreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_stonecreeper": {
+    "criteria": {
+      "stonecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/flint_and_steel": {
+    "criteria": {
+      "has_flint": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_obsidian": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_brown": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/red_dye_from_beetroot": {
+    "criteria": {
+      "has_beetroot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_rabbitcreeper": {
+    "criteria": {
+      "rabbitcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepertrapdoor_planks": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_vindicatorcreeper": {
+    "criteria": {
+      "vindicatorcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gold_nugget": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_hoe": {
+    "criteria": {
+      "has_stick": "2020-08-16 15:09:48 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_light_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercobblestone_stairs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/all_effects": {
+    "criteria": {
+      "all_effects": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_gemcreeper": {
+    "criteria": {
+      "gemcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/bucket": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_red": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/yellow_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercore": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicblock": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/orange_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/white_banner": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_blue_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepertrapdoor_iron": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_lightcreeper": {
+    "criteria": {
+      "lightcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_hoecreeper": {
+    "criteria": {
+      "hoecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_cobblestone_wall": {
+    "criteria": {
+      "has_mossy_cobblestone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/golden_shovel": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_helmet": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepershulkerbox": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/bow": {
+    "criteria": {
+      "has_string": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/get_wither_skull": {
+    "criteria": {
+      "wither_skull": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/smooth_sandstone": {
+    "criteria": {
+      "has_sandstone": "2020-08-31 21:19:34 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_onecreeper": {
+    "criteria": {
+      "onecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/bred_all_animals": {
+    "criteria": {
+      "bred_chicken": "2020-09-20 15:22:17 +0900",
+      "bred_ocelot": "2020-09-20 15:22:17 +0900",
+      "bred_sheep": "2020-09-20 15:22:17 +0900",
+      "bred_wolf": "2020-09-20 15:22:17 +0900",
+      "bred_llama": "2020-09-20 15:22:17 +0900",
+      "bred_rabbit": "2020-09-20 15:22:17 +0900",
+      "bred_horse": "2020-09-20 15:22:17 +0900",
+      "bred_cow": "2020-09-20 15:22:17 +0900",
+      "bred_mooshroom": "2020-09-20 15:22:17 +0900",
+      "bred_pig": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_yellow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstoneblock": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/orange_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperpainting": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_dashcreeper": {
+    "criteria": {
+      "dashcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/diamond_chestplate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicarmor_legs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_pink": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/mine_stone": {
+    "criteria": {
+      "get_stone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_horsecreeper": {
+    "criteria": {
+      "horsecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/furnace": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/minecart": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/beetroot_soup": {
+    "criteria": {
+      "has_beetroot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/orange_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/green_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_pickaxe": {
+    "criteria": {
+      "has_stick": "2020-08-16 15:09:48 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/iron_hoe": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_pink": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone_torch": {
+    "criteria": {
+      "has_redstone": "2020-08-16 21:27:45 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_slab": {
+    "criteria": {
+      "has_stonebrick": "2020-08-30 19:47:56 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_white": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/golden_apple": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/green_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_ink_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/iron_shovel": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/orange_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_endercreeper": {
+    "criteria": {
+      "endercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/cyan_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/bowl": {
+    "criteria": {
+      "has_brown_mushroom": "2020-09-20 15:22:17 +0900",
+      "has_red_mushroom": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/item_frame": {
+    "criteria": {
+      "has_leather": "2020-08-22 21:35:39 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/lime_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/clock": {
+    "criteria": {
+      "has_redstone": "2020-08-16 21:27:45 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_energycore_red": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_destructioncreeper_evo": {
+    "criteria": {
+      "destructioncreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_black": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_treecreeper": {
+    "criteria": {
+      "treecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/end_crystal": {
+    "criteria": {
+      "has_ender_eye": "2020-08-16 19:41:07 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/enter_the_nether": {
+    "criteria": {
+      "entered_nether": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_evocore_evo": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/green_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_magenta": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_shootingcreeper": {
+    "criteria": {
+      "shootingcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_white": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_door": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/green_banner": {
+    "criteria": {
+      "has_green_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_shrinkcreeper": {
+    "criteria": {
+      "shrinkcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gold_ingot_from_nuggets": {
+    "criteria": {
+      "has_at_least_9_gold_nugget": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_typesword_wind": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/lapis_lazuli": {
+    "criteria": {
+      "has_lapis_block": "2020-08-16 18:32:56 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/upgrade_tools": {
+    "criteria": {
+      "stone_pickaxe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/diamond_helmet": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_cactuscreeper": {
+    "criteria": {
+      "cactuscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_gunorecreeper": {
+    "criteria": {
+      "gunorecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:root": {
+    "criteria": {
+      "takumi": "2020-08-16 14:55:09 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_hyperspacecreeper": {
+    "criteria": {
+      "hyperspacecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pink_dye_from_pink_tulip": {
+    "criteria": {
+      "has_red_flower": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/blue_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/birch_fence": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_stairs": {
+    "criteria": {
+      "has_stonebrick": "2020-08-30 19:47:56 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/golden_boots": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_retsu": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_brown": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_axe": {
+    "criteria": {
+      "has_stick": "2020-08-16 15:09:48 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_silver": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battleshield": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_lostcreeper": {
+    "criteria": {
+      "lostcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_lapis_ink_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_light_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_edgycreeper": {
+    "criteria": {
+      "edgycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_sandstone": {
+    "criteria": {
+      "has_stone_slab": "2020-09-07 22:29:46 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_terracottacreeper": {
+    "criteria": {
+      "terracottacreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_diamondcreeper": {
+    "criteria": {
+      "diamondcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperice": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_roundcreeper": {
+    "criteria": {
+      "roundcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_blackcreeper": {
+    "criteria": {
+      "blackcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_disordercreeper": {
+    "criteria": {
+      "disordercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/end_bricks": {
+    "criteria": {
+      "has_end_stone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicarmor_chest": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/painting": {
+    "criteria": {
+      "has_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/pink_bed": {
+    "criteria": {
+      "has_pink_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_annivcreeper": {
+    "criteria": {
+      "annivcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_lime": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_slab": {
+    "criteria": {
+      "has_stone": "2020-08-16 14:55:09 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/black_carpet": {
+    "criteria": {
+      "has_black_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/arrow": {
+    "criteria": {
+      "has_feather": "2020-09-20 15:22:17 +0900",
+      "has_flint": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_colorcreeper": {
+    "criteria": {
+      "colorcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_magenta": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fallingslimecreeper": {
+    "criteria": {
+      "fallingslimecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/cure_zombie_villager": {
+    "criteria": {
+      "cured_zombie": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/snow_layer": {
+    "criteria": {
+      "has_snowball": "2020-08-16 19:22:21 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_crystalcreeper": {
+    "criteria": {
+      "crystalcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/yellow_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blue_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cyan_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_blue_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_lime": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiparachute": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cyan_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicbow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_reversecreeper": {
+    "criteria": {
+      "reversecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_pigcreeper": {
+    "criteria": {
+      "pigcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_minecreeper": {
+    "criteria": {
+      "minecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/andesite": {
+    "criteria": {
+      "has_stone": "2020-08-16 15:59:05 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_robocreeper": {
+    "criteria": {
+      "robocreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperiron_wall": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/golden_helmet": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplanks_stairs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fightercreeper": {
+    "criteria": {
+      "fightercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_earthcreeper": {
+    "criteria": {
+      "earthcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/jungle_wooden_slab": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_baku": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperframe": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/smooth_red_sandstone": {
+    "criteria": {
+      "has_red_sandstone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_epcreeper": {
+    "criteria": {
+      "epcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_rarecreeper": {
+    "criteria": {
+      "rarecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_magenta": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplanks_door": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bedcreeper": {
+    "criteria": {
+      "bedcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dropper": {
+    "criteria": {
+      "has_redstone": "2020-08-16 21:27:45 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_gray": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_ironcreeper": {
+    "criteria": {
+      "ironcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/coal": {
+    "criteria": {
+      "has_coal_block": "2020-09-05 20:14:46 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:antiexplosion": {
+    "criteria": {
+      "creeperiron": "2020-09-20 15:22:17 +0900",
+      "creeperstainedglass": "2020-09-20 15:22:17 +0900",
+      "creeperbrick": "2020-09-20 15:22:17 +0900",
+      "creeperglass": "2020-09-20 15:22:17 +0900",
+      "creeperwool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_root": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/find_end_city": {
+    "criteria": {
+      "in_city": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_meatcreeper": {
+    "criteria": {
+      "meatcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/string_to_wool": {
+    "criteria": {
+      "has_string": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/leather_chestplate": {
+    "criteria": {
+      "has_leather": "2020-08-22 21:35:39 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/enter_end_gateway": {
+    "criteria": {
+      "entered_end_gateway": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiinstantwall": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_expcreeper": {
+    "criteria": {
+      "expcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/obtain_blaze_rod": {
+    "criteria": {
+      "blaze_rod": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_andesite": {
+    "criteria": {
+      "has_stone": "2020-08-16 16:17:15 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_yellow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purpur_block": {
+    "criteria": {
+      "has_chorus_fruit_popped": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/pink_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_cyan": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/shoot_arrow": {
+    "criteria": {
+      "shot_arrow": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/magenta_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_lime": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_whiteeyescreeper": {
+    "criteria": {
+      "whiteeyescreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_ofalencreeper": {
+    "criteria": {
+      "ofalencreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_firecreeper": {
+    "criteria": {
+      "firecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:rainbowsheep": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_spongecreeper": {
+    "criteria": {
+      "spongecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_paralysiscreeper": {
+    "criteria": {
+      "paralysiscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/carrot_on_a_stick": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_carrot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:takumishield": {
+    "criteria": {
+      "takumishield": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/pink_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/jungle_door": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/nether_brick_stairs": {
+    "criteria": {
+      "has_nether_brick": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lit_pumpkin": {
+    "criteria": {
+      "has_pumpkin": "2020-08-16 22:32:15 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_granite": {
+    "criteria": {
+      "has_stone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stonebrick": {
+    "criteria": {
+      "has_stone": "2020-08-16 14:55:09 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_launchcreeper": {
+    "criteria": {
+      "launchcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_red_sandstone": {
+    "criteria": {
+      "has_red_sandstone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperillumination": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_dirtcreeper": {
+    "criteria": {
+      "dirtcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_dancecreeper": {
+    "criteria": {
+      "dancecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_sandstormcreeper": {
+    "criteria": {
+      "sandstormcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplate_iron": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_emeraldcreeper": {
+    "criteria": {
+      "emeraldcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_huskcreeper": {
+    "criteria": {
+      "huskcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/respawn_dragon": {
+    "criteria": {
+      "summoned_dragon": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/smelt_iron": {
+    "criteria": {
+      "iron": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_boarcreeper": {
+    "criteria": {
+      "boarcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_blue_bed": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_light_blue_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_stonebrick": {
+    "criteria": {
+      "has_stonebrick": "2020-08-30 19:47:56 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/pink_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_kan": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_uppercreeper": {
+    "criteria": {
+      "uppercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/fishing_rod": {
+    "criteria": {
+      "has_string": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/purple_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/black_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/acacia_wooden_slab": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_skeletoncreeper": {
+    "criteria": {
+      "skeletoncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_lapiscreeper": {
+    "criteria": {
+      "lapiscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_door": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_illusionercreeper": {
+    "criteria": {
+      "illusionercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/snow": {
+    "criteria": {
+      "has_snowball": "2020-08-16 19:22:21 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_levelupcreeper": {
+    "criteria": {
+      "levelupcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/nether_brick_slab": {
+    "criteria": {
+      "has_nether_brick": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperobserver": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/gray_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/yellow_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_fence_gate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_gatecreeper": {
+    "criteria": {
+      "gatecreeper": "2020-08-30 21:20:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pumpkin_seeds": {
+    "criteria": {
+      "has_pumpkin": "2020-08-16 22:32:15 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstonerepeater_off": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purple_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:type_dest": {
+    "criteria": {
+      "crit": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/map": {
+    "criteria": {
+      "has_compass": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2020-08-16 14:58:36 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/shiny_gear": {
+    "criteria": {
+      "diamond_boots": "2020-08-16 15:46:38 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/golden_sword": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/white_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_evokercreeper": {
+    "criteria": {
+      "evokercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/elytra": {
+    "criteria": {
+      "elytra": "2020-08-16 18:34:29 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_sandstone": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_sand": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_shovel": {
+    "criteria": {
+      "has_stick": "2020-08-16 15:09:48 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicarmor_feet": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purpur_stairs": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_purpur_block": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/shears": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/stick": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone_lamp": {
+    "criteria": {
+      "has_glowstone": "2020-08-30 20:55:36 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarmor_legs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperiron_stairs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/blue_carpet": {
+    "criteria": {
+      "has_blue_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dispenser": {
+    "criteria": {
+      "has_bow": "2020-09-01 20:17:21 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_boxcreeper": {
+    "criteria": {
+      "boxcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pink_dye_from_red_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_wondercreeper": {
+    "criteria": {
+      "wondercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/emerald_block": {
+    "criteria": {
+      "has_at_least_9_emerald": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicarmor_head": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_inversioncreeper": {
+    "criteria": {
+      "inversioncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/nether_wart_block": {
+    "criteria": {
+      "has_nether_wart": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/golden_carrot": {
+    "criteria": {
+      "has_gold_nugget": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cobblestone_slab": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_green": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/speckled_melon": {
+    "criteria": {
+      "has_melon": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/trapped_chest": {
+    "criteria": {
+      "has_tripwire_hook": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercobblestone_wall": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_stingycreeper": {
+    "criteria": {
+      "stingycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_purple": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_happinesscreeper": {
+    "criteria": {
+      "happinesscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_anvilcreeper": {
+    "criteria": {
+      "anvilcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/summon_iron_golem": {
+    "criteria": {
+      "summoned_golem": "2020-08-16 22:29:19 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_voidcreeper": {
+    "criteria": {
+      "voidcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_noobcreeper": {
+    "criteria": {
+      "noobcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:creeperbomb": {
+    "criteria": {
+      "creeperbomb": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_wolfcreeper": {
+    "criteria": {
+      "wolfcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_earthcreeper_evo": {
+    "criteria": {
+      "earthcreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/break_diamond_hoe": {
+    "criteria": {
+      "broke_hoe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_polarbearcreeper": {
+    "criteria": {
+      "polarbearcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_cyan": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_rewritecreeper": {
+    "criteria": {
+      "rewritecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_typesword_grass": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/yellow_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/acacia_fence": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/magenta_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_typesword_normal": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/red_dye_from_rose_bush": {
+    "criteria": {
+      "has_double_plant": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_purple_and_pink": {
+    "criteria": {
+      "has_pink_dye": "2020-09-20 15:22:17 +0900",
+      "has_purple_dye": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/gold_block": {
+    "criteria": {
+      "has_at_least_9_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_tntcreeper": {
+    "criteria": {
+      "tntcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/yellow_dye_from_sunflower": {
+    "criteria": {
+      "has_double_plant": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_kingcreeper": {
+    "criteria": {
+      "kingcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/return_to_sender": {
+    "criteria": {
+      "killed_ghast": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_deteriorationcreeper": {
+    "criteria": {
+      "deteriorationcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/cauldron": {
+    "criteria": {
+      "has_water_bucket": "2020-08-16 14:58:52 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/armor_stand": {
+    "criteria": {
+      "has_stone_slab": "2020-08-16 15:10:45 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/sleep_in_bed": {
+    "criteria": {
+      "slept_in_bed": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_typesword_fire": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_stairs": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "entered_water": "2020-08-16 14:55:36 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:takumibowgun": {
+    "criteria": {
+      "takumishield": "2020-09-20 14:46:01 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/iron_trapdoor": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_cannoncreeper": {
+    "criteria": {
+      "cannoncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_green": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/dragon_breath": {
+    "criteria": {
+      "dragon_breath": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2020-08-22 21:35:39 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/white_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/jungle_fence": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperboat": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/diamond_pickaxe": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_nether_brick": {
+    "criteria": {
+      "has_nether_wart": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_clockcreeper": {
+    "criteria": {
+      "clockcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/kill_all_mobs": {
+    "criteria": {
+      "zombie_pigman": "2020-09-20 15:22:17 +0900",
+      "stray": "2020-09-20 15:22:17 +0900",
+      "shulker": "2020-09-20 15:22:17 +0900",
+      "wither_skeleton": "2020-09-20 15:22:17 +0900",
+      "zombie_villager": "2020-09-20 15:22:17 +0900",
+      "magma_cube": "2020-09-20 15:22:17 +0900",
+      "polar_bear": "2020-09-20 15:22:17 +0900",
+      "slime": "2020-09-20 15:22:17 +0900",
+      "vindicator": "2020-09-20 15:22:17 +0900",
+      "skeleton": "2020-09-20 15:22:17 +0900",
+      "husk": "2020-09-20 15:22:17 +0900",
+      "blaze": "2020-09-20 15:22:17 +0900",
+      "evoker": "2020-09-20 15:22:17 +0900",
+      "cave_spider": "2020-09-20 15:22:17 +0900",
+      "silverfish": "2020-09-20 15:22:17 +0900",
+      "zombie": "2020-09-20 15:22:17 +0900",
+      "witch": "2020-09-20 15:22:17 +0900",
+      "guardian": "2020-09-20 15:22:17 +0900",
+      "spider": "2020-09-20 15:22:17 +0900",
+      "ghast": "2020-09-20 15:22:17 +0900",
+      "creeper": "2020-09-20 15:22:17 +0900",
+      "enderman": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_sleepercreeper": {
+    "criteria": {
+      "sleepercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bigfishcreeper": {
+    "criteria": {
+      "bigfishcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/ender_eye": {
+    "criteria": {
+      "has_blaze_powder": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/enchant_item": {
+    "criteria": {
+      "enchanted_item": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone_block": {
+    "criteria": {
+      "has_at_least_9_redstone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/yellow_banner": {
+    "criteria": {
+      "has_yellow_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstonecomparator_off": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lime_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/pink_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_orange": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/green_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fireworkscreeper": {
+    "criteria": {
+      "fireworkscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/gray_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_weathercreeper": {
+    "criteria": {
+      "weathercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/yellow_bed": {
+    "criteria": {
+      "has_yellow_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_cowcreeper": {
+    "criteria": {
+      "cowcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_titancreeper": {
+    "criteria": {
+      "titancreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/follow_ender_eye": {
+    "criteria": {
+      "in_stronghold": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brick_block": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_brick": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_cyan": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_blazecreeper": {
+    "criteria": {
+      "blazecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_brown": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_red": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:king_armor": {
+    "criteria": {
+      "takumi_helmet": "2020-09-01 20:15:03 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/blaze_powder": {
+    "criteria": {
+      "has_blaze_rod": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:end/root": {
+    "criteria": {
+      "entered_end": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/black_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_purple": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/golden_chestplate": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_black": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_darkcreeper_evo": {
+    "criteria": {
+      "darkcreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperdropper": {
+    "criteria": {
+      "has_ingredient": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_blue_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_yukaricreeper": {
+    "criteria": {
+      "yukaricreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_gray_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_trizombiecreeper": {
+    "criteria": {
+      "trizombiecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperslimebomb": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_crosscreeper": {
+    "criteria": {
+      "crosscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/iron_block": {
+    "criteria": {
+      "has_at_least_9_iron_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fallcreeper": {
+    "criteria": {
+      "fallcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperminecart": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/red_dye_from_poppy": {
+    "criteria": {
+      "has_red_flower": "2020-08-16 15:00:29 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/wooden_pressure_plate": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_gray": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_psychiccreeper": {
+    "criteria": {
+      "psychiccreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_sandcreeper": {
+    "criteria": {
+      "sandcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/yellow_dye_from_dandelion": {
+    "criteria": {
+      "has_yellow_flower": "2020-08-16 22:42:16 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/clay": {
+    "criteria": {
+      "has_clay_ball": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepervault": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_piercecreeper": {
+    "criteria": {
+      "piercecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_unlimitedcreeper": {
+    "criteria": {
+      "unlimitedcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/wooden_sword": {
+    "criteria": {
+      "has_stick": "2020-08-16 15:09:48 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_banner": {
+    "criteria": {
+      "has_gray_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_magicstone": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_planks": {
+    "criteria": {
+      "has_log": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/gray_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_gray_banner": {
+    "criteria": {
+      "has_light_gray_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_blue_carpet": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_light_blue_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fescreeper": {
+    "criteria": {
+      "fescreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/fence": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_red": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/iron_axe": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/glowstone": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_glowstone_dust": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sea_lantern": {
+    "criteria": {
+      "has_prismarine_crystals": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/black_banner": {
+    "criteria": {
+      "has_black_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_carpet": {
+    "criteria": {
+      "has_gray_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/tripwire_hook": {
+    "criteria": {
+      "has_string": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_oceancreeper": {
+    "criteria": {
+      "oceancreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstonelamp": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blue_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_redstonecreeper": {
+    "criteria": {
+      "redstonecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbomb": {
+    "criteria": {
+      "has_ingredient": "2020-09-14 20:57:02 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_xms": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/black_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_angrycreeper": {
+    "criteria": {
+      "angrycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/birch_fence_gate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/stone_button": {
+    "criteria": {
+      "has_stone": "2020-08-16 14:55:09 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/totem_of_undying": {
+    "criteria": {
+      "used_totem": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:allcomplete": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/yellow_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_red": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/prismarine_bricks": {
+    "criteria": {
+      "has_prismarine_shard": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battleshield_powered": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperrail_powered": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/kill_a_mob": {
+    "criteria": {
+      "zombie_pigman": "2020-09-20 15:22:17 +0900",
+      "stray": "2020-09-20 15:22:17 +0900",
+      "shulker": "2020-09-20 15:22:17 +0900",
+      "wither_skeleton": "2020-09-20 15:22:17 +0900",
+      "zombie_villager": "2020-09-20 15:22:17 +0900",
+      "magma_cube": "2020-09-20 15:22:17 +0900",
+      "polar_bear": "2020-09-20 15:22:17 +0900",
+      "slime": "2020-09-20 15:22:17 +0900",
+      "vindicator": "2020-09-20 15:22:17 +0900",
+      "skeleton": "2020-09-20 15:22:17 +0900",
+      "husk": "2020-09-20 15:22:17 +0900",
+      "blaze": "2020-09-20 15:22:17 +0900",
+      "evoker": "2020-09-20 15:22:17 +0900",
+      "cave_spider": "2020-09-20 15:22:17 +0900",
+      "silverfish": "2020-09-20 15:22:17 +0900",
+      "zombie": "2020-09-20 15:22:17 +0900",
+      "witch": "2020-09-20 15:22:17 +0900",
+      "guardian": "2020-09-20 15:22:17 +0900",
+      "spider": "2020-09-20 15:22:17 +0900",
+      "ghast": "2020-09-20 15:22:17 +0900",
+      "creeper": "2020-09-20 15:22:17 +0900",
+      "enderman": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_keepcreeper": {
+    "criteria": {
+      "keepcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:takumialtar": {
+    "criteria": {
+      "creeperbomb": "2020-08-16 15:03:13 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_magenta": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/green_carpet": {
+    "criteria": {
+      "has_green_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gray_dye": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepertimedetector": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "ice_flats": "2020-09-20 15:22:17 +0900",
+      "frozen_river": "2020-09-20 15:22:17 +0900",
+      "taiga_cold_hills": "2020-09-20 15:22:17 +0900",
+      "forest": "2020-08-16 14:55:41 +0900",
+      "mesa_rock": "2020-09-20 15:22:17 +0900",
+      "mushroom_island_shore": "2020-09-20 15:22:17 +0900",
+      "swampland": "2020-08-16 14:55:25 +0900",
+      "birch_forest": "2020-08-16 15:14:29 +0900",
+      "deep_ocean": "2020-09-05 19:35:58 +0900",
+      "beaches": "2020-09-05 19:36:22 +0900",
+      "extreme_hills_with_trees": "2020-09-05 19:35:25 +0900",
+      "desert_hills": "2020-08-16 15:25:32 +0900",
+      "mesa": "2020-09-20 15:22:17 +0900",
+      "forest_hills": "2020-08-16 15:14:09 +0900",
+      "savanna": "2020-08-16 15:23:13 +0900",
+      "plains": "2020-08-16 14:55:20 +0900",
+      "jungle_hills": "2020-09-20 15:22:17 +0900",
+      "jungle_edge": "2020-09-20 15:22:17 +0900",
+      "mesa_clear_rock": "2020-09-20 15:22:17 +0900",
+      "savanna_rock": "2020-09-20 15:22:17 +0900",
+      "ice_mountains": "2020-09-20 15:22:17 +0900",
+      "redwood_taiga": "2020-09-20 15:22:17 +0900",
+      "taiga": "2020-09-20 15:22:17 +0900",
+      "redwood_taiga_hills": "2020-09-20 15:22:17 +0900",
+      "taiga_hills": "2020-09-20 15:22:17 +0900",
+      "birch_forest_hills": "2020-08-16 15:22:25 +0900",
+      "mushroom_island": "2020-09-20 15:22:17 +0900",
+      "taiga_cold": "2020-09-20 15:22:17 +0900",
+      "ocean": "2020-09-05 19:36:08 +0900",
+      "extreme_hills": "2020-08-16 15:22:32 +0900",
+      "roofed_forest": "2020-08-16 18:39:01 +0900",
+      "cold_beach": "2020-09-20 15:22:17 +0900",
+      "river": "2020-08-16 14:55:40 +0900",
+      "jungle": "2020-09-20 15:22:17 +0900",
+      "desert": "2020-08-16 14:55:09 +0900",
+      "stone_beach": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_wooden_slab": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbrick": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_minispidercreeper": {
+    "criteria": {
+      "minispidercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercobblestone_slab": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_gray_carpet": {
+    "criteria": {
+      "has_light_gray_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fakecreeper": {
+    "criteria": {
+      "fakecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_blue_banner": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_light_blue_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_artcreeper": {
+    "criteria": {
+      "artcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/purple_carpet": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_purple_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_shadowcreeper": {
+    "criteria": {
+      "shadowcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/orange_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/stone_pressure_plate": {
+    "criteria": {
+      "has_stone": "2020-08-16 14:55:09 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/plant_seed": {
+    "criteria": {
+      "beetroots": "2020-09-20 15:22:17 +0900",
+      "pumpkin_stem": "2020-09-20 15:22:17 +0900",
+      "melon_stem": "2020-09-20 15:22:17 +0900",
+      "nether_wart": "2020-09-20 15:22:17 +0900",
+      "wheat": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/leather_boots": {
+    "criteria": {
+      "has_leather": "2020-08-22 21:35:39 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/red_dye_from_tulip": {
+    "criteria": {
+      "has_red_flower": "2020-08-16 15:00:28 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_gray": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumialtar": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/orange_dye_from_orange_tulip": {
+    "criteria": {
+      "has_red_flower": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_snowcreeper": {
+    "criteria": {
+      "snowcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_killercreeper": {
+    "criteria": {
+      "killercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_san": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/diamond_block": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_at_least_9_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/flower_pot": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_brick": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/yellow_carpet": {
+    "criteria": {
+      "has_yellow_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperchestbomb": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_gatecreeper_evo": {
+    "criteria": {
+      "gatecreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/tnt_minecart": {
+    "criteria": {
+      "has_minecart": "2020-09-01 21:16:34 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_darkcreeper": {
+    "criteria": {
+      "darkcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/melon_block": {
+    "criteria": {
+      "has_melon": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_lime": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperlever": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperiron_slab": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cookie": {
+    "criteria": {
+      "has_cocoa": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_powered_chest": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/red_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_oxeye_daisy": {
+    "criteria": {
+      "has_red_flower": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/acacia_stairs": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_typesword_ground": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/fire_charge": {
+    "criteria": {
+      "has_blaze_powder": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/blue_banner": {
+    "criteria": {
+      "has_blue_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperlantern": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_mothercreeper": {
+    "criteria": {
+      "mothercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/slime": {
+    "criteria": {
+      "has_at_least_9_slime_ball": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarrow_sai": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperladder": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperdispenser": {
+    "criteria": {
+      "has_ingredient": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/writable_book": {
+    "criteria": {
+      "has_book": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstonebrick_stairs": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_wooden_slab": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/wheat": {
+    "criteria": {
+      "has_hay_block": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_black": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_nethercreeper": {
+    "criteria": {
+      "nethercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/white_bed": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/lime_banner": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_lime_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_jumpcreeper": {
+    "criteria": {
+      "jumpcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_obsidiancreeper": {
+    "criteria": {
+      "obsidiancreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/magenta_bed": {
+    "criteria": {
+      "has_magenta_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_poweredcreeper": {
+    "criteria": {
+      "poweredcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/rabbit_stew_from_red_mushroom": {
+    "criteria": {
+      "has_cooked_rabbit": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dark_prismarine": {
+    "criteria": {
+      "has_prismarine_shard": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone": {
+    "criteria": {
+      "has_redstone_block": "2020-08-16 16:21:05 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/golden_hoe": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/bread": {
+    "criteria": {
+      "has_wheat": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bonecreeper": {
+    "criteria": {
+      "bonecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/trapdoor": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/black_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/pink_carpet": {
+    "criteria": {
+      "has_pink_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_powered_head": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_nerdcreeper": {
+    "criteria": {
+      "nerdcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_silentcreeper": {
+    "criteria": {
+      "silentcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbutton_planks": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_black": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_pigmancreeper": {
+    "criteria": {
+      "pigmancreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_doublecreeper": {
+    "criteria": {
+      "doublecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/sign": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/create_full_beacon": {
+    "criteria": {
+      "beacon": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_silver": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "entered_water": "2020-08-16 14:55:36 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/diorite": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_quartz": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_transcreeper": {
+    "criteria": {
+      "transcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/summon_wither": {
+    "criteria": {
+      "summoned": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_gray": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bigspidercreeper": {
+    "criteria": {
+      "bigspidercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/mushroom_stew": {
+    "criteria": {
+      "has_bowl": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperbrick_slab": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/gray_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/balanced_diet": {
+    "criteria": {
+      "cooked_porkchop": "2020-09-20 15:22:17 +0900",
+      "chicken": "2020-09-20 15:22:17 +0900",
+      "cooked_mutton": "2020-09-20 15:22:17 +0900",
+      "cooked_beef": "2020-09-20 15:22:17 +0900",
+      "chorus_fruit": "2020-09-20 15:22:17 +0900",
+      "beef": "2020-09-20 15:22:17 +0900",
+      "baked_potato": "2020-09-20 15:22:17 +0900",
+      "porkchop": "2020-09-20 15:22:17 +0900",
+      "clownfish": "2020-09-20 15:22:17 +0900",
+      "beetroot_soup": "2020-09-20 15:22:17 +0900",
+      "apple": "2020-09-20 15:22:17 +0900",
+      "spider_eye": "2020-09-20 15:22:17 +0900",
+      "potato": "2020-09-20 15:22:17 +0900",
+      "cooked_cod": "2020-09-20 15:22:17 +0900",
+      "rabbit": "2020-09-20 15:22:17 +0900",
+      "poisonous_potato": "2020-09-20 15:22:17 +0900",
+      "melon": "2020-09-20 15:22:17 +0900",
+      "pumpkin_pie": "2020-09-20 15:22:17 +0900",
+      "raw_salmon": "2020-09-20 15:22:17 +0900",
+      "mutton": "2020-09-20 15:22:17 +0900",
+      "pufferfish": "2020-09-20 15:22:17 +0900",
+      "bread": "2020-09-20 15:22:17 +0900",
+      "golden_apple": "2020-09-20 15:22:17 +0900",
+      "cookie": "2020-09-20 15:22:17 +0900",
+      "rotten_flesh": "2020-09-20 15:22:17 +0900",
+      "raw_cod": "2020-09-20 15:22:17 +0900",
+      "golden_carrot": "2020-09-20 15:22:17 +0900",
+      "beetroot": "2020-09-20 15:22:17 +0900",
+      "cooked_rabbit": "2020-09-20 15:22:17 +0900",
+      "cooked_chicken": "2020-09-20 15:22:17 +0900",
+      "enchanted_golden_apple": "2020-08-30 21:26:45 +0900",
+      "mushroom_stew": "2020-09-20 15:22:17 +0900",
+      "rabbit_stew": "2020-09-20 15:22:17 +0900",
+      "cooked_salmon": "2020-09-20 15:22:17 +0900",
+      "carrot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/fast_travel": {
+    "criteria": {
+      "travelled": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_chest": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/pink_banner": {
+    "criteria": {
+      "has_pink_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_viruscreeper": {
+    "criteria": {
+      "viruscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_powered_feet": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_wearcreeper": {
+    "criteria": {
+      "wearcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/hay_block": {
+    "criteria": {
+      "has_at_least_9_wheat": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_magenta": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/lime_bed": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_lime_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/tnt": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_gunpowder": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/black_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/granite": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_quartz": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purple_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_fallingbombcreeper": {
+    "criteria": {
+      "fallingbombcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/orange_carpet": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_orange_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/beacon": {
+    "criteria": {
+      "has_nether_star": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:takumiblock": {
+    "criteria": {
+      "takumiblock": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_callcreeper": {
+    "criteria": {
+      "callcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_icecreeper": {
+    "criteria": {
+      "icecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_yellow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_green": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/cyan_carpet": {
+    "criteria": {
+      "has_cyan_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/root": {
+    "criteria": {
+      "consumed_item": "2020-08-16 15:13:02 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_skull": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_craftsmancreeper": {
+    "criteria": {
+      "craftsmancreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "entered_water": "2020-08-16 14:55:36 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_obsidian": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/acacia_door": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiblock": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperpiston_sticky": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/stone_hoe": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/spruce_fence": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/diamond_hoe": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/activator_rail": {
+    "criteria": {
+      "has_rail": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/spectral_arrow": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_glowstone_dust": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/white_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/diamond_shovel": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dark_oak_stairs": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_catcreeper": {
+    "criteria": {
+      "catcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:adventure/trade": {
+    "criteria": {
+      "traded": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_parrotcreeper": {
+    "criteria": {
+      "parrotcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/white_carpet": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/ender_chest": {
+    "criteria": {
+      "has_ender_eye": "2020-08-16 19:41:07 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_squidcreeper": {
+    "criteria": {
+      "squidcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_stairs": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_sandstone_slab": {
+    "criteria": {
+      "has_red_sandstone": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/uneasy_alliance": {
+    "criteria": {
+      "killed_ghast": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_sinobicreeper": {
+    "criteria": {
+      "sinobicreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepertorch": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/purple_banner": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_purple_wool": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/magenta_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/mine_diamond": {
+    "criteria": {
+      "diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_concretecreeper": {
+    "criteria": {
+      "concretecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_watercreeper": {
+    "criteria": {
+      "watercreeper": "2020-08-30 21:17:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_mousecreeper": {
+    "criteria": {
+      "mousecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercobblestone": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/anvil": {
+    "criteria": {
+      "has_iron_block": "2020-08-16 21:34:05 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cyan_concrete_powder": {
+    "criteria": {
+      "has_sand": "2020-09-14 22:12:54 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gold_ingot_from_block": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bigbatcreeper": {
+    "criteria": {
+      "bigbatcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_bigcreeper": {
+    "criteria": {
+      "bigcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_shulkercreeper": {
+    "criteria": {
+      "shulkercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lime_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_demoncreeper": {
+    "criteria": {
+      "demoncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplate_planks": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_glasscreeper": {
+    "criteria": {
+      "glasscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/paper": {
+    "criteria": {
+      "has_reeds": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pink_dye_from_peony": {
+    "criteria": {
+      "has_double_plant": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_daimonjicreeper": {
+    "criteria": {
+      "daimonjicreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_antinomycreeper": {
+    "criteria": {
+      "antinomycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_gorgeouscreeper": {
+    "criteria": {
+      "gorgeouscreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/green_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_blue_dye_from_lapis_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-16 20:39:53 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/diamond_axe": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_llamacreeper": {
+    "criteria": {
+      "llamacreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brown_wool": {
+    "criteria": {
+      "has_white_wool": "2020-08-16 18:43:28 +0900"
+    },
+    "done": true
+  },
+  "minecraft:nether/find_fortress": {
+    "criteria": {
+      "fortress": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_endermitecreeper": {
+    "criteria": {
+      "endermitecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepermeatbomb": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/white_stained_glass": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/acacia_fence_gate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/coal_block": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_at_least_9_coal": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_head": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_minesweeper_pickaxe": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/light_weighted_pressure_plate": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_white": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperiron": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/stone_shovel": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:boltstone": {
+    "criteria": {
+      "boltstone": "2020-09-01 21:16:55 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_lavacreeper": {
+    "criteria": {
+      "lavacreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_battlearmor_feet": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_zombiecreeper": {
+    "criteria": {
+      "zombiecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_oddcreeper": {
+    "criteria": {
+      "oddcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_brown": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_antinomycreeper_evo": {
+    "criteria": {
+      "antinomycreeper_evo": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/lead": {
+    "criteria": {
+      "has_slime_ball": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstoneoscillator": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_transcreeper_2": {
+    "criteria": {
+      "transcreeper_2": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_birdcreeper": {
+    "criteria": {
+      "birdcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_glowstonecreeper": {
+    "criteria": {
+      "glowstonecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_straycreeper": {
+    "criteria": {
+      "straycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_root": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_spidercreeper": {
+    "criteria": {
+      "spidercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/root": {
+    "criteria": {
+      "crafting_table": "2020-09-07 21:47:14 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/slime_ball": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_floatcreeper": {
+    "criteria": {
+      "floatcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglasspane_purple": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_chestcreeper": {
+    "criteria": {
+      "chestcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/magma": {
+    "criteria": {
+      "has_magma_cream": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/brewing_stand": {
+    "criteria": {
+      "has_blaze_rod": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/root": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_mastercreeper": {
+    "criteria": {
+      "mastercreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/acacia_planks": {
+    "criteria": {
+      "has_log2": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/compass": {
+    "criteria": {
+      "has_redstone": "2020-08-16 21:27:45 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/repeater": {
+    "criteria": {
+      "has_redstone_torch": "2020-08-30 20:16:32 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperwool_orange": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperrail": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_leadcreeper": {
+    "criteria": {
+      "leadcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperclay_light_blue": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/quartz_block": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_quartz": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/iron_door": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_witchcreeper": {
+    "criteria": {
+      "witchcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/nether_brick_fence": {
+    "criteria": {
+      "has_nether_brick": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_allium": {
+    "criteria": {
+      "has_red_flower": "2020-08-16 15:00:24 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/red_bed": {
+    "criteria": {
+      "has_red_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_ingot_from_nuggets": {
+    "criteria": {
+      "has_at_least_9_iron_nugget": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/cyan_bed": {
+    "criteria": {
+      "has_cyan_wool": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:parachutefall": {
+    "criteria": {
+      "impossible": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_sheepcreeper": {
+    "criteria": {
+      "sheepcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_musiccreeper": {
+    "criteria": {
+      "musiccreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "entered_water": "2020-08-16 14:55:36 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_vexcreeper": {
+    "criteria": {
+      "vexcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarmor_feet": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperstainedglass_pink": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_crycreeper": {
+    "criteria": {
+      "crycreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_stairs": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/jungle_stairs": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/heavy_weighted_pressure_plate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_iron_ingot": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "entered_water": "2020-08-16 14:55:36 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/pumpkin_pie": {
+    "criteria": {
+      "has_pumpkin": "2020-08-16 22:32:15 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/daylight_detector": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_quartz": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purpur_pillar": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_purpur_block": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:typewepon": {
+    "criteria": {
+      "grass": "2020-09-20 15:22:17 +0900",
+      "fire": "2020-09-20 15:22:17 +0900",
+      "ground": "2020-09-20 15:22:17 +0900",
+      "water": "2020-09-20 15:22:17 +0900",
+      "wind": "2020-08-16 21:09:26 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/end_rod": {
+    "criteria": {
+      "has_chorus_fruit_popped": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/brown_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:story/enter_the_end": {
+    "criteria": {
+      "entered_end": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_woodcreeper": {
+    "criteria": {
+      "woodcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/jungle_fence_gate": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/breed_an_animal": {
+    "criteria": {
+      "bred_chicken": "2020-09-20 15:22:17 +0900",
+      "bred_ocelot": "2020-09-20 15:22:17 +0900",
+      "bred_sheep": "2020-09-20 15:22:17 +0900",
+      "bred_wolf": "2020-09-20 15:22:17 +0900",
+      "bred_llama": "2020-09-20 15:22:17 +0900",
+      "bred_rabbit": "2020-09-20 15:22:17 +0900",
+      "bred_horse": "2020-09-20 15:22:17 +0900",
+      "bred_cow": "2020-09-20 15:22:17 +0900",
+      "bred_mooshroom": "2020-09-20 15:22:17 +0900",
+      "bred_pig": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumishield": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperredstonewire": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/piston": {
+    "criteria": {
+      "has_redstone": "2020-08-16 21:27:45 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/golden_leggings": {
+    "criteria": {
+      "has_gold_ingot": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperslimeblock": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_stairs": {
+    "criteria": {
+      "has_cobblestone": "2020-08-16 15:59:06 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/rail": {
+    "criteria": {
+      "has_minecart": "2020-09-01 21:16:34 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_ballooncreeper": {
+    "criteria": {
+      "ballooncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/brown_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_gray_stained_hardened_clay": {
+    "criteria": {
+      "has_hardened_clay": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_constructcreeper": {
+    "criteria": {
+      "constructcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_invisiblecreeper": {
+    "criteria": {
+      "invisiblecreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/dark_oak_fence": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_planks": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/diamond_boots": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_diamond": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_takumiarmor_head": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/nether_brick": {
+    "criteria": {
+      "has_netherbrick": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_naturalcreeper": {
+    "criteria": {
+      "naturalcreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:slay/slay_destructioncreeper": {
+    "criteria": {
+      "destructioncreeper": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/wooden_door": {
+    "criteria": {
+      "has_planks": "2020-08-30 19:44:37 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creeperplanks_slab": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_gray_stained_glass_pane": {
+    "criteria": {
+      "has_glass": "2020-08-17 21:58:43 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/light_gray_bed_from_white_bed": {
+    "criteria": {
+      "has_bed": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/bone_block": {
+    "criteria": {
+      "has_the_recipe": "2020-09-20 15:22:17 +0900",
+      "has_at_least_9_bonemeal": "2020-09-20 15:22:17 +0900"
+    },
+    "done": true
+  },
+  "takumicraft:recipes/recipe_creepercarpet_yellow": {
+    "criteria": {
+      "has_ingredient": "2020-09-20 15:22:17 +0900",
+      "has_the_recipe": "2020-09-20 15:22:18 +0900"
+    },
+    "done": true
+  }
+}
