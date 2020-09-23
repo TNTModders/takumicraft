@@ -720,6 +720,8 @@ entity.phantomcreeper.name=Phantom Creeper
 entity.phantomcreeper.desc=A flying nightmare, shows a phantom of fighter from the air.
 entity.poisoncreeper.name=Poison Creeper
 entity.poisoncreeper.desc=The blast of this creeper is poisoness, draining your helth.
+entity.myceliumcreeper.name=Mycelium Creeper
+entity.myceliumcreeper.desc=Creeping mycelium, do you want to eat mushroom?
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

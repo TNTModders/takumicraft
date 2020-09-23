@@ -773,6 +773,8 @@ entity.phantomcreeper.name=ファントム匠
 entity.phantomcreeper.desc=幻影より生まれし、異なる貌を持つ。空より来る新たなる脅威。
 entity.poisoncreeper.name=毒匠
 entity.poisoncreeper.desc=蝕むは毒の霧、命を削る煙を流し。
+entity.myceliumcreeper.name=菌匠
+entity.myceliumcreeper.desc=這い寄る菌糸と茸の匠。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
