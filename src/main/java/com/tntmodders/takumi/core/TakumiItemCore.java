@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemFood;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -95,7 +96,13 @@ public class TakumiItemCore {
     public static final Item EVO_CORE_EVO = new ItemEvoCore(true);
     public static final Item TAKUMI_PARACHUTE = new ItemTakumiParachute();
     public static final Item TAKUMI_FRAME = new ItemTakumiItemFrame();
-    public static final Item RECORD_EXPLOSION= new ItemTakumiRecord("record_explosion",TakumiSoundCore.RECORD_EXPLOSION);
+    public static final Item RECORD_EXPLOSION = new ItemTakumiRecord("record_explosion", TakumiSoundCore.RECORD_EXPLOSION);
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_BEEF = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_BEEF));
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_CHIKEN = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_CHICKEN));
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_PORKCHOP = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_PORKCHOP));
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_MUTTON = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_MUTTON));
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_RABBIT = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_RABBIT));
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_FLESH = new ItemTakumiSpecialMeat(((ItemFood) Items.ROTTEN_FLESH));
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

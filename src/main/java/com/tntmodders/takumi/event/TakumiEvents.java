@@ -516,6 +516,16 @@ public class TakumiEvents {
                         ((EntityItem) entity).setItem(stack);
                     }
                     return true;
+                } else if (((EntityItem) entity).getItem().getItem() instanceof ItemFood) {
+                    ItemFood food = ItemTakumiSpecialMeat.getSpecializedMeat(((EntityItem) entity).getItem().getItem());
+                    if (food != null && entity.world.rand.nextInt(5) == 0) {
+                        EntityItem item = new EntityItem(entity.world);
+                        item.copyLocationAndAnglesFrom(entity);
+                        item.setItem(new ItemStack(food, ((EntityItem) entity).getItem().getCount()));
+                        entity.world.spawnEntity(item);
+                        entity.setDead();
+                        return true;
+                    }
                 }
             }
             if (entity instanceof EntityPainting && ItemTakumiPainting.isPaintingAntiExplosion(((EntityPainting) entity))) {

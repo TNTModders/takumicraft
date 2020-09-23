@@ -7,6 +7,7 @@ import com.tntmodders.takumi.client.render.tileentity.*;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
+import com.tntmodders.takumi.item.ItemTakumiSpecialMeat;
 import com.tntmodders.takumi.tileentity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -63,8 +64,13 @@ public class TakumiClientCore {
                                     "Registered item model with metadata" + i + " : " + s + "_" + i);
                         }
                     } else {
-                        ModelLoader.setCustomModelResourceLocation(item, 0,
-                                new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
+                        if (item instanceof ItemTakumiSpecialMeat) {
+                            ModelLoader.setCustomModelResourceLocation(item, 0,
+                                    new ModelResourceLocation(new ResourceLocation(((ItemTakumiSpecialMeat) item).getItemFood().getRegistryName().getResourcePath()), "inventory"));
+                        } else {
+                            ModelLoader.setCustomModelResourceLocation(item, 0,
+                                    new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, s), "inventory"));
+                        }
                         TakumiCraftCore.LOGGER.info("Registered item model: " + s);
                     }
                 }
@@ -179,8 +185,8 @@ public class TakumiClientCore {
             }
         });
 
-        ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 1, new ModelResourceLocation("takumicraft:creeperframe","normal"));
-        ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 2, new ModelResourceLocation("takumicraft:creeperframe","map"));
+        ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 1, new ModelResourceLocation("takumicraft:creeperframe", "normal"));
+        ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 2, new ModelResourceLocation("takumicraft:creeperframe", "map"));
     }
 
     public static void registerEntityRender(Class<Entity> clazz, ITakumiEntity entity) {

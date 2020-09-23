@@ -288,6 +288,7 @@ item.takumiparachute.message=Couldn't use parachute here.
 item.creeperframe.name=Creeper ItemFrame
 item.record_explosion.name=Record
 item.record.record_explosion.desc=Creeper - blastworld_001
+item.takumispecialmeat.name=Exploded Meat
 
 #entity
 #desc max: 72 chars

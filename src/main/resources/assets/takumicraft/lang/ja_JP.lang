@@ -288,6 +288,7 @@ item.takumiparachute.message=落下傘を展開する十分な広さがない
 item.creeperframe.name=匠式硬質額縁
 item.record_explosion.name=レコード
 item.record.record_explosion.desc=匠式 - 爆界_001
+item.takumispecialmeat.name=匠式特上肉
 
 #entity
 ＃descは36文字まで。
