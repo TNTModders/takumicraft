@@ -18,21 +18,24 @@ import java.util.List;
 
 public class ItemTakumiSpecialMeat extends ItemFood {
     private final ItemFood itemFood;
+    private final Item rawFood;
 
-    public ItemTakumiSpecialMeat(ItemFood itemIn) {
+    public ItemTakumiSpecialMeat(ItemFood itemIn, Item rawItemIn) {
         super(((int) (itemIn.getHealAmount(new ItemStack(itemIn)) * 2.5)), itemIn.getSaturationModifier(new ItemStack(itemIn)) * 2, false);
         this.itemFood = itemIn;
+        this.rawFood = rawItemIn;
         String s = "takumispecialmeat_" + itemIn.getRegistryName().getResourcePath();
         this.setRegistryName(TakumiCraftCore.MODID, s);
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumispecialmeat");
     }
 
-    public static ItemTakumiSpecialMeat getSpecializedMeat(Item itemIn) {
+    public static ItemTakumiSpecialMeat getSpecializedMeat(Item itemIn, boolean allowRawFood) {
         Class<TakumiItemCore> clazz = TakumiItemCore.class;
         for (Field field : clazz.getFields()) {
             try {
-                if (field.get(TakumiItemCore.INSTANCE) instanceof ItemTakumiSpecialMeat && ((ItemTakumiSpecialMeat) field.get(TakumiItemCore.INSTANCE)).getItemFood() == itemIn) {
+                if (field.get(TakumiItemCore.INSTANCE) instanceof ItemTakumiSpecialMeat &&
+                        (((ItemTakumiSpecialMeat) field.get(TakumiItemCore.INSTANCE)).getItemFood() == itemIn || (((ItemTakumiSpecialMeat) field.get(TakumiItemCore.INSTANCE)).getRawFood() == itemIn && allowRawFood))) {
                     return ((ItemTakumiSpecialMeat) field.get(TakumiItemCore.INSTANCE));
                 }
             } catch (IllegalAccessException e) {
@@ -44,6 +47,10 @@ public class ItemTakumiSpecialMeat extends ItemFood {
 
     public ItemFood getItemFood() {
         return itemFood;
+    }
+
+    public Item getRawFood() {
+        return rawFood;
     }
 
     @Override
@@ -64,6 +71,6 @@ public class ItemTakumiSpecialMeat extends ItemFood {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(TakumiUtils.takumiTranslate( this.itemFood.getUnlocalizedName() + ".name"));
+        tooltip.add(TakumiUtils.takumiTranslate(this.itemFood.getUnlocalizedName() + ".name"));
     }
 }

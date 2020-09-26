@@ -11,13 +11,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class EntityWindLance extends EntityTippedArrow {
-    public EntityWindLance(World worldIn) {
+public class EntityWindTypeLance extends EntityTippedArrow {
+    public EntityWindTypeLance(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 1.8F);
     }
 
-    public EntityWindLance(World worldIn, EntityLivingBase shooter) {
+    public EntityWindTypeLance(World worldIn, EntityLivingBase shooter) {
         super(worldIn, shooter);
     }
 
@@ -34,7 +34,7 @@ public class EntityWindLance extends EntityTippedArrow {
         this.setInvisible(true);
         if (!this.world.isRemote) {
             TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 2);
-            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(1))) {
+            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(2)) || this.world.getWorldBorder().getClosestDistance(this) < 2.5 * 2.5) {
                 this.dismount();
             }
         }

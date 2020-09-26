@@ -10,8 +10,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -45,11 +45,10 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 120 == 0) {
+        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 100 == 0) {
+            TakumiCraftCore.LOGGER.info("done");
             ((EntityLivingBase) entityIn).heal(0.5f);
-            if (entityIn instanceof EntityPlayer && !worldIn.isRemote) {
-                ((EntityPlayer) entityIn).getFoodStats().addStats(1, 0.1f);
-            }
+            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2,0,true,false));
         }
         if (entityIn instanceof EntityLivingBase) {
             ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);
@@ -57,9 +56,18 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     }
 
     @Override
-    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,
+    public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entityIn,
                                           double yToTest, Material materialIn, boolean testingHead) {
-        return materialIn == Material.WATER || super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
+        if(world.getBlockState(blockpos).getBlock() == this){
+            if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 100 == 0) {
+                ((EntityLivingBase) entityIn).heal(0.5f);
+                ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2,0,true,false));
+            }
+            if (entityIn instanceof EntityLivingBase) {
+                ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);
+            }
+        }
+        return materialIn == Material.WATER || super.isEntityInsideMaterial(world, blockpos, iblockstate, entityIn, yToTest, materialIn, testingHead);
     }
 
     @Override

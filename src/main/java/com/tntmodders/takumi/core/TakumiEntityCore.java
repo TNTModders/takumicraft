@@ -288,7 +288,7 @@ public class TakumiEntityCore {
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "waterforce"),
                 EntityWaterTypeForce.class, "waterforce", 915, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "windlance"),
-                EntityWindLance.class, "windlance", 916, TakumiCraftCore.TakumiInstance, 64, 1, true);
+                EntityWindTypeLance.class, "windlance", 916, TakumiCraftCore.TakumiInstance, 64, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "bighomingbomb"),
                 EntityBigHomingBomb.class, "bighomingbomb", 917, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "odddummyghast"),
@@ -390,11 +390,11 @@ public class TakumiEntityCore {
                         return null;
                     }
                 });
-        RenderingRegistry.registerEntityRenderingHandler(EntityWindLance.class,
-                manager -> new Render<EntityWindLance>(manager) {
+        RenderingRegistry.registerEntityRenderingHandler(EntityWindTypeLance.class,
+                manager -> new Render<EntityWindTypeLance>(manager) {
                     @Nullable
                     @Override
-                    protected ResourceLocation getEntityTexture(EntityWindLance entity) {
+                    protected ResourceLocation getEntityTexture(EntityWindTypeLance entity) {
                         return null;
                     }
                 });

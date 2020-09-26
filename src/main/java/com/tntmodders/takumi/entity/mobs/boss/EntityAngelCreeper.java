@@ -43,8 +43,8 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.angelcreeper.name"), BossInfo.Color.BLUE,
                     BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
-    private DamageSource lastSource;
     public int deathTicks;
+    private DamageSource lastSource;
 
     public EntityAngelCreeper(World worldIn) {
         super(worldIn);
@@ -140,13 +140,13 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
 
         if (!this.world.isRemote) {
             if (this.deathTicks == 1) {
-                this.world.playBroadcastSound(1028, new BlockPos(this), 0);
+                //this.world.playBroadcastSound(1028, new BlockPos(this), 0);
             }
         }
 
         if (this.deathTicks == 200 && !this.world.isRemote) {
             this.world.createExplosion(this, this.posX, this.posY, this.posZ, 16, true);
-            this.entityDropItem(new ItemStack(TakumiItemCore.CHAMP_CORE, this.rand.nextInt(3)+1), 0.5f);
+            this.entityDropItem(new ItemStack(TakumiItemCore.CHAMP_CORE, this.rand.nextInt(3) + 1), 0.5f);
             this.setDead();
         }
     }
@@ -201,13 +201,14 @@ public class EntityAngelCreeper extends EntityTakumiAbstractCreeper {
             }
             this.heal(0.025f);
         }
-        if (this.deathTicks > 0) {
-            this.world.loadedEntityList.forEach(entity -> {
+        if (this.deathTicks > 0 && !this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().grow(100)).isEmpty()) {
+            this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().grow(100)).forEach(entity -> {
                 if (!(entity instanceof EntityAngelCreeper) && this.getDistanceSqToEntity(entity) < 100) {
-                    if(!(entity instanceof EntityPlayer) || !(((EntityPlayer) entity).isCreative() || ((EntityPlayer) entity).isSpectator()))
-                    entity.motionX += (this.posX - entity.posX) / 100;
-                    entity.motionY += (this.posY - entity.posY) / 100;
-                    entity.motionZ += (this.posZ - entity.posZ) / 100;
+                    if (!(entity instanceof EntityPlayer) || !(((EntityPlayer) entity).isCreative() || ((EntityPlayer) entity).isSpectator())) {
+                        entity.motionX += (this.posX - entity.posX) / 100;
+                        entity.motionY += (this.posY - entity.posY) / 100;
+                        entity.motionZ += (this.posZ - entity.posZ) / 100;
+                    }
                 }
             });
         }

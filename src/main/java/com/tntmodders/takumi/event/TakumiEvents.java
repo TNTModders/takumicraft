@@ -396,7 +396,7 @@ public class TakumiEvents {
                 TakumiEnchantmentCore.TYPE_DEST)) {
             if (!event.getEntityLiving().world.isRemote) {
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 5, 4, true, false));
-                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SATURATION, 5, 0, true, false));
+                //event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SATURATION, 5, 0, true, false));
             } else {
                 for (int i = 0; i < 20; ++i) {
                     event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
@@ -516,9 +516,9 @@ public class TakumiEvents {
                         ((EntityItem) entity).setItem(stack);
                     }
                     return true;
-                } else if (((EntityItem) entity).getItem().getItem() instanceof ItemFood) {
-                    ItemFood food = ItemTakumiSpecialMeat.getSpecializedMeat(((EntityItem) entity).getItem().getItem());
-                    if (food != null && entity.world.rand.nextInt(5) == 0) {
+                } else if (((EntityItem) entity).getItem().getItem() instanceof ItemFood && !entity.isDead) {
+                    ItemFood food = ItemTakumiSpecialMeat.getSpecializedMeat(((EntityItem) entity).getItem().getItem(), false);
+                    if (food != null && entity.world.rand.nextInt(10) == 0) {
                         EntityItem item = new EntityItem(entity.world);
                         item.copyLocationAndAnglesFrom(entity);
                         item.setItem(new ItemStack(food, ((EntityItem) entity).getItem().getCount()));
@@ -611,7 +611,7 @@ public class TakumiEvents {
             }
         }
         if (event.getExplosion() instanceof TakumiExplosion) {
-            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityWindLance) {
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityWindTypeLance) {
                 event.getAffectedEntities().removeIf(entity -> !(entity instanceof EntityMob));
                 event.getAffectedEntities().forEach(entity -> {
                     if (entity instanceof EntityMob) {
@@ -1224,6 +1224,23 @@ public class TakumiEvents {
                 ITextComponent message = comp.appendSibling(event.getComponent().setStyle(new Style().setColor(TextFormatting.RESET).setBold(false)));
                 event.setComponent(message);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingDrops(LivingDropsEvent event) {
+        if (event.getSource().getTrueSource() instanceof EntityLivingBase &&
+                ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_KNIFE &&
+                (event.getSource().getDamageType().equals("player") || event.getSource().isCreativePlayer())) {
+            event.getDrops().replaceAll(entityItem -> {
+                if (ItemTakumiSpecialMeat.getSpecializedMeat(entityItem.getItem().getItem(), true) != null) {
+                    EntityItem newItem = new EntityItem(entityItem.world);
+                    newItem.copyLocationAndAnglesFrom(entityItem);
+                    newItem.setItem(new ItemStack(ItemTakumiSpecialMeat.getSpecializedMeat(entityItem.getItem().getItem(), true), entityItem.getItem().getCount()));
+                    return newItem;
+                }
+                return entityItem;
+            });
         }
     }
 }

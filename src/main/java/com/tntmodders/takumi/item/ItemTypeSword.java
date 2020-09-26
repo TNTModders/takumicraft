@@ -6,7 +6,7 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.item.EntityWaterTypeForce;
-import com.tntmodders.takumi.entity.item.EntityWindLance;
+import com.tntmodders.takumi.entity.item.EntityWindTypeLance;
 import com.tntmodders.takumi.item.material.TakumiToolMaterial;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -99,7 +99,7 @@ public class ItemTypeSword extends ItemSword {
             }
             case WIND: {
                 if (!attacker.world.isRemote) {
-                    EntityWindLance lance = new EntityWindLance(attacker.world, attacker);
+                    EntityWindTypeLance lance = new EntityWindTypeLance(attacker.world, attacker);
                     lance.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
                     lance.setAim(attacker, 0, attacker.rotationYaw, 0.0F, 1.0F, 1.0F);
                     attacker.world.spawnEntity(lance);

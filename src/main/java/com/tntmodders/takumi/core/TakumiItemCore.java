@@ -97,12 +97,14 @@ public class TakumiItemCore {
     public static final Item TAKUMI_PARACHUTE = new ItemTakumiParachute();
     public static final Item TAKUMI_FRAME = new ItemTakumiItemFrame();
     public static final Item RECORD_EXPLOSION = new ItemTakumiRecord("record_explosion", TakumiSoundCore.RECORD_EXPLOSION);
-    public static final ItemTakumiSpecialMeat SPECIALMEAT_BEEF = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_BEEF));
-    public static final ItemTakumiSpecialMeat SPECIALMEAT_CHIKEN = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_CHICKEN));
-    public static final ItemTakumiSpecialMeat SPECIALMEAT_PORKCHOP = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_PORKCHOP));
-    public static final ItemTakumiSpecialMeat SPECIALMEAT_MUTTON = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_MUTTON));
-    public static final ItemTakumiSpecialMeat SPECIALMEAT_RABBIT = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_RABBIT));
-    public static final ItemTakumiSpecialMeat SPECIALMEAT_FLESH = new ItemTakumiSpecialMeat(((ItemFood) Items.ROTTEN_FLESH));
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_BEEF = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_BEEF), Items.BEEF);
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_CHIKEN = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_CHICKEN), Items.CHICKEN);
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_PORKCHOP = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_PORKCHOP), Items.PORKCHOP);
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_MUTTON = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_MUTTON), Items.MUTTON);
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_RABBIT = new ItemTakumiSpecialMeat(((ItemFood) Items.COOKED_RABBIT), Items.RABBIT);
+    public static final ItemTakumiSpecialMeat SPECIALMEAT_FLESH = new ItemTakumiSpecialMeat(((ItemFood) Items.ROTTEN_FLESH), Items.ROTTEN_FLESH);
+    public static final Item ATTACK_CORE = new ItemAttackCore();
+    public static final Item TAKUMI_KNIFE = new ItemTakumiKnife_S();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

@@ -1,6 +1,8 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -11,12 +13,14 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -215,7 +219,14 @@ public class EntityAttackBlock extends Entity {
                         this.setDead();
                         this.dummy.setDead();
                         this.world.getPlayers(EntityPlayer.class, input -> EntityAttackBlock.this.getDistanceSqToEntity(input) < 10000).forEach(player
-                                -> player.sendMessage(new TextComponentTranslation("entity.attackblock.message.done")));
+                                -> {
+                            player.sendMessage(new TextComponentTranslation("entity.attackblock.message.done"));
+                            player.addItemStackToInventory(new ItemStack(TakumiItemCore.ATTACK_CORE, 1));
+                            if (player instanceof EntityPlayerMP) {
+                                ((EntityPlayerMP) player).getAdvancements().grantCriterion(player.getServer().getAdvancementManager().getAdvancement(
+                                        new ResourceLocation(TakumiCraftCore.MODID, "slay/slay_bigcreeper")), "bigcreeper");
+                            }
+                        });
                     }
                     if (this.ticksExisted % 200 == 0) {
                         long l = Math.floorDiv(System.currentTimeMillis(), 1000);

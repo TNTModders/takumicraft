@@ -289,6 +289,10 @@ item.creeperframe.name=Creeper ItemFrame
 item.record_explosion.name=Record
 item.record.record_explosion.desc=Creeper - blastworld_001
 item.takumispecialmeat.name=Exploded Meat
+item.takumiknife.name=Creeper Transform Knife
+item.takumiknife.tooltip=Charged Power:
+item.takumiknife_gun.name=Creeper Transform Bowgun
+item.attackcore.name=AttackBlock Core
 
 #entity
 #desc max: 72 chars
@@ -840,7 +844,7 @@ advancements.takumicraft.takumialtar.desc=Get Altar.
 advancements.takumicraft.ofalen.title=Magic and Science
 advancements.takumicraft.ofalen.desc=Get Ofalen.
 entity.creeper_hoge.name=Creeper
-advancements.takumicraft.slay.desc=is registerd to Creeper Book.
+advancements.takumicraft.slay.desc=registerd to Creeper Book.
 advancements.takumicraft.parachute.title=Parachute Fall
 advancements.takumicraft.parachute.desc=Fall 50 blocks high using takumi parachute.
 

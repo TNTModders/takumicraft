@@ -289,6 +289,10 @@ item.creeperframe.name=匠式硬質額縁
 item.record_explosion.name=レコード
 item.record.record_explosion.desc=匠式 - 爆界_001
 item.takumispecialmeat.name=匠式特上肉
+item.takumiknife.name=匠式砲丁[斬]
+item.takumiknife.tooltip=装填数:
+item.takumiknife_gun.name=匠式砲丁[爆]
+item.attackcore.name=匠エネルギーコア[極]
 
 #entity
 ＃descは36文字まで。
@@ -897,7 +901,7 @@ advancements.takumicraft.typedest.desc=匠素結晶[壊]を入手する 鉄床�
 advancements.takumicraft.typemagic.title=魔の使い手
 advancements.takumicraft.typemagic.desc=匠素結晶[魔]を入手する 鉄床で匠素結晶の武器にエンチャント可能 魔法の力は守りを与え、近づくものには枷を与える。
 entity.creeper_hoge.name=匠
-advancements.takumicraft.slay.desc=が匠の書に追加された
+advancements.takumicraft.slay.desc=匠の書に追加された
 advancements.takumicraft.parachute.title=快適なガスト匠の旅
 advancements.takumicraft.parachute.desc=匠式落下傘で50ブロック以上降下する たまにはゆっくり、ガスト匠と一緒に快適な空の旅を。
 
