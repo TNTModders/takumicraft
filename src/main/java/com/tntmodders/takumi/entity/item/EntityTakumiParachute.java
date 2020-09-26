@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -58,7 +59,7 @@ public class EntityTakumiParachute extends Entity {
     public void onUpdate() {
         super.onUpdate();
         this.motionY = -0.1;
-        if (this.getControllingPassenger() != null) {
+        if (this.getControllingPassenger() != null && this.getControllingPassenger() instanceof EntityPlayer) {
             this.motionX = this.getControllingPassenger().motionX * 10;
             this.motionZ = this.getControllingPassenger().motionZ * 10;
             this.rotationYaw = this.getControllingPassenger().rotationYaw;
@@ -66,6 +67,9 @@ public class EntityTakumiParachute extends Entity {
                 TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) this.getControllingPassenger(),
                         new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
                         new ResourceLocation(TakumiCraftCore.MODID, "parachutefall"));
+            } else {
+                this.motionX *= 0.8;
+                this.motionZ *= 0.8;
             }
         }
         this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);

@@ -114,7 +114,6 @@ public class BlockTakumiInstantWall extends Block implements ITakumiItemBlock {
                 double d1 = (double) pos.getY() + 0.3 + rand.nextDouble() * 0.5;
                 double d2 = (double) pos.getZ() + rand.nextDouble() * 1.4 - 0.2;
                 for (int i = 0; i < (meta - 10) * (meta - 10) * 2; i++) {
-                    TakumiCraftCore.LOGGER.info("disp");
                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
                 }
             }
