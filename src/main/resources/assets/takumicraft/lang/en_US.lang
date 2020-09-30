@@ -792,6 +792,7 @@ entity.creeperpainting.name=Creeper Painting
 entity.creeperbolt.name=Creeper Bolt
 entity.destgolem.name=Dest Golem
 entity.takumiparachute.name=Takumi Parachute
+entity.takumiknifegungrenede.name=Creeper Transform Bowgun
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

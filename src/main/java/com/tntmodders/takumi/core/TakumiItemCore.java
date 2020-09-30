@@ -105,6 +105,7 @@ public class TakumiItemCore {
     public static final ItemTakumiSpecialMeat SPECIALMEAT_FLESH = new ItemTakumiSpecialMeat(((ItemFood) Items.ROTTEN_FLESH), Items.ROTTEN_FLESH);
     public static final Item ATTACK_CORE = new ItemAttackCore();
     public static final Item TAKUMI_KNIFE = new ItemTakumiKnife_S();
+    public static final Item TAKUMI_KNIFE_GUN = new ItemTakumiKnife_G();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

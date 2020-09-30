@@ -1,0 +1,126 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "takumicraft:items/takumiknife_gun"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -80,
+        0,
+        40
+      ],
+      "translation": [
+        -1,
+        -2,
+        2.5
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -80,
+        0,
+        -40
+      ],
+      "translation": [
+        -1,
+        -2,
+        2.5
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "takumicraft:item/takumiknife_6"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.17
+      },
+      "model": "takumicraft:item/takumiknife_5"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.32
+      },
+      "model": "takumicraft:item/takumiknife_4"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.43
+      },
+      "model": "takumicraft:item/takumiknife_3"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.57
+      },
+      "model": "takumicraft:item/takumiknife_2"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.71
+      },
+      "model": "takumicraft:item/takumiknife_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.86
+      },
+      "model": "takumicraft:item/takumiknife_0"
+    }
+  ]
+}

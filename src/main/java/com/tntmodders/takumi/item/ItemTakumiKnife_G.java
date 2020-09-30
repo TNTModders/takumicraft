@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
+import com.tntmodders.takumi.entity.item.EntityTakumiKnifeGun;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,14 +27,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class ItemTakumiKnife_S extends Item {
+public class ItemTakumiKnife_G extends Item {
     protected static final UUID SWORD_HEALTH_MODIFIER = UUID.fromString("7ABE2D17-F418-4EC4-BFC2-E7B2A1AB89B2");
 
-    public ItemTakumiKnife_S() {
+    public ItemTakumiKnife_G() {
         super();
-        this.setRegistryName(TakumiCraftCore.MODID, "takumiknife");
+        this.setRegistryName(TakumiCraftCore.MODID, "takumiknife_gun");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
-        this.setUnlocalizedName("takumiknife");
+        this.setUnlocalizedName("takumiknife_gun");
         this.setMaxStackSize(1);
         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
             @Override
@@ -42,7 +43,7 @@ public class ItemTakumiKnife_S extends Item {
                 if (entityIn == null) {
                     return 0.0F;
                 }
-                return entityIn.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_KNIFE ? 0.0F :
+                return entityIn.getActiveItemStack().getItem() != TakumiItemCore.TAKUMI_KNIFE_GUN ? 0.0F :
                         (float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 40.0F;
             }
         });
@@ -59,10 +60,6 @@ public class ItemTakumiKnife_S extends Item {
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                    new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 24, 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-                    new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", 1d, 0));
             multimap.put(SharedMonsterAttributes.MAX_HEALTH.getName(),
                     new AttributeModifier(SWORD_HEALTH_MODIFIER, "Health modifier", 20f, 0));
         }
@@ -122,31 +119,6 @@ public class ItemTakumiKnife_S extends Item {
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        if (entity instanceof EntityLivingBase) {
-            player.heal(2f);
-            player.getFoodStats().addStats(1, 0.2f);
-            for (int i = 0; i < 10; i++) {
-                double x = player.world.rand.nextDouble() - 0.5;
-                double y = player.world.rand.nextDouble() * 1.5;
-                double z = player.world.rand.nextDouble() - 0.5;
-                player.world.spawnParticle(EnumParticleTypes.HEART, player.posX + x, player.posY + y, player.posZ + z, x, y, z);
-            }
-            if (!player.world.isRemote) {
-                NBTTagCompound compound = stack.getTagCompound() == null ? new NBTTagCompound() : stack.getTagCompound();
-                if (compound.hasKey("Power")) {
-                    int i = Math.min(10, compound.getInteger("Power") + 1);
-                    compound.setInteger("Power", i);
-                } else {
-                    compound.setInteger("Power", 1);
-                }
-                stack.setTagCompound(compound);
-            }
-        }
-        return super.onLeftClickEntity(stack, player, entity);
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         int i = 0;
@@ -156,15 +128,18 @@ public class ItemTakumiKnife_S extends Item {
         tooltip.add(TakumiUtils.takumiTranslate("item.takumiknife.tooltip") + " " + i);
     }
 
+
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
         if (entityLiving instanceof EntityPlayer) {
-            int i = this.getMaxItemUseDuration(stack) - timeLeft;
-            if (i > 40) {
-                if (entityLiving.getActiveItemStack() == stack) {
-                    ItemStack itemStack = new ItemStack(TakumiItemCore.TAKUMI_KNIFE_GUN);
-                    itemStack.setTagCompound(stack.getTagCompound());
-                    entityLiving.setHeldItem(entityLiving.getActiveHand(), itemStack);
+            if (true) {
+                int i = this.getMaxItemUseDuration(stack) - timeLeft;
+                if (i > 40) {
+                    if (entityLiving.getActiveItemStack() == stack) {
+                        ItemStack itemStack = new ItemStack(TakumiItemCore.TAKUMI_KNIFE);
+                        itemStack.setTagCompound(stack.getTagCompound());
+                        entityLiving.setHeldItem(entityLiving.getActiveHand(), itemStack);
+                    }
                 }
             }
         }
@@ -190,8 +165,39 @@ public class ItemTakumiKnife_S extends Item {
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
         int i = this.getMaxItemUseDuration(stack) - count;
         if (player.world.isRemote && i % 16 == 1 && i < 40) {
-            player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.1f, 1f);
+            player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.25f, 1f);
+        } else
+            super.onUsingTick(stack, player, count);
+    }
+
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        if (entityLiving instanceof EntityPlayer) {
+            if (!((EntityPlayer) entityLiving).getCooldownTracker().hasCooldown(stack.getItem())) {
+                if (!entityLiving.world.isRemote) {
+                    NBTTagCompound compound = stack.getTagCompound() == null ? new NBTTagCompound() : stack.getTagCompound();
+                    boolean flg = ((EntityPlayer) entityLiving).isCreative();
+                    if (compound.hasKey("Power")) {
+                        int i = compound.getInteger("Power");
+                        if (i > 0 || flg) {
+                            if (!flg) {
+                                compound.setInteger("Power", i - 1);
+                            }
+                            EntityTakumiKnifeGun grenede = new EntityTakumiKnifeGun(entityLiving.world, entityLiving);
+                            grenede.setThrowableHeading(entityLiving.getLookVec().x, -0.025, entityLiving.getLookVec().z, 5f, 0);
+                            entityLiving.world.spawnEntity(grenede);
+                            stack.setTagCompound(compound);
+                            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, 10);
+                        }
+                    } else {
+                        compound.setInteger("Power", 0);
+                        stack.setTagCompound(compound);
+                    }
+                }
+                return true;
+            }
+            return false;
         }
-        super.onUsingTick(stack, player, count);
+        return true;
     }
 }

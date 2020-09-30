@@ -2,5 +2,55 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "takumicraft:items/takumiknife"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "takumicraft:item/takumiknife_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.17
+      },
+      "model": "takumicraft:item/takumiknife_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.32
+      },
+      "model": "takumicraft:item/takumiknife_2"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.43
+      },
+      "model": "takumicraft:item/takumiknife_3"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.57
+      },
+      "model": "takumicraft:item/takumiknife_4"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.71
+      },
+      "model": "takumicraft:item/takumiknife_5"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.86
+      },
+      "model": "takumicraft:item/takumiknife_6"
+    }
+  ]
 }

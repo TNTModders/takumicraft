@@ -20,10 +20,7 @@ import net.minecraft.block.BlockRailPowered;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.MoverType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityItemFrame;
@@ -31,10 +28,7 @@ import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.passive.EntityBat;
-import net.minecraft.entity.passive.EntityParrot;
-import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -373,7 +367,7 @@ public class TakumiEvents {
         if (EnchantmentHelper.getEnchantments(event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND)).containsKey(
                 TakumiEnchantmentCore.TYPE_MAGIC)) {
             if (!event.getEntityLiving().world.isRemote) {
-                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 5, 4, true, false));
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 3, true, false));
                 List<Potion> potions = new ArrayList<>();
                 event.getEntityLiving().getActivePotionEffects().forEach(potionEffect -> {
                     if (potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION) {
@@ -473,10 +467,12 @@ public class TakumiEvents {
     public void onExplosion(Detonate event) {
         if (TakumiConfigCore.inTCPVP) {
             if (event.getExplosion().getPosition().y < 50) {
-                event.setCanceled(true);
+                event.getAffectedEntities().clear();
+                event.getAffectedBlocks().clear();
+            } else {
+                event.getAffectedEntities().removeIf(entity -> entity.posY < 49);
+                event.getAffectedBlocks().removeIf(pos -> pos.getY() < 50);
             }
-            event.getAffectedEntities().removeIf(entity -> entity.posY < 49);
-            event.getAffectedBlocks().removeIf(pos -> pos.getY() < 50);
             return;
         }
         if (FMLCommonHandler.instance().getSide().isServer() && event.getWorld().getMinecraftServer() != null) {
@@ -664,6 +660,10 @@ public class TakumiEvents {
                             return false;
                         });
                     }
+                }
+                if (grenade instanceof EntityTakumiKnifeGun) {
+                    event.getAffectedEntities().removeIf(entity -> entity instanceof EntityPlayer || (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed())
+                            || entity instanceof EntityItem || entity instanceof EntityHanging);
                 }
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiArrow) {

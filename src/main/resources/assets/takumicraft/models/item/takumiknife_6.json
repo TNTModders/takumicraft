@@ -1,0 +1,6 @@
+{
+  "parent": "takumicraft:item/takumiknife",
+  "textures": {
+    "layer0": "takumicraft:items/takumiknife_6"
+  }
+}

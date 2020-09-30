@@ -1,8 +1,6 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.core.TakumiPacketCore;
-import com.tntmodders.takumi.network.MessageDarkShrine;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -57,10 +55,11 @@ public class BlockTakumiDarkBrick extends Block {
                     ((EntityPlayer) entityIn).addPotionEffect(new PotionEffect(potion, 6000, 4, false, false));
                     ((EntityPlayer) entityIn).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 250, 0, true, false));
                 }
-                if (entityIn instanceof EntityPlayerMP && !worldIn.isRemote) {
-                   try{
-                       TakumiPacketCore.INSTANCE.sendTo(new MessageDarkShrine(), ((EntityPlayerMP) entityIn));
-                   }catch (Exception ignored){}
+                if (entityIn.ticksExisted % 200 == 0 && entityIn instanceof EntityPlayerMP && !worldIn.isRemote) {
+                    try {
+                        //TakumiPacketCore.INSTANCE.sendTo(new MessageDarkShrine(), ((EntityPlayerMP) entityIn));
+                    } catch (Exception ignored) {
+                    }
                 }
             }
         }

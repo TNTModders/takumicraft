@@ -35,7 +35,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-        if (world.isRemote && rand.nextBoolean()) {
+        if (world.isRemote && rand.nextBoolean() && world.isAirBlock(pos.up())) {
             for (int i = 0; i < 4; i++) {
                 world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + (rand.nextDouble() - 0.5D),
                         pos.getY() + 0.375 + rand.nextDouble(), pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
@@ -47,7 +47,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 100 == 0) {
             ((EntityLivingBase) entityIn).heal(0.5f);
-            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2,0,true,false));
+            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2, 0, true, false));
         }
         if (entityIn instanceof EntityLivingBase) {
             ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);
@@ -57,10 +57,10 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
     @Override
     public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entityIn,
                                           double yToTest, Material materialIn, boolean testingHead) {
-        if(world.getBlockState(blockpos).getBlock() == this){
+        if (world.getBlockState(blockpos).getBlock() == this) {
             if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 100 == 0) {
                 ((EntityLivingBase) entityIn).heal(0.5f);
-                ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2,0,true,false));
+                ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2, 0, true, false));
             }
             if (entityIn instanceof EntityLivingBase) {
                 ((EntityLivingBase) entityIn).getActivePotionEffects().removeIf(potionEffect -> potionEffect.getPotion().isBadEffect() && potionEffect.getPotion() != TakumiPotionCore.INVERSION);

@@ -334,6 +334,9 @@ public class TakumiEntityCore {
                 EntityTakumiParachute.class, "takumiparachute", 933, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumirandomchest"),
                 EntityTakumiRandomChest.class, "takumirandomchest", 934, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiknifegungrenede"),
+                EntityTakumiKnifeGun.class, "takumiknifegungrenede", 935, TakumiCraftCore.TakumiInstance, 64, 2, true);
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -450,6 +453,7 @@ public class TakumiEntityCore {
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiParachute.class, RenderTakumiParachute::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiRandomChest.class, RenderTakumiRandomChest::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiKnifeGun.class, RenderTakumiKnifeGun::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

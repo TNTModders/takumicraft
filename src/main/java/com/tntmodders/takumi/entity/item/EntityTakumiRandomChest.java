@@ -183,7 +183,7 @@ public class EntityTakumiRandomChest extends Entity implements IInventory, ILoot
 
                 }
             } else {
-                this.motionY = -0.1;
+                this.motionY = -0.25;
                 this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
             }
         } else {

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -161,7 +162,7 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             worldIn.createExplosion(null, entityIn.posX, entityIn.posY, entityIn.posZ, 5f, true);
             stack.shrink(1);
         }
-        if (!stack.isItemEnchanted()) {
+        if (!stack.isItemEnchanted()|| !EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.MINESWEEPER)) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.MINESWEEPER, 1);
             } catch (Exception e) {
