@@ -1,9 +1,11 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
 import com.tntmodders.takumi.item.ItemTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -64,6 +66,7 @@ public class EntityTakumiArrow extends EntityArrow {
 
     @Override
     public void onUpdate() {
+        TakumiCraftCore.LOGGER.info(this.shootingEntity);
         if (this.type == EnumArrowType.LASER) {
             this.setNoGravity(true);
             if (this.world.isRemote) {
@@ -88,7 +91,7 @@ public class EntityTakumiArrow extends EntityArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.typeOfHit == Type.ENTITY) {
-            if (raytraceResultIn.entityHit == this.shootingEntity) {
+            if (raytraceResultIn.entityHit == this.shootingEntity || this.ticksExisted < 5) {
                 return;
             }
             if (!TakumiConfigCore.inEventServer) {
@@ -102,12 +105,24 @@ public class EntityTakumiArrow extends EntityArrow {
         if (!this.world.isRemote) {
             switch (this.type) {
                 case NORMAL: {
-                    if (TakumiConfigCore.inEventServer && !TakumiConfigCore.inTCPVP) {
-                        TakumiUtils.takumiCreateExplosion(world, this,
-                                this.posX, this.posY, this.posZ, 15, false, false, 4);
+                    if (TakumiConfigCore.inEventServer) {
+                        if (TakumiConfigCore.inTCPVP) {
+                            TakumiExplosion explosion = TakumiUtils.takumiCreateExplosion(world, this,
+                                    raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y, raytraceResultIn.hitVec.z, 4, false, true, 2, false);
+                            explosion.getPlayerKnockbackMap().keySet().forEach(entityPlayer -> {
+                                float f = 1.0f;
+                                if (raytraceResultIn.entityHit == entityPlayer) {
+                                    f = 2.0f;
+                                }
+                                entityPlayer.attackEntityFrom(new EntityDamageSourceIndirect("explosion.player", this.shootingEntity, this), f);
+                            });
+                        } else {
+                            TakumiUtils.takumiCreateExplosion(world, this,
+                                    raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y, raytraceResultIn.hitVec.z,  15, false, false, 4);
+                        }
                     } else {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
-                                this.posX, this.posY, this.posZ, power, false, destroy);
+                                raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y, raytraceResultIn.hitVec.z, power, false, destroy);
                     }
                     break;
                 }
@@ -115,8 +130,7 @@ public class EntityTakumiArrow extends EntityArrow {
                     for (int i = 0; i < 5; i++) {
                         TakumiUtils.takumiCreateExplosion(world,
                                 this.shootingEntity != null ? this.shootingEntity : this,
-                                this.posX + rand.nextInt(7) - 3, this.posY + rand.nextInt(3),
-                                this.posZ + rand.nextInt(7) - 3, power, false, destroy);
+                                raytraceResultIn.hitVec.x+this.rand.nextInt(7)-3, raytraceResultIn.hitVec.y+this.rand.nextInt(7)-3, raytraceResultIn.hitVec.z+this.rand.nextInt(7)-3, power, false, destroy);
                     }
 /*                    if (this.shootingEntity instanceof EntityCannonCreeper && this.shootingEntity.isGlowing() && ((EntityCannonCreeper) this.shootingEntity).getAttackTarget() instanceof EntityAttackBlock) {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
@@ -135,8 +149,8 @@ public class EntityTakumiArrow extends EntityArrow {
                     for (int i = 0; i < 5; i++) {
                         TakumiUtils.takumiCreateExplosion(world,
                                 this.shootingEntity != null ? this.shootingEntity : this,
-                                this.posX + this.motionX / 4 * i, this.posY + this.motionY / 4 * i,
-                                this.posZ + this.motionZ / 4 * i, power, false, destroy);
+                                raytraceResultIn.hitVec.x + this.motionX / 4 * i, raytraceResultIn.hitVec.y+ this.motionY / 4 * i,
+                                raytraceResultIn.hitVec.z + this.motionZ / 4 * i, power, false, destroy);
 
                     }
                     break;
@@ -144,7 +158,7 @@ public class EntityTakumiArrow extends EntityArrow {
                 case MONSTER: {
                     try {
                         EntityCreeper creeper = this.container.getConstructor(World.class).newInstance(world);
-                        creeper.setPosition(this.posX, this.posY, this.posZ);
+                        creeper.setPosition(raytraceResultIn.hitVec.x,raytraceResultIn.hitVec.y,raytraceResultIn.hitVec.z);
                         NBTTagCompound compound = new NBTTagCompound();
                         creeper.writeEntityToNBT(compound);
                         compound.setShort("Fuse", (short) 1);
@@ -167,14 +181,14 @@ public class EntityTakumiArrow extends EntityArrow {
                 case LASER: {
                     for (int i = 0; i < 10; i++) {
                         TakumiUtils.takumiCreateExplosion(world,
-                                this.shootingEntity != null ? this.shootingEntity : this, this.posX + this.motionX * i,
-                                this.posY + this.motionY * i, this.posZ + this.motionZ * i, power, false, destroy);
+                                this.shootingEntity != null ? this.shootingEntity : this, raytraceResultIn.hitVec.x + this.motionX * i,
+                                raytraceResultIn.hitVec.y + this.motionY * i, raytraceResultIn.hitVec.z + this.motionZ * i, power, false, destroy);
                     }
                     break;
                 }
             }
+            this.setDead();
         }
-        this.setDead();
     }
 
     @Override

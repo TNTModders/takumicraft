@@ -1,10 +1,15 @@
 {
+  "type": "minecraft:chest",
   "pools": [
     {
       "name": "takumicraft:takumirandomchest",
       "rolls": {
-        "min": 1,
+        "min": 2,
         "max": 5
+      },
+      "bonus_rolls": {
+        "min": 0,
+        "max": 1
       },
       "entries": [
         {
@@ -20,18 +25,13 @@
         },
         {
           "type": "item",
-          "name": "minecraft:banner",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": 8
-            },
-            {
-              "function": "set_data",
-              "data": 15
-            }
-          ]
+          "name": "takumicraft:takumiinstantwall",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "takumicraft:creepersnowbomb",
+          "weight": 10
         },
         {
           "type": "item",
@@ -114,6 +114,20 @@
         {
           "type": "item",
           "name": "minecraft:record_13",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "takumicraft:record_explosion",
           "weight": 10,
           "functions": [
             {
@@ -270,7 +284,7 @@
         {
           "type": "item",
           "name": "takumicraft:monsterbomb_weathercreeper",
-          "weight": 10,
+          "weight": 5,
           "functions": [
             {
               "function": "set_count",
@@ -306,6 +320,13 @@
                 "min": 1,
                 "max": 1
               }
+            },
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.1,
+                "max": 0.8
+              }
             }
           ]
         },
@@ -333,6 +354,13 @@
               "count": {
                 "min": 1,
                 "max": 1
+              }
+            },
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.1,
+                "max": 0.8
               }
             }
           ]
@@ -443,47 +471,51 @@
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{Potion:\"minecraft:strong_swiftness\"}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製ポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0}],CustomPotionColor:65280}"
+            },
+            {
+              "function": "set_nbt",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製俊足ポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:1,Amplifier:1,Duration:1800}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
-                  "chance": 0.2
+                  "chance": 0.6
                 }
               ]
             },
             {
               "function": "set_nbt",
-              "tag": "{Potion:\"minecraft:strong_leaping\"}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製跳躍ポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:8,Amplifier:1,Duration:1800}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
-                  "chance": 0.2
+                  "chance": 0.5
                 }
               ]
             },
             {
               "function": "set_nbt",
-              "tag": "{Potion:\"minecraft:water_breathing\"}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製水中呼吸ポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:13,Amplifier:0,Duration:3600}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
-                  "chance": 0.2
+                  "chance": 0.4
                 }
               ]
             },
             {
               "function": "set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:34,Amplifier:0,Duration:600}]}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製防爆ポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:34,Amplifier:0,Duration:600}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
-                  "chance": 0.2
+                  "chance": 0.3
                 }
               ]
             },
             {
               "function": "set_nbt",
-              "tag": "{Potion:\"minecraft:healing\"}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製回復ポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:6,Amplifier:0}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
@@ -496,12 +528,16 @@
         {
           "type": "item",
           "name": "minecraft:splash_potion",
-          "weight": 4,
+          "weight": 10,
           "children": "alternatives",
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:34,Amplifier:0,Duration:600}]}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製スプラッシュポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0}],CustomPotionColor:65280}"
+            },
+            {
+              "function": "set_nbt",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製防爆スプラッシュポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:34,Amplifier:0,Duration:600}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
@@ -511,11 +547,68 @@
             },
             {
               "function": "set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:35,Amplifier:0,Duration:600}]}",
+              "tag": "{display:{Lore:[\"アイテム運が上がるかも……?\"],Name:\"匠式特製収爆スプラッシュポーション\"},CustomPotionEffects:[{Id:26,Amplifier:0,Duration:1200,ShowParticles:0},{Id:35,Amplifier:0,Duration:600}],CustomPotionColor:65280}",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
                   "chance": 0.5
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.8
+        }
+      ]
+    },
+    {
+      "name": "takumicraft:takumirandomchest_ammo",
+      "rolls": 1,
+      "bonus_rolls": {
+        "min": 0,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "item",
+          "name": "takumicraft:takumiarrow_sai",
+          "weight": 100,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 8
+            },
+            {
+              "function": "set_count",
+              "count": 16,
+              "conditions": [
+                {
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.5
+                }
+              ]
+            },
+            {
+              "function": "set_count",
+              "count": 24,
+              "conditions": [
+                {
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.25
+                }
+              ]
+            },
+            {
+              "function": "set_count",
+              "count": 32,
+              "conditions": [
+                {
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.1
                 }
               ]
             }
