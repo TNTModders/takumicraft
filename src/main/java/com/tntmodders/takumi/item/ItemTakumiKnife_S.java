@@ -123,16 +123,18 @@ public class ItemTakumiKnife_S extends Item {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        if (entity instanceof EntityLivingBase) {
-            player.heal(2f);
-            player.getFoodStats().addStats(1, 0.2f);
-            for (int i = 0; i < 10; i++) {
-                double x = player.world.rand.nextDouble() - 0.5;
-                double y = player.world.rand.nextDouble() * 1.5;
-                double z = player.world.rand.nextDouble() - 0.5;
-                player.world.spawnParticle(EnumParticleTypes.HEART, player.posX + x, player.posY + y, player.posZ + z, x, y, z);
+        if (entity instanceof EntityLivingBase && player.getRidingEntity() != entity) {
+            if (player.world.isRemote) {
+                for (int i = 0; i < 10; i++) {
+                    double x = player.world.rand.nextDouble() - 0.5;
+                    double y = player.world.rand.nextDouble() * 1.5;
+                    double z = player.world.rand.nextDouble() - 0.5;
+                    player.world.spawnParticle(EnumParticleTypes.HEART, player.posX + x, player.posY + y, player.posZ + z, x, y, z);
+                }
             }
-            if (!player.world.isRemote) {
+           else {
+                player.heal(2f);
+                player.getFoodStats().addStats(1, 0.2f);
                 NBTTagCompound compound = stack.getTagCompound() == null ? new NBTTagCompound() : stack.getTagCompound();
                 if (compound.hasKey("Power")) {
                     int i = Math.min(10, compound.getInteger("Power") + 1);

@@ -45,7 +45,7 @@ public class BlockTakumiHotSpring extends BlockFluidClassic {
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 100 == 0) {
+        if (!entityIn.world.isRemote && entityIn instanceof EntityLivingBase && entityIn.ticksExisted % 100 == 0) {
             ((EntityLivingBase) entityIn).heal(0.5f);
             ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SATURATION, 2, 0, true, false));
         }

@@ -184,7 +184,7 @@ public class ItemTakumiKnife_G extends Item {
                                 compound.setInteger("Power", i - 1);
                             }
                             EntityTakumiKnifeGun grenede = new EntityTakumiKnifeGun(entityLiving.world, entityLiving);
-                            grenede.setThrowableHeading(entityLiving.getLookVec().x, -0.025, entityLiving.getLookVec().z, 5f, 0);
+                            grenede.setThrowableHeading(entityLiving.getLookVec().x, entityLiving.getLookVec().y, entityLiving.getLookVec().z, 5f, 0);
                             entityLiving.world.spawnEntity(grenede);
                             stack.setTagCompound(compound);
                             ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, 10);

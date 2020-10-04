@@ -21,7 +21,7 @@ public class ItemTakumiParachute extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (!worldIn.isRemote && playerIn.getRidingEntity() == null) {
-            if (!worldIn.collidesWithAnyBlock(playerIn.getEntityBoundingBox().grow(4)) && worldIn.getWorldBorder().getClosestDistance(playerIn) < 3.5 * 3.5) {
+            if (!worldIn.collidesWithAnyBlock(playerIn.getEntityBoundingBox().grow(4)) && worldIn.getWorldBorder().getClosestDistance(playerIn) > 3.5 * 3.5) {
                 EntityTakumiParachute parachute = new EntityTakumiParachute(worldIn);
                 parachute.setPosition(playerIn.posX, playerIn.posY, playerIn.posZ);
                 boolean flg = worldIn.spawnEntity(parachute);

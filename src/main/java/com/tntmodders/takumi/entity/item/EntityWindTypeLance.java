@@ -34,7 +34,7 @@ public class EntityWindTypeLance extends EntityTippedArrow {
         this.setInvisible(true);
         if (!this.world.isRemote) {
             TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 2);
-            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(2)) || this.world.getWorldBorder().getClosestDistance(this) < 2.5 * 2.5) {
+            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(2,0,2)) || this.world.getWorldBorder().getClosestDistance(this) < 2.5 * 2.5) {
                 this.dismount();
             }
         }

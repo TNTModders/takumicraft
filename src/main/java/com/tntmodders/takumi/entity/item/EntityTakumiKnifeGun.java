@@ -33,4 +33,12 @@ public class EntityTakumiKnifeGun extends AbstractEntityTakumiGrenade {
     public boolean getDestroy() {
         return false;
     }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.ticksExisted > 200) {
+            this.setDead();
+        }
+    }
 }
