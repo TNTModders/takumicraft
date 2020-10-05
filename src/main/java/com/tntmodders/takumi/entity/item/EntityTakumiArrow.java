@@ -1,8 +1,8 @@
 package com.tntmodders.takumi.entity.item;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityIceologerCreeper;
 import com.tntmodders.takumi.item.ItemTakumiArrow;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
@@ -66,7 +66,6 @@ public class EntityTakumiArrow extends EntityArrow {
 
     @Override
     public void onUpdate() {
-        TakumiCraftCore.LOGGER.info(this.shootingEntity);
         if (this.type == EnumArrowType.LASER) {
             this.setNoGravity(true);
             if (this.world.isRemote) {
@@ -118,7 +117,7 @@ public class EntityTakumiArrow extends EntityArrow {
                             });
                         } else {
                             TakumiUtils.takumiCreateExplosion(world, this,
-                                    raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y, raytraceResultIn.hitVec.z,  15, false, false, 4);
+                                    raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y, raytraceResultIn.hitVec.z, 15, false, false, 4);
                         }
                     } else {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
@@ -130,7 +129,7 @@ public class EntityTakumiArrow extends EntityArrow {
                     for (int i = 0; i < 5; i++) {
                         TakumiUtils.takumiCreateExplosion(world,
                                 this.shootingEntity != null ? this.shootingEntity : this,
-                                raytraceResultIn.hitVec.x+this.rand.nextInt(7)-3, raytraceResultIn.hitVec.y+this.rand.nextInt(7)-3, raytraceResultIn.hitVec.z+this.rand.nextInt(7)-3, power, false, destroy);
+                                raytraceResultIn.hitVec.x + this.rand.nextInt(7) - 3, raytraceResultIn.hitVec.y + this.rand.nextInt(7) - 3, raytraceResultIn.hitVec.z + this.rand.nextInt(7) - 3, power, false, destroy);
                     }
 /*                    if (this.shootingEntity instanceof EntityCannonCreeper && this.shootingEntity.isGlowing() && ((EntityCannonCreeper) this.shootingEntity).getAttackTarget() instanceof EntityAttackBlock) {
                         TakumiUtils.takumiCreateExplosion(world, this.shootingEntity != null ? this.shootingEntity : this,
@@ -149,7 +148,7 @@ public class EntityTakumiArrow extends EntityArrow {
                     for (int i = 0; i < 5; i++) {
                         TakumiUtils.takumiCreateExplosion(world,
                                 this.shootingEntity != null ? this.shootingEntity : this,
-                                raytraceResultIn.hitVec.x + this.motionX / 4 * i, raytraceResultIn.hitVec.y+ this.motionY / 4 * i,
+                                raytraceResultIn.hitVec.x + this.motionX / 4 * i, raytraceResultIn.hitVec.y + this.motionY / 4 * i,
                                 raytraceResultIn.hitVec.z + this.motionZ / 4 * i, power, false, destroy);
 
                     }
@@ -157,21 +156,25 @@ public class EntityTakumiArrow extends EntityArrow {
                 }
                 case MONSTER: {
                     try {
-                        EntityCreeper creeper = this.container.getConstructor(World.class).newInstance(world);
-                        creeper.setPosition(raytraceResultIn.hitVec.x,raytraceResultIn.hitVec.y,raytraceResultIn.hitVec.z);
-                        NBTTagCompound compound = new NBTTagCompound();
-                        creeper.writeEntityToNBT(compound);
-                        compound.setShort("Fuse", (short) 1);
-                        creeper.readEntityFromNBT(compound);
-                        if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
-                            creeper.onStruckByLightning(null);
-                        }
-                        creeper.setInvisible(true);
-                        creeper.ignite();
-                        world.spawnEntity(creeper);
-                        creeper.onUpdate();
-                        if (creeper instanceof EntityBoltCreeper) {
-                            creeper.setDead();
+                        if (this.container == EntityIceologerCreeper.class) {
+                            EntityIceologerCreeper.summonIceologerSpell(world, raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y + 5, raytraceResultIn.hitVec.z);
+                        } else {
+                            EntityCreeper creeper = this.container.getConstructor(World.class).newInstance(world);
+                            creeper.setPosition(raytraceResultIn.hitVec.x, raytraceResultIn.hitVec.y, raytraceResultIn.hitVec.z);
+                            NBTTagCompound compound = new NBTTagCompound();
+                            creeper.writeEntityToNBT(compound);
+                            compound.setShort("Fuse", (short) 1);
+                            creeper.readEntityFromNBT(compound);
+                            if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
+                                creeper.onStruckByLightning(null);
+                            }
+                            creeper.setInvisible(true);
+                            creeper.ignite();
+                            world.spawnEntity(creeper);
+                            creeper.onUpdate();
+                            if (creeper instanceof EntityBoltCreeper) {
+                                creeper.setDead();
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

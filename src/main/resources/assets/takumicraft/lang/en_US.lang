@@ -726,6 +726,8 @@ entity.poisoncreeper.name=Poison Creeper
 entity.poisoncreeper.desc=The blast of this creeper is poisoness, draining your helth.
 entity.myceliumcreeper.name=Mycelium Creeper
 entity.myceliumcreeper.desc=Creeping mycelium, do you want to eat mushroom?
+entity.iceologercreeper.name=Iceologer Creeper
+entity.iceologercreeper.desc=Not a Looser, but a froster creeping from the winter.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -793,6 +795,7 @@ entity.creeperbolt.name=Creeper Bolt
 entity.destgolem.name=Dest Golem
 entity.takumiparachute.name=Takumi Parachute
 entity.takumiknifegungrenede.name=Creeper Transform Bowgun
+entity.iceologercreeperspell.name=Iceologer Creeper
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.
@@ -890,6 +893,7 @@ splash_potion.effect.creeper=Splash Potion of Creeper
 lingering_potion.effect.creeper=Lingering Potion of Creeper
 tipped_arrow.effect.antiswelling=Arrow of Anti Swelling
 tipped_arrow.effect.antiexplosion=Arrow of Anti Explosion
+frozen=Frozen
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

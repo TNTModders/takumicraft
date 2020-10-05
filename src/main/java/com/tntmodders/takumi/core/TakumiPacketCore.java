@@ -16,11 +16,9 @@ public class TakumiPacketCore {
     public static void register() {
         INSTANCE.registerMessage(MessageMSMoveHandler.class, MessageMSMove.class, 0, Side.SERVER);
         INSTANCE.registerMessage(MessageTHMDetonateHandler.class, MessageTHMDetonate.class, 1, Side.SERVER);
-/*        if (FMLCommonHandler.instance().getSide().isClient()) {
-            registerClient();
-        }*/
         INSTANCE.registerMessage(MessageDarkShrineHandler.class, MessageDarkShrine.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(MessageMSFoilHandler.class, MessageMSFoil.class, 3, Side.CLIENT);
+        INSTANCE.registerMessage(MessageFrozenEffectHandler.class, MessageFrozenEffect.class, 4, Side.CLIENT);
     }
 
     @SideOnly(Side.CLIENT)

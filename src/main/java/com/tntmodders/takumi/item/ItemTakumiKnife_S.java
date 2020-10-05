@@ -196,4 +196,6 @@ public class ItemTakumiKnife_S extends Item {
         }
         super.onUsingTick(stack, player, count);
     }
+
+
 }

@@ -110,7 +110,8 @@ public abstract class EntityAbstractSpellCreeper extends EntityAbstractIllagerCr
 
     public enum SpellType {
         NONE(0, 0.0D, 0.0D, 0.0D), SUMMON_VEX(1, 0.7D, 0.7D, 0.8D), FANGS(2, 0.4D, 0.3D, 0.35D),
-        WOLOLO(3, 0.7D, 0.5D, 0.2D), DISAPPEAR(4, 0.3D, 0.3D, 0.8D), BLINDNESS(5, 0.1D, 0.1D, 0.2D);
+        WOLOLO(3, 0.7D, 0.5D, 0.2D), DISAPPEAR(4, 0.3D, 0.3D, 0.8D), BLINDNESS(5, 0.1D, 0.1D, 0.2D),
+        ICE(6, 0f, 0f, 0.6f);
 
         private final int id;
         private final double[] particleSpeed;

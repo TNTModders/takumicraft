@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.entity.mobs.EntityBoltCreeper;
+import com.tntmodders.takumi.entity.mobs.EntityIceologerCreeper;
 import com.tntmodders.takumi.item.ItemTakumiMonsterBomb;
 import com.tntmodders.takumi.tileentity.TileEntityMonsterBomb;
 import net.minecraft.block.ITileEntityProvider;
@@ -53,6 +54,9 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
         if (Objects.equals(name, "creativecreeper")) {
             locName = "textures/entity/creab.png";
         }
+        if (Objects.equals(name, "iceologercreeper")) {
+            locName = "textures/entity/iceolb.png";
+        }
         this.locName = locName;
         this.tileEntityMonsterBomb = new TileEntityMonsterBomb(locName);
         this.isBlockContainer = true;
@@ -79,8 +83,7 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-            EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return true;
     }
 
@@ -107,9 +110,7 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-            @Nullable
-                    TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         if (te instanceof IWorldNameable && ((IWorldNameable) te).hasCustomName()) {
             player.addStat(StatList.getBlockStats(this));
             player.addExhaustion(0.005F);
@@ -148,27 +149,31 @@ public class BlockTakumiMonsterBomb extends BlockAbstractTakumiBomb implements I
 
     @Override
     public void explode(World world, int x, int y, int z) {
-        try {
-            if (!world.isRemote) {
-                EntityCreeper creeper = this.entityClass.getConstructor(World.class).newInstance(world);
-                creeper.setPosition(x + 0.5, y + 0.5, z + 0.5);
-                NBTTagCompound compound = new NBTTagCompound();
-                creeper.writeEntityToNBT(compound);
-                compound.setShort("Fuse", (short) 1);
-                creeper.readEntityFromNBT(compound);
-                if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
-                    creeper.onStruckByLightning(null);
+        if (this.entityClass == EntityIceologerCreeper.class) {
+            EntityIceologerCreeper.summonIceologerSpell(world, x + 0.5, y + 5.5, z + 0.5);
+        } else {
+            try {
+                if (!world.isRemote) {
+                    EntityCreeper creeper = this.entityClass.getConstructor(World.class).newInstance(world);
+                    creeper.setPosition(x + 0.5, y + 0.5, z + 0.5);
+                    NBTTagCompound compound = new NBTTagCompound();
+                    creeper.writeEntityToNBT(compound);
+                    compound.setShort("Fuse", (short) 1);
+                    creeper.readEntityFromNBT(compound);
+                    if (creeper instanceof EntityBoltCreeper || world.isThundering()) {
+                        creeper.onStruckByLightning(null);
+                    }
+                    creeper.setInvisible(true);
+                    creeper.ignite();
+                    world.spawnEntity(creeper);
+                    creeper.onUpdate();
+                    if (creeper instanceof EntityBoltCreeper) {
+                        creeper.setDead();
+                    }
                 }
-                creeper.setInvisible(true);
-                creeper.ignite();
-                world.spawnEntity(creeper);
-                creeper.onUpdate();
-                if (creeper instanceof EntityBoltCreeper) {
-                    creeper.setDead();
-                }
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
             }
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
         }
     }
 

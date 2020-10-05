@@ -22,6 +22,7 @@ public class TakumiPotionCore {
     public static final Potion CLOCK = new PotionClockCreeper();
     public static final Potion ANTI_EXPLOSION = new PotionAntiExplosion();
     public static final Potion ANTI_SWELLING = new PotionAntiSwelling();
+    public static final Potion FROZEN = new PotionFrozen();
 
     public static final PotionType EXPLOSION = new PotionType(new PotionEffect(ANTI_EXPLOSION, 3600))
             .setRegistryName(TakumiCraftCore.MODID, "antiexplosion");
@@ -39,6 +40,7 @@ public class TakumiPotionCore {
         event.register(CLOCK);
         event.register(ANTI_EXPLOSION);
         event.register(ANTI_SWELLING);
+        event.register(FROZEN);
     }
 
     public static void registerPotionType(IForgeRegistry<PotionType> event) {

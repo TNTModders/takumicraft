@@ -23,6 +23,7 @@ public class ModelIllagerCreeper extends ModelBase {
     public ModelRenderer nose;
     public ModelRenderer rightArm;
     public ModelRenderer leftArm;
+    public ModelRenderer cape;
 
     public ModelIllagerCreeper(float scaleFactor, float p_i47227_2_, int textureWidthIn, int textureHeightIn) {
         this.head = new ModelRenderer(this).setTextureSize(textureWidthIn, textureHeightIn);
@@ -40,6 +41,12 @@ public class ModelIllagerCreeper extends ModelBase {
         this.body.setRotationPoint(0.0F, 0.0F + p_i47227_2_, 0.0F);
         this.body.setTextureOffset(16, 20).addBox(-4.0F, 0.0F, -3.0F, 8, 12, 6, scaleFactor);
         this.body.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, scaleFactor + 0.5F);
+        this.cape = new ModelRenderer(this).setTextureSize(textureWidthIn, textureHeightIn);
+        this.cape.setRotationPoint(0.0F, 0.0F + p_i47227_2_, 0.0F);
+        this.cape.setTextureOffset(64, 38).addBox(-4f, 1f, 3f, 9, 20, 1, scaleFactor);
+        this.cape.rotateAngleX = ((float) Math.toRadians(15));
+        this.body.addChild(this.cape);
+        this.cape.showModel = false;
         this.arms = new ModelRenderer(this).setTextureSize(textureWidthIn, textureHeightIn);
         this.arms.setRotationPoint(0.0F, 0.0F + p_i47227_2_ + 2.0F, 0.0F);
         this.arms.setTextureOffset(44, 22).addBox(-8.0F, -2.0F, -2.0F, 4, 8, 4, scaleFactor);
@@ -69,7 +76,7 @@ public class ModelIllagerCreeper extends ModelBase {
      */
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-            float headPitch, float scale) {
+                       float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
         this.head.render(scale);
         this.body.render(scale);
@@ -92,7 +99,7 @@ public class ModelIllagerCreeper extends ModelBase {
      */
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-            float headPitch, float scaleFactor, Entity entityIn) {
+                                  float headPitch, float scaleFactor, Entity entityIn) {
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.arms.rotationPointY = 3.0F;

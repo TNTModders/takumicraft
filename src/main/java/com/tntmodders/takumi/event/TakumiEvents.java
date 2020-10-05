@@ -12,6 +12,7 @@ import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.item.*;
+import com.tntmodders.takumi.network.MessageFrozenEffect;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
@@ -61,11 +62,8 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent.Close;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
@@ -711,6 +709,22 @@ public class TakumiEvents {
             event.getAffectedBlocks().removeIf(pos -> pos.getY() < event.getExplosion().getPosition().y - 1);
             event.getAffectedEntities().clear();
         }
+        if (event.getExplosion().getExplosivePlacedBy() instanceof EntityIceologerCreeperSpell) {
+            event.getAffectedEntities().forEach(entity -> {
+                if (entity instanceof EntityLivingBase && !entity.isImmuneToExplosions()) {
+                    PotionEffect effect = new PotionEffect(TakumiPotionCore.FROZEN, 200, 0, true, false);
+                    ((EntityLivingBase) entity).addPotionEffect(effect);
+                    DamageSource source = DamageSource.causeMobDamage(event.getExplosion().getExplosivePlacedBy()).setMagicDamage();
+                    if (!entity.isEntityInvulnerable(source)) {
+                        entity.attackEntityFrom(source, 3f + entity.world.getDifficulty().getDifficultyId());
+                    }
+                    if (!entity.world.isRemote && !(entity instanceof EntityPlayer)) {
+                        TakumiPacketCore.INSTANCE.sendToAll(new MessageFrozenEffect(entity.getEntityId(), effect, false));
+                    }
+                }
+            });
+            event.getAffectedEntities().clear();
+        }
         if (event.getExplosion().getExplosivePlacedBy() instanceof ITakumiEntity) {
             boolean flg = ((ITakumiEntity) event.getExplosion().getExplosivePlacedBy()).takumiExplodeEvent(event);
             if (!flg) {
@@ -1241,6 +1255,86 @@ public class TakumiEvents {
                 }
                 return entityItem;
             });
+        }
+    }
+
+    @SubscribeEvent
+    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getEntityPlayer() != null && event.getEntityPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getEntityPlayer().isCreative()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        if (event.getEntityPlayer() != null && event.getEntityPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getEntityPlayer().isCreative()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+        if (event.getEntityPlayer() != null && event.getEntityPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getEntityPlayer().isCreative()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+        if (event.getEntityPlayer() != null && event.getEntityPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getEntityPlayer().isCreative()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onUseItem(LivingEntityUseItemEvent.Start event) {
+        if (event.getEntityLiving() != null && event.getEntityLiving().isPotionActive(TakumiPotionCore.FROZEN) &&
+                !(event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).isCreative())) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onAttack(AttackEntityEvent event) {
+        if (event.getEntityPlayer() != null && event.getEntityPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getEntityPlayer().isCreative()) {
+            event.setCanceled(true);
+        } else if (event.getTarget() instanceof EntityLivingBase && ((EntityLivingBase) event.getTarget()).isPotionActive(TakumiPotionCore.FROZEN) && !event.getTarget().world.isRemote) {
+            ((EntityLivingBase) event.getTarget()).removePotionEffect(TakumiPotionCore.FROZEN);
+            PotionEffect effect = new PotionEffect(TakumiPotionCore.FROZEN, 200, 0, true, false);
+            TakumiPacketCore.INSTANCE.sendToAll(new MessageFrozenEffect(event.getTarget().getEntityId(), effect, true));
+            event.getTarget().playSound(SoundEvents.BLOCK_GLASS_BREAK, 1f, 1f);
+        }
+    }
+
+    @SubscribeEvent
+    public void onBreak(PlayerEvent.BreakSpeed event) {
+        if (event.getEntityPlayer() != null && event.getEntityPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getEntityPlayer().isCreative()) {
+            event.setNewSpeed(event.getOriginalSpeed() / 100);
+        }
+    }
+
+    @SubscribeEvent
+    public void onFinishBreak(BlockEvent.BreakEvent event) {
+        if (event.getPlayer() != null && event.getPlayer().isPotionActive(TakumiPotionCore.FROZEN) && !event.getPlayer().isCreative()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onJump(LivingEvent.LivingJumpEvent event) {
+        if (event.getEntityLiving() != null && event.getEntityLiving().isPotionActive(TakumiPotionCore.FROZEN) &&
+                !(event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).isCreative())) {
+            event.getEntityLiving().isAirBorne = false;
+            event.getEntityLiving().motionX = 0;
+            event.getEntityLiving().motionY = 0;
+            event.getEntityLiving().motionZ = 0;
+        }
+    }
+
+    @SubscribeEvent
+    public void onKnockBack(LivingKnockBackEvent event) {
+        if (event.getEntityLiving() != null && event.getEntityLiving().isPotionActive(TakumiPotionCore.FROZEN)) {
+            event.setStrength(event.getOriginalStrength() / 100);
         }
     }
 }

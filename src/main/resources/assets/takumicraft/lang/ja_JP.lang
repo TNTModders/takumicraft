@@ -779,6 +779,8 @@ entity.poisoncreeper.name=毒匠
 entity.poisoncreeper.desc=蝕むは毒の霧、命を削る煙を流し。
 entity.myceliumcreeper.name=菌匠
 entity.myceliumcreeper.desc=這い寄る菌糸と茸の匠。
+entity.iceologercreeper.name=アイソロジャー匠
+entity.iceologercreeper.desc=敗者に非ず、凍てつく冬より這い寄る魔術師。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -816,6 +818,7 @@ entity.psychiccreeper.return.3=凶
 entity.psychiccreeper.message.3=出会い運の低さが顕著です。暴走族に絡まれてしまうかも。
 entity.psychiccreeper.return.4=大凶
 entity.psychiccreeper.message.4=貴様に安寧の地など無い。
+entity.iceologercreeperspell.name=アイソロジャー匠
 
 entity.takumiarrow.name=匠式弾
 entity.takumisnowball.name=爆裂雪玉
@@ -947,6 +950,7 @@ splash_potion.effect.creeper=匠のスプラッシュポーション
 lingering_potion.effect.creeper=匠の残留ポーション
 tipped_arrow.effect.antiswelling=収爆の矢
 tipped_arrow.effect.antiexplosion=防爆の矢
+frozen=凍結
 
 #Vanilla
 item.skull.creeper.name=匠の頭

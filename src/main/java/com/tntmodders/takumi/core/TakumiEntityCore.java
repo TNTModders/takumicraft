@@ -112,7 +112,7 @@ public class TakumiEntityCore {
                 EntityLayerCreeper.class, EntityChaseCreeper.class, EntityBoarCreeper.class, EntityMouseCreeper.class, EntityEvolutionCreeper.class,
                 EntityObsidianCreeper.class, EntityWitherCreeper.class, EntityAngelCreeper.class, EntityParalysisCreeper.class, EntityKeepCreeper.class,
                 EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class, EntityWonderCreeper.class,
-                EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class));
+                EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class, EntityIceologerCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -336,6 +336,8 @@ public class TakumiEntityCore {
                 EntityTakumiRandomChest.class, "takumirandomchest", 934, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumiknifegungrenede"),
                 EntityTakumiKnifeGun.class, "takumiknifegungrenede", 935, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "iceologercreeperspell"),
+                EntityIceologerCreeperSpell.class, "iceologercreeperspell", 936, TakumiCraftCore.TakumiInstance, 64, 2, true);
 
     }
 
@@ -454,6 +456,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiParachute.class, RenderTakumiParachute::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiRandomChest.class, RenderTakumiRandomChest::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiKnifeGun.class, RenderTakumiKnifeGun::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityIceologerCreeperSpell.class, RenderIceologerCreeperSpell::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

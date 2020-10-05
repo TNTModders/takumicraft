@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiRedstoneWire;
+import com.tntmodders.takumi.client.render.layer.LayerFrozenEffect;
+import com.tntmodders.takumi.client.render.layer.LayerTakumiPoweredArmor;
 import com.tntmodders.takumi.client.render.sp.RenderEntityLivingSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerSP;
 import com.tntmodders.takumi.client.render.sp.RenderPlayerTHM;
@@ -18,17 +20,20 @@ import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.GuiGameOver;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelElytra;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelShield;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,7 +55,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -63,10 +67,9 @@ public class TakumiClientEvents {
 
     @SideOnly(Side.CLIENT)
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
-
+    private static final ResourceLocation ICE_TEXTURE = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/frozen_overlay.png");
     private static long respawnTime;
     private static long prevRespawnTime;
-
 
     @SubscribeEvent
     public void clientChatRecieved(ClientChatReceivedEvent event) {
@@ -113,6 +116,43 @@ public class TakumiClientEvents {
     }
 
     @SubscribeEvent
+    public void renderOverlayEvent(RenderGameOverlayEvent.Pre event) {
+        if (Minecraft.getMinecraft().player.isPotionActive(TakumiPotionCore.FROZEN) && event.getType() == RenderGameOverlayEvent.ElementType.HELMET &&
+                Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
+            ScaledResolution scaledRes = event.getResolution();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            Minecraft.getMinecraft().getTextureManager().bindTexture(ICE_TEXTURE);
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder bufferbuilder = tessellator.getBuffer();
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+            bufferbuilder.pos(0.0D, scaledRes.getScaledHeight(), -90.0D).tex(0.0D, 1.0D).endVertex();
+            bufferbuilder.pos(scaledRes.getScaledWidth(), scaledRes.getScaledHeight(), -90.0D).tex(1.0D, 1.0D).endVertex();
+            bufferbuilder.pos(scaledRes.getScaledWidth(), 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
+            bufferbuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
+            tessellator.draw();
+            GlStateManager.depthMask(true);
+            GlStateManager.enableDepth();
+            GlStateManager.enableAlpha();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        }
+    }
+
+    @SubscribeEvent
+    public void renderEntityLiving(RenderLivingEvent.Post event) {
+        if (event.getEntity().isPotionActive(TakumiPotionCore.FROZEN)) {
+            try {
+                Field field = TakumiASMNameMap.getField(RenderLivingBase.class, "layerRenderers");
+                field.setAccessible(true);
+                List<LayerRenderer> layerRenderers = ((List) field.get(event.getRenderer()));
+                if (layerRenderers.stream().noneMatch(layerRenderer -> layerRenderer instanceof LayerFrozenEffect)) {
+                    event.getRenderer().addLayer(new LayerFrozenEffect(event.getRenderer()));
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void color(ColorHandlerEvent.Block event) {
         event.getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockTakumiRedstoneWire.colorMultiplier(state.getValue(BlockTakumiRedstoneWire.POWER)),
                 TakumiBlockCore.CREEPER_REDSTONE_WIRE);
@@ -131,39 +171,15 @@ public class TakumiClientEvents {
         if (Lists.newArrayList(event.getEntity().getArmorInventoryList()).stream().allMatch(
                 itemStack -> itemStack.getItem() instanceof ItemBattleArmor &&
                         ((ItemBattleArmor) itemStack.getItem()).isPowered)) {
-            Minecraft.getMinecraft().getTextureManager().bindTexture(TakumiClientEvents.ModelSaber.SABER_TEXTURE);
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(event.getX(), event.getY(), event.getZ());
-            GlStateManager.depthMask(true);
-            GlStateManager.scale(1.0F, -1.0F, -1.0F);
-            GlStateManager.matrixMode(5890);
-            GlStateManager.loadIdentity();
-            float tick = Minecraft.getMinecraft().player.ticksExisted * 2;
-            GL11.glTranslated(tick * 0.01F, tick * 0.01F, 0.0F);
-            GlStateManager.matrixMode(5888);
-            GlStateManager.enableBlend();
-            GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-            GlStateManager.disableLighting();
-            int i = 15728880;
-            int j = i % 65536;
-            int k = i / 65536;
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-            GlStateManager.translate(0, -1.45, 0);
-            GlStateManager.scale(1.175, 1.175, 1.175);
-            GlStateManager.rotate(event.getEntity().rotationYaw, 0, 1, 0);
-            event.getRenderer().getMainModel().render(event.getEntity(), event.getEntity().limbSwing,
-                    event.getEntity().limbSwingAmount, event.getPartialRenderTick(), 0, event.getEntity().rotationPitch,
-                    0.0625f);
-            GlStateManager.matrixMode(5890);
-            GlStateManager.loadIdentity();
-            GlStateManager.matrixMode(5888);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
-                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enableLighting();
-            GlStateManager.disableBlend();
-            GlStateManager.depthMask(true);
-            GlStateManager.popMatrix();
+            try {
+                Field field = TakumiASMNameMap.getField(RenderLivingBase.class, "layerRenderers");
+                field.setAccessible(true);
+                List<LayerRenderer> layerRenderers = ((List) field.get(event.getRenderer()));
+                if (layerRenderers.stream().noneMatch(layerRenderer -> layerRenderer instanceof LayerTakumiPoweredArmor)) {
+                    event.getRenderer().addLayer(new LayerTakumiPoweredArmor(event.getRenderer()));
+                }
+            } catch (Exception e) {
+            }
         }
     }
 
