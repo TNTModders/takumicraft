@@ -13,6 +13,7 @@ import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.item.*;
 import com.tntmodders.takumi.network.MessageFrozenEffect;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiForceField;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
@@ -472,6 +473,14 @@ public class TakumiEvents {
                 event.getAffectedBlocks().removeIf(pos -> pos.getY() < 50);
             }
             return;
+        }
+        if (event.getWorld().tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity instanceof TileEntityTakumiForceField)) {
+            event.getWorld().tickableTileEntities.forEach(tileEntity -> {
+                if (tileEntity instanceof TileEntityTakumiForceField) {
+                    event.getAffectedEntities().removeIf(entity -> tileEntity.getDistanceSq(entity.posX + 0.5, entity.posY + 0.5, entity.posZ + 0.5) < 100);
+                    event.getAffectedBlocks().removeIf(pos -> tileEntity.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 100);
+                }
+            });
         }
         if (FMLCommonHandler.instance().getSide().isServer() && event.getWorld().getMinecraftServer() != null) {
             try {

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EYE",
+    "EQE",
+    "EYE"
+  ],
+  "key": {
+    "E": {
+      "item": "takumicraft:energycore",
+      "data": 2
+    },
+    "Y": {
+      "item": "takumicraft:monsterbomb_ofalencreeper"
+    },
+    "Q": {
+      "item": "takumicraft:attackcore"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumiforcefield"
+  }
+}

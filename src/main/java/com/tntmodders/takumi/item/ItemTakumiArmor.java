@@ -84,7 +84,6 @@ public class ItemTakumiArmor extends ItemArmor {
 
     @SideOnly(Side.CLIENT)
     @Override
-    @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack,
                                @Nullable
                                        World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

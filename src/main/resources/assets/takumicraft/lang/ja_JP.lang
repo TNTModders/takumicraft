@@ -204,6 +204,9 @@ tile.creeperslimebomb.name=魔式特殊爆弾[スライム]
 tile.creepersnowbomb.name=壊式特殊爆弾[薄]
 tile.creepermeatbomb.name=魔式特殊爆弾[肉]
 tile.creeperchestbomb.name=壊式特殊爆弾[チェスト]
+tile.takumiforcefield.name=匠式結界
+tile.takumiforcefield.message.01=匠式結界は既に展開されています。
+tile.takumiforcefield.message.02=匠式結界は10分間有効です。
 
 #item
 item.takumibook.name=匠の書

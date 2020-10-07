@@ -199,23 +199,16 @@ public class TakumiClientCore {
     }
 
     public static void registerTileRender() {
-        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock",
-                new RenderAcidBlock<>());
-        ClientRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb",
-                new RenderMonsterBomb<>());
-        ClientRegistry.registerTileEntity(TileEntityTakumiSuperPowered.class, TakumiCraftCore.MODID + ":takumiblock",
-                new RenderTakumiBlock<>());
-        ClientRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered",
-                new RenderTakumiCreepered<>());
-        ClientRegistry.registerTileEntity(TileEntityDarkBoard.class, TakumiCraftCore.MODID + ":takumidarkboard",
-                new RenderDarkBoard<>());
-        ClientRegistry.registerTileEntity(TileEntityVault.class, TakumiCraftCore.MODID + ":creepervault",
-                new RenderVault());
-        ClientRegistry.registerTileEntity(TileEntityTakumiBed.class, TakumiCraftCore.MODID + ":creeperbed",
-                new RenderTakumiBed());
-        ClientRegistry.registerTileEntity(TileEntityTakumiShulkerBox.class, TakumiCraftCore.MODID + ":creepershulkerbox",
-                new RenderTakumiShulkerBox(new ModelShulker()));
+        ClientRegistry.registerTileEntity(TileEntityAcidBlock.class, TakumiCraftCore.MODID + ":acidblock", new RenderAcidBlock<>());
+        ClientRegistry.registerTileEntity(TileEntityMonsterBomb.class, TakumiCraftCore.MODID + ":monsterbomb", new RenderMonsterBomb<>());
+        ClientRegistry.registerTileEntity(TileEntityTakumiSuperPowered.class, TakumiCraftCore.MODID + ":takumiblock", new RenderTakumiBlock<>());
+        ClientRegistry.registerTileEntity(TileEntityTakumiCreepered.class, TakumiCraftCore.MODID + ":takumicreepered", new RenderTakumiCreepered<>());
+        ClientRegistry.registerTileEntity(TileEntityDarkBoard.class, TakumiCraftCore.MODID + ":takumidarkboard", new RenderDarkBoard<>());
+        ClientRegistry.registerTileEntity(TileEntityVault.class, TakumiCraftCore.MODID + ":creepervault", new RenderVault());
+        ClientRegistry.registerTileEntity(TileEntityTakumiBed.class, TakumiCraftCore.MODID + ":creeperbed", new RenderTakumiBed());
+        ClientRegistry.registerTileEntity(TileEntityTakumiShulkerBox.class, TakumiCraftCore.MODID + ":creepershulkerbox", new RenderTakumiShulkerBox(new ModelShulker()));
         ClientRegistry.registerTileEntity(TileEntityTakumiSign.class, TakumiCraftCore.MODID + ":creepersign", new RenderTakumiSign());
+        ClientRegistry.registerTileEntity(TileEntityTakumiForceField.class, TakumiCraftCore.MODID + ":takumiforcefield", new RenderTakumiForceField<>());
     }
 
 

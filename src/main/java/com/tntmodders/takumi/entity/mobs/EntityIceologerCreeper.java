@@ -134,12 +134,12 @@ public class EntityIceologerCreeper extends EntityAbstractSpellCreeper {
 
     @Override
     public int getSecondaryColor() {
-        return 0x0000ff;
+        return 0x008888;
     }
 
     @Override
     public int getPrimaryColor() {
-        return 0x000022;
+        return 0x004422;
     }
 
     @Override

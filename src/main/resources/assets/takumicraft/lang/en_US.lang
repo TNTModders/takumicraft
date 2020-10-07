@@ -204,6 +204,9 @@ tile.creeperslimebomb.name=Slime Creeper Bomb
 tile.creepersnowbomb.name=Layer Creeper Bomb
 tile.creepermeatbomb.name=Meat Creeper Bomb
 tile.creeperchestbomb.name=Chest Creeper Bomb
+tile.takumiforcefield.name=AntiExplosion ForceField
+tile.takumiforcefield.message.01=The ForceField has already been deployed.
+tile.takumiforcefield.message.02=The ForceField is avilable for 10 min.
 
 #item
 item.takumibook.name=Creeper Book
