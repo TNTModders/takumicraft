@@ -474,7 +474,8 @@ public class TakumiEvents {
             }
             return;
         }
-        if (event.getWorld().tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity instanceof TileEntityTakumiForceField)) {
+        if (event.getWorld().tickableTileEntities != null && !event.getWorld().tickableTileEntities.isEmpty() &&
+                event.getWorld().tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity instanceof TileEntityTakumiForceField)) {
             event.getWorld().tickableTileEntities.forEach(tileEntity -> {
                 if (tileEntity instanceof TileEntityTakumiForceField) {
                     event.getAffectedEntities().removeIf(entity -> tileEntity.getDistanceSq(entity.posX + 0.5, entity.posY + 0.5, entity.posZ + 0.5) < 100);
@@ -727,7 +728,7 @@ public class TakumiEvents {
                     if (!entity.isEntityInvulnerable(source)) {
                         entity.attackEntityFrom(source, 3f + entity.world.getDifficulty().getDifficultyId());
                     }
-                    if (!entity.world.isRemote && !(entity instanceof EntityPlayer)) {
+                    if (!entity.world.isRemote) {
                         TakumiPacketCore.INSTANCE.sendToAll(new MessageFrozenEffect(entity.getEntityId(), effect, false));
                     }
                 }

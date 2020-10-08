@@ -4,6 +4,7 @@ import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiForceField;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.*;
 import net.minecraft.block.state.IBlockState;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -53,12 +55,29 @@ public class TakumiUtils {
     public static void setBlockStateProtected(World world, BlockPos pos, IBlockState state) {
         if (FMLCommonHandler.instance().getSide().isServer() && world.getMinecraftServer() != null) {
             try {
-                BlockPos blockpos = world.getSpawnPoint();
-                int i = MathHelper.abs(pos.getX() - blockpos.getX());
-                int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
-                int k = Math.max(i, j);
-                if (k > world.getMinecraftServer().getSpawnProtectionSize()) {
+                if (world.tickableTileEntities == null || world.tickableTileEntities.isEmpty()) {
                     world.setBlockState(pos, state);
+                }
+                else {
+                    boolean flg = true;
+                    if (world.tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity instanceof TileEntityTakumiForceField)) {
+                        for (TileEntity tileEntity : world.tickableTileEntities) {
+                            if (tileEntity instanceof TileEntityTakumiForceField) {
+                                if (tileEntity.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 100) {
+                                    flg = false;
+                                }
+                            }
+                        }
+                    }
+                    if (flg) {
+                        BlockPos blockpos = world.getSpawnPoint();
+                        int i = MathHelper.abs(pos.getX() - blockpos.getX());
+                        int j = MathHelper.abs(pos.getZ() - blockpos.getZ());
+                        int k = Math.max(i, j);
+                        if (k > world.getMinecraftServer().getSpawnProtectionSize()) {
+                            world.setBlockState(pos, state);
+                        }
+                    }
                 }
             } catch (Exception e) {
                 world.setBlockState(pos, state);

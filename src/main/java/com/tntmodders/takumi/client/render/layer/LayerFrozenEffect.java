@@ -25,7 +25,6 @@ public class LayerFrozenEffect implements LayerRenderer {
             GlStateManager.pushMatrix();
             GlStateManager.color(1F, 1F, 1F, 1.0F);
             this.render.bindTexture(ICE_TEXTURE);
-            GlStateManager.scale(1.05f, 1.05f, 1.05f);
             GlStateManager.enableNormalize();
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
