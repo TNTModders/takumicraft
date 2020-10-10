@@ -338,6 +338,8 @@ public class TakumiEntityCore {
                 EntityTakumiKnifeGun.class, "takumiknifegungrenede", 935, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "iceologercreeperspell"),
                 EntityIceologerCreeperSpell.class, "iceologercreeperspell", 936, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumicannon"),
+                EntityTakumiCannon.class, "takumicannon", 937, TakumiCraftCore.TakumiInstance, 64, 2, true);
 
     }
 
@@ -457,6 +459,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiRandomChest.class, RenderTakumiRandomChest::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiKnifeGun.class, RenderTakumiKnifeGun::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityIceologerCreeperSpell.class, RenderIceologerCreeperSpell::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiCannon.class, RenderTakumiCannon::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
