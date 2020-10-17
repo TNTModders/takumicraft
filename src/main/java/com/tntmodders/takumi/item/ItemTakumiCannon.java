@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.entity.item.EntityTakumiCannon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,8 +25,13 @@ public class ItemTakumiCannon extends Item {
             EntityTakumiCannon cannon = new EntityTakumiCannon(worldIn);
             cannon.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
             if (!worldIn.collidesWithAnyBlock(cannon.getEntityBoundingBox())) {
-                worldIn.spawnEntity(cannon);
-                //cannon.setFacing(player.getHorizontalFacing());
+                if (worldIn.spawnEntity(cannon)) {
+                    cannon.setPlacer(player);
+                    cannon.setLocked(TakumiConfigCore.ownerLockTakumiCannon);
+                    if (!player.isCreative()) {
+                        player.getHeldItem(hand).shrink(1);
+                    }
+                }
             }
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

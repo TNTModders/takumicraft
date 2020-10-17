@@ -6,6 +6,7 @@ import com.tntmodders.takumi.network.MessageTakumiCannon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -17,6 +18,8 @@ import javax.annotation.Nullable;
 public class EntityTakumiCannon extends Entity {
     private EnumFacing facing;
     private int resetTick;
+    private String placer;
+    private boolean locked;
 
     public EntityTakumiCannon(World worldIn) {
         super(worldIn);
@@ -142,5 +145,26 @@ public class EntityTakumiCannon extends Entity {
     @Override
     public double getMountedYOffset() {
         return this.height * 0.3D;
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.getTrueSource() instanceof EntityPlayer) {
+            if (!this.locked || ((EntityPlayer) source.getTrueSource()).isCreative() || ((EntityPlayer) source.getTrueSource()).canUseCommandBlock() || source.getTrueSource().getName().equals(this.placer)) {
+                this.setDead();
+                if (!this.world.isRemote && !source.isCreativePlayer()) {
+                    this.dropItem(TakumiItemCore.TAKUMI_CANNON, 1);
+                }
+            }
+        }
+        return super.attackEntityFrom(source, amount);
+    }
+
+    public void setPlacer(EntityPlayer placer) {
+        this.placer = placer.getName();
+    }
+
+    public void setLocked(boolean flg) {
+        this.locked = flg;
     }
 }

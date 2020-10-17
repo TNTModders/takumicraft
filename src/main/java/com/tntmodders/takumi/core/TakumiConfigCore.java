@@ -22,6 +22,7 @@ public class TakumiConfigCore {
     public static int rangeTakumiBookSync;
     public static boolean useNewYearTex;
     public static boolean ownerLockTakumiBlock;
+    public static boolean ownerLockTakumiCannon;
     //debugConfig
     public static boolean inDev = false;
     /**
@@ -93,6 +94,8 @@ public class TakumiConfigCore {
         ownerLockTakumiBlock = cfg.getBoolean("ownerLockTakumiBlock", GENERAL, true,
                 TakumiUtils.takumiTranslate("config.takumicraft.oltb.desc"), "config.takumicraft.oltb.prop");
 
+        ownerLockTakumiBlock = cfg.getBoolean("ownerLockTakumiCannon", GENERAL, false,
+                TakumiUtils.takumiTranslate("config.takumicraft.oltc.desc"), "config.takumicraft.oltc.prop");
         cfg.save();
     }
 }
