@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class TakumiConfigCore {
 
     public static final boolean inEventServerClient = false;
+    public static final boolean SPEC_CHAT = true;
 
     public static final String GENERAL = "General";
     private static final String SPAWN = GENERAL + ".Spawn";

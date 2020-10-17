@@ -203,9 +203,9 @@ public class EntityRoboCreeper extends EntityTakumiAbstractCreeper implements IT
             }
         }
         if (pos != null) {
-            this.world.playSound(null, this.posX, this.posY, this.posZ,
-                    SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.WEATHER, 10000.0F,
-                    0.8F + this.rand.nextFloat() * 0.2F);
+            this.world.playSound(this.posX, this.posY, this.posZ,
+                    SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.WEATHER, 10.0F,
+                    0.8F + this.rand.nextFloat() * 0.2F, true);
             if (!this.world.isRemote) {
                 this.world.newExplosion(this, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4f,
                         true, true);

@@ -296,6 +296,7 @@ item.takumiknife.name=Creeper Transform Knife
 item.takumiknife.tooltip=Charged Power:
 item.takumiknife_gun.name=Creeper Transform Bowgun
 item.attackcore.name=AttackBlock Core
+item.takumicannon.name=Creeper Heavy Cannon
 
 #entity
 #desc max: 72 chars
@@ -799,6 +800,8 @@ entity.destgolem.name=Dest Golem
 entity.takumiparachute.name=Takumi Parachute
 entity.takumiknifegungrenede.name=Creeper Transform Bowgun
 entity.iceologercreeperspell.name=Iceologer Creeper
+entity.takumicannon.name=Creeper Heavy Cannon
+entity.takumicannonball.name=Creeper Heavy Cannon
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

@@ -303,6 +303,13 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                 int amount = Math.min(this.rand.nextInt(3), this.getDropItem().getItemStackLimit());
                 this.dropItem(this.getDropItem(), amount);
             }
+            if (this instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) this).isEvo()) {
+                if (this.rand.nextInt(10) == 0) {
+                    this.dropItem(TakumiItemCore.EVO_CORE_EVO, 1);
+                } else {
+                    this.dropItem(TakumiItemCore.EVO_CORE, this.rand.nextInt(3));
+                }
+            }
             if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(3) == 0) {
                 this.dropItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), 1);
             }

@@ -106,6 +106,7 @@ public class TakumiItemCore {
     public static final Item ATTACK_CORE = new ItemAttackCore();
     public static final Item TAKUMI_KNIFE = new ItemTakumiKnife_S();
     public static final Item TAKUMI_KNIFE_GUN = new ItemTakumiKnife_G();
+    public static final Item TAKUMI_CANNON = new ItemTakumiCannon();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

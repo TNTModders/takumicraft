@@ -259,7 +259,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         EntityLightningBolt bolt =
                                 new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
                                         false);
-                        this.world.addWeatherEffect(bolt);
+                        //this.world.addWeatherEffect(bolt);
                         this.world.spawnEntity(bolt);
                     }
                     break;

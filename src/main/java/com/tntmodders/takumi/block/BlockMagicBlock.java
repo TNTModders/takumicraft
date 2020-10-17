@@ -40,7 +40,7 @@ public class BlockMagicBlock extends Block {
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (!worldIn.isRemote && entityIn.ticksExisted % 20 == 0 && !entityIn.isDead) {
             EntityLightningBolt bolt = new EntityLightningBolt(worldIn, pos.getX(), pos.getY() + 0.5, pos.getZ(), false);
-            worldIn.addWeatherEffect(bolt);
+            //worldIn.addWeatherEffect(bolt);
             worldIn.spawnEntity(bolt);
         }
     }

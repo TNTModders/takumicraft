@@ -21,7 +21,7 @@ public class EntityCryCreeper extends EntityTakumiAbstractCreeper {
         for (int i = 0; i < (this.getPowered() ? 8 : 4); i++) {
             BlockPos pos = new BlockPos(this.posX + this.rand.nextInt(20) - 10, this.posY + this.rand.nextInt(3), this.posZ + this.rand.nextInt(20) - 10);
             EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX(), pos.getY(), pos.getZ(), false);
-            this.world.addWeatherEffect(bolt);
+            //this.world.addWeatherEffect(bolt);
             this.world.spawnEntity(bolt);
             if (!this.world.isRemote) {
                 EntityPigZombie ghast = new EntityPigZombie(this.world);
@@ -34,7 +34,7 @@ public class EntityCryCreeper extends EntityTakumiAbstractCreeper {
         if (pigList != null && pigList.size() > 0) {
             pigList.forEach(entityPig -> {
                 EntityLightningBolt bolt = new EntityLightningBolt(this.world, entityPig.posX, entityPig.posY, entityPig.posZ, false);
-                this.world.addWeatherEffect(bolt);
+                //this.world.addWeatherEffect(bolt);
                 this.world.spawnEntity(bolt);
             });
         }

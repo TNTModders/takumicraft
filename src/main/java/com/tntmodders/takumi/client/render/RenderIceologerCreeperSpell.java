@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.client.render;
 
-import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.entity.item.EntityIceologerCreeperSpell;
 import net.minecraft.client.Minecraft;
@@ -25,7 +24,6 @@ public class RenderIceologerCreeperSpell<T extends EntityIceologerCreeperSpell> 
         GlStateManager.translate((float) x, (float) y + 0.5F, (float) z);
         this.bindEntityTexture(entity);
         GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
-        TakumiCraftCore.LOGGER.info("render:"+entity.getGlowingSize());
         GlStateManager.scale(entity.getGlowingSize(), entity.getGlowingSize(), entity.getGlowingSize());
         GlStateManager.translate(-0.5F, -0.5F, 0.5F);
         blockrendererdispatcher.renderBlockBrightness(TakumiBlockCore.CREEPER_ICE.getDefaultState(),

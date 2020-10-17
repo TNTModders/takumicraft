@@ -1,7 +1,10 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.entity.item.EntityTakumiCannon;
+import com.tntmodders.takumi.entity.item.EntityTakumiCannonBall;
 import com.tntmodders.takumi.entity.item.EntityTakumiThrowGrenede;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -44,5 +47,18 @@ public class ItemTakumiThrowGrenede extends Item {
 
         playerIn.addStat(StatList.getObjectUseStats(this));
         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+    }
+
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        if (entityLiving instanceof EntityPlayer && entityLiving.isRiding() && entityLiving.getRidingEntity() instanceof EntityTakumiCannon) {
+            if (!entityLiving.world.isRemote) {
+                EntityTakumiCannonBall grenede = new EntityTakumiCannonBall(entityLiving.world, entityLiving);
+                grenede.setHeadingFromThrower(entityLiving, ((EntityTakumiCannon) entityLiving.getRidingEntity()).getFacing().getHorizontalAngle(),
+                        entityLiving.getRidingEntity().rotationPitch, 0.0F, 5F, 0.5F);
+                entityLiving.world.spawnEntity(grenede);
+            }
+        }
+        return super.onEntitySwing(entityLiving, stack);
     }
 }

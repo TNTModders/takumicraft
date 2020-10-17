@@ -19,6 +19,7 @@ public class TakumiPacketCore {
         INSTANCE.registerMessage(MessageDarkShrineHandler.class, MessageDarkShrine.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(MessageMSFoilHandler.class, MessageMSFoil.class, 3, Side.CLIENT);
         INSTANCE.registerMessage(MessageFrozenEffectHandler.class, MessageFrozenEffect.class, 4, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTakumiCannonHandler.class, MessageTakumiCannon.class, 5, Side.CLIENT);
     }
 
     @SideOnly(Side.CLIENT)

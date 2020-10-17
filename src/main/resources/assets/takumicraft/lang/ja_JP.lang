@@ -296,6 +296,7 @@ item.takumiknife.name=匠式砲丁[斬]
 item.takumiknife.tooltip=装填数:
 item.takumiknife_gun.name=匠式砲丁[爆]
 item.attackcore.name=匠エネルギーコア[極]
+item.takumicannon.name=匠式巨砲
 
 #entity
 ＃descは36文字まで。
@@ -852,6 +853,9 @@ entity.creeperbolt.name=龍雷
 entity.destgolem.name=壊式即応機兵
 entity.takumiparachute.name=匠式落下傘
 entity.takumiknifegungrenede.name=匠式砲丁
+entity.iceologercreeperspell.name=アイソロジャー匠
+entity.takumicannon.name=匠式巨砲
+entity.takumicannonball.name=匠式巨砲
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ

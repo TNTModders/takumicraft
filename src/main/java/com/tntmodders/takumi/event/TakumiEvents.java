@@ -1235,7 +1235,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void serverChat(ServerChatEvent event) {
-        if (TakumiConfigCore.inEventServer) {
+        if (TakumiConfigCore.inEventServer &&TakumiConfigCore.SPEC_CHAT) {
             if (event.getPlayer().isSpectator()) {
                 //[spec]->takumicraft.tcs.spec, compString -> compTranslation
                 Style style = new Style();

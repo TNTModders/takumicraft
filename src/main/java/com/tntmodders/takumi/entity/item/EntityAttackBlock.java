@@ -177,7 +177,7 @@ public class EntityAttackBlock extends Entity {
                             for (int j = 0; j < 10; j++) {
                                 EntityLightningBolt bolt =
                                         new EntityLightningBolt(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, false);
-                                this.world.addWeatherEffect(bolt);
+                                //this.world.addWeatherEffect(bolt);
                                 this.world.spawnEntity(bolt);
                             }
                         }
@@ -247,10 +247,10 @@ public class EntityAttackBlock extends Entity {
                                 case 1: {
                                     for (int d = -10; d <= 10; d++) {
                                         EntityLightningBolt boltX = new EntityLightningBolt(this.world, this.dummy.posX + d, this.dummy.posY, this.dummy.posZ, false);
-                                        this.world.addWeatherEffect(boltX);
+                                        //this.world.addWeatherEffect(boltX);
                                         this.world.spawnEntity(boltX);
                                         EntityLightningBolt boltZ = new EntityLightningBolt(this.world, this.dummy.posX, this.dummy.posY, this.dummy.posZ + d, false);
-                                        this.world.addWeatherEffect(boltZ);
+                                        //this.world.addWeatherEffect(boltZ);
                                         this.world.spawnEntity(boltZ);
                                     }
                                     break;
@@ -260,7 +260,7 @@ public class EntityAttackBlock extends Entity {
                                     for (BlockPos pos : this.thunderPoint) {
                                         for (int i = 0; i < 10; i++) {
                                             EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX(), pos.getY(), pos.getZ(), false);
-                                            this.world.addWeatherEffect(bolt);
+                                            //this.world.addWeatherEffect(bolt);
                                             this.world.spawnEntity(bolt);
                                         }
                                     }
@@ -402,7 +402,7 @@ public class EntityAttackBlock extends Entity {
                                     this.world.newExplosion(this.dummy, x, y, z, 3f, true, false);
                                 }
                                 EntityLightningBolt bolt = new EntityLightningBolt(this.world, x, y, z, true);
-                                this.world.addWeatherEffect(bolt);
+                                //this.world.addWeatherEffect(bolt);
                                 this.world.spawnEntity(bolt);
                             }
                         }

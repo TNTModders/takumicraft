@@ -73,7 +73,7 @@ public class EntityWonderCreeper extends EntityTakumiAbstractCreeper {
                     double x = this.posX + Math.cos((this.rotationYawHead + 90) * Math.PI / 180) * t * 4;
                     double z = this.posZ + Math.sin((this.rotationYawHead + 90) * Math.PI / 180) * t * 4;
                     EntityLightningBolt bolt = new EntityLightningBolt(this.world, x, this.posY, z, false);
-                    this.world.addWeatherEffect(bolt);
+                    //this.world.addWeatherEffect(bolt);
                     this.world.spawnEntity(bolt);
                 }
                 this.wonderSinceIgnited += 1;

@@ -19,7 +19,7 @@ public class EntityTearCreeper extends EntityTakumiAbstractCreeper {
         for (int i = 0; i < (this.getPowered() ? 10 : 5); i++) {
             BlockPos pos = new BlockPos(this.posX + this.rand.nextInt(20) - 10, this.posY + this.rand.nextInt(20), this.posZ + this.rand.nextInt(20) - 10);
             EntityLightningBolt bolt = new EntityLightningBolt(this.world, pos.getX(), pos.getY(), pos.getZ(), false);
-            this.world.addWeatherEffect(bolt);
+            //this.world.addWeatherEffect(bolt);
             this.world.spawnEntity(bolt);
             if (!this.world.isRemote) {
                 EntityGhast ghast = new EntityGhast(this.world);
