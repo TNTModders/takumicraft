@@ -46,10 +46,14 @@ public class EntityIceologerCreeperSpell extends EntityLiving {
         super.onUpdate();
         if (this.onGround || this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(0.1))) {
             if (!this.world.isRemote) {
-                this.world.createExplosion(this, this.posX + 0.5, this.posY + 0.5, this.posZ + 0.5, 3f, true);
+                this.onGroundUpdate();
             }
             this.setDead();
         }
+    }
+
+    protected void onGroundUpdate() {
+        this.world.createExplosion(this, this.posX + 0.5, this.posY + 0.5, this.posZ + 0.5, 3f, true);
     }
 
     @Override
@@ -80,5 +84,9 @@ public class EntityIceologerCreeperSpell extends EntityLiving {
 
     public float getGlowingSize() {
         return ((float) Math.min(this.ticksExisted * 2 / this.tick, 1));
+    }
+
+    public boolean canFreezeEntity() {
+        return true;
     }
 }

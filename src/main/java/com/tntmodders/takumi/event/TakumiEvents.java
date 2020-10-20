@@ -719,7 +719,8 @@ public class TakumiEvents {
             event.getAffectedBlocks().removeIf(pos -> pos.getY() < event.getExplosion().getPosition().y - 1);
             event.getAffectedEntities().clear();
         }
-        if (event.getExplosion().getExplosivePlacedBy() instanceof EntityIceologerCreeperSpell) {
+        if (event.getExplosion().getExplosivePlacedBy() instanceof EntityIceologerCreeperSpell
+                && ((EntityIceologerCreeperSpell) event.getExplosion().getExplosivePlacedBy()).canFreezeEntity()) {
             event.getAffectedEntities().forEach(entity -> {
                 if (entity instanceof EntityLivingBase && !entity.isImmuneToExplosions()) {
                     PotionEffect effect = new PotionEffect(TakumiPotionCore.FROZEN, 200, 0, true, false);
@@ -774,10 +775,14 @@ public class TakumiEvents {
             })) {
                 if (e.getEntityLiving() instanceof EntityTakumiAbstractCreeper &&
                         ((EntityTakumiAbstractCreeper) e.getEntityLiving()).takumiRank() !=
-                                ITakumiEntity.EnumTakumiRank.LOW || e.getWorld().rand.nextInt(10) == 0) {
+                                ITakumiEntity.EnumTakumiRank.LOW || e.getWorld().rand.nextInt(3) == 0) {
                     if (!e.getWorld().isThundering()) {
                         e.setResult(Result.DENY);
                     }
+                }
+            } else if (e.getWorld().getTotalWorldTime() < 48000) {
+                if (!e.getWorld().isThundering() && e.getWorld().rand.nextInt(3) == 0) {
+                    e.setResult(Result.DENY);
                 }
             }
         } catch (Exception ignored) {
@@ -1235,7 +1240,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void serverChat(ServerChatEvent event) {
-        if (TakumiConfigCore.inEventServer &&TakumiConfigCore.SPEC_CHAT) {
+        if (TakumiConfigCore.inEventServer && TakumiConfigCore.SPEC_CHAT) {
             if (event.getPlayer().isSpectator()) {
                 //[spec]->takumicraft.tcs.spec, compString -> compTranslation
                 Style style = new Style();

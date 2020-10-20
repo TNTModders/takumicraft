@@ -342,6 +342,8 @@ public class TakumiEntityCore {
                 EntityTakumiCannon.class, "takumicannon", 937, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumicannonball"),
                 EntityTakumiCannonBall.class, "takumicannonball", 938, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "kingcreeperspellblock"),
+                EntityKingBlock.class, "kingcreeperspellblock", 939, TakumiCraftCore.TakumiInstance, 64, 2, true);
 
     }
 
@@ -464,6 +466,7 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiCannon.class, RenderTakumiCannon::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiCannonBall.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.THROW_GRENEDE, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityKingBlock.class, manager -> new RenderIceologerCreeperSpell(manager, TakumiBlockCore.CREEPER_ALTAR));
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

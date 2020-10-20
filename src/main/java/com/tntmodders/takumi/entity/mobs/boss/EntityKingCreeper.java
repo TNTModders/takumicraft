@@ -2,12 +2,18 @@ package com.tntmodders.takumi.entity.mobs.boss;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.RenderKingCreeper;
 import com.tntmodders.takumi.core.TakumiItemCore;
+import com.tntmodders.takumi.core.TakumiPacketCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ai.EntityAIBossCreeperSwell;
 import com.tntmodders.takumi.entity.item.EntityBigHomingBomb;
+import com.tntmodders.takumi.entity.item.EntityKingBlock;
+import com.tntmodders.takumi.network.MessageTakumiBossAttackID;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -23,7 +29,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
@@ -33,6 +41,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Random;
 
 public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
@@ -119,14 +128,23 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         this.dataManager.set(ATTACK_ID, id);
     }
 
+    /**
+     * server use, in client, you can sync the ID by MessageTakumiBossAttackID.class
+     */
     public void setRandomAttackID() {
-        //@TODO: chage maxID if the var of attacks added. & change debugID if you commit it.
-        int debugID = 0;
-        if (debugID != 0) {
-            this.dataManager.set(ATTACK_ID, debugID);
-        } else {
-            int maxID = 5;
-            this.dataManager.set(ATTACK_ID, new Random(System.currentTimeMillis()).nextInt(maxID + 1));
+        if (!this.world.isRemote) {
+            int id;
+            //@TODO: chage maxID if the var of attacks added. & change debugID if you commit it.
+            int debugID = 7;
+            if (debugID != 0) {
+                this.dataManager.set(ATTACK_ID, debugID);
+                id = debugID;
+            } else {
+                int maxID = 7;
+                id = new Random(System.currentTimeMillis()).nextInt(maxID + 1);
+                this.dataManager.set(ATTACK_ID, id);
+            }
+            TakumiPacketCore.INSTANCE.sendToAll(new MessageTakumiBossAttackID(this.getEntityId(), this.getAttackID()));
         }
     }
 
@@ -213,6 +231,49 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     }
                     break;
                 }
+                //kingblock / N.magic.zone
+                case 6: {
+                    for (double x = -5; x <= 5; x += 0.5) {
+                        for (double z = -5; z <= 5; z += 0.5) {
+                            if (x * x + z * z <= 25 && this.rand.nextInt(20) == 0) {
+                                this.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, x, 0, z,
+                                        (this.rand.nextDouble() - 0.5) * 0.3, 0.5,
+                                        (this.rand.nextDouble() - 0.5) * 0.3);
+                            }
+                        }
+                    }
+                    break;
+                }
+                //sword / null
+                case 7: {
+                    break;
+                }
+            }
+        } else {
+            if (this.getAttackID() == 7) {
+                try {
+                    Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
+                    field.setAccessible(true);
+                    int time = field.getInt(this);
+                    if (time > 44) {
+                        AxisAlignedBB aabb = this.getEntityBoundingBox().grow(5, 0, 5).contract(0, 1, 0);
+                        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, aabb);
+                        if (!list.isEmpty()) {
+                            list.forEach(entity -> {
+                                if (entity instanceof EntityLivingBase) {
+                                    entity.attackEntityFrom(DamageSource.causeMobDamage(this), 20);
+                                }
+                            });
+                        }
+                        int t = 50 - time;
+                        for (int i = 0; i <= 5; i++) {
+                            double x = this.posX + Math.cos(Math.toRadians(60 * t)) * i;
+                            double z = this.posZ + Math.sin(Math.toRadians(60 * t)) * i;
+                            this.world.createExplosion(this, x, this.posY, z, 0f, false);
+                        }
+                    }
+                } catch (Exception e) {
+                }
             }
         }
 
@@ -292,6 +353,42 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     }
                     break;
                 }
+                //kingblock
+                case 6: {
+                    EntityLivingBase entitylivingbase = this.getAttackTarget();
+                    if (entitylivingbase != null) {
+                        double d0 = Math.min(entitylivingbase.posY, this.posY);
+                        double d1 = Math.max(entitylivingbase.posY, this.posY) + 1.0D;
+                        float f = (float) MathHelper.atan2(entitylivingbase.posZ - this.posZ,
+                                entitylivingbase.posX - this.posX);
+
+                        if (this.getDistanceSqToEntity(entitylivingbase) < 16.0D) {
+                            for (int i = 0; i < 5; ++i) {
+                                float f1 = f + (float) i * (float) Math.PI * 0.4F;
+                                this.spawnFangs(this.posX + (double) MathHelper.cos(f1) * 3D,
+                                        this.posZ + (double) MathHelper.sin(f1) * 3D, d0, d1, f1, 0);
+                            }
+
+                            for (int k = 0; k < 8; ++k) {
+                                float f2 = f + (float) k * (float) Math.PI * 2.0F / 8.0F + (float) Math.PI * 2F / 5F;
+                                this.spawnFangs(this.posX + (double) MathHelper.cos(f2) * 7D,
+                                        this.posZ + (double) MathHelper.sin(f2) * 7D, d0, d1, f2, 3);
+                            }
+                        } else {
+                            for (int l = 0; l < 16; ++l) {
+                                double d2 = 2D * (double) (l + 1);
+                                this.spawnFangs(this.posX + (double) MathHelper.cos(f) * d2,
+                                        this.posZ + (double) MathHelper.sin(f) * d2, d0, d1, f, l / 2);
+                            }
+                        }
+                        break;
+                    }
+                }
+                //bigsword
+                case 7: {
+                    this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0, false);
+                    break;
+                }
 
                 default: {
                     this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 12 : 8, true);
@@ -300,6 +397,44 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
         }
         this.setRandomAttackID();
     }
+
+    private void spawnFangs(double p_190876_1_, double p_190876_3_, double p_190876_5_, double p_190876_7_,
+                            float p_190876_9_, int p_190876_10_) {
+        BlockPos blockpos = new BlockPos(p_190876_1_, p_190876_7_, p_190876_3_);
+        boolean flag = false;
+        double d0 = 0.0D;
+
+        while (true) {
+            if (!this.world.isBlockNormalCube(blockpos, true) &&
+                    this.world.isBlockNormalCube(blockpos.down(), true)) {
+                if (!this.world.isAirBlock(blockpos)) {
+                    IBlockState iblockstate = this.world.getBlockState(blockpos);
+                    AxisAlignedBB axisalignedbb =
+                            iblockstate.getCollisionBoundingBox(this.world, blockpos);
+
+                    if (axisalignedbb != null) {
+                        d0 = axisalignedbb.maxY;
+                    }
+                }
+
+                flag = true;
+                break;
+            }
+
+            blockpos = blockpos.down();
+
+            if (blockpos.getY() < MathHelper.floor(p_190876_5_) - 1) {
+                break;
+            }
+        }
+
+        if (flag) {
+            EntityKingBlock spell = new EntityKingBlock(this.world, p_190876_1_,
+                    (double) blockpos.getY() + d0 + 5, p_190876_3_, p_190876_10_ * 10 + 20);
+            this.world.spawnEntity(spell);
+        }
+    }
+
 
     private void spawnParticle(EnumParticleTypes types, double x, double y, double z, double motionX, double motionY,
                                double motionZ) {
@@ -429,5 +564,10 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
         this.bossInfo.removePlayer(player);
+    }
+
+    @Override
+    public Object getRender(RenderManager manager) {
+        return new RenderKingCreeper(manager);
     }
 }
