@@ -22,7 +22,7 @@ import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.block.state.pattern.FactoryBlockPattern;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.toasts.TutorialToast;
+import net.minecraft.client.gui.toasts.SystemToast;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -102,7 +102,7 @@ public class BlockTakumiAltar extends Block {
                     return true;
                 }
             } else {
-                if (entity instanceof EntityKingCreeper && TakumiUtils.getAdvancementUnlocked(new ResourceLocation("takumicraft:kingslayer"))) {
+                if (entity instanceof EntityKingCreeper && !TakumiUtils.getAdvancementUnlocked(new ResourceLocation("takumicraft:kingslayer"))) {
                     if (FMLCommonHandler.instance().getSide().isClient()) {
                         this.proxyShowGuiToast();
                     }
@@ -114,8 +114,8 @@ public class BlockTakumiAltar extends Block {
 
     @SideOnly(Side.CLIENT)
     public void proxyShowGuiToast() {
-        Minecraft.getMinecraft().getToastGui().add(new TutorialToast(TutorialToast.Icons.RECIPE_BOOK, new TextComponentTranslation("tile.takumialter.info.01"),
-                new TextComponentTranslation("tile.takumialter.info.02"), false));
+        Minecraft.getMinecraft().getToastGui().add(new SystemToast(SystemToast.Type.TUTORIAL_HINT, new TextComponentTranslation("tile.takumialter.info.01"),
+                new TextComponentTranslation("tile.takumialter.info.02")));
     }
 
     private void spawnWither(World worldIn, BlockPos pos) {
