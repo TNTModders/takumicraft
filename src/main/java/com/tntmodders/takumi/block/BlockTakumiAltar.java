@@ -11,6 +11,7 @@ import com.tntmodders.takumi.entity.mobs.boss.EntityAngelCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityGemCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityWitherCreeper;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -20,14 +21,21 @@ import net.minecraft.block.state.pattern.BlockMaterialMatcher;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.block.state.pattern.FactoryBlockPattern;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.toasts.TutorialToast;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -49,54 +57,65 @@ public class BlockTakumiAltar extends Block {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
                                     EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         boolean flg = super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-        if (!worldIn.isRemote) {
-            Entity entity = null;
-            if (canSpawnWither(worldIn, pos)) {
-                spawnWither(worldIn, pos);
-                return true;
-            } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
-                entity = new EntityKingCreeper(worldIn);
-            } else if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.EMERALD_BLOCK) {
-                entity = new EntityAngelCreeper(worldIn);
-            } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.MAGIC_BLOCK) {
-                entity = new EntityGemCreeper(worldIn);
-            } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
-                entity = new EntityAnnivCreeper(worldIn);
-            } else {
-                List<ITakumiEntity> entities = new ArrayList<>();
-                TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
-                    if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
-                        entities.add(iTakumiEntity);
-                    }
-                });
-                if (!entities.isEmpty()) {
-                    entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
-                    try {
-                        entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(
-                                World.class).newInstance(worldIn);
-                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
+
+        Entity entity = null;
+        if (canSpawnWither(worldIn, pos)) {
+            spawnWither(worldIn, pos);
+            return true;
+        } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.CREEPER_BOMB) {
+            entity = new EntityKingCreeper(worldIn);
+        } else if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.EMERALD_BLOCK) {
+            entity = new EntityAngelCreeper(worldIn);
+        } else if (worldIn.getBlockState(pos.down()).getBlock() == TakumiBlockCore.MAGIC_BLOCK) {
+            entity = new EntityGemCreeper(worldIn);
+        } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
+            entity = new EntityAnnivCreeper(worldIn);
+        } else {
+            List<ITakumiEntity> entities = new ArrayList<>();
+            TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
+                if (iTakumiEntity.takumiRank() == EnumTakumiRank.HIGH) {
+                    entities.add(iTakumiEntity);
+                }
+            });
+            if (!entities.isEmpty()) {
+                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
+                try {
+                    entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(
+                            World.class).newInstance(worldIn);
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    e.printStackTrace();
                 }
             }
+        }
 
-            if (entity != null) {
-                entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                worldIn.setBlockToAir(pos);
-                if (worldIn.getBlockState(pos.down()).getBlockHardness(worldIn, pos.down()) > 0) {
-                    worldIn.setBlockToAir(pos.down());
+        if (entity != null) {
+            entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+            worldIn.setBlockToAir(pos);
+            if (worldIn.getBlockState(pos.down()).getBlockHardness(worldIn, pos.down()) > 0) {
+                worldIn.setBlockToAir(pos.down());
+            }
+            if (!worldIn.isRemote) {
+                worldIn.createExplosion(new EntityAlterDummy(worldIn), pos.getX() + 0.5, pos.getY() + 0.5,
+                        pos.getZ() + 0.5, 3f, true);
+                worldIn.loadedEntityList.removeIf(entity1 -> entity1 instanceof EntityAlterDummy);
+                if (worldIn.spawnEntity(entity)) {
+                    return true;
                 }
-                if (!worldIn.isRemote) {
-                    worldIn.createExplosion(new EntityAlterDummy(worldIn), pos.getX() + 0.5, pos.getY() + 0.5,
-                            pos.getZ() + 0.5, 3f, true);
-                    worldIn.loadedEntityList.removeIf(entity1 -> entity1 instanceof EntityAlterDummy);
-                    if (worldIn.spawnEntity(entity)) {
-                        return true;
+            } else {
+                if (entity instanceof EntityKingCreeper && TakumiUtils.getAdvancementUnlocked(new ResourceLocation("takumicraft:kingslayer"))) {
+                    if (FMLCommonHandler.instance().getSide().isClient()) {
+                        this.proxyShowGuiToast();
                     }
                 }
             }
         }
         return flg;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void proxyShowGuiToast() {
+        Minecraft.getMinecraft().getToastGui().add(new TutorialToast(TutorialToast.Icons.RECIPE_BOOK, new TextComponentTranslation("tile.takumialter.info.01"),
+                new TextComponentTranslation("tile.takumialter.info.02"), false));
     }
 
     private void spawnWither(World worldIn, BlockPos pos) {

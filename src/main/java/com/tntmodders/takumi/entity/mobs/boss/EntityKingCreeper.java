@@ -52,6 +52,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.kingcreeper.name"), Color.GREEN,
                     Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
     private DamageSource lastSource;
+    private boolean hasUltimateCalled;
 
     public EntityKingCreeper(World worldIn) {
         super(worldIn);
@@ -65,6 +66,10 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
             e.printStackTrace();
         }
         this.experienceValue = 50;
+    }
+
+    public void setHasUltimateCalled(boolean hasUltimateCalled) {
+        this.hasUltimateCalled = hasUltimateCalled;
     }
 
     @Override
@@ -96,6 +101,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 }
                 kingCreeper.setCreeperState(-1);
                 kingCreeper.setAttackTarget(null);
+                kingCreeper.setHasUltimateCalled(this.hasUltimateCalled);
                 kingCreeper.setAttackID(this.getAttackID());
                 this.world.spawnEntity(kingCreeper);
             }
@@ -134,16 +140,20 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     public void setRandomAttackID() {
         if (!this.world.isRemote) {
             int id;
-            //@TODO: chage maxID if the var of attacks added. & change debugID if you commit it.
-            int debugID = 7;
-            if (debugID != 0) {
-                this.dataManager.set(ATTACK_ID, debugID);
-                id = debugID;
+            if (!this.hasUltimateCalled && this.getHealth() <= this.getMaxHealth() / 2) {
+                this.hasUltimateCalled = true;
+                id = 99;
             } else {
-                int maxID = 7;
-                id = new Random(System.currentTimeMillis()).nextInt(maxID + 1);
-                this.dataManager.set(ATTACK_ID, id);
+                //@TODO: chage maxID if the var of attacks added. & change debugID if you commit it.
+                int debugID = 0;
+                if (debugID != 0) {
+                    id = debugID;
+                } else {
+                    int maxID = 7;
+                    id = new Random(System.currentTimeMillis()).nextInt(maxID + 1);
+                }
             }
+            this.dataManager.set(ATTACK_ID, id);
             TakumiPacketCore.INSTANCE.sendToAll(new MessageTakumiBossAttackID(this.getEntityId(), this.getAttackID()));
         }
     }
@@ -261,7 +271,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                         if (!list.isEmpty()) {
                             list.forEach(entity -> {
                                 if (entity instanceof EntityLivingBase) {
-                                    entity.attackEntityFrom(DamageSource.causeMobDamage(this), 20);
+                                    entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10);
                                 }
                             });
                         }
@@ -390,6 +400,27 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     break;
                 }
 
+                //ultimate
+                case 99: {
+                    List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().grow(5));
+                    if (!list.isEmpty()) {
+                        list.forEach(entity -> {
+                            if (entity instanceof EntityLivingBase && !entity.isEntityInvulnerable(DamageSource.causeMobDamage(this)) &&
+                                    !(entity instanceof EntityPlayer && (((EntityPlayer) entity).isCreative() || ((EntityPlayer) entity).isSpectator()))) {
+                                entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageIsAbsolute().setDamageBypassesArmor(),
+                                        ((EntityLivingBase) entity).getHealth() - 1f);
+                            }
+                        });
+                    }
+                    for (int x = -5; x <= 5; x++) {
+                        for (int y = -5; y <= 5; y++) {
+                            for (int z = -5; z <= 5; z++) {
+                                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 4f, true);
+                            }
+                        }
+                    }
+                }
+
                 default: {
                     this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 12 : 8, true);
                 }
@@ -456,7 +487,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(260);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
     }
@@ -471,12 +502,14 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("attackid", this.getAttackID());
+        compound.setBoolean("hasUltimateCalled", this.hasUltimateCalled);
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setAttackID(compound.getInteger("attackid"));
+        this.hasUltimateCalled = compound.getBoolean("hasUltimateCalled");
         if (this.hasCustomName()) {
             this.bossInfo.setName(this.getDisplayName());
         }
