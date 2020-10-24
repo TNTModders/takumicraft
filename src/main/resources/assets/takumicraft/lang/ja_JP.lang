@@ -787,6 +787,9 @@ entity.myceliumcreeper.name=菌匠
 entity.myceliumcreeper.desc=這い寄る菌糸と茸の匠。
 entity.iceologercreeper.name=アイソロジャー匠
 entity.iceologercreeper.desc=敗者に非ず、凍てつく冬より這い寄る魔術師。
+entity.extremecreeper.name=疾匠
+entity.extremecreeper.read=しっしょう
+entity.extremecreeper.desc=疾きを極めし一閃より、この匠は現れる。穿て、背後に顕る一瞬を。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

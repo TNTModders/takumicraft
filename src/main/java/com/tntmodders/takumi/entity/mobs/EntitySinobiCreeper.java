@@ -126,15 +126,20 @@ public class EntitySinobiCreeper extends EntityTakumiAbstractCreeper {
 
     }
 
-    private class ParticleSmokeSinobi extends ParticleSmokeNormal {
+    static class ParticleSmokeSinobi extends ParticleSmokeNormal {
 
         public ParticleSmokeSinobi(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i46348_8_,
-                double p_i46348_10_, double p_i46348_12_, float p_i46348_14_) {
+                                   double p_i46348_10_, double p_i46348_12_, float p_i46348_14_) {
+            this(worldIn, xCoordIn, yCoordIn, zCoordIn, p_i46348_8_, p_i46348_10_, p_i46348_12_, p_i46348_14_, (int) (4.0F / (worldIn.rand.nextFloat() * 0.9F + 0.1F)) * 100);
+        }
+
+        public ParticleSmokeSinobi(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i46348_8_,
+                                   double p_i46348_10_, double p_i46348_12_, float p_i46348_14_, int maxAge) {
             super(worldIn, xCoordIn, yCoordIn, zCoordIn, p_i46348_8_, p_i46348_10_, p_i46348_12_, p_i46348_14_);
             this.particleRed = 1;
             this.particleGreen = 1;
             this.particleBlue = 1;
-            this.particleMaxAge = (int) (4.0F / (this.rand.nextFloat() * 0.9F + 0.1F)) * 100;
+            this.particleMaxAge = maxAge;
         }
 
         @Override

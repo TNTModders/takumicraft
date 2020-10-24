@@ -734,6 +734,8 @@ entity.myceliumcreeper.name=Mycelium Creeper
 entity.myceliumcreeper.desc=Creeping mycelium, do you want to eat mushroom?
 entity.iceologercreeper.name=Iceologer Creeper
 entity.iceologercreeper.desc=Not a Looser, but a froster creeping from the winter.
+entity.extremecreeper.name=Extreme Creeper
+entity.extremecreeper.desc=It extremed speed, tearing your body to pierces on a blink.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
