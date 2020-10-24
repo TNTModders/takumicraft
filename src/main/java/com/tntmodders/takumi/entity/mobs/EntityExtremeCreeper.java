@@ -182,6 +182,7 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
                 this.setPosition(x, y, z);
                 if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox())) {
                     this.setPosition(prevX, prevY, prevZ);
+                    this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1f, -1f);
                 } else {
                     this.flg = true;
                     if (FMLCommonHandler.instance().getSide().isClient()) {
@@ -193,6 +194,7 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
                             this.world.spawnAlwaysVisibleParticle(EnumParticleTypes.PORTAL.getParticleID(), prevX + dx * i, prevY + dy * i + 1, prevZ + dz * i,
                                     0, 0, 0);
                         }
+                        this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1f, 1f);
                     }
                 }
 
@@ -200,7 +202,6 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
                     for (int i = 0; i < 30; i++) {
                         this.spawnParticle(prevX, prevY, prevZ);
                     }
-                    this.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1f, 1f);
                 }
             } else if (flg && time > this.spTime && this.getAttackTarget() != null) {
                 for (int i = 0; i < 5; i++) {
@@ -241,8 +242,8 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
             int time = field.getInt(this);
             if (time < this.spTime) {
                 if (source.getTrueSource() != null && !source.isCreativePlayer()) {
+                    source.getTrueSource().playSound(SoundEvents.BLOCK_ANVIL_PLACE, 1f, 1.5f);
                     source.getTrueSource().attackEntityFrom(source, amount * 1.5f);
-                    source.getTrueSource().playSound(SoundEvents.BLOCK_ANVIL_FALL, 0.1f, 2f);
                 }
                 return false;
             }

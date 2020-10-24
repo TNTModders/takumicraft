@@ -38,7 +38,7 @@ public class RenderKingCreeper extends RenderTakumiCreeper {
                     Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
                     field.setAccessible(true);
                     int time = field.getInt(kingcreeper);
-                    if (time > 44) {
+                    if (time > kingcreeper.maxFuseTime - 6) {
                         GlStateManager.translate(0, 1, 0);
                         GlStateManager.rotate(90.0f, 1.0f, 0.0f, 0.0f);
                         GlStateManager.rotate(360 / 6 * (time - 44), 0.0f, 0.0f, 1.0f);
