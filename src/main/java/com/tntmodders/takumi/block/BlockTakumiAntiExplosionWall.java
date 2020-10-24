@@ -59,4 +59,9 @@ public class BlockTakumiAntiExplosionWall extends BlockWall {
         Block block = world.getBlockState(other).getBlock();
         return super.canBeConnectedTo(world, pos, facing) || block instanceof BlockFence;
     }
+
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
 }

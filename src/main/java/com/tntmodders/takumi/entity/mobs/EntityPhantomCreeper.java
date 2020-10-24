@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderPhantomCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
+import com.tntmodders.takumi.entity.item.EntityTakumiParachute;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
@@ -216,14 +217,26 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
                     double dy = this.posY - this.getAttackTarget().posY;
 
                     if (dx * dx + dz * dz < 25 && dy < 20) {
+                        Entity ride = null;
                         this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
                         EntityZombieCreeper creeper = new EntityZombieCreeper(this.world);
                         creeper.setPosition(this.posX, this.posY, this.posZ);
-                        creeper.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.ELYTRA));
+                        if (this.rand.nextDouble() < 0.7) {
+                            creeper.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(Items.ELYTRA));
+                        } else {
+                            creeper.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_AXE));
+                            EntityTakumiParachute parachute = new EntityTakumiParachute(this.world);
+                            parachute.setPosition(this.posX, this.posY, this.posZ);
+                            this.world.spawnEntity(parachute);
+                            ride = parachute;
+                        }
                         creeper.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Items.CHAINMAIL_HELMET));
                         creeper.setAttackTarget(this.getAttackTarget());
                         this.world.spawnEntity(creeper);
                         this.damageEntity(DamageSource.causeMobDamage(this), 1);
+                        if (ride != null) {
+                            creeper.startRiding(ride);
+                        }
                     }
                 }
             }

@@ -94,7 +94,7 @@ public class TakumiConfigCore {
         ownerLockTakumiBlock = cfg.getBoolean("ownerLockTakumiBlock", GENERAL, true,
                 TakumiUtils.takumiTranslate("config.takumicraft.oltb.desc"), "config.takumicraft.oltb.prop");
 
-        ownerLockTakumiBlock = cfg.getBoolean("ownerLockTakumiCannon", GENERAL, false,
+        ownerLockTakumiCannon = cfg.getBoolean("ownerLockTakumiCannon", GENERAL, false,
                 TakumiUtils.takumiTranslate("config.takumicraft.oltc.desc"), "config.takumicraft.oltc.prop");
         cfg.save();
     }

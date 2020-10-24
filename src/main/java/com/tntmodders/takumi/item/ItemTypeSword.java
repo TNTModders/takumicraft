@@ -148,8 +148,8 @@ public class ItemTypeSword extends ItemSword {
             if (EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.TYPE_MAGIC)) {
                 worldIn.getEntities(EntityLivingBase.class,
                         input -> entityIn.getDistanceSqToEntity(input) < 16f).forEach(entityLivingBase -> {
-                    if (entityLivingBase.getClass() != entityIn.getClass() && !worldIn.isRemote) {
-                        entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2));
+                    if (entityLivingBase.getClass() != entityIn.getClass()) {
+                        entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5, 2, true, false));
                     }
                 });
             }

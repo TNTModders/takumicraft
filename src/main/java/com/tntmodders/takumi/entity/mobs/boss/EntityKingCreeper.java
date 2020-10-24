@@ -266,12 +266,12 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     field.setAccessible(true);
                     int time = field.getInt(this);
                     if (time > 44) {
-                        AxisAlignedBB aabb = this.getEntityBoundingBox().grow(5, 0, 5).contract(0, 1, 0);
+                        AxisAlignedBB aabb = this.getEntityBoundingBox().grow(5, 0, 5).contract(0, 0.6, 0);
                         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, aabb);
                         if (!list.isEmpty()) {
                             list.forEach(entity -> {
                                 if (entity instanceof EntityLivingBase) {
-                                    entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10);
+                                    entity.attackEntityFrom(DamageSource.causeMobDamage(this), 15);
                                 }
                             });
                         }
@@ -415,7 +415,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     for (int x = -5; x <= 5; x++) {
                         for (int y = -5; y <= 5; y++) {
                             for (int z = -5; z <= 5; z++) {
-                                this.world.createExplosion(this, this.posX, this.posY, this.posZ, 4f, true);
+                                this.world.newExplosion(this, this.posX, this.posY, this.posZ, 4f, true, true);
                             }
                         }
                     }

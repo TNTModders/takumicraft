@@ -41,8 +41,8 @@ public class EntityTakumiTitanMeteor extends AbstractEntityTakumiGrenade {
                 for (int x = -75; x <= 75; x++) {
                     for (int y = -25; y <= 25; y++) {
                         for (int z = -75; z <= 75; z++) {
-                            if (x * x + 3 * y * y + z * z <= 75 * 75 && this.rand.nextInt(2500) == 0) {
-                                TakumiUtils.takumiCreateExplosion(world, this, result.hitVec.x + x, result.hitVec.y + y, result.hitVec.z + z, this.getPower(), true, this.getDestroy());
+                            if (x * x + 8 * y * y + z * z <= 75 * 75 && this.rand.nextInt(2000) == 0) {
+                                TakumiUtils.takumiCreateExplosion(world, this, result.hitVec.x + x, result.hitVec.y + y, result.hitVec.z + z, this.getPower(), false, this.getDestroy());
                             }
                         }
                     }
@@ -62,6 +62,7 @@ public class EntityTakumiTitanMeteor extends AbstractEntityTakumiGrenade {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) > 2000 ? 2000 : 0.25f;
+        return blockStateIn.getBlockHardness(worldIn, pos) < 0 ? super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) :
+                blockStateIn.getBlock().getExplosionResistance(worldIn, pos, this, explosionIn) > 2000 ? 2000 : 0.05f;
     }
 }
