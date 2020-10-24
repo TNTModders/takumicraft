@@ -150,7 +150,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 if (debugID != 0) {
                     id = debugID;
                 } else {
-                    int maxID = 7;
+                    int maxID = 9;
                     id = new Random(System.currentTimeMillis()).nextInt(maxID + 1);
                 }
             }
