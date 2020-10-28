@@ -108,6 +108,7 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
 
     @Override
     public void setDead() {
+        TakumiCraftCore.LOGGER.info(this.getHealth());
         if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
             if (!this.world.isRemote) {
                 EntityTransCreeper_2 transCreeper = new EntityTransCreeper_2(this.world);

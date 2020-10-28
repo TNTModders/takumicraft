@@ -49,14 +49,15 @@ public class TakumiExplosion extends Explosion {
     private final Vec3d position;
     private final double amp;
     private final boolean damage;
+    private final boolean sound;
 
     public TakumiExplosion(World worldIn, Entity entityIn, double x, double y, double z, float size, boolean flaming,
                            boolean damagesTerrain, double amp) {
-        this(worldIn, entityIn, x, y, z, size, flaming, damagesTerrain, amp, true);
+        this(worldIn, entityIn, x, y, z, size, flaming, damagesTerrain, amp, true, true);
     }
 
     public TakumiExplosion(World worldIn, Entity entityIn, double x, double y, double z, float size, boolean flaming,
-                           boolean damagesTerrain, double amp, boolean damage) {
+                           boolean damagesTerrain, double amp, boolean damage, boolean sound) {
         super(worldIn, entityIn, x, y, z, size, flaming, damagesTerrain);
         this.damage = damage;
         this.random = new Random();
@@ -72,6 +73,7 @@ public class TakumiExplosion extends Explosion {
         this.causesFire = flaming;
         this.damagesTerrain = damagesTerrain;
         this.position = new Vec3d(this.x, this.y, this.z);
+        this.sound = sound;
     }
 
     public float getSize() {
@@ -198,8 +200,10 @@ public class TakumiExplosion extends Explosion {
 
     @Override
     public void doExplosionB(boolean spawnParticles) {
-        this.world.playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
-                4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+        if (this.sound) {
+            this.world.playSound(null, this.x, this.y, this.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
+                    4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+        }
 
         if (this.size >= 2.0F && this.damagesTerrain) {
             this.world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);

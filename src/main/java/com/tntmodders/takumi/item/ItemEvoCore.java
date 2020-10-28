@@ -114,6 +114,11 @@ public class ItemEvoCore extends Item {
                     return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
                 }
             }
+        } else {
+/*            EntityItem item = new EntityItem(worldIn);
+            item.setItem(TakumiUtils.generateRandomTipsBook(worldIn.rand));
+            item.copyLocationAndAnglesFrom(playerIn);
+            worldIn.spawnEntity(item);*/
         }
         return result;
     }

@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.mojang.authlib.GameProfile;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
@@ -21,7 +20,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -67,7 +65,7 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(ExplosionEvent.Detonate event) {
         if (!this.world.isRemote) {
             event.getAffectedEntities().forEach(entity -> {
-                if (entity instanceof EntityPlayer) {
+                if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isSpectator()) {
                     ItemStack stack = new ItemStack(Items.SKULL, 1, 3);
                     NBTTagCompound tagCompound = stack.getTagCompound();
                     if (tagCompound == null) {
@@ -77,10 +75,7 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
                     stack.setTagCompound(tagCompound);
                     this.world.setBlockState(entity.getPosition(), Blocks.SKULL.getDefaultState().withProperty(BlockSkull.FACING, entity.getAdjustedHorizontalFacing()));
                     if (this.world.getTileEntity(entity.getPosition()) instanceof TileEntitySkull) {
-                        NBTTagCompound nbttagcompound = stack.getTagCompound();
-                        GameProfile gameprofile = null;
-                        gameprofile = NBTUtil.readGameProfileFromNBT(nbttagcompound.getCompoundTag("SkullOwner"));
-                        ((TileEntitySkull) this.world.getTileEntity(entity.getPosition())).setPlayerProfile(gameprofile);
+                        ((TileEntitySkull) this.world.getTileEntity(entity.getPosition())).setPlayerProfile(((EntityPlayer) entity).getGameProfile());
                     }
                 } else if (entity instanceof EntityWitherSkeleton) {
                     ItemStack stack = new ItemStack(Items.SKULL, 1, 1);
@@ -243,7 +238,7 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
             if (time < this.spTime) {
                 if (source.getTrueSource() != null && !source.isCreativePlayer()) {
                     source.getTrueSource().playSound(SoundEvents.BLOCK_ANVIL_PLACE, 1f, 1.5f);
-                    source.getTrueSource().attackEntityFrom(source, amount * 1.5f);
+                    source.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this), amount * 1.5f);
                 }
                 return false;
             }

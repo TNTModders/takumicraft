@@ -48,7 +48,7 @@ public class EntityBigHomingBomb extends EntityShulkerBullet {
     protected void bulletHit(RayTraceResult result) {
         if (!(result.entityHit instanceof EntityBigCreeper) && !(result.entityHit instanceof EntityKingCreeper)) {
             if (!this.world.isRemote) {
-                TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 7f, true, true);
+                TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 4f, true, true);
             }
             if (result.entityHit == null) {
                 ((WorldServer) this.world).spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY,

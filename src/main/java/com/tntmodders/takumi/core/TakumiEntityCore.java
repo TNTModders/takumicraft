@@ -15,6 +15,7 @@ import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.entity.EnumCreatureType;
@@ -345,6 +346,8 @@ public class TakumiEntityCore {
                 EntityTakumiCannonBall.class, "takumicannonball", 938, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "kingcreeperspellblock"),
                 EntityKingBlock.class, "kingcreeperspellblock", 939, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "kingcreeperstorm"),
+                EntityKingStorm.class, "kingcreeperstorm", 940, TakumiCraftCore.TakumiInstance, 64, 2, true);
 
     }
 
@@ -468,6 +471,12 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiCannonBall.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.THROW_GRENEDE, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityKingBlock.class, manager -> new RenderIceologerCreeperSpell(manager, TakumiBlockCore.CREEPER_ALTAR));
+        RenderingRegistry.registerEntityRenderingHandler(EntityKingStorm.class, manager -> new RenderLiving<EntityKingStorm>(manager, new ModelCreeper(), 0f) {
+            @Override
+            protected ResourceLocation getEntityTexture(EntityKingStorm entity) {
+                return null;
+            }
+        });
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

@@ -299,6 +299,16 @@ item.takumiknife.tooltip=Charged Power:
 item.takumiknife_gun.name=Creeper Transform Bowgun
 item.attackcore.name=AttackBlock Core
 item.takumicannon.name=Creeper Heavy Cannon
+item.oldbook.name=謎のメモ
+item.oldbook.content.0=輝く石より抽出した薬液を用いて、結晶のエネルギーを醸造できる。壊の力と魔の力は、それらを増幅させるが、時に我らには毒ともなる。
+item.oldbook.content.1=匠たちの湧き出る地、緑の世界は、今やその門を固く閉ざした。王の力があれば、緑の門は開くだろう。 赤い世界のように真下へ落ちるわけでもなく、黒い世界のように月へ行くわけでもなく、あの地は全く外にあるのに、門を閉ざす必要は何故あったのだろうか?
+item.oldbook.content.2=奴らの王をこちらに引き寄せるために、奴らの祭壇を利用させてもらった。祭壇の下に爆弾、奴はそれで顕れる。今まで祭壇より出る敵には手を焼いてきたが、此の王の強さは比類なきものであろう。奴を倒して王の力を削ぐことができれば……。
+item.oldbook.content.3=それぞれの属性には特質と相性がある。火を用いる者に火は効かず、水を受けるものに水は効かず、草靡く者は高きを物ともしない。地を支える者は回復し、風を纏う者は素早く動く。特質を理解し、相性を突くことが身を守るだろう。
+item.oldbook.content.4=壊と魔は相反する。それぞれを継承する者は猛者であり、苛烈な力を以て敵を殲滅する。然して、陰陽二つを共に身に宿すものも居る。計り知れないエネルギーは、同時に勝者に力を与える。
+item.oldbook.content.5=属性纏いし武器に対して、結晶のエネルギーを合成できる。壊の力と魔の力は、攻めの力と守りの力を増幅させる。
+item.oldbook.content.6=ある日突然、龍が現れた。奴は自分の力を仲間に与え、配下を増やし、そして戦いが起きた。地に落ちた星を知らずに。
+item.oldbook.content.7=祭壇より顕る匠の力は、時に道具に爆発を耐え抜く力を与える。鉄床を用いて力を合成してみるとよいだろう。
+item.oldbook.content.8= ｜○｜ ー凹△ ー＾▽ □凸｜ ー凸□  □凸▽ □＾｜ ー～△ ｜○｜ ー～▽ □凸□
 
 #entity
 #desc max: 72 chars
@@ -806,6 +816,8 @@ entity.takumiknifegungrenede.name=Creeper Transform Bowgun
 entity.iceologercreeperspell.name=Iceologer Creeper
 entity.takumicannon.name=Creeper Heavy Cannon
 entity.takumicannonball.name=Creeper Heavy Cannon
+entity.kingcreeperspellblock.name=King Creeper
+entity.kingcreeperstorm.name=King Creeper
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.
@@ -954,6 +966,8 @@ config.takumicraft.oltb.prop=Takumi Super Block : Owner Lock
 config.takumicraft.oltb.desc=If true, only placer and opped player can edit and destroy Takumi Super Block.
 config.takumicraft.oltb.prop=Takumi Cannon : Owner Lock
 config.takumicraft.oltb.desc=If true, only placer and opped player can destroy Takumi Cannon.
+config.takumicraft.droptipsbook.prop=Drop TipsBook
+config.takumicraft.droptipsbook.desc=If true, tips book of this mod drops when you killed takumicraft creepers.
 takumicraft.takumibook.key=Show TakumiBook
 takumicraft.xms.key=X-MS S-foil
 takumicraft.tcs.spec=【Spectators】

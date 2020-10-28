@@ -23,6 +23,7 @@ public class TakumiConfigCore {
     public static boolean useNewYearTex;
     public static boolean ownerLockTakumiBlock;
     public static boolean ownerLockTakumiCannon;
+    public static boolean dropTipsBook;
     //debugConfig
     public static boolean inDev = false;
     /**
@@ -96,6 +97,9 @@ public class TakumiConfigCore {
 
         ownerLockTakumiCannon = cfg.getBoolean("ownerLockTakumiCannon", GENERAL, false,
                 TakumiUtils.takumiTranslate("config.takumicraft.oltc.desc"), "config.takumicraft.oltc.prop");
+
+        dropTipsBook = cfg.getBoolean("dropTipsBook",GENERAL,true,
+                TakumiUtils.takumiTranslate("config.takumicraft.droptipsbook.desc"),"config.takumicraft.droptipsbook.prop");
         cfg.save();
     }
 }

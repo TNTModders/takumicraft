@@ -12,6 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -156,5 +157,10 @@ public class EntityDashCreeper extends EntityTakumiAbstractCreeper {
             }
         }
         super.onLivingUpdate();
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        return super.getCanSpawnHere() && (this.world.provider.getDimensionType() != DimensionType.OVERWORLD || this.rand.nextInt(5) == 0);
     }
 }

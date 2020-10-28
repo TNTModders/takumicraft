@@ -8,6 +8,7 @@ import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
 import com.tntmodders.takumi.entity.item.EntityAttackBlock;
 import com.tntmodders.takumi.entity.item.EntityDestGolem;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -343,6 +344,12 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                     }
                 } catch (Exception e) {
 
+                }
+                if (this.world.playerEntities.size() == 1 && this.rand.nextInt(50) == 0) {
+                    EntityItem item = new EntityItem(this.world);
+                    item.setItem(TakumiUtils.generateRandomTipsBook(this.rand));
+                    item.copyLocationAndAnglesFrom(this);
+                    this.world.spawnEntity(item);
                 }
             }
         }

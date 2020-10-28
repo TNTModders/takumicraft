@@ -16,7 +16,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.play.server.SPacketExplosion;
 import net.minecraft.tileentity.TileEntity;
@@ -44,6 +49,23 @@ import java.util.jar.JarFile;
 
 public class TakumiUtils {
 
+    public static ItemStack generateRandomTipsBook(Random random) {
+        ItemStack stack = new ItemStack(Items.WRITTEN_BOOK);
+        EnumTakumiOldBooks books = EnumTakumiOldBooks.randomValueOf(random);
+        NBTTagCompound compound = stack.getTagCompound();
+        if (compound == null) {
+            compound = new NBTTagCompound();
+        }
+        compound.setString("title", TakumiUtils.takumiTranslate("item.oldbook.name") + "_" + books.getId());
+        compound.setString("author", "???");
+        NBTTagList list = new NBTTagList();
+        list.appendTag(new NBTTagString(TakumiUtils.takumiTranslate("item.oldbook.content." + books.getId())));
+        compound.setTag("pages", list);
+        compound.setInteger("generation", 1);
+        stack.setTagCompound(compound);
+        return stack;
+    }
+
     public static boolean canSpawnElementBoss(World world) {
         return world.provider.getDimensionType().getId() == TakumiWorldCore.TAKUMI_WORLD.getId() ||
                 (world.playerEntities.stream().anyMatch(player -> player instanceof EntityPlayerMP &&
@@ -57,8 +79,7 @@ public class TakumiUtils {
             try {
                 if (world.tickableTileEntities == null || world.tickableTileEntities.isEmpty()) {
                     world.setBlockState(pos, state);
-                }
-                else {
+                } else {
                     boolean flg = true;
                     if (world.tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity instanceof TileEntityTakumiForceField)) {
                         for (TileEntity tileEntity : world.tickableTileEntities) {
@@ -250,8 +271,13 @@ public class TakumiUtils {
 
     public static TakumiExplosion takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
                                                         boolean fire, boolean destroy, double amp, boolean damage) {
+        return takumiCreateExplosion(world, entity, x, y, z, power, fire, destroy, amp, damage, true);
+    }
+
+    public static TakumiExplosion takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
+                                                        boolean fire, boolean destroy, double amp, boolean damage, boolean sound) {
         boolean flg = world instanceof WorldServer;
-        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp, damage);
+        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp, damage,sound);
         if (ForgeEventFactory.onExplosionStart(world, explosion)) {
             return explosion;
         }
@@ -324,5 +350,31 @@ public class TakumiUtils {
                 return EnumDyeColor.BLACK.getColorValue();
         }
         return EnumDyeColor.BLACK.getColorValue();
+    }
+
+    public enum EnumTakumiOldBooks {
+        POTION(0),
+        WORLD(1),
+        KING(2),
+        TYPE_01(3),
+        TYPE_02(4),
+        ENCHANT(5),
+        MISC_01(6),
+        ITEM_PROTECTION(7),
+        MISC_02(8);
+
+        private final int id;
+
+        EnumTakumiOldBooks(int idIn) {
+            this.id = idIn;
+        }
+
+        public static EnumTakumiOldBooks randomValueOf(Random random) {
+            return EnumTakumiOldBooks.values()[random.nextInt(EnumTakumiOldBooks.values().length)];
+        }
+
+        public int getId() {
+            return id;
+        }
     }
 }

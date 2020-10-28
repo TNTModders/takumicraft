@@ -569,11 +569,11 @@ public class TakumiEvents {
                 default: {
                     event.getAffectedEntities().forEach(entity -> {
                         if (entity instanceof EntityLivingBase) {
-                            entity.getEquipmentAndArmor().forEach(itemStack -> {
+                            /*entity.getEquipmentAndArmor().forEach(itemStack -> {
                                 if (itemStack != ItemStack.EMPTY && entity.world.rand.nextInt(20) == 0) {
                                     itemStack.shrink(1);
                                 }
-                            });
+                            });*/
                             entity.attackEntityFrom(DamageSource.causeMobDamage(
                                     event.getExplosion().getExplosivePlacedBy()).setMagicDamage(), 10);
                         }
