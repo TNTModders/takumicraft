@@ -180,7 +180,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 case 1: {
                     for (double x = -5; x <= 5; x += 0.25) {
                         for (double z = -5; z <= 5; z += 0.25) {
-                            if (x * x + z * z <= 25 && x * x + z * z >= 4.5 * 4.5 && this.rand.nextBoolean()) {
+                            if (x * x + z * z <= 25 && x * x + z * z >= 4.5 * 4.5 && this.rand.nextInt(10) == 0) {
                                 this.spawnParticle(EnumParticleTypes.FLAME, x, 0, z,
                                         Math.sin(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2, 0.4,
                                         Math.cos(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2);
@@ -195,7 +195,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     for (double x = -5; x <= 5; x += 0.5) {
                         for (double z = -5; z <= 5; z += 0.5) {
                             for (double y = -5; y <= 5; y += 0.5) {
-                                if (x * x + z * z + y * y <= 25 && x * x + z * z + y * y >= 4.5 * 4.5) {
+                                if (x * x + z * z + y * y <= 25 && x * x + z * z + y * y >= 4.5 * 4.5 && this.rand.nextInt(10) == 0) {
                                     this.spawnParticle(EnumParticleTypes.FLAME, x, y, z,
                                             Math.sin(Math.atan2(z, x) * this.ticksExisted / 10) * 0.01, 0,
                                             Math.cos(Math.atan2(z, x) * this.ticksExisted / 10) * 0.01);
@@ -250,8 +250,8 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 case 6: {
                     for (double x = -5; x <= 5; x += 0.5) {
                         for (double z = -5; z <= 5; z += 0.5) {
-                            if (x * x + z * z <= 25 && this.rand.nextInt(20) == 0) {
-                                this.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, x, 0, z,
+                            if (x * x + z * z <= 25 && this.rand.nextInt(10) == 0) {
+                                this.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, x, this.rand.nextDouble() + 0.5, z,
                                         (this.rand.nextDouble() - 0.5) * 0.3, 0.5,
                                         (this.rand.nextDouble() - 0.5) * 0.3);
                             }
@@ -283,7 +283,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 case 9: {
                     for (double x = -3; x <= 3; x += 0.25) {
                         for (double z = -3; z <= 3; z += 0.25) {
-                            if (x * x + z * z <= 9 && x * x + z * z >= 2.5 * 2.5 && this.rand.nextBoolean()) {
+                            if (x * x + z * z <= 9 && x * x + z * z >= 2.5 * 2.5 && this.rand.nextInt(10) == 0) {
                                 this.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, 0, z,
                                         Math.sin(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2, 0.4,
                                         Math.cos(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2);
@@ -297,7 +297,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                 case 10: {
                     for (double x = -2; x <= 2; x += 0.25) {
                         for (double z = -2; z <= 2; z += 0.25) {
-                            if (x * x + z * z <= 4 && x * x + z * z >= 1.5 * 1.5 && this.rand.nextBoolean()) {
+                            if (x * x + z * z <= 4 && x * x + z * z >= 1.5 * 1.5 && this.rand.nextInt(10) == 0) {
                                 this.spawnParticle(EnumParticleTypes.PORTAL, x, 0, z,
                                         Math.sin(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2, 0.4,
                                         Math.cos(Math.atan2(z, x) * this.ticksExisted / 10) * 0.2);
@@ -358,14 +358,15 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                     Field field = TakumiASMNameMap.getField(EntityCreeper.class, "timeSinceIgnited");
                     field.setAccessible(true);
                     int time = field.getInt(this);
-                    if (time > this.maxFuseTime - 3) {
+                   /* if (time > this.maxFuseTime - 3) {
                         for (int i = 0; i < 5; i++) {
                             EntityLightningBolt bolt = new EntityLightningBolt(this.world, this.posX + (this.rand.nextGaussian() - 0.5) * 3, this.posY + 15,
                                     this.posZ + (this.rand.nextGaussian() - 0.5) * 3, false);
                             this.world.addWeatherEffect(bolt);
                             this.world.spawnEntity(bolt);
                         }
-                    } else if (time == this.maxFuseTime - 3) {
+                    } else*/
+                    if (time == this.maxFuseTime - 3 && !this.onGround) {
                         this.setPosition(this.posX, this.posY + 15, this.posZ);
                     }
                 } catch (Exception e) {
@@ -525,7 +526,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
 
                 //TPExp
                 case 10: {
-                    TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 1f, false, true, 10);
+                    TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 1f, false, true, 7);
                     break;
                 }
 
@@ -551,14 +552,17 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
                             }
                         });
                     }
-                    for (int x = -4; x <= 4; x++) {
-                        for (int y = -4; y <= 4; y++) {
-                            for (int z = -4; z <= 4; z++) {
-                                this.world.newExplosion(this, this.posX, this.posY, this.posZ, 5f, true, true);
+                    for (int x = -3; x <= 3; x++) {
+                        for (int y = -3; y <= 3; y++) {
+                            for (int z = -3; z <= 3; z++) {
+                                if (this.rand.nextInt(8) == 0) {
+                                    TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 4f, true, true, 0.1, false);
+                                }
                             }
                         }
                     }
                     this.setHealth(this.getHealth() - 20);
+                    break;
                 }
 
                 default: {
@@ -616,7 +620,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(3) + 1);
+            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(8) + 2);
 /*            if (FMLCommonHandler.instance().getSide().isServer()) {
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TextComponentString(this.getName() + " has killed!"), true);
             }*/

@@ -108,8 +108,7 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
 
     @Override
     public void setDead() {
-        TakumiCraftCore.LOGGER.info(this.getHealth());
-        if (!(this.getHealth() <= 0 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+        if (!(this.getHealth() <= 1 || this.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
             if (!this.world.isRemote) {
                 EntityTransCreeper_2 transCreeper = new EntityTransCreeper_2(this.world);
                 NBTTagCompound tagCompound = new NBTTagCompound();
@@ -179,16 +178,18 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
                 }
             }
             if (this.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
-                this.world.playerEntities.forEach(entityPlayer -> {
-                    if (this.getDistanceSqToEntity(entityPlayer) < 256 && !this.world.isRemote) {
-                        entityPlayer.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0));
-                        entityPlayer.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 100, 0));
-                    }
-                });
+                if (!this.world.isRemote) {
+                    this.world.playerEntities.forEach(entityPlayer -> {
+                        if (this.getDistanceSqToEntity(entityPlayer) < 256 && !this.world.isRemote && !entityPlayer.isSpectator()) {
+                            entityPlayer.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0));
+                            entityPlayer.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 100, 0));
+                        }
+                    });
+                }
             }
             if (this.getActivePotionEffect(MobEffects.RESISTANCE) != null) {
                 this.world.playerEntities.forEach(entityPlayer -> {
-                    if (this.getDistanceSqToEntity(entityPlayer) < 9) {
+                    if (this.getDistanceSqToEntity(entityPlayer) < 9 && !entityPlayer.isSpectator()) {
                         if (!this.world.isRemote) {
                             entityPlayer.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 100));
                             if (this.ticksExisted % 20 == 0) {
@@ -219,8 +220,10 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
                     }
                     if (this.getDistanceSqToEntity(this.getAttackTarget()) < 25 && this.ticksExisted % 10 == 0 &&
                             this.rand.nextBoolean()) {
-                        this.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 10, 255));
-                        //TakumiCraftCore.LOGGER.info(this.getActivePotionEffects());
+                        if (!this.world.isRemote) {
+                            this.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 10, 255));
+                            //TakumiCraftCore.LOGGER.info(this.getActivePotionEffects());
+                        }
                     }
                 }
             }
@@ -325,8 +328,8 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
                     break;
                 }
                 case 3: {
-                    this.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 120));
                     if (!this.world.isRemote) {
+                        this.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 120));
                         this.world.createExplosion(this, this.posX, this.posY, this.posZ, 1f, false);
                     }
                     break;
@@ -374,16 +377,18 @@ public class EntityTransCreeper_2 extends EntityTakumiAbstractCreeper {
             }
 
             int rnd = new Random(System.currentTimeMillis()).nextInt(8);
-            if (rnd == 4) {
-                //fung
-            } else if (rnd == 5) {
-                this.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 20 * 15, 0));
-            } else if (rnd == 6) {
-                this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20 * 15, 0));
-            } else if (rnd == 7) {
-                this.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20 * 15, 0));
-            } else if (this.rand.nextInt(3) == 0) {
-                this.removePotionEffect(MobEffects.SLOWNESS);
+            if (!this.world.isRemote) {
+                if (rnd == 4) {
+                    //fung
+                } else if (rnd == 5) {
+                    this.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 20 * 15, 0));
+                } else if (rnd == 6) {
+                    this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20 * 15, 0));
+                } else if (rnd == 7) {
+                    this.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20 * 15, 0));
+                } else if (this.rand.nextInt(3) == 0) {
+                    this.removePotionEffect(MobEffects.SLOWNESS);
+                }
             }
         }
     }

@@ -18,7 +18,7 @@ public class EntityKingBlock extends EntityIceologerCreeperSpell {
             double x = this.posX - 2.5 + this.rand.nextDouble() * 6;
             double y = this.posY + this.rand.nextDouble() - this.rand.nextDouble();
             double z = this.posZ - 2.5 + this.rand.nextDouble() * 6;
-            TakumiUtils.takumiCreateExplosion(world, this, x, y, z, 4f, true, true, 2f);
+            TakumiUtils.takumiCreateExplosion(world, this, x, y, z, 4f, true, true, 1.25f);
         }
     }
 
