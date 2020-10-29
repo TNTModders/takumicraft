@@ -69,7 +69,7 @@ public class EntityKingStorm extends EntityMob {
     public void onCollideWithPlayer(EntityPlayer entityIn) {
         super.onCollideWithPlayer(entityIn);
         this.world.createExplosion(this, entityIn.posX, entityIn.posY, entityIn.posZ, 0f, false);
-        entityIn.motionY = 3f * (1.1 - Math.max(this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).getAttributeValue(), 1));
+        entityIn.motionY = 5f * (1.1 - Math.max(this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).getAttributeValue(), 1));
     }
 
     @Override
