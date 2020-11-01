@@ -13,7 +13,6 @@ import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
 import com.tntmodders.takumi.utils.TakumiUtils;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,7 +22,6 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityShulkerBullet;
 import net.minecraft.init.Biomes;
@@ -32,7 +30,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeOcean;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -46,11 +43,11 @@ import java.util.*;
 
 public class TakumiEntityCore {
 
-    public static final EnumCreatureType CREATURE_TAKUMI =
-            EnumHelper.addCreatureType("creature_takumi", IMob.class, TakumiConfigCore.spawnWeightAnimal, Material.AIR,
-                    false, false);
-    public static final EnumCreatureType WATER_TAKUMI =
-            EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);
+    public static final EnumCreatureType CREATURE_TAKUMI = EnumCreatureType.MONSTER;
+    /*            EnumHelper.addCreatureType("creature_takumi", IMob.class, TakumiConfigCore.spawnWeightAnimal, Material.AIR,
+                        false, false);*/
+    public static final EnumCreatureType WATER_TAKUMI = EnumCreatureType.WATER_CREATURE;
+    /*            EnumHelper.addCreatureType("water_takumi", IMob.class, 30, Material.WATER, false, false);*/
     public static final List<Class<? extends ITakumiEntity>> CLASS_LIST = new ArrayList<>();
     private static final List<ITakumiEntity> ENTITY_LIST = new ArrayList<>();
     public static List<Biome> biomes = new ArrayList<>();
