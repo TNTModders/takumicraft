@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -171,8 +172,8 @@ public class EntityPolarBearCreeper extends EntityTakumiAbstractCreeper {
     public void customSpawn() {
         List<Biome> biomeList = TakumiEntityCore.biomes;
         biomeList.removeIf(biome -> biome.getTempCategory() != TempCategory.COLD);
-        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20,
-                TakumiEntityCore.CREATURE_TAKUMI, biomeList.toArray(new Biome[0]));
+        EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 10, 1, 1,
+                EnumCreatureType.MONSTER, biomeList.toArray(new Biome[0]));
     }
 
     @Override

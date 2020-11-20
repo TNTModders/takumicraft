@@ -91,7 +91,11 @@ public class BlockTakumiSuperPowered extends BlockContainer {
 
     @Override
     public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-        return true;
+        if (world.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
+                ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock() != null) {
+            return ((TileEntityTakumiSuperPowered) world.getTileEntity(pos)).getBlock().canSustainPlant(state, world, pos, direction, plantable);
+        }
+        return false;
     }
 
     @Override
@@ -405,9 +409,13 @@ public class BlockTakumiSuperPowered extends BlockContainer {
                 if (this.canEditBlock(((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)), playerIn, true)) {
                     if (!playerIn.isCreative()) {
                         if (((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock() != null) {
-                            ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock().dropBlockAsItem(worldIn, pos,
-                                    ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
-                                            ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getMeta()), 0);
+                            EntityItem item = new EntityItem(worldIn);
+                            item.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                            item.setItem(
+                                    ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock().getItem(worldIn, pos,
+                                            ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock().getStateFromMeta(
+                                                    ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getMeta())));
+                            worldIn.spawnEntity(item);
                         }
                         this.dropBlockAsItem(worldIn, pos, this.getDefaultState(), 0);
                     }

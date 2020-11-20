@@ -43,7 +43,7 @@ import java.util.*;
 
 public class TakumiEntityCore {
 
-    public static final EnumCreatureType CREATURE_TAKUMI = EnumCreatureType.MONSTER;
+    //public static final EnumCreatureType CREATURE_TAKUMI = EnumCreatureType.MONSTER;
     /*            EnumHelper.addCreatureType("creature_takumi", IMob.class, TakumiConfigCore.spawnWeightAnimal, Material.AIR,
                         false, false);*/
     public static final EnumCreatureType WATER_TAKUMI = EnumCreatureType.WATER_CREATURE;

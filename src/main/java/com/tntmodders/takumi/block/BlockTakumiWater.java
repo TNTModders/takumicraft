@@ -76,8 +76,7 @@ public class BlockTakumiWater extends BlockFluidClassic {
     @Override
     public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,
                                           double yToTest, Material materialIn, boolean testingHead) {
-        return materialIn == Material.WATER ? true :
-                super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
+        return materialIn == Material.WATER || super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);
     }
 
     @Override

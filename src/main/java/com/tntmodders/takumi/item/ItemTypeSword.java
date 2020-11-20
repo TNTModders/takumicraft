@@ -196,4 +196,15 @@ public class ItemTypeSword extends ItemSword {
         return (toRepair.getItem() != TakumiItemCore.TAKUMI_TYPE_SWORD_NORMAL &&
                 repair.getItem() == TakumiItemCore.TAKUMI_TYPE_CORE && repair.getMetadata() + 1 == type.getId()) || super.getIsRepairable(toRepair, repair);
     }
+
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        if (this.type == ITakumiEntity.EnumTakumiType.WIND && entityLiving.onGround) {
+            performEffect(null, entityLiving);
+            if (!(entityLiving instanceof EntityPlayer) || !((EntityPlayer) entityLiving).isCreative()) {
+                stack.damageItem(1, entityLiving);
+            }
+        }
+        return super.onEntitySwing(entityLiving, stack);
+    }
 }

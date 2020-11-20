@@ -1,7 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.client.render.RenderWolfCreeper;
-import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,10 +15,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -174,11 +171,11 @@ public class EntityWolfCreeper extends EntityTakumiAbstractCreeper {
         return true;
     }
 
-    @Override
+/*    @Override
     public void customSpawn() {
         EntityRegistry.addSpawn(this.getClass(), this.takumiRank().getSpawnWeight() * 25, 5, 20,
                 TakumiEntityCore.CREATURE_TAKUMI, TakumiEntityCore.biomes.toArray(new Biome[0]));
-    }
+    }*/
 
     @Override
     public boolean isAnimal() {

@@ -6,6 +6,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 
 public class EnchantmentTakumiMineSweeper extends Enchantment {
 
@@ -17,6 +18,18 @@ public class EnchantmentTakumiMineSweeper extends Enchantment {
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof ItemTakumiMineSweeperTool && super.canApply(stack);
+        return (stack.getItem() instanceof ItemTakumiMineSweeperTool ||
+                (stack.getItem() instanceof ItemTool && ((ItemTool) stack.getItem()).getToolMaterialName().equalsIgnoreCase("DIAMOND"))) && super.canApply(stack);
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return (stack.getItem() instanceof ItemTakumiMineSweeperTool ||
+                (stack.getItem() instanceof ItemTool && ((ItemTool) stack.getItem()).getToolMaterialName().equalsIgnoreCase("DIAMOND"))) && super.canApplyAtEnchantingTable(stack);
+    }
+
+    @Override
+    public boolean isAllowedOnBooks() {
+        return super.isAllowedOnBooks();
     }
 }
