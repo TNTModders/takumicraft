@@ -95,6 +95,10 @@ public class EntityBigCreeperDummy extends Entity {
 
     @Override
     public boolean hitByEntity(Entity entityIn) {
+        if (entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative()) {
+            this.setDead();
+            return true;
+        }
         return false;
     }
 

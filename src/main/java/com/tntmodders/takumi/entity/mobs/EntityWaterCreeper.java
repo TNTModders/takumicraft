@@ -2,7 +2,6 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
 
@@ -14,10 +13,9 @@ public class EntityWaterCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        for (BlockPos pos : event.getAffectedBlocks()) {
-            event.getWorld().setBlockState(pos, Blocks.WATER.getDefaultState());
-        }
-        event.getAffectedBlocks().removeAll(event.getAffectedBlocks());
+        event.getAffectedBlocks().forEach(pos ->
+                event.getWorld().setBlockState(pos, Blocks.WATER.getDefaultState()));
+        event.getAffectedBlocks().clear();
         return true;
     }
 

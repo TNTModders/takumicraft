@@ -262,7 +262,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         }
     }*/
 
-    @Override
+/*    @Override
     public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         if (blockAccess.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
                 ((TileEntityTakumiSuperPowered) blockAccess.getTileEntity(pos)).getBlock() != null) {
@@ -270,7 +270,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
                     blockAccess, pos, side);
         }
         return 0;
-    }
+    }*/
 
     @Override
     public boolean canProvidePower(IBlockState state) {
@@ -347,8 +347,9 @@ public class BlockTakumiSuperPowered extends BlockContainer {
             if (playerIn.getHeldItem(hand).getItem() instanceof ItemBlock &&
                     playerIn.getHeldItem(hand).getItem() != Item.getItemFromBlock(TakumiBlockCore.TAKUMI_SUPERPOWERED) &&
                     ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getRenderType(
-                            ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getDefaultState()) ==
-                            EnumBlockRenderType.MODEL) {
+                            ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock().getDefaultState()) == EnumBlockRenderType.MODEL &&
+                    ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock() != Blocks.ANVIL) {
+
                 Block block = ((ItemBlock) playerIn.getHeldItem(hand).getItem()).getBlock();
                 if (block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.MODEL) {
                     if (!playerIn.isCreative()) {
@@ -451,7 +452,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         return super.modifyAcceleration(worldIn, pos, entityIn, motion);
     }
 
-    @Override
+ /*   @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (worldIn.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered &&
                 ((TileEntityTakumiSuperPowered) worldIn.getTileEntity(pos)).getBlock() != null) {
@@ -464,7 +465,7 @@ public class BlockTakumiSuperPowered extends BlockContainer {
         } else {
             super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
         }
-    }
+    }*/
 
     @Override
     public EnumPushReaction getMobilityFlag(IBlockState state) {
@@ -545,11 +546,11 @@ public class BlockTakumiSuperPowered extends BlockContainer {
             return false;
         }
     }
-
+/*
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         if (state.getBlock() == Blocks.AIR) {
             super.breakBlock(worldIn, pos, state);
         }
-    }
+    }*/
 }
