@@ -602,7 +602,8 @@ public class TakumiEvents {
                                     !event.getWorld().isAirBlock(blockPos) &&
                                     event.getWorld().getBlockState(blockPos).getBlockHardness(event.getWorld(),
                                             blockPos) != -1 &&
-                                    event.getWorld().getBlockState(blockPos).getBlock().getExplosionResistance(event.getWorld(), blockPos, null, null) < 2000 &&
+                                    event.getWorld().getBlockState(blockPos).getBlock().getExplosionResistance(event.getWorld(), blockPos,
+                                            null, null) < 2000 &&
                                     event.getWorld().getBlockState(blockPos).getBlock() != TakumiBlockCore.ACID_BLOCK) {
                                 TakumiUtils.setBlockStateProtected(event.getWorld(), blockPos,
                                         TakumiBlockCore.ACID_BLOCK.getDefaultState().withProperty(BlockTakumiAcid.META, i));

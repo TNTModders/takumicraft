@@ -75,7 +75,6 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
         }
         if (power > 0.5) {
             for (BlockPos pos : event.getAffectedBlocks()) {
-
                 if (!this.world.isRemote &&
                         this.world.getBlockState(pos).getBlock().getExplosionResistance(world, pos, this,
                                 event.getExplosion()) >=
