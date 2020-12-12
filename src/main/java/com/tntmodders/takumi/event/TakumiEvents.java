@@ -956,7 +956,7 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onKillEntity(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote && TakumiBlockCore.BOMB_MAP.containsKey(event.getEntityLiving().getClass()) &&
-                event.getEntityLiving().getRNG().nextInt(10) == 0) {
+                event.getEntityLiving().getRNG().nextInt(10) == 0 && event.getEntityLiving().world.getGameRules().getBoolean("doMobLoot")) {
             int i = event.getEntityLiving().getRNG().nextInt(3);
             if (i > 0) {
                 event.getEntityLiving().dropItem(Item.getItemFromBlock(TakumiBlockCore.BOMB_MAP.get(event.getEntityLiving().getClass())), i);
@@ -973,7 +973,8 @@ public class TakumiEvents {
             Calendar calendar = event.getEntityLiving().world.getCurrentDate();
             int month = calendar.get(Calendar.MONTH) + 1;
             int date = calendar.get(Calendar.DATE);
-            if (month == 12 && (date == 24 || date == 25) && event.getEntityLiving().getRNG().nextInt(4) == 0) {
+            if (month == 12 && (date == 24 || date == 25) && event.getEntityLiving().getRNG().nextInt(4) == 0
+                    && event.getEntityLiving().world.getGameRules().getBoolean("doMobLoot")) {
                 Item[] xmasItems = {Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), Item.getItemFromBlock(Blocks.TNT), Items.GUNPOWDER, TakumiItemCore.EXP_PRO_PRI};
                 ItemStack stack = new ItemStack(xmasItems[event.getEntityLiving().getRNG().nextInt(xmasItems.length)], 1);
                 if (stack.getItem() != TakumiItemCore.EXP_PRO_PRI) {
@@ -982,7 +983,7 @@ public class TakumiEvents {
                 if (stack.getItem() != TakumiItemCore.EXP_PRO_PRI || event.getEntityLiving().getRNG().nextInt(5) == 0) {
                     event.getEntityLiving().entityDropItem(stack, 0.1f);
                 }
-            } else if (month == 1 && date < 8) {
+            } else if (month == 1 && date < 8 && event.getEntityLiving().world.getGameRules().getBoolean("doMobLoot")) {
                 event.getEntityLiving().entityDropItem(new ItemStack(Items.SKULL, 1, 4).setStackDisplayName(
                         TakumiUtils.takumiTranslate("takumicraft.newyear.item.name")), 0.1f);
             }
@@ -1028,7 +1029,7 @@ public class TakumiEvents {
 
         }
         if (!event.getEntity().world.isRemote && event.getEntity() instanceof ITakumiEntity && event.getEntity().isGlowing() && event.getEntity().world.loadedEntityList != null &&
-                event.getEntity().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock)) {
+                event.getEntity().world.loadedEntityList.stream().anyMatch(entity -> entity instanceof EntityAttackBlock) && event.getEntityLiving().world.getGameRules().getBoolean("doMobLoot")) {
             event.getEntity().dropItem(TakumiItemCore.ENERGY_CORE, event.getEntity().world.rand.nextInt(3));
         }
         if (TakumiConfigCore.useTP) {

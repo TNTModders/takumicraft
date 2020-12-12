@@ -300,31 +300,33 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            if (this.getDropItem() != null && this.rand.nextInt(3) == 0) {
-                int amount = Math.min(this.rand.nextInt(3), this.getDropItem().getItemStackLimit());
-                this.dropItem(this.getDropItem(), amount);
-            }
-            if (this instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) this).isEvo()) {
-                if (this.rand.nextInt(10) == 0) {
-                    this.dropItem(TakumiItemCore.EVO_CORE_EVO, 1);
-                } else {
-                    this.dropItem(TakumiItemCore.EVO_CORE, this.rand.nextInt(3));
+            if (this.world.getGameRules().getBoolean("doMobLoot")) {
+                if (this.getDropItem() != null && this.rand.nextInt(3) == 0) {
+                    int amount = Math.min(this.rand.nextInt(3), this.getDropItem().getItemStackLimit());
+                    this.dropItem(this.getDropItem(), amount);
                 }
-            }
-            if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(3) == 0) {
-                this.dropItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), 1);
-            }
-            int drop = this.rand.nextInt(4);
-            int i = this.takumiType().getId();
-            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 10 : 5) == 0 && drop > 0 && i > 0 && i < 7) {
-                this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, drop, i - 1), 0f);
-            }
-            if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 15 : 10) == 0 && drop > 0) {
-                if (this.takumiType().isMagic() && this.rand.nextBoolean()) {
-                    this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_MAGIC, drop), 0f);
+                if (this instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) this).isEvo()) {
+                    if (this.rand.nextInt(10) == 0) {
+                        this.dropItem(TakumiItemCore.EVO_CORE_EVO, 1);
+                    } else {
+                        this.dropItem(TakumiItemCore.EVO_CORE, this.rand.nextInt(3));
+                    }
                 }
-                if (this.takumiType().isDest() && this.rand.nextBoolean()) {
-                    this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_DEST, drop), 0f);
+                if (this.takumiRank() == EnumTakumiRank.MID && this.rand.nextInt(3) == 0) {
+                    this.dropItem(Item.getItemFromBlock(TakumiBlockCore.CREEPER_BOMB), 1);
+                }
+                int drop = this.rand.nextInt(4);
+                int i = this.takumiType().getId();
+                if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 10 : 5) == 0 && drop > 0 && i > 0 && i < 7) {
+                    this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, drop, i - 1), 0f);
+                }
+                if (this.rand.nextInt(this.takumiRank() == EnumTakumiRank.LOW ? 15 : 10) == 0 && drop > 0) {
+                    if (this.takumiType().isMagic() && this.rand.nextBoolean()) {
+                        this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_MAGIC, drop), 0f);
+                    }
+                    if (this.takumiType().isDest() && this.rand.nextBoolean()) {
+                        this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE_DEST, drop), 0f);
+                    }
                 }
             }
             if (source.getTrueSource() instanceof EntityPlayer) {

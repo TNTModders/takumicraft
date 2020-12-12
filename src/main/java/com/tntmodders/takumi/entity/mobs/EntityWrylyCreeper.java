@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -18,6 +19,9 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
             if (!this.world.isRemote) {
                 EntityWrylyCreeper wrylyCreeper = new EntityWrylyCreeper(this.world);
                 wrylyCreeper.copyLocationAndAnglesFrom(this);
+                NBTTagCompound compound = new NBTTagCompound();
+                this.writeEntityToNBT(compound);
+                wrylyCreeper.readEntityFromNBT(compound);
                 wrylyCreeper.setHealth(this.getHealth());
                 if (this.getPowered()) {
                     TakumiUtils.takumiSetPowered(wrylyCreeper, true);
