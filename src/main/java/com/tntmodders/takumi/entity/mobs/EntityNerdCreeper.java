@@ -65,7 +65,9 @@ public class EntityNerdCreeper extends EntityTakumiAbstractCreeper {
             if (entity instanceof EntityLivingBase) {
                 if (((EntityLivingBase) entity).getHeldItemMainhand().getItem() != null) {
                     entity.entityDropItem(((EntityLivingBase) entity).getHeldItemMainhand(), 0f);
-                    ((EntityLivingBase) entity).setHeldItem(EnumHand.MAIN_HAND, new ItemStack(TakumiItemCore.EXP_PRO_PRI));
+                    ItemStack stack = new ItemStack(TakumiItemCore.EXP_PRO_PRI);
+                    stack.setTranslatableName("item.explosionbook.name." + this.rand.nextInt(2));
+                    ((EntityLivingBase) entity).setHeldItem(EnumHand.MAIN_HAND, stack);
                 }
 
             }
