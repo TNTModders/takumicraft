@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.render.layer.LayerTakumiCharge;
 import com.tntmodders.takumi.entity.mobs.EntityPhantomCreeper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -18,6 +19,7 @@ public class RenderPhantomCreeper<T extends EntityPhantomCreeper> extends Render
     public RenderPhantomCreeper(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelPhantom(), 0.5f);
         this.addLayer(new LayerPhantomCreeper(this));
+        this.addLayer(new LayerTakumiCharge(this));
     }
 
     /**

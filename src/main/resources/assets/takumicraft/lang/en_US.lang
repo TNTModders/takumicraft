@@ -748,6 +748,8 @@ entity.iceologercreeper.name=Iceologer Creeper
 entity.iceologercreeper.desc=Not a Looser, but a froster creeping from the winter.
 entity.extremecreeper.name=Extreme Creeper
 entity.extremecreeper.desc=It extremed speed, tearing your body to pierces on a blink.
+entity.piglincreeper.name=Piglin Creeper
+entity.piglincreeper.desc=A creeping terror, shows a nether of destroyer from the lava.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

@@ -478,8 +478,21 @@ public class TakumiEvents {
                 event.getWorld().tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity instanceof TileEntityTakumiForceField)) {
             event.getWorld().tickableTileEntities.forEach(tileEntity -> {
                 if (tileEntity instanceof TileEntityTakumiForceField) {
+                    event.getAffectedEntities().forEach(entity -> {
+                        if (entity instanceof EntityGiantCreeper && entity.getDistanceSq(tileEntity.getPos()) < 100) {
+                            entity.setDead();
+                        }
+                    });
                     event.getAffectedEntities().removeIf(entity -> tileEntity.getDistanceSq(entity.posX + 0.5, entity.posY + 0.5, entity.posZ + 0.5) < 100);
-                    event.getAffectedBlocks().removeIf(pos -> tileEntity.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 100);
+                    event.getAffectedBlocks().removeIf(pos -> {
+                        if (tileEntity.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 100) {
+                            if (event.getWorld().getBlockState(pos).getBlock() == TakumiBlockCore.ACID_BLOCK) {
+                                event.getWorld().setBlockToAir(pos);
+                            }
+                            return true;
+                        }
+                        return false;
+                    });
                 }
             });
         }

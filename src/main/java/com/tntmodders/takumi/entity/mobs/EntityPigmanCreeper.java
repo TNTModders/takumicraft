@@ -85,7 +85,7 @@ public class EntityPigmanCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onDeath(DamageSource source) {
-        if (!this.world.isRemote) {
+        if (!this.world.isRemote && this.world.getGameRules().getBoolean("doMobLoot")) {
             this.dropItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK), 1);
         }
         super.onDeath(source);

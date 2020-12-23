@@ -375,31 +375,33 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-        if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
-            this.setItemStackToSlot(EntityEquipmentSlot.CHEST, ItemStack.EMPTY);
-            if (this.rand.nextInt(4) == 0 && !this.world.isRemote) {
-                this.entityDropItem(new ItemStack(Items.ELYTRA), 0.0f);
-            }
-        }
-        for (ItemStack itemStack : this.getArmorInventoryList()) {
-            if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null &&
-                    itemStack.getItem() != Item.getItemFromBlock(Blocks.PUMPKIN) &&
-                    itemStack.getItem() != Item.getItemFromBlock(Blocks.LIT_PUMPKIN)) {
-                this.entityDropItem(itemStack, 0.0f);
-            }
-        }
-        if (cause.getTrueSource() instanceof EntityCreeper) {
-            EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
+       if(this.world.getGameRules().getBoolean("doMobLoot")){
+           if (this.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
+               this.setItemStackToSlot(EntityEquipmentSlot.CHEST, ItemStack.EMPTY);
+               if (this.rand.nextInt(4) == 0 && !this.world.isRemote) {
+                   this.entityDropItem(new ItemStack(Items.ELYTRA), 0.0f);
+               }
+           }
+           for (ItemStack itemStack : this.getArmorInventoryList()) {
+               if (!this.world.isRemote && this.rand.nextBoolean() && itemStack != null &&
+                       itemStack.getItem() != Item.getItemFromBlock(Blocks.PUMPKIN) &&
+                       itemStack.getItem() != Item.getItemFromBlock(Blocks.LIT_PUMPKIN)) {
+                   this.entityDropItem(itemStack, 0.0f);
+               }
+           }
+           if (cause.getTrueSource() instanceof EntityCreeper) {
+               EntityCreeper entitycreeper = (EntityCreeper) cause.getTrueSource();
 
-            if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
-                entitycreeper.incrementDroppedSkulls();
-                ItemStack itemstack = this.getSkullDrop();
+               if (entitycreeper.getPowered() && entitycreeper.isAIEnabled()) {
+                   entitycreeper.incrementDroppedSkulls();
+                   ItemStack itemstack = this.getSkullDrop();
 
-                if (!itemstack.isEmpty()) {
-                    this.entityDropItem(itemstack, 0.0F);
-                }
-            }
-        }
+                   if (!itemstack.isEmpty()) {
+                       this.entityDropItem(itemstack, 0.0F);
+                   }
+               }
+           }
+       }
     }
 
     protected ItemStack getSkullDrop() {
