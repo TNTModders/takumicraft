@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -27,6 +28,15 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
 
     public EntityPiglinCreeper(World worldIn) {
         super(worldIn);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1000);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
     }
 
     @Override
@@ -92,7 +102,7 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -161,8 +171,8 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
                 if (entityItem.getItem().getItem() == Items.GOLD_INGOT || entityItem.getItem().getItem() == Item.getItemFromBlock(Blocks.GOLD_BLOCK)) {
                     EntityPiglinCreeper.this.setAttackTarget(null);
                     EntityPiglinCreeper.this.setCreeperState(-2);
-                    this.getMoveHelper().setMoveTo(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);
-                    this.getNavigator().tryMoveToXYZ(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);
+                    /*this.getMoveHelper().setMoveTo(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);
+                    this.getNavigator().tryMoveToXYZ(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);*/
                     if (!this.world.isRemote) {
                         EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
                     }

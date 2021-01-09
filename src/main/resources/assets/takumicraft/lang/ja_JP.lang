@@ -209,6 +209,7 @@ tile.creeperchestbomb.name=壊式特殊爆弾[チェスト]
 tile.takumiforcefield.name=匠式結界
 tile.takumiforcefield.message.01=匠式結界は既に展開されています。
 tile.takumiforcefield.message.02=匠式結界は10分間有効です。
+tile.ttfoundation.name=匠式古煉瓦
 
 #item
 item.takumibook.name=匠の書
@@ -804,6 +805,8 @@ entity.extremecreeper.read=しっしょう
 entity.extremecreeper.desc=疾きを極めし一閃より、この匠は現れる。穿て、背後に顕る一瞬を。
 entity.piglincreeper.name=ピグリン匠
 entity.piglincreeper.desc=煉獄より這い出し、異なる力を持つ、炎より出づる新たなる脅威。
+entity.corruptioncreeper.name=損匠
+entity.corruptioncreeper.desc=損害甚大、損傷重症、この匠は蝕む破壊を撒き散らす。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -979,6 +982,8 @@ lingering_potion.effect.creeper=匠の残留ポーション
 tipped_arrow.effect.antiswelling=収爆の矢
 tipped_arrow.effect.antiexplosion=防爆の矢
 frozen=凍結
+corruption=損壊加速
+
 
 #Vanilla
 item.skull.creeper.name=匠の頭

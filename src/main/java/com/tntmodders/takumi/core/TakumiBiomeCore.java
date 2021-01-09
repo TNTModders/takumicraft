@@ -5,6 +5,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TakumiBiomeCore {
 
@@ -18,6 +20,19 @@ public class TakumiBiomeCore {
     public static final Biome TAKUMI_FOREST = new BiomeTakumiForest();
     public static final Biome TAKUMI_OBJET = new BiomeTakumiObjet();
     public static final Biome TAKUMI_MESA = new BiomeTakumiMesa();
+
+    public static final List<Biome> BIOMES = new ArrayList<>();
+
+    static {
+        BIOMES.add(TAKUMI_PLAINS);
+        BIOMES.add(TAKUMI_LAVA_MOUNTAINS);
+        BIOMES.add(TAKUMI_OCEAN);
+        BIOMES.add(TAKUMI_MOUNTAINS);
+        BIOMES.add(TAKUMI_HOTSPRING_MOUNTAINS);
+        BIOMES.add(TAKUMI_FOREST);
+        BIOMES.add(TAKUMI_OBJET);
+        BIOMES.add(TAKUMI_MESA);
+    }
 
     public static void register(IForgeRegistry<Biome> registry) {
         Class clazz = TakumiBiomeCore.class;

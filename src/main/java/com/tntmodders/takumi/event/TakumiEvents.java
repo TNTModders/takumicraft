@@ -312,6 +312,19 @@ public class TakumiEvents {
                                 event.getEntityLiving().posZ, 7f, true)), 20f);
             }
         }
+        if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CORRUPTION) != null) {
+            if (event.getEntityLiving().ticksExisted % 20 == 0) {
+                if (!event.getEntityLiving().world.isRemote) {
+                    int lv = event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.CORRUPTION).getAmplifier() + 1;
+                    event.getEntityLiving().getHeldItemMainhand().damageItem(lv * 2, event.getEntityLiving());
+                    event.getEntityLiving().getHeldItemOffhand().damageItem(lv * 2, event.getEntityLiving());
+                    event.getEntityLiving().getArmorInventoryList().forEach(itemStack -> itemStack.damageItem(lv * 2, event.getEntityLiving()));
+                } else {
+                    event.getEntityLiving().world.playSound(event.getEntityLiving().posX, event.getEntityLiving().posY,
+                            event.getEntityLiving().posZ, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.AMBIENT, 10f, 1, true);
+                }
+            }
+        }
         if (event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.VIRUS) != null &&
                 event.getEntityLiving().getActivePotionEffect(TakumiPotionCore.VIRUS).getDuration() <= 1) {
             if (!event.getEntityLiving().world.isRemote) {

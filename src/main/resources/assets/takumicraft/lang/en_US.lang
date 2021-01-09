@@ -209,6 +209,7 @@ tile.creeperchestbomb.name=Chest Creeper Bomb
 tile.takumiforcefield.name=AntiExplosion ForceField
 tile.takumiforcefield.message.01=The ForceField has already been deployed.
 tile.takumiforcefield.message.02=The ForceField is avilable for 10 min.
+tile.ttfoundation.name=Takumi Tower Block
 
 #item
 item.takumibook.name=Creeper Book
@@ -750,6 +751,8 @@ entity.extremecreeper.name=Extreme Creeper
 entity.extremecreeper.desc=It extremed speed, tearing your body to pierces on a blink.
 entity.piglincreeper.name=Piglin Creeper
 entity.piglincreeper.desc=A creeping terror, shows a nether of destroyer from the lava.
+entity.corruptioncreeper.name=Corruption Creeper
+entity.corruptioncreeper.desc=Corrupting your inventory, this creeper spreads destruction.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -920,6 +923,7 @@ lingering_potion.effect.creeper=Lingering Potion of Creeper
 tipped_arrow.effect.antiswelling=Arrow of Anti Swelling
 tipped_arrow.effect.antiexplosion=Arrow of Anti Explosion
 frozen=Frozen
+corruption=Corruption
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

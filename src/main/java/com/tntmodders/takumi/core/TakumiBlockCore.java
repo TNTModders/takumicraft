@@ -205,6 +205,8 @@ public class TakumiBlockCore {
     public static final Block MAGIC_BLOCK = new BlockMagicBlock();
     public static final Block TAKUMI_FORCEFIELD = new BlockTakumiForceField();
 
+    public static final Block TT_FOUNDATION = new BlockTakumiTTFoundation();
+
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 
     public static void register(IForgeRegistry<Block> registry) {

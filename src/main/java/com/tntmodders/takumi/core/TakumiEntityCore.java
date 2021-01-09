@@ -110,8 +110,8 @@ public class TakumiEntityCore {
                 EntityLayerCreeper.class, EntityChaseCreeper.class, EntityBoarCreeper.class, EntityMouseCreeper.class, EntityEvolutionCreeper.class,
                 EntityObsidianCreeper.class, EntityWitherCreeper.class, EntityAngelCreeper.class, EntityParalysisCreeper.class, EntityKeepCreeper.class,
                 EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class, EntityWonderCreeper.class,
-                EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class, EntityIceologerCreeper.class,
-                EntityExtremeCreeper.class, EntityPiglinCreeper.class));
+                EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class,
+                EntityIceologerCreeper.class, EntityExtremeCreeper.class, EntityPiglinCreeper.class, EntityCorruptionCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -179,6 +179,7 @@ public class TakumiEntityCore {
                     }
                 });
                 entity.additionalSpawn();
+                TakumiBiomeCore.BIOMES.forEach(biome -> EntityRegistry.addSpawn(clazz, 10, 100, 100, EnumCreatureType.MONSTER, biome));
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiClientCore.registerEntityRender(clazz, entity);
