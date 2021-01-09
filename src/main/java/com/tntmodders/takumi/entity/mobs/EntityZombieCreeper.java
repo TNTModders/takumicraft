@@ -1,6 +1,5 @@
 package com.tntmodders.takumi.entity.mobs;
 
-import com.sun.istack.internal.Nullable;
 import com.tntmodders.takumi.client.render.RenderZombieCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
@@ -317,7 +316,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
     }
 
     @Override
-    @Nullable
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_ZOMBIE;
     }
@@ -449,7 +447,6 @@ public class EntityZombieCreeper extends EntityTakumiAbstractCreeper {
      * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
      */
     @Override
-    @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         float f = difficulty.getClampedAdditionalDifficulty();

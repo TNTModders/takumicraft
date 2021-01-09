@@ -1,6 +1,12 @@
 {
   "record_explosion": {
+    "category": "record",
     "subtitle": "takumicraft.sound.subtitle.record_explosion",
-    "sounds": ["takumicraft:record_explosion"]
+    "sounds": [
+      {
+        "name": "takumicraft:record_explosion",
+        "stream": true
+      }
+    ]
   }
 }
