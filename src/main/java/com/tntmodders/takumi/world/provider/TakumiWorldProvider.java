@@ -42,7 +42,7 @@ public class TakumiWorldProvider extends WorldProvider {
     @Override
     protected void init() {
         super.init();
-        //this.hasSkyLight = false;
+        this.hasSkyLight = false;
         this.doesWaterVaporize = false;
         this.chunkGenerator = new TakumiWorldChunkGenerator(this.world, this.getSeed(), true,
                 this.world.getWorldInfo().getGeneratorOptions());
@@ -109,6 +109,21 @@ public class TakumiWorldProvider extends WorldProvider {
     @Override
     public DimensionType getDimensionType() {
         return TakumiWorldCore.TAKUMI_WORLD;
+    }
+
+    @Override
+    public boolean isSkyColored() {
+        return true;
+    }
+
+    @Override
+    public double getVoidFogYFactor() {
+        return 256;
+    }
+
+    @Override
+    public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
+        super.setAllowedSpawnTypes(true, true);
     }
 
 /*    @Override

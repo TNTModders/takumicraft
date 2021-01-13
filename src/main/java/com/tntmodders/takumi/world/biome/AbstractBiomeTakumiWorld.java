@@ -63,9 +63,9 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
         });
         this.spawnableMonsterList.clear();
         this.spawnableMonsterList.addAll(entryList);
-        this.spawnableCreatureList.addAll(entryList);
+        //this.spawnableCreatureList.addAll(entryList);
         this.modSpawnableLists.put(EnumCreatureType.MONSTER, entryList);
-        this.modSpawnableLists.put(EnumCreatureType.CREATURE, entryList);
+       //this.modSpawnableLists.put(EnumCreatureType.CREATURE, entryList);
     }
 
     protected static BiomeProperties getBaseProperty(String name) {
@@ -146,6 +146,6 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
 
     @Override
     public float getSpawningChance() {
-        return 0.1f;
+        return 0.5f;
     }
 }

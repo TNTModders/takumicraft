@@ -1,6 +1,6 @@
 package com.tntmodders.takumi.world.gen;
 
-import net.minecraft.init.Blocks;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructure;
@@ -63,7 +63,7 @@ public class TakumiMapGenTower_F extends MapGenStructure {
                                 y % 16 == 0 || y == 255) && !(x < -8 && z > -8 && z < 8) &&
                                 !(x > 8 && z > -8 && z < 8) && !(z < -8 && x > -8 && x < 8) &&
                                 !(z > 8 && x > -8 && x < 8) && (y < dY || y <= 64)) {
-                            worldIn.setBlockState(new BlockPos(x, y, z), Blocks.OBSIDIAN.getDefaultState());
+                            worldIn.setBlockState(new BlockPos(x, y, z), TakumiBlockCore.TT_FOUNDATION.getDefaultState());
                         } else if (!(x < -8 && z > -8 && z < 8) && !(x > 8 && z > -8 && z < 8) &&
                                 !(z < -8 && x > -8 && x < 8) && !(z > 8 && x > -8 && x < 8)) {
                             worldIn.setBlockToAir(new BlockPos(x, y, z));
