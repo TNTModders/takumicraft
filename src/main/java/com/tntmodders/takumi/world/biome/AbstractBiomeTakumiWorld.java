@@ -3,9 +3,6 @@ package com.tntmodders.takumi.world.biome;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
-import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
-import com.tntmodders.takumi.entity.mobs.EntityBatCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
 import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
@@ -15,8 +12,6 @@ import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSand.EnumType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
@@ -47,15 +42,15 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
         entryList.add(new SpawnListEntry(EntitySeaGuardianCreeper.class, 1, 1, 1));
         this.modSpawnableLists.put(TakumiEntityCore.WATER_TAKUMI, entryList);
         entryList.clear();
-        TakumiEntityCore.CLASS_LIST.forEach(clazz -> {
+       /* TakumiEntityCore.CLASS_LIST.forEach(clazz -> {
             try {
                 ITakumiEntity iTakumiEntity = clazz.getConstructor(World.class).newInstance((World) null);
                 if (!(iTakumiEntity instanceof EntitySquidCreeper ||
                         iTakumiEntity instanceof EntitySeaGuardianCreeper) &&
                         (iTakumiEntity.takumiRank() == EnumTakumiRank.LOW ||
                                 iTakumiEntity.takumiRank() == EnumTakumiRank.MID)) {
-                    int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 20;
-                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 10, count, count+1));
+                    int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 500;
+                    entryList.add(new SpawnListEntry(((EntityLiving) iTakumiEntity).getClass(), 5, count, count+1));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -65,7 +60,7 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
         this.spawnableMonsterList.addAll(entryList);
         //this.spawnableCreatureList.addAll(entryList);
         this.modSpawnableLists.put(EnumCreatureType.MONSTER, entryList);
-       //this.modSpawnableLists.put(EnumCreatureType.CREATURE, entryList);
+       //this.modSpawnableLists.put(EnumCreatureType.CREATURE, entryList);*/
     }
 
     protected static BiomeProperties getBaseProperty(String name) {

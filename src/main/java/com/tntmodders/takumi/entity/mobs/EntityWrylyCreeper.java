@@ -7,6 +7,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import java.util.UUID;
+
 public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
 
     public EntityWrylyCreeper(World worldIn) {
@@ -20,9 +22,11 @@ public class EntityWrylyCreeper extends EntityTakumiAbstractCreeper {
                 EntityWrylyCreeper wrylyCreeper = new EntityWrylyCreeper(this.world);
                 wrylyCreeper.copyLocationAndAnglesFrom(this);
                 NBTTagCompound compound = new NBTTagCompound();
-                this.writeEntityToNBT(compound);
-                wrylyCreeper.readEntityFromNBT(compound);
+                this.writeToNBT(compound);
+                compound.setBoolean("ignited", false);
+                wrylyCreeper.readFromNBT(compound);
                 wrylyCreeper.setHealth(this.getHealth());
+                wrylyCreeper.setUniqueId(UUID.randomUUID());
                 if (this.getPowered()) {
                     TakumiUtils.takumiSetPowered(wrylyCreeper, true);
                 }

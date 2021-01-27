@@ -220,6 +220,13 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
+    public void playerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent e) {
+        if (TakumiConfigCore.inEventServer) {
+            e.player.addTag("login");
+        }
+    }
+
+    @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
         if (TakumiConfigCore.inEventServer && event.getEntityLiving() instanceof EntityVillager) {
             if (event.getEntityLiving().getTags().contains("V1")) {
@@ -451,7 +458,6 @@ public class TakumiEvents {
                     entityfireworkrocket.setSilent(true);
                     entityfireworkrocket.setInvisible(true);
                     player.world.spawnEntity(entityfireworkrocket);
-                    Enchantment.getEnchantmentID(TakumiEnchantmentCore.ROCKET_ELYTRA);
                 }
             }
         }

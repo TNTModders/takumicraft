@@ -81,6 +81,9 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
                 return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ?
                         super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
         }
+        if(state.getBlock().getHarvestTool(state).equals(this.enumTakumiTool.getName())){
+            return this.efficiencyOnProperMaterial;
+        }
         return super.getStrVsBlock(stack, state);
     }
 

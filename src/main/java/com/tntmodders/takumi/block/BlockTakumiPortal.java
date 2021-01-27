@@ -18,6 +18,7 @@ import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.block.state.pattern.BlockPattern.PatternHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -283,7 +284,8 @@ public class BlockTakumiPortal extends BlockBreakable {
      */
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
+        if ((entityIn instanceof EntityPlayer || entityIn instanceof EntityCreeper) &&
+                !entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
             try {
                 MinecraftServer server = worldIn.getMinecraftServer();
                 if (server != null && entityIn.timeUntilPortal <= 0) {

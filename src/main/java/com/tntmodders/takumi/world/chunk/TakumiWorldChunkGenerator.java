@@ -231,7 +231,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
         }
         double d0 = 0.03125D;
         this.depthBuffer =
-                this.surfaceNoise.getRegion(this.depthBuffer, (double) (x * 16), (double) (z * 16), 16, 16, 0.0625D,
+                this.surfaceNoise.getRegion(this.depthBuffer, x * 16, z * 16, 16, 16, 0.0625D,
                         0.0625D, 1.0D);
         for (int i = 0; i < 16; ++i) {
             for (int j = 0; j < 16; ++j) {
@@ -245,20 +245,20 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
     private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_) {
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, p_185978_1_, p_185978_3_, 5, 5,
                 (double) this.settings.depthNoiseScaleX * 2, (double) this.settings.depthNoiseScaleZ * 2,
-                (double) this.settings.depthNoiseScaleExponent);
+                this.settings.depthNoiseScaleExponent);
         float f = this.settings.coordinateScale * 2.5f;
         float f1 = this.settings.heightScale * 2.5f;
         this.mainNoiseRegion =
                 this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_,
-                        5, 33, 5, (double) (f / this.settings.mainNoiseScaleX),
-                        (double) (f1 / this.settings.mainNoiseScaleY + 250),
-                        (double) (f / this.settings.mainNoiseScaleZ));
+                        5, 33, 5, f / this.settings.mainNoiseScaleX,
+                        f1 / this.settings.mainNoiseScaleY + 250,
+                        f / this.settings.mainNoiseScaleZ);
         this.minLimitRegion =
                 this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_,
-                        p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
+                        p_185978_3_, 5, 33, 5, f, f1, f);
         this.maxLimitRegion =
                 this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, p_185978_1_, p_185978_2_,
-                        p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
+                        p_185978_3_, 5, 33, 5, f, f1, f);
         int i = 0;
         int j = 0;
 
@@ -325,8 +325,8 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                 }
 
                 ++j;
-                double d8 = (double) f3;
-                double d9 = (double) f2;
+                double d8 = f3;
+                double d9 = f2;
                 d8 = d8 + d7 * 0.2D;
                 d8 = d8 * (double) this.settings.baseSize / 8.0D;
                 double d0 = (double) this.settings.baseSize + d8 * 4.0D;
@@ -344,7 +344,7 @@ public class TakumiWorldChunkGenerator implements IChunkGenerator {
                     double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
 
                     if (l1 > 29) {
-                        double d6 = (double) ((float) (l1 - 29) / 3.0F);
+                        double d6 = (float) (l1 - 29) / 3.0F;
                         d5 = d5 * (1.0D - d6) + -10.0D * d6;
                     }
 

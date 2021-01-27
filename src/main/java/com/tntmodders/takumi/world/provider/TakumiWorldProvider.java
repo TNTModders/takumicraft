@@ -10,10 +10,12 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TakumiWorldProvider extends WorldProvider {
 
-    private final Vec3d fogColor = new Vec3d(0, 0.75, 0);
+    private final Vec3d fogColor = new Vec3d(0, 0.25, 0);
     private IChunkGenerator chunkGenerator;
 
     public TakumiWorldProvider() {
@@ -25,7 +27,7 @@ public class TakumiWorldProvider extends WorldProvider {
     protected void generateLightBrightnessTable() {
         for (int i = 0; i <= 15; ++i) {
             float f1 = 1.0F - (float) i / 15.0F;
-            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F * 0.1f;
+            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F * 0.05f;
         }
     }
 
@@ -40,8 +42,14 @@ public class TakumiWorldProvider extends WorldProvider {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public float getStarBrightness(float par1)
+    {
+        return 0;
+    }
+
+    @Override
     protected void init() {
-        super.init();
         this.hasSkyLight = false;
         this.doesWaterVaporize = false;
         this.chunkGenerator = new TakumiWorldChunkGenerator(this.world, this.getSeed(), true,
@@ -97,11 +105,6 @@ public class TakumiWorldProvider extends WorldProvider {
     }
 
     @Override
-    public boolean isDaytime() {
-        return false;
-    }
-
-    @Override
     public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
         return this.fogColor;
     }
@@ -126,7 +129,23 @@ public class TakumiWorldProvider extends WorldProvider {
         super.setAllowedSpawnTypes(true, true);
     }
 
-/*    @Override
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean doesXZShowFog(int x, int z) {
+        return true;
+    }
+
+    @Override
+    public boolean hasSkyLight() {
+        return false;
+    }
+
+  @Override
+    public boolean isDaytime() {
+        return false;
+    }
+
+    /*    @Override
     public void onWorldUpdateEntities() {
         super.onWorldUpdateEntities();
         this.world.getWorldInfo().setRaining(true);

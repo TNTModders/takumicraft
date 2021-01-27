@@ -347,11 +347,16 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                 } catch (Exception e) {
 
                 }
-                if (this.world.playerEntities.size() == 1 && this.rand.nextInt(50) == 0) {
-                    EntityItem item = new EntityItem(this.world);
-                    item.setItem(TakumiUtils.generateRandomTipsBook(this.rand));
-                    item.copyLocationAndAnglesFrom(this);
-                    this.world.spawnEntity(item);
+                if (this.world.getMinecraftServer() != null) {
+                    if (this.world.getMinecraftServer().isSinglePlayer()) {
+                        if (this.world.playerEntities.size() == 1 && this.rand.nextInt(50) == 0) {
+                            EntityItem item = new EntityItem(this.world);
+                            item.setItem(TakumiUtils.generateRandomTipsBook(this.rand));
+                            item.copyLocationAndAnglesFrom(this);
+                            this.world.spawnEntity(item);
+                        }
+                    }
+
                 }
             }
         }
@@ -363,14 +368,13 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
         if (this.world.provider.getDimensionType() != TakumiWorldCore.TAKUMI_WORLD) {
             return super.getCanSpawnHere();
         } else {
-            return this.world.loadedEntityList.size() < 500 && this.world.getDifficulty() != EnumDifficulty.PEACEFUL &&
-                    this.world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
+            return this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
         }
     }
 
     @Override
     public int getMaxSpawnedInChunk() {
-        return this.world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD ? 100 : 5;
+        return this.world.provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD ? 250 : 5;
     }
 
     @Override

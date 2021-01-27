@@ -16,14 +16,14 @@ import net.minecraft.world.Teleporter;
 public class BlockTakumiPortalFrame extends Block {
 
     public BlockTakumiPortalFrame() {
-        super(Material.TNT, MapColor.GREEN);
+        super(Material.IRON, MapColor.GREEN);
         this.setRegistryName(TakumiCraftCore.MODID, "takumiportalframe");
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumiportalframe");
         this.setLightLevel(1f);
         this.setHardness(5f);
         this.setResistance(10000000f);
-        this.setHarvestLevel("pickaxe", 3);
+        this.setHarvestLevel("pickaxe", 2);
     }
 
     private boolean changeDim(EntityPlayer playerIn) {

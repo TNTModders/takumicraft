@@ -21,7 +21,7 @@ public class ItemTakumiSpecialMeat extends ItemFood {
     private final Item rawFood;
 
     public ItemTakumiSpecialMeat(ItemFood itemIn, Item rawItemIn) {
-        super(((int) (itemIn.getHealAmount(new ItemStack(itemIn)) * 2.5)), itemIn.getSaturationModifier(new ItemStack(itemIn)) * 2, false);
+        super(((int) (itemIn.getHealAmount(new ItemStack(itemIn)) * 2.5)), itemIn.getSaturationModifier(new ItemStack(itemIn)) * 3, false);
         this.itemFood = itemIn;
         this.rawFood = rawItemIn;
         String s = "takumispecialmeat_" + itemIn.getRegistryName().getResourcePath();
