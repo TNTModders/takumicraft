@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "incantation=monster": {
+      "model": "takumicraft:ttincantation"
+    },
+    "incantation=water": {
+      "model": "takumicraft:ttincantation_water"
+    },
+    "incantation=lava": {
+      "model": "takumicraft:ttincantation_lava"
+    },
+    "incantation=thunder": {
+      "model": "takumicraft:ttincantation_thunder"
+    },
+    "incantation=ex": {
+      "model": "takumicraft:ttincantation_ex"
+    }
+  }
+}

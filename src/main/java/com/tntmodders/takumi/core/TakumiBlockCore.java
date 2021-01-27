@@ -205,7 +205,14 @@ public class TakumiBlockCore {
     public static final Block MAGIC_BLOCK = new BlockMagicBlock();
     public static final Block TAKUMI_FORCEFIELD = new BlockTakumiForceField();
 
-    public static final Block TT_FOUNDATION = new BlockTakumiTTFoundation();
+    public static final Block TT_FOUNDATION = new BlockTTFoundation();
+    public static final Block TT_PORTAL = new BlockTTPortal();
+    public static final Block TT_INCANTATION = new BlockTTIncantation();
+    public static final Block TT_BARRIAR = new BlockTTBarriar();
+    public static final Block TT_LIGHT = new BlockTTLight();
+    public static final Block TT_ACTIVATOR = new BlockTTActivator();
+    public static final Block TT_CREEPERCORE = new BlockTTCreeperCore();
+    public static final Block TT_CURSE = new BlockTTCurse();
 
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 

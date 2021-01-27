@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.core.client;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.BlockTTIncantation;
 import com.tntmodders.takumi.block.BlockTakumiDoor;
 import com.tntmodders.takumi.block.BlockTakumiFenceGate;
 import com.tntmodders.takumi.client.render.tileentity.*;
@@ -184,6 +185,13 @@ public class TakumiClientCore {
                         state.getValue(BlockPressurePlateWeighted.POWER) > 0 ? "powered=true" : "powered=false");
             }
         });
+        ModelLoader.setCustomStateMapper(TakumiBlockCore.TT_INCANTATION, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(new ResourceLocation(TakumiCraftCore.MODID, "ttincantation"),
+                        "incantation=" + state.getValue(BlockTTIncantation.INCANTATION).getName());
+            }
+        });
 
         ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 1, new ModelResourceLocation("takumicraft:creeperframe", "normal"));
         ModelLoader.setCustomModelResourceLocation(TakumiItemCore.TAKUMI_FRAME, 2, new ModelResourceLocation("takumicraft:creeperframe", "map"));
@@ -209,7 +217,7 @@ public class TakumiClientCore {
         ClientRegistry.registerTileEntity(TileEntityTakumiShulkerBox.class, TakumiCraftCore.MODID + ":creepershulkerbox", new RenderTakumiShulkerBox(new ModelShulker()));
         ClientRegistry.registerTileEntity(TileEntityTakumiSign.class, TakumiCraftCore.MODID + ":creepersign", new RenderTakumiSign());
         ClientRegistry.registerTileEntity(TileEntityTakumiForceField.class, TakumiCraftCore.MODID + ":takumiforcefield", new RenderTakumiForceField<>());
+        ClientRegistry.registerTileEntity(TileEntityTTPortal.class, TakumiCraftCore.MODID + ":ttportal", new RenderTTPortal<>());
+        ClientRegistry.registerTileEntity(TileEntityTTTESR.class,TakumiCraftCore.MODID+":tttesr",new RenderTTTESR<>());
     }
-
-
 }

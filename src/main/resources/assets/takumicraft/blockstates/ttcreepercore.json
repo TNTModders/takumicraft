@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "takumicraft:blocks/ttcreepercore"
+    },
+    "model": "takumicraft:ttcreepercore",
+    "uvlock": false
+  },
+  "variants": {
+    "normal": [
+      {
+      }
+    ],
+    "inventory": [
+      {
+      }
+    ]
+  }
+}

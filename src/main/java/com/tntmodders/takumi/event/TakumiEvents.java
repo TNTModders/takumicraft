@@ -17,6 +17,7 @@ import com.tntmodders.takumi.tileentity.TileEntityTakumiForceField;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
+import com.tntmodders.takumi.world.gen.TakumiMapGenTower_F;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.BlockRailPowered;
 import net.minecraft.block.state.IBlockState;
@@ -1102,20 +1103,18 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onChunckPopulate(PopulateChunkEvent.Pre event) {
         if (event.getWorld().provider.getDimensionType() == DimensionType.OVERWORLD) {
-            TakumiMapGenDarkShrine mapGenDarkShrine;
-            mapGenDarkShrine = new TakumiMapGenDarkShrine();
+            TakumiMapGenDarkShrine mapGenDarkShrine = new TakumiMapGenDarkShrine();
             mapGenDarkShrine.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
             mapGenDarkShrine.generateStructure(event.getWorld(), event.getRand(),
                     new ChunkPos(event.getChunkX(), event.getChunkZ()));
         }
-/*        if (event.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD && event.getChunkX() == 0 &&
-                event.getChunkZ() == 0) {
-            TakumiMapGenTower_F takumiMapGenTower_f;
-            takumiMapGenTower_f = new TakumiMapGenTower_F();
+        if (event.getWorld().provider.getDimensionType() == TakumiWorldCore.TAKUMI_WORLD && event.getChunkX() % 250 == 0 &&
+                event.getChunkZ() % 250 == 0) {
+            TakumiMapGenTower_F takumiMapGenTower_f = new TakumiMapGenTower_F();
             takumiMapGenTower_f.generate(event.getWorld(), event.getChunkX(), event.getChunkZ(), null);
             takumiMapGenTower_f.generateStructure(event.getWorld(), event.getRand(),
                     new ChunkPos(event.getChunkX(), event.getChunkZ()));
-        }*/
+        }
     }
 
     @SubscribeEvent

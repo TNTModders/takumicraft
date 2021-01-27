@@ -210,6 +210,13 @@ tile.takumiforcefield.name=AntiExplosion ForceField
 tile.takumiforcefield.message.01=The ForceField has already been deployed.
 tile.takumiforcefield.message.02=The ForceField is avilable for 10 min.
 tile.ttfoundation.name=Takumi Tower Block
+tile.ttportal.name=Takumi Tower Gate
+tile.ttincantation.name=Takumi Tower Block [Incantation]
+tile.ttbarriar.name=Takumi Tower Block [Barriar]
+tile.ttlight.name=Takumi Tower Block [Light]
+tile.ttactivator.name=Takumi Tower Block [Activator]
+tile.ttcreepercore.name=Takumi Tower Block [Core]
+tile.ttcurse.name=Takumi Tower Block [Curse]
 
 #item
 item.takumibook.name=Creeper Book

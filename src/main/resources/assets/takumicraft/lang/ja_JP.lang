@@ -209,7 +209,14 @@ tile.creeperchestbomb.name=壊式特殊爆弾[チェスト]
 tile.takumiforcefield.name=匠式結界
 tile.takumiforcefield.message.01=匠式結界は既に展開されています。
 tile.takumiforcefield.message.02=匠式結界は10分間有効です。
-tile.ttfoundation.name=匠式古煉瓦
+tile.ttfoundation.name=匠古煉瓦
+tile.ttportal.name=匠タワーゲート
+tile.ttincantation.name=匠古煉瓦[呪]
+tile.ttbarriar.name=匠古煉瓦[封]
+tile.ttlight.name=匠古煉瓦[光]
+tile.ttactivator.name=匠古煉瓦[応]
+tile.ttcreepercore.name=匠古煉瓦[要]
+tile.ttcurse.name=匠古煉瓦[淵]
 
 #item
 item.takumibook.name=匠の書
