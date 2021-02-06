@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockTTCurse extends BlockContainer {
+public class BlockTTCurse extends BlockContainer implements IBlockTT{
     public BlockTTCurse() {
         super(Material.ROCK);
         this.setRegistryName(TakumiCraftCore.MODID, "ttcurse");

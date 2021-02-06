@@ -2,11 +2,15 @@ package com.tntmodders.takumi.utils;
 
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.block.IBlockTT;
+import com.tntmodders.takumi.block.ITakumiSPBomb;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.tileentity.TileEntityTakumiForceField;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import net.minecraft.advancements.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -277,7 +281,7 @@ public class TakumiUtils {
     public static TakumiExplosion takumiCreateExplosion(World world, Entity entity, double x, double y, double z, float power,
                                                         boolean fire, boolean destroy, double amp, boolean damage, boolean sound) {
         boolean flg = world instanceof WorldServer;
-        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp, damage,sound);
+        TakumiExplosion explosion = new TakumiExplosion(world, entity, x, y, z, power, fire, destroy, amp, damage, sound);
         if (ForgeEventFactory.onExplosionStart(world, explosion)) {
             return explosion;
         }
@@ -297,6 +301,10 @@ public class TakumiUtils {
             }
         }
         return explosion;
+    }
+
+    public static boolean isExcludedBlockForRewrite(Block block) {
+        return block instanceof ITakumiSPBomb || block == TakumiBlockCore.TAKUMI_FORCEFIELD || block instanceof IBlockTT;
     }
 
     @SideOnly(Side.CLIENT)

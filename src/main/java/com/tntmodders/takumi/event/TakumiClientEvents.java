@@ -14,6 +14,7 @@ import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.item.EntityTakumiBoat;
 import com.tntmodders.takumi.entity.item.EntityXMS;
 import com.tntmodders.takumi.item.ItemBattleArmor;
+import com.tntmodders.takumi.item.ItemTakumiArmor;
 import com.tntmodders.takumi.network.MessageMSMove;
 import com.tntmodders.takumi.network.MessageTHMDetonate;
 import com.tntmodders.takumi.utils.TakumiUtils;
@@ -152,6 +153,7 @@ public class TakumiClientEvents {
         }
     }
 
+
     @SubscribeEvent
     public void color(ColorHandlerEvent.Block event) {
         event.getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> BlockTakumiRedstoneWire.colorMultiplier(state.getValue(BlockTakumiRedstoneWire.POWER)),
@@ -168,6 +170,12 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderPlayerPost(RenderLivingEvent.Post event) {
+        if (Lists.newArrayList(event.getEntity().getArmorInventoryList()).stream().allMatch(
+                itemStack -> itemStack.getItem() instanceof ItemTakumiArmor)) {
+            event.getEntity().setInvisible(false);
+            //event.getRenderer().getMainModel().boxList.forEach(modelRenderer -> modelRenderer.showModel = true);
+            event.getRenderer().renderName(event.getEntity(), event.getX(), event.getY(), event.getZ());
+        }
         if (Lists.newArrayList(event.getEntity().getArmorInventoryList()).stream().allMatch(
                 itemStack -> itemStack.getItem() instanceof ItemBattleArmor &&
                         ((ItemBattleArmor) itemStack.getItem()).isPowered)) {
@@ -195,6 +203,11 @@ public class TakumiClientEvents {
 
     @SubscribeEvent
     public void renderPlayer(RenderLivingEvent.Pre event) {
+        if (Lists.newArrayList(event.getEntity().getArmorInventoryList()).stream().allMatch(
+                itemStack -> itemStack.getItem() instanceof ItemTakumiArmor)) {
+            event.getEntity().setInvisible(true);
+            //event.getRenderer().getMainModel().boxList.forEach(modelRenderer -> modelRenderer.showModel = false);
+        }
         if (event.getEntity().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA) {
             try {
                 Field field = TakumiASMNameMap.getField(RenderLivingBase.class, "layerRenderers");
@@ -443,10 +456,10 @@ public class TakumiClientEvents {
             private final ModelRenderer leftWing = new ModelRenderer(this, 22, 0);
 
             public ModelTakumiElytra() {
-                this.leftWing.addBox(-10.0F, 0.0F, 0.0F, 10, 20, 2, 1.2F);
+                this.leftWing.addBox(-10.0F, 0.0F, 0.0F, 10, 20, 2, 1.25F);
                 this.rightWing = new ModelRenderer(this, 22, 0);
                 this.rightWing.mirror = true;
-                this.rightWing.addBox(0.0F, 0.0F, 0.0F, 10, 20, 2, 1.2F);
+                this.rightWing.addBox(0.0F, 0.0F, 0.0F, 10, 20, 2, 1.25F);
             }
 
             /**

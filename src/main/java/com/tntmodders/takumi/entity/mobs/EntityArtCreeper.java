@@ -81,7 +81,8 @@ public class EntityArtCreeper extends EntityTakumiAbstractCreeper {
                                 if (!(blockState.getBlock().hasTileEntity(blockState) &&
                                         blockState.getBlock().createTileEntity(this.world,
                                                 blockState) instanceof IInventory) && blockState.isFullCube() &&
-                                        blockState.getBlockHardness(this.world, pos) > -1) {
+                                        blockState.getBlockHardness(this.world, pos) > -1 &&
+                                        !TakumiUtils.isExcludedBlockForRewrite(blockState.getBlock())) {
                                     TakumiUtils.setBlockStateProtected(this.world, pos, blockState);
                                     flg = true;
                                 }

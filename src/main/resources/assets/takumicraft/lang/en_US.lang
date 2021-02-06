@@ -5,6 +5,8 @@ takumicraft.description.name=Woo! Takumi has come!!!
 takumicraft.credits.name=The texture of "Yukari Creeper" is made by Noraushi/Bahamut.
 takumicraft.message.armor=Be a Creeper.
 takumicraft.message.bowgun=Hold Creeper Arrow or Creeper Bomb on your left hand.
+takumicraft.message.alter.1=Right Click to Summon Elder Creepers.
+takumicraft.message.alter.2=King Creeper: above Creeper Bomb.
 
 #tile
 tile.creeperbomb.name=Creeper Bomb

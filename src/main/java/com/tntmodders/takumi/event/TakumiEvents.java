@@ -3,6 +3,7 @@ package com.tntmodders.takumi.event;
 import com.tntmodders.asm.TakumiASMNameMap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.block.BlockTakumiAcid;
+import com.tntmodders.takumi.block.IBlockTT;
 import com.tntmodders.takumi.core.*;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
@@ -18,6 +19,7 @@ import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
 import com.tntmodders.takumi.world.gen.TakumiMapGenTower_F;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.BlockRailPowered;
 import net.minecraft.block.state.IBlockState;
@@ -520,6 +522,10 @@ public class TakumiEvents {
             try {
                 List<BlockPos> list = new ArrayList<>();
                 event.getAffectedBlocks().forEach(pos -> {
+                    Block block = event.getWorld().getBlockState(pos).getBlock();
+                    if (block instanceof IBlockTT) {
+                        list.add(pos);
+                    }
                     BlockPos blockpos = event.getWorld().getSpawnPoint();
                     int i = MathHelper.abs(pos.getX() - blockpos.getX());
                     int j = MathHelper.abs(pos.getZ() - blockpos.getZ());

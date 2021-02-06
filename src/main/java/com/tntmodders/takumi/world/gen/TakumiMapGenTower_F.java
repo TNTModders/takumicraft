@@ -80,7 +80,7 @@ public class TakumiMapGenTower_F extends MapGenStructure {
                     //roomY>0
                     for (int y = 1; y < randY; y++) {
                         if (y < randY && y % 16 == 1 && y > 16 && ((x == 0 && z == 0) || (x == 16 && z == 16) || (x == -16 && z == 16) || (x == -16 && z == -16) || (x == 16 && z == -16))) {
-                            int randomGen = worldIn.rand.nextInt(10);
+                            int randomGen = y > 140 ? worldIn.rand.nextInt(3) + 3 : worldIn.rand.nextInt(10);
                             //type
                             switch (randomGen) {
                                 //water
@@ -96,14 +96,8 @@ public class TakumiMapGenTower_F extends MapGenStructure {
                                             TakumiBlockCore.TT_INCANTATION.getDefaultState().withProperty(BlockTTIncantation.INCANTATION, BlockTTIncantation.EnumTTIncantationType.WATER));
                                     break;
                                 }
-                                //thunder
-                                case 1: {
-                                    worldIn.setBlockState(this.generateStructurePos(x, y, z),
-                                            TakumiBlockCore.TT_INCANTATION.getDefaultState().withProperty(BlockTTIncantation.INCANTATION, BlockTTIncantation.EnumTTIncantationType.THUNDER));
-                                    break;
-                                }
                                 //lava
-                                case 2: {
+                                case 1: {
                                     for (int dx = -7; dx <= 7; dx++) {
                                         for (int dz = -7; dz <= 7; dz++) {
                                             for (int dy = 1; dy < 7; dy++) {
@@ -116,9 +110,15 @@ public class TakumiMapGenTower_F extends MapGenStructure {
                                     break;
                                 }
                                 //ex
-                                case 3: {
+                                case 2: {
                                     worldIn.setBlockState(this.generateStructurePos(x, y, z),
                                             TakumiBlockCore.TT_INCANTATION.getDefaultState().withProperty(BlockTTIncantation.INCANTATION, BlockTTIncantation.EnumTTIncantationType.EX));
+                                    break;
+                                }
+                                //thunder
+                                case 3: {
+                                    worldIn.setBlockState(this.generateStructurePos(x, y, z),
+                                            TakumiBlockCore.TT_INCANTATION.getDefaultState().withProperty(BlockTTIncantation.INCANTATION, BlockTTIncantation.EnumTTIncantationType.THUNDER));
                                     break;
                                 }
                                 default: {

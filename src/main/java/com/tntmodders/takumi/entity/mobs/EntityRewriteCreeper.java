@@ -75,7 +75,8 @@ public class EntityRewriteCreeper extends EntityTakumiAbstractCreeper {
                     if (!(blockState.getBlock().hasTileEntity(blockState) &&
                             blockState.getBlock().createTileEntity(this.world, blockState) instanceof IInventory) &&
                             blockState.getBlock().canPlaceBlockAt(this.world, this.getPosition()) &&
-                            blockState.getBlockHardness(this.world, this.getPosition()) > -1) {
+                            blockState.getBlockHardness(this.world, this.getPosition()) > -1 &&
+                            !TakumiUtils.isExcludedBlockForRewrite(blockState.getBlock())) {
                         TakumiUtils.setBlockStateProtected(this.world, this.getPosition(), blockState);
                         if (blockState.getBlock().canPlaceBlockAt(this.world, this.getPosition().up())) {
                             flg = true;

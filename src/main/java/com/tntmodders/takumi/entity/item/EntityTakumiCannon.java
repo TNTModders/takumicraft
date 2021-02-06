@@ -72,7 +72,9 @@ public class EntityTakumiCannon extends Entity {
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound) {
-        compound.setInteger("facing", this.facing.getHorizontalIndex());
+        if(this.facing != null){
+            compound.setInteger("facing", this.facing.getHorizontalIndex());
+        }
     }
 
     @Override

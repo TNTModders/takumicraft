@@ -4,7 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import net.minecraft.block.BlockEmptyDrops;
 import net.minecraft.block.material.Material;
 
-public class BlockTTFoundation extends BlockEmptyDrops {
+public class BlockTTFoundation extends BlockEmptyDrops implements IBlockTT{
     public BlockTTFoundation() {
         super(Material.ROCK);
         this.setRegistryName(TakumiCraftCore.MODID, "ttfoundation");

@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockTTIncantation extends BlockContainer {
+public class BlockTTIncantation extends BlockContainer implements IBlockTT{
     public static final PropertyEnum<EnumTTIncantationType> INCANTATION = PropertyEnum.create("incantation", EnumTTIncantationType.class);
 
     public BlockTTIncantation() {

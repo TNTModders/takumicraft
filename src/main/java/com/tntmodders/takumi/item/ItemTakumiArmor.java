@@ -1,12 +1,15 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.client.model.ModelTakumiArmor;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.item.material.TakumiArmorMaterial;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.MobEffects;
@@ -30,6 +33,29 @@ public class ItemTakumiArmor extends ItemArmor {
         this.setRegistryName(TakumiCraftCore.MODID, "takumiarmor_" + equipmentSlotIn.getName());
         this.setCreativeTab(TakumiCraftCore.TAB_CREEPER);
         this.setUnlocalizedName("takumiarmor_" + equipmentSlotIn.getName());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @Nullable
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+        switch (armorSlot) {
+            case HEAD: {
+                return new ModelTakumiArmor.ModelTakumiArmor_Head();
+            }
+            case CHEST: {
+                return new ModelTakumiArmor.ModelTakumiArmor_Chest();
+            }
+            case LEGS: {
+                return new ModelTakumiArmor.ModelTakumiArmor_Legs();
+            }
+            case FEET: {
+                return new ModelTakumiArmor.ModelTakumiArmor_Feet();
+            }
+            default: {
+                return null;
+            }
+        }
     }
 
     @Override
@@ -141,7 +167,7 @@ public class ItemTakumiArmor extends ItemArmor {
 
             //チェストプレート
             if (this.armorType == EntityEquipmentSlot.CHEST) {
-                player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 1210, 1));
+                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1210, 0));
             }
 
             //レギンス
@@ -162,7 +188,7 @@ public class ItemTakumiArmor extends ItemArmor {
                 break;
             }
         }
-        player.setInvisible(flg);
+        //player.setInvisible(flg);
         if (!itemStack.isItemEnchanted()) {
             itemStack.addEnchantment(Enchantments.UNBREAKING, 10);
             itemStack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 10);

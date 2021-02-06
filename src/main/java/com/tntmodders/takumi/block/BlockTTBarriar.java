@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockTTBarriar extends BlockContainer {
+public class BlockTTBarriar extends BlockContainer implements IBlockTT{
     public BlockTTBarriar() {
         super(Material.ROCK);
         this.setRegistryName(TakumiCraftCore.MODID, "ttbarriar");
