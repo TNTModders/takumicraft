@@ -2,13 +2,17 @@ package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.tileentity.TileEntityTTTESR;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -83,5 +87,15 @@ public class BlockTTBarriar extends BlockContainer implements IBlockTT{
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityTTTESR();
+    }
+
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+        if (entityIn instanceof EntityPlayerMP) {
+            TakumiUtils.giveAdvancementImpossible((EntityPlayerMP) entityIn,
+                    new ResourceLocation(TakumiCraftCore.MODID, "creeperbomb"),
+                    new ResourceLocation(TakumiCraftCore.MODID, "creepertower"));
+        }
     }
 }

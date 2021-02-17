@@ -7,6 +7,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.tileentity.TileEntity;
@@ -23,7 +24,8 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
         if (!this.world.isRemote) {
             try {
                 tick++;
-                if (tick % 100 == 0) {
+                if (tick % 100 == 0 && this.world.rand.nextInt(5) == 0 &&
+                        this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPos().add(-32, -32, -32), this.getPos().add(32, 32, 32))).size() < 100) {
                     IBlockState state = this.world.getBlockState(this.getPos());
                     if (state.getBlock() == TakumiBlockCore.TT_INCANTATION) {
                         switch (state.getValue(BlockTTIncantation.INCANTATION)) {
@@ -39,7 +41,7 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
                                 break;
                             }
                             case WATER: {
-                                if (this.world.getEntitiesWithinAABB(EntityCreeper.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 15, 8))).size() < 15) {
+                                if (this.world.getEntitiesWithinAABB(EntityCreeper.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 15, 8))).size() < 10) {
                                     EntityCreeper creeper = new EntitySquidCreeper(this.world);
                                     switch (this.world.rand.nextInt(4)) {
                                         case 1: {
@@ -67,7 +69,7 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
                             }
                             case LAVA: {
                                 if (this.world.rand.nextInt(5) == 0 &&
-                                        this.world.getEntitiesWithinAABB(EntityCreeper.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 15, 8))).size() < 20) {
+                                        this.world.getEntitiesWithinAABB(EntityCreeper.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 15, 8))).size() < 10) {
                                     EntityCreeper creeper = this.world.rand.nextBoolean() ? new EntityRushCreeper(this.world) : new EntityChaseCreeper(this.world);
                                     if (((ITakumiEntity) creeper).takumiRank() == ITakumiEntity.EnumTakumiRank.LOW ||
                                             ((ITakumiEntity) creeper).takumiRank() == ITakumiEntity.EnumTakumiRank.MID) {
@@ -84,7 +86,7 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
                                 break;
                             }
                             default: {
-                                if (this.world.getEntitiesWithinAABB(EntityCreeper.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 15, 8))).size() < 20) {
+                                if (this.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 15, 8))).size() < 10) {
                                     Class<? extends ITakumiEntity> clazz = TakumiEntityCore.getEntityList().get(this.world.rand.nextInt(TakumiEntityCore.getEntityList().size())).getClass();
                                     Entity creeper = (Entity) clazz.getConstructor(World.class).newInstance(this.world);
                                     if (((ITakumiEntity) creeper).takumiRank() == ITakumiEntity.EnumTakumiRank.LOW ||

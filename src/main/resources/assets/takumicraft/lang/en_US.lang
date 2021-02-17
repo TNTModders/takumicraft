@@ -6,7 +6,12 @@ takumicraft.credits.name=The texture of "Yukari Creeper" is made by Noraushi/Bah
 takumicraft.message.armor=Be a Creeper.
 takumicraft.message.bowgun=Hold Creeper Arrow or Creeper Bomb on your left hand.
 takumicraft.message.alter.1=Right Click to Summon Elder Creepers.
-takumicraft.message.alter.2=King Creeper: above Creeper Bomb.
+takumicraft.message.alter.2=----
+takumicraft.message.alter.3=King Creeper: above Creeper Bomb.
+takumicraft.message.alter.4=Angel Creeper: above Emerald Block.
+takumicraft.message.alter.5=Gem Creeper: above MagicStone Block.
+takumicraft.message.alter.6=Anniv Creeper: under Cake.
+takumicraft.message.alter.7=Wither Creeper: Wither Spawning Shape, Alters instead of Skulls.
 
 #tile
 tile.creeperbomb.name=Creeper Bomb
@@ -219,6 +224,11 @@ tile.ttlight.name=Takumi Tower Block [Light]
 tile.ttactivator.name=Takumi Tower Block [Activator]
 tile.ttcreepercore.name=Takumi Tower Block [Core]
 tile.ttcurse.name=Takumi Tower Block [Curse]
+tile.ttcolored_red.name=Takumi Tower Block [Colored]
+tile.ttcolored_blue.name=Takumi Tower Block [Colored]
+tile.ttcolored_green.name=Takumi Tower Block [Colored]
+tile.ttcolored_white.name=Takumi Tower Block [Colored]
+tile.ttcolored_black.name=Takumi Tower Block [Colored]
 
 #item
 item.takumibook.name=Creeper Book
@@ -889,6 +899,8 @@ entity.creeper_hoge.name=Creeper
 advancements.takumicraft.slay.desc=registerd to Creeper Book.
 advancements.takumicraft.parachute.title=Parachute Fall
 advancements.takumicraft.parachute.desc=Fall 50 blocks high using takumi parachute.
+advancements.takumicraft.creepertower.title=Find Creeper Tower
+advancements.takumicraft.creepertower.desc=Get into the Ruined Creeper Tower,
 
 #enchantment
 enchantment.takumi_anti_powered=Anti-powered

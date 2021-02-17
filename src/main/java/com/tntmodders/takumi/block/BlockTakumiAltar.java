@@ -173,5 +173,10 @@ public class BlockTakumiAltar extends Block {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.1"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.2"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.3"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.4"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.5"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.6"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.7"));
     }
 }

@@ -6,7 +6,12 @@ takumicraft.credits.name=「ゆかり匠」のテクスチャは野良牛/バフ
 takumicraft.message.armor=クラフターよ、匠であれ。
 takumicraft.message.bowgun=左手に匠式弾か高性能爆弾をもって使用。
 takumicraft.message.alter.1=王者と召人を喚ぶ祭壇。
-takumicraft.message.alter.2=高性能爆弾の上に置き王匠を召喚。
+takumicraft.message.alter.2=右クリックで上位匠を召喚できる。
+takumicraft.message.alter.3=高性能爆弾の上に置き王匠を召喚。
+takumicraft.message.alter.4=エメラルドブロックの上に置き輪廻天匠を召喚。
+takumicraft.message.alter.5=匠魔石の上に置き玉匠を召喚。
+takumicraft.message.alter.6=ケーキの下に置き祝匠を召喚。
+takumicraft.message.alter.7=ウィザースケルトンの頭の代わりに祭壇を三つ置きウィザー匠を召喚。
 
 #tile
 tile.creeperbomb.name=匠式高性能爆弾
@@ -219,6 +224,11 @@ tile.ttlight.name=匠古煉瓦[光]
 tile.ttactivator.name=匠古煉瓦[応]
 tile.ttcreepercore.name=匠古煉瓦[要]
 tile.ttcurse.name=匠古煉瓦[淵]
+tile.ttcolored_red.name=匠古煉瓦[色]
+tile.ttcolored_blue.name=匠古煉瓦[色]
+tile.ttcolored_green.name=匠古煉瓦[色]
+tile.ttcolored_white.name=匠古煉瓦[色]
+tile.ttcolored_black.name=匠古煉瓦[色]
 
 #item
 item.takumibook.name=匠の書
@@ -948,6 +958,8 @@ entity.creeper_hoge.name=匠
 advancements.takumicraft.slay.desc=匠の書に追加された
 advancements.takumicraft.parachute.title=快適なガスト匠の旅
 advancements.takumicraft.parachute.desc=匠式落下傘で50ブロック以上降下する たまにはゆっくり、ガスト匠と一緒に快適な空の旅を。
+advancements.takumicraft.creepertower.title=国破れて山河あり
+advancements.takumicraft.creepertower.desc=荒廃した匠タワーに侵入する 玉座は空にして裏に隠る。
 
 #enchantment
 enchantment.takumi_anti_powered=巨匠特攻

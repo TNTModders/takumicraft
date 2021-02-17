@@ -213,6 +213,11 @@ public class TakumiBlockCore {
     public static final Block TT_ACTIVATOR = new BlockTTActivator();
     public static final Block TT_CREEPERCORE = new BlockTTCreeperCore();
     public static final Block TT_CURSE = new BlockTTCurse();
+    public static final Block TT_COLORED_RED = new BlockTTColored("red");
+    public static final Block TT_COLORED_BLUE = new BlockTTColored("blue");
+    public static final Block TT_COLORED_GREEN = new BlockTTColored("green");
+    public static final Block TT_COLORED_WHITE = new BlockTTColored("white");
+    public static final Block TT_COLORED_BLACK = new BlockTTColored("black");
 
     public static final Map<Class<? extends EntityCreeper>, BlockTakumiMonsterBomb> BOMB_MAP = new HashMap<>();
 

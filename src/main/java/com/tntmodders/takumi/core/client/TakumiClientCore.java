@@ -218,6 +218,6 @@ public class TakumiClientCore {
         ClientRegistry.registerTileEntity(TileEntityTakumiSign.class, TakumiCraftCore.MODID + ":creepersign", new RenderTakumiSign());
         ClientRegistry.registerTileEntity(TileEntityTakumiForceField.class, TakumiCraftCore.MODID + ":takumiforcefield", new RenderTakumiForceField<>());
         ClientRegistry.registerTileEntity(TileEntityTTPortal.class, TakumiCraftCore.MODID + ":ttportal", new RenderTTPortal<>());
-        ClientRegistry.registerTileEntity(TileEntityTTTESR.class,TakumiCraftCore.MODID+":tttesr",new RenderTTTESR<>());
+        ClientRegistry.registerTileEntity(TileEntityTTTESR.class, TakumiCraftCore.MODID + ":tttesr", new RenderTTTESR<>());
     }
 }

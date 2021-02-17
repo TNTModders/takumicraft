@@ -196,6 +196,11 @@ public class EntityPhantomCreeper extends EntityTakumiAbstractCreeper {
         return 0x336633;
     }
 
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.UNDEAD;
+    }
+
     /**
      * Called to update the entity's position/logic.
      */

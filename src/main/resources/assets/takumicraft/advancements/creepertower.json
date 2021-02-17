@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:ttfoundation"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.creepertower.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.creepertower.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "takumicraft:creeperbomb",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -162,23 +162,23 @@ public class ItemTakumiArmor extends ItemArmor {
         if (!world.isRemote) {
             //ヘルメット
             if (this.armorType == EntityEquipmentSlot.HEAD) {
-                player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 1210, 0));
+                player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 1210, 0, true, false));
             }
 
             //チェストプレート
             if (this.armorType == EntityEquipmentSlot.CHEST) {
-                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1210, 0));
+                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1210, 0, true, false));
             }
 
             //レギンス
             if (this.armorType == EntityEquipmentSlot.LEGS && !player.isPotionActive(MobEffects.INSTANT_HEALTH)) {
                 player.heal(0.5f);
-                player.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1210, 0));
+                player.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1210, 0, true, false));
             }
 
             //ブーツ
             if (this.armorType == EntityEquipmentSlot.FEET) {
-                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1210, 0));
+                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 1210, 0, true, false));
             }
         }
         boolean flg = true;
