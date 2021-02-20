@@ -774,6 +774,8 @@ entity.corruptioncreeper.name=Corruption Creeper
 entity.corruptioncreeper.desc=Corrupting your inventory, this creeper spreads destruction.
 entity.evaporationcreeper.name=Evaporation Creeper
 entity.evaporationcreeper.desc=Blown'up and evaporated, don't stay in liquid! To endure, you have to take a distance.
+entity.pulsecreeper.name=Pulse Creeper
+entity.pulsecreeper.desc=Once the wave occurs, it destroys all the circuits.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
