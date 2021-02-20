@@ -62,7 +62,7 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
                         }
                     });
                 }
-                return this.creeper != null;
+                return this.creeper != null && !this.creeper.isDead;
             }
 
             @Override
@@ -155,39 +155,41 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (this.getAttackTarget() != null && this.getAttackTarget() != this.getLastAttackedEntity()) {
-            this.getAttackTarget().getArmorInventoryList().forEach(itemStack -> {
-                if (itemStack.getItem() instanceof ItemArmor && ((ItemArmor) itemStack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.GOLD) {
-                    EntityPiglinCreeper.this.setAttackTarget(null);
-                    EntityPiglinCreeper.this.setCreeperState(-2);
-                    if (!this.world.isRemote) {
-                        EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
+        if (!this.isDead) {
+            if (this.getAttackTarget() != null && this.getAttackTarget() != this.getLastAttackedEntity()) {
+                this.getAttackTarget().getArmorInventoryList().forEach(itemStack -> {
+                    if (itemStack.getItem() instanceof ItemArmor && ((ItemArmor) itemStack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.GOLD) {
+                        EntityPiglinCreeper.this.setAttackTarget(null);
+                        EntityPiglinCreeper.this.setCreeperState(-2);
+                        if (!this.world.isRemote) {
+                            EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
+                        }
                     }
-                }
-            });
-        }
-        if (!this.world.getEntitiesWithinAABB(EntityItem.class, this.getEntityBoundingBox().grow(10)).isEmpty()) {
-            this.world.getEntitiesWithinAABB(EntityItem.class, this.getEntityBoundingBox().grow(10)).forEach(entityItem -> {
-                if (entityItem.getItem().getItem() == Items.GOLD_INGOT || entityItem.getItem().getItem() == Item.getItemFromBlock(Blocks.GOLD_BLOCK)) {
-                    EntityPiglinCreeper.this.setAttackTarget(null);
-                    EntityPiglinCreeper.this.setCreeperState(-2);
+                });
+            }
+            if (!this.world.getEntitiesWithinAABB(EntityItem.class, this.getEntityBoundingBox().grow(10)).isEmpty()) {
+                this.world.getEntitiesWithinAABB(EntityItem.class, this.getEntityBoundingBox().grow(10)).forEach(entityItem -> {
+                    if (entityItem.getItem().getItem() == Items.GOLD_INGOT || entityItem.getItem().getItem() == Item.getItemFromBlock(Blocks.GOLD_BLOCK)) {
+                        EntityPiglinCreeper.this.setAttackTarget(null);
+                        EntityPiglinCreeper.this.setCreeperState(-2);
                     /*this.getMoveHelper().setMoveTo(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);
                     this.getNavigator().tryMoveToXYZ(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);*/
-                    if (!this.world.isRemote) {
-                        EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
-                    }
-                    if (this.getDistanceSqToEntity(entityItem) < 1.5 * 1.5) {
-                        if (this.getHeldItemMainhand().isEmpty()) {
-                            this.setHeldItem(EnumHand.MAIN_HAND, entityItem.getItem());
+                        if (!this.world.isRemote) {
+                            EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
                         }
-                        entityItem.setDead();
+                        if (this.getDistanceSqToEntity(entityItem) < 1.5 * 1.5) {
+                            if (this.getHeldItemMainhand().isEmpty()) {
+                                this.setHeldItem(EnumHand.MAIN_HAND, entityItem.getItem());
+                            }
+                            entityItem.setDead();
+                        }
                     }
-                }
-            });
-        }
-        if (this.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
-            this.setCreeperState(-2);
-            this.setAttackTarget(null);
+                });
+            }
+            if (this.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
+                this.setCreeperState(-2);
+                this.setAttackTarget(null);
+            }
         }
     }
 

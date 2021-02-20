@@ -826,6 +826,9 @@ entity.piglincreeper.name=ピグリン匠
 entity.piglincreeper.desc=煉獄より這い出し、異なる力を持つ、炎より出づる新たなる脅威。
 entity.corruptioncreeper.name=損匠
 entity.corruptioncreeper.desc=損害甚大、損傷重症、この匠は蝕む破壊を撒き散らす。
+entity.evaporationcreeper.name=蒸匠
+entity.evaporationcreeper.read=じょうたくみ
+entity.evaporationcreeper.desc=流体を除けば、邪魔をするものは無い。吹き飛ばすときは蒸気に注意。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
