@@ -12,6 +12,7 @@ takumicraft.message.alter.4=Angel Creeper: above Emerald Block.
 takumicraft.message.alter.5=Gem Creeper: above MagicStone Block.
 takumicraft.message.alter.6=Anniv Creeper: under Cake.
 takumicraft.message.alter.7=Wither Creeper: Wither Spawning Shape, Alters instead of Skulls.
+takumicraft.message.kingtool=Left Click: Normal Harvesting / Right Click: Blast Harvesting
 
 #tile
 tile.creeperbomb.name=Creeper Bomb
@@ -331,6 +332,9 @@ item.oldbook.content.5=属性纏いし武器に対して、結晶のエネルギ
 item.oldbook.content.6=ある日突然、龍が現れた。奴は自分の力を仲間に与え、配下を増やし、そして戦いが起きた。地に落ちた星を知らずに。
 item.oldbook.content.7=祭壇より顕る匠の力は、時に道具に爆発を耐え抜く力を与える。鉄床を用いて力を合成してみるとよいだろう。
 item.oldbook.content.8= ｜○｜ ー凹△ ー＾▽ □凸｜ ー凸□  □凸▽ □＾｜ ー～△ ｜○｜ ー～▽ □凸□
+item.takumikingtool_pickaxe.name=King's Pickaxe
+item.takumikingtool_shovel.name=King's Shovel
+item.takumikingtool_axe.name=King's Axe
 
 #entity
 #desc max: 72 chars
@@ -848,6 +852,7 @@ entity.takumicannon.name=Creeper Heavy Cannon
 entity.takumicannonball.name=Creeper Heavy Cannon
 entity.kingcreeperspellblock.name=King Creeper
 entity.kingcreeperstorm.name=King Creeper
+entity.takumikingtoolarrow.name=King's Tool
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

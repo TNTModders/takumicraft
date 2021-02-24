@@ -154,6 +154,14 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void onUpdate() {
+        if (this.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
+            if (this.getActivePotionEffect(MobEffects.BLINDNESS).getDuration() < 5 &&
+                    (this.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.GOLD_INGOT || this.getHeldItem(EnumHand.MAIN_HAND).getItem() == Item.getItemFromBlock(Blocks.GOLD_BLOCK))) {
+                this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,2000));
+            }
+            this.setCreeperState(-2);
+            this.setAttackTarget(null);
+        }
         super.onUpdate();
         if (!this.isDead) {
             if (this.getAttackTarget() != null && this.getAttackTarget() != this.getLastAttackedEntity()) {
@@ -162,7 +170,7 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
                         EntityPiglinCreeper.this.setAttackTarget(null);
                         EntityPiglinCreeper.this.setCreeperState(-2);
                         if (!this.world.isRemote) {
-                            EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
+                            EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,2000));
                         }
                     }
                 });
@@ -175,7 +183,7 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
                     /*this.getMoveHelper().setMoveTo(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);
                     this.getNavigator().tryMoveToXYZ(entityItem.posX, entityItem.posY, entityItem.posZ, 1f);*/
                         if (!this.world.isRemote) {
-                            EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS));
+                            EntityPiglinCreeper.this.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS,2000));
                         }
                         if (this.getDistanceSqToEntity(entityItem) < 1.5 * 1.5) {
                             if (this.getHeldItemMainhand().isEmpty()) {
@@ -185,10 +193,6 @@ public class EntityPiglinCreeper extends EntityTakumiAbstractCreeper {
                         }
                     }
                 });
-            }
-            if (this.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
-                this.setCreeperState(-2);
-                this.setAttackTarget(null);
             }
         }
     }

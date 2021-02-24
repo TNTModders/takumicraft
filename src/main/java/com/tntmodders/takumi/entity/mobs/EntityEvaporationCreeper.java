@@ -28,17 +28,20 @@ public class EntityEvaporationCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void takumiExplode() {
+        if (!this.world.isRemote) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, this.getPowered() ? 5 : 3, false);
+        }
         this.buildsand((int) this.posX, (int) this.posY, (int) this.posZ, this.getPowered() ? 10 : 5, this.world);
     }
 
     protected void buildsand(int ox, int oy, int oz, int height, World par1World) {
         int blockX, blockY, blockZ;
         int searchRange = height * 2;
-        for (int x = -1 * searchRange; x < searchRange; ++x) {
+        for (int x = -1 * searchRange; x <= searchRange; ++x) {
             blockX = x + ox;
-            for (int y = (int) (-0.5 * searchRange); y < (int) (0.5 * searchRange); ++y) {
+            for (int y = (int) (-0.5 * searchRange); y <= (int) (0.5 * searchRange); ++y) {
                 blockY = y + oy;
-                for (int z = -1 * searchRange; z < searchRange; ++z) {
+                for (int z = -1 * searchRange; z <= searchRange; ++z) {
                     blockZ = z + oz;
 
                     BlockPos pos = new BlockPos(blockX, blockY, blockZ);
@@ -92,7 +95,7 @@ public class EntityEvaporationCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public int getExplosionPower() {
-        return 2;
+        return 0;
     }
 
     @Override

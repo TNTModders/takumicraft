@@ -347,12 +347,20 @@ public class TakumiEntityCore {
                 EntityKingBlock.class, "kingcreeperspellblock", 939, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "kingcreeperstorm"),
                 EntityKingStorm.class, "kingcreeperstorm", 940, TakumiCraftCore.TakumiInstance, 64, 2, true);
-
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumikingtoolarrow"),
+                EntityTakumiKingToolArrow.class, "takumikingtoolarrow", 941, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
     private static void renderRegister() {
         RenderingRegistry.registerEntityRenderingHandler(EntityTakumiArrow.class,
+                manager -> new RenderArrow<EntityArrow>(manager) {
+                    @Override
+                    protected ResourceLocation getEntityTexture(EntityArrow entity) {
+                        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/item/carrow.png");
+                    }
+                });
+        RenderingRegistry.registerEntityRenderingHandler(EntityTakumiKingToolArrow.class,
                 manager -> new RenderArrow<EntityArrow>(manager) {
                     @Override
                     protected ResourceLocation getEntityTexture(EntityArrow entity) {

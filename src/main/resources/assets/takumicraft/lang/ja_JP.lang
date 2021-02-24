@@ -12,6 +12,7 @@ takumicraft.message.alter.4=エメラルドブロックの上に置き輪廻天�
 takumicraft.message.alter.5=匠魔石の上に置き玉匠を召喚。
 takumicraft.message.alter.6=ケーキの下に置き祝匠を召喚。
 takumicraft.message.alter.7=ウィザースケルトンの頭の代わりに祭壇を三つ置きウィザー匠を召喚。
+takumicraft.message.kingtool=左クリックで通常破壊 / 右クリックで遠隔破壊
 
 #tile
 tile.creeperbomb.name=匠式高性能爆弾
@@ -331,6 +332,9 @@ item.oldbook.content.5=属性纏いし武器に対して、結晶のエネルギ
 item.oldbook.content.6=ある日突然、龍が現れた。奴は自分の力を仲間に与え、配下を増やし、そして戦いが起きた。地に落ちた星を知らずに。
 item.oldbook.content.7=祭壇より顕る匠の力は、時に道具に爆発を耐え抜く力を与える。鉄床を用いて力を合成してみるとよいだろう。
 item.oldbook.content.8= ｜○｜ ー凹△ ー＾▽ □凸｜ ー凸□  □凸▽ □＾｜ ー～△ ｜○｜ ー～▽ □凸□
+item.takumikingtool_pickaxe.name=匠式ピッケル
+item.takumikingtool_shovel.name=匠式ショベル
+item.takumikingtool_axe.name=匠式斧
 
 #entity
 ＃descは36文字まで。
@@ -904,6 +908,7 @@ entity.takumicannon.name=匠式巨砲
 entity.takumicannonball.name=匠式巨砲
 entity.kingcreeperspellblock.name=王匠
 entity.kingcreeperstorm.name=王匠
+entity.takumikingtoolarrow.name=匠式ツール弾
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ

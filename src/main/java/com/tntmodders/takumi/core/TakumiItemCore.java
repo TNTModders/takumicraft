@@ -107,6 +107,9 @@ public class TakumiItemCore {
     public static final Item TAKUMI_KNIFE = new ItemTakumiKnife_S();
     public static final Item TAKUMI_KNIFE_GUN = new ItemTakumiKnife_G();
     public static final Item TAKUMI_CANNON = new ItemTakumiCannon();
+    public static final Item KING_TOOL_AXE = new ItemTakumiKingTool(EnumTakumiTool.AXE);
+    public static final Item KING_TOOL_PICKAXE = new ItemTakumiKingTool(EnumTakumiTool.PICKAXE);
+    public static final Item KING_TOOL_SHOVEL = new ItemTakumiKingTool(EnumTakumiTool.SHOVEL);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

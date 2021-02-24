@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q",
+    "B",
+    "S"
+  ],
+  "key": {
+    "Q": {
+      "item": "takumicraft:creepercore"
+    },
+    "B": {
+      "item": "takumicraft:creeperbomb"
+    },
+    "S": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "takumicraft:takumikingtool_shovel"
+  }
+}

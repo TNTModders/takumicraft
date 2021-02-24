@@ -18,7 +18,7 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
-        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 0.75f;
+        return blockStateIn.getBlockHardness(worldIn, pos) == -1 ? 10000000f : 1f;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public boolean takumiExplodeEvent(Detonate event) {
-        float power = this.getPowered() ? 6f : 3f;
+        float power = this.getPowered() ? 3.5f : 2f;
         if (event.getExplosion() instanceof TakumiExplosion) {
             power = ((TakumiExplosion) event.getExplosion()).getSize();
         }
@@ -82,7 +82,7 @@ public class EntityBangCreeper extends EntityTakumiAbstractCreeper {
                         TakumiUtils.takumiGetBlockResistance(this, this.world.getBlockState(pos), pos) != -1) {
                     this.world.setBlockToAir(pos);
                     TakumiUtils.takumiCreateExplosion(this.world, this, pos.getX() + 0.5, pos.getY() + 0.5,
-                            pos.getZ() + 0.5, power - 0.2f, false, true);
+                            pos.getZ() + 0.5, power - 0.5f, false, true, 2.5);
                 }
             }
         }

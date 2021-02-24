@@ -669,6 +669,47 @@ public class TakumiEvents {
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiLauncher) {
                 event.getAffectedEntities().clear();
             }
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityTakumiKingToolArrow) {
+                event.getAffectedEntities().clear();
+                EntityTakumiKingToolArrow arrow = ((EntityTakumiKingToolArrow) ((TakumiExplosion) event.getExplosion()).getExploder());
+                if (arrow.shootingEntity != null) {
+                    Item item = null;
+                    if (arrow.getEnumTool() == ItemTakumiMineSweeperTool.EnumTakumiTool.AXE) {
+                        item = TakumiItemCore.KING_TOOL_AXE;
+                    } else if (arrow.getEnumTool() == ItemTakumiMineSweeperTool.EnumTakumiTool.PICKAXE) {
+                        item = TakumiItemCore.KING_TOOL_PICKAXE;
+                    } else if (arrow.getEnumTool() == ItemTakumiMineSweeperTool.EnumTakumiTool.SHOVEL) {
+                        item = TakumiItemCore.KING_TOOL_SHOVEL;
+                    }
+
+                    if (item != null) {
+                        ItemStack stack = new ItemStack(item);
+                        event.getAffectedBlocks().forEach(blockPos -> {
+                            if (event.getWorld().getBlockState(blockPos) != null &&
+                                    !(arrow.shootingEntity instanceof EntityPlayer && !((EntityPlayer) arrow.shootingEntity).canPlayerEdit(blockPos, EnumFacing.UP, stack))) {
+                                if (stack.getStrVsBlock(event.getWorld().getBlockState(blockPos)) > 1.0f) {
+                                    if (arrow.shootingEntity instanceof EntityPlayer && !((EntityPlayer) arrow.shootingEntity).isCreative()) {
+                                        EntityItem entityItem = new EntityItem(event.getWorld(), arrow.shootingEntity.posX, arrow.shootingEntity.posY, arrow.shootingEntity.posZ,
+                                                new ItemStack(event.getWorld().getBlockState(blockPos).getBlock().getItemDropped(event.getWorld().getBlockState(blockPos), event.getWorld().rand, 5)));
+                                        entityItem.setNoPickupDelay();
+                                        event.getWorld().spawnEntity(entityItem);
+
+                                        if (arrow.shootingEntity instanceof EntityPlayerMP) {
+                                            int exp = net.minecraftforge.common.ForgeHooks.onBlockBreakEvent(event.getWorld(), ((EntityPlayerMP) arrow.shootingEntity).interactionManager.getGameType(),
+                                                    ((EntityPlayerMP) arrow.shootingEntity), blockPos);
+                                            if (exp > 0) {
+                                                event.getWorld().getBlockState(blockPos).getBlock().dropXpOnBlockBreak(event.getWorld(), arrow.shootingEntity.getPosition(), exp);
+                                            }
+                                        }
+                                    }
+                                    TakumiUtils.setBlockStateProtected(event.getWorld(), blockPos, Blocks.AIR.getDefaultState());
+                                }
+                            }
+                        });
+                        event.getAffectedBlocks().removeIf(blockPos -> !event.getWorld().isAirBlock(blockPos));
+                    }
+                }
+            }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof AbstractEntityTakumiGrenade) {
                 AbstractEntityTakumiGrenade grenade =
                         (AbstractEntityTakumiGrenade) ((TakumiExplosion) event.getExplosion()).getExploder();
