@@ -268,6 +268,7 @@ public class TakumiClientEvents {
         }
     }
 
+
     public float getCreeperFlashIntensity(EntityLivingBase entityLivingBase, float partialTicks) {
         if (entityLivingBase.getActivePotionEffect(TakumiPotionCore.CREEPERED) == null ||
                 entityLivingBase.getActivePotionEffect(TakumiPotionCore.CREEPERED).getDuration() > 30) {
@@ -287,6 +288,16 @@ public class TakumiClientEvents {
             int i = (int) (f * 0.2F * 255.0F);
             i = MathHelper.clamp(i, 0, 255);
             return i << 24 | 822083583;
+        }
+    }
+
+    @SubscribeEvent
+    public void renderSpecificHand(RenderSpecificHandEvent event) {
+        if (Lists.newArrayList(Minecraft.getMinecraft().player.getArmorInventoryList()).stream().allMatch(
+                itemStack -> itemStack.getItem() instanceof ItemTakumiArmor)) {
+            if (Minecraft.getMinecraft().player.getHeldItem(event.getHand()).isEmpty() || (event.getEquipProgress() > 0 && event.getEquipProgress() < 0.5)) {
+                event.setCanceled(true);
+            }
         }
     }
 
