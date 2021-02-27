@@ -837,6 +837,8 @@ entity.pulsecreeper.name=パルス匠
 entity.pulsecreeper.desc=放つ波は一度、周囲の回路を破壊し尽くす。
 entity.smokecreeper.name=爆煙匠
 entity.smokecreeper.desc=爆煙は、拡がれば最後、いつか誘爆する……。
+entity.nightmarecreeper.name=悪夢匠
+entity.nightmarecreeper.desc=キｮうキ、ｼユうﾚン、そレﾊあｸム。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -911,6 +913,7 @@ entity.takumicannonball.name=匠式巨砲
 entity.kingcreeperspellblock.name=王匠
 entity.kingcreeperstorm.name=王匠
 entity.takumikingtoolarrow.name=匠式ツール弾
+entity.smokeparticle.name=爆煙匠
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ
@@ -1016,7 +1019,7 @@ tipped_arrow.effect.antiswelling=収爆の矢
 tipped_arrow.effect.antiexplosion=防爆の矢
 frozen=凍結
 corruption=損壊加速
-
+nightmare=悪夢
 
 #Vanilla
 item.skull.creeper.name=匠の頭

@@ -782,6 +782,8 @@ entity.pulsecreeper.name=Pulse Creeper
 entity.pulsecreeper.desc=Once the wave occurs, it destroys all the circuits.
 entity.smokecreeper.name=Smoke Creeper
 entity.smokecreeper.desc=Explosive Smoke, it will burst you, in several seconds...
+entity.nightmarecreeper.name=Nightmare Creeper
+entity.nightmarecreeper.desc=tHiS, iS, aN nIGhTmaRe.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -855,6 +857,7 @@ entity.takumicannonball.name=Creeper Heavy Cannon
 entity.kingcreeperspellblock.name=King Creeper
 entity.kingcreeperstorm.name=King Creeper
 entity.takumikingtoolarrow.name=King's Tool
+entity.smokeparticle.name=Smoke Creeper
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.
@@ -956,6 +959,7 @@ tipped_arrow.effect.antiswelling=Arrow of Anti Swelling
 tipped_arrow.effect.antiexplosion=Arrow of Anti Explosion
 frozen=Frozen
 corruption=Corruption
+nightmare=Nightmare
 
 #Vanilla
 item.skull.creeper.name=Creeper Head

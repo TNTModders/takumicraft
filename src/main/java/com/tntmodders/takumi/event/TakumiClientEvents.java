@@ -69,6 +69,7 @@ public class TakumiClientEvents {
     @SideOnly(Side.CLIENT)
     public static final ModelSaber MODEL_LIGHTSABER = new ModelSaber();
     private static final ResourceLocation ICE_TEXTURE = new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/frozen_overlay.png");
+    private static final ResourceLocation PORTAL_TEXTURE = new ResourceLocation("textures/misc/vignette.png");
     private static long respawnTime;
     private static long prevRespawnTime;
 
@@ -123,6 +124,25 @@ public class TakumiClientEvents {
             ScaledResolution scaledRes = event.getResolution();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             Minecraft.getMinecraft().getTextureManager().bindTexture(ICE_TEXTURE);
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder bufferbuilder = tessellator.getBuffer();
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+            bufferbuilder.pos(0.0D, scaledRes.getScaledHeight(), -90.0D).tex(0.0D, 1.0D).endVertex();
+            bufferbuilder.pos(scaledRes.getScaledWidth(), scaledRes.getScaledHeight(), -90.0D).tex(1.0D, 1.0D).endVertex();
+            bufferbuilder.pos(scaledRes.getScaledWidth(), 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
+            bufferbuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
+            tessellator.draw();
+            GlStateManager.depthMask(true);
+            GlStateManager.enableDepth();
+            GlStateManager.enableAlpha();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        }
+        if (Minecraft.getMinecraft().player.isPotionActive(TakumiPotionCore.NIGHTMARE) && event.getType() == RenderGameOverlayEvent.ElementType.HELMET &&
+                Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
+            ScaledResolution scaledRes = event.getResolution();
+            double d = Minecraft.getMinecraft().player.ticksExisted*1.5;
+            GlStateManager.color(((float) Math.sin(Math.toRadians(d))), ((float) Math.sin(Math.toRadians(d + 120))), ((float) Math.sin(Math.toRadians(d + 240))), 0.7f);
+            Minecraft.getMinecraft().getTextureManager().bindTexture(PORTAL_TEXTURE);
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);

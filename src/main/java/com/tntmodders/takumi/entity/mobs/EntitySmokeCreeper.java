@@ -23,7 +23,9 @@ public class EntitySmokeCreeper extends EntityEPCreeper {
 
     @Override
     public void takumiExplode() {
-        TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, this.getPowered() ? 4 : 2, false, true);
+        if(!this.world.isRemote){
+            TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, this.getPowered() ? 4 : 2, false, true);
+        }
     }
 
     @Override
