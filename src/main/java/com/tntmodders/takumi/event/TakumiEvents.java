@@ -577,6 +577,18 @@ public class TakumiEvents {
             if (entity instanceof EntityItemFrame && ItemTakumiItemFrame.isItemFrameAntiExplosion(((EntityItemFrame) entity))) {
                 return true;
             }
+            if (entity instanceof EntitySmokeParticle) {
+                if (event.getExplosion() instanceof TakumiExplosion && ((TakumiExplosion) event.getExplosion()).getExploder().isEntityAlive() &&
+                        (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntitySmokeParticle || ((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntitySmokeCreeper)) {
+                    entity.setDead();
+                    if (!event.getWorld().isRemote) {
+                        TakumiUtils.takumiCreateExplosion(event.getWorld(), entity, entity.posX + event.getWorld().rand.nextDouble() / 2 - 0.25, entity.posY + event.getWorld().rand.nextDouble() / 2 - 0.25,
+                                entity.posZ + event.getWorld().rand.nextDouble() / 2 - 0.25, 4f, false, true);
+                    }
+
+                }
+                return true;
+            }
             if (entity instanceof EntityLivingBase) {
                 if (((EntityLivingBase) entity).getActiveItemStack().getItem() instanceof IItemAntiExplosion) {
                     ((EntityLivingBase) entity).getActiveItemStack().damageItem(1, ((EntityLivingBase) entity));
@@ -689,11 +701,12 @@ public class TakumiEvents {
                                     !(arrow.shootingEntity instanceof EntityPlayer && !((EntityPlayer) arrow.shootingEntity).canPlayerEdit(blockPos, EnumFacing.UP, stack))) {
                                 if (stack.getStrVsBlock(event.getWorld().getBlockState(blockPos)) > 1.0f) {
                                     if (arrow.shootingEntity instanceof EntityPlayer && !((EntityPlayer) arrow.shootingEntity).isCreative()) {
-                                        EntityItem entityItem = new EntityItem(event.getWorld(), arrow.shootingEntity.posX, arrow.shootingEntity.posY, arrow.shootingEntity.posZ,
-                                                new ItemStack(event.getWorld().getBlockState(blockPos).getBlock().getItemDropped(event.getWorld().getBlockState(blockPos), event.getWorld().rand, 5)));
-                                        entityItem.setNoPickupDelay();
-                                        event.getWorld().spawnEntity(entityItem);
-
+                                        if (arrow.isSilk && event.getWorld().getBlockState(blockPos).getBlock().canSilkHarvest(event.getWorld(), blockPos, event.getWorld().getBlockState(blockPos),
+                                                arrow.shootingEntity instanceof EntityPlayer ? ((EntityPlayer) arrow.shootingEntity) : null)) {
+                                            Block.spawnAsEntity(event.getWorld(), arrow.shootingEntity.getPosition(), new ItemStack(event.getWorld().getBlockState(blockPos).getBlock()));
+                                        } else {
+                                            event.getWorld().getBlockState(blockPos).getBlock().dropBlockAsItem(event.getWorld(), arrow.shootingEntity.getPosition(), event.getWorld().getBlockState(blockPos), 5);
+                                        }
                                         if (arrow.shootingEntity instanceof EntityPlayerMP) {
                                             int exp = net.minecraftforge.common.ForgeHooks.onBlockBreakEvent(event.getWorld(), ((EntityPlayerMP) arrow.shootingEntity).interactionManager.getGameType(),
                                                     ((EntityPlayerMP) arrow.shootingEntity), blockPos);

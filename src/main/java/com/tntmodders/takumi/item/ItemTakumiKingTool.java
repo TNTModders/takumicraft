@@ -161,7 +161,7 @@ public class ItemTakumiKingTool extends ItemTool {
             float f = getArrowVelocity(i);
             if ((double) f >= 0.1D) {
                 if (!worldIn.isRemote) {
-                    EntityArrow entityarrow = new EntityTakumiKingToolArrow(worldIn, entityLiving, this.enumTakumiTool);
+                    EntityTakumiKingToolArrow entityarrow = new EntityTakumiKingToolArrow(worldIn, entityLiving, this.enumTakumiTool);
                     entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
                     if (f == 1.0F) {
                         entityarrow.setIsCritical(true);
@@ -179,6 +179,9 @@ public class ItemTakumiKingTool extends ItemTool {
                     }
                     stack.damageItem(1, entityplayer);
                     entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+                    if(EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH,stack)>0){
+                        entityarrow.isSilk = true;
+                    }
                     worldIn.spawnEntity(entityarrow);
                 }
                 worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ,

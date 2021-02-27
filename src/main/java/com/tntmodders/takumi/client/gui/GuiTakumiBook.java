@@ -50,12 +50,12 @@ public class GuiTakumiBook extends GuiScreen {
             new ResourceLocation(TakumiCraftCore.MODID, "textures/book/book_boss.png");
     private final EntityPlayer player;
     private final int bookImage = 192;
+    private final int bookTotalPages;
     private int time;
     private NextPageButton buttonNextPage;
     private NextPageButton buttonPreviousPage;
     private GuiButton buttonDone;
     private int currPage;
-    private int bookTotalPages;
 
     public GuiTakumiBook(EntityPlayer player) {
         this.player = player;
@@ -193,6 +193,15 @@ public class GuiTakumiBook extends GuiScreen {
         }
         if (entity instanceof EntityTransCreeper_2 && !flg) {
             return new EntityTransCreeper(((Entity) entity).world);
+        }
+        if (entity instanceof EntitySmokeCreeper) {
+            if (flg) {
+                EntitySmokeCreeper smokeCreeper = new EntitySmokeCreeper(((EntitySmokeCreeper) entity).world);
+                smokeCreeper.isGlowingSP = false;
+                return smokeCreeper;
+            } else {
+                return new EntityCreeper(((Entity) entity).world);
+            }
         }
         if (entity instanceof EntitySlimeCreeper) {
             ((EntitySlimeCreeper) entity).setSlimeSize(2, false);

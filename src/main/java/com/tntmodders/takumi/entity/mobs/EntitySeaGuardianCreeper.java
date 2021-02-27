@@ -68,7 +68,7 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void customSpawn() {
         EntitySpawnPlacementRegistry.setPlacementType(EntitySeaGuardianCreeper.class, SpawnPlacementType.IN_WATER);
-        EntityRegistry.addSpawn(EntitySeaGuardianCreeper.class, this.takumiRank().getSpawnWeight(), 1, 3,
+        EntityRegistry.addSpawn(EntitySeaGuardianCreeper.class, this.takumiRank().getSpawnWeight() / 5, 1, 1,
                 TakumiEntityCore.WATER_TAKUMI, Biomes.OCEAN, Biomes.DEEP_OCEAN, Biomes.FROZEN_OCEAN);
     }
 
@@ -145,6 +145,11 @@ public class EntitySeaGuardianCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getTalkInterval() {
         return 160;
+    }
+
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
     }
 
     @Override

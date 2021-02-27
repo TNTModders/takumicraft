@@ -112,7 +112,7 @@ public class TakumiEntityCore {
                 EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class, EntityWonderCreeper.class,
                 EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class,
                 EntityIceologerCreeper.class, EntityExtremeCreeper.class, EntityPiglinCreeper.class, EntityCorruptionCreeper.class, EntityEvaporationCreeper.class,
-                EntityPulseCreeper.class));
+                EntityPulseCreeper.class, EntitySmokeCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -349,6 +349,9 @@ public class TakumiEntityCore {
                 EntityKingStorm.class, "kingcreeperstorm", 940, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "takumikingtoolarrow"),
                 EntityTakumiKingToolArrow.class, "takumikingtoolarrow", 941, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "smokeparticle"),
+                EntitySmokeParticle.class, "smokeparticle", 942, TakumiCraftCore.TakumiInstance, 64, 2, true);
+
     }
 
     @SideOnly(Side.CLIENT)

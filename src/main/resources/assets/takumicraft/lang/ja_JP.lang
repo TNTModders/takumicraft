@@ -835,6 +835,8 @@ entity.evaporationcreeper.read=じょうたくみ
 entity.evaporationcreeper.desc=流体を除けば、邪魔をするものは無い。吹き飛ばすときは蒸気に注意。
 entity.pulsecreeper.name=パルス匠
 entity.pulsecreeper.desc=放つ波は一度、周囲の回路を破壊し尽くす。
+entity.smokecreeper.name=爆煙匠
+entity.smokecreeper.desc=爆煙は、拡がれば最後、いつか誘爆する……。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
