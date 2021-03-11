@@ -157,12 +157,14 @@ public class RenderNightmareCreeper<T extends EntityNightmareCreeper> extends Re
 
         @Override
         public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(0, -1, 0);
-            this.renderer.bindTexture(GUARDIAN_ELDER_TEXTURE);
-            creeper.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entitylivingbaseIn);
-            creeper.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-            GlStateManager.popMatrix();
+            if (!entitylivingbaseIn.isInvisible()) {
+                GlStateManager.pushMatrix();
+                GlStateManager.translate(0, -1, 0);
+                this.renderer.bindTexture(GUARDIAN_ELDER_TEXTURE);
+                creeper.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entitylivingbaseIn);
+                creeper.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                GlStateManager.popMatrix();
+            }
         }
 
         @Override

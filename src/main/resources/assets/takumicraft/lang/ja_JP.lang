@@ -13,6 +13,10 @@ takumicraft.message.alter.5=匠魔石の上に置き玉匠を召喚。
 takumicraft.message.alter.6=ケーキの下に置き祝匠を召喚。
 takumicraft.message.alter.7=ウィザースケルトンの頭の代わりに祭壇を三つ置きウィザー匠を召喚。
 takumicraft.message.kingtool=左クリックで通常破壊 / 右クリックで遠隔破壊
+takumicraft.message.ttportal.false=封印の像を探せ。
+takumicraft.message.ttportal.true=裏側が開くのを待て。
+
+death.attack.extremecreeper=疾匠に攻撃を反射された。
 
 #tile
 tile.creeperbomb.name=匠式高性能爆弾

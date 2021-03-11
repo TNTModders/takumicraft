@@ -13,6 +13,10 @@ takumicraft.message.alter.5=Gem Creeper: above MagicStone Block.
 takumicraft.message.alter.6=Anniv Creeper: under Cake.
 takumicraft.message.alter.7=Wither Creeper: Wither Spawning Shape, Alters instead of Skulls.
 takumicraft.message.kingtool=Left Click: Normal Harvesting / Right Click: Blast Harvesting
+takumicraft.message.ttportal.false=Find the statue of seal.
+takumicraft.message.ttportal.true=Keep your eyes untill another side opens.
+
+death.attack.extremecreeper=Extreme Creeper Reflection.
 
 #tile
 tile.creeperbomb.name=Creeper Bomb

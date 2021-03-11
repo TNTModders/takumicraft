@@ -231,6 +231,17 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
+        //debuglogging
+        if(event.getEntityLiving().world.isRemote && event.getEntityLiving().ticksExisted%200==0 &&
+                event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).getDisplayNameString().contains("tomkate")){
+            if(event.getEntityLiving().getHeldItemMainhand().getItem()==TakumiItemCore.TESTER){
+                event.getEntityLiving().world.loadedEntityList.forEach(entity -> {
+                    if(entity instanceof EntityCreeper){
+                        //((EntityCreeper) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING,200));
+                    }
+                });
+            }
+        }
         if (TakumiConfigCore.inEventServer && event.getEntityLiving() instanceof EntityVillager) {
             if (event.getEntityLiving().getTags().contains("V1")) {
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY));

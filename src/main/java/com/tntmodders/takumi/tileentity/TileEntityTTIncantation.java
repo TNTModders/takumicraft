@@ -7,9 +7,13 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.mobs.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -24,8 +28,8 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
         if (!this.world.isRemote) {
             try {
                 tick++;
-                if (tick % 100 == 0 && this.world.rand.nextInt(5) == 0 &&
-                        this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPos().add(-32, -32, -32), this.getPos().add(32, 32, 32))).size() < 100) {
+                if (tick % 100 == 0 && this.world.rand.nextInt(5) == 0 /*&&
+                        this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPos().add(-32, -32, -32), this.getPos().add(32, 32, 32))).size() < 100*/) {
                     IBlockState state = this.world.getBlockState(this.getPos());
                     if (state.getBlock() == TakumiBlockCore.TT_INCANTATION) {
                         switch (state.getValue(BlockTTIncantation.INCANTATION)) {
@@ -82,7 +86,14 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
                                 break;
                             }
                             case EX: {
-                                //未実装
+                                if (this.world.rand.nextInt(3) == 0 &&
+                                        this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 4, 8))).size()>=1) {
+                                    EntityAreaEffectCloud cloud = new EntityAreaEffectCloud(this.world, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5);
+                                    cloud.setPotion(new PotionType(new PotionEffect(MobEffects.WITHER, 1000, 6)));
+                                    cloud.setRadius(8);
+                                    cloud.setRadiusPerTick(-0.1f);
+                                    this.world.spawnEntity(cloud);
+                                }
                                 break;
                             }
                             default: {

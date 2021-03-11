@@ -2,6 +2,7 @@ package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.particle.ParticleTakumiPortal;
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.tileentity.TileEntityTTPortal;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -10,11 +11,13 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,7 +27,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockTTPortal extends BlockContainer implements IBlockTT{
+public class BlockTTPortal extends BlockContainer implements IBlockTT {
     protected static final AxisAlignedBB END_PORTAL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
 
     public BlockTTPortal() {
@@ -85,9 +88,28 @@ public class BlockTTPortal extends BlockContainer implements IBlockTT{
      */
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!worldIn.isRemote && !entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && entityIn.getEntityBoundingBox().intersects(state.getBoundingBox(worldIn, pos).offset(pos))) {
-            //TakumiCraftCore.LOGGER.info("ttpot");
-            //entityIn.changeDimension(1);
+        if (entityIn instanceof EntityPlayer && !worldIn.isRemote && !entityIn.isRiding()
+                && !entityIn.isBeingRidden() && entityIn.isNonBoss() && entityIn.getEntityBoundingBox().intersects(state.getBoundingBox(worldIn, pos).offset(pos))) {
+            boolean flg = true;
+            for (int x = -35; x <= 35; x++) {
+                for (int z = -35; z <= 35; z++) {
+                    BlockPos pos1 = pos.add(x, 9, z);
+                    if (flg && worldIn.getBlockState(pos1).getBlock() == TakumiBlockCore.TT_CREEPERCORE) {
+                        flg = false;
+                        break;
+                    }
+                }
+            }
+            if (flg) {
+                if (entityIn.ticksExisted % 200 == 0) {
+                    entityIn.sendMessage(new TextComponentTranslation("takumicraft.message.ttportal.true"));
+                    //entityIn.changeDimension(1);
+                }
+            } else {
+                if (entityIn.ticksExisted % 200 == 0) {
+                    entityIn.sendMessage(new TextComponentTranslation("takumicraft.message.ttportal.false"));
+                }
+            }
         }
     }
 

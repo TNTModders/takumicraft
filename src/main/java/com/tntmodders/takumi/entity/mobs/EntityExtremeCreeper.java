@@ -34,6 +34,7 @@ import java.lang.reflect.Field;
 
 public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
     private final int spTime = 60;
+    private final DamageSource source = new DamageSource("extremecreeper");
     private boolean flg;
 
     public EntityExtremeCreeper(World worldIn) {
@@ -237,12 +238,14 @@ public class EntityExtremeCreeper extends EntityTakumiAbstractCreeper {
             int time = field.getInt(this);
             if (time < this.spTime) {
                 if (source.getTrueSource() != null && !source.isCreativePlayer()) {
+                    source.getTrueSource().hurtResistantTime = 1;
                     source.getTrueSource().playSound(SoundEvents.BLOCK_ANVIL_PLACE, 1f, 1.5f);
-                    source.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this), amount * 1.5f);
+                    source.getTrueSource().attackEntityFrom(this.source, amount * 1.5f);
                 }
                 return false;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return super.attackEntityFrom(source, source.getTrueSource() instanceof EntityPlayer ? amount * 3 : amount);
     }

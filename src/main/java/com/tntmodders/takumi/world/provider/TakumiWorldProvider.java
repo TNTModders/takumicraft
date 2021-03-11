@@ -125,11 +125,6 @@ public class TakumiWorldProvider extends WorldProvider {
     }
 
     @Override
-    public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
-        super.setAllowedSpawnTypes(true, true);
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int x, int z) {
         return true;

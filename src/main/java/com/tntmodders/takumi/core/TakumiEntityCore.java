@@ -180,7 +180,7 @@ public class TakumiEntityCore {
                     }
                 });
                 entity.additionalSpawn();
-                TakumiBiomeCore.BIOMES.forEach(biome -> EntityRegistry.addSpawn(clazz, 100, 500, 501, EnumCreatureType.MONSTER, biome));
+                //TakumiBiomeCore.BIOMES.forEach(biome -> EntityRegistry.addSpawn(clazz, 100, 10, 501, EnumCreatureType.MONSTER, biome));
             }
             if (FMLCommonHandler.instance().getSide().isClient()) {
                 TakumiClientCore.registerEntityRender(clazz, entity);
