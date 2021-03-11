@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderVergerCreeper;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
@@ -13,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -171,6 +173,11 @@ public class EntityVergerCreeper extends EntityTakumiAbstractCreeper {
 
     @Override
     public void customSpawn() {
+    }
+
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/dragon_armor.png");
     }
 
     @Override
