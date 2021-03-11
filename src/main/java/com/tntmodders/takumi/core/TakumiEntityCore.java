@@ -112,7 +112,7 @@ public class TakumiEntityCore {
                 EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class, EntityWonderCreeper.class,
                 EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class,
                 EntityIceologerCreeper.class, EntityExtremeCreeper.class, EntityPiglinCreeper.class, EntityCorruptionCreeper.class, EntityEvaporationCreeper.class,
-                EntityPulseCreeper.class, EntitySmokeCreeper.class,EntityNightmareCreeper.class));
+                EntityPulseCreeper.class, EntitySmokeCreeper.class, EntityNightmareCreeper.class, EntityVergerCreeper.class));
     }
 
     public static List<ITakumiEntity> getEntityList() {
@@ -351,7 +351,8 @@ public class TakumiEntityCore {
                 EntityTakumiKingToolArrow.class, "takumikingtoolarrow", 941, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "smokeparticle"),
                 EntitySmokeParticle.class, "smokeparticle", 942, TakumiCraftCore.TakumiInstance, 64, 2, true);
-
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "vergerball"),
+                EntityVergerBall.class, "vergerball", 943, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -484,6 +485,13 @@ public class TakumiEntityCore {
         RenderingRegistry.registerEntityRenderingHandler(EntityKingStorm.class, manager -> new RenderLiving<EntityKingStorm>(manager, new ModelCreeper(), 0f) {
             @Override
             protected ResourceLocation getEntityTexture(EntityKingStorm entity) {
+                return null;
+            }
+        });
+        RenderingRegistry.registerEntityRenderingHandler(EntityVergerBall.class, manager -> new Render<EntityVergerBall>(manager) {
+            @Nullable
+            @Override
+            protected ResourceLocation getEntityTexture(EntityVergerBall entity) {
                 return null;
             }
         });

@@ -788,6 +788,8 @@ entity.smokecreeper.name=Smoke Creeper
 entity.smokecreeper.desc=Explosive Smoke, it will burst you, in several seconds...
 entity.nightmarecreeper.name=Nightmare Creeper
 entity.nightmarecreeper.desc=tHiS, iS, aN nIGhTmaRe.
+entity.vergercreeper.name=Verger Creeper
+entity.vergercreeper.desc=The verger of the tower, the ghost creeping the ruin.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -862,6 +864,7 @@ entity.kingcreeperspellblock.name=King Creeper
 entity.kingcreeperstorm.name=King Creeper
 entity.takumikingtoolarrow.name=King's Tool
 entity.smokeparticle.name=Smoke Creeper
+entity.vergerball.name=Verger Creeper
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

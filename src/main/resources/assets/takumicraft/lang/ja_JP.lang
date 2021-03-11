@@ -843,6 +843,8 @@ entity.smokecreeper.name=爆煙匠
 entity.smokecreeper.desc=爆煙は、拡がれば最後、いつか誘爆する……。
 entity.nightmarecreeper.name=悪夢匠
 entity.nightmarecreeper.desc=キｮうキ、ｼユうﾚン、そレﾊあｸム。
+entity.vergercreeper.name=守護匠
+entity.vergercreeper.desc=塔の守り人、這い寄る亡霊。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -918,6 +920,7 @@ entity.kingcreeperspellblock.name=王匠
 entity.kingcreeperstorm.name=王匠
 entity.takumikingtoolarrow.name=匠式ツール弾
 entity.smokeparticle.name=爆煙匠
+entity.vergerball.name=守護匠
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ

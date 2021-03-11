@@ -2,10 +2,11 @@ package com.tntmodders.takumi.entity;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.effect.EntityWeatherEffect;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -14,29 +15,27 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityTakumiLightningBolt extends EntityLightningBolt {
+public class EntityTakumiLightningBolt extends EntityWeatherEffect {
+    private final boolean effectOnly;
+    /**
+     * A random long that is used to change the vertex of the lightning rendered in RenderLightningBolt
+     */
+    public long boltVertex;
+    public float red;
+    public float green;
+    public float blue;
+    public float alpha;
     /**
      * Declares which state the lightning bolt is in. Whether it's in the air, hit the ground, etc.
      */
     private int lightningState;
     /**
-     * A random long that is used to change the vertex of the lightning rendered in RenderLightningBolt
-     */
-    public long boltVertex;
-    /**
      * Determines the time before the EntityLightningBolt is destroyed. It is a random integer decremented over time.
      */
     private int boltLivingTime;
-    private final boolean effectOnly;
-
-
-    public float red;
-    public float green;
-    public float blue;
-    public float alpha;
 
     public EntityTakumiLightningBolt(World worldIn, double x, double y, double z, boolean effectOnlyIn) {
-        super(worldIn, x, y, z, effectOnlyIn);
+        super(worldIn);
         this.red = 1f;
         this.green = 0f;
         this.blue = 0.4f;
@@ -118,8 +117,10 @@ public class EntityTakumiLightningBolt extends EntityLightningBolt {
                 List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(this.posX - 3.0D, this.posY - 3.0D, this.posZ - 3.0D, this.posX + 3.0D, this.posY + 6.0D + 3.0D, this.posZ + 3.0D));
 
                 for (Entity entity : list) {
-                    if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, null))
+                    if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, null)) {
+                        entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 8.0F);
                         entity.onStruckByLightning(null);
+                    }
                 }
             }
         }

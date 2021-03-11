@@ -1,11 +1,11 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.entity.EntityTakumiLightningBolt;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -38,9 +38,9 @@ public class BlockMagicBlock extends Block {
      */
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (!worldIn.isRemote && entityIn.ticksExisted % 20 == 0 && !entityIn.isDead) {
-            EntityLightningBolt bolt = new EntityLightningBolt(worldIn, pos.getX(), pos.getY() + 0.5, pos.getZ(), false);
-            //worldIn.addWeatherEffect(bolt);
+        if (/*!worldIn.isRemote && */entityIn.ticksExisted % 20 == 0 && !entityIn.isDead) {
+            EntityTakumiLightningBolt bolt = new EntityTakumiLightningBolt(worldIn, pos.getX(), pos.getY() + 0.5, pos.getZ(), false);
+            worldIn.addWeatherEffect(bolt);
             worldIn.spawnEntity(bolt);
         }
     }
