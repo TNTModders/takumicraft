@@ -15,6 +15,11 @@ takumicraft.message.alter.7=Wither Creeper: Wither Spawning Shape, Alters instea
 takumicraft.message.kingtool=Left Click: Normal Harvesting / Right Click: Blast Harvesting
 takumicraft.message.ttportal.false=Find the statue of seal.
 takumicraft.message.ttportal.true=Keep your eyes untill another side opens.
+takumicraft.message.typesword.grass=Bonus Damage on Falling Attack
+takumicraft.message.typesword.water=Drawn Damage on Attack
+takumicraft.message.typesword.fire=Fire Damage on Attack
+takumicraft.message.typesword.wind=Fly on Right Click
+takumicraft.message.typesword.ground=Knockback Damage on Attack
 
 death.attack.extremecreeper=Extreme Creeper Reflection.
 

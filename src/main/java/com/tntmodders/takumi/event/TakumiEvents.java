@@ -232,11 +232,11 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onUpdate(LivingUpdateEvent event) {
         //debuglogging
-        if(event.getEntityLiving().world.isRemote && event.getEntityLiving().ticksExisted%200==0 &&
-                event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).getDisplayNameString().contains("tomkate")){
-            if(event.getEntityLiving().getHeldItemMainhand().getItem()==TakumiItemCore.TESTER){
+        if (event.getEntityLiving().world.isRemote && event.getEntityLiving().ticksExisted % 200 == 0 &&
+                event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).getDisplayNameString().contains("tomkate")) {
+            if (event.getEntityLiving().getHeldItemMainhand().getItem() == TakumiItemCore.TESTER) {
                 event.getEntityLiving().world.loadedEntityList.forEach(entity -> {
-                    if(entity instanceof EntityCreeper){
+                    if (entity instanceof EntityCreeper) {
                         //((EntityCreeper) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING,200));
                     }
                 });
@@ -682,7 +682,8 @@ public class TakumiEvents {
                 event.getAffectedEntities().removeIf(entity -> !(entity instanceof EntityMob));
                 event.getAffectedEntities().forEach(entity -> {
                     if (entity instanceof EntityMob) {
-                        entity.attackEntityFrom(DamageSource.causeExplosionDamage(event.getExplosion()), 4f);
+                        float f = ((EntityMob) entity).getHealth() / 1.5f;
+                        entity.attackEntityFrom(DamageSource.causeExplosionDamage(event.getExplosion()), f > 10 ? f : 10);
                     }
                 });
             }

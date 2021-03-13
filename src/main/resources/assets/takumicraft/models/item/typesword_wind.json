@@ -2,5 +2,21 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "takumicraft:items/typesword_wind"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        -20,
+        -90,
+        60
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        -20,
+        -90,
+        60
+      ]
+    }
   }
 }

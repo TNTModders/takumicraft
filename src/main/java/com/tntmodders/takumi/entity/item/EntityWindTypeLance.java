@@ -4,7 +4,6 @@ import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -23,7 +22,7 @@ public class EntityWindTypeLance extends EntityTippedArrow {
 
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
-        if (!(raytraceResultIn.entityHit instanceof EntityPlayer)) {
+        if (raytraceResultIn.typeOfHit == RayTraceResult.Type.BLOCK){
             this.dismount();
         }
     }
@@ -34,7 +33,7 @@ public class EntityWindTypeLance extends EntityTippedArrow {
         this.setInvisible(true);
         if (!this.world.isRemote) {
             TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2f, false, false, 2);
-            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(2,0,2)) || this.world.getWorldBorder().getClosestDistance(this) < 2.5 * 2.5) {
+            if (this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(1, 0, 1)) || this.world.getWorldBorder().getClosestDistance(this) < 2.5 * 2.5) {
                 this.dismount();
             }
         }
@@ -48,6 +47,7 @@ public class EntityWindTypeLance extends EntityTippedArrow {
         this.dismountRidingEntity();
         this.setDead();
     }
+
 
     @Override
     public boolean canBePushed() {

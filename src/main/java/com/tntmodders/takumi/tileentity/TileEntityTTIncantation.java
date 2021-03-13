@@ -87,12 +87,20 @@ public class TileEntityTTIncantation extends TileEntity implements ITickable {
                             }
                             case EX: {
                                 if (this.world.rand.nextInt(3) == 0 &&
-                                        this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 4, 8))).size()>=1) {
-                                    EntityAreaEffectCloud cloud = new EntityAreaEffectCloud(this.world, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5);
-                                    cloud.setPotion(new PotionType(new PotionEffect(MobEffects.WITHER, 1000, 6)));
-                                    cloud.setRadius(8);
-                                    cloud.setRadiusPerTick(-0.1f);
-                                    this.world.spawnEntity(cloud);
+                                        this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPos().add(-8, 0, -8), this.getPos().add(8, 4, 8))).size() >= 1) {
+                                    if (this.world.rand.nextBoolean()) {
+                                        EntityAreaEffectCloud cloud = new EntityAreaEffectCloud(this.world, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5);
+                                        cloud.setPotion(new PotionType(new PotionEffect(MobEffects.WITHER, 1000, 6)));
+                                        cloud.setRadius(8);
+                                        cloud.setRadiusPerTick(-0.1f);
+                                        this.world.spawnEntity(cloud);
+                                    } else {
+                                        Entity creeper = new EntityVergerCreeper(this.world);
+                                        creeper.world = this.world;
+                                        creeper.setPosition(this.getPos().getX() + this.world.rand.nextInt(13) - 6, this.getPos().getY() + this.world.rand.nextInt(15),
+                                                this.getPos().getZ() + this.world.rand.nextInt(13) - 6);
+                                        this.world.spawnEntity(creeper);
+                                    }
                                 }
                                 break;
                             }

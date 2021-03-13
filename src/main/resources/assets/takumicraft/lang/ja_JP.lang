@@ -15,6 +15,11 @@ takumicraft.message.alter.7=ウィザースケルトンの頭の代わりに祭�
 takumicraft.message.kingtool=左クリックで通常破壊 / 右クリックで遠隔破壊
 takumicraft.message.ttportal.false=封印の像を探せ。
 takumicraft.message.ttportal.true=裏側が開くのを待て。
+takumicraft.message.typesword.grass=高所からの暗殺にダメージボーナス
+takumicraft.message.typesword.water=攻撃した敵を窒息させる
+takumicraft.message.typesword.fire=攻撃した敵を炎上させる
+takumicraft.message.typesword.wind=右クリックで飛行できる
+takumicraft.message.typesword.ground=攻撃で周囲を吹き飛ばす
 
 death.attack.extremecreeper=疾匠に攻撃を反射された。
 
