@@ -344,6 +344,7 @@ item.oldbook.content.8= ｜○｜ ー凹△ ー＾▽ □凸｜ ー凸□  □�
 item.takumikingtool_pickaxe.name=King's Pickaxe
 item.takumikingtool_shovel.name=King's Shovel
 item.takumikingtool_axe.name=King's Axe
+item.tester.name=King's Cane
 
 #entity
 #desc max: 72 chars

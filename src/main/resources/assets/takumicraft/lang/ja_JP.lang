@@ -344,6 +344,7 @@ item.oldbook.content.8= ｜○｜ ー凹△ ー＾▽ □凸｜ ー凸□  □�
 item.takumikingtool_pickaxe.name=匠式ピッケル
 item.takumikingtool_shovel.name=匠式ショベル
 item.takumikingtool_axe.name=匠式斧
+item.tester.name=匠式錫杖
 
 #entity
 ＃descは36文字まで。

@@ -11,7 +11,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityDarkVillager extends EntitySpellcasterIllager {
@@ -31,6 +30,7 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
         if (source == DamageSource.OUT_OF_WORLD || (source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) source.getTrueSource()).isCreative())) {
             this.setHealth(0.1f);
             this.setDead();
+            return true;
         }
         return false;
     }
@@ -51,7 +51,8 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
 
     @Override
     public void setDead() {
-        if (this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.getHealth() <= 1) {
+        if (this.getHealth() <= 1) {
+            this.world.createExplosion(this, this.posX, this.posY, this.posZ, 0f, false);
             super.setDead();
         }
     }
