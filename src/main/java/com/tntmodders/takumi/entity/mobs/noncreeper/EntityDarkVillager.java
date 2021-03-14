@@ -6,7 +6,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpellcasterIllager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.EnumDifficulty;
@@ -22,6 +24,15 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
         super.initEntityAI();
         this.tasks.taskEntries.clear();
         this.targetTasks.taskEntries.clear();
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.OUT_OF_WORLD || (source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) source.getTrueSource()).isCreative())) {
+            this.setHealth(0.1f);
+            this.setDead();
+        }
+        return false;
     }
 
     @Override
@@ -84,6 +95,10 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
         this.setAggressive(1, true);
         this.setHealth(20);
         this.setEntityInvulnerable(true);
+        if (this.world.isAirBlock(this.getPosition().down()) && this.world.isAirBlock(this.getPosition().down(2))) {
+            this.setHealth(0.1f);
+            this.setDead();
+        }
         if (!this.world.isAirBlock(this.getPosition()) &&
                 this.world.getBlockState(this.getPosition()).getBlockHardness(this.world, this.getPosition()) > 0) {
             this.world.setBlockToAir(this.getPosition());
@@ -106,5 +121,10 @@ public class EntityDarkVillager extends EntitySpellcasterIllager {
     @Override
     protected SoundEvent getSpellSound() {
         return SoundEvents.EVOCATION_ILLAGER_CAST_SPELL;
+    }
+
+    @Override
+    public boolean startRiding(Entity entityIn, boolean force) {
+        return false;
     }
 }
