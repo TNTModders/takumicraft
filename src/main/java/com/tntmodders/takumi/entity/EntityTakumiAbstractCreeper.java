@@ -3,6 +3,7 @@ package com.tntmodders.takumi.entity;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.RenderTakumiCreeper;
 import com.tntmodders.takumi.core.TakumiBlockCore;
+import com.tntmodders.takumi.core.TakumiConfigCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.core.TakumiWorldCore;
 import com.tntmodders.takumi.entity.ai.EntityAIFollowCatCreeper;
@@ -347,7 +348,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
                 } catch (Exception e) {
 
                 }
-                if (this.world.getMinecraftServer() != null) {
+                if (this.world.getMinecraftServer() != null && TakumiConfigCore.dropTipsBook) {
                     if (this.world.getMinecraftServer().isSinglePlayer()) {
                         if (this.world.playerEntities.size() == 1 && this.rand.nextInt(50) == 0) {
                             EntityItem item = new EntityItem(this.world);

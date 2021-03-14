@@ -98,7 +98,7 @@ public class TakumiConfigCore {
         ownerLockTakumiCannon = cfg.getBoolean("ownerLockTakumiCannon", GENERAL, false,
                 TakumiUtils.takumiTranslate("config.takumicraft.oltc.desc"), "config.takumicraft.oltc.prop");
 
-        dropTipsBook = cfg.getBoolean("dropTipsBook",GENERAL,true,
+        dropTipsBook = cfg.getBoolean("dropTipsBook",GENERAL,false,
                 TakumiUtils.takumiTranslate("config.takumicraft.droptipsbook.desc"),"config.takumicraft.droptipsbook.prop");
         cfg.save();
     }

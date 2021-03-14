@@ -5,6 +5,7 @@ import com.tntmodders.takumi.core.TakumiPotionCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -68,7 +69,7 @@ public class EntityNightmareCreeper extends EntityTakumiAbstractCreeper {
     public boolean takumiExplodeEvent(Detonate event) {
         if (!this.world.isRemote) {
             event.getAffectedEntities().forEach(entity -> {
-                if (entity instanceof EntityLivingBase) {
+                if (entity instanceof EntityPlayer) {
                     ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(TakumiPotionCore.NIGHTMARE, 200, 0, true, false));
                     ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0, true, false));
                 }
