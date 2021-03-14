@@ -353,6 +353,8 @@ public class TakumiEntityCore {
                 EntitySmokeParticle.class, "smokeparticle", 942, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "vergerball"),
                 EntityVergerBall.class, "vergerball", 943, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "stickygrenade"),
+                EntityStickyGrenade.class, "stickygrenade", 944, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -495,6 +497,8 @@ public class TakumiEntityCore {
                 return null;
             }
         });
+        RenderingRegistry.registerEntityRenderingHandler(EntityStickyGrenade.class,
+                manager -> new RenderSnowball<>(manager, TakumiItemCore.CLUSTER_GRENADE, Minecraft.getMinecraft().getRenderItem()));
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {

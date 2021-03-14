@@ -345,6 +345,7 @@ item.takumikingtool_pickaxe.name=匠式ピッケル
 item.takumikingtool_shovel.name=匠式ショベル
 item.takumikingtool_axe.name=匠式斧
 item.tester.name=匠式錫杖
+item.stickygrenade.name=匠式粘着爆弾
 
 #entity
 ＃descは36文字まで。
@@ -927,6 +928,7 @@ entity.kingcreeperstorm.name=王匠
 entity.takumikingtoolarrow.name=匠式ツール弾
 entity.smokeparticle.name=爆煙匠
 entity.vergerball.name=守護匠
+entity.stickygrenade.name=匠式粘着爆弾
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ

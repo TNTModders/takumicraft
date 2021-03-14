@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GQG",
     "QGQ",
-    "GQG"
+    "GEG",
+    "QGQ"
   ],
   "key": {
     "Q": {
@@ -18,6 +18,6 @@
     }
   },
   "result": {
-    "item": "takumicraft:takumithrowgrenede"
+    "item": "takumicraft:stickygrenade"
   }
 }

@@ -345,6 +345,7 @@ item.takumikingtool_pickaxe.name=King's Pickaxe
 item.takumikingtool_shovel.name=King's Shovel
 item.takumikingtool_axe.name=King's Axe
 item.tester.name=King's Cane
+item.stickygrenade.name=Sticky Grenade
 
 #entity
 #desc max: 72 chars
@@ -871,6 +872,7 @@ entity.kingcreeperstorm.name=King Creeper
 entity.takumikingtoolarrow.name=King's Tool
 entity.smokeparticle.name=Smoke Creeper
 entity.vergerball.name=Verger Creeper
+entity.stickygrenade.name=Sticky Grenade
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

@@ -20,6 +20,7 @@ import com.tntmodders.takumi.world.TakumiExplosion;
 import com.tntmodders.takumi.world.gen.TakumiMapGenDarkShrine;
 import com.tntmodders.takumi.world.gen.TakumiMapGenTower_F;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.BlockRailPowered;
 import net.minecraft.block.state.IBlockState;
@@ -686,6 +687,15 @@ public class TakumiEvents {
                         entity.attackEntityFrom(DamageSource.causeExplosionDamage(event.getExplosion()), f > 10 ? f : 10);
                     }
                 });
+            }
+            if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityStickyGrenade_KC) {
+                event.getAffectedEntities().forEach(entity -> {
+                    if (entity instanceof EntityLivingBase) {
+                        entity.attackEntityFrom(DamageSource.causeExplosionDamage(event.getExplosion()), 1f + ((TakumiExplosion) event.getExplosion()).getSize() * 3);
+                    }
+                });
+                event.getAffectedEntities().clear();
+                event.getAffectedBlocks().removeIf(blockPos -> !(event.getWorld().getBlockState(blockPos).getBlock() instanceof BlockDoor || event.getWorld().isAirBlock(blockPos)));
             }
             if (((TakumiExplosion) event.getExplosion()).getExploder() instanceof EntityWitherCreeperSkull) {
                 event.getAffectedEntities().removeIf(entity -> entity instanceof EntityWitherCreeper);
