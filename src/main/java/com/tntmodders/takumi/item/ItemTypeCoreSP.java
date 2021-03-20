@@ -1,12 +1,18 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemTypeCoreSP extends Item {
 
@@ -28,6 +34,13 @@ public class ItemTypeCoreSP extends Item {
         return EnumRarity.UNCOMMON;
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore"));
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore_sp"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+    }
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {

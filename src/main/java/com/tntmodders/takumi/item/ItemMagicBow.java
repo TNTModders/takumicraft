@@ -3,6 +3,8 @@ package com.tntmodders.takumi.item;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
+import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemMagicBow extends ItemBow {
 
@@ -155,5 +158,12 @@ public class ItemMagicBow extends ItemBow {
     @Override
     protected boolean isArrow(ItemStack stack) {
         return stack.getItem() == Items.ARROW || stack.getItem() == Items.TIPPED_ARROW || stack.getItem() == Items.SPECTRAL_ARROW;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.magicbow"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 }

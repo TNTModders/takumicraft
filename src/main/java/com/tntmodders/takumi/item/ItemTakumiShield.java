@@ -3,6 +3,7 @@ package com.tntmodders.takumi.item;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -11,8 +12,11 @@ import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemTakumiShield extends ItemShield implements IItemAntiExplosion {
 
@@ -54,5 +58,12 @@ public class ItemTakumiShield extends ItemShield implements IItemAntiExplosion {
             stack.shrink(1);
             worldIn.createExplosion(null, entityIn.posX, entityIn.posY, entityIn.posZ, 5f, true);
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.takumishield"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 }

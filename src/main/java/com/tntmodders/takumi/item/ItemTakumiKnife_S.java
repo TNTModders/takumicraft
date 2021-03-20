@@ -131,8 +131,7 @@ public class ItemTakumiKnife_S extends Item {
                     double z = player.world.rand.nextDouble() - 0.5;
                     player.world.spawnParticle(EnumParticleTypes.HEART, player.posX + x, player.posY + y, player.posZ + z, x, y, z);
                 }
-            }
-           else {
+            } else {
                 player.heal(2f);
                 player.getFoodStats().addStats(1, 0.2f);
                 NBTTagCompound compound = stack.getTagCompound() == null ? new NBTTagCompound() : stack.getTagCompound();
@@ -151,6 +150,8 @@ public class ItemTakumiKnife_S extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.takumiknife"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
         int i = 0;
         if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("Power")) {
             i = stack.getTagCompound().getInteger("Power");

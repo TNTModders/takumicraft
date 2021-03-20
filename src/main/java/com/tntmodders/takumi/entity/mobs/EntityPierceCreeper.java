@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class EntityPierceCreeper extends EntityTakumiAbstractCreeper {
 
@@ -74,9 +75,9 @@ public class EntityPierceCreeper extends EntityTakumiAbstractCreeper {
     }
 
     private boolean canDeath() {
-        return (this.world.getBlockState(this.getPosition().down()).getBlockHardness(this.world,
+        return ((this.world.getBlockState(this.getPosition().down()).getBlockHardness(this.world,
                 this.getPosition().down()) < 0 && !this.world.isAirBlock(this.getPosition().down())) ||
-                this.posY <= 5 && this.onGround;
+                this.posY <= 5 && this.onGround)|| !ForgeEventFactory.getMobGriefingEvent(this.world,this);
     }
 
     @Override

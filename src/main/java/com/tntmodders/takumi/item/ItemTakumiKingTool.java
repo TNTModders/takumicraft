@@ -302,6 +302,8 @@ public class ItemTakumiKingTool extends ItemTool {
     public void addInformation(ItemStack stack,
                                @Nullable
                                        World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.kingtool"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.kingtool.1"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.kingtool.2"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 }

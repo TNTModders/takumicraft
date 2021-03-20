@@ -2,7 +2,9 @@ package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,6 +37,16 @@ public class ItemTester extends Item {
     }
 */
 
+    @Override
+    public boolean onEntitySwing(EntityLivingBase entityLivingBase, ItemStack stack) {
+        if (entityLivingBase.getName().equals("tomkate")) {
+
+        } else if (!(entityLivingBase instanceof EntityPlayer && ((EntityPlayer) entityLivingBase).isCreative())) {
+            Explosion explosion = entityLivingBase.world.createExplosion(entityLivingBase, entityLivingBase.posX, entityLivingBase.posY, entityLivingBase.posZ, 3f, false);
+            entityLivingBase.attackEntityFrom(DamageSource.causeExplosionDamage(explosion).setDamageIsAbsolute(), 1000f);
+        }
+        return true;
+    }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -57,5 +69,6 @@ public class ItemTester extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add("匠を創りし者のみ扱える錫杖。余人は振るうこと能わず、其の身は爆発四散する。");
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 }

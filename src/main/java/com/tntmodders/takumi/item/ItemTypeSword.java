@@ -212,8 +212,13 @@ public class ItemTypeSword extends ItemSword {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (stack.getItem() != TakumiItemCore.TAKUMI_TYPE_SWORD_NORMAL) {
-            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword." + this.type.getName()));
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword." + this.type.getName() + ".1"));
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword." + this.type.getName() + ".2"));
+        } else {
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword.normal.1"));
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword.normal.2"));
         }
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 
     @Override

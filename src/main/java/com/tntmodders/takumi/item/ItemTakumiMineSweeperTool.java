@@ -4,9 +4,11 @@ import com.google.common.collect.Sets;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.item.material.TakumiToolMaterial;
+import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -22,7 +24,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -204,6 +208,13 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             itemStack.addEnchantment(TakumiEnchantmentCore.MINESWEEPER, 1);
             items.add(itemStack);
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.minesweepertool"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 
     public enum EnumTakumiTool {

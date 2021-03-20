@@ -178,5 +178,6 @@ public class BlockTakumiAltar extends Block {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.5"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.6"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.7"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 }

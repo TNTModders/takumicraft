@@ -114,6 +114,7 @@ public class ItemTakumiArmor extends ItemArmor {
                                @Nullable
                                        World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.armor"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 
     @Override

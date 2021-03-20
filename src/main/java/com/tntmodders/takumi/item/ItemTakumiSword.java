@@ -4,6 +4,8 @@ import com.google.common.collect.Multimap;
 import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.item.material.TakumiToolMaterial;
+import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -19,6 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.UUID;
 
 public class ItemTakumiSword extends ItemSword {
@@ -83,5 +87,12 @@ public class ItemTakumiSword extends ItemSword {
                     new AttributeModifier(SWORD_HEALTH_MODIFIER, "Health modifier", 4f, 0));
         }
         return multimap;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.takumisword"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
     }
 }
