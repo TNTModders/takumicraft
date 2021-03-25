@@ -1527,4 +1527,23 @@ public class TakumiEvents {
             }
         }
     }
+
+    @SubscribeEvent
+    public void onItemFished(ItemFishedEvent event) {
+        if (!event.getDrops().isEmpty() && event.getEntityLiving().world.rand.nextInt(20)==0) {
+            EntityFishingCreeper creeper = new EntityFishingCreeper(event.getEntityLiving().world);
+            double d0 = event.getHookEntity().getAngler().posX - event.getHookEntity().posX;
+            double d1 = event.getHookEntity().getAngler().posY - event.getHookEntity().posY;
+            double d2 = event.getHookEntity().getAngler().posZ - event.getHookEntity().posZ;
+            double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+            double d4 = 0.1D;
+            creeper.setPosition(event.getHookEntity().posX, event.getHookEntity().posY+0.3, event.getHookEntity().posZ);
+            creeper.motionX = d0 * 0.2D;
+            creeper.motionY = d1 * 0.2D + (double) MathHelper.sqrt(d3) * 0.16D;
+            creeper.motionZ = d2 * 0.2D;
+            event.getEntityLiving().world.spawnEntity(creeper);
+            creeper.setAttackTarget(event.getHookEntity().getAngler());
+            event.setCanceled(true);
+        }
+    }
 }

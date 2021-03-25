@@ -827,6 +827,8 @@ entity.slightcreeper.desc=Too lightweight to chase, speedy blasting creeper.
 entity.slightcreeper.message=とても軽い
 entity.superdiamondcreeper.name=Diamond Creeper [Evo]
 entity.superdiamondcreeper.desc=A creeper with diamond heart. Too hard, too strong.
+entity.fishingcreeper.name=Salmon Creeper
+entity.fishingcreeper.desc=What a surprising explosive shark... no its a salmon.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

@@ -4,10 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEntityCore;
 import com.tntmodders.takumi.entity.ITakumiEntity;
-import com.tntmodders.takumi.entity.mobs.EntityBatCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySeaGuardianCreeper;
-import com.tntmodders.takumi.entity.mobs.EntitySquidCreeper;
-import com.tntmodders.takumi.entity.mobs.EntityVergerCreeper;
+import com.tntmodders.takumi.entity.mobs.*;
 import com.tntmodders.takumi.world.chunk.TakumiWorldChunkGenerator;
 import com.tntmodders.takumi.world.gen.TakumiWorldGenBigTree;
 import com.tntmodders.takumi.world.gen.TakumiWorldGenTrees;
@@ -52,7 +49,8 @@ public abstract class AbstractBiomeTakumiWorld extends Biome {
                 ITakumiEntity iTakumiEntity = clazz.getConstructor(World.class).newInstance((World) null);
                 if (!(iTakumiEntity instanceof EntitySquidCreeper ||
                         iTakumiEntity instanceof EntitySeaGuardianCreeper ||
-                        iTakumiEntity instanceof EntityVergerCreeper) &&
+                        iTakumiEntity instanceof EntityVergerCreeper ||
+                        iTakumiEntity instanceof EntityFishingCreeper) &&
                         (iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.LOW ||
                                 iTakumiEntity.takumiRank() == ITakumiEntity.EnumTakumiRank.MID)) {
                     int count = iTakumiEntity instanceof EntityBatCreeper ? 1 : 10;

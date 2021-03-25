@@ -882,6 +882,8 @@ entity.slightcreeper.desc=弾むかのような軽量級匠。
 entity.slightcreeper.message=とても軽い
 entity.superdiamondcreeper.name=ダイヤモンド匠[堂々優匠]
 entity.superdiamondcreeper.desc=硬い精神と強靭な肉体、ダイヤの匠は砕けない。
+entity.fishingcreeper.name=釣匠
+entity.fishingcreeper.desc=驚き飛び出る爆裂鮭、鮫ではないので一安心。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
