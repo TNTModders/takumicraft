@@ -39,7 +39,7 @@ public class ItemTypeCoreSP extends Item {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
             tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore"));
             tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore_sp"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 
     @Override

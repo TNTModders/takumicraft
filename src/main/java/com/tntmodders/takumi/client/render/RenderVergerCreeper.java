@@ -62,11 +62,24 @@ public class RenderVergerCreeper<T extends EntityVergerCreeper> extends RenderLi
         float f2 = (1.0F + f * 0.4F) * f1;
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
+    }
 
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableBlend();
-        GlStateManager.color(0.5F, 0.5F, 0.5F, 0.4f);
-        GlStateManager.disableLighting();
+    @Override
+    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        if (!entity.isBook) {
+            GlStateManager.pushMatrix();
+            GlStateManager.matrixMode(5888);
+            GlStateManager.enableBlend();
+            GlStateManager.color(0.5F, 0.5F, 0.5F, 0.4f);
+            GlStateManager.disableLighting();
+        }
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        if (!entity.isBook) {
+            GlStateManager.enableLighting();
+            GlStateManager.color(1, 1, 1, 1);
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
+        }
     }
 
     /**

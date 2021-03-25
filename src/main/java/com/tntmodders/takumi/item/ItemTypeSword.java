@@ -218,7 +218,7 @@ public class ItemTypeSword extends ItemSword {
             tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword.normal.1"));
             tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typesword.normal.2"));
         }
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 
     @Override

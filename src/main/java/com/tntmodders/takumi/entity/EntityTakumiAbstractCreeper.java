@@ -46,6 +46,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     private int stoppingCounter;
     private int dmgCount;
     private float prevHealth;
+    public boolean isBook = false;
 
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);

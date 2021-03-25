@@ -148,6 +148,6 @@ public class ItemTakumiBow extends ItemBow {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.takumibow"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 }

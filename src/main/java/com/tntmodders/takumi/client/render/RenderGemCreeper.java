@@ -51,11 +51,22 @@ public class RenderGemCreeper<T extends EntityGemCreeper> extends RenderLiving<T
         GlStateManager.scale(2.375, 2.5, 2.5);
         GlStateManager.translate(0, 0.5, 0);
         super.preRenderCallback(entitylivingbaseIn, partialTickTime);
-        if (!entitylivingbaseIn.isBook) {
+    }
+
+    @Override
+    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        if (!entity.isBook) {
             GlStateManager.matrixMode(5888);
             GlStateManager.enableBlend();
             GlStateManager.color(0.5F, 0.5F, 0.5F, 0.8f);
             GlStateManager.disableLighting();
+        }
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        if(!entity.isBook){
+            GlStateManager.enableLighting();
+            GlStateManager.color(1,1,1,1);
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
         }
     }
 

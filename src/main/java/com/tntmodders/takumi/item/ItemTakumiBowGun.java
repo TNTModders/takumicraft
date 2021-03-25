@@ -126,7 +126,7 @@ public class ItemTakumiBowGun extends Item {
                                        World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.bowgun.1"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.bowgun.2"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 
     @Override

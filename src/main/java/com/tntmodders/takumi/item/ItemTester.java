@@ -69,6 +69,6 @@ public class ItemTester extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add("匠を創りし者のみ扱える錫杖。余人は振るうこと能わず、其の身は爆発四散する。");
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 }

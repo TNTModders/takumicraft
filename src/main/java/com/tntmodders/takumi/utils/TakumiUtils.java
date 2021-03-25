@@ -53,6 +53,12 @@ import java.util.jar.JarFile;
 
 public class TakumiUtils {
 
+    public static void addSpiltInfo(ItemStack stack, List<String> tooltip){
+        if(stack.isItemEnchanted()){
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        }
+    }
+
     public static ItemStack generateRandomTipsBook(Random random) {
         ItemStack stack = new ItemStack(Items.WRITTEN_BOOK);
         EnumTakumiOldBooks books = EnumTakumiOldBooks.randomValueOf(random);

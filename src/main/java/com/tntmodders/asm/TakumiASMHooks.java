@@ -133,6 +133,7 @@ public class TakumiASMHooks {
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
+            GlStateManager.color(1F,1F,1F, 1F);
             GlStateManager.popMatrix();
         } else if (itemStack.getItem() == TakumiItemCore.BATTLE_SHIELD) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(ItemBattleShield.SHIELD_TEXTURE);
@@ -174,6 +175,7 @@ public class TakumiASMHooks {
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             //GlStateManager.depthMask(false);
+            GlStateManager.color(1F,1F,1F, 1F);
             GlStateManager.popMatrix();
         }
     }

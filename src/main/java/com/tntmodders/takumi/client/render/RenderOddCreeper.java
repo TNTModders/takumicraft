@@ -62,11 +62,24 @@ public class RenderOddCreeper<T extends EntityOddCreeper> extends RenderLiving<T
         float f2 = (1.0F + f * 0.4F) * f1;
         float f3 = (1.0F + f * 0.1F) / f1;
         GlStateManager.scale(f2, f3, f2);
+    }
 
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableBlend();
-        GlStateManager.color(0.5F, 0.5F, 0.5F, ((float) Math.cos(entitylivingbaseIn.ticksExisted / 3 / Math.PI)));
-        GlStateManager.disableLighting();
+    @Override
+    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        if (!entity.isBook) {
+            GlStateManager.pushMatrix();
+            GlStateManager.matrixMode(5888);
+            GlStateManager.enableBlend();
+            GlStateManager.color(0.5F, 0.5F, 0.5F, ((float) Math.cos(entity.ticksExisted / 3 / Math.PI)));
+            GlStateManager.disableLighting();
+        }
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        if (!entity.isBook) {
+            GlStateManager.enableLighting();
+            GlStateManager.color(1, 1, 1, 1);
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
+        }
     }
 
     /**
@@ -96,7 +109,7 @@ public class RenderOddCreeper<T extends EntityOddCreeper> extends RenderLiving<T
 
         @Override
         public void doRenderLayer(E entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
-                float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+                                  float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             Calendar calendar = entitylivingbaseIn.world.getCurrentDate();
             int month = calendar.get(Calendar.MONTH) + 1;
             int date = calendar.get(Calendar.DATE);

@@ -214,7 +214,7 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.minesweepertool"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 
     public enum EnumTakumiTool {

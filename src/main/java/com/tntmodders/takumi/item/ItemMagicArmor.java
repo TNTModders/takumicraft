@@ -66,6 +66,6 @@ public class ItemMagicArmor extends ItemArmor {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.magicarmor"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 }

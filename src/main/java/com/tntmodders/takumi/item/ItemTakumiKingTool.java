@@ -162,7 +162,7 @@ public class ItemTakumiKingTool extends ItemTool {
             if ((double) f >= 0.1D) {
                 if (!worldIn.isRemote) {
                     EntityTakumiKingToolArrow entityarrow = new EntityTakumiKingToolArrow(worldIn, entityLiving, this.enumTakumiTool);
-                    entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+                    entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 1.5F, 1.0F);
                     if (f == 1.0F) {
                         entityarrow.setIsCritical(true);
                     }
@@ -304,6 +304,6 @@ public class ItemTakumiKingTool extends ItemTool {
                                        World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.kingtool.1"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.kingtool.2"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 }

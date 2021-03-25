@@ -816,6 +816,12 @@ entity.nightmarecreeper.name=Nightmare Creeper
 entity.nightmarecreeper.desc=tHiS, iS, aN nIGhTmaRe.
 entity.vergercreeper.name=Verger Creeper
 entity.vergercreeper.desc=The verger of the tower, the ghost creeping the ruin.
+entity.heavycreeper.name=Heavy Creeper
+entity.heavycreeper.desc=Too heavy to fight, strong blasting creeper.
+entity.heavycreeper.message=とても重い
+entity.slightcreeper.name=Slight Creeper
+entity.slightcreeper.desc=Too lightweight to chase, speedy blasting creeper.
+entity.slightcreeper.desc=とても軽い
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の

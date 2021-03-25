@@ -151,7 +151,7 @@ public class ItemTakumiKnife_S extends Item {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.takumiknife"));
-        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
+        TakumiUtils.addSpiltInfo(stack, tooltip);
         int i = 0;
         if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("Power")) {
             i = stack.getTagCompound().getInteger("Power");

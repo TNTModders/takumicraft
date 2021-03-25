@@ -38,7 +38,6 @@ public class EntityGemCreeper extends EntityTakumiAbstractCreeper {
     private final BossInfoServer bossInfo =
             (BossInfoServer) new BossInfoServer(new TextComponentTranslation("entity.gemcreeper.name"), BossInfo.Color.WHITE,
                     BossInfo.Overlay.PROGRESS).setDarkenSky(true).setCreateFog(true);
-    public boolean isBook = false;
     private DamageSource lastSource;
     private int lastID;
     private int activeTimer;

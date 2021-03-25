@@ -234,8 +234,8 @@ public class GuiTakumiBook extends GuiScreen {
                     new ItemStack(TakumiItemCore.TAKUMI_ARROW_HA));
             ((Entity) entity).setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
                     new ItemStack(TakumiItemCore.TAKUMI_BOW));
-        } else if (entity instanceof EntityGemCreeper) {
-            ((EntityGemCreeper) entity).isBook = true;
+        } else if (entity instanceof EntityGemCreeper || entity instanceof EntityOddCreeper || entity instanceof EntityVergerCreeper) {
+            ((EntityTakumiAbstractCreeper) entity).isBook = true;
         }
         return (EntityLivingBase) entity;
     }
