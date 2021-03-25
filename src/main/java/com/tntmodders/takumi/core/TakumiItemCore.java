@@ -111,6 +111,7 @@ public class TakumiItemCore {
     public static final Item KING_TOOL_PICKAXE = new ItemTakumiKingTool(EnumTakumiTool.PICKAXE);
     public static final Item KING_TOOL_SHOVEL = new ItemTakumiKingTool(EnumTakumiTool.SHOVEL);
     public static final Item CLUSTER_GRENADE = new ItemStickyGrenade();
+    public static final Item TAKUMI_DIAMOND = new ItemTakumiDiamond();
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

@@ -51,6 +51,17 @@ public class TakumiEnchantmentCore {
             return false;
         }
     }.setRegistryName(TakumiCraftCore.MODID, "takumi_item_protection").setName("takumi_item_protection");
+    public static final Enchantment DIAMOND_CURSE = new Enchantment(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.ALL, EntityEquipmentSlot.values()) {
+        @Override
+        public boolean canApplyAtEnchantingTable(ItemStack stack) {
+            return false;
+        }
+
+        @Override
+        public boolean isCurse() {
+            return true;
+        }
+    }.setRegistryName(TakumiCraftCore.MODID, "takumi_diamond_curse").setName("takumi_diamond_curse");
 
     public static void register(IForgeRegistry<Enchantment> registry) {
         Class clazz = TakumiEnchantmentCore.class;

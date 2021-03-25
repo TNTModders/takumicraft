@@ -38,6 +38,7 @@ takumicraft.message.magicarmor=Cursed Armor of Magic Power.
 takumicraft.message.magicbow=Five Birds with One Arrow, Charmed Bow of Magic Power.
 takumicraft.message.takumiknife=The Knifegun of the Stranger, with a Bullet of Life.
 takumicraft.message.takumishield=A Great Shield of Creeper. Made from Bomb, is it Safe?
+takumicraft.message.takumidiamond=Enchant-able on Anvil to Damageable Item
 takumicraft.message.spilt=----
 
 death.attack.extremecreeper=Extreme Creeper Reflection.
@@ -258,6 +259,7 @@ tile.ttcolored_blue.name=Takumi Tower Block [Colored]
 tile.ttcolored_green.name=Takumi Tower Block [Colored]
 tile.ttcolored_white.name=Takumi Tower Block [Colored]
 tile.ttcolored_black.name=Takumi Tower Block [Colored]
+tile.takumidiamondblock.name=Diamond Block?
 
 #item
 item.takumibook.name=Creeper Book
@@ -365,6 +367,7 @@ item.takumikingtool_shovel.name=King's Shovel
 item.takumikingtool_axe.name=King's Axe
 item.tester.name=King's Cane
 item.stickygrenade.name=Sticky Grenade
+item.takumidiamond.name=Diamond?
 
 #entity
 #desc max: 72 chars
@@ -821,7 +824,9 @@ entity.heavycreeper.desc=Too heavy to fight, strong blasting creeper.
 entity.heavycreeper.message=とても重い
 entity.slightcreeper.name=Slight Creeper
 entity.slightcreeper.desc=Too lightweight to chase, speedy blasting creeper.
-entity.slightcreeper.desc=とても軽い
+entity.slightcreeper.message=とても軽い
+entity.superdiamondcreeper.name=Diamond Creeper [Evo]
+entity.superdiamondcreeper.desc=A creeper with diamond heart. Too hard, too strong.
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -964,6 +969,7 @@ enchantment.takumi_type_magic=Magic-powered
 enchantment.takumi_type_dest=Destruction-powered
 enchantment.takumi_elytra=Explosive Elytra
 enchantment.takumi_item_protection=Item Protection
+enchantment.takumi_diamond_curse=Curse of Unbreakable
 
 #potion
 takumisubsidence=Subsidence

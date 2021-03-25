@@ -1,11 +1,15 @@
 package com.tntmodders.takumi.entity.item;
 
+import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.item.ItemTakumiMineSweeperTool;
 import com.tntmodders.takumi.utils.TakumiUtils;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityTakumiKingToolArrow extends EntityArrow {
@@ -50,5 +54,10 @@ public class EntityTakumiKingToolArrow extends EntityArrow {
             TakumiUtils.takumiCreateExplosion(this.world, this, this.posX, this.posY, this.posZ, 2.5f, false, true);
         }
         this.setDead();
+    }
+
+    @Override
+    public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
+        return blockStateIn.getBlock() == TakumiBlockCore.TAKUMI_DIAMOND_BLOCK ? 0f : super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
     }
 }

@@ -41,6 +41,7 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -58,10 +59,7 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
-import net.minecraft.world.DimensionType;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.GameType;
+import net.minecraft.world.*;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -169,6 +167,26 @@ public class TakumiEvents {
                     }
                 }
                 event.getOutput().addEnchantment(TakumiEnchantmentCore.ITEM_PROTECTION, Math.min(i, 10));
+            } else if (event.getLeft().getCount() == 1 && event.getRight().getItem() == TakumiItemCore.TAKUMI_DIAMOND &&
+                    EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.EXPLOSION_PROTECTION, event.getRight()) > 0 &&
+                    EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getLeft()) == 0 &&
+                    event.getLeft().isItemStackDamageable()) {
+                event.setCost(30);
+                event.setMaterialCost(1);
+                ItemStack stack = new ItemStack(event.getLeft().getItem(), event.getLeft().getCount(), event.getLeft().getMetadata());
+                if (event.getLeft().hasDisplayName()) {
+                    stack.setStackDisplayName(event.getLeft().getDisplayName());
+                }
+                event.setOutput(stack);
+                if (event.getLeft().isItemEnchanted()) {
+                    for (Map.Entry<Enchantment, Integer> entry : EnchantmentHelper.getEnchantments(
+                            event.getLeft()).entrySet()) {
+                        if (entry.getKey() != TakumiEnchantmentCore.DIAMOND_CURSE) {
+                            event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                        }
+                    }
+                }
+                event.getOutput().addEnchantment(TakumiEnchantmentCore.DIAMOND_CURSE, 1);
             }
         }
     }
@@ -1178,6 +1196,15 @@ public class TakumiEvents {
                 event.getEntityLiving().world.createExplosion(null, event.getItem().posX, event.getItem().posY,
                         event.getItem().posZ, 2, true);
             }
+            event.getItem().setDead();
+            event.setCanceled(true);
+        } else if (event.getItem().getItem().getItem() == TakumiItemCore.TAKUMI_DIAMOND &&
+                EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.EXPLOSION_PROTECTION, event.getItem().getItem()) == 0) {
+            if (!event.getEntityLiving().world.isRemote) {
+                event.getEntityLiving().world.createExplosion(null, event.getItem().posX, event.getItem().posY,
+                        event.getItem().posZ, 3, true);
+            }
+            event.getItem().setDead();
             event.setCanceled(true);
         }
     }
@@ -1465,6 +1492,39 @@ public class TakumiEvents {
     public void onKnockBack(LivingKnockBackEvent event) {
         if (event.getEntityLiving() != null && event.getEntityLiving().isPotionActive(TakumiPotionCore.FROZEN)) {
             event.setStrength(event.getOriginalStrength() / 100);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
+        if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getOriginal()) > 0) {
+            if (!event.getEntityLiving().world.isRemote) {
+                EntityItem item = new EntityItem(event.getEntityLiving().world, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ);
+                ItemStack stack = event.getOriginal();
+                stack.setItemDamage(0);
+                item.setItem(stack);
+                item.setPickupDelay(1);
+                event.getEntityLiving().world.spawnEntity(item);
+                if (event.getEntityPlayer() instanceof EntityPlayerMP) {
+                    for (int i = 0; i < 5; i++) {
+                        ((EntityPlayerMP) event.getEntityPlayer()).connection.sendPacket(new SPacketSoundEffect(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS,
+                                event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, 10f, event.getEntityLiving().getRNG().nextFloat() + 0.5f));
+                    }
+                }
+                if (event.getEntityLiving().world instanceof WorldServer) {
+                    for (int i = 0; i < 20; ++i) {
+                        ((WorldServer) event.getEntityLiving().world).spawnParticle(EnumParticleTypes.PORTAL,
+                                event.getEntityLiving().posX + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
+                                        event.getEntityLiving().width * 6, event.getEntityLiving().posY +
+                                        event.getEntityLiving().getRNG().nextDouble() * event.getEntityLiving().height * 2,
+                                event.getEntityLiving().posZ + (event.getEntityLiving().getRNG().nextDouble() - 0.5D) *
+                                        event.getEntityLiving().width * 6, 10, 0.0D, 0.0D, 0.0D, 1);
+                    }
+                }
+                event.getEntityPlayer().attackEntityFrom(DamageSource.causePlayerDamage(event.getEntityPlayer()), event.getEntityPlayer().getHealth() - 1f);
+                event.getEntityPlayer().getFoodStats().setFoodLevel(1);
+                event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200, 0));
+            }
         }
     }
 }

@@ -28,9 +28,9 @@ takumicraft.message.typesword.wind.2=右クリックで飛行できる
 takumicraft.message.typesword.ground.1=地の力を帯びた鉄槌。匠の意思は震打に宿る。
 takumicraft.message.typesword.ground.2=攻撃で周囲を吹き飛ばす
 takumicraft.message.typesword.normal.1=匠の力を帯びた光剣。意思は何処、破壊有るのみ。
-takumicraft.message.typesword.normal.2=破壊と魔術に調和を与える一振り。
-takumicraft.message.typecore_sp=匠素結晶を使った武器に鉄床でエンチャント付与可能
-takumicraft.message.typecore=1スタックまとめてエリトラに鉄床でエンチャント付与可能
+takumicraft.message.typesword.normal.2=壊と魔に調和を与える一振り。
+takumicraft.message.typecore_sp=匠素結晶を使った武器に鉄床でエンチャント可能
+takumicraft.message.typecore=1スタックまとめてエリトラに鉄床でエンチャント可能
 takumicraft.message.takumibow=爆ぜる矢を撃つ匠の名弓。その一穿ちは混沌を齎す。
 takumicraft.message.takumisword=漲る力を与える匠の銘剣。その一振りは秩序を薙ぐ。
 takumicraft.message.minesweepertool=爆発物を安全に破壊できるツール。爆弾から作ったけど大丈夫……?
@@ -38,6 +38,7 @@ takumicraft.message.magicarmor=強大な力には、代償が伴う。魔の守�
 takumicraft.message.magicbow=一度番えば五方に放たる魔の大弓。この一張には古の残滓が宿る。
 takumicraft.message.takumiknife=その砲丁は生命を撃つ、陰と陽、穏と凛を廻る神器。
 takumicraft.message.takumishield=爆発を防ぐ匠印の大盾。爆弾から作ったけど大丈夫……?
+takumicraft.message.takumidiamond=耐久値を持つアイテムに鉄床でエンチャント可能
 takumicraft.message.spilt=----
 
 death.attack.extremecreeper=疾匠に攻撃を反射された。
@@ -258,6 +259,7 @@ tile.ttcolored_blue.name=匠古煉瓦[色]
 tile.ttcolored_green.name=匠古煉瓦[色]
 tile.ttcolored_white.name=匠古煉瓦[色]
 tile.ttcolored_black.name=匠古煉瓦[色]
+tile.takumidiamondblock.name=ダイヤモンドブロック?
 
 #item
 item.takumibook.name=匠の書
@@ -365,6 +367,7 @@ item.takumikingtool_shovel.name=匠式ショベル
 item.takumikingtool_axe.name=匠式斧
 item.tester.name=匠式錫杖
 item.stickygrenade.name=匠式粘着爆弾
+item.takumidiamond.name=ダイヤモンド?
 
 #entity
 ＃descは36文字まで。
@@ -877,6 +880,8 @@ entity.heavycreeper.message=とても重い
 entity.slightcreeper.name=軽匠
 entity.slightcreeper.desc=弾むかのような軽量級匠。
 entity.slightcreeper.message=とても軽い
+entity.superdiamondcreeper.name=ダイヤモンド匠[堂々優匠]
+entity.superdiamondcreeper.desc=硬い精神と強靭な肉体、ダイヤの匠は砕けない。
 
 entity.edgycreeper.tip_a.0=闇の
 entity.edgycreeper.tip_a.1=運命の
@@ -1024,6 +1029,7 @@ enchantment.takumi_type_magic=魔式守護法
 enchantment.takumi_type_dest=壊式殲滅術
 enchantment.takumi_elytra=匠式エリトラ爆進術
 enchantment.takumi_item_protection=アイテム抗爆化
+enchantment.takumi_diamond_curse=不壊の呪い
 
 #potion
 takumisubsidence=潜行
