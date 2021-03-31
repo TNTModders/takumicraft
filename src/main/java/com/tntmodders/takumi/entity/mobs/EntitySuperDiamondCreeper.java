@@ -7,9 +7,12 @@ import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiLightningBolt;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -34,12 +37,21 @@ public class EntitySuperDiamondCreeper extends EntityTakumiAbstractCreeper {
         try {
             Field field = TakumiASMNameMap.getField(EntityCreeper.class, "fuseTime");
             field.setAccessible(true);
-            field.set(this, 80);
+            field.set(this, 90);
         } catch (Exception e) {
             e.printStackTrace();
         }
         this.experienceValue = 50;
     }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100000);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(128);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40);
+    }
+
 
     @Override
     public void takumiExplode() {
@@ -85,6 +97,7 @@ public class EntitySuperDiamondCreeper extends EntityTakumiAbstractCreeper {
             stack.addEnchantment(TakumiEnchantmentCore.EXPLOSION_PROTECTION, 1);
             item.setItem(stack);
             this.world.spawnEntity(item);
+            this.dropItem(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK), 64);
         }
     }
 
@@ -132,7 +145,7 @@ public class EntitySuperDiamondCreeper extends EntityTakumiAbstractCreeper {
     public void onUpdate() {
         super.onUpdate();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        if (this.isEntityAlive() && (this.getCreeperState() > 0 || this.hasIgnited()) && this.rand.nextInt(5) == 0) {
+        if (this.isEntityAlive() && (this.getCreeperState() > 0 || this.hasIgnited()) && this.rand.nextInt(20) == 0) {
             Random random = new Random(System.currentTimeMillis());
             double x = this.posX + random.nextInt(100) - 50;
             double z = this.posZ + random.nextInt(100) - 50;

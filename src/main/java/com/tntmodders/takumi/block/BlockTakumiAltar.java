@@ -7,6 +7,7 @@ import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEntity.EnumTakumiRank;
 import com.tntmodders.takumi.entity.item.EntityAlterDummy;
 import com.tntmodders.takumi.entity.mobs.EntityAnnivCreeper;
+import com.tntmodders.takumi.entity.mobs.EntitySuperDiamondCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityAngelCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityGemCreeper;
 import com.tntmodders.takumi.entity.mobs.boss.EntityKingCreeper;
@@ -73,6 +74,8 @@ public class BlockTakumiAltar extends Block {
             entity = new EntityGemCreeper(worldIn);
         } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
             entity = new EntityAnnivCreeper(worldIn);
+        }else if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.DIAMOND_BLOCK) {
+            entity = new EntitySuperDiamondCreeper(worldIn);
         } else {
             List<ITakumiEntity> entities = new ArrayList<>();
             TakumiEntityCore.getEntityList().forEach(iTakumiEntity -> {
@@ -81,7 +84,7 @@ public class BlockTakumiAltar extends Block {
                 }
             });
             if (!entities.isEmpty()) {
-                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper);
+                entities.removeIf(iTakumiEntity -> iTakumiEntity instanceof EntityAnnivCreeper || iTakumiEntity instanceof EntitySuperDiamondCreeper);
                 try {
                     entity = (Entity) entities.get(worldIn.rand.nextInt(entities.size())).getClass().getConstructor(
                             World.class).newInstance(worldIn);
@@ -178,6 +181,7 @@ public class BlockTakumiAltar extends Block {
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.5"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.6"));
         tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.7"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.alter.8"));
         TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 }

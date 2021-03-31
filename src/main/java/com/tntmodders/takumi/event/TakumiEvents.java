@@ -1546,4 +1546,15 @@ public class TakumiEvents {
             event.setCanceled(true);
         }
     }
+
+    @SubscribeEvent
+    public void onDamageCritical(CriticalHitEvent event){
+        if(event.getEntityPlayer().getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_WIND){
+            if(event.isVanillaCritical()){
+                event.setDamageModifier(5f);
+            }else {
+                event.setDamageModifier(0.75f);
+            }
+        }
+    }
 }

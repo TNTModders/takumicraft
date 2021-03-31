@@ -59,6 +59,7 @@ public class ItemTypeSword extends ItemSword {
             if (stack.getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_GRASS && attacker.fallDistance > 2f) {
                 f *= 20;
             }
+
             target.attackEntityFrom(DamageSource.causeMobDamage(attacker), f);
         }
         return this.performEffect(target, attacker) && super.hitEntity(stack, target, attacker);
