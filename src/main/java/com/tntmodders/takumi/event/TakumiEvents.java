@@ -27,6 +27,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityItemFrame;
@@ -41,7 +42,6 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -59,7 +59,10 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
-import net.minecraft.world.*;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.GameType;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -80,7 +83,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class TakumiEvents {
-
+    private static final UUID COVERED_ARMOR_BONUS_ID = UUID.fromString("7E0292F2-9434-48D5-A29F-9583AF7DF27F");
     @SubscribeEvent
     public void onAnvilUpdate(AnvilUpdateEvent event) {
         if (event.getLeft().getItem() instanceof ItemTypeSword &&
@@ -183,6 +186,15 @@ public class TakumiEvents {
                             event.getLeft()).entrySet()) {
                         if (entry.getKey() != TakumiEnchantmentCore.DIAMOND_CURSE) {
                             event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
+                            if(event.getOutput().getItem() instanceof ItemArmor){
+                                event.getOutput().addAttributeModifier(SharedMonsterAttributes.ARMOR.getName(),
+                                        new AttributeModifier(COVERED_ARMOR_BONUS_ID, "Covered armor bonus", -12f, 0),((ItemArmor) event.getOutput().getItem()).armorType);
+                            }else{
+                                event.getOutput().addAttributeModifier(SharedMonsterAttributes.ARMOR.getName(),
+                                        new AttributeModifier(COVERED_ARMOR_BONUS_ID, "Covered armor bonus", -12f, 0),EntityEquipmentSlot.MAINHAND);
+                                event.getOutput().addAttributeModifier(SharedMonsterAttributes.ARMOR.getName(),
+                                        new AttributeModifier(COVERED_ARMOR_BONUS_ID, "Covered armor bonus", -12f, 0),EntityEquipmentSlot.OFFHAND);
+                            }
                         }
                     }
                 }
@@ -286,8 +298,7 @@ public class TakumiEvents {
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100));
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 100, 1));
             }
-            event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).attemptDamageItem(1,
-                    event.getEntityLiving().world.rand, null);
+            event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, null);
             if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItemDamage() >
                     event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getMaxDamage() - 5) {
                 event.getEntityLiving().setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
@@ -1198,7 +1209,8 @@ public class TakumiEvents {
             }
             event.getItem().setDead();
             event.setCanceled(true);
-        } else if (event.getItem().getItem().getItem() == TakumiItemCore.TAKUMI_DIAMOND &&
+        } else if ((event.getItem().getItem().getItem() == TakumiItemCore.TAKUMI_DIAMOND||
+                event.getItem().getItem().getItem() == Item.getItemFromBlock(TakumiBlockCore.TAKUMI_DIAMOND_BLOCK)) &&
                 EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.EXPLOSION_PROTECTION, event.getItem().getItem()) == 0) {
             if (!event.getEntityLiving().world.isRemote) {
                 event.getEntityLiving().world.createExplosion(null, event.getItem().posX, event.getItem().posY,
@@ -1497,7 +1509,7 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
-        if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getOriginal()) > 0) {
+    /*    if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getOriginal()) > 0) {
             if (!event.getEntityLiving().world.isRemote) {
                 EntityItem item = new EntityItem(event.getEntityLiving().world, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ);
                 ItemStack stack = event.getOriginal();
@@ -1525,7 +1537,7 @@ public class TakumiEvents {
                 event.getEntityPlayer().getFoodStats().setFoodLevel(1);
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200, 0));
             }
-        }
+        }*/
     }
 
     @SubscribeEvent
@@ -1555,6 +1567,8 @@ public class TakumiEvents {
             }else {
                 event.setDamageModifier(0.75f);
             }
+        }else if(event.getEntityPlayer().getHeldItemMainhand().getItem()==TakumiItemCore.TAKUMI_TYPE_SWORD_GRASS && event.getEntityPlayer().fallDistance>2f){
+            event.setDamageModifier(10f);
         }
     }
 }

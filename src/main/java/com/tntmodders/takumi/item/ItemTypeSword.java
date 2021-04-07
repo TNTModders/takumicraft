@@ -56,10 +56,6 @@ public class ItemTypeSword extends ItemSword {
             float f = EntityTakumiAbstractCreeper.getTypeMatchFactor(this.type, targetType);
             f = ((float) Math.pow(f, 8));
             f *= 5;
-            if (stack.getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_GRASS && attacker.fallDistance > 2f) {
-                f *= 20;
-            }
-
             target.attackEntityFrom(DamageSource.causeMobDamage(attacker), f);
         }
         return this.performEffect(target, attacker) && super.hitEntity(stack, target, attacker);
@@ -232,7 +228,7 @@ public class ItemTypeSword extends ItemSword {
                 if (!worldIn.isRemote) {
                     EntityWindTypeLance lance = new EntityWindTypeLance(worldIn, entityplayer);
                     lance.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-                    lance.setAim(entityplayer, 0, entityplayer.rotationYaw, 10F, 5.0F, 0.2F);
+                    lance.setAim(entityplayer, entityplayer.rotationPitch < 0 ? entityplayer.rotationPitch / 6 : 0, entityplayer.rotationYaw, 10F, 5.0F, 0.2F);
                     worldIn.spawnEntity(lance);
                     entityplayer.setPosition(lance.posX, lance.posY, lance.posZ);
                     entityplayer.startRiding(lance, true);

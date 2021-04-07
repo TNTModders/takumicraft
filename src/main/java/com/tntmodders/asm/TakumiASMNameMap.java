@@ -37,6 +37,9 @@ public class TakumiASMNameMap {
         METHOD_MAP.put("onBroken", "func_110128_b");
         METHOD_MAP.put("entityDropItem", "func_70099_a");
         METHOD_MAP.put("dropItemOrSelf", "func_146065_b");
+        METHOD_MAP.put("damageItem"," func_77972_a");
+        METHOD_MAP.put("attemptDamageItem","func_96631_a");
+        METHOD_MAP.put("isItemStackDamageable","func_77984_f");
     }
 
     public static boolean matchName(String name1, String name2) {

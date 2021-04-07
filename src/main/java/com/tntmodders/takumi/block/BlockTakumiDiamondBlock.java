@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -17,6 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockTakumiDiamondBlock extends BlockAbstractTakumiBomb {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
@@ -68,5 +70,30 @@ public class BlockTakumiDiamondBlock extends BlockAbstractTakumiBomb {
     @Override
     public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
         return 7;
+    }
+
+    @Override
+    public boolean canDropFromExplosion(Explosion explosionIn) {
+        return false;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return null;
+    }
+
+    @Override
+    protected boolean canSilkHarvest() {
+        return false;
+    }
+
+    @Override
+    protected ItemStack getSilkTouchDrop(IBlockState state) {
+        return ItemStack.EMPTY;
     }
 }

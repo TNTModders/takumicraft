@@ -38,7 +38,7 @@ public class EntityAnnivCreeper extends EntityTakumiAbstractCreeper {
             }
             for (int t = 0; t < (this.getPowered() ? 300 : 200); t++) {
                 Random rand = new Random();
-                int i = this.getPowered() ? 50 : 30;
+                int i = this.getPowered() ? 80 : 50;
                 double x = this.posX + this.rand.nextInt(i * 2) - i;
                 double z = this.posZ + this.rand.nextInt(i * 2) - i;
                 double y = this.world.getHeight((int) x, (int) z);

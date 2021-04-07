@@ -61,6 +61,11 @@ public class TakumiEnchantmentCore {
         public boolean isCurse() {
             return true;
         }
+
+        @Override
+        public boolean isAllowedOnBooks() {
+            return false;
+        }
     }.setRegistryName(TakumiCraftCore.MODID, "takumi_diamond_curse").setName("takumi_diamond_curse");
 
     public static void register(IForgeRegistry<Enchantment> registry) {

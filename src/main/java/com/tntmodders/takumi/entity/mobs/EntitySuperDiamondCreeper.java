@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.entity.mobs;
 
 import com.tntmodders.asm.TakumiASMNameMap;
+import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.core.TakumiBlockCore;
 import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
@@ -15,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
@@ -60,19 +62,19 @@ public class EntitySuperDiamondCreeper extends EntityTakumiAbstractCreeper {
             int limit = (30 + this.rand.nextInt(20)) * (this.getPowered() ? 2 : 1);
             for (int t = 0; t < limit; t++) {
                 Random rand = new Random();
-                int i = this.getPowered() ? 80 : 50;
+                int i = this.getPowered() ? 100 : 70;
                 double x = this.posX + this.rand.nextInt(i * 2) - i;
                 double y = this.posY + this.rand.nextInt(i) - i / 1.5;
                 double z = this.posZ + this.rand.nextInt(i * 2) - i;
                 this.world.createExplosion(this, x, y, z, this.getPowered() ? 5f : 4f, true);
             }
-            for (int t = 0; t < (this.getPowered() ? 300 : 150); t++) {
+            for (int t = 0; t < (this.getPowered() ? 350 : 200); t++) {
                 Random rand = new Random();
-                int i = this.getPowered() ? 80 : 50;
+                int i = this.getPowered() ? 100 : 70;
                 double x = this.posX + this.rand.nextInt(i * 2) - i;
                 double z = this.posZ + this.rand.nextInt(i * 2) - i;
                 double y = this.world.getHeight((int) x, (int) z);
-                this.world.createExplosion(this, x, y, z, this.getPowered() ? 12f : 8f, true);
+                this.world.createExplosion(this, x, y, z, this.getPowered() ? 12f : 9f, true);
             }
 
             for (int t = 0; t < 20; t++) {
@@ -173,6 +175,11 @@ public class EntitySuperDiamondCreeper extends EntityTakumiAbstractCreeper {
         event.getAffectedBlocks().clear();
         event.getAffectedEntities().clear();
         return true;
+    }
+
+    @Override
+    public ResourceLocation getArmor() {
+        return new ResourceLocation(TakumiCraftCore.MODID, "textures/entity/dragon_armor.png");
     }
 
     @Override

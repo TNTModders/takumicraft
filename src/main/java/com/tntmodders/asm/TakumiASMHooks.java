@@ -1,6 +1,7 @@
 package com.tntmodders.asm;
 
 import com.tntmodders.takumi.block.BlockTakumiMonsterBomb;
+import com.tntmodders.takumi.core.TakumiEnchantmentCore;
 import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
@@ -14,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityItemFrame;
@@ -28,6 +30,12 @@ import org.lwjgl.opengl.GL11;
 import java.lang.reflect.Field;
 
 public class TakumiASMHooks {
+
+    public static void TakumiItemStackDamageHook(ItemStack stack) {
+        if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, stack) > 0 && stack.getMaxDamage() - stack.getItemDamage() < 5) {
+            stack.setItemDamage(0);
+        }
+    }
 
     public static void TakumiPaintingHook(ItemStack itemStack, float f, EntityHanging hanging) {
         ItemStack stack = ItemStack.EMPTY;
@@ -133,7 +141,7 @@ public class TakumiASMHooks {
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
-            GlStateManager.color(1F,1F,1F, 1F);
+            GlStateManager.color(1F, 1F, 1F, 1F);
             GlStateManager.popMatrix();
         } else if (itemStack.getItem() == TakumiItemCore.BATTLE_SHIELD) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(ItemBattleShield.SHIELD_TEXTURE);
@@ -175,7 +183,7 @@ public class TakumiASMHooks {
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             //GlStateManager.depthMask(false);
-            GlStateManager.color(1F,1F,1F, 1F);
+            GlStateManager.color(1F, 1F, 1F, 1F);
             GlStateManager.popMatrix();
         }
     }
