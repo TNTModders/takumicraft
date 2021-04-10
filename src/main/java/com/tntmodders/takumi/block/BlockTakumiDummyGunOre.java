@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.block;
 
 import com.tntmodders.takumi.entity.mobs.EntityGunoreCreeper;
+import com.tntmodders.takumi.tileentity.TileEntityTakumiSuperPowered;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -34,13 +35,15 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
 
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        if (!worldIn.isRemote && entityIn instanceof EntityPlayer) {
+        if (!worldIn.isRemote && entityIn instanceof EntityPlayer && !(worldIn.getTileEntity(pos) instanceof TileEntityTakumiSuperPowered)) {
             EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);
             creeper.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             worldIn.spawnEntity(creeper);
             creeper.ignite();
+            creeper.setAttackTarget(((EntityPlayer) entityIn));
+            creeper.setCreeperState(1);
+            worldIn.setBlockToAir(pos);
         }
-        worldIn.setBlockToAir(pos);
     }
 
     @Override

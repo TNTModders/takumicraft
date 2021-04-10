@@ -134,7 +134,7 @@ public class EntityOceanCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 1 + this.rand.nextInt(2), 2), 0);
+            this.entityDropItem(new ItemStack(TakumiItemCore.TAKUMI_TYPE_CORE, 16 + this.rand.nextInt(8), 2), 0);
         }
         super.onDeath(source);
     }

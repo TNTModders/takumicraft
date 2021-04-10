@@ -962,6 +962,10 @@ entity.takumikingtoolarrow.name=匠式ツール弾
 entity.smokeparticle.name=爆煙匠
 entity.vergerball.name=守護匠
 entity.stickygrenade.name=匠式粘着爆弾
+entity.theunknown.name=■■■■■
+entity.theunknown.message=%1$s は■■■■■と遭遇した。
+entity.unknownlay.name=■■■■■
+entity.unknownlay_ex.name=■■■■■
 
 entity.attackblock.message.charge.01=敵性体 チャージ開始 退避せよ
 entity.attackblock.message.charge.02=敵性体 チャージ進行中 繰り返す 退避せよ

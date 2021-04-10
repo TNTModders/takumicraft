@@ -27,7 +27,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityItemFrame;
@@ -84,6 +83,7 @@ import java.util.*;
 
 public class TakumiEvents {
     private static final UUID COVERED_ARMOR_BONUS_ID = UUID.fromString("7E0292F2-9434-48D5-A29F-9583AF7DF27F");
+
     @SubscribeEvent
     public void onAnvilUpdate(AnvilUpdateEvent event) {
         if (event.getLeft().getItem() instanceof ItemTypeSword &&
@@ -186,15 +186,6 @@ public class TakumiEvents {
                             event.getLeft()).entrySet()) {
                         if (entry.getKey() != TakumiEnchantmentCore.DIAMOND_CURSE) {
                             event.getOutput().addEnchantment(entry.getKey(), entry.getValue());
-                            if(event.getOutput().getItem() instanceof ItemArmor){
-                                event.getOutput().addAttributeModifier(SharedMonsterAttributes.ARMOR.getName(),
-                                        new AttributeModifier(COVERED_ARMOR_BONUS_ID, "Covered armor bonus", -12f, 0),((ItemArmor) event.getOutput().getItem()).armorType);
-                            }else{
-                                event.getOutput().addAttributeModifier(SharedMonsterAttributes.ARMOR.getName(),
-                                        new AttributeModifier(COVERED_ARMOR_BONUS_ID, "Covered armor bonus", -12f, 0),EntityEquipmentSlot.MAINHAND);
-                                event.getOutput().addAttributeModifier(SharedMonsterAttributes.ARMOR.getName(),
-                                        new AttributeModifier(COVERED_ARMOR_BONUS_ID, "Covered armor bonus", -12f, 0),EntityEquipmentSlot.OFFHAND);
-                            }
                         }
                     }
                 }
@@ -292,13 +283,14 @@ public class TakumiEvents {
                 }
             }
         }
-        if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == TakumiItemCore.MAKEUP) {
+        if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD) != null &&
+                event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == TakumiItemCore.MAKEUP) {
             if (!event.getEntityLiving().world.isRemote) {
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 100));
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100));
                 event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 100, 1));
             }
-            event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, null);
+            event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).damageItem(1, event.getEntityLiving());
             if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItemDamage() >
                     event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getMaxDamage() - 5) {
                 event.getEntityLiving().setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
@@ -1209,7 +1201,7 @@ public class TakumiEvents {
             }
             event.getItem().setDead();
             event.setCanceled(true);
-        } else if ((event.getItem().getItem().getItem() == TakumiItemCore.TAKUMI_DIAMOND||
+        } else if ((event.getItem().getItem().getItem() == TakumiItemCore.TAKUMI_DIAMOND ||
                 event.getItem().getItem().getItem() == Item.getItemFromBlock(TakumiBlockCore.TAKUMI_DIAMOND_BLOCK)) &&
                 EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.EXPLOSION_PROTECTION, event.getItem().getItem()) == 0) {
             if (!event.getEntityLiving().world.isRemote) {
@@ -1542,14 +1534,14 @@ public class TakumiEvents {
 
     @SubscribeEvent
     public void onItemFished(ItemFishedEvent event) {
-        if (!event.getDrops().isEmpty() && event.getEntityLiving().world.rand.nextInt(20)==0) {
+        if (!event.getDrops().isEmpty() && event.getEntityLiving().world.rand.nextInt(20) == 0) {
             EntityFishingCreeper creeper = new EntityFishingCreeper(event.getEntityLiving().world);
             double d0 = event.getHookEntity().getAngler().posX - event.getHookEntity().posX;
             double d1 = event.getHookEntity().getAngler().posY - event.getHookEntity().posY;
             double d2 = event.getHookEntity().getAngler().posZ - event.getHookEntity().posZ;
             double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
             double d4 = 0.1D;
-            creeper.setPosition(event.getHookEntity().posX, event.getHookEntity().posY+0.3, event.getHookEntity().posZ);
+            creeper.setPosition(event.getHookEntity().posX, event.getHookEntity().posY + 0.3, event.getHookEntity().posZ);
             creeper.motionX = d0 * 0.2D;
             creeper.motionY = d1 * 0.2D + (double) MathHelper.sqrt(d3) * 0.16D;
             creeper.motionZ = d2 * 0.2D;
@@ -1560,15 +1552,35 @@ public class TakumiEvents {
     }
 
     @SubscribeEvent
-    public void onDamageCritical(CriticalHitEvent event){
-        if(event.getEntityPlayer().getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_WIND){
-            if(event.isVanillaCritical()){
+    public void onDamageCritical(CriticalHitEvent event) {
+        if (event.getEntityPlayer().getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_WIND) {
+            if (event.isVanillaCritical()) {
                 event.setDamageModifier(5f);
-            }else {
+            } else {
                 event.setDamageModifier(0.75f);
             }
-        }else if(event.getEntityPlayer().getHeldItemMainhand().getItem()==TakumiItemCore.TAKUMI_TYPE_SWORD_GRASS && event.getEntityPlayer().fallDistance>2f){
+        } else if (event.getEntityPlayer().getHeldItemMainhand().getItem() == TakumiItemCore.TAKUMI_TYPE_SWORD_GRASS && event.getEntityPlayer().fallDistance > 2f) {
             event.setDamageModifier(10f);
+        }
+    }
+
+    @SubscribeEvent
+    public void onDamagaeDeal(LivingDamageEvent event) {
+        if (event.getEntityLiving() != null) {
+            boolean flg = false;
+            for (ItemStack stack : event.getEntityLiving().getArmorInventoryList()) {
+                if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, stack) > 0) {
+                    flg = true;
+                }
+            }
+            if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getEntityLiving().getHeldItemMainhand()) > 0 ||
+                    EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getEntityLiving().getHeldItemMainhand()) > 0) {
+                flg = true;
+            }
+
+            if (flg) {
+                event.setAmount(event.getAmount() * 2);
+            }
         }
     }
 }

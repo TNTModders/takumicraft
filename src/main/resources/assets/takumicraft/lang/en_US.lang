@@ -906,6 +906,10 @@ entity.takumikingtoolarrow.name=King's Tool
 entity.smokeparticle.name=Smoke Creeper
 entity.vergerball.name=Verger Creeper
 entity.stickygrenade.name=Sticky Grenade
+entity.theunknown.name=■■■■■
+entity.theunknown.message=%1$s found■■■■■.
+entity.unknownlay.name=■■■■■
+entity.unknownlay_ex.name=■■■■■
 
 entity.attackblock.message.charge.01=Evacuate! The enemy is charging.
 entity.attackblock.message.charge.02=Evacuate now! The enemy has been charging.

@@ -4,6 +4,7 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.*;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.EntityTakumiLightningBolt;
+import com.tntmodders.takumi.entity.EntityUnknownLay;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import com.tntmodders.takumi.entity.item.*;
@@ -12,6 +13,7 @@ import com.tntmodders.takumi.entity.mobs.boss.*;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityBoneDummy;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityDarkVillager;
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityOddDummyGhast;
+import com.tntmodders.takumi.entity.mobs.noncreeper.EntityTheUnknown;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelCreeper;
@@ -112,7 +114,7 @@ public class TakumiEntityCore {
                 EntitySlipCreeper.class, EntityEdgyCreeper.class, EntityPsychicCreeper.class, EntityShrinkCreeper.class, EntityTossCreeper.class, EntityWonderCreeper.class,
                 EntityGemCreeper.class, EntityFakeCreeper.class, EntityPhantomCreeper.class, EntityPoisonCreeper.class, EntityMyceliumCreeper.class,
                 EntityIceologerCreeper.class, EntityExtremeCreeper.class, EntityPiglinCreeper.class, EntityCorruptionCreeper.class, EntityEvaporationCreeper.class,
-                EntityPulseCreeper.class, EntitySmokeCreeper.class, EntityNightmareCreeper.class, EntityVergerCreeper.class,EntityHeavyCreeper.class,EntitySlightCreeper.class,
+                EntityPulseCreeper.class, EntitySmokeCreeper.class, EntityNightmareCreeper.class, EntityVergerCreeper.class, EntityHeavyCreeper.class, EntitySlightCreeper.class,
                 EntitySuperDiamondCreeper.class, EntityFishingCreeper.class));
     }
 
@@ -356,6 +358,13 @@ public class TakumiEntityCore {
                 EntityVergerBall.class, "vergerball", 943, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "stickygrenade"),
                 EntityStickyGrenade.class, "stickygrenade", 944, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "theunknown"),
+                EntityTheUnknown.class, "theunknown", 945, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.addSpawn("theunknown", 1, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "theunknownlay"),
+                EntityUnknownLay.class, "theunknownlay", 946, TakumiCraftCore.TakumiInstance, 64, 2, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "theunknownlay_ex"),
+                EntityUnknownLay.EntityUnknownLayEx.class, "theunknownlay_ex", 947, TakumiCraftCore.TakumiInstance, 64, 2, true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -500,6 +509,9 @@ public class TakumiEntityCore {
         });
         RenderingRegistry.registerEntityRenderingHandler(EntityStickyGrenade.class,
                 manager -> new RenderSnowball<>(manager, TakumiItemCore.CLUSTER_GRENADE, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTheUnknown.class, RenderTheUnknown::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityUnknownLay.class, RenderTheUnknown.RenderUnknownLay::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityUnknownLay.EntityUnknownLayEx.class, RenderTheUnknown.RenderUnknownLay::new);
     }
 
     static class EntityComparator implements Comparator<EntityHolder> {
