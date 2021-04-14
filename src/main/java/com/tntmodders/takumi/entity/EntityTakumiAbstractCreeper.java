@@ -43,10 +43,10 @@ import java.util.Collection;
 
 public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implements ITakumiEntity {
 
+    public boolean isBook = false;
     private int stoppingCounter;
     private int dmgCount;
     private float prevHealth;
-    public boolean isBook = false;
 
     public EntityTakumiAbstractCreeper(World worldIn) {
         super(worldIn);
@@ -142,7 +142,7 @@ public abstract class EntityTakumiAbstractCreeper extends EntityCreeper implemen
     @Override
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         if (this instanceof ITakumiEvoEntity && ((ITakumiEvoEntity) this).isEvo()) {
-            return blockStateIn.getBlockHardness(worldIn, pos) < 0 ? super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn) : 1f;
+            return blockStateIn.getBlockHardness(worldIn, pos) ==-1 ? 1000000f : 1f;
         }
         return super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
     }

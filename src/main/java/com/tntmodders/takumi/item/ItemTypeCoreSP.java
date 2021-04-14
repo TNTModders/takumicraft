@@ -1,6 +1,7 @@
 package com.tntmodders.takumi.item;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.core.TakumiItemCore;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
@@ -37,8 +38,14 @@ public class ItemTypeCoreSP extends Item {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore"));
-            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore_sp"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore"));
+        tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore_sp"));
+        if (stack.getItem() == TakumiItemCore.TAKUMI_TYPE_CORE_DEST) {
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore_p2"));
+        }
+        if (stack.getItem() == TakumiItemCore.TAKUMI_TYPE_CORE_MAGIC) {
+            tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.typecore_p3"));
+        }
         TakumiUtils.addSpiltInfo(stack, tooltip);
     }
 

@@ -1,7 +1,7 @@
 package com.tntmodders.takumi.client.render;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.entity.EntityUnknownLay;
+import com.tntmodders.takumi.entity.item.EntityUnknownLay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelIllager;
@@ -69,7 +69,6 @@ public class RenderTheUnknown extends RenderLiving<EntityMob> {
         GlStateManager.translate(f * 0.01F, f * 0.01F, 0.0F);
         GlStateManager.scale(2, 2, 2);
         GlStateManager.matrixMode(5888);
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
         Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
         Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
@@ -104,12 +103,12 @@ public class RenderTheUnknown extends RenderLiving<EntityMob> {
             GlStateManager.matrixMode(5888);
             if (entity instanceof EntityUnknownLay.EntityUnknownLayEx) {
                 float f1 = f < 30 ? 10 : 40 - f;
-                GlStateManager.translate(x - 2.5, y, z - 2.5);
+                GlStateManager.translate(x, y + 2.5, z);
                 GlStateManager.scale(f1 * 5 / 10, f1 * 5 / 10, f1 * 5 / 10);
             } else {
                 float f1 = f > 30 ? 30 : f;
                 GlStateManager.scale(f1 / 30, f1 / 30, f1 / 30);
-                GlStateManager.translate(x - 0.5, y, z - 0.5);
+                GlStateManager.translate(x, y + 0.5, z);
                 GlStateManager.scale(f1 / 30, f1 / 30, f1 / 30);
             }
             Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
@@ -137,7 +136,8 @@ public class RenderTheUnknown extends RenderLiving<EntityMob> {
             public ModelUnknownLay() {
                 this.box = new ModelRenderer(this, 0, 0);
                 this.box.setTextureSize(16, 16);
-                this.box.addBox(0, 0, 0, 16, 16, 16);
+                this.box.addBox(-8, -8, -8, 16, 16, 16);
+                this.box.setRotationPoint(0f, 0f, 0f);
             }
 
             public void render() {

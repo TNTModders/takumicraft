@@ -2,6 +2,7 @@ package com.tntmodders.takumi.entity.mobs;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Sets;
+import com.tntmodders.takumi.client.particle.ParticleTakumiPortal;
 import com.tntmodders.takumi.client.render.RenderDarkCreeper;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.entity.ITakumiEntity;
@@ -10,6 +11,7 @@ import com.tntmodders.takumi.entity.mobs.evo.EntityDarkCreeper_Evo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -27,7 +29,10 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -37,7 +42,10 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.world.ExplosionEvent.Detonate;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -255,17 +263,13 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper implements IT
      */
     @Override
     public void onLivingUpdate() {
-        if (this.world.isRemote) {
+        if (this.world.isRemote && FMLCommonHandler.instance().getSide().isClient()) {
             for (int i = 0; i < 2; ++i) {
-                this.world.spawnParticle(EnumParticleTypes.PORTAL,
-                        this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
-                        this.posY + this.rand.nextDouble() * this.height - 0.25D,
-                        this.posZ + (this.rand.nextDouble() - 0.5D) * this.width,
-                        (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(),
-                        (this.rand.nextDouble() - 0.5D) * 2.0D);
+                this.spawnParticle(this.world, this.posX + (this.rand.nextDouble() - 0.5D) * this.width,
+                        this.posY + this.rand.nextDouble() * this.height - 0.25D, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width,
+                        (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
             }
         }
-
         this.isJumping = false;
         super.onLivingUpdate();
     }
@@ -548,15 +552,17 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper implements IT
         entity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
 
         short short1 = 128;
-        for (int l = 0; l < short1; ++l) {
-            double d6 = l / (short1 - 1.0D);
-            float f = (rand.nextFloat() - 0.5F) * 0.2F;
-            float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
-            float f2 = (rand.nextFloat() - 0.5F) * 0.2F;
-            double d7 = d3 + (entity.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
-            double d8 = d4 + (entity.posY - d4) * d6 + rand.nextDouble() * entity.height;
-            double d9 = d5 + (entity.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
-            entity.world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            for (int l = 0; l < short1; ++l) {
+                double d6 = l / (short1 - 1.0D);
+                float f = (rand.nextFloat() - 0.5F) * 0.2F;
+                float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
+                float f2 = (rand.nextFloat() - 0.5F) * 0.2F;
+                double d7 = d3 + (entity.posX - d3) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
+                double d8 = d4 + (entity.posY - d4) * d6 + rand.nextDouble() * entity.height;
+                double d9 = d5 + (entity.posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * entity.width * 2.0D;
+                this.spawnParticle(world, d7, d8, d9, f, f1, f2);
+            }
         }
 
         entity.world.playSound(null, entity.prevPosX, entity.prevPosY, entity.prevPosZ,
@@ -564,6 +570,11 @@ public class EntityDarkCreeper extends EntityTakumiAbstractCreeper implements IT
         entity.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
         return true;
 
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void spawnParticle(World worldIn, double x, double y, double z, double dx, double dy, double dz) {
+        Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleTakumiPortal(worldIn, x, y, z, dx, dy, dz));
     }
 
     @Override

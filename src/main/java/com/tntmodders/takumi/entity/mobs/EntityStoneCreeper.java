@@ -1,5 +1,6 @@
 package com.tntmodders.takumi.entity.mobs;
 
+import com.tntmodders.takumi.block.IBlockTT;
 import com.tntmodders.takumi.entity.EntityTakumiAbstractCreeper;
 import com.tntmodders.takumi.utils.TakumiUtils;
 import com.tntmodders.takumi.world.TakumiExplosion;
@@ -59,6 +60,8 @@ public class EntityStoneCreeper extends EntityTakumiAbstractCreeper {
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn) {
         if (blockStateIn.getMaterial() == Material.AIR) {
             return 0f;
+        }else if(blockStateIn.getBlock() instanceof IBlockTT){
+            return 1000000f;
         }
         String s = blockStateIn.getBlock().getHarvestTool(blockStateIn);
         return blockStateIn.getBlockHardness(worldIn, pos) == -1 || s == null || !s.equalsIgnoreCase("pickaxe") ?

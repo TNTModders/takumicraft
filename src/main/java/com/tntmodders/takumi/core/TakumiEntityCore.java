@@ -4,7 +4,6 @@ import com.tntmodders.takumi.TakumiCraftCore;
 import com.tntmodders.takumi.client.render.*;
 import com.tntmodders.takumi.core.client.TakumiClientCore;
 import com.tntmodders.takumi.entity.EntityTakumiLightningBolt;
-import com.tntmodders.takumi.entity.EntityUnknownLay;
 import com.tntmodders.takumi.entity.ITakumiEntity;
 import com.tntmodders.takumi.entity.ITakumiEvoEntity;
 import com.tntmodders.takumi.entity.item.*;
@@ -360,7 +359,7 @@ public class TakumiEntityCore {
                 EntityStickyGrenade.class, "stickygrenade", 944, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "theunknown"),
                 EntityTheUnknown.class, "theunknown", 945, TakumiCraftCore.TakumiInstance, 64, 2, true);
-        EntityRegistry.addSpawn("theunknown", 1, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+        EntityRegistry.addSpawn(EntityTheUnknown.class, 1, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "theunknownlay"),
                 EntityUnknownLay.class, "theunknownlay", 946, TakumiCraftCore.TakumiInstance, 64, 2, true);
         EntityRegistry.registerModEntity(new ResourceLocation(TakumiCraftCore.MODID, "theunknownlay_ex"),

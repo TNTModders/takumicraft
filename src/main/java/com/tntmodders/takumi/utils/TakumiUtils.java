@@ -53,8 +53,8 @@ import java.util.jar.JarFile;
 
 public class TakumiUtils {
 
-    public static void addSpiltInfo(ItemStack stack, List<String> tooltip){
-        if(stack.isItemEnchanted()){
+    public static void addSpiltInfo(ItemStack stack, List<String> tooltip) {
+        if (stack.isItemEnchanted()) {
             tooltip.add(TakumiUtils.takumiTranslate("takumicraft.message.spilt"));
         }
     }
@@ -209,7 +209,7 @@ public class TakumiUtils {
 
     public static float takumiGetBlockResistance(Entity entity, IBlockState state, BlockPos pos) {
         float f = entity.getExplosionResistance(null, entity.world, pos, state);
-        if (f >= 1200) {
+        if (f >= 1200 || state.getBlockHardness(entity.world, pos) == -1) {
             return -1;
         }
         if (f < 0) {

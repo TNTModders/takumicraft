@@ -1,8 +1,7 @@
 package com.tntmodders.takumi.entity.mobs.noncreeper;
 
 import com.tntmodders.takumi.TakumiCraftCore;
-import com.tntmodders.takumi.entity.EntityUnknownLay;
-import com.tntmodders.takumi.utils.TakumiUtils;
+import com.tntmodders.takumi.entity.item.EntityUnknownLay;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -40,6 +40,7 @@ public class EntityTheUnknown extends EntitySpellcasterIllager {
     public EntityTheUnknown(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 1.95F);
+        this.experienceValue = 30;
     }
 
     @Override
@@ -122,22 +123,42 @@ public class EntityTheUnknown extends EntitySpellcasterIllager {
             this.setAttackTarget(null);
             this.setAggressive(1, true);
             this.setSpellType(SpellType.NONE);
-            if (!this.world.isRemote) {
-                if (this.world.getNearestAttackablePlayer(this, 20, 20) instanceof EntityPlayerMP
-                        && TakumiUtils.getAdvancementUnlockedServer(new ResourceLocation(TakumiCraftCore.MODID, "creepertower"),
-                        ((EntityPlayerMP) this.world.getNearestAttackablePlayer(this, 20, 20)))) {
+            try {
+                if (this.world.getNearestAttackablePlayer(this, 20, 20) instanceof EntityPlayerMP) {
+                    EntityPlayerMP playerMP = ((EntityPlayerMP) this.world.getNearestAttackablePlayer(this, 20, 20));
+                    TakumiCraftCore.LOGGER.info(playerMP.getAdvancements().getProgress(FMLCommonHandler.instance().getMinecraftServerInstance().getAdvancementManager().getAdvancement(
+                            new ResourceLocation(TakumiCraftCore.MODID, "creepertower"))));
                     this.ignite();
-                    if (FMLCommonHandler.instance().getSide().isServer()) {
-                        FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TextComponentTranslation("entity.theunknown.message",
-                                this.world.getNearestAttackablePlayer(this, 20, 20).getDisplayName().getFormattedText()), true);
-                    }
+                    FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TextComponentTranslation("entity.theunknown.message",
+                            this.world.getNearestAttackablePlayer(this, 20, 20).getDisplayName().getFormattedText()), true);
+                    this.addTrackingPlayer(playerMP);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         }
-        if (this.ticksExisted > 6000) {
+        if (this.ticksExisted > 24000) {
             this.setDead();
+        }
+    }
+
+    @Override
+    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
+        damageAmount = damageAmount > 12 ? 12 : damageAmount;
+        super.damageEntity(damageSrc, damageAmount);
+    }
+
+    @Override
+    protected boolean canDropLoot() {
+        return false;
+    }
+
+    @Override
+    public void playSound(SoundEvent soundIn, float volume, float pitch) {
+        if (this.hasIgnited()) {
+            super.playSound(soundIn, volume, pitch);
         }
     }
 
@@ -259,7 +280,7 @@ public class EntityTheUnknown extends EntitySpellcasterIllager {
 
             if (flag) {
                 EntityUnknownLay lay = new EntityUnknownLay(world);
-                lay.setPosition(x, y/*blockpos.getY() + d0+1*/, z);
+                lay.setPosition(x, blockpos.getY() + d0+0.5, z);
                 EntityTheUnknown.this.world.spawnEntity(lay);
             }
         }

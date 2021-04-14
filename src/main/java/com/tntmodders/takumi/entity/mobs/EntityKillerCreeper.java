@@ -25,49 +25,50 @@ public class EntityKillerCreeper extends EntityTakumiAbstractCreeper {
         super(worldIn);
     }
 
+    //@TODO Unbreakable
     @Override
     public void takumiExplode() {
         if (this.getAttackTarget() == null) {
             this.setAttackTarget(this.world.getClosestPlayerToEntity(this, 100));
         }
-        if(this.getAttackTarget() !=  null){
+        if (this.getAttackTarget() != null) {
             BlockPos pos = this.getAttackTarget().getPosition();
             for (int y = 0; y <= 6; y++) {
                 for (int x = -1; x <= 8 - y; x++) {
                     for (int z = -1; z <= 1; z++) {
-                        TakumiUtils.setBlockStateProtected(this.world, pos.add(x, y, z), STONE);
+                        this.setBlockKC(this.world, pos.add(x, y, z), STONE);
                         if (z == -1 || z == 1) {
-                            TakumiUtils.setBlockStateProtected(this.world, pos.add(x, y + 1, z), STONE);
-                            TakumiUtils.setBlockStateProtected(this.world, pos.add(x, y + 2, z), IRON);
+                            this.setBlockKC(this.world, pos.add(x, y + 1, z), STONE);
+                            this.setBlockKC(this.world, pos.add(x, y + 2, z), IRON);
                         }
                     }
                 }
             }
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 1, -1), IRON);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 1, 0), LAVA);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 1, 1), IRON);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 2, 0), Blocks.AIR.getDefaultState());
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 3, 0), web);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 4, 0), web);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 3, -1), IRON);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 4, -1), IRON);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 3, 1), IRON);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 4, 1), IRON);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 5, 0), Blocks.AIR.getDefaultState());
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 6, 0), Blocks.AIR.getDefaultState());
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(-1, 7, -1), STONE);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(-1, 7, 1), STONE);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(-1, 7, 0), STONE);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 7, -1), STONE);
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 7, 0), Blocks.AIR.getDefaultState());
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(0, 7, 1), STONE);
+            this.setBlockKC(this.world, pos.add(0, 1, -1), IRON);
+            this.setBlockKC(this.world, pos.add(0, 1, 0), LAVA);
+            this.setBlockKC(this.world, pos.add(0, 1, 1), IRON);
+            this.setBlockKC(this.world, pos.add(0, 2, 0), Blocks.AIR.getDefaultState());
+            this.setBlockKC(this.world, pos.add(0, 3, 0), web);
+            this.setBlockKC(this.world, pos.add(0, 4, 0), web);
+            this.setBlockKC(this.world, pos.add(0, 3, -1), IRON);
+            this.setBlockKC(this.world, pos.add(0, 4, -1), IRON);
+            this.setBlockKC(this.world, pos.add(0, 3, 1), IRON);
+            this.setBlockKC(this.world, pos.add(0, 4, 1), IRON);
+            this.setBlockKC(this.world, pos.add(0, 5, 0), Blocks.AIR.getDefaultState());
+            this.setBlockKC(this.world, pos.add(0, 6, 0), Blocks.AIR.getDefaultState());
+            this.setBlockKC(this.world, pos.add(-1, 7, -1), STONE);
+            this.setBlockKC(this.world, pos.add(-1, 7, 1), STONE);
+            this.setBlockKC(this.world, pos.add(-1, 7, 0), STONE);
+            this.setBlockKC(this.world, pos.add(0, 7, -1), STONE);
+            this.setBlockKC(this.world, pos.add(0, 7, 0), Blocks.AIR.getDefaultState());
+            this.setBlockKC(this.world, pos.add(0, 7, 1), STONE);
 
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
-                    TakumiUtils.setBlockStateProtected(this.world, pos.add(x, 8, z), STONE);
+                    this.setBlockKC(this.world, pos.add(x, 8, z), STONE);
                 }
             }
-            TakumiUtils.setBlockStateProtected(this.world, pos.add(1, 8, 0), Blocks.GLOWSTONE.getDefaultState());
+            this.setBlockKC(this.world, pos.add(1, 8, 0), Blocks.GLOWSTONE.getDefaultState());
 
             this.getAttackTarget().setPositionAndUpdate(pos.getX(), pos.getY() + 6, pos.getZ());
         }
@@ -117,5 +118,11 @@ public class EntityKillerCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public int getPrimaryColor() {
         return 0x333333;
+    }
+
+    protected void setBlockKC(World world, BlockPos pos, IBlockState state) {
+        if (world.getBlockState(pos).getBlockHardness(world, pos) != -1 || world.isAirBlock(pos)) {
+            TakumiUtils.setBlockStateProtected(world, pos, state);
+        }
     }
 }

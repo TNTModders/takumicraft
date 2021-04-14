@@ -1,17 +1,20 @@
-package com.tntmodders.takumi.entity;
+package com.tntmodders.takumi.entity.item;
 
 import com.tntmodders.takumi.entity.mobs.noncreeper.EntityTheUnknown;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityUnknownLay extends Entity {
+    protected boolean isEx = false;
 
     public EntityUnknownLay(World worldIn) {
         super(worldIn);
@@ -22,16 +25,23 @@ public class EntityUnknownLay extends Entity {
     public void onUpdate() {
         super.onUpdate();
         if (this.ticksExisted < 30) {
-            for (EntityLivingBase entitylivingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(0.2D, 0.0D, 0.2D))) {
-                if (!(entitylivingbase instanceof EntityTheUnknown)) {
-                    entitylivingbase.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40, 1));
+            if (!this.isEx) {
+                for (EntityLivingBase entitylivingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(0.2D, 0.0D, 0.2D))) {
+                    if (!(entitylivingbase instanceof EntityTheUnknown)) {
+                        entitylivingbase.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40, 1));
+                    }
                 }
             }
         } else if (this.ticksExisted < 40) {
             if (!this.world.isRemote) {
                 for (EntityLivingBase entitylivingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(0.2D, 0.0D, 0.2D))) {
-                    if (!(entitylivingbase instanceof EntityTheUnknown)) {
-                        entitylivingbase.attackEntityFrom(DamageSource.OUT_OF_WORLD, 20f);
+                    if (!(entitylivingbase instanceof EntityTheUnknown) && !getIsInvulnerable() && entitylivingbase.isNonBoss()) {
+                        if (entitylivingbase instanceof EntityPlayer && (((EntityPlayer) entitylivingbase).isCreative() || ((EntityPlayer) entitylivingbase).isSpectator())) {
+                            entitylivingbase.attackEntityFrom(DamageSource.OUT_OF_WORLD, 0.5f);
+                        } else {
+                            entitylivingbase.attackEntityFrom(DamageSource.OUT_OF_WORLD.setDamageIsAbsolute(), entitylivingbase.getMaxHealth() * 2);
+                            entitylivingbase.deathTime = 19;
+                        }
                     }
                 }
             } else {
@@ -63,6 +73,12 @@ public class EntityUnknownLay extends Entity {
         public EntityUnknownLayEx(World worldIn) {
             super(worldIn);
             this.setSize(5f, 5f);
+            this.isEx = true;
+        }
+
+        @Override
+        public AxisAlignedBB getCollisionBoundingBox() {
+            return this.ticksExisted > 20 ? this.getEntityBoundingBox() : null;
         }
     }
 }

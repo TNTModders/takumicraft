@@ -531,7 +531,9 @@ public class EntityAttackBlock extends Entity {
     public boolean hitByEntity(Entity entityIn) {
         if (entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative()) {
             this.setDead();
-            this.dummy.setDead();
+            if (this.dummy != null) {
+                this.dummy.setDead();
+            }
             return true;
         }
         return false;
