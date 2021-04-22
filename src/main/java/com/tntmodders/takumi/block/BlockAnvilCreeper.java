@@ -42,6 +42,11 @@ public class BlockAnvilCreeper extends BlockAnvil/* implements ITakumiItemBlock 
     }
 
     @Override
+    protected boolean canSilkHarvest() {
+        return false;
+    }
+
+    @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
         if (!worldIn.isRemote) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
@@ -56,6 +61,12 @@ public class BlockAnvilCreeper extends BlockAnvil/* implements ITakumiItemBlock 
                 (player.getHeldItemMainhand().getStrVsBlock(state) > 1.0f || this.getHarvestTool(state) == null))) {
             this.explode(worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        this.explode(worldIn,pos.getX(),pos.getY(),pos.getZ());
+        return true;
     }
 
     @Override

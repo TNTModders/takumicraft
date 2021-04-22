@@ -95,9 +95,13 @@ public class ItemTakumiKingTool extends ItemTool {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+        if (handIn == EnumHand.MAIN_HAND) {
+            ItemStack itemstack = playerIn.getHeldItem(handIn);
+            playerIn.setActiveHand(handIn);
+            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+        } else {
+            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        }
     }
 
     @Override
@@ -179,7 +183,7 @@ public class ItemTakumiKingTool extends ItemTool {
                     }
                     stack.damageItem(1, entityplayer);
                     entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-                    if(EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH,stack)>0){
+                    if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                         entityarrow.isSilk = true;
                     }
                     worldIn.spawnEntity(entityarrow);

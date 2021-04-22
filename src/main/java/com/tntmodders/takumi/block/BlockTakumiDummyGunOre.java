@@ -62,11 +62,6 @@ public class BlockTakumiDummyGunOre extends BlockAbstractTakumiBomb {
     }
 
     @Override
-    protected boolean canSilkHarvest() {
-        return false;
-    }
-
-    @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         if (!worldIn.isRemote) {
             EntityGunoreCreeper creeper = new EntityGunoreCreeper(worldIn);

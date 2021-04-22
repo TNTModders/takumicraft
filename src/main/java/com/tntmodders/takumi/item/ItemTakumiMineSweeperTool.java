@@ -85,7 +85,8 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
                 return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ?
                         super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
         }
-        if(state.getBlock().getHarvestTool(state).equals(this.enumTakumiTool.getName())){
+        if (state.getBlock().getHarvestTool(state) != null &&
+                state.getBlock().getHarvestTool(state).equals(this.enumTakumiTool.getName())) {
             return this.efficiencyOnProperMaterial;
         }
         return super.getStrVsBlock(stack, state);
@@ -93,7 +94,7 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-            EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                      EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (this.enumTakumiTool == EnumTakumiTool.SHOVEL) {
             ItemStack itemstack = player.getHeldItem(hand);
 
@@ -169,7 +170,7 @@ public class ItemTakumiMineSweeperTool extends ItemTool {
             worldIn.createExplosion(null, entityIn.posX, entityIn.posY, entityIn.posZ, 5f, true);
             stack.shrink(1);
         }
-        if (!stack.isItemEnchanted()|| !EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.MINESWEEPER)) {
+        if (!stack.isItemEnchanted() || !EnchantmentHelper.getEnchantments(stack).containsKey(TakumiEnchantmentCore.MINESWEEPER)) {
             try {
                 stack.addEnchantment(TakumiEnchantmentCore.MINESWEEPER, 1);
             } catch (Exception e) {

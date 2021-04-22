@@ -13,9 +13,9 @@
     },
     "firstperson_lefthand": {
       "rotation": [
-        -20,
-        -90,
-        60
+        20,
+        90,
+        -60
       ]
     }
   }

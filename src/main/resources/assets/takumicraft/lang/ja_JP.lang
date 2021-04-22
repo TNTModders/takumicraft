@@ -264,6 +264,7 @@ tile.ttcolored_green.name=匠古煉瓦[色]
 tile.ttcolored_white.name=匠古煉瓦[色]
 tile.ttcolored_black.name=匠古煉瓦[色]
 tile.takumidiamondblock.name=ダイヤモンドブロック?
+tile.anvilcreeper.name=金床
 
 #item
 item.takumibook.name=匠の書
@@ -365,7 +366,7 @@ item.oldbook.content.4=壊と魔は相反する。それぞれを継承する者
 item.oldbook.content.5=属性纏いし武器に対して、結晶のエネルギーを合成できる。壊の力と魔の力は、攻めの力と守りの力を増幅させる。
 item.oldbook.content.6=ある日突然、龍が現れた。奴は自分の力を仲間に与え、配下を増やし、そして戦いが起きた。地に落ちた星を知らずに。
 item.oldbook.content.7=祭壇より顕る匠の力は、時に道具に爆発を耐え抜く力を与える。鉄床を用いて力を合成してみるとよいだろう。
-item.oldbook.content.8= ｜○｜ ー凹△ ー＾▽ □凸｜ ー凸□  □凸▽ □＾｜ ー～△ ｜○｜ ー～▽ □凸□
+item.oldbook.content.8= ｜○｜ー凹△ー＾▽□凸｜ー凸□□凸▽□＾｜ー～△｜○｜ー～▽□凸□
 item.takumikingtool_pickaxe.name=匠式ピッケル
 item.takumikingtool_shovel.name=匠式ショベル
 item.takumikingtool_axe.name=匠式斧

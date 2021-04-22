@@ -74,7 +74,7 @@ public class BlockTakumiAltar extends Block {
             entity = new EntityGemCreeper(worldIn);
         } else if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.CAKE) {
             entity = new EntityAnnivCreeper(worldIn);
-        }else if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.DIAMOND_BLOCK) {
+        } else if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.DIAMOND_BLOCK) {
             entity = new EntitySuperDiamondCreeper(worldIn);
         } else {
             List<ITakumiEntity> entities = new ArrayList<>();
@@ -135,13 +135,15 @@ public class BlockTakumiAltar extends Block {
         }
 
         BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 0, 0).getPos();
-        EntityWitherCreeper witherCreeper = new EntityWitherCreeper(worldIn);
-        BlockPos blockpos1 = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
-        witherCreeper.setLocationAndAngles((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.55D, (double) blockpos1.getZ() + 0.5D, blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F, 0.0F);
-        witherCreeper.renderYawOffset = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F;
-        witherCreeper.ignite();
+        if (!worldIn.isRemote) {
+            EntityWitherCreeper witherCreeper = new EntityWitherCreeper(worldIn);
+            BlockPos blockpos1 = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
+            witherCreeper.setLocationAndAngles((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.55D, (double) blockpos1.getZ() + 0.5D, blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F, 0.0F);
+            witherCreeper.renderYawOffset = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? 0.0F : 90.0F;
+            witherCreeper.ignite();
 
-        worldIn.spawnEntity(witherCreeper);
+            worldIn.spawnEntity(witherCreeper);
+        }
 
         for (int l = 0; l < 120; ++l) {
             worldIn.spawnParticle(EnumParticleTypes.SNOWBALL, (double) blockpos.getX() + worldIn.rand.nextDouble(), (double) (blockpos.getY() - 2) + worldIn.rand.nextDouble() * 3.9D, (double) blockpos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);

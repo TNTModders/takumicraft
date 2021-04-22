@@ -1579,7 +1579,7 @@ public class TakumiEvents {
             }
 
             if (flg) {
-                event.setAmount(event.getAmount() * 2);
+                event.setAmount(event.getAmount() * 3);
             }
         }
     }

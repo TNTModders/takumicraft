@@ -620,7 +620,7 @@ public class EntityKingCreeper extends EntityTakumiAbstractCreeper {
     @Override
     public void onDeath(DamageSource source) {
         if (!this.world.isRemote) {
-            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(8) + 2);
+            this.dropItem(TakumiItemCore.KING_CORE, this.rand.nextInt(5) * this.rand.nextInt(5) / 2 + 2);
 /*            if (FMLCommonHandler.instance().getSide().isServer()) {
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TextComponentString(this.getName() + " has killed!"), true);
             }*/

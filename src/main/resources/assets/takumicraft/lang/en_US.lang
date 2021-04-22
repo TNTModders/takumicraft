@@ -264,6 +264,7 @@ tile.ttcolored_green.name=Takumi Tower Block [Colored]
 tile.ttcolored_white.name=Takumi Tower Block [Colored]
 tile.ttcolored_black.name=Takumi Tower Block [Colored]
 tile.takumidiamondblock.name=Diamond Block?
+tile.anvilcreeper.name=Anvil
 
 #item
 item.takumibook.name=Creeper Book
