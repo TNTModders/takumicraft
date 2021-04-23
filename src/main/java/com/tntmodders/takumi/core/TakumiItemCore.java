@@ -112,6 +112,10 @@ public class TakumiItemCore {
     public static final Item KING_TOOL_SHOVEL = new ItemTakumiKingTool(EnumTakumiTool.SHOVEL);
     public static final Item CLUSTER_GRENADE = new ItemStickyGrenade();
     public static final Item TAKUMI_DIAMOND = new ItemTakumiDiamond();
+    public static final Item ERA_HELMET = new ItemERArmor(EntityEquipmentSlot.HEAD);
+    public static final Item ERA_CHEST = new ItemERArmor(EntityEquipmentSlot.CHEST);
+    public static final Item ERA_LEGGINGS = new ItemERArmor(EntityEquipmentSlot.LEGS);
+    public static final Item ERA_BOOTS = new ItemERArmor(EntityEquipmentSlot.FEET);
 
     public static List<Item> itemBlocks = new ArrayList<>();
 

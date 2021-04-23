@@ -1567,19 +1567,28 @@ public class TakumiEvents {
     @SubscribeEvent
     public void onDamagaeDeal(LivingDamageEvent event) {
         if (event.getEntityLiving() != null) {
-            boolean flg = false;
+            boolean flg_curse = false;
+            boolean flg_era = false;
             for (ItemStack stack : event.getEntityLiving().getArmorInventoryList()) {
                 if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, stack) > 0) {
-                    flg = true;
+                    flg_curse = true;
+                }
+                if (stack.getItem() instanceof ItemERArmor) {
+                    flg_era = true;
                 }
             }
             if (EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getEntityLiving().getHeldItemMainhand()) > 0 ||
                     EnchantmentHelper.getEnchantmentLevel(TakumiEnchantmentCore.DIAMOND_CURSE, event.getEntityLiving().getHeldItemMainhand()) > 0) {
-                flg = true;
+                flg_curse = true;
             }
 
-            if (flg) {
+            if (flg_curse) {
                 event.setAmount(event.getAmount() * 3);
+            }
+
+            if (flg_era && !event.getEntityLiving().world.isRemote && !event.getSource().isUnblockable()) {
+                event.getEntityLiving().world.createExplosion(event.getEntityLiving(), event.getEntityLiving().posX + 0.5, event.getEntityLiving().posY + 0.5, event.getEntityLiving().posZ + 0.5,
+                        1f, false);
             }
         }
     }

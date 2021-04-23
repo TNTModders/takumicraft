@@ -43,6 +43,7 @@ takumicraft.message.magicbow=一度番えば五方に放たる魔の大弓。こ
 takumicraft.message.takumiknife=その砲丁は生命を撃つ、陰と陽、穏と凛を廻る神器。
 takumicraft.message.takumishield=爆発を防ぐ匠印の大盾。爆弾から作ったけど大丈夫……?
 takumicraft.message.takumidiamond=耐久値を持つアイテムに鉄床でエンチャント可能
+takumicraft.message.takumiera=匠の爆発力を活かした反応装甲。爆弾から作ったけど大丈夫……?
 takumicraft.message.spilt=----
 
 death.attack.extremecreeper=疾匠に攻撃を反射された。
@@ -373,6 +374,10 @@ item.takumikingtool_axe.name=匠式斧
 item.tester.name=匠式錫杖
 item.stickygrenade.name=匠式粘着爆弾
 item.takumidiamond.name=ダイヤモンド?
+item.takumiera_head.name=匠式爆発反応鎧[頭]
+item.takumiera_chest.name=匠式爆発反応鎧[胴]
+item.takumiera_legs.name=匠式爆発反応鎧[腰]
+item.takumiera_feet.name=匠式爆発反応鎧[足]
 
 #entity
 ＃descは36文字まで。

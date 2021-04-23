@@ -43,6 +43,7 @@ takumicraft.message.magicbow=Five Birds with One Arrow, Charmed Bow of Magic Pow
 takumicraft.message.takumiknife=The Knifegun of the Stranger, with a Bullet of Life.
 takumicraft.message.takumishield=A Great Shield of Creeper. Made from Bomb, is it Safe?
 takumicraft.message.takumidiamond=Enchant-able on Anvil to Damageable Item
+takumicraft.message.takumiera=An effective reactive armor. Made from Bomb, is it safe?
 takumicraft.message.spilt=----
 
 death.attack.extremecreeper=Extreme Creeper Reflection.
@@ -373,6 +374,10 @@ item.takumikingtool_axe.name=King's Axe
 item.tester.name=King's Cane
 item.stickygrenade.name=Sticky Grenade
 item.takumidiamond.name=Diamond?
+item.takumiera_head.name=Creeper ERA Head
+item.takumiera_chest.name=Creeper ERA Chest
+item.takumiera_legs.name=Creeper ERA Leggings
+item.takumiera_feet.name=Creeper ERA Boots
 
 #entity
 #desc max: 72 chars
