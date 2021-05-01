@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:potion",
+      "nbt": "{CustomPotionColor:65280,CustomPotionEffects:[{Id:8,Amplifier:0,Duration:1}]}"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.takumipotion.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.takumipotion.desc"
+    }
+  },
+  "parent": "takumicraft:typecore",
+  "criteria": {
+    "potion_explosion": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "takumicraft:antiexplosion": {}
+        }
+      }
+    },
+    "potion_swelling": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "takumicraft:antiswelling": {}
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@
       "translate": "advancements.takumicraft.takumibowgun.desc"
     }
   },
-  "parent": "takumicraft:typewepon",
+  "parent": "takumicraft:ofalen",
   "criteria": {
     "takumishield": {
       "trigger": "minecraft:inventory_changed",

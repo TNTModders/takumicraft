@@ -10,7 +10,7 @@
       "translate": "advancements.takumicraft.parachute.desc"
     }
   },
-  "parent": "takumicraft:creeperbomb",
+  "parent": "takumicraft:typecore",
   "criteria": {
     "impossible": {
       "trigger": "minecraft:impossible"

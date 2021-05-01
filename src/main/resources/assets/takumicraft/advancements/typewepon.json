@@ -10,7 +10,7 @@
       "translate": "advancements.takumicraft.typewepon.desc"
     }
   },
-  "parent": "takumicraft:root",
+  "parent": "takumicraft:typecore",
   "criteria": {
     "fire": {
       "trigger": "minecraft:inventory_changed",

@@ -9,9 +9,9 @@
     "description": {
       "translate": "advancements.takumicraft.creepertower.desc"
     },
-    "frame": "challenge"
+    "frame": "goal"
   },
-  "parent": "takumicraft:creeperbomb",
+  "parent": "takumicraft:kingslayer",
   "criteria": {
     "impossible": {
       "trigger": "minecraft:impossible"

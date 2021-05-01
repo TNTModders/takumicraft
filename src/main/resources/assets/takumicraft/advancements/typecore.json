@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "takumicraft:typecoresp_dest"
+      "item": "takumicraft:typecore"
     },
     "title": {
-      "translate": "advancements.takumicraft.typedest.title"
+      "translate": "advancements.takumicraft.typecore.title"
     },
     "description": {
-      "translate": "advancements.takumicraft.typedest.desc"
+      "translate": "advancements.takumicraft.typecore.desc"
     }
   },
-  "parent": "takumicraft:creeperbomb",
+  "parent": "takumicraft:root",
   "criteria": {
     "crit": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "takumicraft:typecoresp_dest"
+            "item": "takumicraft:typecore"
           }
         ]
       }

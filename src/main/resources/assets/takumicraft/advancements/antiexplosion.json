@@ -10,7 +10,7 @@
       "translate": "advancements.takumicraft.antiexplosion.desc"
     }
   },
-  "parent": "takumicraft:creeperbomb",
+  "parent": "takumicraft:type_magic",
   "criteria": {
     "creeperiron": {
       "trigger": "minecraft:inventory_changed",
@@ -58,6 +58,46 @@
         "items": [
           {
             "item": "takumicraft:creeperwool"
+          }
+        ]
+      }
+    },
+    "creeperplanks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperplanks"
+          }
+        ]
+      }
+    },
+    "creepercobblestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creepercobblestone"
+          }
+        ]
+      }
+    },
+    "creeperstonebrick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperstonebrick"
+          }
+        ]
+      }
+    },
+    "creeperclay": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:creeperclay"
           }
         ]
       }

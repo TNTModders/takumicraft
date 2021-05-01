@@ -9,9 +9,10 @@
     },
     "description": {
       "translate": "advancements.takumicraft.armor.desc"
-    }
+    },
+    "frame": "challenge"
   },
-  "parent": "takumicraft:takumishield",
+  "parent": "takumicraft:kingslayer",
   "criteria": {
     "takumi_helmet": {
       "trigger": "minecraft:inventory_changed",

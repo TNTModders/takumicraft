@@ -11,7 +11,7 @@
       "translate": "advancements.takumicraft.takumishield.desc"
     }
   },
-  "parent": "takumicraft:root",
+  "parent": "takumicraft:type_magic",
   "criteria": {
     "takumishield": {
       "trigger": "minecraft:inventory_changed",

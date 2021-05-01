@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "takumicraft:takumiofalen"
+      "item": "takumicraft:evocore"
     },
     "title": {
-      "translate": "advancements.takumicraft.ofalen.title"
+      "translate": "advancements.takumicraft.evocore.title"
     },
     "description": {
-      "translate": "advancements.takumicraft.ofalen.desc"
+      "translate": "advancements.takumicraft.evocore.desc"
     }
   },
-  "parent": "takumicraft:boltstone",
+  "parent": "takumicraft:type_magic",
   "criteria": {
     "boltstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "takumicraft:takumiofalen"
+            "item": "takumicraft:evocore"
           }
         ]
       }

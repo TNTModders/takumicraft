@@ -12,7 +12,7 @@
     },
     "frame": "challenge"
   },
-  "parent": "takumicraft:typewepon",
+  "parent": "takumicraft:type_magic",
   "criteria": {
     "impossible": {
       "trigger": "minecraft:impossible"

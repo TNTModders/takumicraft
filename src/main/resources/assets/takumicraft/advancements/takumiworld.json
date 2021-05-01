@@ -8,9 +8,10 @@
     },
     "description": {
       "translate": "advancements.takumicraft.takumiworld.desc"
-    }
+    },
+    "frame": "goal"
   },
-  "parent": "takumicraft:kingslayer",
+  "parent": "takumicraft:disarmament",
   "criteria": {
     "entered_takumi": {
       "trigger": "minecraft:changed_dimension",

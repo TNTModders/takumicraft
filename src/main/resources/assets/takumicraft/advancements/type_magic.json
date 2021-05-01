@@ -10,7 +10,7 @@
       "translate": "advancements.takumicraft.typemagic.desc"
     }
   },
-  "parent": "takumicraft:typewepon",
+  "parent": "takumicraft:creeperbomb",
   "criteria": {
     "crit": {
       "trigger": "minecraft:inventory_changed",

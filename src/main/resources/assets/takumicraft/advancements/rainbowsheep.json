@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.takumicraft.rainbowsheep.desc"
     },
-    "frame": "challenge"
+    "frame": "goal"
   },
   "parent": "takumicraft:antiexplosion",
   "criteria": {

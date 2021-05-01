@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:attackblock"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.attackblock.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.attackblock.desc"
+    },
+    "frame": "goal"
+  },
+  "parent": "takumicraft:evocore_evo",
+  "criteria": {
+    "boltstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "takumicraft:attackblock"
+          }
+        ]
+      }
+    }
+  }
+}

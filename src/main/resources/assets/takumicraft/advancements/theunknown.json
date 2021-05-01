@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "takumicraft:ttcurse"
+    },
+    "title": {
+      "translate": "advancements.takumicraft.theunknown.title"
+    },
+    "description": {
+      "translate": "advancements.takumicraft.theunknown.desc"
+    },
+    "hidden": true,
+    "frame": "goal"
+  },
+  "parent": "takumicraft:darkshrine",
+  "criteria": {
+    "creeper_hoge": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "takumicraft:theunknown"
+        }
+      }
+    }
+  }
+}

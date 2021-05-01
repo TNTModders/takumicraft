@@ -1,6 +1,9 @@
 package com.tntmodders.takumi.enchantment;
 
 import com.tntmodders.takumi.TakumiCraftCore;
+import com.tntmodders.takumi.item.ItemBattleArmor;
+import com.tntmodders.takumi.item.ItemERArmor;
+import com.tntmodders.takumi.item.ItemMagicArmor;
 import com.tntmodders.takumi.item.ItemTakumiArmor;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -24,12 +27,20 @@ public class EnchantmentTakumiExplosionProtection extends Enchantment {
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return stack.getItem() instanceof ItemTakumiArmor && super.canApplyAtEnchantingTable(stack);
+    public int getMinEnchantability(int enchantmentLevel) {
+        return 500;
+    }
+
+    @Override
+    public int getMaxEnchantability(int enchantmentLevel) {
+        return 500;
     }
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof ItemTakumiArmor && super.canApply(stack);
+        return (stack.getItem() instanceof ItemTakumiArmor || stack.getItem() instanceof ItemMagicArmor || stack.getItem() instanceof ItemERArmor || stack.getItem() instanceof ItemBattleArmor)
+                && super.canApply(stack);
     }
+
+
 }

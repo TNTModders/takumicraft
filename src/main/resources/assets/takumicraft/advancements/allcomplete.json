@@ -9,7 +9,8 @@
     "description": {
       "translate": "advancements.takumicraft.allcomplete.desc"
     },
-    "frame": "goal"
+    "frame": "goal",
+    "hidden": true
   },
   "parent": "takumicraft:root",
   "rewards": {
