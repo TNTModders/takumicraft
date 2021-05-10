@@ -465,8 +465,8 @@ public class TakumiEvents {
                 event.getEntity().world.playSound(null, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
                         0.3F, (1.0F + (event.getEntity().world.rand.nextFloat() - event.getEntity().world.rand.nextFloat()) * 0.2F) * 0.7F);
 
-                event.getEntity().world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, event.getEntity().posX - event.getEntity().motionX * 0.1,
-                        event.getEntity().posY - event.getEntity().motionX * 0.1, event.getEntity().posZ - event.getEntity().motionX * 0.1, 0, 0, 0);
+                event.getEntity().world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, event.getEntity().posX,
+                        event.getEntity().posY, event.getEntity().posZ, 0, 0, 0);
                 if (FMLCommonHandler.instance().getSide().isClient() && player.getTicksElytraFlying() > 20) {
                     float red, green, blue;
                     if (player.getTeam() != null && player.getTeam().getColor() != null && player.getTeam().getColor().isColor()) {

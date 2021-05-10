@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.toasts.SystemToast;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -104,6 +106,9 @@ public class BlockTTPortal extends BlockContainer implements IBlockTT {
                 if (entityIn.ticksExisted % 200 == 0) {
                     entityIn.sendMessage(new TextComponentTranslation("takumicraft.message.ttportal.true"));
                     //entityIn.changeDimension(1);
+                    if(FMLCommonHandler.instance().getSide().isClient()){
+                        proxyShowGuiToast();
+                    }
                 }
             } else {
                 if (entityIn.ticksExisted % 200 == 0) {
@@ -111,6 +116,12 @@ public class BlockTTPortal extends BlockContainer implements IBlockTT {
                 }
             }
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void proxyShowGuiToast() {
+        Minecraft.getMinecraft().getToastGui().add(new SystemToast(SystemToast.Type.TUTORIAL_HINT, new TextComponentTranslation("tile.ttportal.info.01"),
+                new TextComponentTranslation("tile.ttportal.info.02")));
     }
 
     @Override
